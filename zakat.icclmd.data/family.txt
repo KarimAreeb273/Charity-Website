@@ -1,0 +1,20 @@
+Father
+Mother
+Son
+Daughter
+Husband
+Wife
+Brother
+Sister
+Grandfather
+Grandmother
+Great Grandfather
+Great Grandmother
+Grandson
+Grand daughter
+Uncle
+Aunt
+Nephew
+Niece
+Cousin
+Other

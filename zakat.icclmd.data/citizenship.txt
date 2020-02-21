@@ -1,0 +1,4 @@
+Permanent Resident
+Non-Citizen
+US Citizen
+Other
