@@ -1,18 +1,22 @@
 ﻿<%@ Page Title="Contact" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.vb" Inherits="zakat.icclmd.org.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-    <h2><%: Title %></h2>
-    <p>Your contact page.</p>
+  <h3>Online Zakat Contact Information</h3>
 
-    <address>
-        One Microsoft Way<br />
-        Redmond, WA 98052-6399<br />
-        <abbr title="Phone">P:</abbr>
-        425.555.0100
-    </address>
+  <address>
+    7306 Contee Road<br />
+    Laurel, MD 20707<br />
+    <abbr title="Phone">Ph:</abbr>
+    301.317.4584
+  </address>
 
-    <address>
-        <strong>Support:</strong><a href="mailto:Support@example.com">Support@example.com</a><br />
-        <strong>Marketing:</strong><a href="mailto:Marketing@example.com">Marketing@example.com</a>
-    </address>
+  <address>
+    <strong>ICCL Office Manager:</strong><br /><a href="mailto:office@icclmd.org">office@icclmd.org</a><br /><br />
+    <strong>Online Zakat Administrator:</strong><br /><a href="mailto:zakat@icclmd.org">zakat@icclmd.org</a>
+  </address>
+
+  <address>
+    <strong>ICCL General Website:</strong><br /><a target="_blank" href="https://www.icclmd.org">https://www.icclmd.org</a><br /><br />
+    <strong>Online Zakat Website:</strong><br /><a href="https://zakat.icclmd.org">https://zakat.icclmd.org</a>
+  </address>
 </asp:Content>
