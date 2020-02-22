@@ -1,44 +1,55 @@
-﻿<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="zakat.icclmd.org.SiteMaster" %>
-
+﻿<!-- بسم الله الرحمن الرحيم -->
+<%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="zakat.icclmd.org.SiteMaster" %>
 <!DOCTYPE html>
-
 <html lang="en">
 <head runat="server">
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%: Page.Title %> - Online Zakat</title>
 
-    <asp:PlaceHolder runat="server">
-        <%: Scripts.Render("~/bundles/modernizr") %>
-    </asp:PlaceHolder>
+  <asp:PlaceHolder runat="server">
+      <%: Scripts.Render("~/bundles/modernizr") %>
+  </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
-    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <webopt:bundlereference runat="server" path="~/Content/css" />
+  <%--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
+  <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <%--font-awesome 5 icons CDN--%>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <%--bootstrap 3 CDN references--%>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
     <form runat="server">
-        <asp:ScriptManager runat="server">
-            <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
-                <asp:ScriptReference Name="MsAjaxBundle" />
-                <asp:ScriptReference Name="jquery" />
-                <asp:ScriptReference Name="bootstrap" />
-                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
-                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
-                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
-                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
-                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
-                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
-                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
-                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
-                <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
-            </Scripts>
-        </asp:ScriptManager>
+      <asp:ScriptManager runat="server">
+        <Scripts>
+            <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
+            <%--Framework Scripts--%>
+            <asp:ScriptReference Name="MsAjaxBundle" />
+            <asp:ScriptReference Name="jquery" />
+            <asp:ScriptReference Name="bootstrap" />
+            <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+            <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+            <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+            <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+            <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+            <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+            <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+            <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+            <asp:ScriptReference Name="WebFormsBundle" />
+            <%--Site Scripts--%>
+        </Scripts>
+      </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: darkgreen">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -46,25 +57,91 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Application name</a>
+                    <a class="navbar-brand" href="default">
+                      <table>
+                        <tr>
+                          <td>
+                            <i class="fas fa-dollar-sign"></i>
+                          </td>
+                          <td>
+                            &nbsp;
+                          </td>
+                          <td>
+                            Online Zakat
+                          </td>
+                        </tr>
+                      </table>
+                    </a>
                 </div>
+                
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a runat="server" href="~/">Home</a></li>
-                        <li><a runat="server" href="~/About">About</a></li>
-                        <li><a runat="server" href="~/Contact">Contact</a></li>
+                  <ul class="nav navbar-nav">
+                    <li><a href="default">Home</a></li>
+                    <li><a href="contact">Contact Us</a></li>
+                  </ul>
+                  <asp:Panel ID="pnlAnonymousTemplate" runat="server" Visible="true">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="application">Apply</a></li>
+                      <li><a href="default">Login</a></li>
                     </ul>
+                  </asp:Panel>
+                  <asp:Panel ID="pnlLoggedInTemplate" runat="server" Visible="false">
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a id="lnkApplication" runat="server" visible="false" href="~/application">Apply</a><li>
+                      <li><a id="lnkMembers" runat="server" visible="false" href="~/members">Members</a></li>
+                      <li><a id="A1" runat="server" visible="true" href="~/password">Password</a></li>
+                      <li>
+                        <asp:LinkButton ID="lnkProfileHeader" runat="server" CausesValidation="false">Welcome, <asp:Label ID="lblName" runat="server" ToolTip="Manage your account"></asp:Label>!</asp:LinkButton>
+                      </li>
+                      <li><a href="logout">Logout</a></li>
+                    </ul>
+                  </asp:Panel>
                 </div>
+
             </div>
         </div>
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
-            <hr />
+            <%--<hr />
             <footer>
                 <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
-            </footer>
+            </footer>--%>
         </div>
+
+        <footer class="navbar-default navbar-fixed-bottom">
+          <div class="container-fluid" style="height: 50px">
+            <div class="row">
+              <div class="col-md-1">
+                &nbsp;
+              </div>
+              <div class="col-md-10">
+                <br />
+                <table class="" style="width: 100%; font-family: Helvetica,Arial,sans-serif; font-size: 12px">
+                  <tr>
+                    <td style="width: 100%; text-align: center; vertical-align: middle;">
+                      <span style="white-space: nowrap;"><a href="default">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;">
+                        <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
+                      </span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="application">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;">&copy;&nbsp;<%: DateTime.Now.Year %> <a href="https://www.icclmd.org" target="_blank">ICCL</a>&nbsp;All Rights Reserved</span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div class="col-md-1">
+                &nbsp;
+              </div>
+              <br />
+            </div>
+          </div>
+        </footer>
 
     </form>
 </body>
