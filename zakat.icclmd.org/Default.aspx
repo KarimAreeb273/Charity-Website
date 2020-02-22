@@ -2,41 +2,108 @@
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="http://www.asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
 
+  <div class="jumbotron">
     <div class="row">
-        <div class="col-md-4">
-            <h2>Getting Started</h2>
-            <p>
-                ASP.NET Web Forms lets you build dynamic websites using a familiar drag-and-drop, event-driven model.
-            A design surface and hundreds of controls and components let you rapidly build sophisticated, powerful UI-driven sites with data access.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301948">Learn more &raquo;</a>
-            </p>
+      <div class="col-md-6">
+        <table style="width:100%" border="0">
+          <tr>
+            <td style="width:100%; text-align: center">
+              <h3>Online Zakat</h3>
+              <br />
+              <i class="fas fa-dollar-sign" style='font-size:200px; color: darkgreen'></i>
+            </td> 
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <div class="form-horizontal">
+          <asp:Panel ID="pnlAnonymous" runat="server" Visible="true">
+            <h3>Login</h3>
+            <br />
+            <div class="form-group">
+              <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Username:</asp:Label>
+              <div class="col-md-10">
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The email/username is required." Display="Dynamic" />
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="A valid email/username is required." ControlToValidate="txtEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic"></asp:RegularExpressionValidator>                
+              </div>
+            </div>
+            <div class="form-group">
+              <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-2 control-label">Password:</asp:Label>
+              <div class="col-md-10">
+                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password field is required." />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <table style="width: 100%" border="0">
+                  <tr>
+                    <td style="text-align: left">
+                      <asp:Button runat="server" ID="btnLogin" Text="Login" Width="133px" CssClass="btn btn-success" TabIndex="3" />&nbsp;
+                      <a href="forgot" class="btn btn-default" style="width: 133px;"  TabIndex="4">Forgot Password</a>
+                    </td>
+                  </tr>
+                </table>
+                <asp:CustomValidator ID="valBadLogin" runat="server" CssClass="text-danger" ControlToValidate="txtEmail" ErrorMessage="Check your username/password combination." Display="Dynamic" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-2"></div>
+              <div class="col-md-10">
+                <br />
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 100%; text-align: left">Or, <a href="application">Submit an Online Zakat Application!</a>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </asp:Panel>
+          <asp:Panel ID="pnlLoggedIn" runat="server" Visible="false">
+            <table style="width: 100%" border="0">
+              <tr>
+                <td style="width: 100%; text-align: center">
+                  <br />
+                  <asp:LinkButton ID="lnkProfile" runat="server">
+                    <i class='fas fa-user-edit' style='color:black; font-size:100px'></i>
+                    <br />
+                    <h3>Edit Your Profile<br />Information!</h3>
+                  </asp:LinkButton>
+                </td>
+              </tr>
+            </table>
+          </asp:Panel>
         </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>
-                NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301949">Learn more &raquo;</a>
-            </p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>
-                You can easily find a web hosting company that offers the right mix of features and price for your applications.
-            </p>
-            <p>
-                <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301950">Learn more &raquo;</a>
-            </p>
-        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Advantages of the Online Zakat System</h4>
+      <ul>
+        <li>Submit online zakat applciations without having to register an account</li>
+        <li>Save your online zakat applciation data electronically and securely</li>
+        <li>Submit online zakat application(s) to one or more Islamic organizations</li>
+        <li>Correspondence is sent/received via email when decisions are made</li>
+        <li>Edit your saved profile as often as necessary</li>
+        <li>Track the progress of your submitted online zakat applciation (with an account)</li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h4>&nbsp;</h4>
+      <ul>
+        <%--<li>Must fulfill basic requirements for membership</li>
+        <li>Must have completed a minimum of one year as an associate member</li>
+        <li>Must be a Sunni Muslim</li>
+        <li>Must be a US citizen or permanent resident</li>--%>
+      </ul>
+    </div>
+  </div>
+  <br /><br />
 
 </asp:Content>
