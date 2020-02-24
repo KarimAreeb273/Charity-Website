@@ -18,13 +18,13 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <%--bootstrap 3 CDN references--%>
   <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
   <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
   <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 <body>
@@ -81,7 +81,7 @@
                   </ul>
                   <asp:Panel ID="pnlAnonymousTemplate" runat="server" Visible="true">
                     <ul class="nav navbar-nav navbar-right">
-                      <li><a href="application">Apply</a></li>
+                      <li><a href="zakatform">Apply</a></li>
                       <li><a href="default">Login</a></li>
                     </ul>
                   </asp:Panel>
@@ -126,7 +126,7 @@
                       <span style="white-space: nowrap;">
                         <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
                       </span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="application">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="zakatform">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
