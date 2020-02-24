@@ -14,15 +14,15 @@ Partial Public Class APPLICATION
     Public Property applicationId As Integer
     Public Property userId As Nullable(Of Integer)
     Public Property organizationId As Nullable(Of Integer)
-    Public Property createdOn As Nullable(Of Date)
-    Public Property createdBy As Nullable(Of Integer)
-    Public Property updatedOn As Nullable(Of Date)
-    Public Property updatedBy As Nullable(Of Integer)
     Public Property isSubmitted As Nullable(Of Boolean)
     Public Property isValidated As Nullable(Of Boolean)
     Public Property isInvestigated As Nullable(Of Boolean)
     Public Property isQualified As Nullable(Of Boolean)
     Public Property approvalStatus As String
+    Public Property createdOn As Nullable(Of Date)
+    Public Property createdBy As Nullable(Of Integer)
+    Public Property updatedOn As Nullable(Of Date)
+    Public Property updatedBy As Nullable(Of Integer)
 
     Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property USER As USER

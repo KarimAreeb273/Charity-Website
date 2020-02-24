@@ -10,15 +10,20 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class DEPDENDENT
-    Public Property depdendentId As Integer
+Partial Public Class REFERENCE
+    Public Property referenceId As Integer
     Public Property userId As Nullable(Of Integer)
     Public Property firstName As String
     Public Property middleName As String
     Public Property lastName As String
-    Public Property dob As Nullable(Of Date)
-    Public Property gender As String
-    Public Property relationship As String
+    Public Property referenceEmail As String
+    Public Property referencePhone As String
+    Public Property referenceKnownSince As Nullable(Of Date)
+    Public Property referenceRelationship As String
+    Public Property referenceStreet As String
+    Public Property referenceCity As String
+    Public Property referenceStateAbbr As String
+    Public Property referenceZip As String
 
     Public Overridable Property USER As USER
 

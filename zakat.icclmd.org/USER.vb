@@ -14,6 +14,7 @@ Partial Public Class USER
     Public Property userId As Integer
     Public Property email As String
     Public Property password As String
+    Public Property photoId As Byte()
     Public Property firstName As String
     Public Property middleName As String
     Public Property lastName As String
@@ -63,26 +64,6 @@ Partial Public Class USER
     Public Property employerStateAbbr As String
     Public Property employerZip As String
     Public Property employerPhone As String
-    Public Property hasReference1 As Boolean
-    Public Property reference1FullName As String
-    Public Property reference1Email As String
-    Public Property reference1Phone As String
-    Public Property reference1KnownSince As Nullable(Of Date)
-    Public Property reference1Relationship As String
-    Public Property reference1Street As String
-    Public Property reference1City As String
-    Public Property reference1StateAbbr As String
-    Public Property reference1Zip As String
-    Public Property hasReference2 As Boolean
-    Public Property reference2FullName As String
-    Public Property reference2Email As String
-    Public Property reference2Phone As String
-    Public Property reference2KnownSince As Nullable(Of Date)
-    Public Property reference2Relationship As String
-    Public Property reference2Street As String
-    Public Property reference2City As String
-    Public Property reference2StateAbbr As String
-    Public Property reference2Zip As String
     Public Property primaryMasjidName As String
     Public Property primaryMasjidPhone As String
     Public Property hasOutstandingDebts As Nullable(Of Boolean)
@@ -100,6 +81,7 @@ Partial Public Class USER
     Public Overridable Property DEPDENDENT As ICollection(Of DEPDENDENT) = New HashSet(Of DEPDENDENT)
     Public Overridable Property NATIONALITY As NATIONALITY
     Public Overridable Property STATE As STATE
+    Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
     Public Overridable Property USER_LANGUAGE As ICollection(Of USER_LANGUAGE) = New HashSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
 
