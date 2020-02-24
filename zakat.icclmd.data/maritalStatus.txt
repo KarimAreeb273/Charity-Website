@@ -1,5 +1,2 @@
 Single
 Married
-Divorced
-Separated
-Widowed

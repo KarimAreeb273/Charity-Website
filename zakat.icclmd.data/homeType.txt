@@ -1,0 +1,3 @@
+Own
+Rent
+Other
