@@ -612,7 +612,7 @@ INSERT INTO NATIONALITY (name) VALUES ('Yemenite');
 INSERT INTO NATIONALITY (name) VALUES ('Zambian');
 INSERT INTO NATIONALITY (name) VALUES ('Zimbabwean');
 
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	1	,	'Public'	,	'This role provides a user the ability to save profile data, submit zakat application(s), and monitor zakat application status'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	1	,	'Applicant'	,	'This role provides a user the ability to save profile data, submit zakat application(s), and monitor zakat application status'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	2	,	'Validator'	,	'This role provides a user the ability to review a zakat application for completeness'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'This role provides a user the ability to review the zakat case to determine that a need exists'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
@@ -670,14 +670,16 @@ INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WI'	,	'Wisconsin'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WY'	,	'Wyoming'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'DC'	,	'District of Columbia'	);
 
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	1	,	'Submitted'	,	'The zakat application has been submitted and is now awaiting validation that it is complete'	);
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	2	,	'Validated'	,	'The zakat application has been valdiated for completion'	);
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	3	,	'Investigated'	,	'The zakat application has been investigated to ensure that a need exists'	);
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	4	,	'Qualified'	,	'The zakat application has been determined to be qualified by jurists'	);
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	5	,	'Approved'	,	'The zakat application has been approved with a distinct amount'	);
--- INSERT INTO STATUS (	statusId	,	name	,	description	) VALUES (	6	,	'Rejected'	,	'The zakat application has been rejected with one or more reasons'	);
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('applicant@icclmd.org'	,	'12121212'	,	'Applicant', 'Applicant');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('validator@icclmd.org'	,	'12121212'	,	'Validator', 'Validator');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('investigator@icclmd.org'	,	'12121212'	,	'Investigator', 'Investigator');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier');
 
-INSERT INTO [dbo].[USER] (	statusId,	email,	password,	firstName,	phone,	street,	city,	county,	stateAbbr,	zip,	isVoterEligible,	isAdmin,	isHouseholdHead,	isAuthenticated,	isUsingHeadEmail,	isApproved,	createdBy,	updatedBy	) VALUES (	2	,	'office@icclmd.org'	,	'changeme'	,	'ICCL Zakat Admin'	,	3013174584	,	'7306 Contee Road'	,	'Laurel'	,	'Prince Georges'	,	'MD'	,	'20707'	,	0	,	1	,	1	,	1	,	0	,	0	,	0	,	0	);
+INSERT INTO [dbo].[USER_ROLE] (userId, roleId) VALUES (1, 5);
+
+INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
 
 
