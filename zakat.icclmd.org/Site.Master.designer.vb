@@ -14,22 +14,22 @@ Option Explicit On
 Partial Public Class SiteMaster
     
     '''<summary>
-    '''pnlAnonymousTemplate control.
+    '''pnlAnonymous control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlAnonymousTemplate As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''pnlLoggedInTemplate control.
+    '''pnlApplicant control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLoggedInTemplate As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlApplicant As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''lnkApplication control.
@@ -41,15 +41,6 @@ Partial Public Class SiteMaster
     Protected WithEvents lnkApplication As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''lnkMembers control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkMembers As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
     '''A1 control.
     '''</summary>
     '''<remarks>
@@ -59,22 +50,103 @@ Partial Public Class SiteMaster
     Protected WithEvents A1 As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''lnkProfileHeader control.
+    '''A7 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkProfileHeader As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents A7 As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''lblName control.
+    '''lblNameApplicant control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblNameApplicant As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlAdministrator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlAdministrator As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''A3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A3 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''A6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A6 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblNameAdministrator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNameAdministrator As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''pnlApprover control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlApprover As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''A4 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A4 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''A5 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A5 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''A2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A2 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblNameApprover control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNameApprover As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''MainContent control.

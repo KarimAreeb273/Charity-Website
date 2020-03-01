@@ -56,23 +56,49 @@
                 <br />
                 <table style="width: 100%">
                   <tr>
-                    <td style="width: 100%; text-align: left">Or, <a href="application">Submit an Online Zakat Application!</a>
+                    <td style="width: 100%; text-align: left">Or, <a href="zakatform">Submit an Online Zakat Application!</a>
                     </td>
                   </tr>
                 </table>
               </div>
             </div>
           </asp:Panel>
-          <asp:Panel ID="pnlLoggedIn" runat="server" Visible="false">
+          <asp:Panel ID="pnlApplicant" runat="server" Visible="false">
             <table style="width: 100%" border="0">
               <tr>
                 <td style="width: 100%; text-align: center">
                   <br />
-                  <asp:LinkButton ID="lnkProfile" runat="server">
-                    <i class='fas fa-user-edit' style='color:black; font-size:100px'></i>
+                  <a href="zakatform">
+                    <i class='fas fa-clipboard-list' style='color:darkgreen; font-size:100px'></i>
                     <br />
-                    <h3>Edit Your Profile<br />Information!</h3>
-                  </asp:LinkButton>
+                    <h3 style='color:black; line-height: 1.5'>Complete Zakat<br />Application</h3>
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </asp:Panel>
+          <asp:Panel ID="pnlApprover" runat="server" Visible="false">
+            <table style="width: 100%" border="0">
+              <tr>
+                <td style="width: 100%; text-align: center">
+                  <br />
+                  <a href="inbox">
+                    <i class='fas fa-file-signature' style='color:darkgreen; font-size:100px'></i>
+                    <br />
+                    <h3 style='color:black; line-height: 1.5'>Approve Zakat<br />Applications</h3>
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </asp:Panel>
+          <asp:Panel ID="pnlAdministrator" runat="server" Visible="false">
+            <table style="width: 100%" border="0">
+              <tr>
+                <td style="width: 100%; text-align: center">
+                  <br />
+                  <i class='fas fa-cogs' style='color:darkgreen; font-size:100px'></i>
+                  <br />
+                  <h3 style='color:black; line-height: 1.5'>Administer Zakat<br />System</h3>
                 </td>
               </tr>
             </table>
@@ -96,12 +122,6 @@
     </div>
     <div class="col-md-6">
       <h4>&nbsp;</h4>
-      <ul>
-        <%--<li>Must fulfill basic requirements for membership</li>
-        <li>Must have completed a minimum of one year as an associate member</li>
-        <li>Must be a Sunni Muslim</li>
-        <li>Must be a US citizen or permanent resident</li>--%>
-      </ul>
     </div>
   </div>
   <br /><br />

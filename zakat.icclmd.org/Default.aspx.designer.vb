@@ -68,20 +68,29 @@ Partial Public Class _Default
     Protected WithEvents valBadLogin As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
-    '''pnlLoggedIn control.
+    '''pnlApplicant control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlLoggedIn As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlApplicant As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''lnkProfile control.
+    '''pnlApprover control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lnkProfile As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents pnlApprover As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''pnlAdministrator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlAdministrator As Global.System.Web.UI.WebControls.Panel
 End Class
