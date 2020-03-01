@@ -4,7 +4,7 @@
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     'end the session
     Session.Clear()
-    Response.Redirect("default")
+    Response.Redirect("/")
   End Sub
 
 End Class
