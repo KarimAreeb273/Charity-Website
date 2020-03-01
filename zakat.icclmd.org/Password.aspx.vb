@@ -7,7 +7,7 @@
       Dim vEmail As String = LCase(Request.QueryString("e"))
       If vUserId = 0 And vEmail = "" Then
         'redirect to home
-        Response.Redirect("default")
+        Response.Redirect("/")
       End If
 
       If vUserId <> 0 Then
@@ -25,7 +25,7 @@
             txtEmail.Text = oUser.email
           Else
             'redirect to home
-            Response.Redirect("default")
+            Response.Redirect("/")
           End If
         End Using
       End If
@@ -77,7 +77,7 @@
         End Using
       Else
         'redirect to home
-        Response.Redirect("default")
+        Response.Redirect("/")
       End If
     Catch ex As Exception
       Response.Write(ex.Message)

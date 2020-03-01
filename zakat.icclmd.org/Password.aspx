@@ -23,7 +23,7 @@
           <div class="form-group">
             <asp:Label runat="server" CssClass="col-lg-3 control-label" Style="white-space: nowrap">&nbsp;</asp:Label>
             <div class="col-lg-9">
-              <div class="alert alert-info">
+              <div class="alert alert-success">
                 <span class="glyphicon glyphicon-info-sign" style="font-size:15px;">&nbsp;</span><strong>Passwords are eight (8) characters minimum</strong>
               </div>
             </div>
@@ -47,7 +47,7 @@
           <div class="form-group">
             <asp:Label runat="server" CssClass="col-lg-3 control-label" Style="white-space: nowrap">&nbsp;</asp:Label>
             <div class="col-lg-9">
-              <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" CssClass="btn btn-primary" TabIndex="5" Width="150" />
+              <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" CssClass="btn btn-success" TabIndex="5" Width="150" />
             </div>
           </div>
           <br />
