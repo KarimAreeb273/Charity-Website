@@ -14,63 +14,35 @@ Partial Public Class USER
     Public Property userId As Integer
     Public Property email As String
     Public Property password As String
-    Public Property photoId As Byte()
     Public Property firstName As String
     Public Property middleName As String
     Public Property lastName As String
+    Public Property gender As String
     Public Property maritalStatus As String
     Public Property dob As Nullable(Of Date)
-    Public Property gender As String
-    Public Property phone As String
     Public Property socialSecurityNumber As String
+    Public Property nationalityId As Nullable(Of Integer)
+    Public Property citizenshipStatus As String
+    Public Property phone As String
     Public Property street As String
     Public Property city As String
     Public Property stateAbbr As String
     Public Property zip As String
-    Public Property beginResidenceDate As Nullable(Of Date)
-    Public Property residenceType As String
-    Public Property nationalityId As Nullable(Of Integer)
+    Public Property beganLivingDate As Nullable(Of Date)
+    Public Property homeType As String
+    Public Property husbandFirstName As String
+    Public Property husbandMiddleName As String
+    Public Property husbandLastName As String
+    Public Property husbandHasAppliedForZakat As Nullable(Of Boolean)
+    Public Property husbandZakatExplanation As String
     Public Property highestEducationCompleted As String
+    Public Property schoolName As String
     Public Property schoolStreet As String
     Public Property schoolCity As String
     Public Property schoolStateAbbr As String
     Public Property schoolZip As String
-    Public Property totalValueCash As Nullable(Of Decimal)
-    Public Property totalValueGold As Nullable(Of Decimal)
-    Public Property totalValueSilver As Nullable(Of Decimal)
-    Public Property totalValueInvestments As Nullable(Of Decimal)
-    Public Property citizenshipStatus As String
-    Public Property hasHealthInsurance As Nullable(Of Boolean)
-    Public Property medicaidNumber As String
-    Public Property medicareNumber As String
-    Public Property healthInsuranceProviderName As String
-    Public Property healthInsuranceProviderPolicyNumber As String
-    Public Property hasLifeInsurance As Nullable(Of Boolean)
-    Public Property hasChildSupport As Nullable(Of Boolean)
-    Public Property totalMonthlyChildSupport As Nullable(Of Decimal)
-    Public Property hasFoodStamps As Nullable(Of Boolean)
-    Public Property totalMonthlyFoodStamps As Nullable(Of Decimal)
-    Public Property hasTemporaryCashAssistance As Nullable(Of Boolean)
-    Public Property totalTemporaryCashAssistance As Nullable(Of Decimal)
-    Public Property sourceTemporaryCashAssistance As String
-    Public Property has401KPension As Nullable(Of Boolean)
-    Public Property hasEmployer As Nullable(Of Boolean)
-    Public Property employerName As String
-    Public Property positionTitle As String
-    Public Property totalMonthlySalary As Nullable(Of Decimal)
-    Public Property employmentStartDate As Nullable(Of Date)
-    Public Property employerStreet As String
-    Public Property employerCity As String
-    Public Property employerStateAbbr As String
-    Public Property employerZip As String
-    Public Property employerPhone As String
     Public Property primaryMasjidName As String
     Public Property primaryMasjidPhone As String
-    Public Property hasOutstandingDebts As Nullable(Of Boolean)
-    Public Property totalOutstandingDebts As Nullable(Of Decimal)
-    Public Property hasLoanedMoney As Nullable(Of Boolean)
-    Public Property totalLoanedMoney As Nullable(Of Decimal)
-    Public Property zakatReasonDescription As String
     Public Property createdOn As Nullable(Of Date)
     Public Property createdBy As Nullable(Of Integer)
     Public Property updatedOn As Nullable(Of Date)

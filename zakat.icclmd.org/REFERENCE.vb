@@ -16,14 +16,13 @@ Partial Public Class REFERENCE
     Public Property firstName As String
     Public Property middleName As String
     Public Property lastName As String
-    Public Property referenceEmail As String
-    Public Property referencePhone As String
-    Public Property referenceKnownSince As Nullable(Of Date)
-    Public Property referenceRelationship As String
-    Public Property referenceStreet As String
-    Public Property referenceCity As String
-    Public Property referenceStateAbbr As String
-    Public Property referenceZip As String
+    Public Property phone As String
+    Public Property knownSince As Nullable(Of Date)
+    Public Property relationship As String
+    Public Property street As String
+    Public Property city As String
+    Public Property stateAbbr As String
+    Public Property zip As String
 
     Public Overridable Property USER As USER
 
