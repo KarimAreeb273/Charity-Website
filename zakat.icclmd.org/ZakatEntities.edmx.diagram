@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="72">
-        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="11.125" PointY="9.75" />
         <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="6.875" PointY="10.375" />
         <EntityTypeShape EntityType="zakatModel.DEPDENDENT" Width="1.5" PointX="6.875" PointY="12.875" />
         <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="2.625" PointY="17.125" />
@@ -17,8 +16,6 @@
         <EntityTypeShape EntityType="zakatModel.USER_LANGUAGE" Width="1.5" PointX="1.375" PointY="14.125" />
         <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="6.875" PointY="17.125" />
         <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="9.25" PointY="12" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_CERTIFICATION_SKILL_USER" />
         <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
@@ -28,6 +25,9 @@
         <AssociationConnector Association="zakatModel.FK_REFERENCE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
+        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="11.625" PointY="10.25" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

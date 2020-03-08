@@ -22,7 +22,6 @@ Partial Public Class zakatEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
     Public Overridable Property CERTIFICATION_SKILL() As DbSet(Of CERTIFICATION_SKILL)
     Public Overridable Property DEPDENDENT() As DbSet(Of DEPDENDENT)
     Public Overridable Property LANGUAGE() As DbSet(Of LANGUAGE)
@@ -34,5 +33,6 @@ Partial Public Class zakatEntities
     Public Overridable Property USER_LANGUAGE() As DbSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE() As DbSet(Of USER_ROLE)
     Public Overridable Property REFERENCE() As DbSet(Of REFERENCE)
+    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
 
 End Class

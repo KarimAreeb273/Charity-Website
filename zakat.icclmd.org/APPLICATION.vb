@@ -48,6 +48,7 @@ Partial Public Class APPLICATION
     Public Property positionTitle As String
     Public Property totalMonthlyGrossSalary As Nullable(Of Decimal)
     Public Property employmentStartDate As Nullable(Of Date)
+    Public Property employmentEndtDate As Nullable(Of Date)
     Public Property employerStreet As String
     Public Property employerCity As String
     Public Property employerStateAbbr As String

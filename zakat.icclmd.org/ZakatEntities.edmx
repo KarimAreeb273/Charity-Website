@@ -46,6 +46,7 @@
           <Property Name="positionTitle" Type="varchar" MaxLength="100" />
           <Property Name="totalMonthlyGrossSalary" Type="money" />
           <Property Name="employmentStartDate" Type="datetime" />
+          <Property Name="employmentEndtDate" Type="datetime" />
           <Property Name="employerStreet" Type="varchar" MaxLength="100" />
           <Property Name="employerCity" Type="varchar" MaxLength="50" />
           <Property Name="employerStateAbbr" Type="varchar" MaxLength="2" />
@@ -407,7 +408,6 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
     <edmx:ConceptualModels>
       <Schema Namespace="zakatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="zakatEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="zakatModel.CERTIFICATION_SKILL" />
           <EntitySet Name="DEPDENDENT" EntityType="zakatModel.DEPDENDENT" />
           <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
@@ -419,14 +419,6 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <EntitySet Name="USER_LANGUAGE" EntityType="zakatModel.USER_LANGUAGE" />
           <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
           <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="zakatModel.FK_CERTIFICATION_SKILL_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="CERTIFICATION_SKILL" EntitySet="CERTIFICATION_SKILL" />
@@ -463,61 +455,16 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
+          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="APPLICATION">
-          <Key>
-            <PropertyRef Name="applicationId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="organizationId" Type="Int32" />
-          <Property Name="isSubmitted" Type="Boolean" />
-          <Property Name="isValidated" Type="Boolean" />
-          <Property Name="isInvestigated" Type="Boolean" />
-          <Property Name="isQualified" Type="Boolean" />
-          <Property Name="approvalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueInvestments" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="has401KPension" Type="Boolean" />
-          <Property Name="totalValue401KPension" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasOutstandingDebts" Type="Boolean" />
-          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasHealthInsurance" Type="Boolean" />
-          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="hasLifeInsurance" Type="Boolean" />
-          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasChildSupport" Type="Boolean" />
-          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyChildSupport" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="hasFoodStamps" Type="Boolean" />
-          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyFoodStamps" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
-          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="isEmployerCurrent" Type="Boolean" />
-          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
-          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="employerStateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="updatedOn" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-        </EntityType>
         <EntityType Name="CERTIFICATION_SKILL">
           <Key>
             <PropertyRef Name="certificationSkillId" />
@@ -629,7 +576,6 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
           <NavigationProperty Name="DEPDENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPDENDENT" />
           <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
@@ -637,6 +583,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER" FromRole="USER" ToRole="REFERENCE" />
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -676,30 +623,6 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER" FromRole="REFERENCE" ToRole="USER" />
         </EntityType>
-        <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLICATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
           <End Type="zakatModel.CERTIFICATION_SKILL" Role="CERTIFICATION_SKILL" Multiplicity="*" />
@@ -808,65 +731,91 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="APPLICATION">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="organizationId" Type="Int32" />
+          <Property Name="isSubmitted" Type="Boolean" />
+          <Property Name="isValidated" Type="Boolean" />
+          <Property Name="isInvestigated" Type="Boolean" />
+          <Property Name="isQualified" Type="Boolean" />
+          <Property Name="approvalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueInvestments" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="has401KPension" Type="Boolean" />
+          <Property Name="totalValue401KPension" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasOutstandingDebts" Type="Boolean" />
+          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasHealthInsurance" Type="Boolean" />
+          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="hasLifeInsurance" Type="Boolean" />
+          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasChildSupport" Type="Boolean" />
+          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyChildSupport" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="hasFoodStamps" Type="Boolean" />
+          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyFoodStamps" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
+          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="isEmployerCurrent" Type="Boolean" />
+          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
+          <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
+          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employerStateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_APPLICATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_USER">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="zakatModelStoreContainer" CdmEntityContainer="zakatEntities">
-          <EntitySetMapping Name="APPLICATION">
-            <EntityTypeMapping TypeName="zakatModel.APPLICATION">
-              <MappingFragment StoreEntitySet="APPLICATION">
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
-                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
-                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
-                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
-                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
-                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
-                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
-                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
-                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
-                <ScalarProperty Name="employerName" ColumnName="employerName" />
-                <ScalarProperty Name="isEmployerCurrent" ColumnName="isEmployerCurrent" />
-                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
-                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
-                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
-                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
-                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
-                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
-                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
-                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
-                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
-                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
-                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
-                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
-                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
-                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
-                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
-                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
-                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
-                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
-                <ScalarProperty Name="totalValue401KPension" ColumnName="totalValue401KPension" />
-                <ScalarProperty Name="has401KPension" ColumnName="has401KPension" />
-                <ScalarProperty Name="totalValueInvestments" ColumnName="totalValueInvestments" />
-                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
-                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
-                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
-                <ScalarProperty Name="approvalStatus" ColumnName="approvalStatus" />
-                <ScalarProperty Name="isQualified" ColumnName="isQualified" />
-                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
-                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
-                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="CERTIFICATION_SKILL">
             <EntityTypeMapping TypeName="zakatModel.CERTIFICATION_SKILL">
               <MappingFragment StoreEntitySet="CERTIFICATION_SKILL">
@@ -1013,6 +962,60 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPLICATION">
+            <EntityTypeMapping TypeName="zakatModel.APPLICATION">
+              <MappingFragment StoreEntitySet="APPLICATION">
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
+                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
+                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
+                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
+                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
+                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
+                <ScalarProperty Name="employmentEndtDate" ColumnName="employmentEndtDate" />
+                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
+                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
+                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
+                <ScalarProperty Name="employerName" ColumnName="employerName" />
+                <ScalarProperty Name="isEmployerCurrent" ColumnName="isEmployerCurrent" />
+                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
+                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
+                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
+                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
+                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
+                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
+                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
+                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
+                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
+                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
+                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
+                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
+                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
+                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
+                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
+                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
+                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
+                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
+                <ScalarProperty Name="totalValue401KPension" ColumnName="totalValue401KPension" />
+                <ScalarProperty Name="has401KPension" ColumnName="has401KPension" />
+                <ScalarProperty Name="totalValueInvestments" ColumnName="totalValueInvestments" />
+                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
+                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
+                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
+                <ScalarProperty Name="approvalStatus" ColumnName="approvalStatus" />
+                <ScalarProperty Name="isQualified" ColumnName="isQualified" />
+                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
+                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
+                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
