@@ -141,6 +141,9 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UserRoles.aspx" />
+    <Content Include="OrganizationEdit.aspx" />
+    <Content Include="Organizations.aspx" />
     <Content Include="ZakatForm.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -229,6 +232,27 @@
     </Compile>
     <Compile Include="LANGUAGE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoles.aspx.designer.vb">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserRoles.aspx.vb">
+      <DependentUpon>UserRoles.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="OrganizationEdit.aspx.designer.vb">
+      <DependentUpon>OrganizationEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationEdit.aspx.vb">
+      <DependentUpon>OrganizationEdit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Organizations.aspx.designer.vb">
+      <DependentUpon>Organizations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Organizations.aspx.vb">
+      <DependentUpon>Organizations.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="NATIONALITY.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
