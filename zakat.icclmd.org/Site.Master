@@ -105,7 +105,7 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="organizations">Organizations</a></li>
-                          <li role="presentation"><a role="menuitem" tabindex="-1" href="roles">Users/Roles</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="userroles">Users/Roles</a></li>
                           <li role="presentation" class="divider"></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Users</a></li>
                         </ul>
