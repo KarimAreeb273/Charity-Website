@@ -356,7 +356,7 @@ INSERT INTO LANGUAGE (name) VALUES ('Oromo');
 INSERT INTO LANGUAGE (name) VALUES ('Oriya');
 INSERT INTO LANGUAGE (name) VALUES ('Ossetian');
 INSERT INTO LANGUAGE (name) VALUES ('Panjabi');
-INSERT INTO LANGUAGE (name) VALUES ('PÄli');
+INSERT INTO LANGUAGE (name) VALUES ('Pali');
 INSERT INTO LANGUAGE (name) VALUES ('Persian');
 INSERT INTO LANGUAGE (name) VALUES ('Polish');
 INSERT INTO LANGUAGE (name) VALUES ('Pashto');
@@ -617,6 +617,7 @@ INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	2	,	'Validator'	,	'Thi
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'This role provides a user the ability to review the zakat case to determine that a need exists'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispursed'	);
 
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AL'	,	'Alabama'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AK'	,	'Alaska'	);

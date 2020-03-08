@@ -11,7 +11,8 @@ Grandmother
 Great Grandfather
 Great Grandmother
 Grandson
-Grand daughter
+Granddaughter
+Grandson
 Uncle
 Aunt
 Nephew
