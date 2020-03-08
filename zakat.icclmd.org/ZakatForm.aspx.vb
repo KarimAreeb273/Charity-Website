@@ -7,11 +7,30 @@
         calDOB.EndDate = Date.Now
         Using oDB As New zakatEntities
           'load the state dropdown
-          drpState.DataSource = (From STATE In oDB.STATE).ToList
+          Dim oState As List(Of STATE) = (From STATE In oDB.STATE).ToList
+          drpState.DataSource = oState
           drpState.DataTextField = "stateName"
           drpState.DataValueField = "stateAbbr"
           drpState.DataBind()
           drpState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+
+          drpEmployerState.DataSource = oState
+          drpEmployerState.DataTextField = "stateName"
+          drpEmployerState.DataValueField = "stateAbbr"
+          drpEmployerState.DataBind()
+          drpEmployerState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+
+          drpRefState.DataSource = oState
+          drpRefState.DataTextField = "stateName"
+          drpRefState.DataValueField = "stateAbbr"
+          drpRefState.DataBind()
+          drpRefState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+
+          drpSchoolState.DataSource = oState
+          drpSchoolState.DataTextField = "stateName"
+          drpSchoolState.DataValueField = "stateAbbr"
+          drpSchoolState.DataBind()
+          drpSchoolState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           'load the nationality dropdown
           drpNationality.DataSource = (From NATIONALITY In oDB.NATIONALITY Order By NATIONALITY.name).ToList
@@ -20,9 +39,23 @@
           drpNationality.DataBind()
           drpNationality.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
-          'load the dues type repeater
-          ''rptDuesTypes.DataSource = (From DUES_TYPE In oDB.DUES_TYPE Where DUES_TYPE.isActive).ToList
-          ''rptDuesTypes.DataBind()
+          'load the organization dropdown
+          drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Order By ORGANIZATION.name).ToList
+          drpOrganization.DataTextField = "name"
+          drpOrganization.DataValueField = "organizationId"
+          drpOrganization.DataBind()
+          drpOrganization.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+
+          'load the language listbox
+          lstLanguages.DataSource = (From LANGUAGE In oDB.LANGUAGE Order By LANGUAGE.name).ToList
+          lstLanguages.DataTextField = "name"
+          lstLanguages.DataValueField = "languageId"
+          lstLanguages.DataBind()
+
+          'load the dependents repeater
+          setDependents()
+          'load the references repeater
+          setReferences()
         End Using
       End If
     Catch ex As Exception
@@ -144,32 +177,17 @@
           Exit Sub
         End If
       End Using
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
-  End Sub
-
-  Private Sub chkReference_CheckedChanged(sender As Object, e As EventArgs) Handles chkReference.CheckedChanged
-    If chkReference.Checked Then
-      txtRefName.Enabled = True
-      txtRefEmail.Enabled = True
-      txtRefPhone.Enabled = True
-    Else
-      txtRefName.Text = ""
-      txtRefEmail.Text = ""
-      txtRefPhone.Text = ""
-      txtRefName.Enabled = False
-      txtRefEmail.Enabled = False
-      txtRefPhone.Enabled = False
-    End If
   End Sub
 
   Public Function GetDate(ByVal month As Short, ByVal day As Short) As Date
     GetDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
   End Function
 
-  Sub RefershGeneralProgress()
+  Sub RefershApplicantProgress()
     Try
       Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18 As Boolean
       If (txtEmail.Text = "") Then
@@ -320,28 +338,13 @@
         vProgress += 1
       End If
 
-      vProgress = ((vProgress / 18) * 100)
+      'calculate progress
+      vProgress = ((vProgress / 17) * 100)
 
       'set progress bar attributes
       prgApplicant.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgApplicant.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentApplicant.Text = CStr(CInt(vProgress)) + "% Complete"
-
-      'ScriptManager.RegisterStartupScript(this, TypeOf (Page), "UpdateMsg", "$(document).ready(function(){EnableControls(); alert('Overrides successfully Updated.');DisableControls();});", True);
-      'System.Web.UI.ScriptManager.RegisterStartupScript(Me, [GetType](), "check_Javascript", "SetMap(59.334591, 18.063240,First Text);", True)
-
-      'System.Web.UI.ScriptManager.RegisterStartupScript(Me, [GetType](), "check_Javascript", "SetMap(59.334591, 18.063240,'First Text');", True)
-
-
-
-      '$(document).ready(function(){
-      '  $("#demo").on("hide.bs.collapse", function(){
-      '    $(".btn").html('<span class="glyphicon glyphicon-collapse-down"></span> Open');
-      '  });
-      '  $("#demo").on("show.bs.collapse", function(){
-      '    $(".btn").html('<span class="glyphicon glyphicon-collapse-up"></span> Close');
-      '  });
-      '});
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -349,7 +352,7 @@
 
   Private Sub txtSocialSecurity_TextChanged(sender As Object, e As EventArgs) Handles txtSocialSecurity.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -357,7 +360,7 @@
 
   Private Sub txtFirstName_TextChanged(sender As Object, e As EventArgs) Handles txtFirstName.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -365,7 +368,7 @@
 
   Private Sub txtMiddleName_TextChanged(sender As Object, e As EventArgs) Handles txtMiddleName.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -373,7 +376,7 @@
 
   Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs) Handles txtLastName.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -381,7 +384,12 @@
 
   Private Sub chkGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkGender.SelectedIndexChanged
     Try
-      RefershGeneralProgress()
+      If chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married" Then
+        pnlHusbandInformation.Visible = True
+      Else
+        pnlHusbandInformation.Visible = False
+      End If
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -389,7 +397,7 @@
 
   Private Sub txtDOB_TextChanged(sender As Object, e As EventArgs) Handles txtDOB.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -397,7 +405,7 @@
 
   Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -405,7 +413,7 @@
 
   Private Sub txtStreet_TextChanged(sender As Object, e As EventArgs) Handles txtStreet.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -413,7 +421,7 @@
 
   Private Sub txtCity_TextChanged(sender As Object, e As EventArgs) Handles txtCity.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -421,7 +429,7 @@
 
   Private Sub drpState_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpState.SelectedIndexChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -429,7 +437,7 @@
 
   Private Sub txtZip_TextChanged(sender As Object, e As EventArgs) Handles txtZip.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -437,7 +445,7 @@
 
   Private Sub txtBeganLiving_TextChanged(sender As Object, e As EventArgs) Handles txtBeganLiving.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -452,7 +460,7 @@
         txtHomeType.Enabled = False
         valHomeType.Enabled = False
       End If
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -460,7 +468,7 @@
 
   Private Sub drpCitizenship_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpCitizenship.SelectedIndexChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -468,7 +476,12 @@
 
   Private Sub drpMaritalStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpMaritalStatus.SelectedIndexChanged
     Try
-      RefershGeneralProgress()
+      If chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married" Then
+        pnlHusbandInformation.Visible = True
+      Else
+        pnlHusbandInformation.Visible = False
+      End If
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -476,7 +489,7 @@
 
   Private Sub txtHomeType_TextChanged(sender As Object, e As EventArgs) Handles txtHomeType.TextChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -484,13 +497,194 @@
 
   Private Sub drpNationality_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpNationality.SelectedIndexChanged
     Try
-      RefershGeneralProgress()
+      RefershApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
 
-  'Private Sub btnTest_Click(sender As Object, e As EventArgs) Handles btnTest.Click
-  '  System.Web.UI.ScriptManager.RegisterStartupScript(Me, [GetType](), "openPanel", "$(document).ready(function(){$('#collapse1').on('show.bs.collapse', function(){ });});", True)
-  'End Sub
+  Private Sub chkInsurance_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkInsurance.SelectedIndexChanged
+    Try
+      If chkInsurance.SelectedValue = "Yes" Then
+        pnlInsurance.Visible = True
+      Else
+        pnlInsurance.Visible = False
+      End If
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Function getAge(ByVal dob As Date) As Int16
+    getAge = Base.getAge(dob)
+  End Function
+
+  Public Function getFormattedPhone(ByVal pPhone As String) As String
+    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+  End Function
+
+  Public Sub btnDeleteDependent_Click(sender As Object, e As System.EventArgs) 'Handles btnDelete.Click
+    Try
+      'go home if no session/user
+      'Dim vUserId As Int32 = Session("sUserId")
+      'If vUserId = 0 Then Response.Redirect("default")
+
+      Dim vDependentId As Int32 = sender.CommandArgument
+      Using oDB As New zakatEntities
+        Dim oDependent As DEPDENDENT = (From DEPDENDENT In oDB.DEPDENDENT Where DEPDENDENT.depdendentId = vDependentId).First
+        oDB.DEPDENDENT.Remove(oDependent)
+        oDB.SaveChanges()
+      End Using
+      'refresh the dependents list
+      setDependents()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Sub btnDeleteReference_Click(sender As Object, e As System.EventArgs) 'Handles btnDelete.Click
+    Try
+      'go home if no session/user
+      'Dim vUserId As Int32 = Session("sUserId")
+      'If vUserId = 0 Then Response.Redirect("default")
+
+      Dim vReferenceId As Int32 = sender.CommandArgument
+      Using oDB As New zakatEntities
+        Dim oReference As REFERENCE = (From REFERENCE In oDB.REFERENCE Where REFERENCE.referenceId = vReferenceId).First
+        oDB.REFERENCE.Remove(oReference)
+        oDB.SaveChanges()
+      End Using
+      'refresh the references list
+      setReferences()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setDependents()
+    Try
+      Using oDB As New zakatEntities
+        Dim vUserId As Int32 = Session("sUserId")
+        'update repeater
+        Dim oDependent_List As List(Of DEPDENDENT) = (From DEPDENDENT In oDB.DEPDENDENT Where DEPDENDENT.userId = vUserId).ToList
+        rptDependents.DataSource = oDependent_List
+        rptDependents.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setReferences()
+    Try
+      Using oDB As New zakatEntities
+        Dim vUserId As Int32 = Session("sUserId")
+        'update repeater
+        Dim oReference_List As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = vUserId).ToList
+        rptReferences.DataSource = oReference_List
+        rptReferences.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub drpOrganization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpOrganization.SelectedIndexChanged
+    Try
+      Using oDB As New zakatEntities
+        If drpOrganization.SelectedValue = "(Select One)" Then
+          accZakat.Enabled = False
+        Else
+          accZakat.Enabled = True
+        End If
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAddLanguage_Click(sender As Object, e As EventArgs) Handles btnAddLanguage.Click
+    Try
+      'if nothing is selected in the lstLanguages listbox, stop
+      If lstLanguages.SelectedIndex = -1 Then Exit Sub
+
+      'get the selected language:
+      Dim vSpokenLanguageValue As Int32 = lstLanguages.SelectedItem.Value
+      Dim vSpokenLanguageText As String = lstLanguages.SelectedItem.Text
+
+      If Not lstSpoken.Items.Contains(New ListItem(vSpokenLanguageText, vSpokenLanguageValue)) Then
+        lstSpoken.Items.Add(New ListItem(vSpokenLanguageText, vSpokenLanguageValue))
+      End If
+
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnDeleteLanguage_Click(sender As Object, e As EventArgs) Handles btnDeleteLanguage.Click
+    Try
+      'if nothing is selected in the lstLanguages listbox, stop
+      If lstSpoken.SelectedIndex = -1 Then Exit Sub
+
+      'get the selected language:
+      Dim vSpokenLanguageValue As Int32 = lstSpoken.SelectedItem.Value
+      Dim vSpokenLanguageText As String = lstSpoken.SelectedItem.Text
+
+      lstSpoken.Items.Remove(New ListItem(vSpokenLanguageText, vSpokenLanguageValue))
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnAddCertification_Click(sender As Object, e As EventArgs) Handles btnAddCertification.Click
+    Try
+      'if nothing is selected in the lstLanguages listbox, stop
+      If txtSkillCertification.Text = "" Then Exit Sub
+
+      'get the selected language:
+
+      If Not lstSkillCertification.Items.Contains(New ListItem(txtSkillCertification.Text)) Then
+        lstSkillCertification.Items.Add(New ListItem(txtSkillCertification.Text))
+        txtSkillCertification.Text = ""
+      End If
+
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnRemoveCertification_Click(sender As Object, e As EventArgs) Handles btnRemoveCertification.Click
+    Try
+      'if nothing is selected in the lstLanguages listbox, stop
+      If lstSkillCertification.SelectedIndex = -1 Then Exit Sub
+
+      'get the selected language:
+      Dim vSkillCertificationValue As String = lstSkillCertification.SelectedItem.Value
+      Dim vSkillCertificationText As String = lstSkillCertification.SelectedItem.Text
+
+      lstSkillCertification.Items.Remove(New ListItem(vSkillCertificationText, vSkillCertificationValue))
+      txtSkillCertification.Text = ""
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtValueAssistance_TextChanged(sender As Object, e As EventArgs) Handles txtValueAssistance.TextChanged
+    Try
+      'if nothing is selected in the lstLanguages listbox then exit sub
+      If txtValueAssistance.Text = "" Then Exit Sub
+      'if not a number then exit sub
+      If Not IsNumeric(txtValueAssistance.Text) Then Exit Sub
+      'if the value equal zero then make the who assisted text box disabled along with the validation otherwise do opposite
+      If CInt(txtValueAssistance.Text) = 0 Then
+        txtWhoAssisted.Enabled = False
+        valWhoAssisted.Enabled = False
+      Else
+        txtWhoAssisted.Enabled = True
+        valWhoAssisted.Enabled = True
+      End If
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 End Class
