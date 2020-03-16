@@ -95,7 +95,7 @@
               <div class="form-group">
                 <asp:Label runat="server" AssociatedControlID="txtPhone" CssClass="col-lg-2 control-label" ToolTip="Organization Phone Number" Style="white-space: nowrap">Phone #:</asp:Label>
                 <div class="col-lg-10">
-                  <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" ToolTip="Organization Phone Number" MaxLength="14" placeholder="(555) 555-1234" TabIndex="3" />
+                  <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" ToolTip="Organization Phone Number" MaxLength="12" placeholder="555-555-1234" TabIndex="3" />
                   <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number." Display="Dynamic" ValidationGroup="Head"></asp:RegularExpressionValidator>
                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ErrorMessage="The organization phone # is required." Display="Static" ValidationGroup="Head" />
                   <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="txtPhone" Mask="(999) 999-9999" MaskType="None" ClearMaskOnLostFocus="False" />
