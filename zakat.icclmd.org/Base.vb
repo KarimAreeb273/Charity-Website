@@ -9,20 +9,13 @@ Public Class Base
     Format = 2
   End Enum
 
-  Enum enumMembershipStatus As Integer
-    Pending = 1
-    Active = 2
-    Inactive = 3
-    Late = 4
-    Lapsed = 5
-  End Enum
-
-  Enum enumDependencyType As Short
-    Spouse = 1
-    Child = 2
-    Parent = 3
-    Other = 4
-    Self = 5
+  Enum enumRole As Integer
+    Appliciant = 1
+    Validator = 2
+    Investigator = 3
+    Qualifier = 4
+    Administrator = 5
+    Financier = 6
   End Enum
 
 #End Region
@@ -71,128 +64,24 @@ Public Class Base
     End Try
   End Function
 
-  'Public Shared Function getIsAdmin(pUserID As Integer, pRole As Integer) As Boolean
-  '  Try
-  '    Using oDB As New zakatEntities
-  '      If (From USER In oDB.USER Where USER.userId = pUserID AndAlso USER.isAdmin = True).Any Then
-  '        Return True
-  '      Else
-  '        Return False
-  '      End If
-  '    End Using
-  '  Catch ex As Exception
-  '    Return False
-  '  End Try
-  'End Function
-
   Public Shared Function getFormattedPhone(pPhone As String, pMode As enumFormatPhone) As String
     Try
       If pPhone = "" Then
-        getFormattedPhone = "None"
+        getFormattedPhone = ""
       Else
         Select Case pMode
           Case enumFormatPhone.Strip
             Dim nonNumericCharacters As New System.Text.RegularExpressions.Regex("\D")
             pPhone = nonNumericCharacters.Replace(pPhone, String.Empty)
           Case enumFormatPhone.Format
-            pPhone = pPhone.Insert(3, ".")
-            pPhone = pPhone.Insert(7, ".")
+            pPhone = pPhone.Insert(3, "-")
+            pPhone = pPhone.Insert(7, "-")
         End Select
         getFormattedPhone = pPhone
       End If
     Catch ex As Exception
       Return ""
     End Try
-  End Function
-
-  Public Shared Function getVoterElibility(pHasPaidDues As Boolean, pMemberType As String, pIsHouseldHead As Boolean, pMemberStatus As enumMembershipStatus, pDOB As Date, pMaritalStatus As String, pCitizenship As String, pCounty As String, Optional pDependencyType As String = "Self") As Boolean
-    Dim vAge As Int16 = getAge(pDOB)
-    If pHasPaidDues Then
-      If pMemberType = "General" Then
-        If pMemberStatus = enumMembershipStatus.Active Then
-          'active, so verify other rules for voting
-          If pIsHouseldHead And vAge >= 18 Then
-            'head of household and older than 18
-            If pCitizenship = "US Citizen" Or pCitizenship = "Permanent Resident" Then
-              'citizenship is US or PR = true
-              If pCounty = "Other" Then
-                'any county other than the 4 = false
-                Return False
-              Else
-                'only 1 of the 4 counties = true
-                Return True
-              End If
-            Else
-              'citizenship is not US or PR = false
-              Return False
-            End If
-          Else
-            'dependent
-            If vAge <= 18 Then
-              '18 or younger = false 
-              Return False
-            ElseIf vAge >= 55 Then
-              '55 or older = true
-              If pCitizenship = "US Citizen" Or pCitizenship = "Permanent Resident" Then
-                'citizenship is US or PR = true
-                If pCounty = "Other" Then
-                  'any county other than the 4 = false
-                  Return False
-                Else
-                  'only 1 of the 4 counties = true
-                  Return True
-                End If
-              Else
-                'citizenship is not US or PR = false
-                Return False
-              End If
-            Else
-              If pMaritalStatus = "Single" Then
-                'between 18 and 55 and single = true
-                If pCitizenship = "US Citizen" Or pCitizenship = "Permanent Resident" Then
-                  'citizenship is US or PR = true
-                  If pCounty = "Other" Then
-                    'any county other than the 4 = false
-                    Return False
-                  Else
-                    'only 1 of the 4 counties = true
-                    Return True
-                  End If
-                Else
-                  'citizenship is not US or PR = false
-                  Return False
-                End If
-              ElseIf pMaritalStatus = "Married" And pDependencyType = "Spouse" Then
-                'married to the head of household
-                If pCitizenship = "US Citizen" Or pCitizenship = "Permanent Resident" Then
-                  'citizenship is US or PR = true
-                  If pCounty = "Other" Then
-                    'any county other than the 4 = false
-                    Return False
-                  Else
-                    'only 1 of the 4 counties = true
-                    Return True
-                  End If
-                Else
-                  'citizenship is not US or PR = false
-                  Return False
-                End If
-              Else
-                'between 18 and 55 and married = false
-                Return False
-              End If
-            End If
-          End If
-        Else
-          'not active will always return false
-          Return False
-        End If
-      Else
-        Return False
-      End If
-    Else
-      Return False
-    End If
   End Function
 
   Public Shared Function getAge(ByVal dob As Date) As Int16
@@ -212,26 +101,64 @@ Public Class Base
     getPassword = sb.ToString
   End Function
 
-  Public Shared Function GetFormattedId(pMemberId As Int32) As String
-    Try
-      Dim vMemberId As String = pMemberId.ToString
-      Select Case vMemberId.Length
-        Case 1
-          GetFormattedId = "0000" & vMemberId
-        Case 2
-          GetFormattedId = "000" & vMemberId
-        Case 3
-          GetFormattedId = "00" & vMemberId
-        Case 4
-          GetFormattedId = "0" & vMemberId
-        Case 5
-          GetFormattedId = vMemberId
-        Case Else
-          GetFormattedId = vMemberId
-      End Select
-    Catch ex As Exception
-      Return Nothing
-    End Try
+  Public Shared Function createUser(pRole As enumRole, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "") As Int32
+    'create the user
+    Dim oUser As New USER
+    Dim vPassword As String
+    Dim vUserId As Int32
+
+    Using oDB As New zakatEntities
+      'insert information about new user and save to db
+      With oUser
+        .email = LCase(pEmail)
+        .firstName = pFirst
+        .middleName = pMiddle
+        .lastName = pLast
+        'randomly generate a password
+        .password = Base.getPassword()
+      End With
+
+      ' Add to Memory
+      oDB.USER.Add(oUser)
+      oDB.SaveChanges()
+
+      'set the userId after adding to db
+      vUserId = oUser.userId
+      vPassword = oUser.password
+
+      'set the applicant role for this user
+      Dim oUserRole As New USER_ROLE
+      With oUserRole
+        .userId = vUserId
+        .roleId = pRole
+      End With
+      ' Add to Memory
+      oDB.USER_ROLE.Add(oUserRole)
+      oDB.SaveChanges()
+
+    End Using
+    'send an email to new applicant with the username and password
+    Dim vTo As String = pEmail
+    Dim vSubject As String = "Online Zakat - New Account"
+    Dim vMsgText As New StringBuilder
+
+    vMsgText.Append("Assalaamu Alaikum " & pFirst & ",<br /><br />")
+    vMsgText.Append("Your Online Zakat Account has been created. ")
+    vMsgText.Append("This account will be used to provide you with updates regarding the progress of any submitted zakat applications. ")
+    vMsgText.Append("You can click or copy/paste the website link below and use the account information provided to log into your account. ")
+    vMsgText.Append("While there, change your auto-generated password so that you can remember it more easily:<br /><br />")
+    vMsgText.Append("<b>Website Link: </b> <a target='_blank' href='https://zakat.icclmd.org/password?e=" & pEmail & "'>https://zakat.icclmd.org/password?e=" & pEmail & "</a><br />")
+    vMsgText.Append("<b>Password:</b>  <i>" & vPassword & "</i><br /><br />")
+    vMsgText.Append("If you have issues regarding your account, please don’t hesitate to contact us.<br /><br />")
+    vMsgText.Append("Thank you,<br /><br />")
+    vMsgText.Append("Online Zakat Administrator<br />")
+    vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
+    vMsgText.Append("7306 Contee Road<br />")
+    vMsgText.Append("Laurel, MD 20707<br />")
+    vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
+    Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+
+    createUser = vUserId
   End Function
 
 #End Region
