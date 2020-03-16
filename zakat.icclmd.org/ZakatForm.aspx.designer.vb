@@ -59,6 +59,15 @@ Partial Public Class ZakatForm
     Protected WithEvents ltlPercentApplicant As Global.System.Web.UI.WebControls.Literal
     
     '''<summary>
+    '''FormOrder control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents FormOrder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''txtEmail control.
     '''</summary>
     '''<remarks>
@@ -84,24 +93,6 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents valDuplicateEmail As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtSocialSecurity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSocialSecurity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''MaskedEditExtender3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender3 As Global.AjaxControlToolkit.MaskedEditExtender
     
     '''<summary>
     '''txtFirstName control.
@@ -140,6 +131,15 @@ Partial Public Class ZakatForm
     Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtSocialSecurity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSocialSecurity As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtDOB control.
     '''</summary>
     '''<remarks>
@@ -174,15 +174,6 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''MaskedEditExtender1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender1 As Global.AjaxControlToolkit.MaskedEditExtender
     
     '''<summary>
     '''chkGender control.
@@ -536,6 +527,15 @@ Partial Public Class ZakatForm
     Protected WithEvents txtValueCash As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''RegularExpressionValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
     '''txtValueGold control.
     '''</summary>
     '''<remarks>
@@ -543,6 +543,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValueGold As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator3 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''txtValueSilver control.
@@ -554,31 +563,31 @@ Partial Public Class ZakatForm
     Protected WithEvents txtValueSilver As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtValueInvestments control.
+    '''RegularExpressionValidator4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtValueInvestments As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents RegularExpressionValidator4 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
-    '''txtValueAssistance control.
+    '''txtValueInvestment control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtValueAssistance As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtValueInvestment As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''chkInsurance control.
+    '''RegularExpressionValidator5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkInsurance As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents RegularExpressionValidator5 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''txtValueRetirement control.
@@ -590,6 +599,42 @@ Partial Public Class ZakatForm
     Protected WithEvents txtValueRetirement As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''RegularExpressionValidator7 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator7 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
+    '''txtValueAssistance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueAssistance As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator6 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator6 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
+    '''chkInsurance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkInsurance As Global.System.Web.UI.WebControls.RadioButtonList
+    
+    '''<summary>
     '''txtValueLifeInsurance control.
     '''</summary>
     '''<remarks>
@@ -597,6 +642,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValueLifeInsurance As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator8 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''txtValueDebt control.
@@ -608,6 +662,15 @@ Partial Public Class ZakatForm
     Protected WithEvents txtValueDebt As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''RegularExpressionValidator9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator9 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
     '''txtValueChildSupport control.
     '''</summary>
     '''<remarks>
@@ -617,6 +680,33 @@ Partial Public Class ZakatForm
     Protected WithEvents txtValueChildSupport As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''RegularExpressionValidator10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator10 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
+    '''drpChildSupportFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents drpChildSupportFrequency As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''valChildSupportFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valChildSupportFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
     '''txtValueFoodStamps control.
     '''</summary>
     '''<remarks>
@@ -624,6 +714,33 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValueFoodStamps As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator11 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
+    '''drpFoodStampFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents drpFoodStampFrequency As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''valFoodStampFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valFoodStampFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
     '''txtWhoAssisted control.
@@ -797,15 +914,6 @@ Partial Public Class ZakatForm
     Protected WithEvents txtEmployerPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MaskedEditExtender4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender4 As Global.AjaxControlToolkit.MaskedEditExtender
-    
-    '''<summary>
     '''txtMonthlySalary control.
     '''</summary>
     '''<remarks>
@@ -813,6 +921,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMonthlySalary As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator12 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator12 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''txtEmployerStreet control.
@@ -968,6 +1085,15 @@ Partial Public Class ZakatForm
     Protected WithEvents btnAddDependent As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''valUserRequiredDep control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valUserRequiredDep As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
     '''rptDependents control.
     '''</summary>
     '''<remarks>
@@ -984,6 +1110,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents paneReference As Global.AjaxControlToolkit.AccordionPane
+    
+    '''<summary>
+    '''lblReferences control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReferences As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''prgReference control.
@@ -1058,15 +1193,6 @@ Partial Public Class ZakatForm
     Protected WithEvents txtRefPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MaskedEditExtender2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender2 As Global.AjaxControlToolkit.MaskedEditExtender
-    
-    '''<summary>
     '''txtKnownSince control.
     '''</summary>
     '''<remarks>
@@ -1130,6 +1256,24 @@ Partial Public Class ZakatForm
     Protected WithEvents txtRefZip As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtMasjidtName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidtName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtMasjidPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''btnAddReference control.
     '''</summary>
     '''<remarks>
@@ -1137,6 +1281,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents btnAddReference As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''valUserRequiredRef control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valUserRequiredRef As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''rptReferences control.
@@ -1182,6 +1335,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPersonalStatement As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''valUserRequiredSave control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valUserRequiredSave As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''btnSave control.
