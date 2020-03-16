@@ -1,119 +1,193 @@
 USE [zakat]
 GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [FK_USER_STATUS]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [FK_USER_STATE]
-GO
-ALTER TABLE [dbo].[MEMBER_DUES] DROP CONSTRAINT [FK_DUES_USER]
-GO
-ALTER TABLE [dbo].[MEMBER_DUES] DROP CONSTRAINT [FK_DUES_DUES_TYPE]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_updatedOn]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_createdOn]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_hasReference]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isApproved]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isUsingHeadEmail]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isAuthenticated]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isHouseholdHead]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isAdmin]
-GO
-ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isVoterEligible]
-GO
-ALTER TABLE [dbo].[MEMBER_DUES] DROP CONSTRAINT [DF_MEMBER_DUES_paypalIpnIsSuccessful]
-GO
-ALTER TABLE [dbo].[MEMBER_DUES] DROP CONSTRAINT [DF_MEMBER_DUES_paypalPdtIsSuccessful]
-GO
-ALTER TABLE [dbo].[MEMBER_DUES] DROP CONSTRAINT [DF_MEMBER_DUES_isConfirmed]
-GO
-ALTER TABLE [dbo].[DUES_TYPE] DROP CONSTRAINT [DF_DUES_TYPE_updatedOn]
-GO
-ALTER TABLE [dbo].[DUES_TYPE] DROP CONSTRAINT [DF_DUES_TYPE_createdOn]
-GO
-/****** Object:  Table [dbo].[USER]    Script Date: 1/21/2019 8:09:10 AM ******/
-DROP TABLE [dbo].[USER]
-GO
-/****** Object:  Table [dbo].[STATUS]    Script Date: 1/21/2019 8:09:10 AM ******/
-DROP TABLE [dbo].[STATUS]
-GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 1/21/2019 8:09:10 AM ******/
-DROP TABLE [dbo].[STATE]
-GO
-/****** Object:  Table [dbo].[MEMBER_DUES]    Script Date: 1/21/2019 8:09:10 AM ******/
-DROP TABLE [dbo].[MEMBER_DUES]
-GO
-/****** Object:  Table [dbo].[DUES_TYPE]    Script Date: 1/21/2019 8:09:10 AM ******/
-DROP TABLE [dbo].[DUES_TYPE]
-GO
-/****** Object:  Table [dbo].[DUES_TYPE]    Script Date: 1/21/2019 8:09:10 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 3/15/2020 9:44:49 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[DUES_TYPE](
-	[duesTypeId] [int] IDENTITY(1,1) NOT NULL,
-	[name] [varchar](10) NULL,
-	[description] [varchar](150) NULL,
-	[amount] [money] NULL,
-	[discountMonth] [smallint] NULL,
-	[discountDay] [smallint] NULL,
-	[discountPercent] [decimal](2, 2) NULL,
-	[effectiveDate] [datetime] NULL,
-	[endDate] [datetime] NULL,
-	[isActive] [bit] NULL,
-	[createdOn] [datetime] NULL,
-	[createdBy] [int] NULL,
-	[updatedOn] [datetime] NULL,
-	[updatedBy] [int] NULL,
- CONSTRAINT [PK_DUES_TYPE] PRIMARY KEY CLUSTERED 
+CREATE TABLE [dbo].[APPLICATION](
+	[applicationId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NOT NULL,
+	[organizationId] [int] NOT NULL,
+	[isSaved] [bit] NULL,
+	[isSubmitted] [bit] NULL,
+	[isValidated] [bit] NULL,
+	[isInvestigated] [bit] NULL,
+	[isQualified] [bit] NULL,
+	[approvalStatus] [varchar](15) NULL,
+	[totalValueCash] [money] NULL,
+	[totalValueGold] [money] NULL,
+	[totalValueSilver] [money] NULL,
+	[totalValueInvestment] [money] NULL,
+	[hasRetirement] [bit] NULL,
+	[totalValueRetirement] [money] NULL,
+	[hasOutstandingDebts] [bit] NULL,
+	[totalValueOutstandingDebts] [money] NULL,
+	[hasHealthInsurance] [varchar](10) NULL,
+	[medicaidNumber] [varchar](9) NULL,
+	[medicareNumber] [varchar](11) NULL,
+	[healthInsuranceProviderName] [varchar](100) NULL,
+	[healthInsuranceProviderPolicyNumber] [varchar](25) NULL,
+	[hasLifeInsurance] [bit] NULL,
+	[totalValueLifeInsurance] [money] NULL,
+	[hasChildSupport] [bit] NULL,
+	[totalChildSupport] [money] NULL,
+	[frequencyChildSupport] [varchar](15) NULL,
+	[hasFoodStamps] [bit] NULL,
+	[totalFoodStamps] [money] NULL,
+	[frequencyFoodStamps] [varchar](15) NULL,
+	[hasTemporaryCashAssistance] [bit] NULL,
+	[sourceTemporaryCashAssistance] [varchar](100) NULL,
+	[totalTemporaryCashAssistance] [money] NULL,
+	[isEmployerCurrent] [bit] NULL,
+	[employerName] [varchar](100) NULL,
+	[positionTitle] [varchar](100) NULL,
+	[totalMonthlyGrossSalary] [money] NULL,
+	[employmentStartDate] [datetime] NULL,
+	[employmentEndtDate] [datetime] NULL,
+	[employerStreet] [varchar](100) NULL,
+	[employerCity] [varchar](50) NULL,
+	[employerStateAbbr] [varchar](15) NULL,
+	[employerZip] [varchar](5) NULL,
+	[employerPhone] [varchar](10) NULL,
+	[personalNeedStatement] [varchar](1000) NULL,
+	[submittedDate] [datetime] NULL,
+ CONSTRAINT [PK_APPLICATION] PRIMARY KEY CLUSTERED 
 (
-	[duesTypeId] ASC
+	[applicationId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[MEMBER_DUES]    Script Date: 12/25/2018 8:14:42 PM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 3/15/2020 9:44:49 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[MEMBER_DUES](
-	[memberDuesId] [int] IDENTITY(1,1) NOT NULL,
+CREATE TABLE [dbo].[CERTIFICATION_SKILL](
+	[certificationSkillId] [int] IDENTITY(1,1) NOT NULL,
 	[userId] [int] NULL,
-	[duesTypeId] [int] NULL,
-	[isConfirmed] [bit] NOT NULL,
-	[paymentDate] [datetime] NULL,
-	[paymentMethod] [varchar](20) NULL,
-	[paymentAmount] [money] NULL,
-	[paymentReference] [varchar](255) NULL,
-	[membershipYear] [varchar](4) NULL,
-	[paypalPdtIsSuccessful] [bit] NULL,
-	[paypalPdtConfirmDate] [datetime] NULL,
-	[paypalPdtTransactionId] [varchar](50) NULL,
-	[paypalPdtResponse] [varchar](4000) NULL,
-	[paypalIpnIsSuccessful] [bit] NULL,
-	[paypalIpnConfirmDate] [datetime] NULL,
-	[paypalIpnTransactionId] [varchar](50) NULL,
-	[paypalIpnResponse] [varchar](4000) NULL,
-	[recordedBy] [int] NULL,
- CONSTRAINT [PK_DUES] PRIMARY KEY CLUSTERED 
+	[certificationSkill] [varchar](100) NULL,
+ CONSTRAINT [PK_CERTIFICATION_SKILL] PRIMARY KEY CLUSTERED 
 (
-	[memberDuesId] ASC
+	[certificationSkillId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 12/25/2018 8:14:42 PM ******/
+/****** Object:  Table [dbo].[DEPDENDENT]    Script Date: 3/15/2020 9:44:49 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DEPDENDENT](
+	[dependentId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[firstName] [varchar](30) NULL,
+	[middleName] [varchar](30) NULL,
+	[lastName] [varchar](30) NULL,
+	[dob] [datetime] NULL,
+	[gender] [varchar](10) NULL,
+	[relationship] [varchar](20) NULL,
+ CONSTRAINT [PK_DEPDENDENTS] PRIMARY KEY CLUSTERED 
+(
+	[dependentId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LANGUAGE](
+	[languageId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](25) NULL,
+ CONSTRAINT [PK_LANGUAGE] PRIMARY KEY CLUSTERED 
+(
+	[languageId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NATIONALITY](
+	[nationalityId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_NATIONALITY] PRIMARY KEY CLUSTERED 
+(
+	[nationalityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ORGANIZATION](
+	[organizationId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](100) NULL,
+	[street] [varchar](100) NULL,
+	[city] [varchar](50) NULL,
+	[stateAbbr] [varchar](15) NULL,
+	[zip] [varchar](5) NULL,
+	[email] [varchar](60) NULL,
+	[phone] [varchar](10) NULL,
+	[website] [varchar](250) NULL,
+ CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED 
+(
+	[organizationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[REFERENCE](
+	[referenceId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[firstName] [varchar](30) NULL,
+	[middleName] [varchar](30) NULL,
+	[lastName] [varchar](30) NULL,
+	[phone] [varchar](10) NULL,
+	[knownSince] [datetime] NULL,
+	[relationship] [varchar](10) NULL,
+	[street] [varchar](100) NULL,
+	[city] [varchar](50) NULL,
+	[stateAbbr] [varchar](15) NULL,
+	[zip] [varchar](5) NULL,
+ CONSTRAINT [PK_REFERENCE] PRIMARY KEY CLUSTERED 
+(
+	[referenceId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ROLE]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ROLE](
+	[roleId] [int] NOT NULL,
+	[name] [varchar](20) NULL,
+	[description] [varchar](250) NULL,
+ CONSTRAINT [PK_ROLE] PRIMARY KEY CLUSTERED 
+(
+	[roleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[STATE]    Script Date: 3/15/2020 9:44:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[STATE](
-	[stateAbbr] [varchar](2) NOT NULL,
+	[stateAbbr] [varchar](15) NOT NULL,
 	[stateName] [varchar](30) NULL,
  CONSTRAINT [PK_STATE] PRIMARY KEY CLUSTERED 
 (
@@ -121,59 +195,45 @@ CREATE TABLE [dbo].[STATE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATUS]    Script Date: 12/25/2018 8:14:42 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[STATUS](
-	[statusId] [int] NOT NULL,
-	[name] [varchar](20) NULL,
-	[description] [varchar](150) NULL,
- CONSTRAINT [PK_STATUS] PRIMARY KEY CLUSTERED 
-(
-	[statusId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[USER]    Script Date: 12/25/2018 8:14:42 PM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 3/15/2020 9:44:50 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[USER](
 	[userId] [int] IDENTITY(1,1) NOT NULL,
-	[statusId] [int] NULL,
-	[memberType] [varchar](10) NULL,
-	[householdHeadId] [int] NULL,
-	[citizenshipStatus] [varchar](20) NULL,
-	[maritalStatus] [varchar](10) NULL,
-	[dependencyType] [varchar](10) NULL,
-	[email] [varchar](60) NULL,
+	[email] [varchar](60) NOT NULL,
 	[password] [varchar](20) NULL,
-	[firstName] [varchar](30) NULL,
+	[firstName] [varchar](30) NOT NULL,
 	[middleName] [varchar](30) NULL,
-	[lastName] [varchar](30) NULL,
-	[phone] [varchar](10) NULL,
+	[lastName] [varchar](30) NOT NULL,
 	[gender] [varchar](10) NULL,
+	[maritalStatus] [varchar](15) NULL,
 	[dob] [datetime] NULL,
+	[socialSecurityNumber] [varchar](9) NULL,
+	[nationalityId] [int] NULL,
+	[citizenshipStatus] [varchar](20) NULL,
+	[phone] [varchar](10) NULL,
 	[street] [varchar](100) NULL,
 	[city] [varchar](50) NULL,
-	[county] [varchar](25) NULL,
-	[stateAbbr] [varchar](2) NULL,
+	[stateAbbr] [varchar](15) NULL,
 	[zip] [varchar](5) NULL,
-	[isVoterEligible] [bit] NULL,
-	[isAdmin] [bit] NULL,
-	[isHouseholdHead] [bit] NULL,
-	[isAuthenticated] [bit] NULL,
-	[isUsingHeadEmail] [bit] NULL,
-	[isApproved] [bit] NULL,
-	[hasReference] [bit] NOT NULL,
-	[referenceName] [varchar](90) NULL,
-	[referenceEmail] [varchar](60) NULL,
-	[referencePhone] [varchar](10) NULL,
-	[approvedOn] [datetime] NULL,
-	[approvedBy] [int] NULL,
+	[beganLivingDate] [datetime] NULL,
+	[homeType] [varchar](15) NULL,
+	[homeTypeOther] [varchar](50) NULL,
+	[husbandFirstName] [varchar](30) NULL,
+	[husbandMiddleName] [varchar](30) NULL,
+	[husbandLastName] [varchar](30) NULL,
+	[husbandHasAppliedForZakat] [varchar](10) NULL,
+	[husbandZakatExplanation] [varchar](4000) NULL,
+	[highestEducationCompleted] [varchar](50) NULL,
+	[schoolName] [varchar](100) NULL,
+	[schoolStreet] [varchar](100) NULL,
+	[schoolCity] [varchar](50) NULL,
+	[schoolStateAbbr] [varchar](15) NULL,
+	[schoolZip] [varchar](5) NULL,
+	[primaryMasjidName] [varchar](100) NULL,
+	[primaryMasjidPhone] [varchar](10) NULL,
 	[createdOn] [datetime] NULL,
 	[createdBy] [int] NULL,
 	[updatedOn] [datetime] NULL,
@@ -184,54 +244,128 @@ CREATE TABLE [dbo].[USER](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[DUES_TYPE] ADD  CONSTRAINT [DF_DUES_TYPE_createdOn]  DEFAULT (getdate()) FOR [createdOn]
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
 GO
-ALTER TABLE [dbo].[DUES_TYPE] ADD  CONSTRAINT [DF_DUES_TYPE_updatedOn]  DEFAULT (getdate()) FOR [updatedOn]
+SET QUOTED_IDENTIFIER ON
 GO
-ALTER TABLE [dbo].[MEMBER_DUES] ADD  CONSTRAINT [DF_MEMBER_DUES_isConfirmed]  DEFAULT ((0)) FOR [isConfirmed]
+CREATE TABLE [dbo].[USER_LANGUAGE](
+	[userLanguageId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[languageId] [int] NULL,
+ CONSTRAINT [PK_USER_LANGUAGE] PRIMARY KEY CLUSTERED 
+(
+	[userLanguageId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[MEMBER_DUES] ADD  CONSTRAINT [DF_MEMBER_DUES_paypalPdtIsSuccessful]  DEFAULT ((0)) FOR [paypalPdtIsSuccessful]
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 3/15/2020 9:44:50 PM ******/
+SET ANSI_NULLS ON
 GO
-ALTER TABLE [dbo].[MEMBER_DUES] ADD  CONSTRAINT [DF_MEMBER_DUES_paypalIpnIsSuccessful]  DEFAULT ((0)) FOR [paypalIpnIsSuccessful]
+SET QUOTED_IDENTIFIER ON
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isVoterEligible]  DEFAULT ((0)) FOR [isVoterEligible]
+CREATE TABLE [dbo].[USER_ROLE](
+	[userRoleId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[roleId] [int] NULL,
+ CONSTRAINT [PK_USER_ROLE] PRIMARY KEY CLUSTERED 
+(
+	[userRoleId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isAdmin]  DEFAULT ((0)) FOR [isAdmin]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSaved]  DEFAULT ((0)) FOR [isSaved]
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isHouseholdHead]  DEFAULT ((1)) FOR [isHouseholdHead]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSubmitted]  DEFAULT ((0)) FOR [isSubmitted]
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isAuthenticated]  DEFAULT ((0)) FOR [isAuthenticated]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isValidated]  DEFAULT ((0)) FOR [isValidated]
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isUsingHeadEmail]  DEFAULT ((0)) FOR [isUsingHeadEmail]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isInvestigated]  DEFAULT ((0)) FOR [isInvestigated]
 GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isApproved]  DEFAULT ((0)) FOR [isApproved]
-GO
-ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_hasReference]  DEFAULT ((0)) FOR [hasReference]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isQualified]  DEFAULT ((0)) FOR [isQualified]
 GO
 ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_createdOn]  DEFAULT (getdate()) FOR [createdOn]
 GO
 ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_updatedOn]  DEFAULT (getdate()) FOR [updatedOn]
 GO
-ALTER TABLE [dbo].[MEMBER_DUES]  WITH CHECK ADD  CONSTRAINT [FK_DUES_DUES_TYPE] FOREIGN KEY([duesTypeId])
-REFERENCES [dbo].[DUES_TYPE] ([duesTypeId])
+ALTER TABLE [dbo].[APPLICATION]  WITH CHECK ADD  CONSTRAINT [FK_APPLICATION_ORGANIZATION] FOREIGN KEY([organizationId])
+REFERENCES [dbo].[ORGANIZATION] ([organizationId])
 GO
-ALTER TABLE [dbo].[MEMBER_DUES] CHECK CONSTRAINT [FK_DUES_DUES_TYPE]
+ALTER TABLE [dbo].[APPLICATION] CHECK CONSTRAINT [FK_APPLICATION_ORGANIZATION]
 GO
-ALTER TABLE [dbo].[MEMBER_DUES]  WITH CHECK ADD  CONSTRAINT [FK_DUES_USER] FOREIGN KEY([userId])
+ALTER TABLE [dbo].[APPLICATION]  WITH CHECK ADD  CONSTRAINT [FK_APPLICATION_STATE] FOREIGN KEY([employerStateAbbr])
+REFERENCES [dbo].[STATE] ([stateAbbr])
+GO
+ALTER TABLE [dbo].[APPLICATION] CHECK CONSTRAINT [FK_APPLICATION_STATE]
+GO
+ALTER TABLE [dbo].[APPLICATION]  WITH CHECK ADD  CONSTRAINT [FK_APPLICATION_USER] FOREIGN KEY([userId])
 REFERENCES [dbo].[USER] ([userId])
 GO
-ALTER TABLE [dbo].[MEMBER_DUES] CHECK CONSTRAINT [FK_DUES_USER]
+ALTER TABLE [dbo].[APPLICATION] CHECK CONSTRAINT [FK_APPLICATION_USER]
+GO
+ALTER TABLE [dbo].[CERTIFICATION_SKILL]  WITH CHECK ADD  CONSTRAINT [FK_CERTIFICATION_SKILL_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[CERTIFICATION_SKILL] CHECK CONSTRAINT [FK_CERTIFICATION_SKILL_USER]
+GO
+ALTER TABLE [dbo].[DEPDENDENT]  WITH CHECK ADD  CONSTRAINT [FK_DEPDENDENTS_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[DEPDENDENT] CHECK CONSTRAINT [FK_DEPDENDENTS_USER]
+GO
+ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_STATE] FOREIGN KEY([stateAbbr])
+REFERENCES [dbo].[STATE] ([stateAbbr])
+GO
+ALTER TABLE [dbo].[ORGANIZATION] CHECK CONSTRAINT [FK_ORGANIZATION_STATE]
+GO
+ALTER TABLE [dbo].[REFERENCE]  WITH CHECK ADD  CONSTRAINT [FK_REFERENCE_STATE] FOREIGN KEY([stateAbbr])
+REFERENCES [dbo].[STATE] ([stateAbbr])
+GO
+ALTER TABLE [dbo].[REFERENCE] CHECK CONSTRAINT [FK_REFERENCE_STATE]
+GO
+ALTER TABLE [dbo].[REFERENCE]  WITH CHECK ADD  CONSTRAINT [FK_REFERENCE_USER1] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[REFERENCE] CHECK CONSTRAINT [FK_REFERENCE_USER1]
+GO
+ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_NATIONALITY1] FOREIGN KEY([nationalityId])
+REFERENCES [dbo].[NATIONALITY] ([nationalityId])
+GO
+ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_NATIONALITY1]
 GO
 ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])
 GO
 ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_STATE]
 GO
-ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_STATUS] FOREIGN KEY([statusId])
-REFERENCES [dbo].[STATUS] ([statusId])
+ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_STATE1] FOREIGN KEY([schoolStateAbbr])
+REFERENCES [dbo].[STATE] ([stateAbbr])
 GO
-ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_STATUS]
+ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_STATE1]
 GO
+ALTER TABLE [dbo].[USER_LANGUAGE]  WITH CHECK ADD  CONSTRAINT [FK_USER_LANGUAGE_LANGUAGE] FOREIGN KEY([languageId])
+REFERENCES [dbo].[LANGUAGE] ([languageId])
+GO
+ALTER TABLE [dbo].[USER_LANGUAGE] CHECK CONSTRAINT [FK_USER_LANGUAGE_LANGUAGE]
+GO
+ALTER TABLE [dbo].[USER_LANGUAGE]  WITH CHECK ADD  CONSTRAINT [FK_USER_LANGUAGE_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[USER_LANGUAGE] CHECK CONSTRAINT [FK_USER_LANGUAGE_USER]
+GO
+ALTER TABLE [dbo].[USER_ROLE]  WITH CHECK ADD  CONSTRAINT [FK_USER_ROLE_ROLE] FOREIGN KEY([roleId])
+REFERENCES [dbo].[ROLE] ([roleId])
+GO
+ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [FK_USER_ROLE_ROLE]
+GO
+ALTER TABLE [dbo].[USER_ROLE]  WITH CHECK ADD  CONSTRAINT [FK_USER_ROLE_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [FK_USER_ROLE_USER]
+GO
+USE [zakat]
+GO
+
 
 INSERT INTO LANGUAGE (name) VALUES ('Abkhaz');
 INSERT INTO LANGUAGE (name) VALUES ('Afar');
@@ -417,6 +551,7 @@ INSERT INTO LANGUAGE (name) VALUES ('Yiddish');
 INSERT INTO LANGUAGE (name) VALUES ('Yoruba');
 INSERT INTO LANGUAGE (name) VALUES ('Zhuang');
 
+INSERT INTO NATIONALITY (name) VALUES ('(Select One)');
 INSERT INTO NATIONALITY (name) VALUES ('Afghan');
 INSERT INTO NATIONALITY (name) VALUES ('Albanian');
 INSERT INTO NATIONALITY (name) VALUES ('Algerian');
@@ -619,6 +754,7 @@ INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'Thi
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispursed'	);
 
+INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'(Select One)'	,	'(Select One)'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AL'	,	'Alabama'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AK'	,	'Alaska'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AZ'	,	'Arizona'	);
@@ -677,13 +813,10 @@ INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('applica
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('validator@icclmd.org'	,	'12121212'	,	'Validator', 'Validator');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('investigator@icclmd.org'	,	'12121212'	,	'Investigator', 'Investigator');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('financier@icclmd.org'	,	'12121212'	,	'Financier', 'Financier');
+
+
 
 INSERT INTO [dbo].[USER_ROLE] (userId, roleId) VALUES (1, 5);
 
 INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
-
-
-
-
-
-
