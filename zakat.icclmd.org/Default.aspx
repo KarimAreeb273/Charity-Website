@@ -33,7 +33,7 @@
               <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-2 control-label">Password:</asp:Label>
               <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" />
-                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password field is required." />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password is required." />
               </div>
             </div>
             <div class="form-group">
@@ -112,12 +112,12 @@
     <div class="col-md-6">
       <h4>Advantages of the Online Zakat System</h4>
       <ul>
-        <li>Submit online zakat applciations without having to register an account</li>
-        <li>Save your online zakat applciation data electronically and securely</li>
+        <li>Submit online zakat applications without having to register an account</li>
+        <li>Save your online zakat application data electronically and securely</li>
         <li>Submit online zakat application(s) to one or more Islamic organizations</li>
         <li>Correspondence is sent/received via email when decisions are made</li>
         <li>Edit your saved profile as often as necessary</li>
-        <li>Track the progress of your submitted online zakat applciation (with an account)</li>
+        <li>Track the progress of your submitted online zakat application (with an account)</li>
       </ul>
     </div>
     <div class="col-md-6">
