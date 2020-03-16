@@ -24,6 +24,7 @@ Partial Public Class REFERENCE
     Public Property stateAbbr As String
     Public Property zip As String
 
+    Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
 
 End Class

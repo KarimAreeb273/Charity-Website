@@ -30,10 +30,11 @@ Partial Public Class USER
     Public Property zip As String
     Public Property beganLivingDate As Nullable(Of Date)
     Public Property homeType As String
+    Public Property homeTypeOther As String
     Public Property husbandFirstName As String
     Public Property husbandMiddleName As String
     Public Property husbandLastName As String
-    Public Property husbandHasAppliedForZakat As Nullable(Of Boolean)
+    Public Property husbandHasAppliedForZakat As String
     Public Property husbandZakatExplanation As String
     Public Property highestEducationCompleted As String
     Public Property schoolName As String
@@ -51,8 +52,9 @@ Partial Public Class USER
     Public Overridable Property CERTIFICATION_SKILL As ICollection(Of CERTIFICATION_SKILL) = New HashSet(Of CERTIFICATION_SKILL)
     Public Overridable Property DEPDENDENT As ICollection(Of DEPDENDENT) = New HashSet(Of DEPDENDENT)
     Public Overridable Property NATIONALITY As NATIONALITY
-    Public Overridable Property STATE As STATE
     Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
+    Public Overridable Property STATE As STATE
+    Public Overridable Property STATE1 As STATE
     Public Overridable Property USER_LANGUAGE As ICollection(Of USER_LANGUAGE) = New HashSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)

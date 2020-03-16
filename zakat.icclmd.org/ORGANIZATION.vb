@@ -21,6 +21,7 @@ Partial Public Class ORGANIZATION
     Public Property phone As String
     Public Property website As String
 
+    Public Overridable Property STATE As STATE
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
 
 End Class

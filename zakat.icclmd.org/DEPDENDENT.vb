@@ -11,7 +11,7 @@ Imports System
 Imports System.Collections.Generic
 
 Partial Public Class DEPDENDENT
-    Public Property depdendentId As Integer
+    Public Property dependentId As Integer
     Public Property userId As Nullable(Of Integer)
     Public Property firstName As String
     Public Property middleName As String

@@ -12,8 +12,9 @@ Imports System.Collections.Generic
 
 Partial Public Class APPLICATION
     Public Property applicationId As Integer
-    Public Property userId As Nullable(Of Integer)
-    Public Property organizationId As Nullable(Of Integer)
+    Public Property userId As Integer
+    Public Property organizationId As Integer
+    Public Property isSaved As Nullable(Of Boolean)
     Public Property isSubmitted As Nullable(Of Boolean)
     Public Property isValidated As Nullable(Of Boolean)
     Public Property isInvestigated As Nullable(Of Boolean)
@@ -22,12 +23,12 @@ Partial Public Class APPLICATION
     Public Property totalValueCash As Nullable(Of Decimal)
     Public Property totalValueGold As Nullable(Of Decimal)
     Public Property totalValueSilver As Nullable(Of Decimal)
-    Public Property totalValueInvestments As Nullable(Of Decimal)
-    Public Property has401KPension As Nullable(Of Boolean)
-    Public Property totalValue401KPension As Nullable(Of Decimal)
+    Public Property totalValueInvestment As Nullable(Of Decimal)
+    Public Property hasRetirement As Nullable(Of Boolean)
+    Public Property totalValueRetirement As Nullable(Of Decimal)
     Public Property hasOutstandingDebts As Nullable(Of Boolean)
     Public Property totalValueOutstandingDebts As Nullable(Of Decimal)
-    Public Property hasHealthInsurance As Nullable(Of Boolean)
+    Public Property hasHealthInsurance As String
     Public Property medicaidNumber As String
     Public Property medicareNumber As String
     Public Property healthInsuranceProviderName As String
@@ -55,12 +56,10 @@ Partial Public Class APPLICATION
     Public Property employerZip As String
     Public Property employerPhone As String
     Public Property personalNeedStatement As String
-    Public Property createdOn As Nullable(Of Date)
-    Public Property createdBy As Nullable(Of Integer)
-    Public Property updatedOn As Nullable(Of Date)
-    Public Property updatedBy As Nullable(Of Integer)
+    Public Property submittedDate As Nullable(Of Date)
 
     Public Overridable Property ORGANIZATION As ORGANIZATION
+    Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
 
 End Class
