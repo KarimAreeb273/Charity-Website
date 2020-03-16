@@ -59,6 +59,7 @@
           Session("sIsApplicant") = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = oUser.userId And USER_ROLE.ROLE.name = "Applicant").Any
           Session("sIsAdministrator") = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = oUser.userId And USER_ROLE.ROLE.name = "Administrator").Any
           Session("sIsApprover") = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = oUser.userId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any
+          Session("sIsFinancier") = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = oUser.userId And USER_ROLE.ROLE.name = "Financier").Any
 
           Response.Redirect("/")
         Else
