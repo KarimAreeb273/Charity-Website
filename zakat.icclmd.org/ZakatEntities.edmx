@@ -9,23 +9,24 @@
           <Key>
             <PropertyRef Name="applicationId" />
           </Key>
-          <Property Name="applicationId" Type="int" Nullable="false" />
-          <Property Name="userId" Type="int" />
-          <Property Name="organizationId" Type="int" />
+          <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="organizationId" Type="int" Nullable="false" />
+          <Property Name="isSaved" Type="bit" />
           <Property Name="isSubmitted" Type="bit" />
           <Property Name="isValidated" Type="bit" />
           <Property Name="isInvestigated" Type="bit" />
           <Property Name="isQualified" Type="bit" />
-          <Property Name="approvalStatus" Type="varchar" MaxLength="10" />
+          <Property Name="approvalStatus" Type="varchar" MaxLength="15" />
           <Property Name="totalValueCash" Type="money" />
           <Property Name="totalValueGold" Type="money" />
           <Property Name="totalValueSilver" Type="money" />
-          <Property Name="totalValueInvestments" Type="money" />
-          <Property Name="has401KPension" Type="bit" />
-          <Property Name="totalValue401KPension" Type="money" />
+          <Property Name="totalValueInvestment" Type="money" />
+          <Property Name="hasRetirement" Type="bit" />
+          <Property Name="totalValueRetirement" Type="money" />
           <Property Name="hasOutstandingDebts" Type="bit" />
           <Property Name="totalValueOutstandingDebts" Type="money" />
-          <Property Name="hasHealthInsurance" Type="bit" />
+          <Property Name="hasHealthInsurance" Type="varchar" MaxLength="10" />
           <Property Name="medicaidNumber" Type="varchar" MaxLength="9" />
           <Property Name="medicareNumber" Type="varchar" MaxLength="11" />
           <Property Name="healthInsuranceProviderName" Type="varchar" MaxLength="100" />
@@ -34,10 +35,10 @@
           <Property Name="totalValueLifeInsurance" Type="money" />
           <Property Name="hasChildSupport" Type="bit" />
           <Property Name="totalChildSupport" Type="money" />
-          <Property Name="frequencyChildSupport" Type="varchar" MaxLength="10" />
+          <Property Name="frequencyChildSupport" Type="varchar" MaxLength="15" />
           <Property Name="hasFoodStamps" Type="bit" />
           <Property Name="totalFoodStamps" Type="money" />
-          <Property Name="frequencyFoodStamps" Type="varchar" MaxLength="10" />
+          <Property Name="frequencyFoodStamps" Type="varchar" MaxLength="15" />
           <Property Name="hasTemporaryCashAssistance" Type="bit" />
           <Property Name="sourceTemporaryCashAssistance" Type="varchar" MaxLength="100" />
           <Property Name="totalTemporaryCashAssistance" Type="money" />
@@ -49,28 +50,25 @@
           <Property Name="employmentEndtDate" Type="datetime" />
           <Property Name="employerStreet" Type="varchar" MaxLength="100" />
           <Property Name="employerCity" Type="varchar" MaxLength="50" />
-          <Property Name="employerStateAbbr" Type="varchar" MaxLength="2" />
+          <Property Name="employerStateAbbr" Type="varchar" MaxLength="15" />
           <Property Name="employerZip" Type="varchar" MaxLength="5" />
           <Property Name="employerPhone" Type="varchar" MaxLength="10" />
           <Property Name="personalNeedStatement" Type="varchar" MaxLength="1000" />
-          <Property Name="createdOn" Type="datetime" />
-          <Property Name="createdBy" Type="int" />
-          <Property Name="updatedOn" Type="datetime" />
-          <Property Name="updatedBy" Type="int" />
+          <Property Name="submittedDate" Type="datetime" />
         </EntityType>
         <EntityType Name="CERTIFICATION_SKILL">
           <Key>
             <PropertyRef Name="certificationSkillId" />
           </Key>
-          <Property Name="certificationSkillId" Type="int" Nullable="false" />
+          <Property Name="certificationSkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="int" />
           <Property Name="certificationSkill" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="DEPDENDENT">
           <Key>
-            <PropertyRef Name="depdendentId" />
+            <PropertyRef Name="dependentId" />
           </Key>
-          <Property Name="depdendentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dependentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="int" />
           <Property Name="firstName" Type="varchar" MaxLength="30" />
           <Property Name="middleName" Type="varchar" MaxLength="30" />
@@ -101,14 +99,12 @@
           <Property Name="name" Type="varchar" MaxLength="100" />
           <Property Name="street" Type="varchar" MaxLength="100" />
           <Property Name="city" Type="varchar" MaxLength="50" />
-          <Property Name="stateAbbr" Type="varchar" MaxLength="2" />
+          <Property Name="stateAbbr" Type="varchar" MaxLength="15" />
           <Property Name="zip" Type="varchar" MaxLength="5" />
           <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="250" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="REFERENCE">
           <Key>
             <PropertyRef Name="referenceId" />
@@ -123,7 +119,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="relationship" Type="varchar" MaxLength="10" />
           <Property Name="street" Type="varchar" MaxLength="100" />
           <Property Name="city" Type="varchar" MaxLength="50" />
-          <Property Name="stateAbbr" Type="varchar" MaxLength="2" />
+          <Property Name="stateAbbr" Type="varchar" MaxLength="15" />
           <Property Name="zip" Type="varchar" MaxLength="5" />
         </EntityType>
         <EntityType Name="ROLE">
@@ -138,7 +134,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Key>
             <PropertyRef Name="stateAbbr" />
           </Key>
-          <Property Name="stateAbbr" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="stateAbbr" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="stateName" Type="varchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="USER">
@@ -146,13 +142,13 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="email" Type="varchar" MaxLength="60" />
+          <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="password" Type="varchar" MaxLength="20" />
-          <Property Name="firstName" Type="varchar" MaxLength="30" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="middleName" Type="varchar" MaxLength="30" />
-          <Property Name="lastName" Type="varchar" MaxLength="30" />
+          <Property Name="lastName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="gender" Type="varchar" MaxLength="10" />
-          <Property Name="maritalStatus" Type="varchar" MaxLength="10" />
+          <Property Name="maritalStatus" Type="varchar" MaxLength="15" />
           <Property Name="dob" Type="datetime" />
           <Property Name="socialSecurityNumber" Type="varchar" MaxLength="9" />
           <Property Name="nationalityId" Type="int" />
@@ -160,20 +156,21 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="street" Type="varchar" MaxLength="100" />
           <Property Name="city" Type="varchar" MaxLength="50" />
-          <Property Name="stateAbbr" Type="varchar" MaxLength="2" />
+          <Property Name="stateAbbr" Type="varchar" MaxLength="15" />
           <Property Name="zip" Type="varchar" MaxLength="5" />
           <Property Name="beganLivingDate" Type="datetime" />
-          <Property Name="homeType" Type="varchar" MaxLength="10" />
+          <Property Name="homeType" Type="varchar" MaxLength="15" />
+          <Property Name="homeTypeOther" Type="varchar" MaxLength="50" />
           <Property Name="husbandFirstName" Type="varchar" MaxLength="30" />
           <Property Name="husbandMiddleName" Type="varchar" MaxLength="30" />
           <Property Name="husbandLastName" Type="varchar" MaxLength="30" />
-          <Property Name="husbandHasAppliedForZakat" Type="bit" />
+          <Property Name="husbandHasAppliedForZakat" Type="varchar" MaxLength="10" />
           <Property Name="husbandZakatExplanation" Type="varchar" MaxLength="4000" />
           <Property Name="highestEducationCompleted" Type="varchar" MaxLength="50" />
           <Property Name="schoolName" Type="varchar" MaxLength="100" />
           <Property Name="schoolStreet" Type="varchar" MaxLength="100" />
           <Property Name="schoolCity" Type="varchar" MaxLength="50" />
-          <Property Name="schoolStateAbbr" Type="varchar" MaxLength="2" />
+          <Property Name="schoolStateAbbr" Type="varchar" MaxLength="15" />
           <Property Name="schoolZip" Type="varchar" MaxLength="5" />
           <Property Name="primaryMasjidName" Type="varchar" MaxLength="100" />
           <Property Name="primaryMasjidPhone" Type="varchar" MaxLength="10" />
@@ -186,7 +183,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Key>
             <PropertyRef Name="userLanguageId" />
           </Key>
-          <Property Name="userLanguageId" Type="int" Nullable="false" />
+          <Property Name="userLanguageId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="int" />
           <Property Name="languageId" Type="int" />
         </EntityType>
@@ -199,7 +196,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="roleId" Type="int" />
         </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="0..1" />
+          <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="1" />
           <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ORGANIZATION">
@@ -210,8 +207,20 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_APPLICATION_STATE">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="employerStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_APPLICATION_USER">
-          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
           <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
@@ -246,7 +255,31 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_REFERENCE_USER">
+        <Association Name="FK_ORGANIZATION_STATE">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="ORGANIZATION">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENCE_STATE">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="REFERENCE" Type="Self.REFERENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="REFERENCE">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENCE_USER1">
           <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
           <End Role="REFERENCE" Type="Self.REFERENCE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,6 +363,18 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_USER_STATE1">
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="schoolStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="zakatModelStoreContainer">
           <EntitySet Name="APPLICATION" EntityType="Self.APPLICATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="Self.CERTIFICATION_SKILL" Schema="dbo" store:Type="Tables" />
@@ -337,29 +382,18 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORGANIZATION" EntityType="Self.ORGANIZATION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REFERENCE" EntityType="Self.REFERENCE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="REFERENCE" EntityType="Self.REFERENCE" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [REFERENCE].[referenceId] AS [referenceId], 
-    [REFERENCE].[userId] AS [userId], 
-    [REFERENCE].[firstName] AS [firstName], 
-    [REFERENCE].[middleName] AS [middleName], 
-    [REFERENCE].[lastName] AS [lastName], 
-    [REFERENCE].[phone] AS [phone], 
-    [REFERENCE].[knownSince] AS [knownSince], 
-    [REFERENCE].[relationship] AS [relationship], 
-    [REFERENCE].[street] AS [street], 
-    [REFERENCE].[city] AS [city], 
-    [REFERENCE].[stateAbbr] AS [stateAbbr], 
-    [REFERENCE].[zip] AS [zip]
-    FROM [dbo].[REFERENCE] AS [REFERENCE]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="Self.FK_APPLICATION_ORGANIZATION">
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_STATE" Association="Self.FK_APPLICATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
           <AssociationSet Name="FK_APPLICATION_USER" Association="Self.FK_APPLICATION_USER">
@@ -374,7 +408,15 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="USER" EntitySet="USER" />
             <End Role="DEPDENDENT" EntitySet="DEPDENDENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_REFERENCE_USER" Association="Self.FK_REFERENCE_USER">
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="Self.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_STATE" Association="Self.FK_REFERENCE_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_USER1" Association="Self.FK_REFERENCE_USER1">
             <End Role="USER" EntitySet="USER" />
             <End Role="REFERENCE" EntitySet="REFERENCE" />
           </AssociationSet>
@@ -402,6 +444,10 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="STATE" EntitySet="STATE" />
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
+          <AssociationSet Name="FK_USER_STATE1" Association="Self.FK_USER_STATE1">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -413,12 +459,12 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
           <EntitySet Name="NATIONALITY" EntityType="zakatModel.NATIONALITY" />
           <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
+          <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
           <EntitySet Name="ROLE" EntityType="zakatModel.ROLE" />
           <EntitySet Name="STATE" EntityType="zakatModel.STATE" />
           <EntitySet Name="USER" EntityType="zakatModel.USER" />
           <EntitySet Name="USER_LANGUAGE" EntityType="zakatModel.USER_LANGUAGE" />
           <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
-          <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
           <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="zakatModel.FK_CERTIFICATION_SKILL_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="CERTIFICATION_SKILL" EntitySet="CERTIFICATION_SKILL" />
@@ -435,6 +481,18 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="NATIONALITY" EntitySet="NATIONALITY" />
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_USER1" Association="zakatModel.FK_REFERENCE_USER1">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
           <AssociationSet Name="FK_USER_ROLE_ROLE" Association="zakatModel.FK_USER_ROLE_ROLE">
             <End Role="ROLE" EntitySet="ROLE" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
@@ -443,9 +501,9 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="STATE" EntitySet="STATE" />
             <End Role="USER" EntitySet="USER" />
           </AssociationSet>
-          <AssociationSet Name="FK_REFERENCE_USER" Association="zakatModel.FK_REFERENCE_USER">
+          <AssociationSet Name="FK_USER_STATE1" Association="zakatModel.FK_USER_STATE1">
+            <End Role="STATE" EntitySet="STATE" />
             <End Role="USER" EntitySet="USER" />
-            <End Role="REFERENCE" EntitySet="REFERENCE" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_LANGUAGE_USER" Association="zakatModel.FK_USER_LANGUAGE_USER">
             <End Role="USER" EntitySet="USER" />
@@ -460,25 +518,29 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
           <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="CERTIFICATION_SKILL">
           <Key>
             <PropertyRef Name="certificationSkillId" />
           </Key>
-          <Property Name="certificationSkillId" Type="Int32" Nullable="false" />
+          <Property Name="certificationSkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
           <Property Name="certificationSkill" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="CERTIFICATION_SKILL" ToRole="USER" />
         </EntityType>
         <EntityType Name="DEPDENDENT">
           <Key>
-            <PropertyRef Name="depdendentId" />
+            <PropertyRef Name="dependentId" />
           </Key>
-          <Property Name="depdendentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dependentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
           <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -512,98 +574,13 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
-        </EntityType>
-        <EntityType Name="ROLE">
-          <Key>
-            <PropertyRef Name="roleId" />
-          </Key>
-          <Property Name="roleId" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
-        </EntityType>
-        <EntityType Name="STATE">
-          <Key>
-            <PropertyRef Name="stateAbbr" />
-          </Key>
-          <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="USER">
-          <Key>
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="maritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="dob" Type="DateTime" Precision="3" />
-          <Property Name="socialSecurityNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="nationalityId" Type="Int32" />
-          <Property Name="citizenshipStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="beganLivingDate" Type="DateTime" Precision="3" />
-          <Property Name="homeType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="husbandFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="husbandMiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="husbandLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="husbandHasAppliedForZakat" Type="Boolean" />
-          <Property Name="husbandZakatExplanation" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="highestEducationCompleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="schoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="schoolStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="schoolCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="schoolStateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="schoolZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="primaryMasjidName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="primaryMasjidPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="updatedOn" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
-          <NavigationProperty Name="DEPDENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPDENDENT" />
-          <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_USER_STATE" FromRole="USER" ToRole="STATE" />
-          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER" FromRole="USER" ToRole="REFERENCE" />
-          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
-        </EntityType>
-        <EntityType Name="USER_LANGUAGE">
-          <Key>
-            <PropertyRef Name="userLanguageId" />
-          </Key>
-          <Property Name="userLanguageId" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="languageId" Type="Int32" />
-          <NavigationProperty Name="LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="USER_ROLE">
-          <Key>
-            <PropertyRef Name="userRoleId" />
-          </Key>
-          <Property Name="userRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="roleId" Type="Int32" />
-          <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -619,9 +596,102 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER" FromRole="REFERENCE" ToRole="USER" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="REFERENCE" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="REFERENCE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
+        </EntityType>
+        <EntityType Name="STATE">
+          <Key>
+            <PropertyRef Name="stateAbbr" />
+          </Key>
+          <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="maritalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="socialSecurityNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="nationalityId" Type="Int32" />
+          <Property Name="citizenshipStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="beganLivingDate" Type="DateTime" Precision="3" />
+          <Property Name="homeType" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="homeTypeOther" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="husbandFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="husbandMiddleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="husbandLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="husbandHasAppliedForZakat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="husbandZakatExplanation" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="highestEducationCompleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="schoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="schoolStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="schoolCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="schoolStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="schoolZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="primaryMasjidName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="primaryMasjidPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
+          <NavigationProperty Name="DEPDENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPDENDENT" />
+          <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
+          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="USER" ToRole="REFERENCE" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_USER_STATE" FromRole="USER" ToRole="STATE" />
+          <NavigationProperty Name="STATE1" Relationship="zakatModel.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
+          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
+        </EntityType>
+        <EntityType Name="USER_LANGUAGE">
+          <Key>
+            <PropertyRef Name="userLanguageId" />
+          </Key>
+          <Property Name="userLanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="languageId" Type="Int32" />
+          <NavigationProperty Name="LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER_ROLE">
+          <Key>
+            <PropertyRef Name="userRoleId" />
+          </Key>
+          <Property Name="userRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="roleId" Type="Int32" />
+          <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
         </EntityType>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
@@ -671,6 +741,42 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ORGANIZATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="ORGANIZATION">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENCE_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="REFERENCE">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENCE_USER1">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="REFERENCE">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USER_ROLE_ROLE">
           <End Type="zakatModel.ROLE" Role="ROLE" Multiplicity="0..1" />
           <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
@@ -695,15 +801,15 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_REFERENCE_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+        <Association Name="FK_USER_STATE1">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
             </Principal>
-            <Dependent Role="REFERENCE">
-              <PropertyRef Name="userId" />
+            <Dependent Role="USER">
+              <PropertyRef Name="schoolStateAbbr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -735,23 +841,24 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Key>
             <PropertyRef Name="applicationId" />
           </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="organizationId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="organizationId" Type="Int32" Nullable="false" />
+          <Property Name="isSaved" Type="Boolean" />
           <Property Name="isSubmitted" Type="Boolean" />
           <Property Name="isValidated" Type="Boolean" />
           <Property Name="isInvestigated" Type="Boolean" />
           <Property Name="isQualified" Type="Boolean" />
-          <Property Name="approvalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="approvalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueInvestments" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="has401KPension" Type="Boolean" />
-          <Property Name="totalValue401KPension" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueInvestment" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasRetirement" Type="Boolean" />
+          <Property Name="totalValueRetirement" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="hasOutstandingDebts" Type="Boolean" />
           <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasHealthInsurance" Type="Boolean" />
+          <Property Name="hasHealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -760,10 +867,10 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="hasChildSupport" Type="Boolean" />
           <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyChildSupport" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="frequencyChildSupport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="hasFoodStamps" Type="Boolean" />
           <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyFoodStamps" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="frequencyFoodStamps" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
           <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
@@ -775,19 +882,17 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
           <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
           <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="employerStateAbbr" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="employerStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="updatedOn" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
+          <Property Name="submittedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
         </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
           <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ORGANIZATION">
@@ -798,8 +903,20 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_APPLICATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="employerStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_APPLICATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
           <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
@@ -835,7 +952,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="middleName" ColumnName="middleName" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="depdendentId" ColumnName="depdendentId" />
+                <ScalarProperty Name="dependentId" ColumnName="dependentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -867,6 +984,24 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="street" ColumnName="street" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REFERENCE">
+            <EntityTypeMapping TypeName="zakatModel.REFERENCE">
+              <MappingFragment StoreEntitySet="REFERENCE">
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="referenceId" ColumnName="referenceId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -907,6 +1042,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="husbandLastName" ColumnName="husbandLastName" />
                 <ScalarProperty Name="husbandMiddleName" ColumnName="husbandMiddleName" />
                 <ScalarProperty Name="husbandFirstName" ColumnName="husbandFirstName" />
+                <ScalarProperty Name="homeTypeOther" ColumnName="homeTypeOther" />
                 <ScalarProperty Name="homeType" ColumnName="homeType" />
                 <ScalarProperty Name="beganLivingDate" ColumnName="beganLivingDate" />
                 <ScalarProperty Name="zip" ColumnName="zip" />
@@ -947,31 +1083,10 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="REFERENCE">
-            <EntityTypeMapping TypeName="zakatModel.REFERENCE">
-              <MappingFragment StoreEntitySet="REFERENCE">
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="referenceId" ColumnName="referenceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="APPLICATION">
             <EntityTypeMapping TypeName="zakatModel.APPLICATION">
               <MappingFragment StoreEntitySet="APPLICATION">
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="submittedDate" ColumnName="submittedDate" />
                 <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
                 <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
                 <ScalarProperty Name="employerZip" ColumnName="employerZip" />
@@ -1002,9 +1117,9 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
                 <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
                 <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
-                <ScalarProperty Name="totalValue401KPension" ColumnName="totalValue401KPension" />
-                <ScalarProperty Name="has401KPension" ColumnName="has401KPension" />
-                <ScalarProperty Name="totalValueInvestments" ColumnName="totalValueInvestments" />
+                <ScalarProperty Name="totalValueRetirement" ColumnName="totalValueRetirement" />
+                <ScalarProperty Name="hasRetirement" ColumnName="hasRetirement" />
+                <ScalarProperty Name="totalValueInvestment" ColumnName="totalValueInvestment" />
                 <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
                 <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
                 <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
@@ -1013,6 +1128,7 @@ warning 6002: The table/view 'zakat.dbo.REFERENCE' does not have a primary key d
                 <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
                 <ScalarProperty Name="isValidated" ColumnName="isValidated" />
                 <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="isSaved" ColumnName="isSaved" />
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
