@@ -80,7 +80,7 @@
                 <li><a href="contact">Contact Us</a></li>
               </ul>
               <div class="container" style="white-space:nowrap">                
-                <asp:Panel ID="pnlAnonymous" runat="server" Visible="true" style="background-color: blue;">
+                <asp:Panel ID="pnlAnonymous" runat="server" Visible="true" style="background-color: darkgreen;">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="zakatform">Apply</a></li>
                     <li><a href="default">Login</a></li>
@@ -113,7 +113,7 @@
                     </li>
                     <li><a id="A3" runat="server" visible="true" href="~/password">Password</a></li>
                     <li>
-                      <a id="A6" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameAdministrator" runat="server" ToolTip="Manage your account"></asp:Label>!</a>
+                      <a id="A6" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameAdministrator" runat="server" ToolTip="Manage your account"></asp:Label></a>
                     </li>
                     <li><a href="logout">Logout</a></li>
                   </ul>
@@ -123,7 +123,17 @@
                     <li><a id="A4" runat="server" visible="true" href="inbox">Inbox</a><li>
                     <li><a id="A5" runat="server" visible="true" href="password">Password</a></li>
                     <li>
-                      <a id="A2" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameApprover" runat="server" ToolTip="Manage your account"></asp:Label>!</a>
+                      <a id="A2" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameApprover" runat="server" ToolTip="Manage your account"></asp:Label></a>
+                    </li>
+                    <li><a href="logout">Logout</a></li>
+                  </ul>
+                </asp:Panel>
+                <asp:Panel ID="pnlFinancier" runat="server" Visible="false">
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><a id="A8" runat="server" visible="true" href="inbox">Inbox</a><li>
+                    <li><a id="A9" runat="server" visible="true" href="password">Password</a></li>
+                    <li>
+                      <a id="A10" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameFinancier" runat="server" ToolTip="Manage your account"></asp:Label></a>
                     </li>
                     <li><a href="logout">Logout</a></li>
                   </ul>

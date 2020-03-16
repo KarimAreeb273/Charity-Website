@@ -149,6 +149,51 @@ Partial Public Class SiteMaster
     Protected WithEvents lblNameApprover As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''pnlFinancier control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlFinancier As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''A8 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A8 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''A9 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A9 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''A10 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A10 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''lblNameFinancier control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblNameFinancier As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''MainContent control.
     '''</summary>
     '''<remarks>

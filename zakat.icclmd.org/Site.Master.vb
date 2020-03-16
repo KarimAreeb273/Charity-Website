@@ -8,6 +8,7 @@
       Dim vIsApplicant As Boolean = Session("sIsApplicant")
       Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
       Dim vIsApprover As Boolean = Session("sIsApprover")
+      Dim vIsFinancier As Boolean = Session("sIsFinancier")
 
       'show panel Anonymous vs. User vs. Admin vs. Approver
       If vUserID Then
@@ -17,25 +18,44 @@
           pnlAdministrator.Visible = False
           pnlApprover.Visible = False
           pnlAnonymous.Visible = False
+          pnlFinancier.Visible = False
           lblNameApplicant.Text = Session("sUserFirstName")
         ElseIf vIsAdministrator Then
           pnlApplicant.Visible = False
           pnlAdministrator.Visible = True
           pnlApprover.Visible = False
           pnlAnonymous.Visible = False
+          pnlFinancier.Visible = False
           lblNameAdministrator.Text = Session("sUserFirstName")
         ElseIf vIsApprover Then
           pnlApplicant.Visible = False
           pnlAdministrator.Visible = False
           pnlApprover.Visible = True
           pnlAnonymous.Visible = False
+          pnlFinancier.Visible = False
           lblNameApprover.Text = Session("sUserFirstName")
+        ElseIf vIsFinancier Then
+          pnlApplicant.Visible = False
+          pnlAdministrator.Visible = False
+          pnlApprover.Visible = False
+          pnlAnonymous.Visible = False
+          pnlFinancier.Visible = True
+          lblNameFinancier.Text = Session("sUserFirstName")
+        Else
+          'Anonymous
+          pnlApplicant.Visible = False
+          pnlAdministrator.Visible = False
+          pnlApprover.Visible = False
+          pnlFinancier.Visible = False
+          pnlAnonymous.Visible = True
+
         End If
       Else
         'Anonymous
         pnlApplicant.Visible = False
         pnlAdministrator.Visible = False
         pnlApprover.Visible = False
+        pnlFinancier.Visible = False
         pnlAnonymous.Visible = True
       End If
     End If
