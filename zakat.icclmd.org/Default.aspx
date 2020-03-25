@@ -112,7 +112,7 @@
     <div class="col-md-6">
       <h4>Advantages of the Online Zakat System</h4>
       <ul>
-        <li>Submit online zakat applications without having to register an account</li>
+        <%--<li>Submit online zakat applications without having to register an account</li>--%>
         <li>Save your online zakat application data electronically and securely</li>
         <li>Submit online zakat application(s) to one or more Islamic organizations</li>
         <li>Correspondence is sent/received via email when decisions are made</li>
