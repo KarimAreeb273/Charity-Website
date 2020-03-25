@@ -9,6 +9,11 @@ Public Class Base
     Format = 2
   End Enum
 
+  Enum enumFormatSSN As Short
+    Strip = 1
+    Format = 2
+  End Enum
+
   Enum enumRole As Integer
     Appliciant = 1
     Validator = 2
@@ -22,22 +27,8 @@ Public Class Base
 
 #Region "Functions"
 
-  Public Shared Function sendEmail(ByVal pTo As String, ByVal pSubject As String, ByVal pBody As String, Optional ByVal pFrom As String = "membership@icclmd.org", Optional ByVal pIsBodyHtml As Boolean = True) As Boolean
+  Public Shared Function sendEmail(ByVal pTo As String, ByVal pSubject As String, ByVal pBody As String, Optional ByVal pFrom As String = "zakat@icclmd.org", Optional ByVal pIsBodyHtml As Boolean = True) As Boolean
     Try
-      'Dim aAppPath As String = System.Configuration.ConfigurationManager.AppSettings("AppPath")
-      'Dim aAppEmailHost As String = System.Configuration.ConfigurationManager.AppSettings("AppEmailHost")
-      'Dim aAppEmailUser As String = ""
-      'Dim aAppEmailPass As String = ""
-      'Select Case pFrom
-      '  Case "orders@sayyadfarm.com"
-      '    aAppEmailUser = System.Configuration.ConfigurationManager.AppSettings("AppEmailUserOrder")
-      '    aAppEmailPass = System.Configuration.ConfigurationManager.AppSettings("AppEmailPassOrder")
-      '  Case Else
-      '    aAppEmailUser = System.Configuration.ConfigurationManager.AppSettings("AppEmailUserSupport")
-      '    aAppEmailPass = System.Configuration.ConfigurationManager.AppSettings("AppEmailPassSupport")
-      'End Select
-      'Dim aAppEmailPort As Integer = System.Configuration.ConfigurationManager.AppSettings("AppEmailPort")
-      'Dim aAppEmailSSL As Boolean = System.Configuration.ConfigurationManager.AppSettings("AppEmailSSL")
       Dim vMsgText As New StringBuilder
 
       vMsgText.Append(pBody)
@@ -57,7 +48,7 @@ Public Class Base
       Dim oSMTP As New SmtpClient
 
       'send the message
-      oSMTP.Send(oEmailMessage)
+      'oSMTP.Send(oEmailMessage)
       sendEmail = True
     Catch ex As Exception
       sendEmail = False
@@ -78,6 +69,26 @@ Public Class Base
             pPhone = pPhone.Insert(7, "-")
         End Select
         getFormattedPhone = pPhone
+      End If
+    Catch ex As Exception
+      Return ""
+    End Try
+  End Function
+
+  Public Shared Function getFormattedSSN(pSSN As String, pMode As enumFormatSSN) As String
+    Try
+      If pSSN = "" Then
+        getFormattedSSN = ""
+      Else
+        Select Case pMode
+          Case enumFormatPhone.Strip
+            Dim nonNumericCharacters As New System.Text.RegularExpressions.Regex("\D")
+            pSSN = nonNumericCharacters.Replace(pSSN, String.Empty)
+          Case enumFormatPhone.Format
+            pSSN = pSSN.Insert(3, "-")
+            pSSN = pSSN.Insert(6, "-")
+        End Select
+        getFormattedSSN = pSSN
       End If
     Catch ex As Exception
       Return ""
@@ -114,8 +125,11 @@ Public Class Base
         .firstName = pFirst
         .middleName = pMiddle
         .lastName = pLast
-        'randomly generate a password
-        .password = Base.getPassword()
+        .password = Base.getPassword()  'randomly generate a password
+        .createdBy = oUser.userId
+        .createdOn = Date.Now
+        .updatedBy = oUser.userId
+        .updatedOn = Date.Now
       End With
 
       ' Add to Memory
@@ -143,16 +157,17 @@ Public Class Base
     Dim vMsgText As New StringBuilder
 
     vMsgText.Append("Assalaamu Alaikum " & pFirst & ",<br /><br />")
-    vMsgText.Append("Your Online Zakat Account has been created. ")
+    vMsgText.Append("Your Online Zakat account has been created. ")
     vMsgText.Append("This account will be used to provide you with updates regarding the progress of any submitted zakat applications. ")
     vMsgText.Append("You can click or copy/paste the website link below and use the account information provided to log into your account. ")
     vMsgText.Append("While there, change your auto-generated password so that you can remember it more easily:<br /><br />")
     vMsgText.Append("<b>Website Link: </b> <a target='_blank' href='https://zakat.icclmd.org/password?e=" & pEmail & "'>https://zakat.icclmd.org/password?e=" & pEmail & "</a><br />")
     vMsgText.Append("<b>Password:</b>  <i>" & vPassword & "</i><br /><br />")
     vMsgText.Append("If you have issues regarding your account, please don’t hesitate to contact us.<br /><br />")
-    vMsgText.Append("Thank you,<br /><br />")
-    vMsgText.Append("Online Zakat Administrator<br />")
+    vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
+    vMsgText.Append("ICCL Zakat Administrator<br />")
     vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
+    vMsgText.Append("(301) 317-4584")
     vMsgText.Append("7306 Contee Road<br />")
     vMsgText.Append("Laurel, MD 20707<br />")
     vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
