@@ -34,6 +34,8 @@ Partial Public Class USER
     Public Property husbandFirstName As String
     Public Property husbandMiddleName As String
     Public Property husbandLastName As String
+    Public Property husbandPhone As String
+    Public Property husbandEmail As String
     Public Property husbandHasAppliedForZakat As String
     Public Property husbandZakatExplanation As String
     Public Property highestEducationCompleted As String
@@ -50,13 +52,14 @@ Partial Public Class USER
     Public Property updatedBy As Nullable(Of Integer)
 
     Public Overridable Property CERTIFICATION_SKILL As ICollection(Of CERTIFICATION_SKILL) = New HashSet(Of CERTIFICATION_SKILL)
-    Public Overridable Property DEPDENDENT As ICollection(Of DEPDENDENT) = New HashSet(Of DEPDENDENT)
     Public Overridable Property NATIONALITY As NATIONALITY
     Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
     Public Overridable Property STATE As STATE
     Public Overridable Property STATE1 As STATE
     Public Overridable Property USER_LANGUAGE As ICollection(Of USER_LANGUAGE) = New HashSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
+    Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
+    Public Overridable Property DEPENDENT As ICollection(Of DEPENDENT) = New HashSet(Of DEPENDENT)
 
 End Class

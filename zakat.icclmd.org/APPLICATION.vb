@@ -14,11 +14,13 @@ Partial Public Class APPLICATION
     Public Property applicationId As Integer
     Public Property userId As Integer
     Public Property organizationId As Integer
-    Public Property isSaved As Nullable(Of Boolean)
+    Public Property isDrafted As Nullable(Of Boolean)
     Public Property isSubmitted As Nullable(Of Boolean)
     Public Property isValidated As Nullable(Of Boolean)
     Public Property isInvestigated As Nullable(Of Boolean)
-    Public Property isQualified As Nullable(Of Boolean)
+    Public Property isQualified1 As Nullable(Of Boolean)
+    Public Property isQualified2 As Nullable(Of Boolean)
+    Public Property IsDispersed As Nullable(Of Boolean)
     Public Property approvalStatus As String
     Public Property totalValueCash As Nullable(Of Decimal)
     Public Property totalValueGold As Nullable(Of Decimal)
@@ -56,10 +58,15 @@ Partial Public Class APPLICATION
     Public Property employerZip As String
     Public Property employerPhone As String
     Public Property personalNeedStatement As String
-    Public Property submittedDate As Nullable(Of Date)
+    Public Property createdOn As Nullable(Of Date)
+    Public Property createdBy As Nullable(Of Integer)
+    Public Property updatedOn As Nullable(Of Date)
+    Public Property updatedBy As Nullable(Of Integer)
 
     Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
+    Public Overridable Property ARTIFACT As ICollection(Of ARTIFACT) = New HashSet(Of ARTIFACT)
+    Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
 
 End Class

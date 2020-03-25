@@ -10,16 +10,15 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class DEPDENDENT
-    Public Property dependentId As Integer
+Partial Public Class REVIEW
+    Public Property reviewId As Integer
     Public Property userId As Nullable(Of Integer)
-    Public Property firstName As String
-    Public Property middleName As String
-    Public Property lastName As String
-    Public Property dob As Nullable(Of Date)
-    Public Property gender As String
-    Public Property relationship As String
+    Public Property applicationId As Nullable(Of Integer)
+    Public Property reviewAction As String
+    Public Property reviewComment As String
+    Public Property reviewDate As Nullable(Of Date)
 
     Public Overridable Property USER As USER
+    Public Overridable Property APPLICATION As APPLICATION
 
 End Class
