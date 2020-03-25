@@ -473,6 +473,33 @@ Partial Public Class ZakatForm
     Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtHusbandPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtHusbandEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHusbandEmail As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''RegularExpressionValidator13 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
     '''chkHusbandApplied control.
     '''</summary>
     '''<remarks>
@@ -1256,13 +1283,13 @@ Partial Public Class ZakatForm
     Protected WithEvents txtRefZip As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtMasjidtName control.
+    '''txtMasjidName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtMasjidtName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtMasjidPhone control.

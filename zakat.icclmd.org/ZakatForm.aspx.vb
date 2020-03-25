@@ -3,6 +3,7 @@
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
+      Response.Write("")
       If Not IsPostBack Then
         calDOB.EndDate = Date.Now
         Dim vUserId As Int32 = Session("sUserId")
@@ -14,32 +15,27 @@
           drpState.DataTextField = "stateName"
           drpState.DataValueField = "stateAbbr"
           drpState.DataBind()
-          'drpState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           drpEmployerState.DataSource = oState
           drpEmployerState.DataTextField = "stateName"
           drpEmployerState.DataValueField = "stateAbbr"
           drpEmployerState.DataBind()
-          'drpEmployerState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           drpRefState.DataSource = oState
           drpRefState.DataTextField = "stateName"
           drpRefState.DataValueField = "stateAbbr"
           drpRefState.DataBind()
-          'drpRefState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           drpSchoolState.DataSource = oState
           drpSchoolState.DataTextField = "stateName"
           drpSchoolState.DataValueField = "stateAbbr"
           drpSchoolState.DataBind()
-          'drpSchoolState.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           'load the nationality dropdown
           drpNationality.DataSource = (From NATIONALITY In oDB.NATIONALITY Order By NATIONALITY.name).ToList
           drpNationality.DataTextField = "name"
           drpNationality.DataValueField = "nationalityId"
           drpNationality.DataBind()
-          'drpNationality.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
           'load the organization dropdown
           drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Order By ORGANIZATION.name).ToList
@@ -55,15 +51,15 @@
           lstLanguages.DataBind()
 
           If vUserId <> 0 Then
-            'load the form for edit purposes if the user has an application in draft status
-            'load user data into the form
             Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
             With oUser
-              txtSocialSecurity.Text = .socialSecurityNumber
+              txtEmail.Text = .email
+              txtEmail.Enabled = False
+              txtSocialSecurity.Text = Base.getFormattedSSN(.socialSecurityNumber, Base.enumFormatSSN.Format)
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
               txtLastName.Text = .lastName
-              txtDOB.Text = .dob
+              txtDOB.Text = IIf(IsDate(.dob), .dob, "")
               txtPhone.Text = Base.getFormattedPhone(.phone, Base.enumFormatPhone.Format)
               chkGender.SelectedValue = .gender
               drpMaritalStatus.SelectedValue = .maritalStatus
@@ -71,10 +67,11 @@
               txtCity.Text = .city
               drpState.SelectedValue = .stateAbbr
               txtZip.Text = .zip
-              txtBeganLiving.Text = .beganLivingDate
+              txtBeganLiving.Text = IIf(IsDate(.beganLivingDate), .beganLivingDate, "")
               drpHomeType.SelectedValue = .homeType
+              txtHomeType.Enabled = IIf(drpHomeType.SelectedValue = "Other", True, False)
               txtHomeType.Text = .homeTypeOther
-              drpNationality.SelectedValue = IIf(.nationalityId = "", "(Select One)", .nationalityId)
+              drpNationality.SelectedValue = .nationalityId
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
               txtSchoolName.Text = .schoolName
@@ -82,28 +79,107 @@
               txtSchoolCity.Text = .schoolCity
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
+              'show husband pane based on rules
+              If (.gender = "Female" And (.maritalStatus = "Married" Or .maritalStatus = "Divorced")) Then
+                pnlHusbandInformation.Visible = True
+              Else
+                pnlHusbandInformation.Visible = False
+              End If
               txtHusbandFirstName.Text = .husbandFirstName
               txtHusbandMiddleName.Text = .husbandMiddleName
               txtHusbandLastName.Text = .husbandLastName
+              txtHusbandEmail.Text = .husbandEmail
+              txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
               chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
               txtHusbandExplanation.Text = .husbandZakatExplanation
-              txtMasjidtName.Text = .primaryMasjidName
-              txtMasjidPhone.Text = .primaryMasjidPhone
+              txtMasjidName.Text = .primaryMasjidName
+              txtMasjidPhone.Text = Base.getFormattedPhone(.primaryMasjidPhone, Base.enumFormatPhone.Format)
             End With
 
-            'check if applciation data has been saved.  if so load it, if not do nothing
-            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isSaved = True And APPLICATION.isSubmitted <> True).Any Then
-              'load application data
-              Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isSaved = True And APPLICATION.isSubmitted <> True).First
+            'add saved languages to the spoken listbox
+            If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).Any) Then
+              'there are languages so add in the form
+              Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).ToList
+              For Each item In oUserLanguages
+                'obtain the language id from the list and add from the db
+                lstSpoken.Items.Add(New ListItem(item.LANGUAGE.name, item.LANGUAGE.languageId))
+              Next
+            End If
 
+            'add saved certifications to the skills/certs listbox
+            If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).Any) Then
+              'there are skills/certs so add in the form
+              Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).ToList
+              For Each item In oCertSkills
+                'obtain the skills/certs from the list and add from the db
+                lstSkillCertification.Items.Add(New ListItem(item.certificationSkill, item.certificationSkillId))
+              Next
             End If
 
             'load the dependents repeater
             setDependents()
             'load the references repeater
             setReferences()
+
+            'refresh applicant progress
+            RefreshApplicantProgress()
+            'refresh reference progress
+            RefreshReferenceProgress()
+
+            'load applciation belongs to the user and the draft status is true and the submitted flag is false
+            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).Any Then
+              Dim oDraftApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).First
+
+              With oDraftApplication
+                drpOrganization.SelectedValue = .organizationId
+                txtValueCash.Text = .totalValueCash
+                txtValueGold.Text = .totalValueGold
+                txtValueSilver.Text = .totalValueSilver
+                txtValueInvestment.Text = .totalValueInvestment
+                txtValueRetirement.Text = .totalValueRetirement
+                txtValueLifeInsurance.Text = .totalValueLifeInsurance
+                txtValueDebt.Text = .totalValueOutstandingDebts
+                txtValueChildSupport.Text = .totalChildSupport
+                drpChildSupportFrequency.Enabled = IIf(.totalChildSupport > 0, True, False)
+                drpChildSupportFrequency.SelectedValue = .frequencyChildSupport
+                txtValueFoodStamps.Text = .totalFoodStamps
+                drpFoodStampFrequency.Enabled = IIf(.totalFoodStamps > 0, True, False)
+                drpFoodStampFrequency.SelectedValue = .frequencyFoodStamps
+                txtValueAssistance.Text = .totalTemporaryCashAssistance
+                txtWhoAssisted.Enabled = IIf(.totalTemporaryCashAssistance > 0, True, False)
+                txtWhoAssisted.Text = .sourceTemporaryCashAssistance
+                chkInsurance.SelectedValue = IIf(.hasHealthInsurance, "Yes", "No")
+                pnlInsurance.Visible = IIf(chkInsurance.SelectedValue = "Yes", True, False)
+                txtInsuranceProvider.Text = .healthInsuranceProviderName
+                txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
+                txtMedicare.Text = .medicareNumber
+                txtMedicaid.Text = .medicaidNumber
+                txtEmployerName.Text = .employerName
+                txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
+                txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
+                txtPosition.Text = .positionTitle
+                txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+                txtMonthlySalary.Text = .totalMonthlyGrossSalary
+                txtEmployerStreet.Text = .employerStreet
+                txtEmployerCity.Text = .employerCity
+                drpEmployerState.SelectedValue = .employerStateAbbr
+                txtEmployerZip.Text = .employerZip
+                txtPersonalStatement.Text = .personalNeedStatement
+              End With
+              'refresh assets and support progress
+              RefreshAssetsSupportProgress()
+              'refresh employment progress
+              RefreshEmploymentProgress()
+              'refresh personal statement progress
+              RefreshStatementProgress()
+            End If
           End If
         End Using
+        If drpOrganization.SelectedValue = "(Select One)" Then
+          accZakat.Enabled = False
+        Else
+          accZakat.Enabled = True
+        End If
       End If
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -219,7 +295,7 @@
 
   Sub RefreshApplicantProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27 As Boolean
+      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29 As Boolean
       If (txtEmail.Text = "") Then
         v1 = False
       Else
@@ -345,21 +421,30 @@
       Else
         v25 = True
       End If
-      If (chkHusbandApplied.SelectedIndex = -1) Then
+      If (txtHusbandPhone.Text = "") Then
         v26 = False
       Else
         v26 = True
       End If
-      If (txtHusbandExplanation.Text = "") Then
+      If (txtHusbandEmail.Text = "") Then
         v27 = False
       Else
         v27 = True
       End If
+      If (chkHusbandApplied.SelectedIndex = -1) Then
+        v28 = False
+      Else
+        v28 = True
+      End If
+      If (txtHusbandExplanation.Text = "") Then
+        v29 = False
+      Else
+        v29 = True
+      End If
 
-
-      Dim vProgress As Decimal
-      Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married", 26, 22)
-      vPossible = IIf(drpHomeType.SelectedValue = "Other" And txtHomeType.Text <> "", vPossible + 1, vPossible)
+      Dim vProgress As Decimal = 0
+      Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), 28, 22)
+      vPossible = IIf(drpHomeType.SelectedValue = "Other", vPossible + 1, vPossible)
       If (v1 = True) Then
         vProgress += 1
       End If
@@ -433,7 +518,7 @@
       End If
 
       'add the following if husband section is visible
-      If (chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married") Then
+      If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
         If (v24 = True) Then
           vProgress += 1
         End If
@@ -444,6 +529,12 @@
           vProgress += 1
         End If
         If (v27 = True) Then
+          vProgress += 1
+        End If
+        If (v28 = True) Then
+          vProgress += 1
+        End If
+        If (v29 = True) Then
           vProgress += 1
         End If
       End If
@@ -813,8 +904,8 @@
     Try
       Dim vDependentId As Int32 = sender.CommandArgument
       Using oDB As New zakatEntities
-        Dim oDependent As DEPDENDENT = (From DEPDENDENT In oDB.DEPDENDENT Where DEPDENDENT.dependentId = vDependentId).First
-        oDB.DEPDENDENT.Remove(oDependent)
+        Dim oDependent As DEPENDENT = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.dependentId = vDependentId).First
+        oDB.DEPENDENT.Remove(oDependent)
         oDB.SaveChanges()
       End Using
       'refresh the dependents list
@@ -844,7 +935,7 @@
       Using oDB As New zakatEntities
         Dim vUserId As Int32 = Session("sUserId")
         'update repeater
-        Dim oDependent_List As List(Of DEPDENDENT) = (From DEPDENDENT In oDB.DEPDENDENT Where DEPDENDENT.userId = vUserId).ToList
+        Dim oDependent_List As List(Of DEPENDENT) = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = vUserId).ToList
         rptDependents.DataSource = oDependent_List
         rptDependents.DataBind()
       End Using
@@ -856,7 +947,6 @@
   Sub setReferences()
     Try
       Dim vUserId As Int32 = Session("sUserId")
-      'If vUserId <> 0 Then
       Using oDB As New zakatEntities
         'update repeater
         Dim oReference_List As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = vUserId).ToList
@@ -865,7 +955,6 @@
         'set the badge
         lblReferences.Text = oReference_List.Count
       End Using
-      'End If
       ' refresh the progress bar
       RefreshReferenceProgress()
     Catch ex As Exception
@@ -977,7 +1066,7 @@
 
       'add dependent
       Using oDB As New zakatEntities
-        Dim oDependent As New DEPDENDENT
+        Dim oDependent As New DEPENDENT
 
         'insert information about new dependent and save to db
         With oDependent
@@ -991,7 +1080,7 @@
         End With
 
         ' Add to Memory
-        oDB.DEPDENDENT.Add(oDependent)
+        oDB.DEPENDENT.Add(oDependent)
         oDB.SaveChanges()
       End Using
 
@@ -1073,7 +1162,7 @@
 
   Private Sub chkGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkGender.SelectedIndexChanged
     Try
-      If chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married" Then
+      If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
         pnlHusbandInformation.Visible = True
       Else
         pnlHusbandInformation.Visible = False
@@ -1086,7 +1175,7 @@
 
   Private Sub drpMaritalStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpMaritalStatus.SelectedIndexChanged
     Try
-      If chkGender.SelectedValue = "Female" And drpMaritalStatus.SelectedValue = "Married" Then
+      If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
         pnlHusbandInformation.Visible = True
       Else
         pnlHusbandInformation.Visible = False
@@ -1233,6 +1322,22 @@
   End Sub
 
   Private Sub txtHusbandLastName_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandLastName.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtHusbandPhone_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandPhone.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtHusbandEmail_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandEmail.TextChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1634,11 +1739,11 @@
         'save user data
         Dim oUser As USER = (From USER In oDB.USER Where USER.userId = pUserId).First
         With oUser
-          .socialSecurityNumber = txtSocialSecurity.Text
+          .socialSecurityNumber = Base.getFormattedSSN(txtSocialSecurity.Text, Base.enumFormatSSN.Strip)
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
-          .dob = IIf(IsDate(txtDOB.Text), txtDOB.Text, Nothing)
+          .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
           .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
@@ -1660,10 +1765,14 @@
           .husbandFirstName = txtHusbandFirstName.Text
           .husbandMiddleName = txtHusbandMiddleName.Text
           .husbandLastName = txtHusbandLastName.Text
+          .husbandEmail = txtHusbandEmail.Text
+          .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
           .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
           .husbandZakatExplanation = txtHusbandExplanation.Text
-          .primaryMasjidName = txtMasjidtName.Text
-          .primaryMasjidPhone = txtMasjidPhone.Text
+          .primaryMasjidName = txtMasjidName.Text
+          .primaryMasjidPhone = Base.getFormattedPhone(txtMasjidPhone.Text, Base.enumFormatPhone.Strip)
+          .updatedBy = pUserId
+          .updatedOn = Date.Now
         End With
 
         ' Add to Memory
@@ -1715,19 +1824,76 @@
           oDB.SaveChanges()
         Next
 
-        'check if an application has been start or not.  If so, load application data, if not create application data
-        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isSaved = True).Any Then
+        'check if an application has been started or not.  If so, load application data, if not create application data
+        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True).Any Then
           'application already exists so save application
-          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isSaved = True).First
+          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True).First
           With oApplication
             .userId = pUserId
             .organizationId = drpOrganization.SelectedValue
-            .isSaved = True
+            .isDrafted = True
             .isSubmitted = False
             .isValidated = False
             .isInvestigated = False
-            .isQualified = False
-            .approvalStatus = "Not Submitted"
+            .isQualified1 = False
+            .isQualified2 = False
+            .IsDispersed = False
+            .approvalStatus = "Draft"
+            .totalValueCash = txtValueCash.Text
+            .totalValueGold = txtValueGold.Text
+            .totalValueSilver = txtValueSilver.Text
+            .totalValueInvestment = txtValueInvestment.Text
+            .totalValueRetirement = txtValueRetirement.Text
+            .hasRetirement = IIf(CInt(txtValueRetirement.Text) > 0, True, False)
+            .totalValueLifeInsurance = txtValueLifeInsurance.Text
+            .hasLifeInsurance = IIf(CInt(txtValueLifeInsurance.Text) > 0, True, False)
+            .totalValueOutstandingDebts = txtValueDebt.Text
+            .hasOutstandingDebts = IIf(CInt(txtValueDebt.Text) > 0, True, False)
+            .totalChildSupport = txtValueChildSupport.Text
+            .hasChildSupport = IIf(CInt(txtValueChildSupport.Text) > 0, True, False)
+            .frequencyChildSupport = drpChildSupportFrequency.SelectedValue
+            .totalFoodStamps = txtValueFoodStamps.Text
+            .hasFoodStamps = IIf(CInt(txtValueFoodStamps.Text) > 0, True, False)
+            .frequencyFoodStamps = drpFoodStampFrequency.SelectedValue
+            .totalTemporaryCashAssistance = txtValueAssistance.Text
+            .hasTemporaryCashAssistance = IIf(CInt(txtValueAssistance.Text) > 0, True, False)
+            .sourceTemporaryCashAssistance = txtWhoAssisted.Text
+            .hasHealthInsurance = IIf(chkInsurance.SelectedValue <> "", chkInsurance.SelectedValue, "")
+            .healthInsuranceProviderName = txtInsuranceProvider.Text
+            .healthInsuranceProviderPolicyNumber = txtPolicyNumber.Text
+            .medicareNumber = txtMedicare.Text
+            .medicaidNumber = txtMedicaid.Text
+            .employerName = txtEmployerName.Text
+            .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), txtEmploymentStart.Text, Nothing)
+            .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), txtEmploymentEnd.Text, Nothing)
+            .positionTitle = txtPosition.Text
+            .employerPhone = txtEmployerPhone.Text
+            .totalMonthlyGrossSalary = txtMonthlySalary.Text
+            .employerStreet = txtEmployerStreet.Text
+            .employerCity = txtEmployerCity.Text
+            .employerStateAbbr = drpEmployerState.SelectedValue
+            .employerZip = txtEmployerZip.Text
+            .personalNeedStatement = txtPersonalStatement.Text
+            .updatedOn = Date.Now
+            .updatedBy = pUserId
+          End With
+          'update db
+          oDB.SaveChanges()
+        Else
+          'application does not exist so create new application
+          Dim oApplication As New APPLICATION
+
+          With oApplication
+            .userId = pUserId
+            .organizationId = drpOrganization.SelectedValue
+            .isDrafted = True
+            .isSubmitted = False
+            .isValidated = False
+            .isInvestigated = False
+            .isQualified1 = False
+            .isQualified2 = False
+            .IsDispersed = False
+            .approvalStatus = "Draft"
             .totalValueCash = txtValueCash.Text
             .totalValueGold = txtValueGold.Text
             .totalValueSilver = txtValueSilver.Text
@@ -1763,47 +1929,10 @@
             .employerStateAbbr = drpEmployerState.SelectedValue
             .employerZip = txtEmployerZip.Text
             .personalNeedStatement = txtPersonalStatement.Text
-            .submittedDate = Date.Now()
-          End With
-          'update db
-          oDB.SaveChanges()
-        Else
-          'application does not exist so create new application
-          Dim oApplication As New APPLICATION
-
-          With oApplication
-            .userId = pUserId
-            .organizationId = drpOrganization.SelectedValue
-            .isSaved = True
-            .isSubmitted = False
-            .isValidated = False
-            .isInvestigated = False
-            .isQualified = False
-            .approvalStatus = "Not Submitted"
-            .totalValueCash = txtValueCash.Text
-            .totalValueGold = txtValueGold.Text
-            .totalValueSilver = txtValueSilver.Text
-            .totalValueInvestment = txtValueInvestment.Text
-            .totalValueRetirement = txtValueRetirement.Text
-            .hasRetirement = IIf(CInt(txtValueRetirement.Text) > 0, True, False)
-            .totalValueLifeInsurance = txtValueLifeInsurance.Text
-            .hasLifeInsurance = IIf(CInt(txtValueLifeInsurance.Text) > 0, True, False)
-            .totalValueOutstandingDebts = txtValueDebt.Text
-            .hasOutstandingDebts = IIf(CInt(txtValueDebt.Text) > 0, True, False)
-            .totalChildSupport = txtValueChildSupport.Text
-            .hasChildSupport = IIf(CInt(txtValueChildSupport.Text) > 0, True, False)
-            .frequencyChildSupport = drpChildSupportFrequency.SelectedValue
-            .totalFoodStamps = txtValueChildSupport.Text
-            .hasFoodStamps = IIf(CInt(txtValueChildSupport.Text) > 0, True, False)
-            .frequencyFoodStamps = drpFoodStampFrequency.SelectedValue
-            .totalTemporaryCashAssistance = txtValueAssistance.Text
-            .hasTemporaryCashAssistance = IIf(CInt(txtValueAssistance.Text) > 0, True, False)
-            .sourceTemporaryCashAssistance = txtWhoAssisted.Text
-            .hasHealthInsurance = IIf(chkInsurance.SelectedValue <> "", chkInsurance.SelectedValue, "")
-            .healthInsuranceProviderName = txtInsuranceProvider.Text
-            .healthInsuranceProviderPolicyNumber = txtPolicyNumber.Text
-            .medicareNumber = txtMedicare.Text
-            .medicaidNumber = txtMedicaid.Text
+            .createdOn = Date.Now
+            .createdBy = pUserId
+            .updatedOn = Date.Now
+            .updatedBy = pUserId
           End With
           'create in db
           oDB.APPLICATION.Add(oApplication)
@@ -1811,12 +1940,11 @@
         End If
       End Using
 
-      'redirect home
-      'Response.Redirect("/")
+      'refresh page
+      Response.Redirect("zakatform")
 
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
-
 End Class

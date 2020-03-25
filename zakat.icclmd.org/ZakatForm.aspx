@@ -206,6 +206,7 @@
                                     <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="Single" Value="Single"></asp:ListItem>
                                     <asp:ListItem Text="Married" Value="Married"></asp:ListItem>
+                                    <asp:ListItem Text="Divorced" Value="Divorced"></asp:ListItem>
                                   </asp:DropDownList>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="drpMaritalStatus" CssClass="text-danger" ErrorMessage="The marital status is required." InitialValue="(Select One)" ValidationGroup="Submit" />
                                 </div>
@@ -394,8 +395,8 @@
                                     <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="High School Diploma/GED" Value="High School Diploma/GED"></asp:ListItem>
                                     <asp:ListItem Text="Associate Degree or Certificate" Value="Associate Degree or Certificate"></asp:ListItem>
-                                    <asp:ListItem Text="Bachelor's Degree" Value="Bachelor's Degree"></asp:ListItem>
-                                    <asp:ListItem Text="Master's Degree" Value="Master's Degree"></asp:ListItem>
+                                    <asp:ListItem Text="Bachelors Degree" Value="Bachelors Degree"></asp:ListItem>
+                                    <asp:ListItem Text="Masters Degree" Value="Masters Degree"></asp:ListItem>
                                     <asp:ListItem Text="Ph.D or Advanced Progressional Degree" Value="Ph.D or Advanced Progressional Degree"></asp:ListItem>
                                     <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
                                   </asp:DropDownList>
@@ -458,7 +459,7 @@
                       <table border="1" style="width:100%; border-top-color: white; border-left-color:white; border-right-color:white; border-bottom-color:black">
                         <tr>
                           <th style="width:100%; text-align:left; vertical-align: middle; background-color: #eee">
-                            Husband Information (If Female and Married)
+                            Husband Information - If Female and (Married or Divorced)
                             <br /><br />
                           </th>
                         </tr>
@@ -466,7 +467,7 @@
                       <br />
                       <table border="0" style="width:100%">
                         <tr>
-                          <td style="width:50%">
+                          <td style="width:50%; vertical-align: top">
                             <div class="col-lg-12">
                               <div class="form-horizontal">
                                 <div class="form-group">
@@ -490,12 +491,28 @@
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandLastName" CssClass="text-danger" Display="Static" ErrorMessage="The husband last name is required." ValidationGroup="Submit" />
                                   </div>
                                 </div>
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="txtHusbandPhone" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Phone #:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:TextBox runat="server" ID="txtHusbandPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="34" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtHusbandPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandPhone" CssClass="text-danger" ErrorMessage="The husband phone # is required." Display="Static" ValidationGroup="Submit" />
+                                  </div>
+                                </div> 
                               </div>
                             </div>
                           </td>
-                          <td style="width:50%">
+                          <td style="width:50%; vertical-align: top; text-align: left">
                             <div class="col-lg-12">
                               <div class="form-horizontal">
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="txtHusbandEmail" CssClass="col-lg-2 control-label" ToolTip="Email" Style="white-space: nowrap">Email:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:TextBox runat="server" ID="txtHusbandEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email" MaxLength="60" AutoPostBack="True" TabIndex="35" ValidationGroup="Submit" />
+                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ErrorMessage="A valid husband email is required." ControlToValidate="txtHusbandEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandEmail" CssClass="text-danger" ErrorMessage="The husband email is required." Display="Static" ValidationGroup="Submit" />
+                                  </div>
+                                </div> 
                                 <div class="form-group">
                                   <asp:Label runat="server" CssClass="col-lg-2 control-label" ToolTip="" Style="white-space: nowrap; position: relative; top: 0px;">&nbsp;</asp:Label>
                                   <div class="col-lg-10">
@@ -505,7 +522,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" CssClass="col-lg-2 control-label" ToolTip="" Style="white-space: nowrap; position: relative; top: 0px;">&nbsp;</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:RadioButtonList ID="chkHusbandApplied" runat="server" RepeatDirection="Horizontal" Style="position: relative; top: 6px;" ToolTip="Hus" TabIndex="34" ValidationGroup="Submit" AutoPostBack="True">
+                                    <asp:RadioButtonList ID="chkHusbandApplied" runat="server" RepeatDirection="Horizontal" Style="position: relative; top: 6px;" ToolTip="Hus" TabIndex="36" ValidationGroup="Submit" AutoPostBack="True">
                                       <asp:ListItem Text="Yes" Value="Yes">&nbsp;&nbsp;Yes&nbsp;&nbsp;</asp:ListItem>
                                       <asp:ListItem Text="No" Value="No">&nbsp;&nbsp;No (Fill out the field below)</asp:ListItem>
                                     </asp:RadioButtonList>
@@ -521,7 +538,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" CssClass="col-lg-2 control-label" ToolTip="" Style="white-space: nowrap; position: relative; top: 0px;">&nbsp;</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandExplanation" AutoCompleteType="Disabled" ToolTip="Explanation for husband not applying" MaxLength="1000" TabIndex="35" TextMode="MultiLine" Rows="4" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
+                                    <asp:TextBox runat="server" ID="txtHusbandExplanation" CssClass="form-control" AutoCompleteType="Disabled" ToolTip="Explanation for husband not applying" MaxLength="1000" TabIndex="37" TextMode="MultiLine" Rows="2" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandExplanation" CssClass="text-danger" ErrorMessage="The explanation for husband not applying is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -839,7 +856,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMedicare" CssClass="col-lg-2 control-label" ToolTip="Medicare #" Style="white-space: nowrap; position: relative; top: 5px">Medicare #:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMedicare" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicare #" TabIndex="116" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtMedicare" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicare #" TabIndex="116" AutoPostBack="True" ValidationGroup="Submit" MaxLength="11" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMedicare" CssClass="text-danger" ErrorMessage="The Medicare # is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -859,7 +876,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMedicaid" CssClass="col-lg-2 control-label" ToolTip="Medicaid #" Style="white-space: nowrap; position: relative; top: 5px">Medicaid #:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMedicaid" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicaid #" TabIndex="118" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtMedicaid" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicaid #" TabIndex="118" AutoPostBack="True" ValidationGroup="Submit" MaxLength="9" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMedicaid" CssClass="text-danger" ErrorMessage="The Medicaid # is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -981,7 +998,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtMonthlySalary" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="206" ValidationGroup="Submit" Text="0" AutoPostBack="True" />
+                                      <asp:TextBox runat="server" MaxLength="7" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="206" ValidationGroup="Submit" Text="0" AutoPostBack="True" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtMonthlySalary" ValidationExpression="^[0-9]+(\.[0-9]{1,2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMonthlySalary" CssClass="text-danger" Display="Static" ErrorMessage="The monthly salary is required." ValidationGroup="Submit" />
                                     </td>
@@ -1212,6 +1229,7 @@
                 <th style="width:25%; text-align:left; vertical-align: middle">
                   Reference Information
                   <span class="label label-default"><asp:Label ID="lblReferences" runat="server" Text="0"></asp:Label></span>
+                  &nbsp;(2 Required)
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1340,16 +1358,16 @@
                               </div>
                             </div>
                             <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtMasjidtName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:</asp:Label>
+                              <asp:Label runat="server" AssociatedControlID="txtMasjidName" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Name" Style="white-space: nowrap">Pr Masjid Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtMasjidtName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="401" AutoPostBack="false" ValidationGroup="Reference" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidtName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Reference" />
+                                <asp:TextBox runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="401" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Reference" />
                               </div>
                             </div>
                             <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtMasjidPhone" CssClass="col-lg-2 control-label" ToolTip="Masjid Phone #" Style="white-space: nowrap">Masjid Phone:</asp:Label>
+                              <asp:Label runat="server" AssociatedControlID="txtMasjidPhone" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Phone #" Style="white-space: nowrap">Pr Masjid Ph #:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtMasjidPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Masjid Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="405" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox runat="server" ID="txtMasjidPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="405" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:RegularExpressionValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Reference"></asp:RegularExpressionValidator>
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ErrorMessage="The masjid phone number is required." Display="Static" ValidationGroup="Reference" />
                               </div>
