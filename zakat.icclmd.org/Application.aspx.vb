@@ -51,12 +51,89 @@
           txtHusbandExplanation.Text = .USER.husbandZakatExplanation
           txtMasjidName.Text = .USER.primaryMasjidName
           txtMasjidPhone.Text = .USER.primaryMasjidPhone
-        End With
 
+          'add saved languages to the list
+          Dim vLanguages As String = ""
+          If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).Any) Then
+            'there are languages so add in the form
+            Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).ToList
+            For Each item In oUserLanguages
+              'concatenate user's spoken languages
+              vLanguages = IIf(vLanguages = "", item.LANGUAGE.name, vLanguages + ", " + item.LANGUAGE.name)
+            Next
+          End If
+          txtLanguages.Text = vLanguages
+
+          'add saved skills/certs to the list
+          Dim vCertSkills As String = ""
+          If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).Any) Then
+            'there are skills/certs so add in the form
+            Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).ToList
+            For Each item In oCertSkills
+              'obtain the skills/certs from the list and add from the db
+              vCertSkills = IIf(vCertSkills = "", item.certificationSkill, vCertSkills + ", " + item.certificationSkill)
+            Next
+          End If
+          txtCertSkills.Text = vCertSkills
+
+          txtOrganization.Text = .ORGANIZATION.name
+          txtValueCash.Text = FormatCurrency(.totalValueCash)
+          txtValueGold.Text = FormatCurrency(.totalValueGold)
+          txtValueSilver.Text = FormatCurrency(.totalValueSilver)
+          txtValueInvestment.Text = FormatCurrency(.totalValueInvestment)
+          txtValueRetirement.Text = FormatCurrency(.totalValueRetirement)
+          txtValueLifeInsurance.Text = FormatCurrency(.totalValueLifeInsurance)
+          txtValueDebt.Text = FormatCurrency(.totalValueOutstandingDebts)
+          txtValueChildSupport.Text = FormatCurrency(.totalChildSupport)
+          txtChildSupportFrequency.Text = .frequencyChildSupport
+          txtValueFoodStamps.Text = FormatCurrency(.totalFoodStamps)
+          txtFoodStampFrequency.Text = .frequencyFoodStamps
+          txtValueAssistance.Text = FormatCurrency(.totalTemporaryCashAssistance)
+          txtWhoAssisted.Text = .sourceTemporaryCashAssistance
+          txtInsuranceProvider.Text = .healthInsuranceProviderName
+          txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
+          txtMedicare.Text = .medicareNumber
+          txtMedicaid.Text = .medicaidNumber
+          txtEmployerName.Text = .employerName
+          txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
+          txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
+          txtPosition.Text = .positionTitle
+          txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+          txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
+          txtEmployerStreet.Text = .employerStreet
+          txtEmployerCity.Text = .employerCity
+          txtEmployerState.Text = .employerStateAbbr
+          txtEmployerZip.Text = .employerZip
+          txtPersonalStatement.Text = .personalNeedStatement
+
+          'add dependents to form if there are any
+          Dim vDependents As String = ""
+          If ((From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).Any) Then
+            'there are skills/certs so add in the form
+            Dim oDependentList As List(Of DEPENDENT) = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).ToList
+            For Each item In oDependentList
+              'obtain the skills/certs from the list and add from the db
+              vDependents = IIf(vDependents = "", item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")", vDependents + ", " + item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")")
+            Next
+          Else
+            vDependents = "None"
+          End If
+          txtDependents.Text = vDependents
+
+          'add reference to the form if any
+          Dim oReference_List As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = .userId).ToList
+          rptReferences.DataSource = oReference_List
+          rptReferences.DataBind()
+        End With
       End Using
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  Public Function getFormattedPhone(ByVal pPhone As String) As String
+    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+  End Function
+
 
 End Class

@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Application1
     
     '''<summary>
+    '''txtOrganization control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtOrganization As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtEmail control.
     '''</summary>
     '''<remarks>
@@ -158,6 +167,141 @@ Partial Public Class Application1
     Protected WithEvents txtOtherHomeType As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtValueCash control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueCash As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueGold control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueGold As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueSilver control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueSilver As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueInvestment control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueInvestment As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueRetirement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueRetirement As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueLifeInsurance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueLifeInsurance As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueDebt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueDebt As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueChildSupport control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueChildSupport As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtChildSupportFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtChildSupportFrequency As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueFoodStamps control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueFoodStamps As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtFoodStampFrequency control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtFoodStampFrequency As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtValueAssistance control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValueAssistance As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtWhoAssisted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtWhoAssisted As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtLanguages control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLanguages As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtInsuranceProvider control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtInsuranceProvider As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtNationality control.
     '''</summary>
     '''<remarks>
@@ -291,6 +435,159 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtPolicyNumber control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPolicyNumber As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtMedicare control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMedicare As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtMedicaid control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMedicaid As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerName As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmploymentStart control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmploymentStart As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmploymentEnd control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmploymentEnd As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtPosition control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPosition As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerPhone As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtMonthlySalary control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMonthlySalary As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerStreet control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerStreet As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerCity control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerCity As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerState control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerState As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtEmployerZip control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmployerZip As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtCertSkills control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCertSkills As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtDependents control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDependents As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtPersonalStatement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPersonalStatement As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''rptReferences control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''valUserRequiredSave control.
