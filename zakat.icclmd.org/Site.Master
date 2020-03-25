@@ -91,7 +91,7 @@
                     <li><a id="lnkApplication" runat="server" visible="true" href="~/zakatform">Apply</a><li>
                     <li><a id="A1" runat="server" visible="true" href="~/password">Password</a></li>
                     <li>
-                      <a id="A7" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameApplicant" runat="server" ToolTip="Manage your account"></asp:Label>!</a>
+                      <a id="A7" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameApplicant" runat="server" ToolTip="Manage your account"></asp:Label></a>
                     </li>
                     <li><a href="logout">Logout</a></li>
                   </ul>
