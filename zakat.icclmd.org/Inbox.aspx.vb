@@ -8,17 +8,35 @@
       If vUserId = 0 Then Response.Redirect("/")
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
-        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
+        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
           Response.Redirect("/")
         End If
 
-        If Not IsPostBack Then
-          'load the state dropdown
-          Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION).ToList
-          rptInbox.DataSource = oApplications
-          rptInbox.DataBind()
+        'load the inbox
+        Dim oApplications As List(Of APPLICATION)
+        If drpWorkflow.SelectedValue = "All" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION).ToList
+        Else
+          If drpWorkflow.SelectedValue = "Drafted" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isDrafted = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Submitted" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isSubmitted = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Validated" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isValidated = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Investigated" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isInvestigated = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Qualified 1" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isQualified1 = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Qualified 2" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isQualified2 = True).ToList
+          ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.IsDispersed = True).ToList
+          Else
+            oApplications = (From APPLICATION In oDB.APPLICATION).ToList
+          End If
         End If
-
+        rptInbox.DataSource = oApplications
+        rptInbox.DataBind()
       End Using
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -45,4 +63,13 @@
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  Public Function GetFormattedNumber(ByVal pMemberId As Int32) As String
+    Try
+      GetFormattedNumber = Base.GetFormattedNumber(pMemberId)
+    Catch ex As Exception
+      Return Nothing
+      Response.Write(ex.Message)
+    End Try
+  End Function
 End Class
