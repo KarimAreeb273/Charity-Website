@@ -48,7 +48,7 @@ Public Class Base
       Dim oSMTP As New SmtpClient
 
       'send the message
-      'oSMTP.Send(oEmailMessage)
+      oSMTP.Send(oEmailMessage)
       sendEmail = True
     Catch ex As Exception
       sendEmail = False
@@ -95,6 +95,28 @@ Public Class Base
     End Try
   End Function
 
+  Public Shared Function GetFormattedNumber(pId As Int32) As String
+    Try
+      Dim vId As String = pId.ToString
+      Select Case vId.Length
+        Case 1
+          GetFormattedNumber = "0000" & vId
+        Case 2
+          GetFormattedNumber = "000" & vId
+        Case 3
+          GetFormattedNumber = "00" & vId
+        Case 4
+          GetFormattedNumber = "0" & vId
+        Case 5
+          GetFormattedNumber = vId
+        Case Else
+          GetFormattedNumber = vId
+      End Select
+    Catch ex As Exception
+      Return Nothing
+    End Try
+  End Function
+
   Public Shared Function getAge(ByVal dob As Date) As Int16
     Dim age As Int16 = Today.Year - dob.Year
     If (dob > Today.AddYears(-age)) Then age -= 1
@@ -126,10 +148,6 @@ Public Class Base
         .middleName = pMiddle
         .lastName = pLast
         .password = Base.getPassword()  'randomly generate a password
-        .createdBy = oUser.userId
-        .createdOn = Date.Now
-        .updatedBy = oUser.userId
-        .updatedOn = Date.Now
       End With
 
       ' Add to Memory
@@ -139,6 +157,15 @@ Public Class Base
       'set the userId after adding to db
       vUserId = oUser.userId
       vPassword = oUser.password
+
+      'save audit information
+      Dim oUserUpdate As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
+      With oUserUpdate
+        .createdBy = vUserId
+        .updatedBy = vUserId
+      End With
+      ' Add to Memory
+      oDB.SaveChanges()
 
       'set the applicant role for this user
       Dim oUserRole As New USER_ROLE
@@ -156,6 +183,7 @@ Public Class Base
     Dim vSubject As String = "Online Zakat - New Account"
     Dim vMsgText As New StringBuilder
 
+    vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
     vMsgText.Append("Assalaamu Alaikum " & pFirst & ",<br /><br />")
     vMsgText.Append("Your Online Zakat account has been created. ")
     vMsgText.Append("This account will be used to provide you with updates regarding the progress of any submitted zakat applications. ")
@@ -167,11 +195,15 @@ Public Class Base
     vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
     vMsgText.Append("ICCL Zakat Administrator<br />")
     vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
-    vMsgText.Append("(301) 317-4584")
+    vMsgText.Append("301-317-4584<br />")
     vMsgText.Append("7306 Contee Road<br />")
     vMsgText.Append("Laurel, MD 20707<br />")
     vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
-    Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+    vMsgText.Append("</span>")
+    '*******************
+    'uncomment next line
+    '*******************
+    'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
     createUser = vUserId
   End Function
