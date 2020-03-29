@@ -4,21 +4,17 @@
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       'go home if no session/user
-      'Dim vUserId As Int32 = Session("sUserId")
-      'Dim vApplicationId As Int32 = Session("sApplicationId")
-      Dim vApplicationId As Int32 = 6
-      'If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
-
-      'comment
-      'lblApplication.Text = "The content for this Online Zakat Application #: " & Session("sApplicationId") & " will be placed here."
+      Dim vUserId As Int32 = Session("sUserId")
+      Dim vApplicationId As Int32 = Session("sApplicationId")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
 
       Using oDB As New zakatEntities
         'verify if the user is a reviewer otherwise redirect home
-        'If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
-        '  Response.Redirect("/")
-        'End If
+        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
+          Response.Redirect("/")
+        End If
 
-        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+        Dim oApplication As Application = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
         With oApplication
           txtEmail.Text = .USER.email
           txtFirstName.Text = .USER.firstName
@@ -106,6 +102,23 @@
           txtEmployerZip.Text = .employerZip
           txtPersonalStatement.Text = .personalNeedStatement
 
+          'set review panels; if isDispersed = true visible is already set to false so do nothing:
+          If .IsDispersed = True Then
+            pnlReviewComments.Visible = False
+          ElseIf .isQualified2 = True Then
+            pnlDispersed.Visible = True
+          ElseIf .isQualified1 = True Then
+            pnlQualified2.Visible = True
+          ElseIf .isInvestigated = True Then
+            pnlQualified1.Visible = True
+          ElseIf .isValidated = True Then
+            pnlInvestigated.Visible = True
+          ElseIf .isSubmitted = True Then
+            pnlValidated.Visible = True
+          ElseIf .isDrafted = True Then
+            pnlReviewComments.Visible = False
+          End If
+
           'add dependents to form if there are any
           Dim vDependents As String = ""
           If ((From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).Any) Then
@@ -121,19 +134,50 @@
           txtDependents.Text = vDependents
 
           'add reference to the form if any
-          Dim oReference_List As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = .userId).ToList
-          rptReferences.DataSource = oReference_List
+          Dim oReferences As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = .userId).ToList
+          rptReferences.DataSource = oReferences
           rptReferences.DataBind()
+
+          'add review history to the page
+          Dim oReviews As List(Of REVIEW) = (From REVIEW In oDB.REVIEW Where REVIEW.userId = .userId And REVIEW.applicationId = vApplicationId).ToList
+          rptReviewHistory.DataSource = oReviews
+          rptReviewHistory.DataBind()
         End With
       End Using
+
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
 
+  Private Sub btnValidated_Click(sender As Object, e As EventArgs) Handles btnValidated.Click
+
+  End Sub
+
+  Private Sub btnInvestigated_Click(sender As Object, e As EventArgs) Handles btnInvestigated.Click
+
+  End Sub
+
+  Private Sub btnQualified1_Click(sender As Object, e As EventArgs) Handles btnQualified1.Click
+
+  End Sub
+
+  Private Sub btnQualified2_Click(sender As Object, e As EventArgs) Handles btnQualified2.Click
+
+  End Sub
+
+  Private Sub btnDispersed_Click(sender As Object, e As EventArgs) Handles btnDispersed.Click
+
+  End Sub
+
+  Private Sub btnRejected_Click(sender As Object, e As EventArgs) Handles btnRejectedDis.Click, btnRejectedInv.Click, btnRejectedQal1.Click, btnRejectedQal2.Click, btnRejectedVal.Click
+
+  End Sub
+
   Public Function getFormattedPhone(ByVal pPhone As String) As String
     getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
+
 
 
 End Class

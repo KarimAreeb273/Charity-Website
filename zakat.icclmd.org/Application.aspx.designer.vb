@@ -293,6 +293,15 @@ Partial Public Class Application1
     Protected WithEvents txtLanguages As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtTotalApplications control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTotalApplications As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtInsuranceProvider control.
     '''</summary>
     '''<remarks>
@@ -590,38 +599,200 @@ Partial Public Class Application1
     Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''valUserRequiredSave control.
+    '''rptReviewHistory control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents valUserRequiredSave As Global.System.Web.UI.WebControls.CustomValidator
+    Protected WithEvents rptReviewHistory As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''btnValidate control.
+    '''pnlReviewComments control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnValidate As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents pnlReviewComments As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''btnInvestigate control.
+    '''txtReviewComments control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnInvestigate As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents txtReviewComments As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''btnQualify control.
+    '''RequiredFieldValidator1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnQualify As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    
+    '''<summary>
+    '''pnlValidated control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlValidated As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnValidated control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnValidated As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnRejectedVal control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejectedVal As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlInvestigated control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlInvestigated As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnInvestigated control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnInvestigated As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnRejectedInv control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejectedInv As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlQualified1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlQualified1 As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnQualified1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnQualified1 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnRejectedQal1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejectedQal1 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlQualified2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlQualified2 As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''btnQualified2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnQualified2 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnRejectedQal2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejectedQal2 As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''pnlDispersed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlDispersed As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtDispersedDate control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDispersedDate As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''lnkCalendarDOB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lnkCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''calDOB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
+    
+    '''<summary>
+    '''btnDispersed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDispersed As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''btnRejectedDis control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejectedDis As Global.System.Web.UI.WebControls.Button
 End Class
