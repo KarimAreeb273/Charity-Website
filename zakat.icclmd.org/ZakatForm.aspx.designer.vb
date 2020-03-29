@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class ZakatForm
     
     '''<summary>
+    '''chkAcknowledgement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkAcknowledgement As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
     '''drpOrganization control.
     '''</summary>
     '''<remarks>
@@ -300,6 +309,24 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpCitizenship As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''txtMasjidName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtMasjidPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''lstLanguages control.
@@ -1283,24 +1310,6 @@ Partial Public Class ZakatForm
     Protected WithEvents txtRefZip As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtMasjidName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMasjidPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''btnAddReference control.
     '''</summary>
     '''<remarks>
@@ -1371,6 +1380,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents valUserRequiredSave As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
+    '''valAcknowledgement control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valAcknowledgement As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''btnSave control.

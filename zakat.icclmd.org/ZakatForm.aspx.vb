@@ -132,23 +132,25 @@
 
               With oDraftApplication
                 drpOrganization.SelectedValue = .organizationId
-                txtValueCash.Text = .totalValueCash
-                txtValueGold.Text = .totalValueGold
-                txtValueSilver.Text = .totalValueSilver
-                txtValueInvestment.Text = .totalValueInvestment
-                txtValueRetirement.Text = .totalValueRetirement
-                txtValueLifeInsurance.Text = .totalValueLifeInsurance
-                txtValueDebt.Text = .totalValueOutstandingDebts
-                txtValueChildSupport.Text = .totalChildSupport
+                txtValueCash.Text = FormatCurrency(.totalValueCash)
+                txtValueGold.Text = FormatCurrency(.totalValueGold)
+                txtValueSilver.Text = FormatCurrency(.totalValueSilver)
+                txtValueInvestment.Text = FormatCurrency(.totalValueInvestment)
+                txtValueRetirement.Text = FormatCurrency(.totalValueRetirement)
+                txtValueLifeInsurance.Text = FormatCurrency(.totalValueLifeInsurance)
+                txtValueDebt.Text = FormatCurrency(.totalValueOutstandingDebts)
+                txtValueChildSupport.Text = FormatCurrency(.totalChildSupport)
                 drpChildSupportFrequency.Enabled = IIf(.totalChildSupport > 0, True, False)
                 drpChildSupportFrequency.SelectedValue = .frequencyChildSupport
-                txtValueFoodStamps.Text = .totalFoodStamps
+                txtValueFoodStamps.Text = FormatCurrency(.totalFoodStamps)
                 drpFoodStampFrequency.Enabled = IIf(.totalFoodStamps > 0, True, False)
                 drpFoodStampFrequency.SelectedValue = .frequencyFoodStamps
-                txtValueAssistance.Text = .totalTemporaryCashAssistance
+                txtValueAssistance.Text = FormatCurrency(.totalTemporaryCashAssistance)
                 txtWhoAssisted.Enabled = IIf(.totalTemporaryCashAssistance > 0, True, False)
                 txtWhoAssisted.Text = .sourceTemporaryCashAssistance
-                chkInsurance.SelectedValue = IIf(.hasHealthInsurance, "Yes", "No")
+                If (.hasHealthInsurance <> "") Then
+                  chkInsurance.SelectedValue = IIf(.hasHealthInsurance, "Yes", "No")
+                End If
                 pnlInsurance.Visible = IIf(chkInsurance.SelectedValue = "Yes", True, False)
                 txtInsuranceProvider.Text = .healthInsuranceProviderName
                 txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
@@ -159,7 +161,7 @@
                 txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
                 txtPosition.Text = .positionTitle
                 txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
-                txtMonthlySalary.Text = .totalMonthlyGrossSalary
+                txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
                 txtEmployerStreet.Text = .employerStreet
                 txtEmployerCity.Text = .employerCity
                 drpEmployerState.SelectedValue = .employerStateAbbr
@@ -177,113 +179,14 @@
         End Using
         If drpOrganization.SelectedValue = "(Select One)" Then
           accZakat.Enabled = False
+          btnSave.Enabled = False
+          btnSubmit.Enabled = False
         Else
           accZakat.Enabled = True
+          btnSave.Enabled = True
+          btnSubmit.Enabled = True
         End If
       End If
-    Catch ex As Exception
-      Response.Write(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-    Try
-      Using oDB As New zakatEntities
-        'reset validator
-        valDuplicateEmail.IsValid = True
-        'validate that its not already registered by a user
-        If (From USER In oDB.USER Where USER.email = txtEmail.Text).Any Then
-          valDuplicateEmail.IsValid = False
-          Exit Sub
-        End If
-        Dim oMember As New USER
-        'Dim vPhone As String = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
-        Dim vPassword As String = Base.getPassword()
-        'insert information about new user and save to db
-        With oMember
-          .email = txtEmail.Text
-          .firstName = txtFirstName.Text
-          .middleName = txtMiddleName.Text
-          .lastName = txtLastName.Text
-          ''.statusId = Base.enumMembershipStatus.Pending
-          .maritalStatus = drpMaritalStatus.SelectedValue
-          .password = vPassword
-          .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
-          .gender = chkGender.SelectedValue
-          .street = txtStreet.Text
-          .city = txtCity.Text
-          ''.county = drpCounty.SelectedValue
-          .stateAbbr = drpState.SelectedValue
-          .zip = txtZip.Text
-          .dob = CDate(txtDOB.Text)
-          .citizenshipStatus = drpCitizenship.SelectedValue
-          ''.memberType = "Review"
-          ''.isAuthenticated = False
-          ''.isAdmin = False
-          ''.isHouseholdHead = True
-          ''.isVoterEligible = False
-          ''.isApproved = False
-          ''.hasReference = chkReference.Checked
-          ''.referenceName = txtRefName.Text
-          ''.referenceEmail = txtRefEmail.Text
-          ''.referencePhone = Base.getFormattedPhone(txtRefPhone.Text, Base.enumFormatPhone.Strip)
-          .createdOn = Date.Now
-          .updatedOn = Date.Now
-        End With
-
-        ' Add to Memory
-        oDB.USER.Add(oMember)
-        oDB.SaveChanges()
-
-        Dim vAdminId As Int32 = Session("sUserId")
-        If vAdminId = 0 Then
-          'registered by an anonymouse user
-          Dim oUser As USER = (From USER In oDB.USER Where USER.email = txtEmail.Text).First
-          With oUser
-            .createdBy = oUser.userId
-            .updatedBy = oUser.userId
-
-            'set session variables
-            Session("sUserId") = .userId
-            Session("sMemberId") = .userId
-            Session("sUserFirstName") = .firstName
-            ''Session("sIsAdmin") = .isAdmin
-          End With
-        Else
-          'registered by the administrater
-          Dim oNewMember As USER = (From USER In oDB.USER Where USER.email = txtEmail.Text).First
-          With oNewMember
-            .createdBy = vAdminId
-            .updatedBy = vAdminId
-
-            'set session variables
-            Session("sMemberId") = .userId
-          End With
-        End If
-        oDB.SaveChanges()
-
-        'create email to new applicant
-        Dim vTo As String = txtEmail.Text
-        Dim vSubject As String = "Online Zakat - New Application"
-        Dim vMsgText As New StringBuilder
-
-        vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Online Zakat Application has been received. ")
-        vMsgText.Append("In addition, click or copy/paste the website link below and use the account information provided to log into your account.  ")
-        vMsgText.Append("While there, change your auto-generated password.<br /><br />")
-        vMsgText.Append("<b>Website Link:</b> <a target='_blank' href='https://zakat.icclmd.org/password?e=" & txtEmail.Text & "'>https://zakat.icclmd.org/password?e=" & txtEmail.Text & "</a><br />")
-        vMsgText.Append("<b>Password:</b>  <i>" & vPassword & "</i><br /><br />")
-        vMsgText.Append("If you have issues regarding your account, please don’t hesitate to contact us.<br /><br />")
-        vMsgText.Append("Thank you,<br /><br />")
-        vMsgText.Append("Online Zakat Administrator<br />")
-        vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
-        vMsgText.Append("7306 Contee Road<br />")
-        vMsgText.Append("Laurel, MD 20707<br />")
-        vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
-        Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
-
-        Response.Redirect("profile")
-      End Using
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -643,7 +546,7 @@
       Else
         v13 = False
       End If
-      If (chkInsurance.SelectedIndex = -1) Then
+      If (chkInsurance.SelectedValue = "") Then
         v14 = False
       Else
         v14 = True
@@ -967,8 +870,12 @@
       Using oDB As New zakatEntities
         If drpOrganization.SelectedValue = "(Select One)" Then
           accZakat.Enabled = False
+          btnSave.Enabled = False
+          btnSubmit.Enabled = False
         Else
           accZakat.Enabled = True
+          btnSave.Enabled = True
+          btnSubmit.Enabled = True
         End If
       End Using
     Catch ex As Exception
@@ -1711,23 +1618,147 @@
         End If
       End If
 
-      Using oDB As New zakatEntities
-        Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
-        'set session variables:
-        Session("sUserId") = vUserId
-        Session("sIsApplicant") = True
-        Session("sUserFirstName") = oUser.firstName
-      End Using
-
       'update all the values stored in the form by calling a common sub routine
-      SaveZakatForm(vUserId)
+      SaveZakatForm(vUserId, True)
 
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
 
-  Sub SaveZakatForm(pUserId As Int32)
+  Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+    Try
+      'verify acknowledgement statement
+      valAcknowledgement.IsValid = True
+      If chkAcknowledgement.Checked = False Then
+        valAcknowledgement.IsValid = False
+        Exit Sub
+      End If
+
+      Dim vApplicationId As Int32
+      'if no user, determine if one can be created or give validation
+      Dim vUserId As Int32 = Session("sUserId")
+      If vUserId = 0 Then
+        'is the email, first and last name populated?
+        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+          vUserId = Base.createUser(Base.enumRole.Appliciant, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+        Else
+          'show validation and exit sub
+          valUserRequiredSave.IsValid = False
+          Exit Sub
+        End If
+      End If
+
+      'update all the values stored in the form by calling a common sub routine
+      SaveZakatForm(vUserId, False)
+
+
+
+      'set the appropriate status for submission: isDrafted=True, isSubmitted=True, approvalStatus=Submitted
+      Using oDB As New zakatEntities
+        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True).Any Then
+          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True).First
+          With oApplication
+            .userId = vUserId
+            .organizationId = drpOrganization.SelectedValue
+            .isDrafted = True
+            .isSubmitted = True
+            .isValidated = False
+            .isInvestigated = False
+            .isQualified1 = False
+            .isQualified2 = False
+            .IsDispersed = False
+            .applicationStatus = "Submitted"
+            .submittedOn = Date.Now
+            .submittedBy = vUserId
+            .updatedOn = Date.Now
+            .updatedBy = vUserId
+          End With
+          'update db
+          oDB.SaveChanges()
+
+          vApplicationId = oApplication.applicationId
+        End If
+      End Using
+
+      'email the user about application submission
+      Dim vTo As String = txtEmail.Text
+      Dim vSubject As String = "Online Zakat - Application Submitted"
+      Dim vMsgText As New StringBuilder
+
+      vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
+      vMsgText.Append("Assalaamu Alaikum " & Session("sUserFirstName") & ",<br /><br />")
+      vMsgText.Append("Your Zakat Application has been received. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
+      vMsgText.Append("<b>Dashboard Link: </b> <a target='_blank' href='https://zakat.icclmd.org/dashboard'>https://zakat.icclmd.org/dashboard</a><br /><br />")
+      vMsgText.Append("If you have issues regarding your zakat application, please don’t hesitate to contact us using the information below.<br /><br />")
+      vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
+      vMsgText.Append("ICCL Zakat Administrator<br />")
+      vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
+      vMsgText.Append("301-317-4584<br />")
+      vMsgText.Append("7306 Contee Road<br />")
+      vMsgText.Append("Laurel, MD 20707<br />")
+      vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
+      vMsgText.Append("</span>")
+      '*******************
+      'uncomment next line
+      '*******************
+      'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+
+      'email the validators that an application requires reviewing
+      Using oDB As New zakatEntities
+        If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator).Any Then
+          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator).ToList
+          vTo = ""
+          For Each item In oUserRoles
+            vTo = IIf(vTo = "", item.USER.email, vTo + "," + item.USER.email)
+          Next
+
+          vSubject = "Online Zakat - Application Submitted"
+          vMsgText.Clear()
+          vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
+          vMsgText.Append("Assalaamu Alaikum Validator(s),<br /><br />")
+          vMsgText.Append("A new Zakat Application has been submitted and is awaiting validation. Please login and perform the necessary validation by clicking or copying/pasting the inbox link below:<br /><br />")
+          vMsgText.Append("<b>Inbox Link: </b> <a target='_blank' href='https://zakat.icclmd.org/inbox'>https://zakat.icclmd.org/inbox</a><br /><br />")
+          vMsgText.Append("If you have questions regarding the action you need to take, please don’t hesitate to contact the ICCL Zakat Administrator using the information below.<br /><br />")
+          vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
+          vMsgText.Append("ICCL Zakat Administrator<br />")
+          vMsgText.Append("<a target='_blank' href='mailto:zakat@icclmd.org'>zakat@icclmd.org</a><br />")
+          vMsgText.Append("301-317-4584<br />")
+          vMsgText.Append("7306 Contee Road<br />")
+          vMsgText.Append("Laurel, MD 20707<br />")
+          vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
+          vMsgText.Append("</span>")
+          '*******************
+          'uncomment next line
+          '*******************
+          'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        End If
+
+        'add a generic review action on behalf of the user
+        Dim oReview As New REVIEW
+        With oReview
+          .userId = vUserId
+          .applicationId = vApplicationId
+          .reviewAction = "Submitted"
+          .reviewDate = Date.Now
+          .reviewComment = "I am submitting this zakat application for your review."
+        End With
+
+        ' Add to Memory
+        oDB.REVIEW.Add(oReview)
+        oDB.SaveChanges()
+
+      End Using
+
+      'redirect to the dashboard
+      Response.Redirect("dashboard")
+
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub SaveZakatForm(pUserId As Int32, isSave As Boolean)
     Try
       Using oDB As New zakatEntities
         'check if the user exists or not, if not, exit sub
@@ -1743,7 +1774,9 @@
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
-          .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
+          If txtDOB.Text <> "" Then
+            .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
+          End If
           .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
@@ -1751,7 +1784,9 @@
           .city = txtCity.Text
           .stateAbbr = drpState.SelectedValue
           .zip = txtZip.Text
-          .beganLivingDate = IIf(IsDate(txtBeganLiving.Text), txtBeganLiving.Text, Nothing)
+          If txtBeganLiving.Text <> "" Then
+            .beganLivingDate = IIf(IsDate(txtBeganLiving.Text), CDate(txtBeganLiving.Text), Nothing)
+          End If
           .homeType = drpHomeType.SelectedValue
           .homeTypeOther = txtHomeType.Text
           .nationalityId = drpNationality.SelectedValue
@@ -1777,6 +1812,14 @@
 
         ' Add to Memory
         oDB.SaveChanges()
+
+        'Using oDB As New zakatEntities
+        'Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
+        'set session variables:
+        Session("sUserId") = pUserId
+        Session("sIsApplicant") = True
+        Session("sUserFirstName") = oUser.firstName
+        'End Using
 
         'delete all saved languages
         If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = pUserId).Any) Then
@@ -1825,9 +1868,9 @@
         Next
 
         'check if an application has been started or not.  If so, load application data, if not create application data
-        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True).Any Then
+        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).Any Then
           'application already exists so save application
-          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True).First
+          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = pUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).First
           With oApplication
             .userId = pUserId
             .organizationId = drpOrganization.SelectedValue
@@ -1838,7 +1881,7 @@
             .isQualified1 = False
             .isQualified2 = False
             .IsDispersed = False
-            .approvalStatus = "Draft"
+            .applicationStatus = "Drafted"
             .totalValueCash = txtValueCash.Text
             .totalValueGold = txtValueGold.Text
             .totalValueSilver = txtValueSilver.Text
@@ -1858,16 +1901,22 @@
             .totalTemporaryCashAssistance = txtValueAssistance.Text
             .hasTemporaryCashAssistance = IIf(CInt(txtValueAssistance.Text) > 0, True, False)
             .sourceTemporaryCashAssistance = txtWhoAssisted.Text
-            .hasHealthInsurance = IIf(chkInsurance.SelectedValue <> "", chkInsurance.SelectedValue, "")
+            If (chkInsurance.SelectedValue <> "") Then
+              .hasHealthInsurance = IIf(chkInsurance.SelectedValue = "Yes", True, False)
+            End If
             .healthInsuranceProviderName = txtInsuranceProvider.Text
             .healthInsuranceProviderPolicyNumber = txtPolicyNumber.Text
             .medicareNumber = txtMedicare.Text
             .medicaidNumber = txtMedicaid.Text
             .employerName = txtEmployerName.Text
-            .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), txtEmploymentStart.Text, Nothing)
-            .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), txtEmploymentEnd.Text, Nothing)
+            If txtEmploymentStart.Text <> "" Then
+              .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), CDate(txtEmploymentStart.Text), Nothing)
+            End If
+            If txtEmploymentEnd.Text <> "" Then
+              .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
+            End If
             .positionTitle = txtPosition.Text
-            .employerPhone = txtEmployerPhone.Text
+            .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
             .totalMonthlyGrossSalary = txtMonthlySalary.Text
             .employerStreet = txtEmployerStreet.Text
             .employerCity = txtEmployerCity.Text
@@ -1893,7 +1942,7 @@
             .isQualified1 = False
             .isQualified2 = False
             .IsDispersed = False
-            .approvalStatus = "Draft"
+            .applicationStatus = "Drafted"
             .totalValueCash = txtValueCash.Text
             .totalValueGold = txtValueGold.Text
             .totalValueSilver = txtValueSilver.Text
@@ -1913,16 +1962,22 @@
             .totalTemporaryCashAssistance = txtValueAssistance.Text
             .hasTemporaryCashAssistance = IIf(CInt(txtValueAssistance.Text) > 0, True, False)
             .sourceTemporaryCashAssistance = txtWhoAssisted.Text
-            .hasHealthInsurance = IIf(chkInsurance.SelectedValue <> "", chkInsurance.SelectedValue, "")
+            If (chkInsurance.SelectedValue <> "") Then
+              .hasHealthInsurance = IIf(chkInsurance.SelectedValue = "Yes", True, False)
+            End If
             .healthInsuranceProviderName = txtInsuranceProvider.Text
             .healthInsuranceProviderPolicyNumber = txtPolicyNumber.Text
             .medicareNumber = txtMedicare.Text
             .medicaidNumber = txtMedicaid.Text
             .employerName = txtEmployerName.Text
-            .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), txtEmploymentStart.Text, Nothing)
-            .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), txtEmploymentEnd.Text, Nothing)
+            If txtEmploymentStart.Text <> "" Then
+              .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), CDate(txtEmploymentStart.Text), Nothing)
+            End If
+            If txtEmploymentEnd.Text <> "" Then
+              .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
+            End If
             .positionTitle = txtPosition.Text
-            .employerPhone = txtEmployerPhone.Text
+            .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
             .totalMonthlyGrossSalary = txtMonthlySalary.Text
             .employerStreet = txtEmployerStreet.Text
             .employerCity = txtEmployerCity.Text
@@ -1940,8 +1995,10 @@
         End If
       End Using
 
-      'refresh page
-      Response.Redirect("zakatform")
+      If isSave Then
+        'refresh page
+        Response.Redirect("zakatform")
+      End If
 
     Catch ex As Exception
       Response.Write(ex.Message)
