@@ -44,13 +44,14 @@
         <table style="width: 210px; white-space: nowrap">
           <tr>
             <td style="width: 50%">
-              <h5><b><asp:Label ID="lblUser" runat="server" Text="Select a User" ToolTip="Currently Modifying Roles for this Individual"></asp:Label></b></h5>&nbsp;<br />
+              <h5><b><asp:Label ID="lblUser" runat="server" Text="Select a User" ToolTip="Currently Modifying Roles for this Individual"></asp:Label></b></h5>
+              <h5><b><asp:Label ID="lblEmail" runat="server" Text="" ToolTip="Currently Modifying Roles for this Individual">&nbsp;</asp:Label></b></h5>&nbsp;
             </td>
           </tr>
           <tr>
             <td style="width: 100%" colspan="2">
               <b>Available Roles:</b><br />
-              <asp:ListBox ID="lstAvailable"  runat="server" AutoPostBack="False" Rows="7" Width="210px"></asp:ListBox>
+              <asp:ListBox ID="lstAvailable"  runat="server" AutoPostBack="False" Rows="6" Width="210px"></asp:ListBox>
             </td>
           </tr>
           <tr>
@@ -76,7 +77,7 @@
           <tr>
             <td style="width: 100%">
               <b>Assigned Roles:</b><br />
-              <asp:ListBox ID="lstAssigned"  runat="server" AutoPostBack="False" Rows="7" Width="210px"></asp:ListBox>
+              <asp:ListBox ID="lstAssigned"  runat="server" AutoPostBack="False" Rows="6" Width="210px"></asp:ListBox>
             </td>
           </tr>
         </table>

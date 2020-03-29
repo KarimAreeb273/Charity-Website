@@ -59,6 +59,15 @@ Partial Public Class UserRoles
     Protected WithEvents lblUser As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblEmail As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''lstAvailable control.
     '''</summary>
     '''<remarks>

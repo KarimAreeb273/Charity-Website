@@ -127,22 +127,24 @@
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
           Response.Redirect("/")
-        End If
-
-        'get the select user in the listbox and display their current roles
-        Dim vSelectedUserId As Int32
-        If Not lstUsers.SelectedIndex = -1 Then
-          vSelectedUserId = lstUsers.SelectedValue
-          lblUser.Text = lstUsers.SelectedItem.Text
         Else
-          Exit Sub
-        End If
+          'get the select user in the listbox and display their current roles
+          Dim oUser As USER = (From USER In oDB.USER Where USER.userId = lstUsers.SelectedValue).First
+          Dim vSelectedUserId As Int32
+          If Not lstUsers.SelectedIndex = -1 Then
+            vSelectedUserId = lstUsers.SelectedValue
+            lblUser.Text = lstUsers.SelectedItem.Text
+            lblEmail.Text = oUser.email
+          Else
+            Exit Sub
+          End If
 
-        'Dim oUserRole As List(Of USER_ROLE) =
-        lstAssigned.DataSource = (From USER_ROLE In oDB.USER_ROLE Join ROLE In oDB.ROLE On USER_ROLE.roleId Equals ROLE.roleId Where USER_ROLE.userId = vSelectedUserId Select New With {Key .roleId = ROLE.roleId, Key .name = ROLE.name}).ToList
-        lstAssigned.DataTextField = "name"
-        lstAssigned.DataValueField = "roleId"
-        lstAssigned.DataBind()
+          'Dim oUserRole As List(Of USER_ROLE) =
+          lstAssigned.DataSource = (From USER_ROLE In oDB.USER_ROLE Join ROLE In oDB.ROLE On USER_ROLE.roleId Equals ROLE.roleId Where USER_ROLE.userId = vSelectedUserId Select New With {Key .roleId = ROLE.roleId, Key .name = ROLE.name}).ToList
+          lstAssigned.DataTextField = "name"
+          lstAssigned.DataValueField = "roleId"
+          lstAssigned.DataBind()
+        End If
       End Using
 
     Catch ex As Exception
