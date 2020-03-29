@@ -19,7 +19,7 @@
           <Property Name="isQualified1" Type="bit" />
           <Property Name="isQualified2" Type="bit" />
           <Property Name="IsDispersed" Type="bit" />
-          <Property Name="approvalStatus" Type="varchar" MaxLength="15" />
+          <Property Name="applicationStatus" Type="varchar" MaxLength="15" />
           <Property Name="totalValueCash" Type="money" />
           <Property Name="totalValueGold" Type="money" />
           <Property Name="totalValueSilver" Type="money" />
@@ -56,6 +56,20 @@
           <Property Name="employerZip" Type="varchar" MaxLength="5" />
           <Property Name="employerPhone" Type="varchar" MaxLength="10" />
           <Property Name="personalNeedStatement" Type="varchar" MaxLength="1000" />
+          <Property Name="submittedOn" Type="datetime" />
+          <Property Name="submittedBy" Type="int" />
+          <Property Name="validatedOn" Type="datetime" />
+          <Property Name="validatedBy" Type="int" />
+          <Property Name="investigatedOn" Type="datetime" />
+          <Property Name="investigatedBy" Type="int" />
+          <Property Name="qualified1On" Type="datetime" />
+          <Property Name="qualified1By" Type="int" />
+          <Property Name="qualified2On" Type="datetime" />
+          <Property Name="qualified2By" Type="int" />
+          <Property Name="dispersedOn" Type="datetime" />
+          <Property Name="dispersedBy" Type="int" />
+          <Property Name="rejectedOn" Type="datetime" />
+          <Property Name="rejectedBy" Type="int" />
           <Property Name="createdOn" Type="datetime" />
           <Property Name="createdBy" Type="int" />
           <Property Name="updatedOn" Type="datetime" />
@@ -585,10 +599,10 @@
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
-          <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
-          <AssociationSet Name="FK_COMMENT_USER" Association="zakatModel.FK_COMMENT_USER">
+          <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
+          <AssociationSet Name="FK_DEPDENDENTS_USER" Association="zakatModel.FK_DEPDENDENTS_USER">
             <End Role="USER" EntitySet="USER" />
-            <End Role="REVIEW" EntitySet="REVIEW" />
+            <End Role="DEPENDENT" EntitySet="DEPENDENT" />
           </AssociationSet>
           <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
           <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
@@ -607,14 +621,14 @@
             <End Role="APPLICATION" EntitySet="APPLICATION" />
             <End Role="ARTIFACT" EntitySet="ARTIFACT" />
           </AssociationSet>
+          <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
           <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
             <End Role="APPLICATION" EntitySet="APPLICATION" />
             <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
-          <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
-          <AssociationSet Name="FK_DEPDENDENTS_USER" Association="zakatModel.FK_DEPDENDENTS_USER">
+          <AssociationSet Name="FK_COMMENT_USER" Association="zakatModel.FK_COMMENT_USER">
             <End Role="USER" EntitySet="USER" />
-            <End Role="DEPENDENT" EntitySet="DEPENDENT" />
+            <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CERTIFICATION_SKILL">
@@ -816,9 +830,9 @@
           <NavigationProperty Name="STATE1" Relationship="zakatModel.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
-          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_USER" FromRole="USER" ToRole="REVIEW" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="DEPENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPENDENT" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
+          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_USER" FromRole="USER" ToRole="REVIEW" />
         </EntityType>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
@@ -913,27 +927,28 @@
           <Property Name="artifact1" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
         </EntityType>
-        <EntityType Name="REVIEW">
+        <EntityType Name="DEPENDENT">
           <Key>
-            <PropertyRef Name="reviewId" />
+            <PropertyRef Name="dependentId" />
           </Key>
-          <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dependentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
-          <Property Name="applicationId" Type="Int32" />
-          <Property Name="reviewAction" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="reviewDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
         </EntityType>
-        <Association Name="FK_COMMENT_USER">
+        <Association Name="FK_DEPDENDENTS_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <End Type="zakatModel.DEPENDENT" Role="DEPENDENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
             </Principal>
-            <Dependent Role="REVIEW">
+            <Dependent Role="DEPENDENT">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
@@ -952,7 +967,7 @@
           <Property Name="isQualified1" Type="Boolean" />
           <Property Name="isQualified2" Type="Boolean" />
           <Property Name="IsDispersed" Type="Boolean" />
-          <Property Name="approvalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="applicationStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
@@ -989,6 +1004,20 @@
           <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
           <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="submittedOn" Type="DateTime" Precision="3" />
+          <Property Name="submittedBy" Type="Int32" />
+          <Property Name="validatedOn" Type="DateTime" Precision="3" />
+          <Property Name="validatedBy" Type="Int32" />
+          <Property Name="investigatedOn" Type="DateTime" Precision="3" />
+          <Property Name="investigatedBy" Type="Int32" />
+          <Property Name="qualified1On" Type="DateTime" Precision="3" />
+          <Property Name="qualified1By" Type="Int32" />
+          <Property Name="qualified2On" Type="DateTime" Precision="3" />
+          <Property Name="qualified2By" Type="Int32" />
+          <Property Name="dispersedOn" Type="DateTime" Precision="3" />
+          <Property Name="dispersedBy" Type="Int32" />
+          <Property Name="rejectedOn" Type="DateTime" Precision="3" />
+          <Property Name="rejectedBy" Type="Int32" />
           <Property Name="createdOn" Type="DateTime" Precision="3" />
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
@@ -1047,6 +1076,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="REVIEW">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" />
+          <Property Name="reviewAction" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="reviewDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
+        </EntityType>
         <Association Name="FK_COMMENT_APPLICATION">
           <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
           <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
@@ -1059,28 +1101,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="DEPENDENT">
-          <Key>
-            <PropertyRef Name="dependentId" />
-          </Key>
-          <Property Name="dependentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="dob" Type="DateTime" Precision="3" />
-          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
-        </EntityType>
-        <Association Name="FK_DEPDENDENTS_USER">
+        <Association Name="FK_COMMENT_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.DEPENDENT" Role="DEPENDENT" Multiplicity="*" />
+          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
             </Principal>
-            <Dependent Role="DEPENDENT">
+            <Dependent Role="REVIEW">
               <PropertyRef Name="userId" />
             </Dependent>
           </ReferentialConstraint>
@@ -1238,15 +1266,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="REVIEW">
-            <EntityTypeMapping TypeName="zakatModel.REVIEW">
-              <MappingFragment StoreEntitySet="REVIEW">
-                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
-                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
-                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+          <EntitySetMapping Name="DEPENDENT">
+            <EntityTypeMapping TypeName="zakatModel.DEPENDENT">
+              <MappingFragment StoreEntitySet="DEPENDENT">
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+                <ScalarProperty Name="dependentId" ColumnName="dependentId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1257,6 +1287,20 @@
                 <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
                 <ScalarProperty Name="createdBy" ColumnName="createdBy" />
                 <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="rejectedBy" ColumnName="rejectedBy" />
+                <ScalarProperty Name="rejectedOn" ColumnName="rejectedOn" />
+                <ScalarProperty Name="dispersedBy" ColumnName="dispersedBy" />
+                <ScalarProperty Name="dispersedOn" ColumnName="dispersedOn" />
+                <ScalarProperty Name="qualified2By" ColumnName="qualified2By" />
+                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
+                <ScalarProperty Name="qualified1By" ColumnName="qualified1By" />
+                <ScalarProperty Name="qualified1On" ColumnName="qualified1On" />
+                <ScalarProperty Name="investigatedBy" ColumnName="investigatedBy" />
+                <ScalarProperty Name="investigatedOn" ColumnName="investigatedOn" />
+                <ScalarProperty Name="validatedBy" ColumnName="validatedBy" />
+                <ScalarProperty Name="validatedOn" ColumnName="validatedOn" />
+                <ScalarProperty Name="submittedBy" ColumnName="submittedBy" />
+                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
                 <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
                 <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
                 <ScalarProperty Name="employerZip" ColumnName="employerZip" />
@@ -1293,7 +1337,7 @@
                 <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
                 <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
                 <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
-                <ScalarProperty Name="approvalStatus" ColumnName="approvalStatus" />
+                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
                 <ScalarProperty Name="IsDispersed" ColumnName="IsDispersed" />
                 <ScalarProperty Name="isQualified2" ColumnName="isQualified2" />
                 <ScalarProperty Name="isQualified1" ColumnName="isQualified1" />
@@ -1307,17 +1351,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DEPENDENT">
-            <EntityTypeMapping TypeName="zakatModel.DEPENDENT">
-              <MappingFragment StoreEntitySet="DEPENDENT">
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="dob" ColumnName="dob" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <EntitySetMapping Name="REVIEW">
+            <EntityTypeMapping TypeName="zakatModel.REVIEW">
+              <MappingFragment StoreEntitySet="REVIEW">
+                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
+                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
+                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="dependentId" ColumnName="dependentId" />
+                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

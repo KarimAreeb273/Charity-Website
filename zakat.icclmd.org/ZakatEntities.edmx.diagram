@@ -27,16 +27,16 @@
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="2.5" PointY="19" />
-        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="15.75" PointY="14.625" />
-        <AssociationConnector Association="zakatModel.FK_COMMENT_USER" />
-        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="13.5" PointY="10" />
+        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="13.5" PointY="6.5" />
+        <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
+        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="13.5" PointY="10.625" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
+        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="15.75" PointY="16.625" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_APPLICATION" />
-        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="13.5" PointY="6.5" />
-        <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
+        <AssociationConnector Association="zakatModel.FK_COMMENT_USER" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

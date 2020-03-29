@@ -21,7 +21,7 @@ Partial Public Class APPLICATION
     Public Property isQualified1 As Nullable(Of Boolean)
     Public Property isQualified2 As Nullable(Of Boolean)
     Public Property IsDispersed As Nullable(Of Boolean)
-    Public Property approvalStatus As String
+    Public Property applicationStatus As String
     Public Property totalValueCash As Nullable(Of Decimal)
     Public Property totalValueGold As Nullable(Of Decimal)
     Public Property totalValueSilver As Nullable(Of Decimal)
@@ -58,6 +58,20 @@ Partial Public Class APPLICATION
     Public Property employerZip As String
     Public Property employerPhone As String
     Public Property personalNeedStatement As String
+    Public Property submittedOn As Nullable(Of Date)
+    Public Property submittedBy As Nullable(Of Integer)
+    Public Property validatedOn As Nullable(Of Date)
+    Public Property validatedBy As Nullable(Of Integer)
+    Public Property investigatedOn As Nullable(Of Date)
+    Public Property investigatedBy As Nullable(Of Integer)
+    Public Property qualified1On As Nullable(Of Date)
+    Public Property qualified1By As Nullable(Of Integer)
+    Public Property qualified2On As Nullable(Of Date)
+    Public Property qualified2By As Nullable(Of Integer)
+    Public Property dispersedOn As Nullable(Of Date)
+    Public Property dispersedBy As Nullable(Of Integer)
+    Public Property rejectedOn As Nullable(Of Date)
+    Public Property rejectedBy As Nullable(Of Integer)
     Public Property createdOn As Nullable(Of Date)
     Public Property createdBy As Nullable(Of Integer)
     Public Property updatedOn As Nullable(Of Date)
