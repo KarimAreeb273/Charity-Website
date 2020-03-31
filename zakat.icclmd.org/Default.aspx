@@ -85,7 +85,7 @@
                   <a href="inbox">
                     <i class='fas fa-file-signature' style='color:darkgreen; font-size:100px'></i>
                     <br />
-                    <h3 style='color:black; line-height: 1.5'>Approve Zakat<br />Applications</h3>
+                    <h3 style='color:black; line-height: 1.5'>Review Zakat<br />Applications</h3>
                   </a>
                 </td>
               </tr>
