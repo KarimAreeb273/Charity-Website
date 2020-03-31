@@ -27,9 +27,9 @@
                   <HeaderTemplate>
                     <tr style="height: 30px; border: solid solid solid solid">
                       <th style="text-align: left; width: 30%">Name</th>
-                      <th style="text-align: left; width: 10%">Email</th>
                       <th style="text-align: left; width: 10%">Phone</th>
-                      <th style="text-align: left; width: 40%">Website</th>
+                      <th style="text-align: left; width: 20%">Email</th>                      
+                      <th style="text-align: left; width: 30%">Website</th>
                       <th style="text-align: center; width: 5%;">Edit</th> 
                       <th style="text-align: center; width: 5%;">Remove</th> 
                     </tr>
@@ -40,11 +40,11 @@
                         <asp:Label ID="lblStatusName" runat="server" ToolTip='<%# DataBinder.Eval(Container.DataItem, "name")%>'><%# DataBinder.Eval(Container.DataItem, "name")%></asp:Label>
                         <%--<asp:LinkButton ID="btnEdit1" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "name")%>'><%# DataBinder.Eval(Container.DataItem, "name")%></span></asp:LinkButton>--%>
                       </td>
-                      <td style="text-align: left; vertical-align: middle">
-                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
-                      </td>
                       <td style="vertical-align: middle">
                         <%# getFormattedPhone(DataBinder.Eval(Container.DataItem, "phone"))%>
+                      </td>
+                      <td style="text-align: left; vertical-align: middle">
+                        <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
                       </td>
                       <td style="text-align: left; vertical-align: middle">
                         <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "website")%></asp:HyperLink>
@@ -95,10 +95,9 @@
               <div class="form-group">
                 <asp:Label runat="server" AssociatedControlID="txtPhone" CssClass="col-lg-2 control-label" ToolTip="Organization Phone Number" Style="white-space: nowrap">Phone #:</asp:Label>
                 <div class="col-lg-10">
-                  <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" ToolTip="Organization Phone Number" MaxLength="12" placeholder="555-555-1234" TabIndex="3" />
-                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number." Display="Dynamic" ValidationGroup="Head"></asp:RegularExpressionValidator>
+                  <asp:TextBox runat="server" ID="txtPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="3" AutoPostBack="false" ValidationGroup="Submit" />
+                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Head"></asp:RegularExpressionValidator>
                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ErrorMessage="The organization phone # is required." Display="Static" ValidationGroup="Head" />
-                  <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="txtPhone" Mask="(999) 999-9999" MaskType="None" ClearMaskOnLostFocus="False" />
                 </div>
               </div>
               <div class="form-group">

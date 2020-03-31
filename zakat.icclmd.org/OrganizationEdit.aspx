@@ -14,7 +14,7 @@
           <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtOrganizationName" CssClass="col-lg-2 control-label" ToolTip="Organization Name" Style="white-space: nowrap">Name:</asp:Label>
             <div class="col-lg-10">
-              <asp:TextBox runat="server" ID="txtOrganizationName" CssClass="form-control" ToolTip="Organization Name" MaxLength="30" TabIndex="1" />
+              <asp:TextBox runat="server" ID="txtOrganizationName" CssClass="form-control" ToolTip="Organization Name" MaxLength="100" TabIndex="1" />
               <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOrganizationName" CssClass="text-danger" ErrorMessage="The organization name is required." Display="Static" ValidationGroup="Head" />
             </div>
           </div>
@@ -29,10 +29,9 @@
           <div class="form-group">
             <asp:Label runat="server" AssociatedControlID="txtPhone" CssClass="col-lg-2 control-label" ToolTip="Organization Phone Number" Style="white-space: nowrap">Phone #:</asp:Label>
             <div class="col-lg-10">
-              <asp:TextBox runat="server" ID="txtPhone" CssClass="form-control" ToolTip="Organization Phone Number" MaxLength="12" placeholder="555-555-1234" TabIndex="3" />
-              <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number." Display="Dynamic" ValidationGroup="Head"></asp:RegularExpressionValidator>
+              <asp:TextBox runat="server" ID="txtPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="3" AutoPostBack="False" ValidationGroup="Submit" />
+              <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Head"></asp:RegularExpressionValidator>
               <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPhone" CssClass="text-danger" ErrorMessage="The organization phone # is required." Display="Static" ValidationGroup="Head" />
-              <ajaxToolkit:MaskedEditExtender ID="MaskedEditExtender1" runat="server" TargetControlID="txtPhone" Mask="(999) 999-9999" MaskType="None" ClearMaskOnLostFocus="False" />
             </div>
           </div>
           <div class="form-group">
@@ -78,7 +77,8 @@
           <div class="form-group">
             <div class="col-lg-2"></div>
             <div class="col-lg-10">
-              <asp:Button ID="btnSaveOrganization" runat="server" Text="Save Organization" CssClass="btn btn-success" TabIndex="9" Width="150" ValidationGroup="Head" />
+              <asp:HyperLink ID="btnCancel" runat="server" NavigateUrl="organizations" CssClass="btn btn-default" TabIndex="9" Width="140">Cancel</asp:HyperLink>
+              <asp:Button ID="btnSaveOrganization" runat="server" Text="Save Organization" CssClass="btn btn-success" TabIndex="10" Width="140" ValidationGroup="Head" />
             </div>
           </div>
         </div>

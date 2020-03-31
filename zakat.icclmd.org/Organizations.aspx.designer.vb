@@ -104,15 +104,6 @@ Partial Public Class Organizations
     Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MaskedEditExtender1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents MaskedEditExtender1 As Global.AjaxControlToolkit.MaskedEditExtender
-    
-    '''<summary>
     '''txtWebsite control.
     '''</summary>
     '''<remarks>
