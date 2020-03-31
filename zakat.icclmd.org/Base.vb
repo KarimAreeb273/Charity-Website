@@ -95,22 +95,22 @@ Public Class Base
     End Try
   End Function
 
-  Public Shared Function GetFormattedNumber(pId As Int32) As String
+  Public Shared Function getFormattedNumber(pId As Int32) As String
     Try
       Dim vId As String = pId.ToString
       Select Case vId.Length
         Case 1
-          GetFormattedNumber = "0000" & vId
+          getFormattedNumber = "0000" & vId
         Case 2
-          GetFormattedNumber = "000" & vId
+          getFormattedNumber = "000" & vId
         Case 3
-          GetFormattedNumber = "00" & vId
+          getFormattedNumber = "00" & vId
         Case 4
-          GetFormattedNumber = "0" & vId
+          getFormattedNumber = "0" & vId
         Case 5
-          GetFormattedNumber = vId
+          getFormattedNumber = vId
         Case Else
-          GetFormattedNumber = vId
+          getFormattedNumber = vId
       End Select
     Catch ex As Exception
       Return Nothing
@@ -134,7 +134,7 @@ Public Class Base
     getPassword = sb.ToString
   End Function
 
-  Public Shared Function createUser(pRole As enumRole, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "") As Int32
+  Public Shared Function createUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "") As Int32
     'create the user
     Dim oUser As New USER
     Dim vPassword As String
@@ -172,6 +172,7 @@ Public Class Base
       With oUserRole
         .userId = vUserId
         .roleId = pRole
+        .organizationId = pOrganizationId
       End With
       ' Add to Memory
       oDB.USER_ROLE.Add(oUserRole)

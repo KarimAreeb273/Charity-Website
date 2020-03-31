@@ -10,48 +10,60 @@
     </div>
     <div class="row">
       <div class="col-lg-6">
-          <div class="input-group">
-            <table style="width: 100%">
-              <tr>
-                <td style="width: 100%">
-                  <asp:TextBox ID="txtSearchUser" runat="server" class="form-control" placeholder="Filter/Search Users" AutoPostBack="True"></asp:TextBox>
-                </td>
-                <td style="width: 58px; border: solid; border-color:darkgray; border-width:1px">
-                  <asp:LinkButton ID="btnSearch" runat="server" ToolTip="Search">
-                    <i class="glyphicon glyphicon-search" style="color: darkgreen; font-size:20px"></i>
-                  </asp:LinkButton>
-                </td>
-                <td>
-                  &nbsp;
-                </td>
-                <td style="width: 58px; border: solid; border-color:darkgray; border-width:1px">
-                  <asp:LinkButton ID="btnClear" runat="server" ToolTip="Clear">
-                    <i class="glyphicon glyphicon-remove" style="color: darkgreen; font-size:20px"></i>
-                  </asp:LinkButton>
-                </td>
-              </tr>
-            </table>
-          </div>
-          <br />
-          <div class="form-group">
-            <asp:Label runat="server" AssociatedControlID="lstUsers" CssClass="col-lg-2 control-label" ToolTip="System Users" Style="white-space: nowrap">Users:</asp:Label>
-            <div class="col-lg-10">
-              <asp:ListBox ID="lstUsers"  runat="server" AutoPostBack="True" Rows="21" Width="210px"></asp:ListBox>
-            </div>
-          </div>
+        <div class="input-group">
+          <table style="width: 100%">
+            <tr>
+              <td style="text-align: right">
+                <b>1. Select Organization:</b>
+              </td>
+              <td>
+                &nbsp;
+              </td>
+              <td style="text-align: left">
+                <asp:DropDownList ID="drpOrganization" runat="server" ToolTip="Organization" CssClass="form-control" style="max-width: 100%; padding-left:0px; padding-right:0px" TabIndex="1" Width="300px" AutoPostBack="True"></asp:DropDownList>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br /><br />
+        <div class="input-group">
+          <table style="width: 100%">
+            <tr>
+              <td style="width: 100%">
+                <asp:TextBox ID="txtSearchUser" runat="server" class="form-control" style="max-width: 100%" Width="400px" placeholder="Filter/Search Users" AutoPostBack="True" TabIndex="2" Enabled="False"></asp:TextBox>&nbsp;<asp:LinkButton ID="btnSearch" runat="server" ToolTip="Search" style="text-decoration:none" TabIndex="3" Enabled="False">
+                  <i class="glyphicon glyphicon-search" style="color: darkgreen; font-size:20px;"></i>
+                </asp:LinkButton>&nbsp;<asp:LinkButton ID="btnClear" runat="server" ToolTip="Clear" style="text-decoration:none" TabIndex="4" Enabled="False">
+                  <i class="glyphicon glyphicon-remove" style="color: darkgreen; font-size:20px"></i>
+                </asp:LinkButton>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <br />
+        <div class="form-group">
+          <table style="max-width: 100%; width:100%; white-space: nowrap" border="0">
+            <tr>
+              <td style="width: 100%">
+                <b>2. Select User:</b><br />
+                <asp:ListBox ID="lstUsers" CssClass="form-control" style="max-width: 100%" runat="server" AutoPostBack="True" Rows="15" Width="450px" TabIndex="5" Enabled="False"></asp:ListBox>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="col-lg-6">
         <table style="width: 210px; white-space: nowrap">
           <tr>
             <td style="width: 50%">
-              <h5><b><asp:Label ID="lblUser" runat="server" Text="Select a User" ToolTip="Currently Modifying Roles for this Individual"></asp:Label></b></h5>
-              <h5><b><asp:Label ID="lblEmail" runat="server" Text="" ToolTip="Currently Modifying Roles for this Individual">&nbsp;</asp:Label></b></h5>&nbsp;
+              <h5><b>3. Assign User Roles:</b></h5>
+              <h5><asp:Label ID="lblUser" runat="server" Text="Select a User" ToolTip="Currently Modifying Roles for this Individual"></asp:Label><br />
+              <asp:Label ID="lblEmail" runat="server" Text="" ToolTip="Currently Modifying Roles for this Individual">&nbsp;</asp:Label></h5>&nbsp;
             </td>
           </tr>
           <tr>
             <td style="width: 100%" colspan="2">
               <b>Available Roles:</b><br />
-              <asp:ListBox ID="lstAvailable"  runat="server" AutoPostBack="False" Rows="6" Width="210px"></asp:ListBox>
+              <asp:ListBox ID="lstAvailable"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="6" Width="210px" TabIndex="6" Enabled="False"></asp:ListBox>
             </td>
           </tr>
           <tr>
@@ -60,12 +72,12 @@
               <table style="width: 100%">
                 <tr>
                   <td style="width: 50%; text-align: left">
-                    <asp:LinkButton ID="btnAddRole" runat="server" ToolTip="Add the Role">
+                    <asp:LinkButton ID="btnAddRole" runat="server" ToolTip="Add the Role" TabIndex="7" Enabled="False">
                       <span class="fas fa-arrow-alt-circle-down" style="color: darkgreen; font-size: 30px" ></span>
                     </asp:LinkButton>
                   </td>
                   <td style="width: 50%; text-align: right">
-                    <asp:LinkButton ID="btnDeleteRole" runat="server" ToolTip="Remove the Role">
+                    <asp:LinkButton ID="btnDeleteRole" runat="server" ToolTip="Remove the Role" TabIndex="8" Enabled="False">
                       <span class="fas fa-arrow-alt-circle-up" style="color: darkgreen; font-size: 30px" ></span>
                     </asp:LinkButton>
                   </td>
@@ -77,7 +89,7 @@
           <tr>
             <td style="width: 100%">
               <b>Assigned Roles:</b><br />
-              <asp:ListBox ID="lstAssigned"  runat="server" AutoPostBack="False" Rows="6" Width="210px"></asp:ListBox>
+              <asp:ListBox ID="lstAssigned"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="5" Width="210px" TabIndex="9" Enabled="False"></asp:ListBox>
             </td>
           </tr>
         </table>
