@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class Application1
     
     '''<summary>
+    '''lblReviewsCountBadge control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReviewsCountBadge As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtOrganizationId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtOrganizationId As Global.System.Web.UI.WebControls.HiddenField
+    
+    '''<summary>
     '''txtOrganization control.
     '''</summary>
     '''<remarks>
@@ -21,6 +39,15 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtOrganization As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''btnEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEmail As Global.System.Web.UI.WebControls.HyperLink
     
     '''<summary>
     '''txtEmail control.
@@ -293,13 +320,13 @@ Partial Public Class Application1
     Protected WithEvents txtLanguages As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''txtTotalApplications control.
+    '''txtApplicationsSubmitted control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtTotalApplications As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtApplicationsSubmitted As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtInsuranceProvider control.
@@ -624,6 +651,15 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtReviewComments As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''valQualifier control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valQualifier As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''RequiredFieldValidator1 control.

@@ -960,7 +960,7 @@
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user
-          vUserId = Base.createUser(Base.enumRole.Appliciant, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
         Else
           'show validation and exit sub
           valUserRequiredDep.IsValid = False
@@ -1546,7 +1546,7 @@
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, txtEmail.Text, txtFirstName.Text, txtLastName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text)
         Else
           'show validation and exit sub
           valUserRequiredRef.IsValid = False
@@ -1610,7 +1610,7 @@
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -1641,7 +1641,7 @@
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -1651,8 +1651,6 @@
 
       'update all the values stored in the form by calling a common sub routine
       SaveZakatForm(vUserId, False)
-
-
 
       'set the appropriate status for submission: isDrafted=True, isSubmitted=True, approvalStatus=Submitted
       Using oDB As New zakatEntities
@@ -1667,7 +1665,8 @@
             .isInvestigated = False
             .isQualified1 = False
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
+            .isRejected = False
             .applicationStatus = "Submitted"
             .submittedOn = Date.Now
             .submittedBy = vUserId
@@ -1682,9 +1681,12 @@
       End Using
 
       'email the user about application submission
+      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
       Dim vTo As String = txtEmail.Text
-      Dim vSubject As String = "Online Zakat - Application Submitted"
+      'Dim vSubject As String = "Online Zakat - Application Submitted"
+      Dim vSubject As String = "Online Zakat - Application #: " & vApplicationIdFormatted & " Submitted"
       Dim vMsgText As New StringBuilder
+      Dim vSend As Boolean
 
       vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
       vMsgText.Append("Assalaamu Alaikum " & Session("sUserFirstName") & ",<br /><br />")
@@ -1702,22 +1704,21 @@
       '*******************
       'uncomment next line
       '*******************
-      'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+      'vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
       'email the validators that an application requires reviewing
       Using oDB As New zakatEntities
-        If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator).Any Then
-          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator).ToList
+        If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator And USER_ROLE.organizationId = CInt(drpOrganization.SelectedValue)).Any Then
+          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Validator And USER_ROLE.organizationId = CInt(drpOrganization.SelectedValue)).ToList
           vTo = ""
           For Each item In oUserRoles
             vTo = IIf(vTo = "", item.USER.email, vTo + "," + item.USER.email)
           Next
 
-          vSubject = "Online Zakat - Application Submitted"
           vMsgText.Clear()
           vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
           vMsgText.Append("Assalaamu Alaikum Validator(s),<br /><br />")
-          vMsgText.Append("A new Zakat Application has been submitted and is awaiting validation. Please login and perform the necessary validation by clicking or copying/pasting the inbox link below:<br /><br />")
+          vMsgText.Append("Zakat Application #: " & vApplicationIdFormatted & " has been received. The application was just submitted and now requires validation. Please login and perform the necessary action by clicking or copying/pasting the inbox link below:<br /><br />")
           vMsgText.Append("<b>Inbox Link: </b> <a target='_blank' href='https://zakat.icclmd.org/inbox'>https://zakat.icclmd.org/inbox</a><br /><br />")
           vMsgText.Append("If you have questions regarding the action you need to take, please don’t hesitate to contact the ICCL Zakat Administrator using the information below.<br /><br />")
           vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -1731,7 +1732,7 @@
           '*******************
           'uncomment next line
           '*******************
-          'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          'vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
 
         'add a generic review action on behalf of the user
@@ -1747,7 +1748,6 @@
         ' Add to Memory
         oDB.REVIEW.Add(oReview)
         oDB.SaveChanges()
-
       End Using
 
       'redirect to the dashboard

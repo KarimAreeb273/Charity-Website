@@ -1,41 +1,30 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Application.aspx.vb" Inherits="zakat.icclmd.org.Application1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+  <div class="container">
     <h4><span style="font-size:20px; color:darkgreen" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>Online Zakat Application</b></h4>
     <br />
     <div class="well well-sm">
       <h5><b>Review the Online Zakat Application and Take Action:</b></h5>
     </div>
-    <div class="container">
-      
-    </div>
 
     <ul class="nav nav-tabs">
-      <li class="active"><a data-toggle="tab" href="#tabAppData">Application Data</a></li>
-      <li><a data-toggle="tab" href="#tabAppHist">Application History</a></li>
+      <li class="active">
+        <a data-toggle="tab" href="#tabAppData">
+          <b>Application Data</b>
+        </a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#tabAppHist">
+          <b>Application History</b>&nbsp;
+          <span class="label label-primary"><asp:Label ID="lblReviewsCountBadge" runat="server" Text="0"></asp:Label></span>
+        </a>
+      </li>
     </ul>
     
     <div class="tab-content">
       <div id="tabAppData" class="tab-pane fade in active">
         <br />
         <div class="row">
-          <%--<div class="col-lg-12">
-            <table style="width: 100%">
-              <tr>
-                <td style="width: 25%">
-                  <asp:Label runat="server" AssociatedControlID="txtOrganization" CssClass="control-label" Style="white-space: nowrap">Submitted To:</asp:Label>
-                </td>
-                <td style="width: 75%; text-align: left">
-                  <asp:Label runat="server" ID="txtOrganization" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
-                </td>
-              </tr>
-            </table>          
-          </div>--%>
-          <%--<div class="col-lg-11">
-            <div class="well well-sm">
-              <h5><b>Application Information:</b></h5>
-            </div>
-          </div>--%>
           <div class="col-lg-6">
             <table style="width: 100%">
               <tr>
@@ -43,6 +32,7 @@
                   <asp:Label runat="server" AssociatedControlID="txtOrganization" CssClass="control-label" Style="white-space: nowrap">Submitted To:</asp:Label>
                 </td>
                 <td>
+                  <asp:HiddenField ID="txtOrganizationId" runat="server" />
                   <asp:Label runat="server" ID="txtOrganization" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
                 </td>
               </tr>
@@ -51,7 +41,8 @@
                   <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="control-label" Style="white-space: nowrap">Email:</asp:Label>
                 </td>
                 <td>
-                  <asp:Label runat="server" ID="txtEmail" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                  <asp:HyperLink ID="btnEmail" runat="server" Target="_blank"></asp:HyperLink>
+                  <asp:Label runat="server" ID="txtEmail" CssClass="control-label" Visible="false"></asp:Label>
                 </td>
               </tr>
               <tr>
@@ -292,10 +283,10 @@
             <table style="width: 100%">
               <tr>
                 <td>
-                  <asp:Label runat="server" AssociatedControlID="txtTotalApplications" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
                 </td>
                 <td>
-                  <asp:Label runat="server" ID="txtTotalApplications" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                  <asp:Label runat="server" ID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
                 </td>
               </tr>
               <tr>
@@ -610,7 +601,7 @@
               <tr style="height: 30px; border: solid solid solid solid">
                 <th style="text-align: left; width: 15%">Name</th>
                 <th style="text-align: left; width: 10%">Action</th>
-                <th style="text-align: left; width: 15%;">Date</th>
+                <th style="text-align: left; width: 15%;">Date of Action</th>
                 <th style="text-align: left; width: 60%">Comment</th>
               </tr>
             </HeaderTemplate>
@@ -619,7 +610,7 @@
                 <td style="text-align: left; vertical-align: top">
                   <%# DataBinder.Eval(Container.DataItem, "USER.firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.lastName")%>
                 </td>
-                <td style="text-align: left; vertical-align: top">
+                <td style="text-align: left; vertical-align: top; white-space: nowrap">
                   <%# DataBinder.Eval(Container.DataItem, "reviewAction")%>
                 </td>
                 <td style="text-align: left; vertical-align: top">
@@ -648,7 +639,8 @@
               <tr>
                 <td colspan="4" style="width:100%; text-align:left">
                   <asp:TextBox ID="txtReviewComments" CssClass="form-control" style="max-width:100%" runat="server" TextMode="MultiLine" Rows="4" Width="100%" MaxLength="1000" TabIndex="1"></asp:TextBox>
-                  <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="text-danger" runat="server" ErrorMessage="The review comments are required." ControlToValidate="txtReviewComments" ValidationGroup="Review"></asp:RequiredFieldValidator>
+                  <asp:CustomValidator ID="valQualifier" runat="server" CssClass="text-danger" ControlToValidate="txtReviewComments" ErrorMessage="You cannot be the intial and final qualifier." Display="Dynamic" ValidationGroup="Review" />
+                  <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="text-danger" runat="server" Display="Static" ErrorMessage="The review comments are required." ControlToValidate="txtReviewComments" ValidationGroup="Review"></asp:RequiredFieldValidator>
                 </td>
               </tr>
             </table>
@@ -696,7 +688,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified1" runat="server" Text="Qualified First" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified1" runat="server" Text="Qualified (Initial)" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
@@ -714,7 +706,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified2" runat="server" Text="Qualified Second" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified2" runat="server" Text="Qualified (Final)" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
