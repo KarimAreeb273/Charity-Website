@@ -57,8 +57,8 @@ Partial Public Class USER
     Public Overridable Property STATE As STATE
     Public Overridable Property STATE1 As STATE
     Public Overridable Property USER_LANGUAGE As ICollection(Of USER_LANGUAGE) = New HashSet(Of USER_LANGUAGE)
-    Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
     Public Overridable Property DEPENDENT As ICollection(Of DEPENDENT) = New HashSet(Of DEPENDENT)
+    Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
 

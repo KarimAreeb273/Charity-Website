@@ -20,7 +20,8 @@ Partial Public Class APPLICATION
     Public Property isInvestigated As Nullable(Of Boolean)
     Public Property isQualified1 As Nullable(Of Boolean)
     Public Property isQualified2 As Nullable(Of Boolean)
-    Public Property IsDispersed As Nullable(Of Boolean)
+    Public Property isDispersed As Nullable(Of Boolean)
+    Public Property isRejected As Nullable(Of Boolean)
     Public Property applicationStatus As String
     Public Property totalValueCash As Nullable(Of Decimal)
     Public Property totalValueGold As Nullable(Of Decimal)
