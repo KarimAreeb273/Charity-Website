@@ -17,20 +17,22 @@
         If drpWorkflow.SelectedValue = "All" Then
           oApplications = (From APPLICATION In oDB.APPLICATION).ToList
         Else
-          If drpWorkflow.SelectedValue = "Drafted" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isDrafted = True).ToList
+          If drpWorkflow.SelectedValue = "Rejected" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Rejected").ToList
+          ElseIf drpWorkflow.SelectedValue = "Drafted" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Drafted").ToList
           ElseIf drpWorkflow.SelectedValue = "Submitted" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isSubmitted = True).ToList
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Submitted").ToList
           ElseIf drpWorkflow.SelectedValue = "Validated" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isValidated = True).ToList
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Validated").ToList
           ElseIf drpWorkflow.SelectedValue = "Investigated" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isInvestigated = True).ToList
-          ElseIf drpWorkflow.SelectedValue = "Qualified 1" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isQualified1 = True).ToList
-          ElseIf drpWorkflow.SelectedValue = "Qualified 2" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.isQualified2 = True).ToList
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Investigated").ToList
+          ElseIf drpWorkflow.SelectedValue = "Qualified (Initial)" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Initial)").ToList
+          ElseIf drpWorkflow.SelectedValue = "Qualified (Final)" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
           ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.IsDispersed = True).ToList
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Dispersed").ToList
           Else
             oApplications = (From APPLICATION In oDB.APPLICATION).ToList
           End If
