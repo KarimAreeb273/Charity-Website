@@ -9,12 +9,15 @@ CREATE TABLE [dbo].[APPLICATION](
 	[applicationId] [int] IDENTITY(1,1) NOT NULL,
 	[userId] [int] NOT NULL,
 	[organizationId] [int] NOT NULL,
-	[isSaved] [bit] NULL,
+	[isDrafted] [bit] NULL,
 	[isSubmitted] [bit] NULL,
 	[isValidated] [bit] NULL,
 	[isInvestigated] [bit] NULL,
-	[isQualified] [bit] NULL,
-	[approvalStatus] [varchar](15) NULL,
+	[isQualified1] [bit] NULL,
+	[isQualified2] [bit] NULL,
+	[isDispersed] [bit] NULL,
+	[isRejected] [bit] NULL,
+	[applicationStatus] [varchar](20) NULL,
 	[totalValueCash] [money] NULL,
 	[totalValueGold] [money] NULL,
 	[totalValueSilver] [money] NULL,
@@ -51,14 +54,46 @@ CREATE TABLE [dbo].[APPLICATION](
 	[employerZip] [varchar](5) NULL,
 	[employerPhone] [varchar](10) NULL,
 	[personalNeedStatement] [varchar](1000) NULL,
-	[submittedDate] [datetime] NULL,
+	[submittedOn] [datetime] NULL,
+	[submittedBy] [int] NULL,
+	[validatedOn] [datetime] NULL,
+	[validatedBy] [int] NULL,
+	[investigatedOn] [datetime] NULL,
+	[investigatedBy] [int] NULL,
+	[qualified1On] [datetime] NULL,
+	[qualified1By] [int] NULL,
+	[qualified2On] [datetime] NULL,
+	[qualified2By] [int] NULL,
+	[dispersedOn] [datetime] NULL,
+	[dispersedBy] [int] NULL,
+	[rejectedOn] [datetime] NULL,
+	[rejectedBy] [int] NULL,
+	[createdOn] [datetime] NULL,
+	[createdBy] [int] NULL,
+	[updatedOn] [datetime] NULL,
+	[updatedBy] [int] NULL,
  CONSTRAINT [PK_APPLICATION] PRIMARY KEY CLUSTERED 
 (
 	[applicationId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 3/15/2020 9:44:49 PM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/2/2020 5:29:38 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ARTIFACT](
+	[artifactId] [int] IDENTITY(1,1) NOT NULL,
+	[applicationId] [int] NULL,
+	[artifact] [varbinary](max) NULL,
+ CONSTRAINT [PK_ARTIFACT] PRIMARY KEY CLUSTERED 
+(
+	[artifactId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -73,12 +108,12 @@ CREATE TABLE [dbo].[CERTIFICATION_SKILL](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DEPDENDENT]    Script Date: 3/15/2020 9:44:49 PM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[DEPDENDENT](
+CREATE TABLE [dbo].[DEPENDENT](
 	[dependentId] [int] IDENTITY(1,1) NOT NULL,
 	[userId] [int] NULL,
 	[firstName] [varchar](30) NULL,
@@ -93,7 +128,7 @@ CREATE TABLE [dbo].[DEPDENDENT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +142,7 @@ CREATE TABLE [dbo].[LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -121,7 +156,7 @@ CREATE TABLE [dbo].[NATIONALITY](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -142,7 +177,7 @@ CREATE TABLE [dbo].[ORGANIZATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -166,7 +201,25 @@ CREATE TABLE [dbo].[REFERENCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/2/2020 5:29:38 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[REVIEW](
+	[reviewId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[applicationId] [int] NULL,
+	[reviewAction] [varchar](20) NULL,
+	[reviewComment] [varchar](1000) NULL,
+	[reviewDate] [datetime] NULL,
+ CONSTRAINT [PK_COMMENT] PRIMARY KEY CLUSTERED 
+(
+	[reviewId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ROLE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -181,7 +234,7 @@ CREATE TABLE [dbo].[ROLE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -195,7 +248,7 @@ CREATE TABLE [dbo].[STATE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -224,6 +277,8 @@ CREATE TABLE [dbo].[USER](
 	[husbandFirstName] [varchar](30) NULL,
 	[husbandMiddleName] [varchar](30) NULL,
 	[husbandLastName] [varchar](30) NULL,
+	[husbandPhone] [varchar](10) NULL,
+	[husbandEmail] [varchar](60) NULL,
 	[husbandHasAppliedForZakat] [varchar](10) NULL,
 	[husbandZakatExplanation] [varchar](4000) NULL,
 	[highestEducationCompleted] [varchar](50) NULL,
@@ -244,7 +299,7 @@ CREATE TABLE [dbo].[USER](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +314,7 @@ CREATE TABLE [dbo].[USER_LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 3/15/2020 9:44:50 PM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/2/2020 5:29:38 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -268,13 +323,15 @@ CREATE TABLE [dbo].[USER_ROLE](
 	[userRoleId] [int] IDENTITY(1,1) NOT NULL,
 	[userId] [int] NULL,
 	[roleId] [int] NULL,
+	[organizationId] [int] NULL,
  CONSTRAINT [PK_USER_ROLE] PRIMARY KEY CLUSTERED 
 (
 	[userRoleId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSaved]  DEFAULT ((0)) FOR [isSaved]
+
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSaved]  DEFAULT ((1)) FOR [isDrafted]
 GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSubmitted]  DEFAULT ((0)) FOR [isSubmitted]
 GO
@@ -282,7 +339,19 @@ ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isValidated]  DE
 GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isInvestigated]  DEFAULT ((0)) FOR [isInvestigated]
 GO
-ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isQualified]  DEFAULT ((0)) FOR [isQualified]
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isQualified]  DEFAULT ((0)) FOR [isQualified1]
+GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isQualified11]  DEFAULT ((0)) FOR [isQualified2]
+GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_IsDispersed]  DEFAULT ((0)) FOR [isDispersed]
+GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_createdOn1]  DEFAULT (getdate()) FOR [submittedOn]
+GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_createdOn]  DEFAULT (getdate()) FOR [createdOn]
+GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_updatedOn]  DEFAULT (getdate()) FOR [updatedOn]
+GO
+ALTER TABLE [dbo].[REVIEW] ADD  CONSTRAINT [DF_REVIEW_reviewDate]  DEFAULT (getdate()) FOR [reviewDate]
 GO
 ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_createdOn]  DEFAULT (getdate()) FOR [createdOn]
 GO
@@ -303,15 +372,20 @@ REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[APPLICATION] CHECK CONSTRAINT [FK_APPLICATION_USER]
 GO
+ALTER TABLE [dbo].[ARTIFACT]  WITH CHECK ADD  CONSTRAINT [FK_ARTIFACT_APPLICATION] FOREIGN KEY([applicationId])
+REFERENCES [dbo].[APPLICATION] ([applicationId])
+GO
+ALTER TABLE [dbo].[ARTIFACT] CHECK CONSTRAINT [FK_ARTIFACT_APPLICATION]
+GO
 ALTER TABLE [dbo].[CERTIFICATION_SKILL]  WITH CHECK ADD  CONSTRAINT [FK_CERTIFICATION_SKILL_USER] FOREIGN KEY([userId])
 REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[CERTIFICATION_SKILL] CHECK CONSTRAINT [FK_CERTIFICATION_SKILL_USER]
 GO
-ALTER TABLE [dbo].[DEPDENDENT]  WITH CHECK ADD  CONSTRAINT [FK_DEPDENDENTS_USER] FOREIGN KEY([userId])
+ALTER TABLE [dbo].[DEPENDENT]  WITH CHECK ADD  CONSTRAINT [FK_DEPDENDENTS_USER] FOREIGN KEY([userId])
 REFERENCES [dbo].[USER] ([userId])
 GO
-ALTER TABLE [dbo].[DEPDENDENT] CHECK CONSTRAINT [FK_DEPDENDENTS_USER]
+ALTER TABLE [dbo].[DEPENDENT] CHECK CONSTRAINT [FK_DEPDENDENTS_USER]
 GO
 ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])
@@ -327,6 +401,16 @@ ALTER TABLE [dbo].[REFERENCE]  WITH CHECK ADD  CONSTRAINT [FK_REFERENCE_USER1] F
 REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[REFERENCE] CHECK CONSTRAINT [FK_REFERENCE_USER1]
+GO
+ALTER TABLE [dbo].[REVIEW]  WITH CHECK ADD  CONSTRAINT [FK_COMMENT_APPLICATION] FOREIGN KEY([applicationId])
+REFERENCES [dbo].[APPLICATION] ([applicationId])
+GO
+ALTER TABLE [dbo].[REVIEW] CHECK CONSTRAINT [FK_COMMENT_APPLICATION]
+GO
+ALTER TABLE [dbo].[REVIEW]  WITH CHECK ADD  CONSTRAINT [FK_COMMENT_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[REVIEW] CHECK CONSTRAINT [FK_COMMENT_USER]
 GO
 ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_NATIONALITY1] FOREIGN KEY([nationalityId])
 REFERENCES [dbo].[NATIONALITY] ([nationalityId])
@@ -353,6 +437,11 @@ REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[USER_LANGUAGE] CHECK CONSTRAINT [FK_USER_LANGUAGE_USER]
 GO
+ALTER TABLE [dbo].[USER_ROLE]  WITH CHECK ADD  CONSTRAINT [FK_USER_ROLE_ORGANIZATION] FOREIGN KEY([organizationId])
+REFERENCES [dbo].[ORGANIZATION] ([organizationId])
+GO
+ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [FK_USER_ROLE_ORGANIZATION]
+GO
 ALTER TABLE [dbo].[USER_ROLE]  WITH CHECK ADD  CONSTRAINT [FK_USER_ROLE_ROLE] FOREIGN KEY([roleId])
 REFERENCES [dbo].[ROLE] ([roleId])
 GO
@@ -363,6 +452,8 @@ REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [FK_USER_ROLE_USER]
 GO
+
+
 USE [zakat]
 GO
 
