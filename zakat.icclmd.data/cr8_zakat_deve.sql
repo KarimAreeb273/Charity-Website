@@ -753,6 +753,7 @@ INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispursed'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	7	,	'General'	,	'This role provides no privileges'	);
 
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'(Select One)'	,	'(Select One)'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AL'	,	'Alabama'	);
@@ -815,8 +816,7 @@ INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('investi
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('financier@icclmd.org'	,	'12121212'	,	'Financier', 'Financier');
 
-
-
-INSERT INTO [dbo].[USER_ROLE] (userId, roleId) VALUES (1, 5);
-
+INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
 INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
+
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
