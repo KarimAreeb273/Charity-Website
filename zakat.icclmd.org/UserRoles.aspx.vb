@@ -15,18 +15,21 @@
 
         If Not IsPostBack Then
           'load the state dropdown
-          lstUsers.DataSource = (From USER In oDB.USER Select New With {Key .fullName = USER.firstName & " " & USER.lastName & " - " & USER.email, Key .userId = USER.userId}).ToList
+          lstUsers.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                                 Where USER_ROLE.roleId <> Base.enumRole.Appliciant
+                                 Select New With {Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName & " - " & USER_ROLE.USER.email,
+                                                  Key .userId = USER_ROLE.USER.userId}).Distinct.ToList
           lstUsers.DataTextField = "fullname"
           lstUsers.DataValueField = "userId"
           lstUsers.DataBind()
 
-          lstAvailable.DataSource = (From ROLE In oDB.ROLE Order By ROLE.name).ToList
+          lstAvailable.DataSource = (From ROLE In oDB.ROLE Where ROLE.name <> "General" And ROLE.name <> "Applicant" Order By ROLE.name).ToList
           lstAvailable.DataTextField = "name"
           lstAvailable.DataValueField = "roleId"
           lstAvailable.DataBind()
 
           'load the organization dropdown
-          drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Order By ORGANIZATION.name Select New With {Key .name = "(" & ORGANIZATION.organizationId & ") " & ORGANIZATION.name, Key .organizationId = ORGANIZATION.organizationId}).ToList
+          drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.name <> "Placeholder" Order By ORGANIZATION.name Select New With {Key .name = "(" & ORGANIZATION.organizationId & ") " & ORGANIZATION.name, Key .organizationId = ORGANIZATION.organizationId}).ToList
           drpOrganization.DataTextField = "name"
           drpOrganization.DataValueField = "organizationId"
           drpOrganization.DataBind()
@@ -150,7 +153,7 @@
           End If
 
           'load the assigned roles listbox
-          lstAssigned.DataSource = (From USER_ROLE In oDB.USER_ROLE Join ROLE In oDB.ROLE On USER_ROLE.roleId Equals ROLE.roleId Where USER_ROLE.userId = vSelectedUserId Select New With {Key .userRoleId = USER_ROLE.userRoleId, Key .name = ROLE.name & " (for " & CStr(USER_ROLE.organizationId) & ")"}).ToList
+          lstAssigned.DataSource = (From USER_ROLE In oDB.USER_ROLE Join ROLE In oDB.ROLE On USER_ROLE.roleId Equals ROLE.roleId Where USER_ROLE.roleId <> Base.enumRole.General And USER_ROLE.userId = vSelectedUserId Select New With {Key .userRoleId = USER_ROLE.userRoleId, Key .name = ROLE.name & " (for " & CStr(USER_ROLE.organizationId) & ")"}).ToList
           lstAssigned.DataTextField = "name"
           lstAssigned.DataValueField = "userRoleId"
           lstAssigned.DataBind()

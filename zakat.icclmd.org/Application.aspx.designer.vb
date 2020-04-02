@@ -23,6 +23,15 @@ Partial Public Class Application1
     Protected WithEvents lblReviewsCountBadge As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtApplicationId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtApplicationId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtOrganizationId control.
     '''</summary>
     '''<remarks>
@@ -320,15 +329,6 @@ Partial Public Class Application1
     Protected WithEvents txtLanguages As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''txtApplicationsSubmitted control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtApplicationsSubmitted As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''txtInsuranceProvider control.
     '''</summary>
     '''<remarks>
@@ -354,6 +354,69 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtCitizenship As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtApplicationStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtApplicationStatus As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtApplicationsSubmitted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtApplicationsSubmitted As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtApplicationsApproved control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtApplicationsApproved As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtApplicationsRejected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtApplicationsRejected As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtPreviouslyApplied control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPreviouslyApplied As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtLastDateAssisted control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLastDateAssisted As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''Label3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtHighestEducation control.
@@ -633,6 +696,15 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents rptReviewHistory As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''phPieFinalStatus control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents phPieFinalStatus As Global.System.Web.UI.WebControls.PlaceHolder
     
     '''<summary>
     '''pnlReviewComments control.

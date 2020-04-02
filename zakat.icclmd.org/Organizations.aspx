@@ -31,7 +31,7 @@
                       <th style="text-align: left; width: 20%">Email</th>                      
                       <th style="text-align: left; width: 30%">Website</th>
                       <th style="text-align: center; width: 5%;">Edit</th> 
-                      <th style="text-align: center; width: 5%;">Remove</th> 
+                      <%--<th style="text-align: center; width: 5%;">Remove</th>--%> 
                     </tr>
                   </HeaderTemplate>
                   <ItemTemplate>
@@ -47,25 +47,23 @@
                         <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
                       </td>
                       <td style="text-align: left; vertical-align: middle">
-                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "website")%></asp:HyperLink>
+                        <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "website")%>'><%# DataBinder.Eval(Container.DataItem, "website")%></asp:HyperLink>
                       </td>
                       <td style="text-align: center; vertical-align: middle">
                         <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "name")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
                       </td>
-                      <td style="text-align: center; vertical-align: middle">
+                      <%--<td style="text-align: center; vertical-align: middle">
                         <asp:LinkButton ID="btnDelete" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnDelete_Click" ToolTip='<%# "Remove " & DataBinder.Eval(Container.DataItem, "name")%>'><span class="glyphicon glyphicon-remove" style="font-size:15px; color:red"></span></asp:LinkButton>
-                      </td>
+                      </td>--%>
                     </tr>
                   </ItemTemplate>
                 </asp:Repeater>
               </table>
             </ContentTemplate>
             <Triggers>
-              <asp:AsyncPostBackTrigger ControlID="btnDelete" EventName="Click" />
               <asp:AsyncPostBackTrigger ControlID="btnEdit" EventName="Click" />
             </Triggers>
           </asp:UpdatePanel>
-          <asp:LinkButton ID="btnDelete" runat="server" Visible="false" Text="temp"></asp:LinkButton>
           <asp:LinkButton ID="btnEdit" runat="server" Visible="false" Text="temp"></asp:LinkButton>
         </asp:Panel>
       </div>

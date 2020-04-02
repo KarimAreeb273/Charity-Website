@@ -87,23 +87,23 @@
     getAge = Base.getAge(dob)
   End Function
 
-  Protected Sub btnDelete_Click(sender As Object, e As System.EventArgs) Handles btnDelete.Click
-    Try
-      'go home if no session/user
-      Dim vOrganizationId As Int32 = sender.CommandArgument
-      If vOrganizationId = 0 Then Response.Redirect("/")
+  'Protected Sub btnDelete_Click(sender As Object, e As System.EventArgs) Handles btnDelete.Click
+  '  Try
+  '    'go home if no session/user
+  '    Dim vOrganizationId As Int32 = sender.CommandArgument
+  '    If vOrganizationId = 0 Then Response.Redirect("/")
 
-      Using oDB As New zakatEntities
-        Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
-        oDB.ORGANIZATION.Remove(oOrganization)
-        oDB.SaveChanges()
-      End Using
-      'refresh the org list
-      setOrganizations()
-    Catch ex As Exception
-      Response.Write(ex.Message)
-    End Try
-  End Sub
+  '    Using oDB As New zakatEntities
+  '      Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
+  '      oDB.ORGANIZATION.Remove(oOrganization)
+  '      oDB.SaveChanges()
+  '    End Using
+  '    'refresh the org list
+  '    setOrganizations()
+  '  Catch ex As Exception
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
 
   Protected Sub btnEdit_Click(sender As Object, e As System.EventArgs) Handles btnEdit.Click
     Try
@@ -127,11 +127,12 @@
     Try
       'update org repeater
       Using oDB As New zakatEntities
-        rptOrganizations.DataSource = (From ORGANIZATION In oDB.ORGANIZATION).ToList
+        rptOrganizations.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.name <> "Placeholder").ToList
         rptOrganizations.DataBind()
       End Using
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
+
 End Class

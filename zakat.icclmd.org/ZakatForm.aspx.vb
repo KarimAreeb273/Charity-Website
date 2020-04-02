@@ -960,7 +960,7 @@
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
         Else
           'show validation and exit sub
           valUserRequiredDep.IsValid = False
@@ -1546,7 +1546,7 @@
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
         Else
           'show validation and exit sub
           valUserRequiredRef.IsValid = False
@@ -1610,7 +1610,7 @@
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -1641,7 +1641,7 @@
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False

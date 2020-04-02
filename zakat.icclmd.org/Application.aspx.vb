@@ -18,9 +18,13 @@
         Dim oApplicationsInvestigated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isInvestigated = True).ToList
         Dim oApplicationsQualified1 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified1 = True).ToList
         Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
-        Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.IsDispersed = True).ToList
+        Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
+        Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
 
+        'set aggregate values
         txtApplicationsSubmitted.Text = oApplicationsSubmitted.Count
+        txtApplicationsApproved.Text = oApplicationsQualified2.Count
+        txtApplicationsRejected.Text = oApplicationsRejected.Count
 
         'verify if the user is a reviewer otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
@@ -107,7 +111,33 @@
           End If
           txtCertSkills.Text = vCertSkills
 
+          'get previous applied date by getting the last submitted
+          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True Order By APPLICATION.submittedOn Descending).Any Then
+            Dim oPreviousSubmitted As APPLICATION = (From APPLICATION In oDB.APPLICATION
+                                                     Where APPLICATION.applicationId <> .applicationId And
+                                                            APPLICATION.userId = oApplication.userId And
+                                                            APPLICATION.isSubmitted = True
+                                                     Order By APPLICATION.submittedOn Descending).First
+            txtPreviouslyApplied.Text = FormatDateTime(oPreviousSubmitted.submittedOn, DateFormat.LongDate)
+          Else
+            txtPreviouslyApplied.Text = "N/A"
+          End If
+
+          'get previous applied date by getting the last submitted
+          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True Order By APPLICATION.qualified2On Descending).Any Then
+            Dim oPreviousApproved As APPLICATION = (From APPLICATION In oDB.APPLICATION
+                                                    Where APPLICATION.applicationId <> .applicationId And
+                                                            APPLICATION.userId = oApplication.userId And
+                                                            APPLICATION.isQualified2 = True
+                                                    Order By APPLICATION.qualified2On Descending).First
+            txtLastDateAssisted.Text = FormatDateTime(oPreviousApproved.qualified2On, DateFormat.LongDate)
+          Else
+            txtLastDateAssisted.Text = "N/A"
+          End If
+
+          txtApplicationId.Text = Base.getFormattedNumber(.applicationId)
           txtOrganizationId.Value = .organizationId
+          txtApplicationStatus.Text = .applicationStatus
           txtOrganization.Text = .ORGANIZATION.name
           txtValueCash.Text = FormatCurrency(.totalValueCash)
           txtValueGold.Text = FormatCurrency(.totalValueGold)
@@ -139,7 +169,9 @@
           txtPersonalStatement.Text = .personalNeedStatement
 
           'set review panels; if isDispersed = true visible is already set to false so do nothing:
-          If .isDispersed = True Then
+          If .isRejected = True Then
+            pnlReviewComments.Visible = False
+          ElseIf .isDispersed = True Then
             pnlReviewComments.Visible = False
           ElseIf .isQualified2 = True Then
             If isFinancier Then
@@ -204,6 +236,9 @@
 
       'set the default date of dispersion to today
       txtDispersedDate.Text = CStr(FormatDateTime(Date.Now, DateFormat.ShortDate))
+
+      'set chart
+      'setChartStatusHistory()
 
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -792,4 +827,43 @@
     getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
 
+  Sub setChartStatusHistory()
+    Try
+      Using oDB As New zakatEntities
+        Dim vApplicationId As Int32 = Session("sApplicationId")
+        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+
+        'obtain aggregates related to the users actions
+        'Dim oApplicationsDrafted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDrafted = True).ToList
+        'Dim oApplicationsSubmitted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True).ToList
+        'Dim oApplicationsValidated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isValidated = True).ToList
+        'Dim oApplicationsInvestigated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isInvestigated = True).ToList
+        'Dim oApplicationsQualified1 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified1 = True).ToList
+        Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
+        'Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
+        Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
+
+        Dim vJscript As New StringBuilder
+        vJscript.Append("google.charts.load('current', {'packages':['corechart']});")
+        vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
+        vJscript.Append("function drawChart() {")
+        vJscript.Append("var data = google.visualization.arrayToDataTable([")
+        vJscript.Append("['Status', 'Count'],")
+        vJscript.Append("['Approved'," & oApplicationsQualified2.Count & "],")
+        vJscript.Append("['Rejected'," & oApplicationsRejected.Count & "]")
+        vJscript.Append("]);")
+        vJscript.Append("var options = {Title 'Final Application Status'};")
+        vJscript.Append("var chart = new google.visualization.PieChart(document.getElementById('pieFinalStatus'));")
+        vJscript.Append("chart.draw(data, options); }")
+
+        Dim cScript As New HtmlGenericControl
+        cScript.TagName = "script"
+        cScript.Attributes.Add("type", "text/javascript")
+        cScript.InnerHtml = vJscript.ToString
+        phPieFinalStatus.Controls.Add(cScript)
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 End Class

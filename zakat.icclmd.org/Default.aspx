@@ -24,7 +24,7 @@
             <div class="form-group">
               <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Username:</asp:Label>
               <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" />
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" Text="eiad.sayyad@gmail.com" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The email/username is required." Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="A valid email/username is required." ControlToValidate="txtEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic"></asp:RegularExpressionValidator>                
               </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
               <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-2 control-label">Password:</asp:Label>
               <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" />
+                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" Text="12121212" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password is required." />
               </div>
             </div>
@@ -83,7 +83,8 @@
                 <td style="width: 100%; text-align: center">
                   <br />
                   <a href="inbox">
-                    <i class='fas fa-file-signature' style='color:darkgreen; font-size:100px'></i>
+                    <%--<i class='fas fa-file-signature' style='color:darkgreen; font-size:100px'></i>--%>
+                    <i class='fas fas fa-inbox' style='color:darkgreen; font-size:100px'></i>
                     <br />
                     <h3 style='color:black; line-height: 1.5'>Review Zakat<br />Applications</h3>
                   </a>

@@ -11,52 +11,52 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class Organizations
+Partial Public Class Users
     
     '''<summary>
-    '''pnlManageOrganizations control.
+    '''lblUsersCountBadge control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents pnlManageOrganizations As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents lblUsersCountBadge As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''UpdatePanel2 control.
+    '''txtFirstName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''rptOrganizations control.
+    '''txtMiddleName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents rptOrganizations As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents txtMiddleName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''btnEdit control.
+    '''CustomValidator5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
+    Protected WithEvents CustomValidator5 As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
-    '''txtOrganizationName control.
+    '''txtLastName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtOrganizationName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtEmail control.
@@ -68,22 +68,22 @@ Partial Public Class Organizations
     Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''valEmailValid control.
+    '''RegularExpressionValidator1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents valEmailValid As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
-    '''valEmailRequired control.
+    '''valDuplicateEmail control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents valEmailRequired As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents valDuplicateEmail As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''txtPhone control.
@@ -95,74 +95,47 @@ Partial Public Class Organizations
     Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtWebsite control.
+    '''btnAddUser control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtWebsite As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents btnAddUser As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''RegularExpressionValidator1 control.
+    '''pnlManageUsers control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    Protected WithEvents pnlManageUsers As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
-    '''RequiredFieldValidator1 control.
+    '''UpdatePanel2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
+    Protected WithEvents UpdatePanel2 As Global.System.Web.UI.UpdatePanel
     
     '''<summary>
-    '''txtStreet control.
+    '''rptUsers control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtStreet As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rptUsers As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''txtCity control.
+    '''btnEdit control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtCity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpState control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpState As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtZip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtZip As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btnAddOrganization control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddOrganization As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
 End Class

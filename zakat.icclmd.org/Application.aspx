@@ -19,6 +19,14 @@
           <span class="label label-primary"><asp:Label ID="lblReviewsCountBadge" runat="server" Text="0"></asp:Label></span>
         </a>
       </li>
+      <li>
+        <a data-toggle="tab" href="#tabUserDash">
+          <div>
+            <b>User Dasboard</b>&nbsp;
+            <span style="font-size:16px;" class="fas fa-chart-area"></span>
+          </div>         
+        </a>
+      </li>
     </ul>
     
     <div class="tab-content">
@@ -27,6 +35,14 @@
         <div class="row">
           <div class="col-lg-6">
             <table style="width: 100%">
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationId" CssClass="control-label" Style="white-space: nowrap">Application #:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtApplicationId" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
               <tr>
                 <td>
                   <asp:Label runat="server" AssociatedControlID="txtOrganization" CssClass="control-label" Style="white-space: nowrap">Submitted To:</asp:Label>
@@ -277,18 +293,6 @@
                   <asp:Label runat="server" ID="txtLanguages" CssClass="control-label"></asp:Label>
                 </td>
               </tr>
-            </table>
-          </div>
-          <div class="col-lg-6">
-            <table style="width: 100%">
-              <tr>
-                <td>
-                  <asp:Label runat="server" AssociatedControlID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
-                </td>
-                <td>
-                  <asp:Label runat="server" ID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
-                </td>
-              </tr>
               <tr>
                 <td>
                   <asp:Label runat="server" AssociatedControlID="txtInsuranceProvider" CssClass="control-label" Style="white-space: nowrap">Insurance Provider:</asp:Label>
@@ -311,6 +315,68 @@
                 </td>
                 <td>
                   <asp:Label runat="server" ID="txtCitizenship" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-lg-6">
+            <table style="width: 100%">
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationStatus" CssClass="control-label" Style="white-space: nowrap">Application Status:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtApplicationStatus" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationsApproved" CssClass="control-label" Style="white-space: nowrap">Approved Applications:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtApplicationsApproved" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationsRejected" CssClass="control-label" Style="white-space: nowrap">Rejected Applications:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtApplicationsRejected" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtPreviouslyApplied" CssClass="control-label" Style="white-space: nowrap">Previously Applied:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtPreviouslyApplied" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtLastDateAssisted" CssClass="control-label" Style="white-space: nowrap">Last Date Assisted:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtLastDateAssisted" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="Label3" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
                 </td>
               </tr>
               <tr>
@@ -622,6 +688,85 @@
               </tr>
             </ItemTemplate>
           </asp:Repeater>
+        </table>
+      </div>
+      <div id="tabUserDash" class="tab-pane fade">
+        <br />
+        <table style="width: 100%" border="1">
+          <tr>
+            <th style="width: 50%; text-align:center">
+              Final Application Status
+            </th>
+            <th style="width: 50%; text-align:center">
+              Days between Status Change
+            </th>            
+          </tr>
+          <tr>
+            <td style="width: 50%; text-align:center">
+              Final Application Status
+            </td>
+            <td style="width: 50%; text-align:center">
+              Days between Status Change
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 50%; height: 250px; vertical-align:top; text-align:center">
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+              <%--
+                <script type="text/javascript">
+                  google.charts.load('current', {'packages':['corechart']});
+                  google.charts.setOnLoadCallback(drawChart);
+
+                  function drawChart() {
+
+                    var data = google.visualization.arrayToDataTable([
+                      ['Status', 'Count'],
+                      ['Approved',     vSubmittedCount],
+                      ['Rejected',     vRejectedCount]
+                    ]);
+
+                    var options = {
+                      title: 'Final Application Status'
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('pieFinalStatus'));
+
+                    chart.draw(data, options);
+                  }
+                </script>
+              --%>
+              <asp:PlaceHolder ID="phPieFinalStatus" runat="server"></asp:PlaceHolder>
+              <div id="pieFinalStatus" style="width: 400px; height: 250px;"></div>
+            </td>
+            <td  style="width: 50%; height: 250px; vertical-align:top; text-align:center">
+              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+              <script type="text/javascript">
+                google.charts.load('current', {'packages':['corechart']});
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+                  var data = google.visualization.arrayToDataTable([
+                    ['Year', 'Sales', 'Expenses'],
+                    ['2004',  1000,      400],
+                    ['2005',  1170,      460],
+                    ['2006',  660,       1120],
+                    ['2007',  1030,      540]
+                  ]);
+
+                  var options = {
+                    title: 'Company Performance',
+                    curveType: 'function',
+                    legend: { position: 'bottom' }
+                  };
+
+                  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                  chart.draw(data, options);
+                }
+              </script>
+              <div id="curve_chart" style="width: 400px; height: 250px"></div>
+            </td>
+          </tr>
         </table>
       </div>
     </div>

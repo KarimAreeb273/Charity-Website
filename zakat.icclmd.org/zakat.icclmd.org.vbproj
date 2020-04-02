@@ -141,9 +141,16 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Application.aspx" />
+    <Content Include="Inbox.aspx" />
+    <Content Include="UserEdit.aspx" />
+    <Content Include="Profile.aspx" />
+    <Content Include="Dashboard.aspx" />
+    <Content Include="Temp.html" />
     <Content Include="UserRoles.aspx" />
     <Content Include="OrganizationEdit.aspx" />
     <Content Include="Organizations.aspx" />
+    <Content Include="Users.aspx" />
     <Content Include="ZakatForm.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -179,6 +186,24 @@
       <DependentUpon>ZakatEntities.edmx</DependentUpon>
       <LastGenOutput>ZakatEntities.vb</LastGenOutput>
     </Content>
+    <Content Include=".env\deve\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include=".env\deve\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <Content Include=".env\prod\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include=".env\prod\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include=".env\prod\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -221,16 +246,57 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application.aspx.designer.vb">
+      <DependentUpon>Application.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application.aspx.vb">
+      <DependentUpon>Application.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="APPLICATION.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ARTIFACT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CERTIFICATION_SKILL.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="DEPDENDENT.vb">
+    <Compile Include="DEPENDENT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="LANGUAGE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Inbox.aspx.designer.vb">
+      <DependentUpon>Inbox.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inbox.aspx.vb">
+      <DependentUpon>Inbox.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="UserEdit.aspx.designer.vb">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserEdit.aspx.vb">
+      <DependentUpon>UserEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.vb">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.aspx.vb">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="REVIEW.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserRoles.aspx.designer.vb">
@@ -271,6 +337,13 @@
     </Compile>
     <Compile Include="USER.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Users.aspx.designer.vb">
+      <DependentUpon>Users.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Users.aspx.vb">
+      <DependentUpon>Users.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="USER_LANGUAGE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>

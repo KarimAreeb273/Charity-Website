@@ -21,6 +21,7 @@ Public Class Base
     Qualifier = 4
     Administrator = 5
     Financier = 6
+    General = 7
   End Enum
 
 #End Region
@@ -134,7 +135,7 @@ Public Class Base
     getPassword = sb.ToString
   End Function
 
-  Public Shared Function createUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "") As Int32
+  Public Shared Function createUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "", Optional pPhone As String = "") As Int32
     'create the user
     Dim oUser As New USER
     Dim vPassword As String
@@ -147,6 +148,7 @@ Public Class Base
         .firstName = pFirst
         .middleName = pMiddle
         .lastName = pLast
+        .phone = pPhone
         .password = Base.getPassword()  'randomly generate a password
       End With
 
@@ -177,7 +179,6 @@ Public Class Base
       ' Add to Memory
       oDB.USER_ROLE.Add(oUserRole)
       oDB.SaveChanges()
-
     End Using
     'send an email to new applicant with the username and password
     Dim vTo As String = pEmail
