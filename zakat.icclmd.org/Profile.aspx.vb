@@ -70,8 +70,8 @@
               txtHusbandLastName.Text = .husbandLastName
               txtHusbandEmail.Text = .husbandEmail
               txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
-              chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
-              txtHusbandExplanation.Text = .husbandZakatExplanation
+              'chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
+              'txtHusbandExplanation.Text = .husbandZakatExplanation
             End With
 
             Session("sUserFirstName") = oUser.firstName
@@ -151,8 +151,8 @@
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
           .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
-          .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
-          .husbandZakatExplanation = txtHusbandExplanation.Text
+          '.husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
+          '.husbandZakatExplanation = txtHusbandExplanation.Text
 
           'successful save so set user name
           Session("sUserFirstName") = txtFirstName.Text

@@ -428,15 +428,6 @@ Partial Public Class Profile
     Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtHusbandPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''txtHusbandEmail control.
     '''</summary>
     '''<remarks>
@@ -455,22 +446,13 @@ Partial Public Class Profile
     Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
-    '''chkHusbandApplied control.
+    '''txtHusbandPhone control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents chkHusbandApplied As Global.System.Web.UI.WebControls.RadioButtonList
-    
-    '''<summary>
-    '''txtHusbandExplanation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandExplanation As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''valUserRequiredSave control.
