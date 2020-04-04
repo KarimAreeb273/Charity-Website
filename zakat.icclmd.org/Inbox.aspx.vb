@@ -6,13 +6,89 @@
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       If vUserId = 0 Then Response.Redirect("/")
-      Using oDB As New zakatEntities
-        'verify if the user is an administrator otherwise redirect home
-        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
-          Response.Redirect("/")
-        End If
 
-        'load the inbox
+      If Not IsPostBack Then
+        txtNumber.Text = ""
+        Using oDB As New zakatEntities
+          'verify if the user is an administrator otherwise redirect home
+          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
+            Response.Redirect("/")
+          End If
+        End Using
+        filterWorkflow()
+      End If
+
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  'Public Function getDate(ByVal month As Short, ByVal day As Short) As Date
+  '  getDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
+  'End Function
+
+  'Public Function getAge(ByVal dob As Date) As Int16
+  '  getAge = Base.getAge(dob)
+  'End Function
+
+  'Public Function getFormattedPhone(ByVal pPhone As String) As String
+  '  getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+  'End Function
+
+  Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
+    Try
+      Session("sApplicationId") = sender.CommandArgument
+      Response.Redirect("application")
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Sub btnViewTimeline_Click(sender As Object, e As System.EventArgs)
+    Try
+      Session("sApplicationId") = sender.CommandArgument
+      Response.Redirect("timeline")
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Function GetFormattedNumber(ByVal pMemberId As Int32) As String
+    Try
+      GetFormattedNumber = Base.GetFormattedNumber(pMemberId)
+    Catch ex As Exception
+      Return Nothing
+      Response.Write(ex.Message)
+    End Try
+  End Function
+
+  Private Sub txtNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNumber.TextChanged
+    Try
+      Dim vAppId As Int32 = IIf(IsNumeric(txtNumber.Text), CInt(txtNumber.Text), 0)
+      If vAppId <> 0 Then
+        drpWorkflow.SelectedValue = "All"
+        Using oDB As New zakatEntities
+          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).Any Then
+            Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).ToList
+            rptInbox.DataSource = oApplications
+            rptInbox.DataBind()
+          End If
+        End Using
+      End If
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub drpWorkflow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpWorkflow.SelectedIndexChanged
+    filterWorkflow()
+  End Sub
+
+  Sub filterWorkflow()
+    Try
+      txtNumber.Text = ""
+      'load the inbox
+      Using oDB As New zakatEntities
         Dim oApplications As List(Of APPLICATION)
         If drpWorkflow.SelectedValue = "All" Then
           oApplications = (From APPLICATION In oDB.APPLICATION).ToList
@@ -44,34 +120,4 @@
       Response.Write(ex.Message)
     End Try
   End Sub
-
-  Public Function getDate(ByVal month As Short, ByVal day As Short) As Date
-    getDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
-  End Function
-
-  Public Function getAge(ByVal dob As Date) As Int16
-    getAge = Base.getAge(dob)
-  End Function
-
-  Public Function getFormattedPhone(ByVal pPhone As String) As String
-    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
-  End Function
-
-  Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
-    Try
-      Session("sApplicationId") = sender.CommandArgument
-      Response.Redirect("application")
-    Catch ex As Exception
-      Response.Write(ex.Message)
-    End Try
-  End Sub
-
-  Public Function GetFormattedNumber(ByVal pMemberId As Int32) As String
-    Try
-      GetFormattedNumber = Base.GetFormattedNumber(pMemberId)
-    Catch ex As Exception
-      Return Nothing
-      Response.Write(ex.Message)
-    End Try
-  End Function
 End Class
