@@ -30,11 +30,11 @@ Partial Public Class zakatEntities
     Public Overridable Property ROLE() As DbSet(Of ROLE)
     Public Overridable Property STATE() As DbSet(Of STATE)
     Public Overridable Property USER_LANGUAGE() As DbSet(Of USER_LANGUAGE)
-    Public Overridable Property USER() As DbSet(Of USER)
     Public Overridable Property ARTIFACT() As DbSet(Of ARTIFACT)
     Public Overridable Property DEPENDENT() As DbSet(Of DEPENDENT)
     Public Overridable Property USER_ROLE() As DbSet(Of USER_ROLE)
-    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
     Public Overridable Property REVIEW() As DbSet(Of REVIEW)
+    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
+    Public Overridable Property USER() As DbSet(Of USER)
 
 End Class

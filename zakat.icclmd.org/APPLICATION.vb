@@ -23,6 +23,8 @@ Partial Public Class APPLICATION
     Public Property isDispersed As Nullable(Of Boolean)
     Public Property isRejected As Nullable(Of Boolean)
     Public Property applicationStatus As String
+    Public Property husbandHasAppliedForZakat As String
+    Public Property husbandZakatExplanation As String
     Public Property totalValueCash As Nullable(Of Decimal)
     Public Property totalValueGold As Nullable(Of Decimal)
     Public Property totalValueSilver As Nullable(Of Decimal)
