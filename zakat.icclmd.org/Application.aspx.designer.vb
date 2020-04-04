@@ -698,13 +698,58 @@ Partial Public Class Application1
     Protected WithEvents rptReviewHistory As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''phPieFinalStatus control.
+    '''lblReport1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents phPieFinalStatus As Global.System.Web.UI.WebControls.PlaceHolder
+    Protected WithEvents lblReport1 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblReport2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReport2 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''lblReport3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblReport3 As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''phReport1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents phReport1 As Global.System.Web.UI.WebControls.PlaceHolder
+    
+    '''<summary>
+    '''phReport2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents phReport2 As Global.System.Web.UI.WebControls.PlaceHolder
+    
+    '''<summary>
+    '''phReport3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents phReport3 As Global.System.Web.UI.WebControls.PlaceHolder
     
     '''<summary>
     '''pnlReviewComments control.

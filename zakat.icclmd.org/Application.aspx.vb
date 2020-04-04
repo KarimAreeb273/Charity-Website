@@ -82,8 +82,6 @@
           txtHusbandFirstName.Text = .USER.husbandFirstName
           txtHusbandMiddleName.Text = .USER.husbandMiddleName
           txtHusbandLastName.Text = .USER.husbandLastName
-          txtHusbandApplied.Text = .USER.husbandHasAppliedForZakat
-          txtHusbandExplanation.Text = .USER.husbandZakatExplanation
           txtMasjidName.Text = .USER.primaryMasjidName
           txtMasjidPhone.Text = .USER.primaryMasjidPhone
 
@@ -139,6 +137,8 @@
           txtOrganizationId.Value = .organizationId
           txtApplicationStatus.Text = .applicationStatus
           txtOrganization.Text = .ORGANIZATION.name
+          txtHusbandApplied.Text = .husbandHasAppliedForZakat
+          txtHusbandExplanation.Text = .husbandZakatExplanation
           txtValueCash.Text = FormatCurrency(.totalValueCash)
           txtValueGold.Text = FormatCurrency(.totalValueGold)
           txtValueSilver.Text = FormatCurrency(.totalValueSilver)
@@ -237,8 +237,9 @@
       'set the default date of dispersion to today
       txtDispersedDate.Text = CStr(FormatDateTime(Date.Now, DateFormat.ShortDate))
 
-      'set chart
-      'setChartStatusHistory()
+      'set charts
+      setReport1(vApplicationId)
+      'setReportTimelineApplicationActions(vApplicationId)
 
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -302,7 +303,7 @@
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
         vMsgText.Append("Your Zakat Application has been reviewed. The application was just validated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
-        vMsgText.Append("<b>Dashboard Link: </b> <a target='_blank' href='https://zakat.icclmd.org/dashboard'>https://zakat.icclmd.org/dashboard</a><br /><br />")
+        vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
         vMsgText.Append("ICCL Zakat Administrator<br />")
@@ -312,9 +313,6 @@
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        '*******************
-        'uncomment next line
-        '*******************
         vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the investigators that an application requires reviewing
@@ -339,9 +337,6 @@
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          '*******************
-          'uncomment next line
-          '*******************
           vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
@@ -411,7 +406,7 @@
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
         vMsgText.Append("Your Zakat Application has been reviewed. The application was just investigated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
-        vMsgText.Append("<b>Dashboard Link: </b> <a target='_blank' href='https://zakat.icclmd.org/dashboard'>https://zakat.icclmd.org/dashboard</a><br /><br />")
+        vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
         vMsgText.Append("ICCL Zakat Administrator<br />")
@@ -421,9 +416,6 @@
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        '*******************
-        'uncomment next line
-        '*******************
         vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the qualifiers that an application requires reviewing
@@ -448,9 +440,6 @@
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          '*******************
-          'uncomment next line
-          '*******************
           vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
@@ -539,9 +528,6 @@
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          '*******************
-          'uncomment next line
-          '*******************
           vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
@@ -618,7 +604,7 @@
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
         vMsgText.Append("Your Zakat Application has been reviewed. The application was just qualified. We will notify you when the application progresses past the next step. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
-        vMsgText.Append("<b>Dashboard Link: </b> <a target='_blank' href='https://zakat.icclmd.org/dashboard'>https://zakat.icclmd.org/dashboard</a><br /><br />")
+        vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
         vMsgText.Append("ICCL Zakat Administrator<br />")
@@ -628,9 +614,6 @@
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        '*******************
-        'uncomment next line
-        '*******************
         vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the validators that an application requires reviewing
@@ -655,9 +638,6 @@
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          '*******************
-          'uncomment next line
-          '*******************
           vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
@@ -736,9 +716,6 @@
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        '*******************
-        'uncomment next line
-        '*******************
         vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
       End Using
 
@@ -809,9 +786,6 @@
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        '*******************
-        'uncomment next line
-        '*******************
         vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
       End Using
 
@@ -827,20 +801,14 @@
     getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
 
-  Sub setChartStatusHistory()
+  Sub setReport1(vApplicationId As Int32)
     Try
+      'ifrReport1.Src = "ReportPieFinalStatus?i=" & vApplicationId
       Using oDB As New zakatEntities
-        Dim vApplicationId As Int32 = Session("sApplicationId")
         Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
 
         'obtain aggregates related to the users actions
-        'Dim oApplicationsDrafted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDrafted = True).ToList
-        'Dim oApplicationsSubmitted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True).ToList
-        'Dim oApplicationsValidated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isValidated = True).ToList
-        'Dim oApplicationsInvestigated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isInvestigated = True).ToList
-        'Dim oApplicationsQualified1 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified1 = True).ToList
         Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
-        'Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
         Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
 
         Dim vJscript As New StringBuilder
@@ -852,18 +820,141 @@
         vJscript.Append("['Approved'," & oApplicationsQualified2.Count & "],")
         vJscript.Append("['Rejected'," & oApplicationsRejected.Count & "]")
         vJscript.Append("]);")
-        vJscript.Append("var options = {Title 'Final Application Status'};")
-        vJscript.Append("var chart = new google.visualization.PieChart(document.getElementById('pieFinalStatus'));")
-        vJscript.Append("chart.draw(data, options); }")
+        vJscript.Append("var options = {")
+        vJscript.Append(" title: ''")
+        lblReport1.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " - Final Application Status"
+        vJscript.Append("};")
+        vJscript.Append("var chart = new google.visualization.PieChart(document.getElementById('divReport1'));")
+        vJscript.Append("chart.draw(data, options);")
+        vJscript.Append("}")
 
+        'begin load values from the list
         Dim cScript As New HtmlGenericControl
         cScript.TagName = "script"
         cScript.Attributes.Add("type", "text/javascript")
         cScript.InnerHtml = vJscript.ToString
-        phPieFinalStatus.Controls.Add(cScript)
+        phReport1.Controls.Add(cScript)
       End Using
+
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  'Sub setReport2(vApplicationId As Int32)
+  '  Try
+  '    'ifrReport2.Src = "ReportTimelineApplicationActions?i=" & pAppId
+  '    Using oDB As New zakatEntities
+  '      'Dim vApplicationId As Int32 = Session("sApplicationId")
+  '      'Dim vApplicationId As Int32 = 6
+  '      Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+
+  '      'obtain aggregates
+  '      Dim vSubmittedStartDate As DateTime
+  '      Dim vSubmittedEndDate As DateTime
+  '      Dim vValidatedStartDate As DateTime
+  '      Dim vValidatedEndDate As DateTime
+  '      Dim vInvestigatedStartDate As DateTime
+  '      Dim vInvestigatedEndDate As DateTime
+  '      Dim vQualified1StartDate As DateTime
+  '      Dim vQualified1EndDate As DateTime
+  '      Dim vQualified2StartDate As DateTime
+  '      Dim vQualified2EndDate As DateTime
+  '      Dim vDispersedStartDate As DateTime
+  '      Dim vDispersedEndDate As DateTime
+  '      Dim vRejectedStartDate As DateTime
+  '      Dim vRejectedEndDate As DateTime
+
+  '      With oApplication
+  '        If .isDispersed = True Then
+  '          vDispersedStartDate = oApplication.qualified2On
+  '          vDispersedEndDate = oApplication.dispersedOn
+  '        End If
+  '        If .isQualified2 = True Then
+  '          vQualified2StartDate = oApplication.qualified1On
+  '          vQualified2EndDate = oApplication.qualified2On
+  '        End If
+  '        If .isQualified1 = True Then
+  '          vQualified1StartDate = oApplication.investigatedOn
+  '          vQualified1EndDate = oApplication.qualified1On
+  '        End If
+  '        If .isInvestigated = True Then
+  '          vInvestigatedStartDate = oApplication.validatedOn
+  '          vInvestigatedEndDate = oApplication.investigatedOn
+  '        End If
+  '        If .isValidated = True Then
+  '          vValidatedStartDate = oApplication.submittedOn
+  '          vValidatedEndDate = oApplication.validatedOn
+  '        End If
+  '        If .isSubmitted = True Then
+  '          vSubmittedStartDate = oApplication.createdOn
+  '          vSubmittedEndDate = oApplication.submittedOn
+  '        End If
+  '        If .isRejected = True Then
+  '          If .isQualified2 Then
+  '            vRejectedStartDate = oApplication.qualified2On
+  '          ElseIf .isQualified1 Then
+  '            vRejectedStartDate = oApplication.qualified1On
+  '          ElseIf .isInvestigated Then
+  '            vRejectedStartDate = oApplication.investigatedOn
+  '          ElseIf .isValidated Then
+  '            vRejectedStartDate = oApplication.validatedOn
+  '          ElseIf .isSubmitted Then
+  '            vRejectedStartDate = oApplication.submittedOn
+  '          End If
+  '          vRejectedEndDate = oApplication.rejectedOn
+  '        End If
+
+  '        Dim vJscript As New StringBuilder
+  '        vJscript.Append("google.charts.load('current', {'packages':['timeline']});")
+  '        vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
+  '        vJscript.Append("function drawChart() {")
+  '        vJscript.Append("var container = document.getElementById('timelineApplicationActions');")
+  '        vJscript.Append("var chart = new google.visualization.Timeline(container);")
+  '        vJscript.Append("var dataTable = new google.visualization.DataTable();")
+  '        vJscript.Append("dataTable.addColumn({ type: 'string', id: 'Review Action' });")
+  '        vJscript.Append("dataTable.addColumn({ type: 'date', id: 'Start' });")
+  '        vJscript.Append("dataTable.addColumn({ type: 'date', id: 'End' });")
+  '        vJscript.Append("dataTable.addRows([")
+  '        'add data rows
+  '        If .isSubmitted Then
+  '          vJscript.Append("['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ") ]")
+  '        End If
+  '        If .isValidated Then
+  '          vJscript.Append(",['Validated', new Date(" & vValidatedStartDate.Year.ToString & ", " & (vValidatedStartDate.Month - 1).ToString & ", " & vValidatedStartDate.Day.ToString & "), new Date(" & vValidatedEndDate.Year.ToString & ", " & (vValidatedEndDate.Month - 1).ToString & ", " & vValidatedEndDate.Day.ToString & ") ]")
+  '        End If
+  '        If .isInvestigated Then
+  '          vJscript.Append(",['Investigated', new Date(" & vInvestigatedStartDate.Year.ToString & ", " & (vInvestigatedStartDate.Month - 1).ToString & ", " & vInvestigatedStartDate.Day.ToString & "), new Date(" & vInvestigatedEndDate.Year.ToString & ", " & (vInvestigatedEndDate.Month - 1).ToString & ", " & vInvestigatedEndDate.Day.ToString & ")]")
+  '        End If
+  '        If .isQualified1 Then
+  '          vJscript.Append(",['Qualified (Initial)', new Date(" & vQualified1StartDate.Year.ToString & ", " & (vQualified1StartDate.Month - 1).ToString & ", " & vQualified1StartDate.Day.ToString & "), new Date(" & vQualified1EndDate.Year.ToString & ", " & (vQualified1EndDate.Month - 1).ToString & ", " & vQualified1EndDate.Day.ToString & ")]")
+  '        End If
+  '        If .isQualified2 Then
+  '          vJscript.Append(",['Qualified (Final)', new Date(" & vQualified2StartDate.Year.ToString & ", " & (vQualified2StartDate.Month - 1).ToString & ", " & vQualified2StartDate.Day.ToString & "), new Date(" & vQualified2EndDate.Year.ToString & ", " & (vQualified2EndDate.Month - 1).ToString & ", " & vQualified2EndDate.Day.ToString & ")]")
+  '        End If
+  '        If .isDispersed Then
+  '          vJscript.Append(",['Dispersed', new Date(" & vDispersedStartDate.Year.ToString & ", " & (vDispersedStartDate.Month - 1).ToString & ", " & vDispersedStartDate.Day.ToString & "), new Date(" & vDispersedEndDate.Year.ToString & ", " & (vDispersedEndDate.Month - 1).ToString & ", " & vDispersedEndDate.Day.ToString & ")]")
+  '        End If
+  '        If .isRejected Then
+  '          vJscript.Append(",['Rejected', new Date(" & vRejectedStartDate.Year.ToString & ", " & (vRejectedStartDate.Month - 1).ToString & ", " & vRejectedStartDate.Day.ToString & "), new Date(" & vRejectedEndDate.Year.ToString & ", " & (vRejectedEndDate.Month - 1).ToString & ", " & vRejectedEndDate.Day.ToString & ")]")
+  '        End If
+  '        vJscript.Append("]);")
+  '        vJscript.Append("chart.draw(dataTable);")
+  '        vJscript.Append("}")
+
+  '        lblReport2.Text = "Review Intervals Between Application Actions"
+  '        'begin load values from the list
+  '        Dim cScript As New HtmlGenericControl
+  '        cScript.TagName = "script"
+  '        cScript.Attributes.Add("type", "text/javascript")
+  '        cScript.InnerHtml = vJscript.ToString
+  '        phReport2.Controls.Add(cScript)
+  '      End With
+  '    End Using
+
+  '  Catch ex As Exception
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
+
 End Class

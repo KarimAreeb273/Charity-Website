@@ -692,85 +692,51 @@
       </div>
       <div id="tabUserDash" class="tab-pane fade">
         <br />
-        <table style="width: 100%" border="1">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <table style="width: 100%" border="0">
           <tr>
-            <th style="width: 50%; text-align:center">
-              Final Application Status
+            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
+              <asp:Label ID="lblReport1" runat="server" Text="Report1"></asp:Label>
             </th>
-            <th style="width: 50%; text-align:center">
-              Days between Status Change
-            </th>            
+            <th style="width: 1%; text-align:center">
+              &nbsp;
+            </th>
+            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
+              <asp:Label ID="lblReport2" runat="server" Text="Report2"></asp:Label>
+            </th>
+            <th style="width: 1%; text-align:center">
+              &nbsp;
+            </th>
+            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
+              <asp:Label ID="lblReport3" runat="server" Text="Report3"></asp:Label>
+            </th>
           </tr>
           <tr>
-            <td style="width: 50%; text-align:center">
-              Final Application Status
+            <td style="text-align:center">
+              <%--<iframe runat="server" id="ifrReport1" style="border:none; width:400px; height: 400px; overflow:hidden;" scrolling="no"></iframe>--%>
+              <asp:PlaceHolder ID="phReport1" runat="server"></asp:PlaceHolder>
+              <div id="divReport1" style="width: 100%; height: 300px;"></div>
             </td>
-            <td style="width: 50%; text-align:center">
-              Days between Status Change
+            <td style="text-align:center">
+              &nbsp;
             </td>
-          </tr>
-          <tr>
-            <td style="width: 50%; height: 250px; vertical-align:top; text-align:center">
-              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-              <%--
-                <script type="text/javascript">
-                  google.charts.load('current', {'packages':['corechart']});
-                  google.charts.setOnLoadCallback(drawChart);
-
-                  function drawChart() {
-
-                    var data = google.visualization.arrayToDataTable([
-                      ['Status', 'Count'],
-                      ['Approved',     vSubmittedCount],
-                      ['Rejected',     vRejectedCount]
-                    ]);
-
-                    var options = {
-                      title: 'Final Application Status'
-                    };
-
-                    var chart = new google.visualization.PieChart(document.getElementById('pieFinalStatus'));
-
-                    chart.draw(data, options);
-                  }
-                </script>
-              --%>
-              <asp:PlaceHolder ID="phPieFinalStatus" runat="server"></asp:PlaceHolder>
-              <div id="pieFinalStatus" style="width: 400px; height: 250px;"></div>
+            <td style="text-align:center">
+              <%--<iframe runat="server" id="ifrReport2" style="border:solid; width:700px; height: 400px; overflow:hidden;" scrolling="yes"></iframe>--%>
+              <asp:PlaceHolder ID="phReport2" runat="server"></asp:PlaceHolder>
+              <div id="divReport2" style="width: 100%; height: 400px;"></div>
             </td>
-            <td  style="width: 50%; height: 250px; vertical-align:top; text-align:center">
-              <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-              <script type="text/javascript">
-                google.charts.load('current', {'packages':['corechart']});
-                google.charts.setOnLoadCallback(drawChart);
-
-                function drawChart() {
-                  var data = google.visualization.arrayToDataTable([
-                    ['Year', 'Sales', 'Expenses'],
-                    ['2004',  1000,      400],
-                    ['2005',  1170,      460],
-                    ['2006',  660,       1120],
-                    ['2007',  1030,      540]
-                  ]);
-
-                  var options = {
-                    title: 'Company Performance',
-                    curveType: 'function',
-                    legend: { position: 'bottom' }
-                  };
-
-                  var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-                  chart.draw(data, options);
-                }
-              </script>
-              <div id="curve_chart" style="width: 400px; height: 250px"></div>
+            <td style="text-align:center">
+              &nbsp;
+            </td>
+            <td style="text-align:center">
+              <%--<iframe runat="server" id="ifrReport3" style="border:solid; width:700px; height: 400px; overflow:hidden;" scrolling="yes"></iframe>--%>
+              <asp:PlaceHolder ID="phReport3" runat="server"></asp:PlaceHolder>
+              <div id="divReport3" style="width: 100%; height: 400px;"></div>
             </td>
           </tr>
-        </table>
+        </table>        
       </div>
     </div>
-
     <div class="row">
       <div class="form-group">
         <div class="col-lg-12">
@@ -915,5 +881,5 @@
     </div>
   </div>
   <br />
-  <br />
+  <br />  
 </asp:Content>
