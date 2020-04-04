@@ -32,6 +32,15 @@ Partial Public Class SiteMaster
     Protected WithEvents pnlApplicant As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''A11 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents A11 As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
     '''lnkApplication control.
     '''</summary>
     '''<remarks>
