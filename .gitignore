@@ -260,3 +260,6 @@ paket-files/
 __pycache__/
 *.pyc
 /zakat.icclmd.team/todo.txt
+/zakat.icclmd.data/temp.txt
+/zakat.icclmd.org/Temp.html
+/zakat.icclmd.team/To Do.docx

@@ -1,0 +1,11 @@
+Website: https://zakat.icclmd.org
+
+DB Name: ph14095182591_iccl_zakat
+DB Server: 198.71.227.2
+username: iccl_zakat
+password: wrkn4ICCL!
+
+FTP Access:
+Host: zakat.icclmd.org
+username: eiad_zakat
+pwd: Eiad12!@

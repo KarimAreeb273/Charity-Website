@@ -202,10 +202,7 @@ Public Class Base
     vMsgText.Append("Laurel, MD 20707<br />")
     vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
     vMsgText.Append("</span>")
-    '*******************
-    'uncomment next line
-    '*******************
-    'Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+    Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
     createUser = vUserId
   End Function

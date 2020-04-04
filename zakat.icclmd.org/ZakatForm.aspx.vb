@@ -90,8 +90,6 @@
               txtHusbandLastName.Text = .husbandLastName
               txtHusbandEmail.Text = .husbandEmail
               txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
-              chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
-              txtHusbandExplanation.Text = .husbandZakatExplanation
               txtMasjidName.Text = .primaryMasjidName
               txtMasjidPhone.Text = Base.getFormattedPhone(.primaryMasjidPhone, Base.enumFormatPhone.Format)
             End With
@@ -132,6 +130,8 @@
 
               With oDraftApplication
                 drpOrganization.SelectedValue = .organizationId
+                chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
+                txtHusbandExplanation.Text = .husbandZakatExplanation
                 txtValueCash.Text = FormatCurrency(.totalValueCash)
                 txtValueGold.Text = FormatCurrency(.totalValueGold)
                 txtValueSilver.Text = FormatCurrency(.totalValueSilver)
@@ -1691,7 +1691,7 @@
       vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
       vMsgText.Append("Assalaamu Alaikum " & Session("sUserFirstName") & ",<br /><br />")
       vMsgText.Append("Your Zakat Application has been received. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
-      vMsgText.Append("<b>Dashboard Link: </b> <a target='_blank' href='https://zakat.icclmd.org/dashboard'>https://zakat.icclmd.org/dashboard</a><br /><br />")
+      vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
       vMsgText.Append("If you have issues regarding your zakat application, please don’t hesitate to contact us using the information below.<br /><br />")
       vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
       vMsgText.Append("ICCL Zakat Administrator<br />")
@@ -1701,10 +1701,7 @@
       vMsgText.Append("Laurel, MD 20707<br />")
       vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
       vMsgText.Append("</span>")
-      '*******************
-      'uncomment next line
-      '*******************
-      'vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+      vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
       'email the validators that an application requires reviewing
       Using oDB As New zakatEntities
@@ -1729,10 +1726,7 @@
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          '*******************
-          'uncomment next line
-          '*******************
-          'vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
 
         'add a generic review action on behalf of the user
@@ -1802,8 +1796,6 @@
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
           .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
-          .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
-          .husbandZakatExplanation = txtHusbandExplanation.Text
           .primaryMasjidName = txtMasjidName.Text
           .primaryMasjidPhone = Base.getFormattedPhone(txtMasjidPhone.Text, Base.enumFormatPhone.Strip)
           .updatedBy = pUserId
@@ -1882,6 +1874,8 @@
             .isQualified2 = False
             .IsDispersed = False
             .applicationStatus = "Drafted"
+            .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
+            .husbandZakatExplanation = txtHusbandExplanation.Text
             .totalValueCash = txtValueCash.Text
             .totalValueGold = txtValueGold.Text
             .totalValueSilver = txtValueSilver.Text
