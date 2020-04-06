@@ -152,7 +152,7 @@ Public Class Base
         .password = Base.getPassword()  'randomly generate a password
       End With
 
-      ' Add to Memory
+      ' Add to db
       oDB.USER.Add(oUser)
       oDB.SaveChanges()
 
