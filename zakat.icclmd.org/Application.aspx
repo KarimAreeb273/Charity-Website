@@ -14,7 +14,13 @@
         </a>
       </li>
       <li>
-        <a data-toggle="tab" href="#tabAppHist">
+        <a data-toggle="tab" href="#tabAppArtifacts">
+          <b>Application Artifacts</b>&nbsp;
+          <span class="label label-primary"><asp:Label ID="lblApplicationArtifacts" runat="server" Text="0"></asp:Label></span>
+        </a>
+      </li>
+      <li>
+        <a data-toggle="tab" href="#tabAppHistory">
           <b>Application History</b>&nbsp;
           <span class="label label-primary"><asp:Label ID="lblReviewsCountBadge" runat="server" Text="0"></asp:Label></span>
         </a>
@@ -659,7 +665,39 @@
           </div>
         </div>
       </div>
-      <div id="tabAppHist" class="tab-pane fade">
+      <div id="tabAppArtifacts" class="tab-pane fade">
+        <br />
+        <table class="table table-hover" border="0">
+          <asp:Repeater ID="rptArtifacts" runat="server">
+            <HeaderTemplate>
+              <tr style="height: 30px; border: solid solid solid solid">
+                <th style="text-align: left; width: 15%">Artifact #</th>
+                <th style="text-align: left; width: 25%">Artifact Type</th>
+                <th style="text-align: left; width: 35%;">Filename</th>
+                <th style="text-align: left; width: 25%">Content Type</th>
+              </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+              <tr>
+                <td style="text-align: left; vertical-align: middle">
+                  <%# getFormattedNumber(DataBinder.Eval(Container.DataItem, "artifactId"))%>
+                </td>
+                <td style="text-align: left; vertical-align: middle">
+                  <%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>
+                </td>
+                <td style="text-align: left; vertical-align: middle">
+                  <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;&nbsp;Click to Download)</asp:LinkButton>
+                </td>
+                <td style="text-align: left; vertical-align: middle">
+                  <%# DataBinder.Eval(Container.DataItem, "contentType")%>
+                </td>
+              </tr>
+            </ItemTemplate>
+          </asp:Repeater>
+        </table>
+        <asp:LinkButton ID="btnDownloadArtifact" runat="server" Visible="false" Text="temp"></asp:LinkButton>
+      </div>
+      <div id="tabAppHistory" class="tab-pane fade">
         <br />
         <table class="table table-hover" border="0">
           <asp:Repeater ID="rptReviewHistory" runat="server">

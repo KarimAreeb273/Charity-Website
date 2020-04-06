@@ -1,4 +1,9 @@
-﻿Public Class ZakatForm
+﻿Imports System.IO
+Imports System.Data
+Imports System.Data.SqlClient
+Imports System.Configuration
+
+Public Class ZakatForm
   Inherits System.Web.UI.Page
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -38,7 +43,7 @@
           drpNationality.DataBind()
 
           'load the organization dropdown
-          drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Order By ORGANIZATION.name).ToList
+          drpOrganization.DataSource = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.name <> "Placeholder" Order By ORGANIZATION.name).ToList
           drpOrganization.DataTextField = "name"
           drpOrganization.DataValueField = "organizationId"
           drpOrganization.DataBind()
@@ -49,6 +54,12 @@
           lstLanguages.DataTextField = "name"
           lstLanguages.DataValueField = "languageId"
           lstLanguages.DataBind()
+
+          'load the artifact type
+          drpArtifactType.DataSource = (From ARTIFACT_TYPE In oDB.ARTIFACT_TYPE).ToList
+          drpArtifactType.DataTextField = "name"
+          drpArtifactType.DataValueField = "artifactTypeId"
+          drpArtifactType.DataBind()
 
           If vUserId <> 0 Then
             Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
@@ -119,11 +130,6 @@
             'load the references repeater
             setReferences()
 
-            'refresh applicant progress
-            RefreshApplicantProgress()
-            'refresh reference progress
-            RefreshReferenceProgress()
-
             'load applciation belongs to the user and the draft status is true and the submitted flag is false
             If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).Any Then
               Dim oDraftApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).First
@@ -168,15 +174,28 @@
                 txtEmployerZip.Text = .employerZip
                 txtPersonalStatement.Text = .personalNeedStatement
               End With
+
+              'refresh applicant progress
+              RefreshApplicantProgress()
+              'refresh reference progress
+              RefreshReferenceProgress()
+              'refresh reference progress
+              RefreshArtifactProgress()
               'refresh assets and support progress
               RefreshAssetsSupportProgress()
               'refresh employment progress
               RefreshEmploymentProgress()
               'refresh personal statement progress
               RefreshStatementProgress()
+
+              Session("sApplicationId") = oDraftApplication.applicationId
+
+              'load the artifact repeater
+              setArtifacts()
             End If
           End If
         End Using
+
         If drpOrganization.SelectedValue = "(Select One)" Then
           accZakat.Enabled = False
           btnSave.Enabled = False
@@ -777,6 +796,39 @@
     End Try
   End Sub
 
+  Sub RefreshArtifactProgress()
+    Try
+      'set values on the form
+      lblArtifacts.Text = 0
+      Dim vApplicationId As Int32 = Session("sApplicationId")
+      If vApplicationId <> 0 Then
+        Using oDB As New zakatEntities
+          If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Photo Identification").Any Then
+            Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Photo Identification").ToList
+            lblArtifacts.Text = oArtifacts.Count
+          End If
+        End Using
+      End If
+      'update the progress
+      Dim vProgress As Decimal = CInt(lblArtifacts.Text)
+      Dim vPossible As Int32 = 1
+
+      If vProgress > 0 Then
+        vProgress = 1
+      Else
+        vProgress = 0
+      End If
+
+      vProgress = ((vProgress / vPossible) * 100)
+      'set progress bar attributes
+      prgArtifact.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
+      prgArtifact.Style("width") = CStr(CInt(vProgress)) + "%"
+      ltlPercentArtifact.Text = CStr(CInt(vProgress)) + "% Complete"
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
   Sub RefreshStatementProgress()
     Try
       If txtPersonalStatement.Text = "" Then
@@ -803,7 +855,7 @@
     getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
 
-  Public Sub btnDeleteDependent_Click(sender As Object, e As System.EventArgs) 'Handles btnDelete.Click
+  Public Sub btnDeleteDependent_Click(sender As Object, e As System.EventArgs)
     Try
       Dim vDependentId As Int32 = sender.CommandArgument
       Using oDB As New zakatEntities
@@ -818,7 +870,7 @@
     End Try
   End Sub
 
-  Public Sub btnDeleteReference_Click(sender As Object, e As System.EventArgs) 'Handles btnDelete.Click
+  Public Sub btnDeleteReference_Click(sender As Object, e As System.EventArgs)
     Try
       Dim vReferenceId As Int32 = sender.CommandArgument
       Using oDB As New zakatEntities
@@ -830,6 +882,57 @@
       setReferences()
     Catch ex As Exception
       Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Protected Sub btnDeleteArtifact_Click(sender As Object, e As System.EventArgs) Handles btnDeleteArtifact.Click
+    Try
+      Dim vArtifactId As Int32 = sender.CommandArgument
+      Using oDB As New zakatEntities
+        If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).Any Then
+          Dim oArtifact As ARTIFACT = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
+          oDB.ARTIFACT.Remove(oArtifact)
+          oDB.SaveChanges()
+        End If
+      End Using
+      'refresh the artifact list
+      setArtifacts()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Protected Sub btnDownloadArtifact_Click(sender As Object, e As System.EventArgs) Handles btnDownloadArtifact.Click
+    Try
+      'if artifact id = 0, redirect home
+      Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
+      If vArtifactId = 0 Then Response.Redirect("/")
+
+      Dim vBytes As Byte()
+      Dim vFileName As String, vContentType As String
+
+      Using oDB As New zakatEntities
+        Dim oArtifact As ARTIFACT
+        oArtifact = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
+        With oArtifact
+          'ApplicationId = sdr("applicationId")
+          vBytes = DirectCast(.data, Byte())
+          vContentType = .contentType
+          vFileName = .filename
+        End With
+        'perform download
+        Response.Clear()
+        Response.Buffer = True
+        Response.Charset = ""
+        Response.Cache.SetCacheability(HttpCacheability.NoCache)
+        Response.ContentType = vContentType
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
+        Response.BinaryWrite(vBytes)
+        Response.Flush()
+        Response.End()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex)
     End Try
   End Sub
 
@@ -862,6 +965,24 @@
       RefreshReferenceProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setArtifacts()
+    Try
+      'verify that we have an applciation id to associate to it otherwise redirect home
+      Dim vApplicationId As Int32 = Session("sApplicationId")
+      If vApplicationId = 0 Then Response.Redirect("/")
+      Using oDB As New zakatEntities
+        Dim oArtifacts As List(Of ARTIFACT)
+        oArtifacts = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId).ToList
+        rptArtifacts.DataSource = oArtifacts
+        rptArtifacts.DataBind()
+      End Using
+      'update progress bar
+      RefreshArtifactProgress()
+    Catch ex As Exception
+      Response.Write(ex)
     End Try
   End Sub
 
@@ -1017,11 +1138,6 @@
         End If
       End Using
       RefreshApplicantProgress()
-
-      'place the focus in the next textbox in the tabnidex order
-      'Dim tb As TextBox = CType(FormOrder.FindControl("txtFirstName"), TextBox)
-      'tb.Focus()
-      'SetFocus(txtFirstName)
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -1628,6 +1744,13 @@
 
   Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
     Try
+      'verify that the user has a phone id
+      valPhotoID.IsValid = True
+      If CInt(lblArtifacts.Text) = 0 Then
+        valPhotoID.IsValid = False
+        Exit Sub
+      End If
+
       'verify acknowledgement statement
       valAcknowledgement.IsValid = True
       If chkAcknowledgement.Checked = False Then
@@ -1690,7 +1813,7 @@
 
       vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
       vMsgText.Append("Assalaamu Alaikum " & Session("sUserFirstName") & ",<br /><br />")
-      vMsgText.Append("Your Zakat Application has been received. Please email a copy of your photo identification to the ICCL Zakat Administrator using the information in the signature line below. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
+      vMsgText.Append("Your Zakat Application has been received. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
       vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
       vMsgText.Append("If you have issues regarding your zakat application, please don’t hesitate to contact us using the information below.<br /><br />")
       vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -1744,8 +1867,8 @@
         oDB.SaveChanges()
       End Using
 
-      'redirect to the dashboard
-      Response.Redirect("dashboard")
+      'redirect to the activity page
+      Response.Redirect("activity")
 
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -1872,7 +1995,7 @@
             .isInvestigated = False
             .isQualified1 = False
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
             .applicationStatus = "Drafted"
             .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
             .husbandZakatExplanation = txtHusbandExplanation.Text
@@ -1922,6 +2045,9 @@
           End With
           'update db
           oDB.SaveChanges()
+
+          'set the applicationId session variable
+          Session("sApplicationId") = oApplication.applicationId
         Else
           'application does not exist so create new application
           Dim oApplication As New APPLICATION
@@ -1935,7 +2061,7 @@
             .isInvestigated = False
             .isQualified1 = False
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
             .applicationStatus = "Drafted"
             .totalValueCash = txtValueCash.Text
             .totalValueGold = txtValueGold.Text
@@ -1986,16 +2112,85 @@
           'create in db
           oDB.APPLICATION.Add(oApplication)
           oDB.SaveChanges()
+
+          'set the applicationId session variable
+          Session("sApplicationId") = oApplication.applicationId
         End If
       End Using
 
+      'if this is a save and not submit, refresh the form page
       If isSave Then
-        'refresh page
         Response.Redirect("zakatform")
       End If
 
     Catch ex As Exception
       Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Function getFormattedNumber(ByVal pNumber As Int32) As String
+    getFormattedNumber = Base.getFormattedNumber(pNumber)
+  End Function
+
+  Private Sub btnUploadArtifact_Click(sender As Object, e As EventArgs) Handles btnUploadArtifact.Click
+    Try
+      'reset validator
+      valUserRequiredArtifact.IsValid = True
+
+      'if no user determine if one can be created or give validation
+      Dim vUserId As Int32 = Session("sUserId")
+      If vUserId = 0 Then
+        'is the email, first and last name populated?
+        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+          'create the user and then add the reference
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+        Else
+          'show validation and exit sub
+          valUserRequiredArtifact.IsValid = False
+          Exit Sub
+        End If
+      End If
+
+      'set session userId
+      Session("sUserId") = vUserId
+
+      'save the application
+      SaveZakatForm(vUserId, False)
+
+      'verify that we have an applciation id to associate to it otherwise redirect home
+      Dim vApplicationId As Int32 = Session("sApplicationId")
+      If vApplicationId = 0 Then Response.Redirect("/")
+      'obtain file information if one exists
+      If fileUploadArtifact.HasFile Then
+        Dim vFilename As String = Path.GetFileName(fileUploadArtifact.PostedFile.FileName)
+        Dim vContentType As String = fileUploadArtifact.PostedFile.ContentType
+        Using fs As Stream = fileUploadArtifact.PostedFile.InputStream
+          Using br As New BinaryReader(fs)
+            Dim bytes As Byte() = br.ReadBytes(DirectCast(fs.Length, Long))
+            Using oDB As New zakatEntities
+              'create new ARTIFACT
+              Dim oArtifact As New ARTIFACT
+              With oArtifact
+                .artifactTypeId = drpArtifactType.SelectedValue
+                .applicationId = vApplicationId
+                .filename = vFilename
+                .contentType = vContentType
+                .data = bytes
+              End With
+              'add to db
+              oDB.ARTIFACT.Add(oArtifact)
+              oDB.SaveChanges()
+
+              'reset the artifact type dropdown
+              Dim oArtifactType As ARTIFACT_TYPE = (From ARTIFACT_TYPE In oDB.ARTIFACT_TYPE Where ARTIFACT_TYPE.name = "(Select One)").First
+              drpArtifactType.SelectedValue = oArtifactType.artifactTypeId
+            End Using
+          End Using
+        End Using
+        Response.Redirect("zakatform")
+      End If
+    Catch ex As Exception
+      Response.Write(ex)
     End Try
   End Sub
 End Class

@@ -231,6 +231,12 @@
           rptReviewHistory.DataSource = oReviews
           rptReviewHistory.DataBind()
           lblReviewsCountBadge.Text = oReviews.Count
+
+          'populate the artifact 
+          Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId).ToList
+          rptArtifacts.DataSource = oArtifacts
+          rptArtifacts.DataBind()
+          lblApplicationArtifacts.Text = oArtifacts.Count
         End With
       End Using
 
@@ -302,7 +308,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just validated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just validated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -405,7 +411,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just investigated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just investigated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -603,7 +609,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just qualified. We will notify you when the application progresses past the next step. You can also review the progress of your application online by clicking or copying/pasting the dashboard link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just qualified. We will notify you when the application progresses past the next step. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -800,6 +806,44 @@
   Public Function getFormattedPhone(ByVal pPhone As String) As String
     getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
+
+  Public Function getFormattedNumber(ByVal pNumber As Int32) As String
+    getFormattedNumber = Base.getFormattedNumber(pNumber)
+  End Function
+
+  Protected Sub btnDownloadArtifact_Click(sender As Object, e As System.EventArgs) Handles btnDownloadArtifact.Click
+    Try
+      'if artifact id = 0, redirect home
+      Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
+      If vArtifactId = 0 Then Response.Redirect("/")
+
+      Dim vBytes As Byte()
+      Dim vFileName As String, vContentType As String
+
+      Using oDB As New zakatEntities
+        Dim oArtifact As ARTIFACT
+        oArtifact = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
+        With oArtifact
+          'ApplicationId = sdr("applicationId")
+          vBytes = DirectCast(.data, Byte())
+          vContentType = .contentType
+          vFileName = .filename
+        End With
+        'perform download
+        Response.Clear()
+        Response.Buffer = True
+        Response.Charset = ""
+        Response.Cache.SetCacheability(HttpCacheability.NoCache)
+        Response.ContentType = vContentType
+        Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
+        Response.BinaryWrite(vBytes)
+        Response.Flush()
+        Response.End()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex)
+    End Try
+  End Sub
 
   Sub setReport1(vApplicationId As Int32)
     Try

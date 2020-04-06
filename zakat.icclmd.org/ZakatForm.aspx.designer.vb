@@ -1337,6 +1337,105 @@ Partial Public Class ZakatForm
     Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
+    '''paneArtifacts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents paneArtifacts As Global.AjaxControlToolkit.AccordionPane
+    
+    '''<summary>
+    '''lblArtifacts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblArtifacts As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''prgArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents prgArtifact As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''ltlPercentArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents ltlPercentArtifact As Global.System.Web.UI.WebControls.Literal
+    
+    '''<summary>
+    '''drpArtifactType control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents drpArtifactType As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''fileUploadArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents fileUploadArtifact As Global.System.Web.UI.WebControls.FileUpload
+    
+    '''<summary>
+    '''valUserRequiredArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valUserRequiredArtifact As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
+    '''btnUploadArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnUploadArtifact As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''rptArtifacts control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rptArtifacts As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''btnDownloadArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDownloadArtifact As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnDeleteArtifact control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDeleteArtifact As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''paneStatement control.
     '''</summary>
     '''<remarks>
@@ -1389,6 +1488,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents valAcknowledgement As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
+    '''valPhotoID control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valPhotoID As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''btnSave control.

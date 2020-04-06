@@ -1428,7 +1428,119 @@
             </table>
           </Content>
         </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneStatement" TabIndex="500">
+        <ajaxToolkit:AccordionPane runat="server" ID="paneArtifacts" TabIndex="500">
+          <Header>
+            <table style="width:100%">
+              <tr>
+                <th style="width:25%; text-align:left; vertical-align: middle">
+                  Artifacts
+                  <span class="label label-default"><asp:Label ID="lblArtifacts" runat="server" Text="0"></asp:Label></span>
+                  &nbsp;(Photo ID Required)
+                </th>
+                <th style="width:50%; text-align:center; vertical-align: middle">
+                  <div class="progress" style="position: relative; top: 10px;">
+                    <div id="prgArtifact" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
+                      <asp:Literal ID="ltlPercentArtifact" runat="server" Text="0% Complete"></asp:Literal>
+                    </div>
+                  </div>
+                </th>
+                <th style="width:25%; text-align:right; vertical-align: middle">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+                </th>
+              </tr>
+            </table>
+          </Header>
+          <Content>
+            <table border="1" style="width:100%">
+              <tr>
+                <td style="width:100%">
+                  <table border="0" style="width:100%">
+                    <tr>
+                      <td style="width:50%">
+                        <div class="col-lg-12">
+                          <div class="form-horizontal">
+                            <br /><br />
+                            <div class="form-group">
+                              <asp:Label runat="server" AssociatedControlID="drpArtifactType" CssClass="col-lg-2 control-label" ToolTip="Artifact Type" Style="white-space: nowrap; position: relative; top: 0px;">Artifact Type:</asp:Label>
+                              <div class="col-lg-10">
+                                <asp:DropDownList ID="drpArtifactType" runat="server" ToolTip="Relation" CssClass="form-control" TabIndex="501" AutoPostBack="false" ValidationGroup="Artifact">
+                                </asp:DropDownList>
+                                <asp:RequiredFieldValidator runat="server" ControlToValidate="drpArtifactType" CssClass="text-danger" ErrorMessage="The artifact type is required." InitialValue="(Select One)" ValidationGroup="Artifact" />
+                              </div>
+                            </div>                          
+                            <div class="form-group">
+                              <div class="col-lg-12">
+                                <b>Your Current List of Artifacts For This Application Are Shown Below:</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td style="width:50%">
+                        <div class="col-lg-12">
+                          <div class="form-horizontal">
+                            <div class="form-group">
+                              <table style="width: 100%" border="0">
+                                <tr>
+                                  <td style="width: 60%; vertical-align:top">
+                                    <asp:FileUpload ID="fileUploadArtifact" runat="server" CssClass="col-lg-2 form-control" style="max-width:100%" Width="100%" TabIndex="502" /><br />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="fileUploadArtifact" CssClass="text-danger" ErrorMessage="Select a file before uploading." ValidationGroup="Artifact" Display="Dynamic" />
+                                    <asp:CustomValidator ID="valUserRequiredArtifact" runat="server" CssClass="text-danger"  ErrorMessage="You must enter your email and name before uploading." Display="Static" ValidationGroup="Reference" Enabled="True" />
+                                  </td>
+                                  <td style="width: 40%; vertical-align:top">
+                                    <div class="col-lg-10">
+                                      <asp:Button ID="btnUploadArtifact" runat="server" Text="Upload Artifact" CssClass="btn btn-default" TabIndex="503" Width="150" ValidationGroup="Artifact" />
+                                    </div>
+                                  </td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  <br />
+                  <table class="table table-hover" border="0" style="font-size:12px">
+                    <asp:Repeater ID="rptArtifacts" runat="server">
+                      <HeaderTemplate>
+                        <tr style="height: 30px; border: solid solid solid solid">
+                          <th style="text-align: left; width: 10%">Artifact #</th>
+                          <th style="text-align: left; width: 20%">Artifact Type</th>
+                          <th style="text-align: left; width: 30%;">Filename</th>
+                          <th style="text-align: left; width: 10%">Content Type</th>
+                          <th style="text-align: center; width: 10%;">Remove</th>
+                        </tr>
+                      </HeaderTemplate>
+                      <ItemTemplate>
+                        <tr>
+                          <td style="text-align: left; vertical-align: middle">
+                            <%# getFormattedNumber(DataBinder.Eval(Container.DataItem, "artifactId"))%>
+                          </td>
+                          <td style="text-align: left; vertical-align: middle">
+                            <%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>
+                          </td>
+                          <td style="text-align: left; vertical-align: middle">
+                            <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%></asp:LinkButton>
+                          </td>
+                          <td style="text-align: left; vertical-align: middle">
+                            <%# DataBinder.Eval(Container.DataItem, "contentType")%>
+                          </td>
+                          <td style="text-align: center; vertical-align: middle">
+                            <asp:LinkButton ID="btnDeleteArtifact2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>' runat="server" CausesValidation="false" OnClick="btnDeleteArtifact_Click" ToolTip="Remove Artifact"><span class="glyphicon glyphicon-remove" style="font-size:20px; color:red"></span></asp:LinkButton>
+                          </td>
+                        </tr>
+                      </ItemTemplate>
+                    </asp:Repeater>
+                  </table>
+                  <asp:LinkButton ID="btnDownloadArtifact" runat="server" Visible="false" Text="temp"></asp:LinkButton>
+                  <asp:LinkButton ID="btnDeleteArtifact" runat="server" Visible="false" Text="temp"></asp:LinkButton>
+                </td>
+              </tr>
+            </table>
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="paneStatement" TabIndex="600">
           <Header>
             <table style="width:100%">
               <tr>
@@ -1453,7 +1565,7 @@
               <tr>
                 <td style="width:100%; padding: 5px">
                   <asp:Label runat="server" AssociatedControlID="txtPersonalStatement" CssClass="control-label" ToolTip="Personal Statement" style="white-space: nowrap">Briefly describe your personal and/or family needs (1000 characters max):</asp:Label>
-                  <asp:TextBox runat="server" ID="txtPersonalStatement" AutoCompleteType="Disabled" MaxLength="1000" TabIndex="501" TextMode="MultiLine" Rows="5" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
+                  <asp:TextBox runat="server" ID="txtPersonalStatement" AutoCompleteType="Disabled" MaxLength="1000" TabIndex="601" TextMode="MultiLine" Rows="5" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPersonalStatement" CssClass="text-danger" ErrorMessage="The personal statement is required." Display="Static" ValidationGroup="Submit" />
                 </td>
               </tr>
@@ -1467,23 +1579,23 @@
       <div class="form-group">
         <div class="col-lg-12">
           <table style="width:100%">
-            
             <tr>
               <td style="width:96%; text-align:right">
                 <asp:CustomValidator ID="valUserRequiredSave" runat="server" CssClass="text-danger" ErrorMessage="You must enter your email and name before saving the form." Display="Dynamic" ValidationGroup="Save" Enabled="True" />
                 <asp:CustomValidator ID="valAcknowledgement" runat="server" CssClass="text-danger" ErrorMessage="You must acknowledge the submission statement by checking the box at the top of this form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
+                <asp:CustomValidator ID="valPhotoID" runat="server" CssClass="text-danger" ErrorMessage="You must have a photo identification before submitting" Display="Dynamic" ValidationGroup="Submit" />
               </td>
               <td style="width:1%; text-align:right">
                 &nbsp;
               </td>
               <td style="width:1%; text-align:right">
-                <asp:Button ID="btnSave" runat="server" Text="Save Application" CssClass="btn btn-default" ValidationGroup="Save" TabIndex="600" Width="150" Enabled="False" />
+                <asp:Button ID="btnSave" runat="server" Text="Save Application" CssClass="btn btn-default" ValidationGroup="Save" TabIndex="700" Width="150" Enabled="False" />
               </td>
               <td style="width:1%; text-align:right">
                 &nbsp;
               </td>
               <td style="width:1%; text-align:right">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-success" TabIndex="601" Width="150"  ValidationGroup="Submit" Enabled="False" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-success" TabIndex="701" Width="150"  ValidationGroup="Submit" Enabled="False" />
               </td>
             </tr>
           </table>
