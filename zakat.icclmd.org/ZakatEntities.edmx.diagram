@@ -16,18 +16,16 @@
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
         <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" />
-        <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="2.5" PointY="19" />
-        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="13.5" PointY="6.5" />
+        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="14.125" PointY="10.375" />
         <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="8.875" PointY="14.5" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_ROLE" />
-        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="15.75" PointY="16.625" />
-        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="18.25" PointY="9.25" />
+        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="14" PointY="15.625" />
+        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="16.375" PointY="10.375" />
         <EntityTypeShape EntityType="zakatModel.USER" Width="1.5" PointX="12" PointY="10.375" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
-        <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_APPLICATION" />
         <AssociationConnector Association="zakatModel.FK_CERTIFICATION_SKILL_USER" />
         <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
@@ -38,6 +36,10 @@
         <AssociationConnector Association="zakatModel.FK_USER_STATE1" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
+        <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="18.625" PointY="17.5" />
+        <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="18.25" PointY="13.125" />
+        <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
+        <AssociationConnector Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

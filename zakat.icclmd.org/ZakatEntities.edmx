@@ -83,8 +83,18 @@
             <PropertyRef Name="artifactId" />
           </Key>
           <Property Name="artifactId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="artifactTypeId" Type="int" />
           <Property Name="applicationId" Type="int" />
-          <Property Name="artifact" Type="varbinary(max)" />
+          <Property Name="filename" Type="varchar" MaxLength="50" />
+          <Property Name="contentType" Type="varchar" MaxLength="400" />
+          <Property Name="data" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="ARTIFACT_TYPE">
+          <Key>
+            <PropertyRef Name="artifactTypeId" />
+          </Key>
+          <Property Name="artifactTypeId" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="25" />
         </EntityType>
         <EntityType Name="CERTIFICATION_SKILL">
           <Key>
@@ -285,6 +295,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
+          <End Role="ARTIFACT_TYPE" Type="Self.ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Role="ARTIFACT" Type="Self.ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIFACT_TYPE">
+              <PropertyRef Name="artifactTypeId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="artifactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
           <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
           <End Role="CERTIFICATION_SKILL" Type="Self.CERTIFICATION_SKILL" Multiplicity="*" />
@@ -468,6 +490,7 @@
         <EntityContainer Name="zakatModelStoreContainer">
           <EntitySet Name="APPLICATION" EntityType="Self.APPLICATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ARTIFACT" EntityType="Self.ARTIFACT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="Self.ARTIFACT_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="Self.CERTIFICATION_SKILL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPENDENT" EntityType="Self.DEPENDENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" Schema="dbo" store:Type="Tables" />
@@ -494,6 +517,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="Self.FK_ARTIFACT_APPLICATION">
             <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="Self.FK_ARTIFACT_ARTIFACT_TYPE">
+            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
             <End Role="ARTIFACT" EntitySet="ARTIFACT" />
           </AssociationSet>
           <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="Self.FK_CERTIFICATION_SKILL_USER">
@@ -582,7 +609,6 @@
             <End Role="STATE" EntitySet="STATE" />
             <End Role="REFERENCE" EntitySet="REFERENCE" />
           </AssociationSet>
-          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
           <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
           <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
           <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
@@ -607,10 +633,6 @@
           <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
           </AssociationSet>
           <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
             <End Role="APPLICATION" EntitySet="APPLICATION" />
@@ -651,6 +673,16 @@
           <AssociationSet Name="FK_USER_ROLE_USER" Association="zakatModel.FK_USER_ROLE_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
+          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
+            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CERTIFICATION_SKILL">
@@ -781,15 +813,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ARTIFACT">
-          <Key>
-            <PropertyRef Name="artifactId" />
-          </Key>
-          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="applicationId" Type="Int32" />
-          <Property Name="artifact1" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
-        </EntityType>
         <EntityType Name="DEPENDENT">
           <Key>
             <PropertyRef Name="dependentId" />
@@ -928,8 +951,8 @@
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
           <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -1016,18 +1039,6 @@
             </Principal>
             <Dependent Role="APPLICATION">
               <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ARTIFACT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="applicationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1151,6 +1162,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ARTIFACT">
+          <Key>
+            <PropertyRef Name="artifactId" />
+          </Key>
+          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="artifactTypeId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
+        </EntityType>
+        <EntityType Name="ARTIFACT_TYPE">
+          <Key>
+            <PropertyRef Name="artifactTypeId" />
+          </Key>
+          <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
+        </EntityType>
+        <Association Name="FK_ARTIFACT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
+          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIFACT_TYPE">
+              <PropertyRef Name="artifactTypeId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="artifactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1238,15 +1294,6 @@
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="userLanguageId" ColumnName="userLanguageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ARTIFACT">
-            <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
-              <MappingFragment StoreEntitySet="ARTIFACT">
-                <ScalarProperty Name="artifact1" ColumnName="artifact" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-                <ScalarProperty Name="artifactId" ColumnName="artifactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1400,6 +1447,26 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTIFACT">
+            <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
+              <MappingFragment StoreEntitySet="ARTIFACT">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="contentType" ColumnName="contentType" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+                <ScalarProperty Name="artifactId" ColumnName="artifactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTIFACT_TYPE">
+            <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
+              <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

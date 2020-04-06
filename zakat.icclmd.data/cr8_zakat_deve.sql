@@ -899,6 +899,15 @@ INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WI'	,	'Wisconsin'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WY'	,	'Wyoming'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'DC'	,	'District of Columbia'	);
 
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	1	,	'(Select One)');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	2	,	'Photo Identification');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	3	,	'Lease/Mortgage Bill');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	4	,	'Utility Bill');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	5	,	'Medical Bill');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	6	,	'Tuition Bill');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Other');
+
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('applicant@icclmd.org'	,	'12121212'	,	'Applicant', 'Applicant');
