@@ -38,7 +38,6 @@
                     <tr>
                       <td style="text-align: left; vertical-align: middle">
                         <asp:Label ID="lblStatusName" runat="server" ToolTip='<%# DataBinder.Eval(Container.DataItem, "name")%>'><%# DataBinder.Eval(Container.DataItem, "name")%></asp:Label>
-                        <%--<asp:LinkButton ID="btnEdit1" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "name")%>'><%# DataBinder.Eval(Container.DataItem, "name")%></span></asp:LinkButton>--%>
                       </td>
                       <td style="vertical-align: middle">
                         <%# getFormattedPhone(DataBinder.Eval(Container.DataItem, "phone"))%>
