@@ -91,7 +91,7 @@
                 </asp:Panel>
                 <asp:Panel ID="pnlApplicant" runat="server" Visible="false">
                   <ul class="nav navbar-nav navbar-right">
-                    <li><a id="A11" runat="server" visible="true" href="~/activity">My Activity</a><li>
+                    <li><a id="A11" runat="server" visible="true" href="~/activity">Activity</a><li>
                     <li><a id="lnkApplication" runat="server" visible="true" href="~/zakatform">Apply</a><li>
                     <li><a id="A1" runat="server" visible="true" href="~/password">Password</a></li>
                     <li>
@@ -184,8 +184,6 @@
             </div>
           </div>
         </footer>
-
     </form>
 </body>
 </html>
-
