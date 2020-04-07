@@ -1507,8 +1507,8 @@
                         <tr style="height: 30px; border: solid solid solid solid">
                           <th style="text-align: left; width: 10%">Artifact #</th>
                           <th style="text-align: left; width: 20%">Artifact Type</th>
-                          <th style="text-align: left; width: 30%;">Filename</th>
-                          <th style="text-align: left; width: 10%">Content Type</th>
+                          <th style="text-align: left; width: 20%;">Filename</th>
+                          <th style="text-align: left; width: 40%">Content Type</th>
                           <th style="text-align: center; width: 10%;">Remove</th>
                         </tr>
                       </HeaderTemplate>

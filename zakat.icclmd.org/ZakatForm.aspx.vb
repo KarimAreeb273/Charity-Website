@@ -1813,7 +1813,7 @@ Public Class ZakatForm
 
       vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
       vMsgText.Append("Assalaamu Alaikum " & Session("sUserFirstName") & ",<br /><br />")
-      vMsgText.Append("Your Zakat Application has been received. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
+      vMsgText.Append("Your Zakat Application has been received. We will provide you with updates regarding the progress of your application. You can also review the progress of your application online by logging in and either click or copy/paste the activity link below:<br /><br />")
       vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
       vMsgText.Append("If you have issues regarding your zakat application, please don’t hesitate to contact us using the information below.<br /><br />")
       vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
