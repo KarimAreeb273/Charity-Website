@@ -308,7 +308,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just validated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just validated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by logging in and either click or copy/paste the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -411,7 +411,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just investigated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just investigated. We will notify you when the application progresses past the next steps. You can also review the progress of your application online by logging in and either click or copy/paste the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -609,7 +609,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been reviewed. The application was just qualified. We will notify you when the application progresses past the next step. You can also review the progress of your application online by clicking or copying/pasting the activity link below:<br /><br />")
+        vMsgText.Append("Your Zakat Application has been reviewed. The application was just qualified. We will notify you when the application progresses past the next step. You can also review the progress of your application online by logging in and either click or copy/paste the activity link below:<br /><br />")
         vMsgText.Append("<b>Activity Link: </b> <a target='_blank' href='https://zakat.icclmd.org/activity'>https://zakat.icclmd.org/activity</a><br /><br />")
         vMsgText.Append("If you have questions regarding the progress of your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
@@ -712,7 +712,7 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("This is the final message related to your Zakat Application. The funds related to this application were just dispersed. As a result, we are closing the case related to your Zakat Application.<br /><br />")
+        vMsgText.Append("The funds related to this application were just dispersed. As a result, we are closing the case related to your Zakat Application. This is the final message related to your Zakat Application. <br /><br />")
         vMsgText.Append("If you have questions regarding your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
         vMsgText.Append("ICCL Zakat Administrator<br />")

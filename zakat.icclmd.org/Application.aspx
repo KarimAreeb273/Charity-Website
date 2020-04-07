@@ -671,10 +671,10 @@
           <asp:Repeater ID="rptArtifacts" runat="server">
             <HeaderTemplate>
               <tr style="height: 30px; border: solid solid solid solid">
-                <th style="text-align: left; width: 15%">Artifact #</th>
-                <th style="text-align: left; width: 25%">Artifact Type</th>
-                <th style="text-align: left; width: 35%;">Filename</th>
-                <th style="text-align: left; width: 25%">Content Type</th>
+                <th style="text-align: left; width: 10%">Artifact #</th>
+                <th style="text-align: left; width: 15%">Artifact Type</th>
+                <th style="text-align: left; width: 30%;">Filename</th>
+                <th style="text-align: left; width: 55%">Content Type</th>
               </tr>
             </HeaderTemplate>
             <ItemTemplate>
