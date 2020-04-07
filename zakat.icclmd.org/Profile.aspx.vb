@@ -57,7 +57,9 @@
               drpHomeType.SelectedValue = .homeType
               txtHomeType.Enabled = IIf(drpHomeType.SelectedValue = "Other", True, False)
               txtHomeType.Text = .homeTypeOther
-              drpNationality.SelectedValue = .nationalityId
+              If (.nationalityId <> Nothing) Then
+                drpNationality.SelectedValue = .nationalityId
+              End If
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
               txtSchoolName.Text = .schoolName
@@ -127,7 +129,9 @@
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
-          .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
+          If txtDOB.Text <> "" Then
+            .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
+          End If
           .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
@@ -135,7 +139,9 @@
           .city = txtCity.Text
           .stateAbbr = drpState.SelectedValue
           .zip = txtZip.Text
-          .beganLivingDate = IIf(IsDate(txtBeganLiving.Text), CDate(txtBeganLiving.Text), Nothing)
+          If txtBeganLiving.Text <> "" Then
+            .beganLivingDate = IIf(IsDate(txtBeganLiving.Text), CDate(txtBeganLiving.Text), Nothing)
+          End If
           .homeType = drpHomeType.SelectedValue
           .homeTypeOther = txtHomeType.Text
           .nationalityId = drpNationality.SelectedValue
@@ -151,8 +157,6 @@
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
           .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
-          '.husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
-          '.husbandZakatExplanation = txtHusbandExplanation.Text
 
           'successful save so set user name
           Session("sUserFirstName") = txtFirstName.Text
