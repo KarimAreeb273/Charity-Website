@@ -8,245 +8,248 @@
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
 
-      Using oDB As New zakatEntities
-        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+      If Not IsPostBack Then
+        Using oDB As New zakatEntities
+          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
 
-        'obtain aggregates related to the users actions
-        Dim oApplicationsDrafted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDrafted = True).ToList
-        Dim oApplicationsSubmitted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True).ToList
-        Dim oApplicationsValidated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isValidated = True).ToList
-        Dim oApplicationsInvestigated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isInvestigated = True).ToList
-        Dim oApplicationsQualified1 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified1 = True).ToList
-        Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
-        Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
-        Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
+          'obtain aggregates related to the users actions
+          Dim oApplicationsDrafted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDrafted = True).ToList
+          Dim oApplicationsSubmitted As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True).ToList
+          Dim oApplicationsValidated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isValidated = True).ToList
+          Dim oApplicationsInvestigated As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isInvestigated = True).ToList
+          Dim oApplicationsQualified1 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified1 = True).ToList
+          Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
+          Dim oApplicationsDispersed As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
+          Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
 
-        'set aggregate values
-        txtApplicationsSubmitted.Text = oApplicationsSubmitted.Count
-        txtApplicationsApproved.Text = oApplicationsQualified2.Count
-        txtApplicationsRejected.Text = oApplicationsRejected.Count
+          'set aggregate values
+          txtApplicationsSubmitted.Text = oApplicationsSubmitted.Count
+          txtApplicationsApproved.Text = oApplicationsQualified2.Count
+          txtApplicationsRejected.Text = oApplicationsRejected.Count
 
-        'verify if the user is a reviewer otherwise redirect home
-        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
-          Response.Redirect("/")
-        End If
-
-        'get the reviewer roles for displaying the correct review panel or none if a role has not been granted
-        Dim oReviewer As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId).ToList
-        Dim isValidator As Boolean = False
-        Dim isInvestigator As Boolean = False
-        Dim isQualifier As Boolean = False
-        Dim isFinancier As Boolean = False
-
-        For Each item In oReviewer
-          Select Case item.roleId
-            Case Base.enumRole.Validator
-              isValidator = True
-            Case Base.enumRole.Investigator
-              isInvestigator = True
-            Case Base.enumRole.Qualifier
-              isQualifier = True
-            Case Base.enumRole.Financier
-              isFinancier = True
-          End Select
-        Next
-
-        'load form with application data
-        With oApplication
-          btnEmail.NavigateUrl = "mailto:" & .USER.email
-          btnEmail.Text = .USER.email
-          txtEmail.Text = .USER.email
-          txtFirstName.Text = .USER.firstName
-          txtMiddleName.Text = .USER.middleName
-          txtLastName.Text = .USER.lastName
-          txtSocialSecurity.Text = .USER.socialSecurityNumber
-          txtDOB.Text = .USER.dob
-          txtPhone.Text = Base.getFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
-          txtGender.Text = .USER.gender
-          txtMaritalStatus.Text = .USER.maritalStatus
-          txtStreet.Text = .USER.street
-          txtCity.Text = .USER.city
-          txtState.Text = .USER.STATE.stateName
-          txtZip.Text = .USER.zip
-          txtBeganLiving.Text = .USER.beganLivingDate
-          txtHomeType.Text = .USER.homeType
-          txtOtherHomeType.Text = .USER.homeTypeOther
-          txtNationality.Text = .USER.NATIONALITY.name
-          txtCitizenship.Text = .USER.citizenshipStatus
-          txtHighestEducation.Text = .USER.highestEducationCompleted
-          txtSchoolName.Text = .USER.schoolName
-          txtSchoolStreet.Text = .USER.schoolStreet
-          txtSchoolCity.Text = .USER.schoolCity
-          txtSchoolState.Text = .USER.STATE.stateName
-          txtSchoolZip.Text = .USER.schoolZip
-          txtHusbandFirstName.Text = .USER.husbandFirstName
-          txtHusbandMiddleName.Text = .USER.husbandMiddleName
-          txtHusbandLastName.Text = .USER.husbandLastName
-          txtMasjidName.Text = .USER.primaryMasjidName
-          txtMasjidPhone.Text = .USER.primaryMasjidPhone
-
-          'add saved languages to the list
-          Dim vLanguages As String = ""
-          If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).Any) Then
-            'there are languages so add in the form
-            Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).ToList
-            For Each item In oUserLanguages
-              'concatenate user's spoken languages
-              vLanguages = IIf(vLanguages = "", item.LANGUAGE.name, vLanguages + ", " + item.LANGUAGE.name)
-            Next
-          End If
-          txtLanguages.Text = vLanguages
-
-          'add saved skills/certs to the list
-          Dim vCertSkills As String = ""
-          If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).Any) Then
-            'there are skills/certs so add in the form
-            Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).ToList
-            For Each item In oCertSkills
-              'obtain the skills/certs from the list and add from the db
-              vCertSkills = IIf(vCertSkills = "", item.certificationSkill, vCertSkills + ", " + item.certificationSkill)
-            Next
-          End If
-          txtCertSkills.Text = vCertSkills
-
-          'get previous applied date by getting the last submitted
-          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True Order By APPLICATION.submittedOn Descending).Any Then
-            Dim oPreviousSubmitted As APPLICATION = (From APPLICATION In oDB.APPLICATION
-                                                     Where APPLICATION.applicationId <> .applicationId And
-                                                            APPLICATION.userId = oApplication.userId And
-                                                            APPLICATION.isSubmitted = True
-                                                     Order By APPLICATION.submittedOn Descending).First
-            txtPreviouslyApplied.Text = FormatDateTime(oPreviousSubmitted.submittedOn, DateFormat.LongDate)
-          Else
-            txtPreviouslyApplied.Text = "N/A"
+          'verify if the user is a reviewer otherwise redirect home
+          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
+            Response.Redirect("/")
           End If
 
-          'get previous applied date by getting the last submitted
-          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True Order By APPLICATION.qualified2On Descending).Any Then
-            Dim oPreviousApproved As APPLICATION = (From APPLICATION In oDB.APPLICATION
-                                                    Where APPLICATION.applicationId <> .applicationId And
-                                                            APPLICATION.userId = oApplication.userId And
-                                                            APPLICATION.isQualified2 = True
-                                                    Order By APPLICATION.qualified2On Descending).First
-            txtLastDateAssisted.Text = FormatDateTime(oPreviousApproved.qualified2On, DateFormat.LongDate)
-          Else
-            txtLastDateAssisted.Text = "N/A"
-          End If
+          'get the reviewer roles for displaying the correct review panel or none if a role has not been granted
+          Dim oReviewer As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId).ToList
+          Dim isValidator As Boolean = False
+          Dim isInvestigator As Boolean = False
+          Dim isQualifier As Boolean = False
+          Dim isFinancier As Boolean = False
 
-          txtApplicationId.Text = Base.getFormattedNumber(.applicationId)
-          txtOrganizationId.Value = .organizationId
-          txtApplicationStatus.Text = .applicationStatus
-          txtOrganization.Text = .ORGANIZATION.name
-          txtHusbandApplied.Text = .husbandHasAppliedForZakat
-          txtHusbandExplanation.Text = .husbandZakatExplanation
-          txtValueCash.Text = FormatCurrency(.totalValueCash)
-          txtValueGold.Text = FormatCurrency(.totalValueGold)
-          txtValueSilver.Text = FormatCurrency(.totalValueSilver)
-          txtValueInvestment.Text = FormatCurrency(.totalValueInvestment)
-          txtValueRetirement.Text = FormatCurrency(.totalValueRetirement)
-          txtValueLifeInsurance.Text = FormatCurrency(.totalValueLifeInsurance)
-          txtValueDebt.Text = FormatCurrency(.totalValueOutstandingDebts)
-          txtValueChildSupport.Text = FormatCurrency(.totalChildSupport)
-          txtChildSupportFrequency.Text = .frequencyChildSupport
-          txtValueFoodStamps.Text = FormatCurrency(.totalFoodStamps)
-          txtFoodStampFrequency.Text = .frequencyFoodStamps
-          txtValueAssistance.Text = FormatCurrency(.totalTemporaryCashAssistance)
-          txtWhoAssisted.Text = .sourceTemporaryCashAssistance
-          txtInsuranceProvider.Text = .healthInsuranceProviderName
-          txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
-          txtMedicare.Text = .medicareNumber
-          txtMedicaid.Text = .medicaidNumber
-          txtEmployerName.Text = .employerName
-          txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
-          txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
-          txtPosition.Text = .positionTitle
-          txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
-          txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
-          txtEmployerStreet.Text = .employerStreet
-          txtEmployerCity.Text = .employerCity
-          txtEmployerState.Text = .employerStateAbbr
-          txtEmployerZip.Text = .employerZip
-          txtPersonalStatement.Text = .personalNeedStatement
+          For Each item In oReviewer
+            Select Case item.roleId
+              Case Base.enumRole.Validator
+                isValidator = True
+              Case Base.enumRole.Investigator
+                isInvestigator = True
+              Case Base.enumRole.Qualifier
+                isQualifier = True
+              Case Base.enumRole.Financier
+                isFinancier = True
+            End Select
+          Next
 
-          'set review panels; if isDispersed = true visible is already set to false so do nothing:
-          If .isRejected = True Then
-            pnlReviewComments.Visible = False
-          ElseIf .isDispersed = True Then
-            pnlReviewComments.Visible = False
-          ElseIf .isQualified2 = True Then
-            If isFinancier Then
-              pnlDispersed.Visible = True
+          'load form with application data
+          With oApplication
+            btnEmail.NavigateUrl = "mailto:" & .USER.email
+            btnEmail.Text = .USER.email
+            txtEmail.Text = .USER.email
+            txtFirstName.Text = .USER.firstName
+            txtMiddleName.Text = .USER.middleName
+            txtLastName.Text = .USER.lastName
+            txtSocialSecurity.Text = .USER.socialSecurityNumber
+            txtDOB.Text = .USER.dob
+            txtPhone.Text = Base.getFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
+            txtGender.Text = .USER.gender
+            txtMaritalStatus.Text = .USER.maritalStatus
+            txtStreet.Text = .USER.street
+            txtCity.Text = .USER.city
+            txtState.Text = .USER.STATE.stateName
+            txtZip.Text = .USER.zip
+            txtBeganLiving.Text = .USER.beganLivingDate
+            txtHomeType.Text = .USER.homeType
+            txtOtherHomeType.Text = .USER.homeTypeOther
+            txtNationality.Text = .USER.NATIONALITY.name
+            txtCitizenship.Text = .USER.citizenshipStatus
+            txtHighestEducation.Text = .USER.highestEducationCompleted
+            txtSchoolName.Text = .USER.schoolName
+            txtSchoolStreet.Text = .USER.schoolStreet
+            txtSchoolCity.Text = .USER.schoolCity
+            txtSchoolState.Text = .USER.STATE.stateName
+            txtSchoolZip.Text = .USER.schoolZip
+            txtHusbandFirstName.Text = .USER.husbandFirstName
+            txtHusbandMiddleName.Text = .USER.husbandMiddleName
+            txtHusbandLastName.Text = .USER.husbandLastName
+            txtMasjidName.Text = .USER.primaryMasjidName
+            txtMasjidPhone.Text = .USER.primaryMasjidPhone
+
+            'add saved languages to the list
+            Dim vLanguages As String = ""
+            If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).Any) Then
+              'there are languages so add in the form
+              Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = .userId).ToList
+              For Each item In oUserLanguages
+                'concatenate user's spoken languages
+                vLanguages = IIf(vLanguages = "", item.LANGUAGE.name, vLanguages + ", " + item.LANGUAGE.name)
+              Next
+            End If
+            txtLanguages.Text = vLanguages
+
+            'add saved skills/certs to the list
+            Dim vCertSkills As String = ""
+            If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).Any) Then
+              'there are skills/certs so add in the form
+              Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = .userId).ToList
+              For Each item In oCertSkills
+                'obtain the skills/certs from the list and add from the db
+                vCertSkills = IIf(vCertSkills = "", item.certificationSkill, vCertSkills + ", " + item.certificationSkill)
+              Next
+            End If
+            txtCertSkills.Text = vCertSkills
+
+            'get previous applied date by getting the last submitted
+            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isSubmitted = True Order By APPLICATION.submittedOn Descending).Any Then
+              Dim oPreviousSubmitted As APPLICATION = (From APPLICATION In oDB.APPLICATION
+                                                       Where APPLICATION.applicationId <> .applicationId And
+                                                              APPLICATION.userId = oApplication.userId And
+                                                              APPLICATION.isSubmitted = True
+                                                       Order By APPLICATION.submittedOn Descending).First
+              txtPreviouslyApplied.Text = FormatDateTime(oPreviousSubmitted.submittedOn, DateFormat.LongDate)
             Else
+              txtPreviouslyApplied.Text = "N/A"
+            End If
+
+            'get previous applied date by getting the last submitted
+            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId <> .applicationId And APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True Order By APPLICATION.qualified2On Descending).Any Then
+              Dim oPreviousApproved As APPLICATION = (From APPLICATION In oDB.APPLICATION
+                                                      Where APPLICATION.applicationId <> .applicationId And
+                                                              APPLICATION.userId = oApplication.userId And
+                                                              APPLICATION.isQualified2 = True
+                                                      Order By APPLICATION.qualified2On Descending).First
+              txtLastDateAssisted.Text = FormatDateTime(oPreviousApproved.qualified2On, DateFormat.LongDate)
+            Else
+              txtLastDateAssisted.Text = "N/A"
+            End If
+
+            txtApplicationId.Text = Base.getFormattedNumber(.applicationId)
+            txtOrganizationId.Value = .organizationId
+            txtApplicationStatus.Text = .applicationStatus
+            txtOrganization.Text = .ORGANIZATION.name
+            txtHusbandApplied.Text = .husbandHasAppliedForZakat
+            txtHusbandExplanation.Text = .husbandZakatExplanation
+            txtValueCash.Text = FormatCurrency(.totalValueCash)
+            txtValueGold.Text = FormatCurrency(.totalValueGold)
+            txtValueSilver.Text = FormatCurrency(.totalValueSilver)
+            txtValueInvestment.Text = FormatCurrency(.totalValueInvestment)
+            txtValueRetirement.Text = FormatCurrency(.totalValueRetirement)
+            txtValueLifeInsurance.Text = FormatCurrency(.totalValueLifeInsurance)
+            txtValueDebt.Text = FormatCurrency(.totalValueOutstandingDebts)
+            txtValueChildSupport.Text = FormatCurrency(.totalChildSupport)
+            txtChildSupportFrequency.Text = .frequencyChildSupport
+            txtValueFoodStamps.Text = FormatCurrency(.totalFoodStamps)
+            txtFoodStampFrequency.Text = .frequencyFoodStamps
+            txtValueAssistance.Text = FormatCurrency(.totalTemporaryCashAssistance)
+            txtWhoAssisted.Text = .sourceTemporaryCashAssistance
+            txtInsuranceProvider.Text = .healthInsuranceProviderName
+            txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
+            txtMedicare.Text = .medicareNumber
+            txtMedicaid.Text = .medicaidNumber
+            txtEmployerName.Text = .employerName
+            txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
+            txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
+            txtPosition.Text = .positionTitle
+            txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+            txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
+            txtEmployerStreet.Text = .employerStreet
+            txtEmployerCity.Text = .employerCity
+            txtEmployerState.Text = .employerStateAbbr
+            txtEmployerZip.Text = .employerZip
+            txtPersonalStatement.Text = .personalNeedStatement
+            txtDispersedAmount.Text = IIf(.dispersedAmount Is Nothing, "", FormatCurrency(.dispersedAmount))
+            txtDispersedAmount2.Text = IIf(.dispersedAmount Is Nothing, "", FormatCurrency(.dispersedAmount))
+
+            'set review panels; if isDispersed = true visible is already set to false so do nothing:
+            If .isRejected = True Then
+              pnlReviewComments.Visible = False
+            ElseIf .isDispersed = True Then
+              pnlReviewComments.Visible = False
+            ElseIf .isQualified2 = True Then
+              If isFinancier Then
+                pnlDispersed.Visible = True
+              Else
+                pnlReviewComments.Visible = False
+              End If
+            ElseIf .isQualified1 = True Then
+              If isQualifier Then
+                pnlQualified2.Visible = True
+              Else
+                pnlReviewComments.Visible = False
+              End If
+            ElseIf .isInvestigated = True Then
+              If isQualifier Then
+                pnlQualified1.Visible = True
+              Else
+                pnlReviewComments.Visible = False
+              End If
+            ElseIf .isValidated = True Then
+              If isInvestigator Then
+                pnlInvestigated.Visible = True
+              Else
+                pnlReviewComments.Visible = False
+              End If
+            ElseIf .isSubmitted = True Then
+              If isValidator Then
+                pnlValidated.Visible = True
+              Else
+                pnlReviewComments.Visible = False
+              End If
+            ElseIf .isDrafted = True Then
               pnlReviewComments.Visible = False
             End If
-          ElseIf .isQualified1 = True Then
-            If isQualifier Then
-              pnlQualified2.Visible = True
+
+            'add dependents to form if there are any
+            Dim vDependents As String = ""
+            If ((From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).Any) Then
+              'there are skills/certs so add in the form
+              Dim oDependentList As List(Of DEPENDENT) = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).ToList
+              For Each item In oDependentList
+                'obtain the skills/certs from the list and add from the db
+                vDependents = IIf(vDependents = "", item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")", vDependents + ", " + item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")")
+              Next
             Else
-              pnlReviewComments.Visible = False
+              vDependents = "None"
             End If
-          ElseIf .isInvestigated = True Then
-            If isQualifier Then
-              pnlQualified1.Visible = True
-            Else
-              pnlReviewComments.Visible = False
-            End If
-          ElseIf .isValidated = True Then
-            If isInvestigator Then
-              pnlInvestigated.Visible = True
-            Else
-              pnlReviewComments.Visible = False
-            End If
-          ElseIf .isSubmitted = True Then
-            If isValidator Then
-              pnlValidated.Visible = True
-            Else
-              pnlReviewComments.Visible = False
-            End If
-          ElseIf .isDrafted = True Then
-            pnlReviewComments.Visible = False
-          End If
+            txtDependents.Text = vDependents
 
-          'add dependents to form if there are any
-          Dim vDependents As String = ""
-          If ((From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).Any) Then
-            'there are skills/certs so add in the form
-            Dim oDependentList As List(Of DEPENDENT) = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = .userId).ToList
-            For Each item In oDependentList
-              'obtain the skills/certs from the list and add from the db
-              vDependents = IIf(vDependents = "", item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")", vDependents + ", " + item.firstName + " " + item.middleName + " " + item.lastName + " (" + item.relationship + ")")
-            Next
-          Else
-            vDependents = "None"
-          End If
-          txtDependents.Text = vDependents
+            'add reference to the form if any
+            Dim oReferences As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = .userId).ToList
+            rptReferences.DataSource = oReferences
+            rptReferences.DataBind()
 
-          'add reference to the form if any
-          Dim oReferences As List(Of REFERENCE) = (From REFERENCE In oDB.REFERENCE Where REFERENCE.userId = .userId).ToList
-          rptReferences.DataSource = oReferences
-          rptReferences.DataBind()
+            'add review history to the page and update the badge
+            Dim oReviews As List(Of REVIEW) = (From REVIEW In oDB.REVIEW Where REVIEW.applicationId = vApplicationId).ToList
+            rptReviewHistory.DataSource = oReviews
+            rptReviewHistory.DataBind()
+            lblReviewsCountBadge.Text = oReviews.Count
 
-          'add review history to the page and update the badge
-          Dim oReviews As List(Of REVIEW) = (From REVIEW In oDB.REVIEW Where REVIEW.applicationId = vApplicationId).ToList
-          rptReviewHistory.DataSource = oReviews
-          rptReviewHistory.DataBind()
-          lblReviewsCountBadge.Text = oReviews.Count
+            'populate the artifact 
+            Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId).ToList
+            rptArtifacts.DataSource = oArtifacts
+            rptArtifacts.DataBind()
+            lblApplicationArtifacts.Text = oArtifacts.Count
+          End With
+        End Using
 
-          'populate the artifact 
-          Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId).ToList
-          rptArtifacts.DataSource = oArtifacts
-          rptArtifacts.DataBind()
-          lblApplicationArtifacts.Text = oArtifacts.Count
-        End With
-      End Using
+        'set the default date of dispersion to today
+        txtDispersedDate.Text = CStr(FormatDateTime(Date.Now, DateFormat.ShortDate))
 
-      'set the default date of dispersion to today
-      txtDispersedDate.Text = CStr(FormatDateTime(Date.Now, DateFormat.ShortDate))
-
-      'set charts
-      setReport1(vApplicationId)
-      'setReportTimelineApplicationActions(vApplicationId)
-
+        'set charts
+        setReport1(vApplicationId)
+        'setReportTimelineApplicationActions(vApplicationId)
+      End If
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -483,6 +486,7 @@
             .applicationStatus = "Qualified (Initial)"
             .qualified1By = vUserId
             .qualified1On = Date.Now
+            .dispersedAmount = txtDispersedAmount1.Text
             .updatedBy = vUserId
             .updatedOn = Date.Now
           End With
@@ -578,6 +582,7 @@
             .applicationStatus = "Qualified (Final)"
             .qualified2By = vUserId
             .qualified2On = Date.Now
+            .dispersedAmount = txtDispersedAmount2.Text
             .updatedBy = vUserId
             .updatedOn = Date.Now
           End With
@@ -681,6 +686,7 @@
             .applicationStatus = "Dispersed"
             .dispersedBy = vUserId
             .dispersedOn = Date.Now
+            .dispersedAmount = txtDispersedAmount.Text
             .updatedBy = vUserId
             .updatedOn = Date.Now
           End With
@@ -733,7 +739,7 @@
     End Try
   End Sub
 
-  Private Sub btnRejected_Click(sender As Object, e As EventArgs) Handles btnRejectedDis.Click, btnRejectedInv.Click, btnRejectedQal1.Click, btnRejectedQal2.Click, btnRejectedVal.Click
+  Private Sub btnRejected_Click(sender As Object, e As EventArgs) Handles btnRejected.Click
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
@@ -883,6 +889,84 @@
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
+  End Sub
+
+  Private Sub txtReviewComments_TextChanged(sender As Object, e As EventArgs) Handles txtReviewComments.TextChanged
+    updateForm()
+  End Sub
+
+  Private Sub txtDispersedAmount1_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount1.TextChanged
+    updateForm()
+  End Sub
+
+  Private Sub txtDispersedAmount2_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount2.TextChanged
+    updateForm()
+  End Sub
+
+  Sub updateForm()
+    Try
+      If txtReviewComments.Text <> "" Then
+        If pnlQualified1.Visible = True Then
+          If txtDispersedAmount1.Text <> "" Then
+            btnRejected1.Disabled = False
+            btnRejected2.Disabled = False
+            btnRejected3.Disabled = False
+            btnRejected4.Disabled = False
+            btnRejected5.Disabled = False
+          Else
+            btnRejected1.Disabled = True
+            btnRejected2.Disabled = True
+            btnRejected3.Disabled = True
+            btnRejected4.Disabled = True
+            btnRejected5.Disabled = True
+          End If
+        ElseIf pnlQualified2.Visible = True Then
+          If txtDispersedAmount2.Text <> "" Then
+            btnRejected1.Disabled = False
+            btnRejected2.Disabled = False
+            btnRejected3.Disabled = False
+            btnRejected4.Disabled = False
+            btnRejected5.Disabled = False
+          Else
+            btnRejected1.Disabled = True
+            btnRejected2.Disabled = True
+            btnRejected3.Disabled = True
+            btnRejected4.Disabled = True
+            btnRejected5.Disabled = True
+          End If
+        ElseIf pnlDispersed.Visible = True Then
+          If txtDispersedAmount.Text <> "" And txtDispersedDate.Text <> "" Then
+            btnRejected1.Disabled = False
+            btnRejected2.Disabled = False
+            btnRejected3.Disabled = False
+            btnRejected4.Disabled = False
+            btnRejected5.Disabled = False
+          Else
+            btnRejected1.Disabled = True
+            btnRejected2.Disabled = True
+            btnRejected3.Disabled = True
+            btnRejected4.Disabled = True
+            btnRejected5.Disabled = True
+          End If
+        End If
+      Else
+        btnRejected1.Disabled = True
+        btnRejected2.Disabled = True
+        btnRejected3.Disabled = True
+        btnRejected4.Disabled = True
+        btnRejected5.Disabled = True
+      End If
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtDispersedAmount_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount.TextChanged
+    updateForm()
+  End Sub
+
+  Private Sub txtDispersedDate_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedDate.TextChanged
+    updateForm()
   End Sub
 
   'Sub setReport2(vApplicationId As Int32)

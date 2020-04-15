@@ -815,6 +815,15 @@ Partial Public Class Application1
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
+    '''btnRejected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejected As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''pnlValidated control.
     '''</summary>
     '''<remarks>
@@ -833,13 +842,13 @@ Partial Public Class Application1
     Protected WithEvents btnValidated As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnRejectedVal control.
+    '''btnRejected1 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRejectedVal As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnRejected1 As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''pnlInvestigated control.
@@ -860,13 +869,13 @@ Partial Public Class Application1
     Protected WithEvents btnInvestigated As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnRejectedInv control.
+    '''btnRejected2 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRejectedInv As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnRejected2 As Global.System.Web.UI.HtmlControls.HtmlButton
     
     '''<summary>
     '''pnlQualified1 control.
@@ -878,6 +887,15 @@ Partial Public Class Application1
     Protected WithEvents pnlQualified1 As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''txtDispersedAmount1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDispersedAmount1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''btnQualified1 control.
     '''</summary>
     '''<remarks>
@@ -887,13 +905,22 @@ Partial Public Class Application1
     Protected WithEvents btnQualified1 As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnRejectedQal1 control.
+    '''btnRejected3 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRejectedQal1 As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnRejected3 As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''RegularExpressionValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''pnlQualified2 control.
@@ -905,6 +932,15 @@ Partial Public Class Application1
     Protected WithEvents pnlQualified2 As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
+    '''txtDispersedAmount2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDispersedAmount2 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''btnQualified2 control.
     '''</summary>
     '''<remarks>
@@ -914,13 +950,22 @@ Partial Public Class Application1
     Protected WithEvents btnQualified2 As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnRejectedQal2 control.
+    '''btnRejected4 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRejectedQal2 As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnRejected4 As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''RegularExpressionValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
     '''pnlDispersed control.
@@ -930,6 +975,15 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlDispersed As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtDispersedAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDispersedAmount As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''txtDispersedDate control.
@@ -950,15 +1004,6 @@ Partial Public Class Application1
     Protected WithEvents lnkCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
     
     '''<summary>
-    '''calDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
     '''btnDispersed control.
     '''</summary>
     '''<remarks>
@@ -968,11 +1013,29 @@ Partial Public Class Application1
     Protected WithEvents btnDispersed As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''btnRejectedDis control.
+    '''btnRejected5 control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnRejectedDis As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnRejected5 As Global.System.Web.UI.HtmlControls.HtmlButton
+    
+    '''<summary>
+    '''RegularExpressionValidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator3 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
+    '''calDOB control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
 End Class

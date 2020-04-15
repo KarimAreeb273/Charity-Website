@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Application.aspx.vb" Inherits="zakat.icclmd.org.Application1" %>
+﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Application.aspx.vb" Inherits="zakat.icclmd.org.Application1" MaintainScrollPositionOnPostback="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
     <h4><span style="font-size:20px; color:darkgreen" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>Online Zakat Application</b></h4>
@@ -787,13 +787,30 @@
               </tr>
               <tr>
                 <td colspan="4" style="width:100%; text-align:left">
-                  <asp:TextBox ID="txtReviewComments" CssClass="form-control" style="max-width:100%" runat="server" TextMode="MultiLine" Rows="4" Width="100%" MaxLength="1000" TabIndex="1"></asp:TextBox>
+                  <asp:TextBox ID="txtReviewComments" CssClass="form-control" style="max-width:100%" runat="server" TextMode="MultiLine" Rows="4" Width="100%" MaxLength="1000" TabIndex="1" AutoPostBack="True"></asp:TextBox>
                   <asp:CustomValidator ID="valQualifier" runat="server" CssClass="text-danger" ControlToValidate="txtReviewComments" ErrorMessage="You cannot be the intial and final qualifier." Display="Dynamic" ValidationGroup="Review" />
                   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" CssClass="text-danger" runat="server" Display="Static" ErrorMessage="The review comments are required." ControlToValidate="txtReviewComments" ValidationGroup="Review"></asp:RequiredFieldValidator>
                 </td>
               </tr>
             </table>
-          </asp:Panel>          
+          </asp:Panel>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"><b>Confirm Rejection</b></h4>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure that you want to reject this application?  This action can<u>not</u> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>&nbsp;<asp:Button ID="btnRejected" runat="server" Text="Reject" CssClass="btn btn-danger" TabIndex="3" Width="100px"  ValidationGroup="Review" />
+                </div>
+              </div>
+            </div>
+          </div>
           <asp:Panel ID="pnlValidated" runat="server" Visible="false">
             <table style="width:100%">
               <tr>
@@ -801,13 +818,13 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnValidated" runat="server" Text="Validated" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnValidated" runat="server" Text="Validate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnRejectedVal" runat="server" Text="Rejected" CssClass="btn btn-danger" TabIndex="3" Width="200"  ValidationGroup="Review" />
+                  <button id="btnRejected1" runat="server" tabindex="3" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" disabled="true" style="width:200px">Reject</button>
                 </td>
               </tr>
             </table>
@@ -819,13 +836,13 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnInvestigated" runat="server" Text="Investigated" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnInvestigated" runat="server" Text="Investigate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnRejectedInv" runat="server" Text="Rejected" CssClass="btn btn-danger" TabIndex="3" Width="200" ValidationGroup="Review" />
+                  <button id="btnRejected2" runat="server" tabindex="3" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" disabled="true" style="width:200px">Reject</button>
                 </td>
               </tr>
             </table>
@@ -833,17 +850,50 @@
           <asp:Panel ID="pnlQualified1" runat="server" Visible="False">
             <table style="width:100%">
               <tr>
-                <td style="width:97%;">
+                <td style="width:93%;">
                   &nbsp;
                 </td>
-                <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified1" runat="server" Text="Qualified (Initial)" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                <td style="width:1%;">
+                  <asp:Label runat="server" AssociatedControlID="txtDispersedAmount1" ToolTip="Recommended Dispersal Amount" Style="white-space: nowrap;">Recommended Dispersal Amount:</asp:Label>
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td  style="width:1%;">
+                  <asp:TextBox runat="server" ID="txtDispersedAmount1" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Dispersed Amount" Width="100px" placeholder="$0.00" TabIndex="2"  ValidationGroup="Review" AutoPostBack="True" />           
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnRejectedQal1" runat="server" Text="Rejected" CssClass="btn btn-danger" TabIndex="3" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified1" runat="server" Text="Qualify (Initial)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" />
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  <button id="btnRejected3" runat="server" tabindex="4" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" disabled="true" style="width:200px" validationgroup="Review">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:93%;">
+                  &nbsp;
+                </td>
+                <td style="width:3%; text-align:right" colspan="3">
+                  <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtDispersedAmount1" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Review" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
+                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDispersedAmount1" CssClass="text-danger" ErrorMessage="The recommended dispersal amount is required." Display="Static" ValidationGroup="Review" />             
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
                 </td>
               </tr>
             </table>
@@ -851,65 +901,129 @@
           <asp:Panel ID="pnlQualified2" runat="server" Visible="False">
             <table style="width:100%">
               <tr>
-                <td style="width:97%;">
+                <td style="width:93%;">
                   &nbsp;
                 </td>
-                <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified2" runat="server" Text="Qualified (Final)" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                <td style="width:1%;">
+                  <asp:Label runat="server" AssociatedControlID="txtDispersedAmount2" ToolTip="Recommended Dispersal Amount" Style="white-space: nowrap;">Recommended Dispersal Amount:</asp:Label>
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td  style="width:1%;">
+                  <asp:TextBox runat="server" ID="txtDispersedAmount2" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Dispersed Amount" Width="100px" placeholder="$0.00" TabIndex="2"  ValidationGroup="Review" AutoPostBack="True" />           
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnRejectedQal2" runat="server" Text="Rejected" CssClass="btn btn-danger" TabIndex="3" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified2" runat="server" Text="Qualify (Final)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" />
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  <button id="btnRejected4" runat="server" tabindex="4" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" disabled="true" style="width:200px" validationgroup="Review">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:93%;">
+                  &nbsp;
+                </td>
+                <td style="width:3%; text-align:right" colspan="3">
+                  <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtDispersedAmount2" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Review" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
+                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDispersedAmount2" CssClass="text-danger" ErrorMessage="The recommended dispersal amount is required." Display="Static" ValidationGroup="Review" />             
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
                 </td>
               </tr>
             </table>
           </asp:Panel>
           <asp:Panel ID="pnlDispersed" runat="server" Visible="False">
-            <table style="width:100%" border="0">
+            <table style="width:100%">
               <tr>
-                <td style="width:97%;">
+                <td style="width:87%;">
                   &nbsp;
                 </td>
                 <td style="width:1%;">
-                  <div class="form-inline">
-                    <div class="form-group">
-                      <asp:Label runat="server" AssociatedControlID="txtDOB" CssClass="col-lg-2 control-label" ToolTip="Date of Birth" Style="white-space: nowrap; position:relative; left: -25px">Dispersed:</asp:Label>
-                      <div class="col-lg-10">
-                        <table border="0" style="width: 280px">
-                          <tr>
-                            <td style="width: 60%">
-                              <asp:TextBox runat="server" ID="txtDispersedDate" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Date of Dispersion" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="2"  ValidationGroup="Submit" />
-                            </td>
-                            <td>
-                              &nbsp;
-                            </td>
-                            <td style="width: 40%; text-align: left;">
-                              <a href="#" runat="server" id="lnkCalendarDOB">
-                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="2"></span>
-                              </a>
-                            </td>
-                          </tr>
-                        </table>
-                        <asp:RegularExpressionValidator runat="server" ErrorMessage="Invalid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtDispersedDate" ValidationGroup="Review"></asp:RegularExpressionValidator>
-                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDispersedDate" CssClass="text-danger" ErrorMessage="Dispersed date is required." Display="Static" ValidationGroup="Review" />
-                        <ajaxToolkit:CalendarExtender ID="calDOB" runat="server" TargetControlID="txtDispersedDate" PopupButtonID="lnkCalendarDOB" PopupPosition="TopRight" />
-                      </div>
-                    </div>
-                  </div>                  
+                  <asp:Label runat="server" AssociatedControlID="txtDispersedAmount" ToolTip="Dispersal Amount" Style="white-space: nowrap;">Dispersal Amount:</asp:Label>
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
-                <td style="width:1%; text-align:right; vertical-align:top">
-                  <asp:Button ID="btnDispersed" runat="server" Text="Dispersed" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" />
+                <td  style="width:1%;">
+                  <asp:TextBox runat="server" ID="txtDispersedAmount" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Dispersed Amount" Width="100px" placeholder="$0.00" TabIndex="2"  ValidationGroup="Review" AutoPostBack="True" />           
                 </td>
                 <td style="width:1%;">
                   &nbsp;
                 </td>
-                <td style="width:1%; text-align:right; vertical-align:top">
-                  <asp:Button ID="btnRejectedDis" runat="server" Text="Rejected" CssClass="btn btn-danger" TabIndex="4" Width="200" ValidationGroup="Review" />
+                <td style="width:1%;">
+                  <asp:Label runat="server" AssociatedControlID="txtDispersedDate" ToolTip="Dispersal Amount" Style="white-space: nowrap;">Dispersal Date:</asp:Label>
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td  style="width:1%;">
+                  <asp:TextBox runat="server" ID="txtDispersedDate" AutoCompleteType="Disabled" CssClass="form-control" Width="100px" ToolTip="Dispersal Date" placeholder="mm/dd/yyyy" TabIndex="3"  ValidationGroup="Review" AutoPostBack="True" />
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width: 1%; text-align: left;">
+                  <a href="#" runat="server" id="lnkCalendarDOB">
+                    <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="4"></span>
+                  </a>
+                </td>
+                <td style="width:1%;">
+                  &nbsp;&nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  <asp:Button ID="btnDispersed" runat="server" Text="Disperse" CssClass="btn btn-success" TabIndex="5" Width="200" ValidationGroup="Review" />
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  <button id="btnRejected5" runat="server" tabindex="6" type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal" disabled="true" style="width:200px" validationgroup="Review">Reject</button>
+                </td>
+              </tr>
+              <tr>
+                <td style="width:87%;">
+                  &nbsp;
+                </td>
+                <td style="width:3%; text-align:right" colspan="3">
+                  <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtDispersedAmount" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Review" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
+                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDispersedAmount" CssClass="text-danger" ErrorMessage="The dispersal amount is required." Display="Static" ValidationGroup="Review" />             
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:5%; text-align:right" colspan="5">
+                  <asp:RegularExpressionValidator runat="server" ErrorMessage="Invalid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtDispersedDate" ValidationGroup="Review"></asp:RegularExpressionValidator>
+                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDispersedDate" CssClass="text-danger" ErrorMessage="The dispersal date is required." Display="Static" ValidationGroup="Review" />
+                  <ajaxToolkit:CalendarExtender ID="calDOB" runat="server" TargetControlID="txtDispersedDate" PopupButtonID="lnkCalendarDOB" PopupPosition="TopRight" />
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
+                </td>
+                <td style="width:1%;">
+                  &nbsp;
+                </td>
+                <td style="width:1%; text-align:right">
+                  &nbsp;
                 </td>
               </tr>
             </table>
