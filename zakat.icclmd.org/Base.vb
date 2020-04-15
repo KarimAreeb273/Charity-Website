@@ -148,8 +148,10 @@ Public Class Base
         .firstName = pFirst
         .middleName = pMiddle
         .lastName = pLast
-        .phone = pPhone
+        .phone = getFormattedPhone(pPhone, enumFormatPhone.Strip)
         .password = Base.getPassword()  'randomly generate a password
+        .createdOn = Date.Now
+        .updatedOn = Date.Now
       End With
 
       ' Add to db
