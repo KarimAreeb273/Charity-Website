@@ -71,6 +71,7 @@ Partial Public Class APPLICATION
     Public Property qualified1By As Nullable(Of Integer)
     Public Property qualified2On As Nullable(Of Date)
     Public Property qualified2By As Nullable(Of Integer)
+    Public Property dispersedAmount As Nullable(Of Decimal)
     Public Property dispersedOn As Nullable(Of Date)
     Public Property dispersedBy As Nullable(Of Integer)
     Public Property rejectedOn As Nullable(Of Date)
@@ -83,7 +84,7 @@ Partial Public Class APPLICATION
     Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
-    Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
     Public Overridable Property ARTIFACT As ICollection(Of ARTIFACT) = New HashSet(Of ARTIFACT)
+    Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
 
 End Class
