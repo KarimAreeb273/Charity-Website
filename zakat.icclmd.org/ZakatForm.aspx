@@ -311,16 +311,16 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMasjidName" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Name" Style="white-space: nowrap">Pr Masjid Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="19" AutoPostBack="false" ValidationGroup="Reference" />
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Reference" />
+                                  <asp:TextBox runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="19" AutoPostBack="false" ValidationGroup="Submit" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMasjidPhone" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Phone #" Style="white-space: nowrap">Pr Masjid Ph #:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMasjidPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="20" AutoPostBack="false" ValidationGroup="Reference" />
-                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Reference"></asp:RegularExpressionValidator>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ErrorMessage="The masjid phone number is required." Display="Static" ValidationGroup="Reference" />
+                                  <asp:TextBox runat="server" ID="txtMasjidPhone" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="20" AutoPostBack="false" ValidationGroup="Submit" />
+                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidPhone" CssClass="text-danger" ErrorMessage="The masjid phone number is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                             </div>
@@ -1435,7 +1435,7 @@
                 <th style="width:25%; text-align:left; vertical-align: middle">
                   Artifacts
                   <span class="label label-default"><asp:Label ID="lblArtifacts" runat="server" Text="0"></asp:Label></span>
-                  &nbsp;(Photo ID Required)
+                  &nbsp;(Gov't Photo ID Required)
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1581,7 +1581,7 @@
           <table style="width:100%">
             <tr>
               <td style="width:96%; text-align:right">
-                <asp:CustomValidator ID="valUserRequiredSave" runat="server" CssClass="text-danger" ErrorMessage="You must enter your email and name before saving the form." Display="Dynamic" ValidationGroup="Save" Enabled="True" />
+                <asp:CustomValidator ID="valUserRequiredSave" runat="server" CssClass="text-danger" ErrorMessage="You must enter your email, name and phone before saving the form." Display="Dynamic" ValidationGroup="Save" Enabled="True" />
                 <asp:CustomValidator ID="valAcknowledgement" runat="server" CssClass="text-danger" ErrorMessage="You must acknowledge the submission statement by checking the box at the top of this form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
                 <asp:CustomValidator ID="valPhotoID" runat="server" CssClass="text-danger" ErrorMessage="You must have a photo identification before submitting" Display="Dynamic" ValidationGroup="Submit" />
               </td>

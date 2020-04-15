@@ -1725,7 +1725,7 @@ Public Class ZakatForm
       Dim vUserId As Int32 = Session("sUserId")
       If vUserId = 0 Then
         'is the email, first and last name populated?
-        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" And txtPhone.Text <> "" Then
           vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
         Else
           'show validation and exit sub
@@ -1996,6 +1996,7 @@ Public Class ZakatForm
             .isQualified1 = False
             .isQualified2 = False
             .isDispersed = False
+            .isRejected = False
             .applicationStatus = "Drafted"
             .husbandHasAppliedForZakat = chkHusbandApplied.SelectedValue
             .husbandZakatExplanation = txtHusbandExplanation.Text
