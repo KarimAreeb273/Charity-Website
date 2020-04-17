@@ -66,52 +66,52 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSubmitted]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSaved]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[USER_ROLE]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[USER_LANGUAGE]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[USER]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[STATE]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[ROLE]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[REVIEW]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[REFERENCE]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[ORGANIZATION]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[NATIONALITY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[LANGUAGE]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[DEPENDENT]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[CERTIFICATION_SKILL]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[ARTIFACT_TYPE]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[ARTIFACT]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/16/2020 5:19:19 AM ******/
 DROP TABLE [dbo].[APPLICATION]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/6/2020 5:39:12 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/16/2020 5:19:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -177,6 +177,7 @@ CREATE TABLE [dbo].[APPLICATION](
 	[qualified1By] [int] NULL,
 	[qualified2On] [datetime] NULL,
 	[qualified2By] [int] NULL,
+	[dispersedAmount] [money] NULL,
 	[dispersedOn] [datetime] NULL,
 	[dispersedBy] [int] NULL,
 	[rejectedOn] [datetime] NULL,
@@ -191,7 +192,7 @@ CREATE TABLE [dbo].[APPLICATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/6/2020 5:39:13 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/16/2020 5:19:22 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,21 +210,21 @@ CREATE TABLE [dbo].[ARTIFACT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/6/2020 5:39:14 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/16/2020 5:19:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[ARTIFACT_TYPE](
 	[artifactTypeId] [int] NOT NULL,
-	[name] [varchar](25) NULL,
+	[name] [varchar](35) NULL,
  CONSTRAINT [PK_ARTIFACT_TYPE] PRIMARY KEY CLUSTERED 
 (
 	[artifactTypeId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/6/2020 5:39:14 AM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/16/2020 5:19:25 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -238,7 +239,7 @@ CREATE TABLE [dbo].[CERTIFICATION_SKILL](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/6/2020 5:39:14 AM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/16/2020 5:19:26 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -258,7 +259,7 @@ CREATE TABLE [dbo].[DEPENDENT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/6/2020 5:39:15 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/16/2020 5:19:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -272,7 +273,7 @@ CREATE TABLE [dbo].[LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/6/2020 5:39:16 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/16/2020 5:19:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -286,7 +287,7 @@ CREATE TABLE [dbo].[NATIONALITY](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/6/2020 5:39:16 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/16/2020 5:19:27 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,7 +308,7 @@ CREATE TABLE [dbo].[ORGANIZATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/6/2020 5:39:16 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/16/2020 5:19:28 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -331,7 +332,7 @@ CREATE TABLE [dbo].[REFERENCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/6/2020 5:39:16 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/16/2020 5:19:31 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -349,7 +350,7 @@ CREATE TABLE [dbo].[REVIEW](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 4/6/2020 5:39:17 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 4/16/2020 5:19:34 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -364,7 +365,7 @@ CREATE TABLE [dbo].[ROLE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 4/6/2020 5:39:17 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 4/16/2020 5:19:35 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -378,7 +379,7 @@ CREATE TABLE [dbo].[STATE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 4/6/2020 5:39:18 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 4/16/2020 5:19:38 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -427,7 +428,7 @@ CREATE TABLE [dbo].[USER](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/6/2020 5:39:18 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/16/2020 5:19:41 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -442,7 +443,7 @@ CREATE TABLE [dbo].[USER_LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/6/2020 5:39:19 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/16/2020 5:19:42 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -1022,7 +1023,7 @@ INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WY'	,	'Wyoming'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'DC'	,	'District of Columbia'	);
 
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	1	,	'(Select One)');
-INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	2	,	'Photo Identification');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	2	,	'Government Photo Identification');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	3	,	'Lease/Mortgage Bill');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	4	,	'Utility Bill');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	5	,	'Medical Bill');
