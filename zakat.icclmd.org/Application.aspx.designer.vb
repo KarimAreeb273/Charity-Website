@@ -743,15 +743,6 @@ Partial Public Class Application1
     Protected WithEvents lblReport2 As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''lblReport3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblReport3 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''phReport1 control.
     '''</summary>
     '''<remarks>
@@ -768,15 +759,6 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents phReport2 As Global.System.Web.UI.WebControls.PlaceHolder
-    
-    '''<summary>
-    '''phReport3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents phReport3 As Global.System.Web.UI.WebControls.PlaceHolder
     
     '''<summary>
     '''pnlReviewComments control.

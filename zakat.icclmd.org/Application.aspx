@@ -29,7 +29,7 @@
         <a data-toggle="tab" href="#tabUserDash">
           <div>
             <b>User Dasboard</b>&nbsp;
-            <span style="font-size:16px;" class="fas fa-chart-area"></span>
+            <span style="font-size:16px;" class="fas fa-chart-pie"></span>
           </div>         
         </a>
       </li>
@@ -733,43 +733,27 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <table style="width: 100%" border="0">
           <tr>
-            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
+            <th style="width: 49%; text-align:center; background-color:#f5f5f5; color: black">
               <asp:Label ID="lblReport1" runat="server" Text="Report1"></asp:Label>
             </th>
             <th style="width: 1%; text-align:center">
               &nbsp;
             </th>
-            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
+            <th style="width: 49%; text-align:center; background-color:#f5f5f5; color: black">
               <asp:Label ID="lblReport2" runat="server" Text="Report2"></asp:Label>
-            </th>
-            <th style="width: 1%; text-align:center">
-              &nbsp;
-            </th>
-            <th style="width: 33%; text-align:center; background-color:#f5f5f5; color: black">
-              <asp:Label ID="lblReport3" runat="server" Text="Report3"></asp:Label>
             </th>
           </tr>
           <tr>
             <td style="text-align:center">
-              <%--<iframe runat="server" id="ifrReport1" style="border:none; width:400px; height: 400px; overflow:hidden;" scrolling="no"></iframe>--%>
               <asp:PlaceHolder ID="phReport1" runat="server"></asp:PlaceHolder>
-              <div id="divReport1" style="width: 100%; height: 300px;"></div>
+              <div id="divReport1" style="width: 100%; height: 250px;"></div>
             </td>
             <td style="text-align:center">
               &nbsp;
             </td>
             <td style="text-align:center">
-              <%--<iframe runat="server" id="ifrReport2" style="border:solid; width:700px; height: 400px; overflow:hidden;" scrolling="yes"></iframe>--%>
               <asp:PlaceHolder ID="phReport2" runat="server"></asp:PlaceHolder>
-              <div id="divReport2" style="width: 100%; height: 400px;"></div>
-            </td>
-            <td style="text-align:center">
-              &nbsp;
-            </td>
-            <td style="text-align:center">
-              <%--<iframe runat="server" id="ifrReport3" style="border:solid; width:700px; height: 400px; overflow:hidden;" scrolling="yes"></iframe>--%>
-              <asp:PlaceHolder ID="phReport3" runat="server"></asp:PlaceHolder>
-              <div id="divReport3" style="width: 100%; height: 400px;"></div>
+              <div id="divReport2" style="width: 100%; height: 250px;"></div>
             </td>
           </tr>
         </table>        

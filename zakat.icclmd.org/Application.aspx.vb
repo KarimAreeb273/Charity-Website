@@ -248,7 +248,7 @@
 
         'set charts
         setReport1(vApplicationId)
-        'setReportTimelineApplicationActions(vApplicationId)
+        setReport2(vApplicationId)
       End If
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -851,46 +851,6 @@
     End Try
   End Sub
 
-  Sub setReport1(vApplicationId As Int32)
-    Try
-      'ifrReport1.Src = "ReportPieFinalStatus?i=" & vApplicationId
-      Using oDB As New zakatEntities
-        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
-
-        'obtain aggregates related to the users actions
-        Dim oApplicationsQualified2 As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
-        Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
-
-        Dim vJscript As New StringBuilder
-        vJscript.Append("google.charts.load('current', {'packages':['corechart']});")
-        vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
-        vJscript.Append("function drawChart() {")
-        vJscript.Append("var data = google.visualization.arrayToDataTable([")
-        vJscript.Append("['Status', 'Count'],")
-        vJscript.Append("['Approved'," & oApplicationsQualified2.Count & "],")
-        vJscript.Append("['Rejected'," & oApplicationsRejected.Count & "]")
-        vJscript.Append("]);")
-        vJscript.Append("var options = {")
-        vJscript.Append(" title: ''")
-        lblReport1.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " - Final Application Status"
-        vJscript.Append("};")
-        vJscript.Append("var chart = new google.visualization.PieChart(document.getElementById('divReport1'));")
-        vJscript.Append("chart.draw(data, options);")
-        vJscript.Append("}")
-
-        'begin load values from the list
-        Dim cScript As New HtmlGenericControl
-        cScript.TagName = "script"
-        cScript.Attributes.Add("type", "text/javascript")
-        cScript.InnerHtml = vJscript.ToString
-        phReport1.Controls.Add(cScript)
-      End Using
-
-    Catch ex As Exception
-      Response.Write(ex.Message)
-    End Try
-  End Sub
-
   Private Sub txtReviewComments_TextChanged(sender As Object, e As EventArgs) Handles txtReviewComments.TextChanged
     updateForm()
   End Sub
@@ -969,120 +929,301 @@
     updateForm()
   End Sub
 
-  'Sub setReport2(vApplicationId As Int32)
-  '  Try
-  '    'ifrReport2.Src = "ReportTimelineApplicationActions?i=" & pAppId
-  '    Using oDB As New zakatEntities
-  '      'Dim vApplicationId As Int32 = Session("sApplicationId")
-  '      'Dim vApplicationId As Int32 = 6
-  '      Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+  Sub setReport1(vApplicationId As Int32)
+    Try
+      'create a pie chart of zakat applications approved vs rejected
+      Using oDB As New zakatEntities
+        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
 
-  '      'obtain aggregates
-  '      Dim vSubmittedStartDate As DateTime
-  '      Dim vSubmittedEndDate As DateTime
-  '      Dim vValidatedStartDate As DateTime
-  '      Dim vValidatedEndDate As DateTime
-  '      Dim vInvestigatedStartDate As DateTime
-  '      Dim vInvestigatedEndDate As DateTime
-  '      Dim vQualified1StartDate As DateTime
-  '      Dim vQualified1EndDate As DateTime
-  '      Dim vQualified2StartDate As DateTime
-  '      Dim vQualified2EndDate As DateTime
-  '      Dim vDispersedStartDate As DateTime
-  '      Dim vDispersedEndDate As DateTime
-  '      Dim vRejectedStartDate As DateTime
-  '      Dim vRejectedEndDate As DateTime
+        'obtain aggregates related to the users actions
+        Dim oApplicationsApproved As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isQualified2 = True).ToList
+        Dim oApplicationsRejected As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isRejected = True).ToList
 
-  '      With oApplication
-  '        If .isDispersed = True Then
-  '          vDispersedStartDate = oApplication.qualified2On
-  '          vDispersedEndDate = oApplication.dispersedOn
-  '        End If
-  '        If .isQualified2 = True Then
-  '          vQualified2StartDate = oApplication.qualified1On
-  '          vQualified2EndDate = oApplication.qualified2On
-  '        End If
-  '        If .isQualified1 = True Then
-  '          vQualified1StartDate = oApplication.investigatedOn
-  '          vQualified1EndDate = oApplication.qualified1On
-  '        End If
-  '        If .isInvestigated = True Then
-  '          vInvestigatedStartDate = oApplication.validatedOn
-  '          vInvestigatedEndDate = oApplication.investigatedOn
-  '        End If
-  '        If .isValidated = True Then
-  '          vValidatedStartDate = oApplication.submittedOn
-  '          vValidatedEndDate = oApplication.validatedOn
-  '        End If
-  '        If .isSubmitted = True Then
-  '          vSubmittedStartDate = oApplication.createdOn
-  '          vSubmittedEndDate = oApplication.submittedOn
-  '        End If
-  '        If .isRejected = True Then
-  '          If .isQualified2 Then
-  '            vRejectedStartDate = oApplication.qualified2On
-  '          ElseIf .isQualified1 Then
-  '            vRejectedStartDate = oApplication.qualified1On
-  '          ElseIf .isInvestigated Then
-  '            vRejectedStartDate = oApplication.investigatedOn
-  '          ElseIf .isValidated Then
-  '            vRejectedStartDate = oApplication.validatedOn
-  '          ElseIf .isSubmitted Then
-  '            vRejectedStartDate = oApplication.submittedOn
-  '          End If
-  '          vRejectedEndDate = oApplication.rejectedOn
-  '        End If
+        Dim vJscript As New StringBuilder
+        vJscript.Append("google.charts.load('current', {'packages':['corechart']});")
+        vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
+        vJscript.Append("function drawChart() {")
+        vJscript.Append("var data = google.visualization.arrayToDataTable([")
+        vJscript.Append("['Status', 'Count'],")
+        vJscript.Append("['Approved'," & oApplicationsApproved.Count & "],")
+        vJscript.Append("['Rejected'," & oApplicationsRejected.Count & "]")
+        vJscript.Append("]);")
+        vJscript.Append("var options = {")
+        vJscript.Append(" title: ''")
+        lblReport1.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " - Final Application Status"
+        vJscript.Append("};")
+        vJscript.Append("var chart = new google.visualization.PieChart(document.getElementById('divReport1'));")
+        vJscript.Append("chart.draw(data, options);")
+        vJscript.Append("}")
 
-  '        Dim vJscript As New StringBuilder
-  '        vJscript.Append("google.charts.load('current', {'packages':['timeline']});")
-  '        vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
-  '        vJscript.Append("function drawChart() {")
-  '        vJscript.Append("var container = document.getElementById('timelineApplicationActions');")
-  '        vJscript.Append("var chart = new google.visualization.Timeline(container);")
-  '        vJscript.Append("var dataTable = new google.visualization.DataTable();")
-  '        vJscript.Append("dataTable.addColumn({ type: 'string', id: 'Review Action' });")
-  '        vJscript.Append("dataTable.addColumn({ type: 'date', id: 'Start' });")
-  '        vJscript.Append("dataTable.addColumn({ type: 'date', id: 'End' });")
-  '        vJscript.Append("dataTable.addRows([")
-  '        'add data rows
-  '        If .isSubmitted Then
-  '          vJscript.Append("['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ") ]")
-  '        End If
-  '        If .isValidated Then
-  '          vJscript.Append(",['Validated', new Date(" & vValidatedStartDate.Year.ToString & ", " & (vValidatedStartDate.Month - 1).ToString & ", " & vValidatedStartDate.Day.ToString & "), new Date(" & vValidatedEndDate.Year.ToString & ", " & (vValidatedEndDate.Month - 1).ToString & ", " & vValidatedEndDate.Day.ToString & ") ]")
-  '        End If
-  '        If .isInvestigated Then
-  '          vJscript.Append(",['Investigated', new Date(" & vInvestigatedStartDate.Year.ToString & ", " & (vInvestigatedStartDate.Month - 1).ToString & ", " & vInvestigatedStartDate.Day.ToString & "), new Date(" & vInvestigatedEndDate.Year.ToString & ", " & (vInvestigatedEndDate.Month - 1).ToString & ", " & vInvestigatedEndDate.Day.ToString & ")]")
-  '        End If
-  '        If .isQualified1 Then
-  '          vJscript.Append(",['Qualified (Initial)', new Date(" & vQualified1StartDate.Year.ToString & ", " & (vQualified1StartDate.Month - 1).ToString & ", " & vQualified1StartDate.Day.ToString & "), new Date(" & vQualified1EndDate.Year.ToString & ", " & (vQualified1EndDate.Month - 1).ToString & ", " & vQualified1EndDate.Day.ToString & ")]")
-  '        End If
-  '        If .isQualified2 Then
-  '          vJscript.Append(",['Qualified (Final)', new Date(" & vQualified2StartDate.Year.ToString & ", " & (vQualified2StartDate.Month - 1).ToString & ", " & vQualified2StartDate.Day.ToString & "), new Date(" & vQualified2EndDate.Year.ToString & ", " & (vQualified2EndDate.Month - 1).ToString & ", " & vQualified2EndDate.Day.ToString & ")]")
-  '        End If
-  '        If .isDispersed Then
-  '          vJscript.Append(",['Dispersed', new Date(" & vDispersedStartDate.Year.ToString & ", " & (vDispersedStartDate.Month - 1).ToString & ", " & vDispersedStartDate.Day.ToString & "), new Date(" & vDispersedEndDate.Year.ToString & ", " & (vDispersedEndDate.Month - 1).ToString & ", " & vDispersedEndDate.Day.ToString & ")]")
-  '        End If
-  '        If .isRejected Then
-  '          vJscript.Append(",['Rejected', new Date(" & vRejectedStartDate.Year.ToString & ", " & (vRejectedStartDate.Month - 1).ToString & ", " & vRejectedStartDate.Day.ToString & "), new Date(" & vRejectedEndDate.Year.ToString & ", " & (vRejectedEndDate.Month - 1).ToString & ", " & vRejectedEndDate.Day.ToString & ")]")
-  '        End If
-  '        vJscript.Append("]);")
-  '        vJscript.Append("chart.draw(dataTable);")
-  '        vJscript.Append("}")
+        'begin load values from the list
+        Dim cScript As New HtmlGenericControl
+        cScript.TagName = "script"
+        cScript.Attributes.Add("type", "text/javascript")
+        cScript.InnerHtml = vJscript.ToString
+        phReport1.Controls.Add(cScript)
+      End Using
 
-  '        lblReport2.Text = "Review Intervals Between Application Actions"
-  '        'begin load values from the list
-  '        Dim cScript As New HtmlGenericControl
-  '        cScript.TagName = "script"
-  '        cScript.Attributes.Add("type", "text/javascript")
-  '        cScript.InnerHtml = vJscript.ToString
-  '        phReport2.Controls.Add(cScript)
-  '      End With
-  '    End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 
-  '  Catch ex As Exception
-  '    Response.Write(ex.Message)
-  '  End Try
-  'End Sub
+  Sub setReport2(vApplicationId As Int32)
+    Try
+      'create a bar chart of zakat applications approved by period
+      Using oDB As New zakatEntities
+        Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
+        lblReport2.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " - Zakat Approved By Period"
+        Dim vCurrentMonth As Int32 = Date.Now.Month
+        Dim vMonthName1 As String = ""
+        Dim vMonthName2 As String = ""
+        Dim vMonthName3 As String = ""
+        Dim vMonthAmount1 As Int32 = 0
+        Dim vMonthAmount2 As Int32 = 0
+        Dim vMonthAmount3 As Int32 = 0
+        Dim vTotalAmount As Int32 = 0
+
+        Dim oAppTotal As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True).ToList
+        For Each item In oAppTotal
+          vTotalAmount = vTotalAmount + item.dispersedAmount
+        Next
+
+        Dim oAppMonth1 As List(Of APPLICATION)
+        Dim oAppMonth2 As List(Of APPLICATION)
+        Dim oAppMonth3 As List(Of APPLICATION)
+
+        If vCurrentMonth = 1 Then
+          vMonthName1 = "Nov " & (Date.Now.Year - 1).ToString
+          vMonthName2 = "Dec " & (Date.Now.Year - 1).ToString
+          vMonthName3 = "Jan " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("11/01/" & (Date.Now.Year - 1).ToString) And APPLICATION.dispersedOn <= CDate("11/30/" & (Date.Now.Year - 1).ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("12/01/" & (Date.Now.Year - 1).ToString) And APPLICATION.dispersedOn <= CDate("12/31/" & (Date.Now.Year - 1).ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("01/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("01/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 2 Then
+          vMonthName1 = "Dec " & (Date.Now.Year - 1).ToString
+          vMonthName2 = "Jan " & Date.Now.Year.ToString
+          vMonthName3 = "Feb " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("12/01/" & (Date.Now.Year - 1).ToString) And APPLICATION.dispersedOn <= CDate("12/31/" & (Date.Now.Year - 1).ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("01/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("01/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("02/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("02/28/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 3 Then
+          vMonthName1 = "Jan " & Date.Now.Year.ToString
+          vMonthName2 = "Feb " & Date.Now.Year.ToString
+          vMonthName3 = "Mar " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("01/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("01/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("02/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("02/28/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("03/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("03/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 4 Then
+          vMonthName1 = "Feb " & Date.Now.Year.ToString
+          vMonthName2 = "Mar " & Date.Now.Year.ToString
+          vMonthName3 = "Apr " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("02/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("02/28/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("03/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("03/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("04/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("04/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 5 Then
+          vMonthName1 = "Mar " & Date.Now.Year.ToString
+          vMonthName2 = "Apr " & Date.Now.Year.ToString
+          vMonthName3 = "May " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("03/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("03/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("04/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("04/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("05/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("05/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 6 Then
+          vMonthName1 = "Apr " & Date.Now.Year.ToString
+          vMonthName2 = "May " & Date.Now.Year.ToString
+          vMonthName3 = "Jun " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("04/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("04/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("05/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("05/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("06/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("06/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 7 Then
+          vMonthName1 = "May " & Date.Now.Year.ToString
+          vMonthName2 = "Jun " & Date.Now.Year.ToString
+          vMonthName3 = "Jul " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("05/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("05/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("06/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("06/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("07/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("07/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 8 Then
+          vMonthName1 = "Jun " & Date.Now.Year.ToString
+          vMonthName2 = "Jul " & Date.Now.Year.ToString
+          vMonthName3 = "Aug " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("06/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("06/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("07/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("07/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("08/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("08/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 9 Then
+          vMonthName1 = "Jul " & Date.Now.Year.ToString
+          vMonthName2 = "Aug " & Date.Now.Year.ToString
+          vMonthName3 = "Sep " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("07/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("07/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("08/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("08/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("09/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("09/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 10 Then
+          vMonthName1 = "Aug " & Date.Now.Year.ToString
+          vMonthName2 = "Sep " & Date.Now.Year.ToString
+          vMonthName3 = "Oct " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("08/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("08/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("09/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("09/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("10/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("10/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 11 Then
+          vMonthName1 = "Sep " & Date.Now.Year.ToString
+          vMonthName2 = "Oct " & Date.Now.Year.ToString
+          vMonthName3 = "Nov " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("09/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("09/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("10/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("10/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("11/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("11/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        ElseIf vCurrentMonth = 12 Then
+          vMonthName1 = "Oct " & Date.Now.Year.ToString
+          vMonthName2 = "Nov " & Date.Now.Year.ToString
+          vMonthName3 = "Dec " & Date.Now.Year.ToString
+          oAppMonth1 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("10/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("10/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth1
+            vMonthAmount1 = vMonthAmount1 + item.dispersedAmount
+          Next
+          oAppMonth2 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("11/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("11/30/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth2
+            vMonthAmount2 = vMonthAmount2 + item.dispersedAmount
+          Next
+          oAppMonth3 = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = oApplication.userId And APPLICATION.isDispersed = True And APPLICATION.dispersedOn >= CDate("12/01/" & Date.Now.Year.ToString) And APPLICATION.dispersedOn <= CDate("12/31/" & Date.Now.Year.ToString)).ToList
+          For Each item In oAppMonth3
+            vMonthAmount3 = vMonthAmount3 + item.dispersedAmount
+          Next
+        End If
+
+        Dim vJscript As New StringBuilder
+        vJscript.Append("google.charts.load('current', {packages: ['corechart', 'bar']});")
+        vJscript.Append("google.charts.setOnLoadCallback(drawBasic);")
+        vJscript.Append("function drawBasic() {")
+        vJscript.Append("var data = google.visualization.arrayToDataTable([")
+        vJscript.Append("['Period', 'Amount', { role: 'style' }, { role: 'annotation' } ],")
+        vJscript.Append("['All Time', " & vTotalAmount & ", 'color: blue', 'All Time'],")
+        vJscript.Append("['" & vMonthName1 & "', " & vMonthAmount1 & ", 'color: blue', '" & vMonthName1 & "'],")
+        vJscript.Append("['" & vMonthName2 & "', " & vMonthAmount2 & ", 'color: blue', '" & vMonthName2 & "'],")
+        vJscript.Append("['" & vMonthName3 & "', " & vMonthAmount3 & ", 'color: blue', '" & vMonthName3 & "']")
+        vJscript.Append("]);")
+        vJscript.Append("var options = {")
+        vJscript.Append("title: '',")
+        vJscript.Append("chartArea: {width: '50%'},")
+        vJscript.Append("hAxis: {")
+        vJscript.Append("title: 'Total Amount Approved ($)',")
+        vJscript.Append("minValue: 0")
+        vJscript.Append("},")
+        vJscript.Append("vAxis: {")
+        vJscript.Append("title: 'Period of Time'")
+        vJscript.Append("}")
+        vJscript.Append("};")
+        vJscript.Append("var chart = new google.visualization.BarChart(document.getElementById('divReport2'));")
+        vJscript.Append("chart.draw(data, options);")
+        vJscript.Append("}")
+
+        'begin load values from the list
+        Dim cScript As New HtmlGenericControl
+        cScript.TagName = "script"
+        cScript.Attributes.Add("type", "text/javascript")
+        cScript.InnerHtml = vJscript.ToString
+        phReport2.Controls.Add(cScript)
+      End Using
+
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 
 End Class
