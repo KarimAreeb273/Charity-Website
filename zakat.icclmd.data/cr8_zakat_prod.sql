@@ -1036,7 +1036,7 @@ INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	2	,	'Validator'	,	'Thi
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'This role provides a user the ability to review the zakat case to determine that a need exists'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispursed'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispersed'	);
 INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	7	,	'General'	,	'This role provides no privileges'	);
 
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
