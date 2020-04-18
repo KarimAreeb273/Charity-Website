@@ -148,7 +148,6 @@
     <Content Include="Temp.html" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
-    <Content Include="Dashboard.aspx" />
     <Content Include="UserRoles.aspx" />
     <Content Include="OrganizationEdit.aspx" />
     <Content Include="Organizations.aspx" />
@@ -267,6 +266,9 @@
     <Compile Include="ARTIFACT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ARTIFACT_TYPE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="CERTIFICATION_SKILL.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -309,13 +311,6 @@
     </Compile>
     <Compile Include="Profile.aspx.vb">
       <DependentUpon>Profile.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Dashboard.aspx.designer.vb">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.aspx.vb">
-      <DependentUpon>Dashboard.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="REVIEW.vb">
