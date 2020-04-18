@@ -145,7 +145,6 @@
     <Content Include="Activity.aspx" />
     <Content Include="Inbox.aspx" />
     <Content Include="Timeline.aspx" />
-    <Content Include="Temp.html" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="UserRoles.aspx" />
