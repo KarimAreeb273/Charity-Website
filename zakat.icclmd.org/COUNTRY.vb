@@ -10,15 +10,10 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class ARTIFACT
-    Public Property artifactId As Integer
-    Public Property artifactTypeId As Nullable(Of Integer)
-    Public Property applicationId As Nullable(Of Integer)
-    Public Property filename As String
-    Public Property contentType As String
-    Public Property data As Byte()
+Partial Public Class COUNTRY
+    Public Property countryId As Integer
+    Public Property name As String
 
-    Public Overridable Property ARTIFACT_TYPE As ARTIFACT_TYPE
-    Public Overridable Property APPLICATION As APPLICATION
+    Public Overridable Property USER As ICollection(Of USER) = New HashSet(Of USER)
 
 End Class

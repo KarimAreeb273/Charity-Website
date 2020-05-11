@@ -34,7 +34,6 @@
         </a>
       </li>
     </ul>
-    
     <div class="tab-content">
       <div id="tabAppData" class="tab-pane fade in active">
         <br />
@@ -375,16 +374,6 @@
                   <asp:Label runat="server" ID="txtLastDateAssisted" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
                 </td>
               </tr>
-
-
-              <tr>
-                <td>
-                  <asp:Label runat="server" AssociatedControlID="txtApplicationsSubmitted" CssClass="control-label" Style="white-space: nowrap">Submitted Applications:</asp:Label>
-                </td>
-                <td>
-                  <asp:Label runat="server" ID="Label3" CssClass="control-label" Style="white-space: nowrap" Text="0"></asp:Label>
-                </td>
-              </tr>
               <tr>
                 <td>
                   <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="control-label" Style="white-space: nowrap">Highest Education:</asp:Label>
@@ -395,7 +384,23 @@
               </tr>
               <tr>
                 <td>
-                  <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="control-label" Style="white-space: nowrap">School Name:</asp:Label>
+                  <asp:Label runat="server" AssociatedControlID="txtSchoolIsInternational" CssClass="control-label" Style="white-space: nowrap">International School:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtSchoolIsInternational" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtSchoolCountry" CssClass="control-label" Style="white-space: nowrap">School Country:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtSchoolCountry" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtSchoolName" CssClass="control-label" Style="white-space: nowrap">School Name:</asp:Label>
                 </td>
                 <td>
                   <asp:Label runat="server" ID="txtSchoolName" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
@@ -511,6 +516,14 @@
                 </td>
                 <td>
                   <asp:Label runat="server" ID="txtMedicaid" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtNotEmployed" CssClass="control-label" Style="white-space: nowrap">Ever Employed:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtNotEmployed" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
                 </td>
               </tr>
               <tr>
@@ -672,9 +685,9 @@
             <HeaderTemplate>
               <tr style="height: 30px; border: solid solid solid solid">
                 <th style="text-align: left; width: 10%">Artifact #</th>
-                <th style="text-align: left; width: 15%">Artifact Type</th>
+                <th style="text-align: left; width: 25%">Artifact Type</th>
                 <th style="text-align: left; width: 30%;">Filename</th>
-                <th style="text-align: left; width: 55%">Content Type</th>
+                <th style="text-align: left; width: 45%">Content Type</th>
               </tr>
             </HeaderTemplate>
             <ItemTemplate>
@@ -686,7 +699,7 @@
                   <%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>
                 </td>
                 <td style="text-align: left; vertical-align: middle">
-                  <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;&nbsp;Click to Download)</asp:LinkButton>
+                  <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;Download)</asp:LinkButton>
                 </td>
                 <td style="text-align: left; vertical-align: middle">
                   <%# DataBinder.Eval(Container.DataItem, "contentType")%>
@@ -778,23 +791,6 @@
               </tr>
             </table>
           </asp:Panel>
-          <!-- Modal -->
-          <div class="modal fade" id="myModal" role="dialog">
-            <div class="modal-dialog modal-md">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title"><b>Confirm Rejection</b></h4>
-                </div>
-                <div class="modal-body">
-                  <p>Are you sure that you want to reject this application?  This action can<u>not</u> be undone.</p>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>&nbsp;<asp:Button ID="btnRejected" runat="server" Text="Reject" CssClass="btn btn-danger" TabIndex="3" Width="100px"  ValidationGroup="Review" />
-                </div>
-              </div>
-            </div>
-          </div>
           <asp:Panel ID="pnlValidated" runat="server" Visible="false">
             <table style="width:100%">
               <tr>
@@ -1012,10 +1008,27 @@
               </tr>
             </table>
           </asp:Panel>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title"><b>Confirm Rejection</b></h4>
+                </div>
+                <div class="modal-body">
+                  <p>Are you sure that you want to reject this application?  This action can<u>not</u> be undone.</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal" style="width:100px">Cancel</button>&nbsp;<asp:Button ID="btnRejected" runat="server" Text="Reject" CssClass="btn btn-danger" TabIndex="3" Width="100px"  ValidationGroup="Review" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <br />
-  <br />  
+  <br />
 </asp:Content>

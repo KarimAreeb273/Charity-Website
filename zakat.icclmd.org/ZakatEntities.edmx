@@ -47,7 +47,7 @@
           <Property Name="hasTemporaryCashAssistance" Type="bit" />
           <Property Name="sourceTemporaryCashAssistance" Type="varchar" MaxLength="100" />
           <Property Name="totalTemporaryCashAssistance" Type="money" />
-          <Property Name="isEmployerCurrent" Type="bit" />
+          <Property Name="isNotEmployed" Type="bit" />
           <Property Name="employerName" Type="varchar" MaxLength="100" />
           <Property Name="positionTitle" Type="varchar" MaxLength="100" />
           <Property Name="totalMonthlyGrossSalary" Type="money" />
@@ -104,6 +104,13 @@
           <Property Name="certificationSkillId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userId" Type="int" />
           <Property Name="certificationSkill" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="countryId" />
+          </Key>
+          <Property Name="countryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DEPENDENT">
           <Key>
@@ -219,7 +226,9 @@
           <Property Name="husbandPhone" Type="varchar" MaxLength="10" />
           <Property Name="husbandEmail" Type="varchar" MaxLength="60" />
           <Property Name="highestEducationCompleted" Type="varchar" MaxLength="50" />
+          <Property Name="isInternationalSchool" Type="bit" />
           <Property Name="schoolName" Type="varchar" MaxLength="100" />
+          <Property Name="schoolCountryId" Type="int" />
           <Property Name="schoolStreet" Type="varchar" MaxLength="100" />
           <Property Name="schoolCity" Type="varchar" MaxLength="50" />
           <Property Name="schoolStateAbbr" Type="varchar" MaxLength="15" />
@@ -392,6 +401,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_USER_COUNTRY">
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="countryId" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="schoolCountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USER_LANGUAGE_LANGUAGE">
           <End Role="LANGUAGE" Type="Self.LANGUAGE" Multiplicity="0..1" />
           <End Role="USER_LANGUAGE" Type="Self.USER_LANGUAGE" Multiplicity="*" />
@@ -493,6 +514,7 @@
           <EntitySet Name="ARTIFACT" EntityType="Self.ARTIFACT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ARTIFACT_TYPE" EntityType="Self.ARTIFACT_TYPE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="Self.CERTIFICATION_SKILL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPENDENT" EntityType="Self.DEPENDENT" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" Schema="dbo" store:Type="Tables" />
@@ -551,6 +573,10 @@
           <AssociationSet Name="FK_REFERENCE_USER1" Association="Self.FK_REFERENCE_USER1">
             <End Role="USER" EntitySet="USER" />
             <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_COUNTRY" Association="Self.FK_USER_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="USER" EntitySet="USER" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="Self.FK_USER_LANGUAGE_LANGUAGE">
             <End Role="LANGUAGE" EntitySet="LANGUAGE" />
@@ -621,10 +647,42 @@
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
+          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
+          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
+            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="REVIEW" EntitySet="REVIEW" />
+          </AssociationSet>
+          <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
           <EntitySet Name="USER" EntityType="zakatModel.USER" />
+          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
           <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="zakatModel.FK_CERTIFICATION_SKILL_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="CERTIFICATION_SKILL" EntitySet="CERTIFICATION_SKILL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_COUNTRY" Association="zakatModel.FK_USER_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="USER" EntitySet="USER" />
           </AssociationSet>
           <AssociationSet Name="FK_DEPDENDENTS_USER" Association="zakatModel.FK_DEPDENDENTS_USER">
             <End Role="USER" EntitySet="USER" />
@@ -657,33 +715,6 @@
           <AssociationSet Name="FK_USER_ROLE_USER" Association="zakatModel.FK_USER_ROLE_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
-          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
-          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="REVIEW" EntitySet="REVIEW" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
-            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="CERTIFICATION_SKILL">
@@ -764,9 +795,9 @@
           <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
           <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
           </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -874,8 +905,176 @@
           <Property Name="reviewAction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="reviewDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ARTIFACT">
+          <Key>
+            <PropertyRef Name="artifactId" />
+          </Key>
+          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="artifactTypeId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+        </EntityType>
+        <EntityType Name="ARTIFACT_TYPE">
+          <Key>
+            <PropertyRef Name="artifactTypeId" />
+          </Key>
+          <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
+        </EntityType>
+        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
+          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIFACT_TYPE">
+              <PropertyRef Name="artifactTypeId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="artifactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="APPLICATION">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="organizationId" Type="Int32" Nullable="false" />
+          <Property Name="isDrafted" Type="Boolean" />
+          <Property Name="isSubmitted" Type="Boolean" />
+          <Property Name="isValidated" Type="Boolean" />
+          <Property Name="isInvestigated" Type="Boolean" />
+          <Property Name="isQualified1" Type="Boolean" />
+          <Property Name="isQualified2" Type="Boolean" />
+          <Property Name="isDispersed" Type="Boolean" />
+          <Property Name="isRejected" Type="Boolean" />
+          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="husbandHasAppliedForZakat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="husbandZakatExplanation" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueInvestment" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasRetirement" Type="Boolean" />
+          <Property Name="totalValueRetirement" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasOutstandingDebts" Type="Boolean" />
+          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasHealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="hasLifeInsurance" Type="Boolean" />
+          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasChildSupport" Type="Boolean" />
+          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyChildSupport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="hasFoodStamps" Type="Boolean" />
+          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyFoodStamps" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
+          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="isNotEmployed" Type="Boolean" />
+          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
+          <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
+          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employerStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="submittedOn" Type="DateTime" Precision="3" />
+          <Property Name="submittedBy" Type="Int32" />
+          <Property Name="validatedOn" Type="DateTime" Precision="3" />
+          <Property Name="validatedBy" Type="Int32" />
+          <Property Name="investigatedOn" Type="DateTime" Precision="3" />
+          <Property Name="investigatedBy" Type="Int32" />
+          <Property Name="qualified1On" Type="DateTime" Precision="3" />
+          <Property Name="qualified1By" Type="Int32" />
+          <Property Name="qualified2On" Type="DateTime" Precision="3" />
+          <Property Name="qualified2By" Type="Int32" />
+          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="dispersedOn" Type="DateTime" Precision="3" />
+          <Property Name="dispersedBy" Type="Int32" />
+          <Property Name="rejectedOn" Type="DateTime" Precision="3" />
+          <Property Name="rejectedBy" Type="Int32" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
+          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_APPLICATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="employerStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARTIFACT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMMENT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="REVIEW">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="countryId" />
+          </Key>
+          <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -907,7 +1106,9 @@
           <Property Name="husbandPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="husbandEmail" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
           <Property Name="highestEducationCompleted" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isInternationalSchool" Type="Boolean" />
           <Property Name="schoolName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="schoolCountryId" Type="Int32" />
           <Property Name="schoolStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="schoolCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="schoolStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -918,7 +1119,9 @@
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
+          <NavigationProperty Name="COUNTRY" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
           <NavigationProperty Name="DEPENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPENDENT" />
           <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="USER" ToRole="REFERENCE" />
@@ -927,8 +1130,19 @@
           <NavigationProperty Name="STATE1" Relationship="zakatModel.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
         </EntityType>
+        <Association Name="FK_APPLICATION_USER">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
           <End Type="zakatModel.CERTIFICATION_SKILL" Role="CERTIFICATION_SKILL" Multiplicity="*" />
@@ -938,6 +1152,18 @@
             </Principal>
             <Dependent Role="CERTIFICATION_SKILL">
               <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_COUNTRY">
+          <End Type="zakatModel.COUNTRY" Role="COUNTRY" Multiplicity="0..1" />
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COUNTRY">
+              <PropertyRef Name="countryId" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="schoolCountryId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1034,178 +1260,6 @@
             </Principal>
             <Dependent Role="USER_ROLE">
               <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="ARTIFACT">
-          <Key>
-            <PropertyRef Name="artifactId" />
-          </Key>
-          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="artifactTypeId" Type="Int32" />
-          <Property Name="applicationId" Type="Int32" />
-          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
-          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
-        </EntityType>
-        <EntityType Name="APPLICATION">
-          <Key>
-            <PropertyRef Name="applicationId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="organizationId" Type="Int32" Nullable="false" />
-          <Property Name="isDrafted" Type="Boolean" />
-          <Property Name="isSubmitted" Type="Boolean" />
-          <Property Name="isValidated" Type="Boolean" />
-          <Property Name="isInvestigated" Type="Boolean" />
-          <Property Name="isQualified1" Type="Boolean" />
-          <Property Name="isQualified2" Type="Boolean" />
-          <Property Name="isDispersed" Type="Boolean" />
-          <Property Name="isRejected" Type="Boolean" />
-          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="husbandHasAppliedForZakat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="husbandZakatExplanation" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueInvestment" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasRetirement" Type="Boolean" />
-          <Property Name="totalValueRetirement" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasOutstandingDebts" Type="Boolean" />
-          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasHealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="hasLifeInsurance" Type="Boolean" />
-          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasChildSupport" Type="Boolean" />
-          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyChildSupport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="hasFoodStamps" Type="Boolean" />
-          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyFoodStamps" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
-          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="isEmployerCurrent" Type="Boolean" />
-          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
-          <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
-          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="employerStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="submittedOn" Type="DateTime" Precision="3" />
-          <Property Name="submittedBy" Type="Int32" />
-          <Property Name="validatedOn" Type="DateTime" Precision="3" />
-          <Property Name="validatedBy" Type="Int32" />
-          <Property Name="investigatedOn" Type="DateTime" Precision="3" />
-          <Property Name="investigatedBy" Type="Int32" />
-          <Property Name="qualified1On" Type="DateTime" Precision="3" />
-          <Property Name="qualified1By" Type="Int32" />
-          <Property Name="qualified2On" Type="DateTime" Precision="3" />
-          <Property Name="qualified2By" Type="Int32" />
-          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="dispersedOn" Type="DateTime" Precision="3" />
-          <Property Name="dispersedBy" Type="Int32" />
-          <Property Name="rejectedOn" Type="DateTime" Precision="3" />
-          <Property Name="rejectedBy" Type="Int32" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="updatedOn" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
-          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
-        </EntityType>
-        <EntityType Name="ARTIFACT_TYPE">
-          <Key>
-            <PropertyRef Name="artifactTypeId" />
-          </Key>
-          <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
-        </EntityType>
-        <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLICATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="employerStateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLICATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ARTIFACT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_COMMENT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="REVIEW">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
-          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARTIFACT_TYPE">
-              <PropertyRef Name="artifactTypeId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="artifactTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1335,49 +1389,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="USER">
-            <EntityTypeMapping TypeName="zakatModel.USER">
-              <MappingFragment StoreEntitySet="USER">
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-                <ScalarProperty Name="primaryMasjidPhone" ColumnName="primaryMasjidPhone" />
-                <ScalarProperty Name="primaryMasjidName" ColumnName="primaryMasjidName" />
-                <ScalarProperty Name="schoolZip" ColumnName="schoolZip" />
-                <ScalarProperty Name="schoolStateAbbr" ColumnName="schoolStateAbbr" />
-                <ScalarProperty Name="schoolCity" ColumnName="schoolCity" />
-                <ScalarProperty Name="schoolStreet" ColumnName="schoolStreet" />
-                <ScalarProperty Name="schoolName" ColumnName="schoolName" />
-                <ScalarProperty Name="highestEducationCompleted" ColumnName="highestEducationCompleted" />
-                <ScalarProperty Name="husbandEmail" ColumnName="husbandEmail" />
-                <ScalarProperty Name="husbandPhone" ColumnName="husbandPhone" />
-                <ScalarProperty Name="husbandLastName" ColumnName="husbandLastName" />
-                <ScalarProperty Name="husbandMiddleName" ColumnName="husbandMiddleName" />
-                <ScalarProperty Name="husbandFirstName" ColumnName="husbandFirstName" />
-                <ScalarProperty Name="homeTypeOther" ColumnName="homeTypeOther" />
-                <ScalarProperty Name="homeType" ColumnName="homeType" />
-                <ScalarProperty Name="beganLivingDate" ColumnName="beganLivingDate" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="citizenshipStatus" ColumnName="citizenshipStatus" />
-                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
-                <ScalarProperty Name="socialSecurityNumber" ColumnName="socialSecurityNumber" />
-                <ScalarProperty Name="dob" ColumnName="dob" />
-                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ARTIFACT">
             <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
               <MappingFragment StoreEntitySet="ARTIFACT">
@@ -1387,6 +1398,14 @@
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
                 <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
                 <ScalarProperty Name="artifactId" ColumnName="artifactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ARTIFACT_TYPE">
+            <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
+              <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1423,7 +1442,7 @@
                 <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
                 <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
                 <ScalarProperty Name="employerName" ColumnName="employerName" />
-                <ScalarProperty Name="isEmployerCurrent" ColumnName="isEmployerCurrent" />
+                <ScalarProperty Name="isNotEmployed" ColumnName="isNotEmployed" />
                 <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
                 <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
                 <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
@@ -1465,11 +1484,56 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ARTIFACT_TYPE">
-            <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
-              <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
+          <EntitySetMapping Name="COUNTRY">
+            <EntityTypeMapping TypeName="zakatModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="zakatModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="primaryMasjidPhone" ColumnName="primaryMasjidPhone" />
+                <ScalarProperty Name="primaryMasjidName" ColumnName="primaryMasjidName" />
+                <ScalarProperty Name="schoolZip" ColumnName="schoolZip" />
+                <ScalarProperty Name="schoolStateAbbr" ColumnName="schoolStateAbbr" />
+                <ScalarProperty Name="schoolCity" ColumnName="schoolCity" />
+                <ScalarProperty Name="schoolStreet" ColumnName="schoolStreet" />
+                <ScalarProperty Name="schoolCountryId" ColumnName="schoolCountryId" />
+                <ScalarProperty Name="schoolName" ColumnName="schoolName" />
+                <ScalarProperty Name="isInternationalSchool" ColumnName="isInternationalSchool" />
+                <ScalarProperty Name="highestEducationCompleted" ColumnName="highestEducationCompleted" />
+                <ScalarProperty Name="husbandEmail" ColumnName="husbandEmail" />
+                <ScalarProperty Name="husbandPhone" ColumnName="husbandPhone" />
+                <ScalarProperty Name="husbandLastName" ColumnName="husbandLastName" />
+                <ScalarProperty Name="husbandMiddleName" ColumnName="husbandMiddleName" />
+                <ScalarProperty Name="husbandFirstName" ColumnName="husbandFirstName" />
+                <ScalarProperty Name="homeTypeOther" ColumnName="homeTypeOther" />
+                <ScalarProperty Name="homeType" ColumnName="homeType" />
+                <ScalarProperty Name="beganLivingDate" ColumnName="beganLivingDate" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="citizenshipStatus" ColumnName="citizenshipStatus" />
+                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
+                <ScalarProperty Name="socialSecurityNumber" ColumnName="socialSecurityNumber" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -350,7 +350,7 @@
                                 <tr>
                                   <td style="width: 45%">
                                     <b>Languages:</b><br />
-                                    <asp:ListBox ID="lstLanguages"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="3" Width="100%" TabIndex="21" ></asp:ListBox>
+                                    <asp:ListBox ID="lstLanguages"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="5" Width="100%" TabIndex="21" ></asp:ListBox>
                                   </td>
                                   <td style="text-align: center;width: 10%">
                                     <br /><br />
@@ -365,10 +365,11 @@
                                   </td>
                                   <td style="width: 45%">
                                     <b>Languages Spoken:</b><br />
-                                    <asp:ListBox ID="lstSpoken"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="3" Width="100%" TabIndex="24" ></asp:ListBox>
+                                    <asp:ListBox ID="lstSpoken"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="5" Width="100%" TabIndex="24" ></asp:ListBox>
                                   </td>
                                 </tr>
                               </table>
+                              <br />
                               <table style="width: 100%; white-space: nowrap">
                                 <tr>
                                   <td style="width: 100%">
@@ -392,7 +393,7 @@
                                     <table border="0" style="width: 100%">
                                       <tr>
                                         <td style="width: 95%; vertical-align: middle"">
-                                          <asp:ListBox ID="lstSkillCertification" runat="server" AutoPostBack="False" Rows="3" CssClass="form-control" style="max-width:100%;width:100%" TabIndex="27" ></asp:ListBox>
+                                          <asp:ListBox ID="lstSkillCertification" runat="server" AutoPostBack="False" Rows="4" CssClass="form-control" style="max-width:100%;width:100%" TabIndex="27" ></asp:ListBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td style="width: 5%; vertical-align: bottom">
@@ -403,7 +404,7 @@
                                   </td>
                                 </tr>
                               </table>
-                              <br />
+                              <br /><br />
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpHighestEducation" CssClass="col-lg-4 control-label" ToolTip="Highest Education Completed" style="white-space: nowrap; position: relative; top: 0px;">Highest Education Completed:</asp:Label>
                                 <div class="col-lg-8">
@@ -427,41 +428,69 @@
                             <br />
                             <div class="form-horizontal">
                               <div class="form-group">
+                                <asp:Label runat="server" CssClass="col-lg-2 control-label">&nbsp;</asp:Label>
+                                <div class="col-lg-10">
+                                  <label>
+                                    <asp:CheckBox ID="chkIsInternational" TabIndex="30" runat="server" AutoPostBack="True" /><b>&nbsp;International School</b>
+                                  </label>
+                                  <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="CustomValidator" Text="temp"></asp:CustomValidator>
+                                </div>
+                              </div>
+                              <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtSchoolName" CssClass="col-lg-2 control-label" ToolTip="School Name" Style="white-space: nowrap">School Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="30" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="31" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolName" CssClass="text-danger" ErrorMessage="The school name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="txtSchoolStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">School Street:</asp:Label>
-                                <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="31" AutoPostBack="True" ValidationGroup="Submit" />
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolStreet" CssClass="text-danger" ErrorMessage="The school street is required." Display="Static" ValidationGroup="Submit" />
+                                  <asp:Label runat="server" AssociatedControlID="txtSchoolCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">School City:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:TextBox runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="32" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolCity" CssClass="text-danger" ErrorMessage="The school city is required." Display="Static" ValidationGroup="Submit" />
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="txtSchoolCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">School City:</asp:Label>
-                                <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="32" AutoPostBack="True" ValidationGroup="Submit" />
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolCity" CssClass="text-danger" ErrorMessage="The school city is required." Display="Static" ValidationGroup="Submit" />
+                              <asp:Panel ID="pnlDomestic" runat="server">
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="txtSchoolStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">School Street:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:TextBox runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="33" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolStreet" CssClass="text-danger" ErrorMessage="The school street is required." Display="Static" ValidationGroup="Submit" />
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="drpSchoolState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">School State:</asp:Label>
-                                <div class="col-lg-10">
-                                  <asp:DropDownList ID="drpSchoolState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="33" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolState" CssClass="text-danger" ErrorMessage="The school state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="drpSchoolState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">School State:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:DropDownList ID="drpSchoolState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="34" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolState" CssClass="text-danger" ErrorMessage="The school state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                  </div>
                                 </div>
-                              </div>
-                              <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="txtSchoolZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">School Zip:</asp:Label>
-                                <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtSchoolZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="34" AutoPostBack="True" ValidationGroup="Submit" />
-                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ErrorMessage="The school zip code is required." Display="Static" ValidationGroup="Submit" />
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="txtSchoolZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">School Zip:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:TextBox runat="server" ID="txtSchoolZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="35" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ErrorMessage="The school zip code is required." Display="Static" ValidationGroup="Submit" />
+                                  </div>
                                 </div>
-                              </div>
+                              </asp:Panel>
+                              <asp:Panel ID="pnlInternational" runat="server" Visible="false">
+                                <div class="form-group">
+                                  <asp:Label runat="server" AssociatedControlID="drpSchoolCountry" CssClass="col-lg-2 control-label" ToolTip="Address Country" Style="white-space: nowrap; position: relative; top: 0px;">School Country:</asp:Label>
+                                  <div class="col-lg-10">
+                                    <asp:DropDownList ID="drpSchoolCountry" runat="server" ToolTip="Address Country" CssClass="form-control" TabIndex="36" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolCountry" CssClass="text-danger" ErrorMessage="The school country is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                  </div>
+                                </div>
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                              </asp:Panel>
                             </div>
                           </div>
                         </td>
@@ -932,130 +961,146 @@
               <tr>
                 <td style="width:100%; padding: 5px">
                   <br />
-                  <table border="0" style="width:100%">
-                    <tr>
-                      <td style="width:50%; vertical-align:top">
-                        <div class="col-lg-12">
-                          <div class="form-horizontal">
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmployerName" CssClass="col-lg-2 control-label" ToolTip="Employer Name" Style="white-space: nowrap">Employer:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="True" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerName" CssClass="text-danger" Display="Static" ErrorMessage="The employer name is required." ValidationGroup="Submit" />
+                  <div class="col-lg-12">
+                    <div class="form-horizontal">
+                      <div class="form-group">
+                        <asp:Label runat="server" CssClass="col-lg-1 control-label">&nbsp;</asp:Label>
+                        <div class="col-lg-10">
+                          <label>
+                            <asp:CheckBox ID="chkNotEmployed" TabIndex="30" runat="server" AutoPostBack="True" /><b>&nbsp;I am not nor have been previously employed</b>
+                          </label>
+                          <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="CustomValidator" Text="temp"></asp:CustomValidator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <asp:Panel ID="pnlEmployed" runat="server" Visible="true">
+                    <table border="0" style="width:100%">
+                      <tr>
+                        <td style="width:50%; vertical-align:top">
+                          <div class="col-lg-12">
+                            <div class="form-horizontal">
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmployerName" CssClass="col-lg-2 control-label" ToolTip="Employer Name" Style="white-space: nowrap">Employer:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="True" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerName" CssClass="text-danger" Display="Static" ErrorMessage="The employer name is required." ValidationGroup="Submit" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmploymentStart" CssClass="col-lg-2 control-label" ToolTip="Employment Start Date" Style="white-space: nowrap">Start Date:</asp:Label>
-                              <div class="col-lg-10">
-                                <table border="0" style="width: 280px">
-                                  <tr>
-                                    <td style="width: 90%">
-                                      <asp:TextBox runat="server" ID="txtEmploymentStart" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment Start Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="202" AutoPostBack="True" ValidationGroup="Submit" />
-                                    </td>
-                                    <td style="width: 10%; text-align: center;">
-                                      <a href="#" runat="server" id="lnkEmploymentStartDate">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="202"></span>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
-                                <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtEmploymentStart" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmploymentStart" CssClass="text-danger" ErrorMessage="The employment start date is required." Display="Static" ValidationGroup="Submit" />
-                                <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtEmploymentStart" PopupButtonID="lnkEmploymentStartDate" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmploymentStart" CssClass="col-lg-2 control-label" ToolTip="Employment Start Date" Style="white-space: nowrap">Start Date:</asp:Label>
+                                <div class="col-lg-10">
+                                  <table border="0" style="width: 280px">
+                                    <tr>
+                                      <td style="width: 90%">
+                                        <asp:TextBox runat="server" ID="txtEmploymentStart" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment Start Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="202" AutoPostBack="True" ValidationGroup="Submit" />
+                                      </td>
+                                      <td style="width: 10%; text-align: center;">
+                                        <a href="#" runat="server" id="lnkEmploymentStartDate">
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="202"></span>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtEmploymentStart" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmploymentStart" CssClass="text-danger" ErrorMessage="The employment start date is required." Display="Static" ValidationGroup="Submit" />
+                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtEmploymentStart" PopupButtonID="lnkEmploymentStartDate" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmploymentEnd" CssClass="col-lg-2 control-label" ToolTip="Employment End Date" Style="white-space: nowrap">End Date:</asp:Label>
-                              <div class="col-lg-10">
-                                <table border="0" style="width: 280px">
-                                  <tr>
-                                    <td style="width: 90%">
-                                      <asp:TextBox runat="server" ID="txtEmploymentEnd" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment End Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="203" AutoPostBack="True" ValidationGroup="Submit" />
-                                    </td>
-                                    <td style="width: 10%; text-align: center;">
-                                      <a href="#" runat="server" id="lnkEmploymentEndDate">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="203"></span>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
-                                <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtEmploymentEnd" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmploymentEnd" CssClass="text-danger" ErrorMessage="The employment end date is required." Display="Static" ValidationGroup="Submit" Enabled="False" />
-                                <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtEmploymentEnd" PopupButtonID="lnkEmploymentEndDate" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmploymentEnd" CssClass="col-lg-2 control-label" ToolTip="Employment End Date" Style="white-space: nowrap">End Date:</asp:Label>
+                                <div class="col-lg-10">
+                                  <table border="0" style="width: 280px">
+                                    <tr>
+                                      <td style="width: 90%">
+                                        <asp:TextBox runat="server" ID="txtEmploymentEnd" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment End Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="203" AutoPostBack="True" ValidationGroup="Submit" />
+                                      </td>
+                                      <td style="width: 10%; text-align: center;">
+                                        <a href="#" runat="server" id="lnkEmploymentEndDate">
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="203"></span>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtEmploymentEnd" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmploymentEnd" CssClass="text-danger" ErrorMessage="The employment end date is required." Display="Static" ValidationGroup="Submit" Enabled="False" />
+                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender2" runat="server" TargetControlID="txtEmploymentEnd" PopupButtonID="lnkEmploymentEndDate" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtPosition" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Position:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="True" ValidationGroup="Submit" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPosition" CssClass="text-danger" ErrorMessage="The position title is required." Display="Static" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtPosition" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Position:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPosition" CssClass="text-danger" ErrorMessage="The position title is required." Display="Static" ValidationGroup="Submit" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmployerPhone" AutoCompleteType="Disabled" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Phone #:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtEmployerPhone" CssClass="form-control" ToolTip="Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="205" AutoPostBack="True"  ValidationGroup="Submit" />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmployerPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number." Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerPhone" CssClass="text-danger" ErrorMessage="The employer phone number is required." Display="Static" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmployerPhone" AutoCompleteType="Disabled" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Phone #:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtEmployerPhone" CssClass="form-control" ToolTip="Phone #" MaxLength="12" placeholder="555-555-1234" TabIndex="205" AutoPostBack="True"  ValidationGroup="Submit" />
+                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmployerPhone" CssClass="text-danger" ValidationExpression="^(1\s?)?((\([0-9]{3}\))|[0-9]{3})[\s\-]?[\0-9]{3}[\s\-]?[0-9]{4}$" ErrorMessage="Please enter a valid phone number." Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerPhone" CssClass="text-danger" ErrorMessage="The employer phone number is required." Display="Static" ValidationGroup="Submit" />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td style="width:50%; vertical-align:top">
-                        <div class="col-lg-12">
-                          <div class="form-horizontal">
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtMonthlySalary" CssClass="col-lg-2 control-label" ToolTip="Monthly Salary" Style="white-space: nowrap">Monthly Salary:</asp:Label>
-                              <div class="col-lg-10">
-                                <table>
-                                  <tr>
-                                    <td>
-                                      <asp:Label runat="server" AssociatedControlID="txtMonthlySalary" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
-                                    </td>
-                                    <td>
-                                      <asp:TextBox runat="server" MaxLength="7" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="206" ValidationGroup="Submit" Text="0" AutoPostBack="True" />
-                                      <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtMonthlySalary" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
-                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMonthlySalary" CssClass="text-danger" Display="Static" ErrorMessage="The monthly salary is required." ValidationGroup="Submit" />
-                                    </td>
-                                  </tr>
-                                </table>
+                        </td>
+                        <td style="width:50%; vertical-align:top">
+                          <div class="col-lg-12">
+                            <div class="form-horizontal">
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtMonthlySalary" CssClass="col-lg-2 control-label" ToolTip="Monthly Salary" Style="white-space: nowrap">Monthly Salary:</asp:Label>
+                                <div class="col-lg-10">
+                                  <table>
+                                    <tr>
+                                      <td>
+                                        <asp:Label runat="server" AssociatedControlID="txtMonthlySalary" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
+                                      </td>
+                                      <td>
+                                        <asp:TextBox runat="server" MaxLength="7" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="206" ValidationGroup="Submit" Text="0" AutoPostBack="True" />
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtMonthlySalary" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMonthlySalary" CssClass="text-danger" Display="Static" ErrorMessage="The monthly salary is required." ValidationGroup="Submit" />
+                                      </td>
+                                    </tr>
+                                  </table>
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmployerStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="207" AutoPostBack="True" ValidationGroup="Submit" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmployerStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="207" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmployerCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="208" AutoPostBack="True" ValidationGroup="Submit" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmployerCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="208" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="drpEmployerState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">State:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:DropDownList ID="drpEmployerState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="209" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="drpEmployerState" CssClass="text-danger" ErrorMessage="The address state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="drpEmployerState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">State:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:DropDownList ID="drpEmployerState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="209" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="drpEmployerState" CssClass="text-danger" ErrorMessage="The address state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtEmployerZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">Zip Code:</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtEmployerZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="210" AutoPostBack="True" ValidationGroup="Submit" />
-                                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ErrorMessage="The address zip code is required." Display="Static" ValidationGroup="Submit" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtEmployerZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">Zip Code:</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtEmployerZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="210" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ErrorMessage="The address zip code is required." Display="Static" ValidationGroup="Submit" />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
+                        </td>
+                      </tr>
+                    </table>
+                  </asp:Panel>
                 </td>
               </tr>
             </table>            
@@ -1583,6 +1628,7 @@
               <td style="width:96%; text-align:right">
                 <asp:CustomValidator ID="valUserRequiredSave" runat="server" CssClass="text-danger" ErrorMessage="You must enter your email, name and phone before saving the form." Display="Dynamic" ValidationGroup="Save" Enabled="True" />
                 <asp:CustomValidator ID="valAcknowledgement" runat="server" CssClass="text-danger" ErrorMessage="You must acknowledge the submission statement by checking the box at the top of this form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
+                <asp:CustomValidator ID="valRequiredFields" runat="server" CssClass="text-danger" ErrorMessage="You must fill in all required fields on the form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
                 <asp:CustomValidator ID="valPhotoID" runat="server" CssClass="text-danger" ErrorMessage="You must have a photo identification before submitting" Display="Dynamic" ValidationGroup="Submit" />
               </td>
               <td style="width:1%; text-align:right">

@@ -271,6 +271,9 @@
     <Compile Include="CERTIFICATION_SKILL.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="COUNTRY.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="DEPENDENT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -297,6 +300,9 @@
     <Compile Include="Timeline.aspx.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="USER.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserEdit.aspx.designer.vb">
       <DependentUpon>UserEdit.aspx</DependentUpon>
@@ -349,9 +355,6 @@
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="STATE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="USER.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.aspx.designer.vb">

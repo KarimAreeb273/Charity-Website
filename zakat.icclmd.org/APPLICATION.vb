@@ -49,7 +49,7 @@ Partial Public Class APPLICATION
     Public Property hasTemporaryCashAssistance As Nullable(Of Boolean)
     Public Property sourceTemporaryCashAssistance As String
     Public Property totalTemporaryCashAssistance As Nullable(Of Decimal)
-    Public Property isEmployerCurrent As Nullable(Of Boolean)
+    Public Property isNotEmployed As Nullable(Of Boolean)
     Public Property employerName As String
     Public Property positionTitle As String
     Public Property totalMonthlyGrossSalary As Nullable(Of Decimal)
@@ -83,8 +83,8 @@ Partial Public Class APPLICATION
 
     Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
-    Public Overridable Property USER As USER
     Public Overridable Property ARTIFACT As ICollection(Of ARTIFACT) = New HashSet(Of ARTIFACT)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
+    Public Overridable Property USER As USER
 
 End Class

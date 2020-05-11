@@ -16,8 +16,8 @@ Partial Public Class STATE
 
     Public Overridable Property ORGANIZATION As ICollection(Of ORGANIZATION) = New HashSet(Of ORGANIZATION)
     Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
+    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property USER As ICollection(Of USER) = New HashSet(Of USER)
     Public Overridable Property USER1 As ICollection(Of USER) = New HashSet(Of USER)
-    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
 
 End Class

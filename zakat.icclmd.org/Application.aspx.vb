@@ -1,6 +1,8 @@
 ﻿Public Class Application1
   Inherits System.Web.UI.Page
 
+  Private this As Object
+
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       'go home if no session/user
@@ -75,6 +77,8 @@
             txtNationality.Text = .USER.NATIONALITY.name
             txtCitizenship.Text = .USER.citizenshipStatus
             txtHighestEducation.Text = .USER.highestEducationCompleted
+            txtSchoolIsInternational.Text = IIf(.USER.isInternationalSchool, "Yes", "No")
+            txtSchoolCountry.Text = IIf(.USER.isInternationalSchool, .USER.COUNTRY.name, "United States")
             txtSchoolName.Text = .USER.schoolName
             txtSchoolStreet.Text = .USER.schoolStreet
             txtSchoolCity.Text = .USER.schoolCity
@@ -157,6 +161,7 @@
             txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
             txtMedicare.Text = .medicareNumber
             txtMedicaid.Text = .medicaidNumber
+            txtNotEmployed.Text = IIf(.isNotEmployed, "No", "Yes")
             txtEmployerName.Text = .employerName
             txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
             txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
@@ -866,7 +871,19 @@
   Sub updateForm()
     Try
       If txtReviewComments.Text <> "" Then
-        If pnlQualified1.Visible = True Then
+        If pnlValidated.Visible = True Then
+          btnRejected1.Disabled = False
+          btnRejected2.Disabled = False
+          btnRejected3.Disabled = False
+          btnRejected4.Disabled = False
+          btnRejected5.Disabled = False
+        ElseIf pnlInvestigated.Visible = True Then
+          btnRejected1.Disabled = False
+          btnRejected2.Disabled = False
+          btnRejected3.Disabled = False
+          btnRejected4.Disabled = False
+          btnRejected5.Disabled = False
+        ElseIf pnlQualified1.Visible = True Then
           If txtDispersedAmount1.Text <> "" Then
             btnRejected1.Disabled = False
             btnRejected2.Disabled = False

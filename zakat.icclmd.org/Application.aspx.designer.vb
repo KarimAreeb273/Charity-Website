@@ -419,15 +419,6 @@ Partial Public Class Application1
     Protected WithEvents txtLastDateAssisted As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
-    '''Label3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Label3 As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
     '''txtHighestEducation control.
     '''</summary>
     '''<remarks>
@@ -435,6 +426,24 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtHighestEducation As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtSchoolIsInternational control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSchoolIsInternational As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtSchoolCountry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSchoolCountry As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtSchoolName control.
@@ -570,6 +579,15 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtMedicaid As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
+    '''txtNotEmployed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtNotEmployed As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
     '''txtEmployerName control.
@@ -797,15 +815,6 @@ Partial Public Class Application1
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
     
     '''<summary>
-    '''btnRejected control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRejected As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
     '''pnlValidated control.
     '''</summary>
     '''<remarks>
@@ -1020,4 +1029,13 @@ Partial Public Class Application1
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
+    
+    '''<summary>
+    '''btnRejected control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnRejected As Global.System.Web.UI.WebControls.Button
 End Class

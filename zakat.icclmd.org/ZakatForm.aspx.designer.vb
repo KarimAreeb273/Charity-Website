@@ -410,6 +410,24 @@ Partial Public Class ZakatForm
     Protected WithEvents drpHighestEducation As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''chkIsInternational control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkIsInternational As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''CustomValidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator3 As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
     '''txtSchoolName control.
     '''</summary>
     '''<remarks>
@@ -419,15 +437,6 @@ Partial Public Class ZakatForm
     Protected WithEvents txtSchoolName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtSchoolStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''txtSchoolCity control.
     '''</summary>
     '''<remarks>
@@ -435,6 +444,24 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSchoolCity As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pnlDomestic control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlDomestic As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtSchoolStreet control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''drpSchoolState control.
@@ -453,6 +480,24 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSchoolZip As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pnlInternational control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlInternational As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''drpSchoolCountry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents drpSchoolCountry As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''pnlHusbandInformation control.
@@ -885,6 +930,33 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents ltlPercentEmployment As Global.System.Web.UI.WebControls.Literal
+    
+    '''<summary>
+    '''chkNotEmployed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkNotEmployed As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''CustomValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator2 As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
+    '''pnlEmployed control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlEmployed As Global.System.Web.UI.WebControls.Panel
     
     '''<summary>
     '''txtEmployerName control.
@@ -1488,6 +1560,15 @@ Partial Public Class ZakatForm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents valAcknowledgement As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
+    '''valRequiredFields control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valRequiredFields As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''valPhotoID control.

@@ -16,6 +16,8 @@ ALTER TABLE [dbo].[USER] DROP CONSTRAINT [FK_USER_STATE]
 GO
 ALTER TABLE [dbo].[USER] DROP CONSTRAINT [FK_USER_NATIONALITY1]
 GO
+ALTER TABLE [dbo].[USER] DROP CONSTRAINT [FK_USER_COUNTRY]
+GO
 ALTER TABLE [dbo].[REVIEW] DROP CONSTRAINT [FK_COMMENT_USER]
 GO
 ALTER TABLE [dbo].[REVIEW] DROP CONSTRAINT [FK_COMMENT_APPLICATION]
@@ -44,6 +46,8 @@ ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_updatedOn]
 GO
 ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_createdOn]
 GO
+ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_isInternationalSchool]
+GO
 ALTER TABLE [dbo].[REVIEW] DROP CONSTRAINT [DF_REVIEW_reviewDate]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_updatedOn]
@@ -51,6 +55,8 @@ GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_createdOn]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_createdOn1]
+GO
+ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isNotEmployed]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_IsDispersed]
 GO
@@ -66,52 +72,55 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSubmitted]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSaved]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[USER_ROLE]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[USER_LANGUAGE]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[USER]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[STATE]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[ROLE]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[REVIEW]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[REFERENCE]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[ORGANIZATION]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[NATIONALITY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[LANGUAGE]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[DEPENDENT]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[COUNTRY]    Script Date: 5/10/2020 9:48:07 AM ******/
+DROP TABLE [dbo].[COUNTRY]
+GO
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[CERTIFICATION_SKILL]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[ARTIFACT_TYPE]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[ARTIFACT]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 5/10/2020 9:48:07 AM ******/
 DROP TABLE [dbo].[APPLICATION]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 4/16/2020 5:19:19 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 5/10/2020 9:48:07 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -155,7 +164,7 @@ CREATE TABLE [dbo].[APPLICATION](
 	[hasTemporaryCashAssistance] [bit] NULL,
 	[sourceTemporaryCashAssistance] [varchar](100) NULL,
 	[totalTemporaryCashAssistance] [money] NULL,
-	[isEmployerCurrent] [bit] NULL,
+	[isNotEmployed] [bit] NULL,
 	[employerName] [varchar](100) NULL,
 	[positionTitle] [varchar](100) NULL,
 	[totalMonthlyGrossSalary] [money] NULL,
@@ -192,7 +201,7 @@ CREATE TABLE [dbo].[APPLICATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 4/16/2020 5:19:22 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 5/10/2020 9:48:11 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -210,7 +219,7 @@ CREATE TABLE [dbo].[ARTIFACT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 4/16/2020 5:19:24 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 5/10/2020 9:48:12 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -224,7 +233,7 @@ CREATE TABLE [dbo].[ARTIFACT_TYPE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 4/16/2020 5:19:25 AM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 5/10/2020 9:48:12 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -239,7 +248,21 @@ CREATE TABLE [dbo].[CERTIFICATION_SKILL](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 4/16/2020 5:19:26 AM ******/
+/****** Object:  Table [dbo].[COUNTRY]    Script Date: 5/10/2020 9:48:13 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[COUNTRY](
+	[countryId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+ CONSTRAINT [PK_COUNTRY] PRIMARY KEY CLUSTERED 
+(
+	[countryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 5/10/2020 9:48:15 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +282,7 @@ CREATE TABLE [dbo].[DEPENDENT](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 4/16/2020 5:19:27 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 5/10/2020 9:48:17 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -273,7 +296,7 @@ CREATE TABLE [dbo].[LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 4/16/2020 5:19:27 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 5/10/2020 9:48:17 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -287,7 +310,7 @@ CREATE TABLE [dbo].[NATIONALITY](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 4/16/2020 5:19:27 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 5/10/2020 9:48:17 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -308,7 +331,7 @@ CREATE TABLE [dbo].[ORGANIZATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 4/16/2020 5:19:28 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 5/10/2020 9:48:18 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -332,7 +355,7 @@ CREATE TABLE [dbo].[REFERENCE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 4/16/2020 5:19:31 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 5/10/2020 9:48:19 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -350,7 +373,7 @@ CREATE TABLE [dbo].[REVIEW](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 4/16/2020 5:19:34 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 5/10/2020 9:48:20 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -365,7 +388,7 @@ CREATE TABLE [dbo].[ROLE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 4/16/2020 5:19:35 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 5/10/2020 9:48:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -379,7 +402,7 @@ CREATE TABLE [dbo].[STATE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 4/16/2020 5:19:38 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 5/10/2020 9:48:23 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -411,7 +434,9 @@ CREATE TABLE [dbo].[USER](
 	[husbandPhone] [varchar](10) NULL,
 	[husbandEmail] [varchar](60) NULL,
 	[highestEducationCompleted] [varchar](50) NULL,
+	[isInternationalSchool] [bit] NULL,
 	[schoolName] [varchar](100) NULL,
+	[schoolCountryId] [int] NULL,
 	[schoolStreet] [varchar](100) NULL,
 	[schoolCity] [varchar](50) NULL,
 	[schoolStateAbbr] [varchar](15) NULL,
@@ -428,7 +453,7 @@ CREATE TABLE [dbo].[USER](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 4/16/2020 5:19:41 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 5/10/2020 9:48:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -443,7 +468,7 @@ CREATE TABLE [dbo].[USER_LANGUAGE](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 4/16/2020 5:19:42 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 5/10/2020 9:48:24 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -473,6 +498,8 @@ ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isQualified11]  
 GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_IsDispersed]  DEFAULT ((0)) FOR [isDispersed]
 GO
+ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isNotEmployed]  DEFAULT ((0)) FOR [isNotEmployed]
+GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_createdOn1]  DEFAULT (getdate()) FOR [submittedOn]
 GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_createdOn]  DEFAULT (getdate()) FOR [createdOn]
@@ -480,6 +507,8 @@ GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_updatedOn]  DEFAULT (getdate()) FOR [updatedOn]
 GO
 ALTER TABLE [dbo].[REVIEW] ADD  CONSTRAINT [DF_REVIEW_reviewDate]  DEFAULT (getdate()) FOR [reviewDate]
+GO
+ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_isInternationalSchool]  DEFAULT ((0)) FOR [isInternationalSchool]
 GO
 ALTER TABLE [dbo].[USER] ADD  CONSTRAINT [DF_USER_createdOn]  DEFAULT (getdate()) FOR [createdOn]
 GO
@@ -544,6 +573,11 @@ ALTER TABLE [dbo].[REVIEW]  WITH CHECK ADD  CONSTRAINT [FK_COMMENT_USER] FOREIGN
 REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[REVIEW] CHECK CONSTRAINT [FK_COMMENT_USER]
+GO
+ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_COUNTRY] FOREIGN KEY([schoolCountryId])
+REFERENCES [dbo].[COUNTRY] ([countryId])
+GO
+ALTER TABLE [dbo].[USER] CHECK CONSTRAINT [FK_USER_COUNTRY]
 GO
 ALTER TABLE [dbo].[USER]  WITH CHECK ADD  CONSTRAINT [FK_USER_NATIONALITY1] FOREIGN KEY([nationalityId])
 REFERENCES [dbo].[NATIONALITY] ([nationalityId])
@@ -912,6 +946,7 @@ INSERT INTO NATIONALITY (name) VALUES ('Norwegian');
 INSERT INTO NATIONALITY (name) VALUES ('Omani');
 INSERT INTO NATIONALITY (name) VALUES ('Pakistani');
 INSERT INTO NATIONALITY (name) VALUES ('Palauan');
+INSERT INTO NATIONALITY (name) VALUES ('Palestinian');
 INSERT INTO NATIONALITY (name) VALUES ('Panamanian');
 INSERT INTO NATIONALITY (name) VALUES ('Papua New Guinean');
 INSERT INTO NATIONALITY (name) VALUES ('Paraguayan');
@@ -968,6 +1003,251 @@ INSERT INTO NATIONALITY (name) VALUES ('Welsh');
 INSERT INTO NATIONALITY (name) VALUES ('Yemenite');
 INSERT INTO NATIONALITY (name) VALUES ('Zambian');
 INSERT INTO NATIONALITY (name) VALUES ('Zimbabwean');
+
+INSERT INTO country (name) VALUES ('(Select One)');
+INSERT INTO country (name) VALUES ('Afghanistan');
+INSERT INTO country (name) VALUES ('Aland Islands');
+INSERT INTO country (name) VALUES ('Albania');
+INSERT INTO country (name) VALUES ('Algeria');
+INSERT INTO country (name) VALUES ('American Samoa');
+INSERT INTO country (name) VALUES ('Andorra');
+INSERT INTO country (name) VALUES ('Angola');
+INSERT INTO country (name) VALUES ('Anguilla');
+INSERT INTO country (name) VALUES ('Antarctica');
+INSERT INTO country (name) VALUES ('Antigua and Barbuda');
+INSERT INTO country (name) VALUES ('Argentina');
+INSERT INTO country (name) VALUES ('Armenia');
+INSERT INTO country (name) VALUES ('Aruba');
+INSERT INTO country (name) VALUES ('Australia');
+INSERT INTO country (name) VALUES ('Austria');
+INSERT INTO country (name) VALUES ('Azerbaijan');
+INSERT INTO country (name) VALUES ('Bahamas');
+INSERT INTO country (name) VALUES ('Bahrain');
+INSERT INTO country (name) VALUES ('Bangladesh');
+INSERT INTO country (name) VALUES ('Barbados');
+INSERT INTO country (name) VALUES ('Belarus');
+INSERT INTO country (name) VALUES ('Belgium');
+INSERT INTO country (name) VALUES ('Belize');
+INSERT INTO country (name) VALUES ('Benin');
+INSERT INTO country (name) VALUES ('Bermuda');
+INSERT INTO country (name) VALUES ('Bhutan');
+INSERT INTO country (name) VALUES ('Bolivia');
+INSERT INTO country (name) VALUES ('Bosnia and Herzegovina');
+INSERT INTO country (name) VALUES ('Botswana');
+INSERT INTO country (name) VALUES ('Bouvet Island');
+INSERT INTO country (name) VALUES ('Brazil');
+INSERT INTO country (name) VALUES ('British Indian Ocean Territory');
+INSERT INTO country (name) VALUES ('Brunei Darussalam');
+INSERT INTO country (name) VALUES ('Bulgaria');
+INSERT INTO country (name) VALUES ('Burkina Faso');
+INSERT INTO country (name) VALUES ('Burundi');
+INSERT INTO country (name) VALUES ('Cambodia');
+INSERT INTO country (name) VALUES ('Cameroon');
+INSERT INTO country (name) VALUES ('Canada');
+INSERT INTO country (name) VALUES ('Cape Verde');
+INSERT INTO country (name) VALUES ('Cayman Islands');
+INSERT INTO country (name) VALUES ('Central African Republic');
+INSERT INTO country (name) VALUES ('Chad');
+INSERT INTO country (name) VALUES ('Chile');
+INSERT INTO country (name) VALUES ('China');
+INSERT INTO country (name) VALUES ('Christmas Island');
+INSERT INTO country (name) VALUES ('Cocos (Keeling) Islands');
+INSERT INTO country (name) VALUES ('Colombia');
+INSERT INTO country (name) VALUES ('Comoros');
+INSERT INTO country (name) VALUES ('Congo');
+INSERT INTO country (name) VALUES ('Congo, The Democratic Republic of the');
+INSERT INTO country (name) VALUES ('Cook Islands');
+INSERT INTO country (name) VALUES ('Costa Rica');
+INSERT INTO country (name) VALUES ('Cote D Ivoire');
+INSERT INTO country (name) VALUES ('Croatia');
+INSERT INTO country (name) VALUES ('Cuba');
+INSERT INTO country (name) VALUES ('Cyprus');
+INSERT INTO country (name) VALUES ('Czech Republic');
+INSERT INTO country (name) VALUES ('Denmark');
+INSERT INTO country (name) VALUES ('Djibouti');
+INSERT INTO country (name) VALUES ('Dominica');
+INSERT INTO country (name) VALUES ('Dominican Republic');
+INSERT INTO country (name) VALUES ('Ecuador');
+INSERT INTO country (name) VALUES ('Egypt');
+INSERT INTO country (name) VALUES ('El Salvador');
+INSERT INTO country (name) VALUES ('Equatorial Guinea');
+INSERT INTO country (name) VALUES ('Eritrea');
+INSERT INTO country (name) VALUES ('Estonia');
+INSERT INTO country (name) VALUES ('Ethiopia');
+INSERT INTO country (name) VALUES ('Falkland Islands (Malvinas)');
+INSERT INTO country (name) VALUES ('Faroe Islands');
+INSERT INTO country (name) VALUES ('Fiji');
+INSERT INTO country (name) VALUES ('Finland');
+INSERT INTO country (name) VALUES ('France');
+INSERT INTO country (name) VALUES ('French Guiana');
+INSERT INTO country (name) VALUES ('French Polynesia');
+INSERT INTO country (name) VALUES ('French Southern Territories');
+INSERT INTO country (name) VALUES ('Gabon');
+INSERT INTO country (name) VALUES ('Gambia');
+INSERT INTO country (name) VALUES ('Georgia');
+INSERT INTO country (name) VALUES ('Germany');
+INSERT INTO country (name) VALUES ('Ghana');
+INSERT INTO country (name) VALUES ('Gibraltar');
+INSERT INTO country (name) VALUES ('Greece');
+INSERT INTO country (name) VALUES ('Greenland');
+INSERT INTO country (name) VALUES ('Grenada');
+INSERT INTO country (name) VALUES ('Guadeloupe');
+INSERT INTO country (name) VALUES ('Guam');
+INSERT INTO country (name) VALUES ('Guatemala');
+INSERT INTO country (name) VALUES ('Guernsey');
+INSERT INTO country (name) VALUES ('Guinea');
+INSERT INTO country (name) VALUES ('Guinea-Bissau');
+INSERT INTO country (name) VALUES ('Guyana');
+INSERT INTO country (name) VALUES ('Haiti');
+INSERT INTO country (name) VALUES ('Heard Island and Mcdonald Islands');
+INSERT INTO country (name) VALUES ('Holy See (Vatican City State)');
+INSERT INTO country (name) VALUES ('Honduras');
+INSERT INTO country (name) VALUES ('Hong Kong');
+INSERT INTO country (name) VALUES ('Hungary');
+INSERT INTO country (name) VALUES ('Iceland');
+INSERT INTO country (name) VALUES ('India');
+INSERT INTO country (name) VALUES ('Indonesia');
+INSERT INTO country (name) VALUES ('Iran, Islamic Republic Of');
+INSERT INTO country (name) VALUES ('Iraq');
+INSERT INTO country (name) VALUES ('Ireland');
+INSERT INTO country (name) VALUES ('Isle of Man');
+INSERT INTO country (name) VALUES ('Israel');
+INSERT INTO country (name) VALUES ('Italy');
+INSERT INTO country (name) VALUES ('Jamaica');
+INSERT INTO country (name) VALUES ('Japan');
+INSERT INTO country (name) VALUES ('Jersey');
+INSERT INTO country (name) VALUES ('Jordan');
+INSERT INTO country (name) VALUES ('Kazakhstan');
+INSERT INTO country (name) VALUES ('Kenya');
+INSERT INTO country (name) VALUES ('Kiribati');
+INSERT INTO country (name) VALUES ('Korea, Democratic Peoples Republic of');
+INSERT INTO country (name) VALUES ('Korea, Republic of');
+INSERT INTO country (name) VALUES ('Kuwait');
+INSERT INTO country (name) VALUES ('Kyrgyzstan');
+INSERT INTO country (name) VALUES ('Lao Peoples Democratic Republic');
+INSERT INTO country (name) VALUES ('Latvia');
+INSERT INTO country (name) VALUES ('Lebanon');
+INSERT INTO country (name) VALUES ('Lesotho');
+INSERT INTO country (name) VALUES ('Liberia');
+INSERT INTO country (name) VALUES ('Libyan Arab Jamahiriya');
+INSERT INTO country (name) VALUES ('Liechtenstein');
+INSERT INTO country (name) VALUES ('Lithuania');
+INSERT INTO country (name) VALUES ('Luxembourg');
+INSERT INTO country (name) VALUES ('Macao');
+INSERT INTO country (name) VALUES ('Macedonia, The Former Yugoslav Republic of');
+INSERT INTO country (name) VALUES ('Madagascar');
+INSERT INTO country (name) VALUES ('Malawi');
+INSERT INTO country (name) VALUES ('Malaysia');
+INSERT INTO country (name) VALUES ('Maldives');
+INSERT INTO country (name) VALUES ('Mali');
+INSERT INTO country (name) VALUES ('Malta');
+INSERT INTO country (name) VALUES ('Marshall Islands');
+INSERT INTO country (name) VALUES ('Martinique');
+INSERT INTO country (name) VALUES ('Mauritania');
+INSERT INTO country (name) VALUES ('Mauritius');
+INSERT INTO country (name) VALUES ('Mayotte');
+INSERT INTO country (name) VALUES ('Mexico');
+INSERT INTO country (name) VALUES ('Micronesia, Federated States of');
+INSERT INTO country (name) VALUES ('Moldova, Republic of');
+INSERT INTO country (name) VALUES ('Monaco');
+INSERT INTO country (name) VALUES ('Mongolia');
+INSERT INTO country (name) VALUES ('Montserrat');
+INSERT INTO country (name) VALUES ('Morocco');
+INSERT INTO country (name) VALUES ('Mozambique');
+INSERT INTO country (name) VALUES ('Myanmar');
+INSERT INTO country (name) VALUES ('Namibia');
+INSERT INTO country (name) VALUES ('Nauru');
+INSERT INTO country (name) VALUES ('Nepal');
+INSERT INTO country (name) VALUES ('Netherlands');
+INSERT INTO country (name) VALUES ('Netherlands Antilles');
+INSERT INTO country (name) VALUES ('New Caledonia');
+INSERT INTO country (name) VALUES ('New Zealand');
+INSERT INTO country (name) VALUES ('Nicaragua');
+INSERT INTO country (name) VALUES ('Niger');
+INSERT INTO country (name) VALUES ('Nigeria');
+INSERT INTO country (name) VALUES ('Niue');
+INSERT INTO country (name) VALUES ('Norfolk Island');
+INSERT INTO country (name) VALUES ('Northern Mariana Islands');
+INSERT INTO country (name) VALUES ('Norway');
+INSERT INTO country (name) VALUES ('Oman');
+INSERT INTO country (name) VALUES ('Pakistan');
+INSERT INTO country (name) VALUES ('Palau');
+INSERT INTO country (name) VALUES ('Palestinian Territory, Occupied');
+INSERT INTO country (name) VALUES ('Panama');
+INSERT INTO country (name) VALUES ('Papua New Guinea');
+INSERT INTO country (name) VALUES ('Paraguay');
+INSERT INTO country (name) VALUES ('Peru');
+INSERT INTO country (name) VALUES ('Philippines');
+INSERT INTO country (name) VALUES ('Pitcairn');
+INSERT INTO country (name) VALUES ('Poland');
+INSERT INTO country (name) VALUES ('Portugal');
+INSERT INTO country (name) VALUES ('Puerto Rico');
+INSERT INTO country (name) VALUES ('Qatar');
+INSERT INTO country (name) VALUES ('Reunion');
+INSERT INTO country (name) VALUES ('Romania');
+INSERT INTO country (name) VALUES ('Russian Federation');
+INSERT INTO country (name) VALUES ('RWANDA');
+INSERT INTO country (name) VALUES ('Saint Helena');
+INSERT INTO country (name) VALUES ('Saint Kitts and Nevis');
+INSERT INTO country (name) VALUES ('Saint Lucia');
+INSERT INTO country (name) VALUES ('Saint Pierre and Miquelon');
+INSERT INTO country (name) VALUES ('Saint Vincent and the Grenadines');
+INSERT INTO country (name) VALUES ('Samoa');
+INSERT INTO country (name) VALUES ('San Marino');
+INSERT INTO country (name) VALUES ('Sao Tome and Principe');
+INSERT INTO country (name) VALUES ('Saudi Arabia');
+INSERT INTO country (name) VALUES ('Senegal');
+INSERT INTO country (name) VALUES ('Serbia and Montenegro');
+INSERT INTO country (name) VALUES ('Seychelles');
+INSERT INTO country (name) VALUES ('Sierra Leone');
+INSERT INTO country (name) VALUES ('Singapore');
+INSERT INTO country (name) VALUES ('Slovakia');
+INSERT INTO country (name) VALUES ('Slovenia');
+INSERT INTO country (name) VALUES ('Solomon Islands');
+INSERT INTO country (name) VALUES ('Somalia');
+INSERT INTO country (name) VALUES ('South Africa');
+INSERT INTO country (name) VALUES ('South Georgia and the South Sandwich Islands');
+INSERT INTO country (name) VALUES ('Spain');
+INSERT INTO country (name) VALUES ('Sri Lanka');
+INSERT INTO country (name) VALUES ('Sudan');
+INSERT INTO country (name) VALUES ('Suriname');
+INSERT INTO country (name) VALUES ('Svalbard and Jan Mayen');
+INSERT INTO country (name) VALUES ('Swaziland');
+INSERT INTO country (name) VALUES ('Sweden');
+INSERT INTO country (name) VALUES ('Switzerland');
+INSERT INTO country (name) VALUES ('Syrian Arab Republic');
+INSERT INTO country (name) VALUES ('Taiwan, Province of China');
+INSERT INTO country (name) VALUES ('Tajikistan');
+INSERT INTO country (name) VALUES ('Tanzania, United Republic of');
+INSERT INTO country (name) VALUES ('Thailand');
+INSERT INTO country (name) VALUES ('Timor-Leste');
+INSERT INTO country (name) VALUES ('Togo');
+INSERT INTO country (name) VALUES ('Tokelau');
+INSERT INTO country (name) VALUES ('Tonga');
+INSERT INTO country (name) VALUES ('Trinidad and Tobago');
+INSERT INTO country (name) VALUES ('Tunisia');
+INSERT INTO country (name) VALUES ('Turkey');
+INSERT INTO country (name) VALUES ('Turkmenistan');
+INSERT INTO country (name) VALUES ('Turks and Caicos Islands');
+INSERT INTO country (name) VALUES ('Tuvalu');
+INSERT INTO country (name) VALUES ('Uganda');
+INSERT INTO country (name) VALUES ('Ukraine');
+INSERT INTO country (name) VALUES ('United Arab Emirates');
+INSERT INTO country (name) VALUES ('United Kingdom');
+INSERT INTO country (name) VALUES ('United States');
+INSERT INTO country (name) VALUES ('United States Minor Outlying Islands');
+INSERT INTO country (name) VALUES ('Uruguay');
+INSERT INTO country (name) VALUES ('Uzbekistan');
+INSERT INTO country (name) VALUES ('Vanuatu');
+INSERT INTO country (name) VALUES ('Venezuela');
+INSERT INTO country (name) VALUES ('Viet Nam');
+INSERT INTO country (name) VALUES ('Virgin Islands, British');
+INSERT INTO country (name) VALUES ('Virgin Islands, U.S.');
+INSERT INTO country (name) VALUES ('Wallis and Futuna');
+INSERT INTO country (name) VALUES ('Western Sahara');
+INSERT INTO country (name) VALUES ('Yemen');
+INSERT INTO country (name) VALUES ('Zambia');
+INSERT INTO country (name) VALUES ('Zimbabwe');
 
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'(Select One)'	,	'(Select One)'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AL'	,	'Alabama'	);

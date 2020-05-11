@@ -55,6 +55,12 @@ Public Class ZakatForm
           lstLanguages.DataValueField = "languageId"
           lstLanguages.DataBind()
 
+          'load the language listbox
+          drpSchoolCountry.DataSource = (From COUNTRY In oDB.COUNTRY Order By COUNTRY.name).ToList
+          drpSchoolCountry.DataTextField = "name"
+          drpSchoolCountry.DataValueField = "countryId"
+          drpSchoolCountry.DataBind()
+
           'load the artifact type
           drpArtifactType.DataSource = (From ARTIFACT_TYPE In oDB.ARTIFACT_TYPE).ToList
           drpArtifactType.DataTextField = "name"
@@ -85,9 +91,18 @@ Public Class ZakatForm
               drpNationality.SelectedValue = .nationalityId
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
+              chkIsInternational.Checked = .isInternationalSchool
               txtSchoolName.Text = .schoolName
-              txtSchoolStreet.Text = .schoolStreet
               txtSchoolCity.Text = .schoolCity
+              If .isInternationalSchool Then
+                pnlDomestic.Visible = False
+                pnlInternational.Visible = True
+              Else
+                pnlDomestic.Visible = True
+                pnlInternational.Visible = False
+              End If
+              txtSchoolStreet.Text = .schoolStreet
+              drpSchoolCountry.SelectedValue = .schoolCountryId
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
               'show husband pane based on rules
@@ -162,16 +177,25 @@ Public Class ZakatForm
                 txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
                 txtMedicare.Text = .medicareNumber
                 txtMedicaid.Text = .medicaidNumber
-                txtEmployerName.Text = .employerName
-                txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
-                txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
-                txtPosition.Text = .positionTitle
-                txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
-                txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
-                txtEmployerStreet.Text = .employerStreet
-                txtEmployerCity.Text = .employerCity
-                drpEmployerState.SelectedValue = .employerStateAbbr
-                txtEmployerZip.Text = .employerZip
+                If .isNotEmployed = True Then
+                  'hide employed panel
+                  chkNotEmployed.Checked = True
+                  pnlEmployed.Visible = False
+                Else
+                  'show employed panel and data
+                  chkNotEmployed.Checked = False
+                  pnlEmployed.Visible = True
+                  txtEmployerName.Text = .employerName
+                  txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
+                  txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
+                  txtPosition.Text = .positionTitle
+                  txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+                  txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
+                  txtEmployerStreet.Text = .employerStreet
+                  txtEmployerCity.Text = .employerCity
+                  drpEmployerState.SelectedValue = .employerStateAbbr
+                  txtEmployerZip.Text = .employerZip
+                End If
                 txtPersonalStatement.Text = .personalNeedStatement
               End With
 
@@ -203,7 +227,7 @@ Public Class ZakatForm
         Else
           accZakat.Enabled = True
           btnSave.Enabled = True
-          btnSubmit.Enabled = True
+          EnableSubmitButton()
         End If
       End If
     Catch ex As Exception
@@ -217,7 +241,7 @@ Public Class ZakatForm
 
   Sub RefreshApplicantProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29 As Boolean
+      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30 As Boolean
       If (txtEmail.Text = "") Then
         v1 = False
       Else
@@ -363,10 +387,16 @@ Public Class ZakatForm
       Else
         v29 = True
       End If
+      If (drpSchoolCountry.SelectedIndex = 0) Then
+        v30 = False
+      Else
+        v30 = True
+      End If
 
       Dim vProgress As Decimal = 0
       Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), 28, 22)
       vPossible = IIf(drpHomeType.SelectedValue = "Other", vPossible + 1, vPossible)
+      vPossible = IIf(chkIsInternational.Checked, vPossible - 2, vPossible)
       If (v1 = True) Then
         vProgress += 1
       End If
@@ -432,11 +462,19 @@ Public Class ZakatForm
       If (v21 = True) Then
         vProgress += 1
       End If
-      If (v22 = True) Then
-        vProgress += 1
-      End If
-      If (v23 = True) Then
-        vProgress += 1
+      If chkIsInternational.Checked Then
+        'tally country
+        If (v30 = True) Then
+          vProgress += 1
+        End If
+      Else
+        'don't tally country
+        If (v22 = True) Then
+          vProgress += 1
+        End If
+        If (v23 = True) Then
+          vProgress += 1
+        End If
       End If
 
       'add the following if husband section is visible
@@ -468,6 +506,9 @@ Public Class ZakatForm
       prgApplicant.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgApplicant.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentApplicant.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -675,6 +716,9 @@ Public Class ZakatForm
       prgAssetsAndSupport.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgAssetsAndSupport.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentAssetsAndSupport.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -682,96 +726,103 @@ Public Class ZakatForm
 
   Sub RefreshEmploymentProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9 As Boolean
-      If (txtEmployerName.Text = "") Then
-        v1 = False
-      Else
-        v1 = True
-      End If
-      If (txtEmploymentStart.Text = "") Then
-        v2 = False
-      Else
-        v2 = True
-      End If
-      ''If (txtEmploymentEnd.Text = "") Then
-      ''  v3 = False
-      ''Else
-      ''  v3 = True
-      ''End If
-      If (txtPosition.Text = "") Then
-        v3 = False
-      Else
-        v3 = True
-      End If
-      If (txtEmployerPhone.Text = "") Then
-        v4 = False
-      Else
-        v4 = True
-      End If
-      If (txtMonthlySalary.Text = "") Then
-        v5 = False
-      Else
-        v5 = True
-      End If
-      If (txtEmployerStreet.Text = "") Then
-        v6 = False
-      Else
-        v6 = True
-      End If
-      If (txtEmployerCity.Text = "") Then
-        v7 = False
-      Else
-        v7 = True
-      End If
-      If (drpEmployerState.SelectedIndex = 0) Then
-        v8 = False
-      Else
-        v8 = True
-      End If
-      If (txtEmployerZip.Text = "") Then
-        v9 = False
-      Else
-        v9 = True
-      End If
-
       Dim vProgress As Decimal
-      Dim vPossible As Int16 = 9
+      If chkNotEmployed.Checked Then
+        vProgress = 100
+      Else
+        Dim v1, v2, v3, v4, v5, v6, v7, v8, v9 As Boolean
+        If (txtEmployerName.Text = "") Then
+          v1 = False
+        Else
+          v1 = True
+        End If
+        If (txtEmploymentStart.Text = "") Then
+          v2 = False
+        Else
+          v2 = True
+        End If
+        ''If (txtEmploymentEnd.Text = "") Then
+        ''  v3 = False
+        ''Else
+        ''  v3 = True
+        ''End If
+        If (txtPosition.Text = "") Then
+          v3 = False
+        Else
+          v3 = True
+        End If
+        If (txtEmployerPhone.Text = "") Then
+          v4 = False
+        Else
+          v4 = True
+        End If
+        If (txtMonthlySalary.Text = "") Then
+          v5 = False
+        Else
+          v5 = True
+        End If
+        If (txtEmployerStreet.Text = "") Then
+          v6 = False
+        Else
+          v6 = True
+        End If
+        If (txtEmployerCity.Text = "") Then
+          v7 = False
+        Else
+          v7 = True
+        End If
+        If (drpEmployerState.SelectedIndex = 0) Then
+          v8 = False
+        Else
+          v8 = True
+        End If
+        If (txtEmployerZip.Text = "") Then
+          v9 = False
+        Else
+          v9 = True
+        End If
 
-      If (v1 = True) Then
-        vProgress += 1
-      End If
-      If (v2 = True) Then
-        vProgress += 1
-      End If
-      If (v3 = True) Then
-        vProgress += 1
-      End If
-      If (v4 = True) Then
-        vProgress += 1
-      End If
-      If (v5 = True) Then
-        vProgress += 1
-      End If
-      If (v6 = True) Then
-        vProgress += 1
-      End If
-      If (v7 = True) Then
-        vProgress += 1
-      End If
-      If (v8 = True) Then
-        vProgress += 1
-      End If
-      If (v9 = True) Then
-        vProgress += 1
-      End If
+        Dim vPossible As Int16 = 9
 
-      'calculate progress
-      vProgress = ((vProgress / vPossible) * 100)
+        If (v1 = True) Then
+          vProgress += 1
+        End If
+        If (v2 = True) Then
+          vProgress += 1
+        End If
+        If (v3 = True) Then
+          vProgress += 1
+        End If
+        If (v4 = True) Then
+          vProgress += 1
+        End If
+        If (v5 = True) Then
+          vProgress += 1
+        End If
+        If (v6 = True) Then
+          vProgress += 1
+        End If
+        If (v7 = True) Then
+          vProgress += 1
+        End If
+        If (v8 = True) Then
+          vProgress += 1
+        End If
+        If (v9 = True) Then
+          vProgress += 1
+        End If
+
+        'calculate progress
+        vProgress = ((vProgress / vPossible) * 100)
+      End If
 
       'set progress bar attributes
       prgEmployment.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgEmployment.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentEmployment.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -791,6 +842,9 @@ Public Class ZakatForm
       prgReference.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgReference.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentReference.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -803,8 +857,8 @@ Public Class ZakatForm
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vApplicationId <> 0 Then
         Using oDB As New zakatEntities
-          If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Photo Identification").Any Then
-            Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Photo Identification").ToList
+          If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").Any Then
+            Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").ToList
             lblArtifacts.Text = oArtifacts.Count
           End If
         End Using
@@ -824,6 +878,9 @@ Public Class ZakatForm
       prgArtifact.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
       prgArtifact.Style("width") = CStr(CInt(vProgress)) + "%"
       ltlPercentArtifact.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -842,6 +899,9 @@ Public Class ZakatForm
         prgStatement.Style("width") = "100%"
         ltlPercentStatement.Text = "100% Complete"
       End If
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -996,7 +1056,7 @@ Public Class ZakatForm
         Else
           accZakat.Enabled = True
           btnSave.Enabled = True
-          btnSubmit.Enabled = True
+          EnableSubmitButton()
         End If
       End Using
     Catch ex As Exception
@@ -1312,7 +1372,7 @@ Public Class ZakatForm
     End Try
   End Sub
 
-  Private Sub txtSchoolCity_TextChanged(sender As Object, e As EventArgs) Handles txtSchoolCity.TextChanged
+  Private Sub txtSchoolCity1_TextChanged(sender As Object, e As EventArgs) Handles txtSchoolCity.TextChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1321,6 +1381,14 @@ Public Class ZakatForm
   End Sub
 
   Private Sub drpSchoolState_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpSchoolState.SelectedIndexChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub drpSchoolCountry_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpSchoolCountry.SelectedIndexChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1909,10 +1977,12 @@ Public Class ZakatForm
           .nationalityId = drpNationality.SelectedValue
           .citizenshipStatus = drpCitizenship.SelectedValue
           .highestEducationCompleted = drpHighestEducation.SelectedValue
+          .isInternationalSchool = chkIsInternational.Checked
           .schoolName = txtSchoolName.Text
           .schoolStreet = txtSchoolStreet.Text
           .schoolCity = txtSchoolCity.Text
           .schoolStateAbbr = drpSchoolState.SelectedValue
+          .schoolCountryId = drpSchoolCountry.SelectedValue
           .schoolZip = txtSchoolZip.Text
           .husbandFirstName = txtHusbandFirstName.Text
           .husbandMiddleName = txtHusbandMiddleName.Text
@@ -2026,20 +2096,27 @@ Public Class ZakatForm
             .healthInsuranceProviderPolicyNumber = txtPolicyNumber.Text
             .medicareNumber = txtMedicare.Text
             .medicaidNumber = txtMedicaid.Text
-            .employerName = txtEmployerName.Text
-            If txtEmploymentStart.Text <> "" Then
-              .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), CDate(txtEmploymentStart.Text), Nothing)
+            If chkNotEmployed.Checked Then
+              'never employed
+              .isNotEmployed = True
+            Else
+              'has been employed
+              .isNotEmployed = False
+              .employerName = txtEmployerName.Text
+              If txtEmploymentStart.Text <> "" Then
+                .employmentStartDate = IIf(IsDate(txtEmploymentStart.Text), CDate(txtEmploymentStart.Text), Nothing)
+              End If
+              If txtEmploymentEnd.Text <> "" Then
+                .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
+              End If
+              .positionTitle = txtPosition.Text
+              .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
+              .totalMonthlyGrossSalary = txtMonthlySalary.Text
+              .employerStreet = txtEmployerStreet.Text
+              .employerCity = txtEmployerCity.Text
+              .employerStateAbbr = drpEmployerState.SelectedValue
+              .employerZip = txtEmployerZip.Text
             End If
-            If txtEmploymentEnd.Text <> "" Then
-              .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
-            End If
-            .positionTitle = txtPosition.Text
-            .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
-            .totalMonthlyGrossSalary = txtMonthlySalary.Text
-            .employerStreet = txtEmployerStreet.Text
-            .employerCity = txtEmployerCity.Text
-            .employerStateAbbr = drpEmployerState.SelectedValue
-            .employerZip = txtEmployerZip.Text
             .personalNeedStatement = txtPersonalStatement.Text
             .updatedOn = Date.Now
             .updatedBy = pUserId
@@ -2192,6 +2269,54 @@ Public Class ZakatForm
       End If
     Catch ex As Exception
       Response.Write(ex)
+    End Try
+  End Sub
+
+  Private Sub chkNotEmployed_CheckedChanged(sender As Object, e As EventArgs) Handles chkNotEmployed.CheckedChanged
+    Try
+      'was the person ever employed
+      If chkNotEmployed.Checked Then
+        pnlEmployed.Visible = False
+      Else
+        pnlEmployed.Visible = True
+      End If
+      'refresh employment progress
+      RefreshEmploymentProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub chkIsInternational_CheckedChanged(sender As Object, e As EventArgs) Handles chkIsInternational.CheckedChanged
+    Try
+      'was the person ever employed
+      If chkIsInternational.Checked Then
+        'is international
+        pnlInternational.Visible = True
+        pnlDomestic.Visible = False
+      Else
+        'is not international
+        pnlInternational.Visible = False
+        pnlDomestic.Visible = True
+      End If
+      'refresh employment progress
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub EnableSubmitButton()
+    'verify all required fields are completed before enabling the submit button
+    Try
+      'was the person ever employed
+      If ltlPercentApplicant.Text = "100% Complete" And ltlPercentArtifact.Text = "100% Complete" And ltlPercentAssetsAndSupport.Text = "100% Complete" And ltlPercentDependent.Text = "100% Complete" And ltlPercentEmployment.Text = "100% Complete" And ltlPercentReference.Text = "100% Complete" And ltlPercentStatement.Text = "100% Complete" Then
+        btnSubmit.Enabled = True
+      Else
+        btnSubmit.Enabled = False
+      End If
+    Catch ex As Exception
+      Response.Write(ex.Message)
     End Try
   End Sub
 End Class
