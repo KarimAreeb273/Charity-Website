@@ -12,8 +12,7 @@
   </asp:PlaceHolder>
 
   <webopt:bundlereference runat="server" path="~/Content/css" />
-  <%--<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />--%>
-  <link href="~/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link href="~/images/zakat.ico" rel="shortcut icon" type="image/x-icon" />
   <%--font-awesome 5 icons CDN--%>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <%--bootstrap 3 CDN references--%>

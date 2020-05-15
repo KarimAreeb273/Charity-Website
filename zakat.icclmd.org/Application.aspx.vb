@@ -1,8 +1,6 @@
 ﻿Public Class Application1
   Inherits System.Web.UI.Page
 
-  Private this As Object
-
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       'go home if no session/user
@@ -30,7 +28,7 @@
           txtApplicationsRejected.Text = oApplicationsRejected.Count
 
           'verify if the user is a reviewer otherwise redirect home
-          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier")).Any Then
+          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
             Response.Redirect("/")
           End If
 

@@ -23,18 +23,6 @@
     End Try
   End Sub
 
-  'Public Function getDate(ByVal month As Short, ByVal day As Short) As Date
-  '  getDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
-  'End Function
-
-  'Public Function getAge(ByVal dob As Date) As Int16
-  '  getAge = Base.getAge(dob)
-  'End Function
-
-  'Public Function getFormattedPhone(ByVal pPhone As String) As String
-  '  getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
-  'End Function
-
   Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument

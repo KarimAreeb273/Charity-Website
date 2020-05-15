@@ -159,7 +159,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
-    <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Forgot.aspx" />
     <Content Include="Global.asax" />
@@ -172,7 +171,7 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Images\dollar.png" />
-    <Content Include="Images\favicon.ico" />
+    <Content Include="Images\zakat.ico" />
     <Content Include="Logout.aspx" />
     <Content Include="Password.aspx" />
     <Content Include="Privacy.aspx" />
