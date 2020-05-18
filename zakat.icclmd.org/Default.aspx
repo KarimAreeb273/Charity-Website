@@ -119,7 +119,18 @@
       </ul>
     </div>
     <div class="col-md-6">
-      <h4>&nbsp;</h4>
+      <h4>Required Zakat Protocols and Documents</h4>
+      <ul style="list-style: none">
+        <li><b>Applicants</b>,</li>
+        <li>Prior to your completing an Online Zakat Application,</li>
+        <li>please download, review and adhere to the following:</li>
+        <%--<li>&nbsp;</li>--%>
+        <li>
+          <a href="/documents/required_zakat_protocols_and_documents.pdf" download>
+            <img src="/Images/png-transparent.png" style="width:50px;height:50px">
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
   <br /><br />
