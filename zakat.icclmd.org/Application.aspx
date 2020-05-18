@@ -897,7 +897,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified2" runat="server" Text="Qualify (Final)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified2" runat="server" Text="Qualify (Final)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" Enabled="false" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
@@ -968,7 +968,7 @@
                   &nbsp;&nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnDispersed" runat="server" Text="Disperse" CssClass="btn btn-success" TabIndex="5" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnDispersed" runat="server" Text="Disperse" CssClass="btn btn-success" TabIndex="5" Width="200" ValidationGroup="Review" Enabled="false" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;

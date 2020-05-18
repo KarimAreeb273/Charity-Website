@@ -897,12 +897,14 @@
           End If
         ElseIf pnlQualified2.Visible = True Then
           If txtDispersedAmount2.Text <> "" Then
+            btnQualified2.Enabled = True
             btnRejected1.Disabled = False
             btnRejected2.Disabled = False
             btnRejected3.Disabled = False
             btnRejected4.Disabled = False
             btnRejected5.Disabled = False
           Else
+            btnQualified2.Enabled = False
             btnRejected1.Disabled = True
             btnRejected2.Disabled = True
             btnRejected3.Disabled = True
@@ -911,12 +913,14 @@
           End If
         ElseIf pnlDispersed.Visible = True Then
           If txtDispersedAmount.Text <> "" And txtDispersedDate.Text <> "" Then
+            btnDispersed.Enabled = True
             btnRejected1.Disabled = False
             btnRejected2.Disabled = False
             btnRejected3.Disabled = False
             btnRejected4.Disabled = False
             btnRejected5.Disabled = False
           Else
+            btnDispersed.Enabled = False
             btnRejected1.Disabled = True
             btnRejected2.Disabled = True
             btnRejected3.Disabled = True
@@ -925,6 +929,7 @@
           End If
         End If
       Else
+        btnDispersed.Enabled = False
         btnRejected1.Disabled = True
         btnRejected2.Disabled = True
         btnRejected3.Disabled = True
