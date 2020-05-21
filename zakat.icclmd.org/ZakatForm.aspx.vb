@@ -612,30 +612,38 @@ Public Class ZakatForm
       End If
       If (chkInsurance.SelectedValue = "") Then
         v14 = False
-      Else
+        v15 = False
+        v16 = False
+        v17 = False
+        v18 = False
+      ElseIf (chkInsurance.SelectedValue = "Yes") Then
         v14 = True
-        If (chkInsurance.SelectedValue = "Yes") Then
-          If (txtInsuranceProvider.Text = "") Then
-            v15 = False
-          Else
-            v15 = True
-          End If
-          If (txtMedicare.Text = "") Then
-            v16 = False
-          Else
-            v16 = True
-          End If
-          If (txtPolicyNumber.Text = "") Then
-            v17 = False
-          Else
-            v17 = True
-          End If
-          If (txtMedicaid.Text = "") Then
-            v18 = False
-          Else
-            v18 = True
-          End If
+        If (txtInsuranceProvider.Text = "") Then
+          v15 = False
+        Else
+          v15 = True
         End If
+        If (txtMedicare.Text = "") Then
+          v16 = False
+        Else
+          v16 = True
+        End If
+        If (txtPolicyNumber.Text = "") Then
+          v17 = False
+        Else
+          v17 = True
+        End If
+        If (txtMedicaid.Text = "") Then
+          v18 = False
+        Else
+          v18 = True
+        End If
+      ElseIf (chkInsurance.SelectedValue = "No") Then
+        v14 = True
+        v15 = False
+        v16 = False
+        v17 = False
+        v18 = False
       End If
 
       Dim vProgress As Decimal
@@ -695,7 +703,7 @@ Public Class ZakatForm
           End If
         End If
       End If
-      If (v14 = True) Then
+      If (chkInsurance.SelectedValue = "Yes") Then
         vPossible += 4
         vProgress += 1
         'add the following since insurance section visible
@@ -711,6 +719,8 @@ Public Class ZakatForm
         If (v18 = True) Then
           vProgress += 1
         End If
+      ElseIf (chkInsurance.SelectedValue = "No") Then
+        vProgress += 1
       End If
 
       'calculate progress
