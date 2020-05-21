@@ -1318,7 +1318,8 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	4	,	'Utility Bill');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	5	,	'Medical Bill');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	6	,	'Tuition Bill');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice');
-INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Other');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Reference Letter');
+INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator');
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator');
