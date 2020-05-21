@@ -158,7 +158,7 @@
                                 <asp:Label runat="server" AssociatedControlID="txtSocialSecurity" CssClass="col-lg-2 control-label" ToolTip="Social Security #" Style="white-space: nowrap">SSN:</asp:Label>
                                 <div class="col-lg-10">
                                   <asp:TextBox runat="server" ID="txtSocialSecurity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Social Security #" MaxLength="11" placeholder="123-45-6789" TabIndex="5" ValidationGroup="Submit" AutoPostBack="True" />
-                                  <asp:RegularExpressionValidator runat="server" ControlToValidate="txtSocialSecurity" CssClass="text-danger" ValidationExpression="^\d{3}-\d{2}-\d{4}$" ErrorMessage="Please enter a valid SSN" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                  <asp:RegularExpressionValidator ID="valSSNFormat" runat="server" ControlToValidate="txtSocialSecurity" CssClass="text-danger" ValidationExpression="^\d{3}-\d{2}-\d{4}$" ErrorMessage="Please enter a valid SSN" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSocialSecurity" CssClass="text-danger" ErrorMessage="The SSN is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>

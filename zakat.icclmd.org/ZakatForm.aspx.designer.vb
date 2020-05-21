@@ -149,6 +149,15 @@ Partial Public Class ZakatForm
     Protected WithEvents txtSocialSecurity As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''valSSNFormat control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valSSNFormat As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
     '''txtDOB control.
     '''</summary>
     '''<remarks>

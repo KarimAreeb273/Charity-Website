@@ -798,7 +798,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnValidated" runat="server" Text="Validate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnValidated" runat="server" Text="Validate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" Enabled="False" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
@@ -816,7 +816,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnInvestigated" runat="server" Text="Investigate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnInvestigated" runat="server" Text="Investigate" CssClass="btn btn-success" TabIndex="2" Width="200" ValidationGroup="Review" Enabled="False" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;
@@ -846,7 +846,7 @@
                   &nbsp;
                 </td>
                 <td style="width:1%; text-align:right">
-                  <asp:Button ID="btnQualified1" runat="server" Text="Qualify (Initial)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" />
+                  <asp:Button ID="btnQualified1" runat="server" Text="Qualify (Initial)" CssClass="btn btn-success" TabIndex="3" Width="200" ValidationGroup="Review" Enabled="False" />
                 </td>
                 <td style="width:1%;">
                   &nbsp;

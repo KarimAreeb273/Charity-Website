@@ -250,7 +250,11 @@ Public Class ZakatForm
       If (txtSocialSecurity.Text = "") Then
         v2 = False
       Else
-        v2 = True
+        If (Regex.IsMatch(txtSocialSecurity.Text, "^\d{3}-\d{2}-\d{4}$")) Then
+          v2 = True
+        Else
+          v2 = False
+        End If
       End If
       If (txtFirstName.Text = "") Then
         v3 = False

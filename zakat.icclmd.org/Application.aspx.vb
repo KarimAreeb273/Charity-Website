@@ -870,65 +870,41 @@
     Try
       If txtReviewComments.Text <> "" Then
         If pnlValidated.Visible = True Then
+          btnValidated.Enabled = True
           btnRejected1.Disabled = False
-          btnRejected2.Disabled = False
-          btnRejected3.Disabled = False
-          btnRejected4.Disabled = False
-          btnRejected5.Disabled = False
         ElseIf pnlInvestigated.Visible = True Then
-          btnRejected1.Disabled = False
+          btnInvestigated.Enabled = True
           btnRejected2.Disabled = False
-          btnRejected3.Disabled = False
-          btnRejected4.Disabled = False
-          btnRejected5.Disabled = False
         ElseIf pnlQualified1.Visible = True Then
           If txtDispersedAmount1.Text <> "" Then
-            btnRejected1.Disabled = False
-            btnRejected2.Disabled = False
+            btnQualified1.Enabled = True
             btnRejected3.Disabled = False
-            btnRejected4.Disabled = False
-            btnRejected5.Disabled = False
           Else
-            btnRejected1.Disabled = True
-            btnRejected2.Disabled = True
+            btnQualified1.Enabled = False
             btnRejected3.Disabled = True
-            btnRejected4.Disabled = True
-            btnRejected5.Disabled = True
           End If
         ElseIf pnlQualified2.Visible = True Then
           If txtDispersedAmount2.Text <> "" Then
             btnQualified2.Enabled = True
-            btnRejected1.Disabled = False
-            btnRejected2.Disabled = False
-            btnRejected3.Disabled = False
             btnRejected4.Disabled = False
-            btnRejected5.Disabled = False
           Else
             btnQualified2.Enabled = False
-            btnRejected1.Disabled = True
-            btnRejected2.Disabled = True
-            btnRejected3.Disabled = True
             btnRejected4.Disabled = True
-            btnRejected5.Disabled = True
           End If
         ElseIf pnlDispersed.Visible = True Then
           If txtDispersedAmount.Text <> "" And txtDispersedDate.Text <> "" Then
             btnDispersed.Enabled = True
-            btnRejected1.Disabled = False
-            btnRejected2.Disabled = False
-            btnRejected3.Disabled = False
-            btnRejected4.Disabled = False
             btnRejected5.Disabled = False
           Else
             btnDispersed.Enabled = False
-            btnRejected1.Disabled = True
-            btnRejected2.Disabled = True
-            btnRejected3.Disabled = True
-            btnRejected4.Disabled = True
             btnRejected5.Disabled = True
           End If
         End If
       Else
+        btnValidated.Enabled = False
+        btnInvestigated.Enabled = False
+        btnQualified1.Enabled = False
+        btnQualified2.Enabled = False
         btnDispersed.Enabled = False
         btnRejected1.Disabled = True
         btnRejected2.Disabled = True

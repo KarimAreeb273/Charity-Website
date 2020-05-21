@@ -11,7 +11,12 @@
         <a data-toggle="tab" href="#manageUsers"><b>Manage Users</b>&nbsp;
           <span class="label label-primary"><asp:Label ID="lblUsersCountBadge" runat="server" Text="0"></asp:Label></span>
         </a>
-      </li>    
+      </li>
+      <li>
+        <a data-toggle="tab" href="#manageApplicants"><b>Manage Applicants</b>&nbsp;
+          <span class="label label-primary"><asp:Label ID="lblApplicantsCountBadge" runat="server" Text="0"></asp:Label></span>
+        </a>
+      </li>
     </ul>
     <div class="tab-content">
       <div id="addUser" class="tab-pane fade in active">
@@ -86,14 +91,19 @@
                 <asp:Repeater ID="rptUsers" runat="server">
                   <HeaderTemplate>
                     <tr style="height: 30px; border: solid solid solid solid">
-                      <th style="text-align: left; width: 35%">Name</th>
+                      <th style="text-align: left; width: 10%">User #</th>
+                      <th style="text-align: left; width: 25%">Name</th>
                       <th style="text-align: left; width: 15%">Phone</th>
-                      <th style="text-align: left; width: 35%">Email</th>
-                      <th style="text-align: center; width: 15%;">Edit</th>
+                      <th style="text-align: left; width: 30%">Email</th>
+                      <th style="text-align: center; width: 10%;">Edit</th>
+                      <th style="text-align: center; width: 10%;">Delete</th>
                     </tr>
                   </HeaderTemplate>
                   <ItemTemplate>
                     <tr>
+                      <td style="vertical-align: middle">
+                        <%#GetFormattedNumber(DataBinder.Eval(Container.DataItem, "userId"))%>
+                      </td>
                       <td style="text-align: left; vertical-align: middle">
                         <%# DataBinder.Eval(Container.DataItem, "fullName")%>
                       </td>
@@ -106,6 +116,9 @@
                       <td style="text-align: center; vertical-align: middle">
                         <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
                       </td>
+                      <td style="text-align: center; vertical-align: middle">
+                        <asp:LinkButton ID="btnDelete2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnDelete_Click" ToolTip='<%# "Delete " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="glyphicon glyphicon-remove" style="font-size:15px; color:red"></span></asp:LinkButton>
+                      </td>
                     </tr>
                   </ItemTemplate>
                 </asp:Repeater>
@@ -113,10 +126,54 @@
             </ContentTemplate>
             <Triggers>
               <asp:AsyncPostBackTrigger ControlID="btnEdit" EventName="Click" />
+              <asp:AsyncPostBackTrigger ControlID="btnDelete" EventName="Click" />
             </Triggers>
           </asp:UpdatePanel>
           <asp:LinkButton ID="btnEdit" runat="server" Visible="false" Text="temp"></asp:LinkButton>
+          <asp:LinkButton ID="btnDelete" runat="server" Visible="false" Text="temp"></asp:LinkButton>
         </asp:Panel>
+      </div>
+      <div id="manageApplicants" class="tab-pane fade">
+        <br />
+        <div class="well well-sm">
+          <h5><b>Manage Registered Applicants:</b></h5>
+        </div>
+        <table class="table table-hover" border="0" style="font-size: 14px">
+          <asp:Repeater ID="rptApplicant" runat="server">
+            <HeaderTemplate>
+              <tr style="height: 30px; border: solid solid solid solid">
+                <th style="text-align: left; width: 10%">User #</th>
+                <th style="text-align: left; width: 25%">Name</th>
+                <th style="text-align: left; width: 15%">Phone</th>
+                <th style="text-align: left; width: 30%">Email</th>
+                <th style="text-align: center; width: 10%;">Edit</th>
+                <th style="text-align: center; width: 10%;">Delete</th>
+              </tr>
+            </HeaderTemplate>
+            <ItemTemplate>
+              <tr>
+                <td style="vertical-align: middle">
+                  <%#GetFormattedNumber(DataBinder.Eval(Container.DataItem, "userId"))%>
+                </td>
+                <td style="text-align: left; vertical-align: middle">
+                  <%# DataBinder.Eval(Container.DataItem, "fullName")%>
+                </td>
+                <td style="vertical-align: middle">
+                  <%# getFormattedPhone(DataBinder.Eval(Container.DataItem, "phone"))%>
+                </td>
+                <td style="text-align: left; vertical-align: middle">
+                  <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
+                </td>
+                <td style="text-align: center; vertical-align: middle">
+                  <asp:LinkButton ID="btnEdit3" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEditApplicant_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
+                </td>
+                <td style="text-align: center; vertical-align: middle">
+                  <asp:LinkButton ID="btnDelete3" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnDeleteApplicant_Click" ToolTip='<%# "Delete " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="glyphicon glyphicon-remove" style="font-size:15px; color:red"></span></asp:LinkButton>
+                </td>
+              </tr>
+            </ItemTemplate>
+          </asp:Repeater>
+        </table>
       </div>
     </div>
   </div>
