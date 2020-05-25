@@ -42,6 +42,14 @@
             <table style="width: 100%">
               <tr>
                 <td>
+                  <asp:Label runat="server" AssociatedControlID="txtApplicationId" CssClass="control-label" Style="white-space: nowrap">User #:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="txtUserId" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
+              <tr>
+                <td>
                   <asp:Label runat="server" AssociatedControlID="txtApplicationId" CssClass="control-label" Style="white-space: nowrap">Application #:</asp:Label>
                 </td>
                 <td>

@@ -55,6 +55,7 @@
           'load form with application data
           With oApplication
             btnEmail.NavigateUrl = "mailto:" & .USER.email
+            txtUserId.Text = Base.getFormattedNumber(.userId)
             btnEmail.Text = .USER.email
             txtEmail.Text = .USER.email
             txtFirstName.Text = .USER.firstName
@@ -159,7 +160,9 @@
             txtPolicyNumber.Text = .healthInsuranceProviderPolicyNumber
             txtMedicare.Text = .medicareNumber
             txtMedicaid.Text = .medicaidNumber
-            txtNotEmployed.Text = IIf(.isNotEmployed, "No", "Yes")
+            If Not IsNothing(.isNotEmployed) Then
+              txtNotEmployed.Text = IIf(.isNotEmployed, "No", "Yes")
+            End If
             txtEmployerName.Text = .employerName
             txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
             txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")

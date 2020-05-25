@@ -32,6 +32,15 @@ Partial Public Class Application1
     Protected WithEvents lblReviewsCountBadge As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''txtUserId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtUserId As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtApplicationId control.
     '''</summary>
     '''<remarks>
