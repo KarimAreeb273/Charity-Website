@@ -14,6 +14,19 @@
           If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
             Response.Redirect("/")
           End If
+          'set the dropdown based on the reviewer's roles in order of workflow (validate, investigate, qualify, finance)
+          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).ToList
+          For Each item In oUserRoles
+            If item.ROLE.name = "Validator" Then
+              drpWorkflow.SelectedValue = "Submitted"
+            ElseIf item.ROLE.name = "Investigator" Then
+              drpWorkflow.SelectedValue = "Validated"
+            ElseIf item.ROLE.name = "Qualifier" Then
+              drpWorkflow.SelectedValue = "Investigated"
+            ElseIf item.ROLE.name = "Financier" Then
+              drpWorkflow.SelectedValue = "Qualified (Final)"
+            End If
+          Next
         End Using
         filterWorkflow()
       End If
