@@ -52,7 +52,7 @@
             .firstName = txtFirstName.Text
             .middleName = txtMiddleName.Text
             .lastName = txtLastName.Text
-            .phone = Base.getFormattedPhone(oUser.phone, Base.enumFormatPhone.Strip)
+            .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
             .updatedBy = vUserId
             .updatedOn = Date.Now
           End With
