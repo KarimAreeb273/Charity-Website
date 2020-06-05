@@ -39,8 +39,7 @@
                   <asp:ListItem Text="Submitted" Value="Submitted"></asp:ListItem>
                   <asp:ListItem Text="Validated" Value="Validated"></asp:ListItem>
                   <asp:ListItem Text="Investigated" Value="Investigated"></asp:ListItem>
-                  <asp:ListItem Text="Qualified (Initial)" Value="Qualified (Initial)"></asp:ListItem>
-                  <asp:ListItem Text="Qualified (Final)" Value="Qualified (Final)"></asp:ListItem>
+                  <asp:ListItem Text="Qualified" Value="Qualified"></asp:ListItem>
                   <asp:ListItem Text="Dispersed" Value="Dispersed"></asp:ListItem>
                   <asp:ListItem Text="Rejected" Value="Rejected"></asp:ListItem>
                 </asp:DropDownList>
@@ -87,16 +86,15 @@
             <td style="text-align: left; vertical-align: middle">
               <%--<asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "USER.email")%>'><%# DataBinder.Eval(Container.DataItem, "USER.email")%></asp:HyperLink>--%>
               <%# DataBinder.Eval(Container.DataItem, "ORGANIZATION.name")%>
-            </td>
-            
+            </td>            
             <td style="text-align: left; vertical-align: middle">
               <span title="Rejected" style="font-size:20px; color:red" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isRejected"), "glyphicon glyphicon-remove", "")%>'></span>
               &nbsp;<span title="Drafted" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDrafted"), "fas fa-save", "")%>'></span>
               &nbsp;<span title="Submitted" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), "fas fa-clipboard-list", "")%>'></span>
-              &nbsp;<span title="Validated" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isValidated"), "fas fa-check", "")%>'></span>
+              &nbsp;<span title="Validated" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isValidated"), "fas fa-clipboard-check", "")%>'></span>
               &nbsp;<span title="Investigated" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isInvestigated"), "fas fa-search", "")%>'></span>
-              &nbsp;<span title="Qualified (Initial)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified1"), "far fa-clipboard", "")%>'></span>
-              &nbsp;<span title="Qualified (Final)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified2"), "fas fa-clipboard-check", "")%>'></span>
+              &nbsp;<span title="Qualified (Initial)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified1"), "fas fa-check", "")%>'></span>
+              &nbsp;<span title="Qualified (Final)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified2"), "fas fa-check-double", "")%>'></span>
               &nbsp;<span title="Dispersed" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDispersed"), "fas fa-money-bill-wave", "")%>'></span>
             </td>
             <td style="text-align: center; vertical-align: middle">

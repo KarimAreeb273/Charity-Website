@@ -15,16 +15,20 @@
             Response.Redirect("/")
           End If
           'set the dropdown based on the reviewer's roles in order of workflow (validate, investigate, qualify, finance)
-          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).ToList
+          Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier") Order By USER_ROLE.roleId).ToList
           For Each item In oUserRoles
             If item.ROLE.name = "Validator" Then
               drpWorkflow.SelectedValue = "Submitted"
+              Exit For
             ElseIf item.ROLE.name = "Investigator" Then
               drpWorkflow.SelectedValue = "Validated"
+              Exit For
             ElseIf item.ROLE.name = "Qualifier" Then
               drpWorkflow.SelectedValue = "Investigated"
+              Exit For
             ElseIf item.ROLE.name = "Financier" Then
-              drpWorkflow.SelectedValue = "Qualified (Final)"
+              drpWorkflow.SelectedValue = "Qualified"
+              Exit For
             End If
           Next
         End Using
@@ -103,10 +107,10 @@
           ElseIf drpWorkflow.SelectedValue = "Validated" Then
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Validated").ToList
           ElseIf drpWorkflow.SelectedValue = "Investigated" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Investigated").ToList
-          ElseIf drpWorkflow.SelectedValue = "Qualified (Initial)" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Initial)").ToList
-          ElseIf drpWorkflow.SelectedValue = "Qualified (Final)" Then
+            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)").ToList
+            'ElseIf drpWorkflow.SelectedValue = "Qualified" Then
+            '  oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
+          ElseIf drpWorkflow.SelectedValue = "Qualified" Then
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
           ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Dispersed").ToList

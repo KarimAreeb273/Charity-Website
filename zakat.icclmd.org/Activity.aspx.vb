@@ -37,4 +37,17 @@
     End Try
   End Function
 
+  Public Function getRejectionComment(ByVal pApplicationId As Int32) As String
+    Try
+      Using oDB As New zakatEntities
+        Dim oReview As REVIEW = (From REVIEW In oDB.REVIEW Where REVIEW.applicationId = pApplicationId AndAlso REVIEW.reviewAction = "Rejected").First
+        getRejectionComment = oReview.reviewComment
+      End Using
+
+    Catch ex As Exception
+      Return Nothing
+      Response.Write(ex.Message)
+    End Try
+  End Function
+
 End Class
