@@ -794,7 +794,10 @@
 
         vMsgText.Append("<span style='font-family: Calibri; font-size: 11pt'>")
         vMsgText.Append("Assalaamu Alaikum " & txtFirstName.Text & ",<br /><br />")
-        vMsgText.Append("Your Zakat Application has been rejected. <br /><br />")
+        vMsgText.Append("Your Zakat Application has been rejected for the following reason(s):<br /><br />")
+        vMsgText.Append("<table style='width: 100%'><tr><td style='text-align: left; width: 50px'>&nbsp;</td><td style='text-align: left; width: 100%'><i style='color:red;font-family: Calibri; font-size: 11pt''>")
+        vMsgText.Append(txtReviewComments.Text)
+        vMsgText.Append("</i></td></tr></table><br />")
         vMsgText.Append("If you have questions regarding your application, please don’t hesitate to contact us using the information below.<br /><br />")
         vMsgText.Append("Jazakum Allahu Khairan,<br /><br />")
         vMsgText.Append("ICCL Zakat Administrator<br />")
