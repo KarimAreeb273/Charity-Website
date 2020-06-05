@@ -115,7 +115,8 @@
         <li>Submit online zakat application(s) to one or more Islamic organizations</li>
         <li>Correspondence is sent/received via email when decisions are made</li>
         <li>Edit your saved profile as often as necessary</li>
-        <li>Track the progress of your submitted online zakat application (with an account)</li>
+        <li>Track the progress of your submitted online zakat application</li>
+        <li>Complete the zakat form in a <a href="language">language</a> that you understand</li>
       </ul>
     </div>
     <div class="col-md-6">
@@ -127,7 +128,7 @@
         <%--<li>&nbsp;</li>--%>
         <li>
           <a href="/documents/required_zakat_protocols_and_documents.pdf" download>
-            <img src="/Images/png-transparent.png" style="width:50px;height:50px">
+            <img src="/Images/png-transparent.png" style="width:50px;height:60px">
           </a>
         </li>
       </ul>
