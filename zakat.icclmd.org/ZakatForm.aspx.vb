@@ -14,6 +14,12 @@ Public Class ZakatForm
         Dim vUserId As Int32 = Session("sUserId")
 
         Using oDB As New zakatEntities
+          'only allow the create a new application if user has one in a status of drafted, rejected, or dispersed otherwise redirect to activity page
+          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId AndAlso (APPLICATION.applicationStatus = "Submitted" OrElse APPLICATION.applicationStatus = "Validated" OrElse APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)" OrElse APPLICATION.applicationStatus = "Qualified (Final)") Order By APPLICATION.createdOn Descending).Any Then
+            'nothing in drafted status so redirect to activity page
+            Response.Redirect("activity")
+          End If
+
           'load the state dropdown
           Dim oState As List(Of STATE) = (From STATE In oDB.STATE Order By STATE.stateName).ToList
           drpState.DataSource = oState
@@ -144,10 +150,12 @@ Public Class ZakatForm
             setDependents()
             'load the references repeater
             setReferences()
+            'refresh applicant progress
+            RefreshApplicantProgress()
 
-            'load applciation belongs to the user and the draft status is true and the submitted flag is false
-            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).Any Then
-              Dim oDraftApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True And APPLICATION.isSubmitted = False).First
+            'load application belonging to the user where the status is drafted
+            If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId AndAlso APPLICATION.applicationStatus = "Drafted").Any Then
+              Dim oDraftApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId AndAlso APPLICATION.applicationStatus = "Drafted").First
 
               With oDraftApplication
                 drpOrganization.SelectedValue = .organizationId
@@ -199,8 +207,6 @@ Public Class ZakatForm
                 txtPersonalStatement.Text = .personalNeedStatement
               End With
 
-              'refresh applicant progress
-              RefreshApplicantProgress()
               'refresh reference progress
               RefreshReferenceProgress()
               'refresh reference progress
@@ -868,21 +874,32 @@ Public Class ZakatForm
     Try
       'set values on the form
       lblArtifacts.Text = 0
+      Dim vCount As Int32 = 0
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vApplicationId <> 0 Then
         Using oDB As New zakatEntities
-          If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").Any Then
-            Dim oArtifacts As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").ToList
-            lblArtifacts.Text = oArtifacts.Count
+          If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso (ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification" OrElse ARTIFACT.ARTIFACT_TYPE.name = "Local Masjid Reference Letter")).Any Then
+            Dim vGovId As Boolean
+            Dim vLetter As Boolean
+            Dim oArtifactsGovId As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").ToList
+            If oArtifactsGovId.Count > 0 Then vGovId = True Else vGovId = False
+            Dim oArtifactsLetter As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Local Masjid Reference Letter").ToList
+            If oArtifactsLetter.Count > 0 Then vLetter = True Else vLetter = False
+            If vGovId Then
+              vCount += 1
+            End If
+            If vLetter Then
+              vCount += 1
+            End If
+            lblArtifacts.Text = vCount
           End If
         End Using
       End If
       'update the progress
       Dim vProgress As Decimal = CInt(lblArtifacts.Text)
-      Dim vPossible As Int32 = 1
-
+      Dim vPossible As Int32 = 2
       If vProgress > 0 Then
-        vProgress = 1
+        vProgress = vCount
       Else
         vProgress = 0
       End If

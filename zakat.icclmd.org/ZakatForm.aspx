@@ -1480,7 +1480,7 @@
                 <th style="width:25%; text-align:left; vertical-align: middle">
                   Artifacts
                   <span class="label label-default"><asp:Label ID="lblArtifacts" runat="server" Text="0"></asp:Label></span>
-                  &nbsp;(Gov't Photo ID Required)
+                  &nbsp;(Gov't ID & Masjid Letter Req'd)
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
