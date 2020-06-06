@@ -1321,15 +1321,22 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Reference Letter');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('applicant@icclmd.org'	,	'12121212'	,	'Applicant', 'Applicant');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('validator@icclmd.org'	,	'12121212'	,	'Validator', 'Validator');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('investigator@icclmd.org'	,	'12121212'	,	'Investigator', 'Investigator');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName) VALUES ('financier@icclmd.org'	,	'12121212'	,	'Financier', 'Financier');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('applicant@icclmd.org'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('validator@icclmd.org'	,	'12121212'	,	'Validator', 'Validator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('investigator@icclmd.org'	,	'12121212'	,	'Investigator', 'Investigator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('financier@icclmd.org'	,	'12121212'	,	'Financier', 'Financier', '3013174584');
 
 INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
 INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
+
+
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (17, 2, 1);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (18, 2, 1);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (19, 2, 1);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (20, 2, 1);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (21, 2, 1);
