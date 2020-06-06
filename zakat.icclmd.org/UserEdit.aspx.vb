@@ -9,7 +9,7 @@
 
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
-        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId And USER_ROLE.ROLE.name = "Administrator").Any Then
+        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
           Response.Redirect("/")
         End If
 
@@ -18,11 +18,13 @@
           Dim vOtherUserId As Int32 = Session("sOtherUserId")
           Dim oUser As USER = (From User In oDB.USER Where User.userId = vOtherUserId).First
           With oUser
+            txtUserId.Text = Base.getFormattedNumber(.userId)
+            txtCreatedOn.Text = FormatDateTime(.createdOn, DateFormat.LongDate)
             txtEmail.Text = .email
             txtFirstName.Text = .firstName
             txtMiddleName.Text = .middleName
             txtLastName.Text = .lastName
-            txtPhone.Text = Base.getFormattedPhone(oUser.phone, Base.enumFormatPhone.Format)
+            txtPhone.Text = Base.getFormattedPhone(.phone, Base.enumFormatPhone.Format)
           End With
         End If
 
@@ -91,4 +93,5 @@
       Response.Write(ex.Message)
     End Try
   End Sub
+
 End Class

@@ -14,6 +14,24 @@ Option Explicit On
 Partial Public Class UserEdit
     
     '''<summary>
+    '''txtUserId control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtUserId As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CustomValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator1 As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
     '''txtFirstName control.
     '''</summary>
     '''<remarks>
@@ -48,6 +66,24 @@ Partial Public Class UserEdit
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtCreatedOn control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtCreatedOn As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''CustomValidator2 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator2 As Global.System.Web.UI.WebControls.CustomValidator
     
     '''<summary>
     '''txtEmail control.
