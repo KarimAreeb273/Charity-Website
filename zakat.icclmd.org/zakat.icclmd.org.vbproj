@@ -141,6 +141,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Applicants.aspx" />
     <Content Include="Application.aspx" />
     <Content Include="Activity.aspx" />
     <Content Include="Images\png-transparent.png" />
@@ -254,6 +255,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Applicants.aspx.designer.vb">
+      <DependentUpon>Applicants.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Applicants.aspx.vb">
+      <DependentUpon>Applicants.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Application.aspx.designer.vb">
       <DependentUpon>Application.aspx</DependentUpon>
     </Compile>
