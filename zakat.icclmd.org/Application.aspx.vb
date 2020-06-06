@@ -28,12 +28,12 @@
           txtApplicationsRejected.Text = oApplicationsRejected.Count
 
           'verify if the user is a reviewer otherwise redirect home
-          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
+          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId AndAlso (USER_ROLE.ROLE.name = "Administrator" OrElse (USER_ROLE.organizationId = oApplication.organizationId AndAlso (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")))).Any Then
             Response.Redirect("/")
           End If
 
           'get the reviewer roles for displaying the correct review panel or none if a role has not been granted
-          Dim oReviewer As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.organizationId = oApplication.organizationId).ToList
+          Dim oReviewer As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId AndAlso (USER_ROLE.organizationId = oApplication.organizationId OrElse USER_ROLE.ROLE.name = "Administrator")).ToList
           Dim isValidator As Boolean = False
           Dim isInvestigator As Boolean = False
           Dim isQualifier As Boolean = False

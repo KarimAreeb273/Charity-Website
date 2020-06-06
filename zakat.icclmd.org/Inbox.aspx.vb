@@ -10,8 +10,8 @@
       If Not IsPostBack Then
         txtNumber.Text = ""
         Using oDB As New zakatEntities
-          'verify if the user is an administrator otherwise redirect home
-          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")).Any Then
+          'verify if the user is a reviewer or administrator otherwise redirect home
+          If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier" OrElse USER_ROLE.ROLE.name = "Administrator")).Any Then
             Response.Redirect("/")
           End If
           'set the dropdown based on the reviewer's roles in order of workflow (validate, investigate, qualify, finance)
@@ -28,6 +28,9 @@
               Exit For
             ElseIf item.ROLE.name = "Financier" Then
               drpWorkflow.SelectedValue = "Qualified"
+              Exit For
+            Else
+              drpWorkflow.SelectedValue = "All"
               Exit For
             End If
           Next
@@ -108,8 +111,6 @@
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Validated").ToList
           ElseIf drpWorkflow.SelectedValue = "Investigated" Then
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)").ToList
-            'ElseIf drpWorkflow.SelectedValue = "Qualified" Then
-            '  oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
           ElseIf drpWorkflow.SelectedValue = "Qualified" Then
             oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
           ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
