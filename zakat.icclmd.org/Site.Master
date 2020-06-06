@@ -107,10 +107,12 @@
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="users">Manage Users</a></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="organizations">Manage Organizations</a></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="userroles">Manage Roles</a></li>
-                          <%--<li role="presentation" class="divider"></li>--%>
+                          <li role="presentation" class="divider"></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="applicants">Manage Applicants</a></li>
                         </ul>
                       </div>
                     </li>
+                    <li><a id="A12" runat="server" visible="true" href="inbox">Inbox</a><li>
                     <li><a id="A3" runat="server" visible="true" href="~/password">Password</a></li>
                     <li>
                       <a id="A6" runat="server" visible="true" href="profile">Welcome <asp:Label ID="lblNameAdministrator" runat="server" ToolTip="Manage your account"></asp:Label></a>
