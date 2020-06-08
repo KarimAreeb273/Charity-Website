@@ -32,6 +32,33 @@ Partial Public Class Applicants
     Protected WithEvents btnClearFilter As Global.System.Web.UI.WebControls.LinkButton
     
     '''<summary>
+    '''btnSortName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSortName As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnSortPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSortPhone As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
+    '''btnSortEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSortEmail As Global.System.Web.UI.WebControls.LinkButton
+    
+    '''<summary>
     '''rptApplicant control.
     '''</summary>
     '''<remarks>

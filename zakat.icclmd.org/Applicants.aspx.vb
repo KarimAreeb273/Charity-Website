@@ -24,7 +24,7 @@
 
   Sub setApplicants()
     Try
-      'update user repeater and update the badge
+      'update user repeater
       Using oDB As New zakatEntities
         rptApplicant.DataSource = (From USER_ROLE In oDB.USER_ROLE
                                    Where USER_ROLE.roleId = Base.enumRole.Appliciant
@@ -33,7 +33,6 @@
                                                 Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName,
                                                 Key .email = USER_ROLE.USER.email}).ToList
         rptApplicant.DataBind()
-        'lblApplicantsCountBadge.Text = rptApplicant.Items.Count
       End Using
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -212,6 +211,60 @@
                                                 Key .email = USER_ROLE.USER.email}).ToList
         rptApplicant.DataBind()
         'lblApplicantsCountBadge.Text = rptApplicant.Items.Count
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSortName_Click(sender As Object, e As EventArgs) Handles btnSortName.Click
+    Try
+      'update user repeater
+      Using oDB As New zakatEntities
+        rptApplicant.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                                   Where USER_ROLE.roleId = Base.enumRole.Appliciant
+                                   Order By USER_ROLE.USER.lastName, USER_ROLE.USER.firstName
+                                   Select New With {Key .userId = USER_ROLE.userId,
+                                                Key .phone = USER_ROLE.USER.phone,
+                                                Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName,
+                                                Key .email = USER_ROLE.USER.email}).ToList
+        rptApplicant.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSortPhone_Click(sender As Object, e As EventArgs) Handles btnSortPhone.Click
+    Try
+      'update user repeater
+      Using oDB As New zakatEntities
+        rptApplicant.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                                   Where USER_ROLE.roleId = Base.enumRole.Appliciant
+                                   Order By USER_ROLE.USER.phone
+                                   Select New With {Key .userId = USER_ROLE.userId,
+                                                Key .phone = USER_ROLE.USER.phone,
+                                                Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName,
+                                                Key .email = USER_ROLE.USER.email}).ToList
+        rptApplicant.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSortEmail_Click(sender As Object, e As EventArgs) Handles btnSortEmail.Click
+    Try
+      'update user repeater
+      Using oDB As New zakatEntities
+        rptApplicant.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                                   Where USER_ROLE.roleId = Base.enumRole.Appliciant
+                                   Order By USER_ROLE.USER.email
+                                   Select New With {Key .userId = USER_ROLE.userId,
+                                                Key .phone = USER_ROLE.USER.phone,
+                                                Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName,
+                                                Key .email = USER_ROLE.USER.email}).ToList
+        rptApplicant.DataBind()
       End Using
     Catch ex As Exception
       Response.Write(ex.Message)

@@ -24,17 +24,29 @@
       </table> 
     </div>
     <table class="table table-hover" border="0" style="font-size: 14px">
+      <tr style="height: 30px; border: solid solid solid solid">
+        <th style="text-align: left; width: 10%">User #</th>
+        <th style="text-align: left; width: 25%">Name&nbsp;
+          <asp:LinkButton ID="btnSortName" runat="server" CommandArgument="name">
+            <span title="sort by name" class="fas fa-sort-alpha-down" style="font-size:17px; color:black"></span>
+          </asp:LinkButton>
+        </th>
+        <th style="text-align: left; width: 15%">Phone&nbsp;
+          <asp:LinkButton ID="btnSortPhone" runat="server" CommandArgument="phone">
+            <span title="sort by phone" class="fas fa-sort-alpha-down" style="font-size:17px; color:black"></span>
+          </asp:LinkButton>
+        </th>
+        <th style="text-align: left; width: 30%">Email&nbsp;
+          <asp:LinkButton ID="btnSortEmail" runat="server" CommandArgument="email">
+            <span title="sort by email" class="fas fa-sort-alpha-down" style="font-size:17px; color:black"></span>
+          </asp:LinkButton>
+        </th>
+        <th style="text-align: center; width: 10%;">Edit</th>
+        <th style="text-align: center; width: 10%;">Delete</th>
+      </tr>
       <asp:Repeater ID="rptApplicant" runat="server">
-        <HeaderTemplate>
-          <tr style="height: 30px; border: solid solid solid solid">
-            <th style="text-align: left; width: 10%">User #</th>
-            <th style="text-align: left; width: 25%">Name</th>
-            <th style="text-align: left; width: 15%">Phone</th>
-            <th style="text-align: left; width: 30%">Email</th>
-            <th style="text-align: center; width: 10%;">Edit</th>
-            <th style="text-align: center; width: 10%;">Delete</th>
-          </tr>
-        </HeaderTemplate>
+        <%--<HeaderTemplate>          
+        </HeaderTemplate>--%>
         <ItemTemplate>
           <tr>
             <td style="vertical-align: middle">
