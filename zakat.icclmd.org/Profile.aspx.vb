@@ -35,6 +35,12 @@
           lstLanguages.DataValueField = "languageId"
           lstLanguages.DataBind()
 
+          'load the language listbox
+          drpSchoolCountry.DataSource = (From COUNTRY In oDB.COUNTRY Order By COUNTRY.name).ToList
+          drpSchoolCountry.DataTextField = "name"
+          drpSchoolCountry.DataValueField = "countryId"
+          drpSchoolCountry.DataBind()
+
           If vUserId <> 0 Then
             'load user data into the form
             Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
@@ -57,23 +63,36 @@
               drpHomeType.SelectedValue = .homeType
               txtHomeType.Enabled = IIf(drpHomeType.SelectedValue = "Other", True, False)
               txtHomeType.Text = .homeTypeOther
-              If (.nationalityId <> Nothing) Then
-                drpNationality.SelectedValue = .nationalityId
-              End If
+              drpNationality.SelectedValue = .nationalityId
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
+              chkIsInternational.Checked = .isInternationalSchool
               txtSchoolName.Text = .schoolName
-              txtSchoolStreet.Text = .schoolStreet
               txtSchoolCity.Text = .schoolCity
+              If .isInternationalSchool Then
+                pnlDomestic.Visible = False
+                pnlInternational.Visible = True
+              Else
+                pnlDomestic.Visible = True
+                pnlInternational.Visible = False
+              End If
+              txtSchoolStreet.Text = .schoolStreet
+              drpSchoolCountry.SelectedValue = .schoolCountryId
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
+              'show husband pane based on rules
+              'If (.gender = "Female" And (.maritalStatus = "Married" Or .maritalStatus = "Divorced")) Then
+              '  pnlHusbandInformation.Visible = True
+              'Else
+              '  pnlHusbandInformation.Visible = False
+              'End If
               txtHusbandFirstName.Text = .husbandFirstName
               txtHusbandMiddleName.Text = .husbandMiddleName
               txtHusbandLastName.Text = .husbandLastName
               txtHusbandEmail.Text = .husbandEmail
               txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
-              'chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
-              'txtHusbandExplanation.Text = .husbandZakatExplanation
+              txtMasjidName.Text = .primaryMasjidName
+              txtMasjidPhone.Text = Base.getFormattedPhone(.primaryMasjidPhone, Base.enumFormatPhone.Format)
             End With
 
             Session("sUserFirstName") = oUser.firstName
@@ -98,11 +117,11 @@
               Next
             End If
 
-            If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
-              pnlHusbandInformation.Visible = True
-            Else
-              pnlHusbandInformation.Visible = False
-            End If
+            'If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
+            '  pnlHusbandInformation.Visible = True
+            'Else
+            '  pnlHusbandInformation.Visible = False
+            'End If
           End If
         End Using
       End If
@@ -147,19 +166,22 @@
           .nationalityId = drpNationality.SelectedValue
           .citizenshipStatus = drpCitizenship.SelectedValue
           .highestEducationCompleted = drpHighestEducation.SelectedValue
+          .isInternationalSchool = chkIsInternational.Checked
           .schoolName = txtSchoolName.Text
           .schoolStreet = txtSchoolStreet.Text
           .schoolCity = txtSchoolCity.Text
           .schoolStateAbbr = drpSchoolState.SelectedValue
+          .schoolCountryId = drpSchoolCountry.SelectedValue
           .schoolZip = txtSchoolZip.Text
           .husbandFirstName = txtHusbandFirstName.Text
           .husbandMiddleName = txtHusbandMiddleName.Text
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
           .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
-
-          'successful save so set user name
-          Session("sUserFirstName") = txtFirstName.Text
+          .primaryMasjidName = txtMasjidName.Text
+          .primaryMasjidPhone = Base.getFormattedPhone(txtMasjidPhone.Text, Base.enumFormatPhone.Strip)
+          .updatedBy = vUserId
+          .updatedOn = Date.Now
         End With
 
         ' Add to Memory
@@ -221,24 +243,55 @@
     End Try
   End Sub
 
-  Private Sub chkGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkGender.SelectedIndexChanged
+  'Private Sub chkGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkGender.SelectedIndexChanged
+  '  Try
+  '    If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
+  '      pnlHusbandInformation.Visible = True
+  '    Else
+  '      pnlHusbandInformation.Visible = False
+  '    End If
+  '  Catch ex As Exception
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
+
+  'Private Sub drpMaritalStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpMaritalStatus.SelectedIndexChanged
+  '  Try
+  '    If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
+  '      pnlHusbandInformation.Visible = True
+  '    Else
+  '      pnlHusbandInformation.Visible = False
+  '    End If
+  '  Catch ex As Exception
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
+
+  Private Sub drpHomeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpHomeType.SelectedIndexChanged
     Try
-      If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
-        pnlHusbandInformation.Visible = True
+      If (drpHomeType.SelectedItem.Text = "Other") Then
+        txtHomeType.Enabled = True
+        valHomeType.Enabled = True
       Else
-        pnlHusbandInformation.Visible = False
+        txtHomeType.Enabled = False
+        valHomeType.Enabled = False
       End If
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
 
-  Private Sub drpMaritalStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpMaritalStatus.SelectedIndexChanged
+  Private Sub chkIsInternational_CheckedChanged(sender As Object, e As EventArgs) Handles chkIsInternational.CheckedChanged
     Try
-      If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
-        pnlHusbandInformation.Visible = True
+      'was the person ever employed
+      If chkIsInternational.Checked Then
+        'is international
+        pnlInternational.Visible = True
+        pnlDomestic.Visible = False
       Else
-        pnlHusbandInformation.Visible = False
+        'is not international
+        pnlInternational.Visible = False
+        pnlDomestic.Visible = True
       End If
     Catch ex As Exception
       Response.Write(ex.Message)

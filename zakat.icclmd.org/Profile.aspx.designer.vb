@@ -95,6 +95,15 @@ Partial Public Class Profile
     Protected WithEvents txtSocialSecurity As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''valSSNFormat control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valSSNFormat As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    
+    '''<summary>
     '''txtDOB control.
     '''</summary>
     '''<remarks>
@@ -257,6 +266,24 @@ Partial Public Class Profile
     Protected WithEvents drpCitizenship As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''txtMasjidName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''txtMasjidPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''lstLanguages control.
     '''</summary>
     '''<remarks>
@@ -338,6 +365,24 @@ Partial Public Class Profile
     Protected WithEvents drpHighestEducation As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
+    '''chkIsInternational control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents chkIsInternational As Global.System.Web.UI.WebControls.CheckBox
+    
+    '''<summary>
+    '''CustomValidator3 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator3 As Global.System.Web.UI.WebControls.CustomValidator
+    
+    '''<summary>
     '''txtSchoolName control.
     '''</summary>
     '''<remarks>
@@ -347,15 +392,6 @@ Partial Public Class Profile
     Protected WithEvents txtSchoolName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''txtSchoolStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''txtSchoolCity control.
     '''</summary>
     '''<remarks>
@@ -363,6 +399,24 @@ Partial Public Class Profile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSchoolCity As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pnlDomestic control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlDomestic As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''txtSchoolStreet control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''drpSchoolState control.
@@ -381,6 +435,24 @@ Partial Public Class Profile
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSchoolZip As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''pnlInternational control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlInternational As Global.System.Web.UI.WebControls.Panel
+    
+    '''<summary>
+    '''drpSchoolCountry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents drpSchoolCountry As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''pnlHusbandInformation control.
@@ -428,6 +500,15 @@ Partial Public Class Profile
     Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''txtHusbandPhone control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''txtHusbandEmail control.
     '''</summary>
     '''<remarks>
@@ -446,13 +527,22 @@ Partial Public Class Profile
     Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
     
     '''<summary>
-    '''txtHusbandPhone control.
+    '''chkHusbandApplied control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents chkHusbandApplied As Global.System.Web.UI.WebControls.RadioButtonList
+    
+    '''<summary>
+    '''txtHusbandExplanation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtHusbandExplanation As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''valUserRequiredSave control.

@@ -127,7 +127,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-lg-2 control-label" ToolTip="Email/Username" Style="white-space: nowrap">Email:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" AutoPostBack="True" TabIndex="1" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: lowercase;" runat="server" ID="txtEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" AutoPostBack="True" TabIndex="1" ValidationGroup="Submit" />
                                   <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="A valid email/username is required." ControlToValidate="txtEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                   <asp:CustomValidator ID="valDuplicateEmail" runat="server" CssClass="text-danger" ControlToValidate="txtEmail" ErrorMessage="This username/email is already registered. Login" Display="Dynamic" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The email/username is required." Display="Static" ValidationGroup="Submit" />
@@ -136,21 +136,21 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="False" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:CustomValidator ID="CustomValidator5" runat="server" CssClass="text-danger" ControlToValidate="txtMiddleName" ErrorMessage="middle" Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -215,7 +215,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="10" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="10" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -228,7 +228,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="11" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="11" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -282,7 +282,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtHomeType" CssClass="col-lg-2 control-label" ToolTip="Home Type" Style="white-space: nowrap">Specify:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtHomeType" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Specify Home Type" MaxLength="50" TabIndex="16" AutoPostBack="True" Enabled="False" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHomeType" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Specify Home Type" MaxLength="50" TabIndex="16" AutoPostBack="True" Enabled="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ID="valHomeType" Enabled="false" ControlToValidate="txtHomeType" CssClass="text-danger" ErrorMessage="Please specify the other home type." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -311,7 +311,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMasjidName" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Name" Style="white-space: nowrap">Pr Masjid Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="19" AutoPostBack="false" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="19" AutoPostBack="false" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -377,7 +377,7 @@
                                     <table border="0" style="width: 100%">
                                       <tr>
                                         <td style="width: 95%">
-                                          <asp:TextBox ID="txtSkillCertification" AutoCompleteType="Disabled" runat="server" CssClass="form-control" style="max-width:100%;width:100%" TabIndex="25" MaxLength="100"></asp:TextBox>
+                                          <asp:TextBox ID="txtSkillCertification" AutoCompleteType="Disabled" runat="server" CssClass="form-control" style="max-width:100%;width:100%;text-transform: capitalize;" TabIndex="25" MaxLength="100"></asp:TextBox>
                                         </td>
                                         <td>&nbsp;</td>
                                         <td style="width: 5%; vertical-align: middle">
@@ -439,14 +439,14 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtSchoolName" CssClass="col-lg-2 control-label" ToolTip="School Name" Style="white-space: nowrap">School Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="31" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="31" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolName" CssClass="text-danger" ErrorMessage="The school name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtSchoolCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">School City:</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="32" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="32" AutoPostBack="True" ValidationGroup="Submit" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolCity" CssClass="text-danger" ErrorMessage="The school city is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -454,7 +454,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtSchoolStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">School Street:</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="33" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="33" AutoPostBack="True" ValidationGroup="Submit" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolStreet" CssClass="text-danger" ErrorMessage="The school street is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -518,21 +518,21 @@
                                 <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtHusbandFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtHusbandFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="35" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="35" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandFirstName" CssClass="text-danger" ErrorMessage="The husband first name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="36" AutoPostBack="False" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="36" AutoPostBack="False" ValidationGroup="Submit" />
                                     <asp:CustomValidator ID="CustomValidator6" runat="server" CssClass="text-danger" ControlToValidate="txtHusbandMiddleName" ErrorMessage="middle" Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="37" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="37" AutoPostBack="True" ValidationGroup="Submit" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandLastName" CssClass="text-danger" Display="Static" ErrorMessage="The husband last name is required." ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -553,7 +553,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandEmail" CssClass="col-lg-2 control-label" ToolTip="Email" Style="white-space: nowrap">Email:</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email" MaxLength="60" AutoPostBack="True" TabIndex="39" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: lowercase;" runat="server" ID="txtHusbandEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email" MaxLength="60" AutoPostBack="True" TabIndex="39" ValidationGroup="Submit" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ErrorMessage="A valid husband email is required." ControlToValidate="txtHusbandEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandEmail" CssClass="text-danger" ErrorMessage="The husband email is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
@@ -873,7 +873,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtWhoAssisted" style="white-space: nowrap; position:relative; top:-5px">&nbsp;&nbsp;</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtWhoAssisted" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" TabIndex="113" AutoPostBack="True" Enabled="false" ValidationGroup="Submit" />
+                                      <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtWhoAssisted" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" TabIndex="113" AutoPostBack="True" Enabled="false" ValidationGroup="Submit" />
                                       <asp:RequiredFieldValidator ID="valWhoAssisted" runat="server" ControlToValidate="txtWhoAssisted" CssClass="text-danger" Enabled="false" ErrorMessage="The person who assisted is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
                                   </tr>
@@ -894,7 +894,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtInsuranceProvider" CssClass="col-lg-2 control-label" ToolTip="Insurance Provider" Style="white-space: nowrap; position: relative; top: 5px">Provider:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox ID="txtInsuranceProvider" AutoCompleteType="Disabled" runat="server"  CssClass="form-control" ToolTip="Insurance Provider" AutoPostBack="True" TabIndex="115" ValidationGroup="Submit"></asp:TextBox>
+                                  <asp:TextBox style="text-transform: capitalize;" ID="txtInsuranceProvider" AutoCompleteType="Disabled" runat="server"  CssClass="form-control" ToolTip="Insurance Provider" AutoPostBack="True" TabIndex="115" ValidationGroup="Submit"></asp:TextBox>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtInsuranceProvider" CssClass="text-danger" ErrorMessage="The insurance provider is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -984,7 +984,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerName" CssClass="col-lg-2 control-label" ToolTip="Employer Name" Style="white-space: nowrap">Employer:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="True" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="True" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerName" CssClass="text-danger" Display="Static" ErrorMessage="The employer name is required." ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1031,7 +1031,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtPosition" CssClass="col-lg-2 control-label" ToolTip="Phone #" Style="white-space: nowrap">Position:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPosition" CssClass="text-danger" ErrorMessage="The position title is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1069,14 +1069,14 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="207" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="207" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:</asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="208" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="208" AutoPostBack="True" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1139,21 +1139,21 @@
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtDepFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtDepFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="false" ValidationGroup="Dependent" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="false" ValidationGroup="Dependent" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Dependent" Enabled="True" />
                               </div>
                             </div>
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtDepMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtDepMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="false" ValidationGroup="Dependent" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="false" ValidationGroup="Dependent" />
                                 <asp:CustomValidator ID="CustomValidator7" runat="server" CssClass="text-danger" ControlToValidate="txtDepMiddleName" ErrorMessage="middle" Display="Static" ValidationGroup="Dependent" Enabled="True" />
                               </div>
                             </div>
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtDepLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtDepLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="false" ValidationGroup="Dependent" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="false" ValidationGroup="Dependent" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Dependent" Enabled="True" />
                               </div>
                             </div>
@@ -1318,21 +1318,21 @@
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtRefFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtRefFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="401" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtRefFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="401" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtRefFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Reference" />
                               </div>
                             </div>
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtRefMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtRefMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="402" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtRefMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="402" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:CustomValidator ID="CustomValidator1" runat="server" CssClass="text-danger" ControlToValidate="txtRefMiddleName" ErrorMessage="middle" Display="Static" ValidationGroup="Reference" />
                               </div>
                             </div>
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtRefLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtRefLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="403" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtRefLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="403" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtRefLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Reference" />
                               </div>
                             </div>                            
@@ -1392,14 +1392,14 @@
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtRefStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtRefStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="407" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtRefStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="407" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtRefStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Reference" />
                               </div>
                             </div>
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="txtRefCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtRefCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="408" AutoPostBack="false" ValidationGroup="Reference" />
+                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtRefCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="408" AutoPostBack="false" ValidationGroup="Reference" />
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtRefCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Reference" />
                               </div>
                             </div>
