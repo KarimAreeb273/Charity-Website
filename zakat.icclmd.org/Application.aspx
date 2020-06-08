@@ -330,6 +330,14 @@
                   <asp:Label runat="server" ID="txtCitizenship" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <asp:Label runat="server" AssociatedControlID="txtDispersedAmount" CssClass="control-label" Style="white-space: nowrap">Dispersed Amount:</asp:Label>
+                </td>
+                <td>
+                  <asp:Label runat="server" ID="lblDispersedAmount" CssClass="control-label" Style="white-space: nowrap"></asp:Label>
+                </td>
+              </tr>
             </table>
           </div>
           <div class="col-lg-6">

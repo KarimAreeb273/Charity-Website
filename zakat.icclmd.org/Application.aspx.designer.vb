@@ -374,6 +374,15 @@ Partial Public Class Application1
     Protected WithEvents txtCitizenship As Global.System.Web.UI.WebControls.Label
     
     '''<summary>
+    '''lblDispersedAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblDispersedAmount As Global.System.Web.UI.WebControls.Label
+    
+    '''<summary>
     '''txtApplicationStatus control.
     '''</summary>
     '''<remarks>

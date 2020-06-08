@@ -61,7 +61,7 @@
             txtFirstName.Text = .USER.firstName
             txtMiddleName.Text = .USER.middleName
             txtLastName.Text = .USER.lastName
-            txtSocialSecurity.Text = .USER.socialSecurityNumber
+            txtSocialSecurity.Text = Left(.USER.socialSecurityNumber, 3) & "-" & Mid(.USER.socialSecurityNumber, 5, 2) & "-" & Right(.USER.socialSecurityNumber, 4)
             txtDOB.Text = .USER.dob
             txtPhone.Text = Base.getFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
             txtGender.Text = .USER.gender
@@ -87,7 +87,7 @@
             txtHusbandMiddleName.Text = .USER.husbandMiddleName
             txtHusbandLastName.Text = .USER.husbandLastName
             txtMasjidName.Text = .USER.primaryMasjidName
-            txtMasjidPhone.Text = .USER.primaryMasjidPhone
+            txtMasjidPhone.Text = Base.getFormattedPhone(.USER.primaryMasjidPhone, Base.enumFormatPhone.Format)
 
             'add saved languages to the list
             Dim vLanguages As String = ""
@@ -176,6 +176,7 @@
             txtPersonalStatement.Text = .personalNeedStatement
             txtDispersedAmount.Text = IIf(.dispersedAmount Is Nothing, "", FormatCurrency(.dispersedAmount))
             txtDispersedAmount2.Text = IIf(.dispersedAmount Is Nothing, "", FormatCurrency(.dispersedAmount))
+            lblDispersedAmount.Text = IIf(.dispersedAmount Is Nothing, "", FormatCurrency(.dispersedAmount))
 
             'set review panels; if isDispersed = true visible is already set to false so do nothing:
             If .isRejected = True Then
