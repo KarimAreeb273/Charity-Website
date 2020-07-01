@@ -150,8 +150,6 @@ Public Class ZakatForm
             setDependents()
             'load the references repeater
             setReferences()
-            'refresh applicant progress
-            RefreshApplicantProgress()
 
             'load application belonging to the user where the status is drafted
             If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId AndAlso APPLICATION.applicationStatus = "Drafted").Any Then
@@ -207,6 +205,8 @@ Public Class ZakatForm
                 txtPersonalStatement.Text = .personalNeedStatement
               End With
 
+              'refresh applicant progress
+              RefreshApplicantProgress()
               'refresh reference progress
               RefreshReferenceProgress()
               'refresh reference progress
@@ -223,6 +223,8 @@ Public Class ZakatForm
               'load the artifact repeater
               setArtifacts()
             End If
+
+
           End If
         End Using
 
@@ -1876,8 +1878,8 @@ Public Class ZakatForm
 
       'set the appropriate status for submission: isDrafted=True, isSubmitted=True, approvalStatus=Submitted
       Using oDB As New zakatEntities
-        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True).Any Then
-          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True).First
+        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True AndAlso APPLICATION.isSubmitted = False).Any Then
+          Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True AndAlso APPLICATION.isSubmitted = False).First
           With oApplication
             .userId = vUserId
             .organizationId = drpOrganization.SelectedValue
