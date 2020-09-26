@@ -205,26 +205,27 @@ Public Class ZakatForm
                 txtPersonalStatement.Text = .personalNeedStatement
               End With
 
-              'refresh applicant progress
-              RefreshApplicantProgress()
-              'refresh reference progress
-              RefreshReferenceProgress()
-              'refresh reference progress
-              RefreshArtifactProgress()
-              'refresh assets and support progress
-              RefreshAssetsSupportProgress()
-              'refresh employment progress
-              RefreshEmploymentProgress()
-              'refresh personal statement progress
-              RefreshStatementProgress()
-
+              'set the session application id
               Session("sApplicationId") = oDraftApplication.applicationId
 
               'load the artifact repeater
               setArtifacts()
             End If
 
+            'update the progress of each section of the application:
 
+            'refresh applicant progress
+            RefreshApplicantProgress()
+            'refresh reference progress
+            RefreshReferenceProgress()
+            'refresh reference progress
+            RefreshArtifactProgress()
+            'refresh assets and support progress
+            RefreshAssetsSupportProgress()
+            'refresh employment progress
+            RefreshEmploymentProgress()
+            'refresh personal statement progress
+            RefreshStatementProgress()
           End If
         End Using
 
