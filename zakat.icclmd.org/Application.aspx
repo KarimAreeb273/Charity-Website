@@ -487,7 +487,7 @@
                 </td>
               </tr>
               <tr>
-                <td>
+                <td style="vertical-align: top">
                   <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="control-label" Style="white-space: nowrap">Husband Explanation:</asp:Label>
                 </td>
                 <td>
