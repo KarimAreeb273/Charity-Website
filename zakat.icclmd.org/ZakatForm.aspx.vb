@@ -236,9 +236,9 @@ Public Class ZakatForm
         Else
           accZakat.Enabled = True
           btnSave.Enabled = True
-          EnableSubmitButton()
         End If
       End If
+      EnableSubmitButton()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -250,30 +250,30 @@ Public Class ZakatForm
 
   Sub RefreshApplicantProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30 As Boolean
+      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32 As Boolean
       If (txtEmail.Text = "") Then
         v1 = False
       Else
         v1 = True
       End If
-      If (txtSocialSecurity.Text = "") Then
+      If (txtFirstName.Text = "") Then
         v2 = False
       Else
-        If (Regex.IsMatch(txtSocialSecurity.Text, "^\d{3}-\d{2}-\d{4}$")) Then
-          v2 = True
-        Else
-          v2 = False
-        End If
+        v2 = True
       End If
-      If (txtFirstName.Text = "") Then
+      If (txtLastName.Text = "") Then
         v3 = False
       Else
         v3 = True
       End If
-      If (txtLastName.Text = "") Then
+      If (txtSocialSecurity.Text = "") Then
         v4 = False
       Else
-        v4 = True
+        If (Regex.IsMatch(txtSocialSecurity.Text, "^\d{3}-\d{2}-\d{4}$")) Then
+          v4 = True
+        Else
+          v4 = False
+        End If
       End If
       If (txtDOB.Text = "") Then
         v5 = False
@@ -340,74 +340,85 @@ Public Class ZakatForm
       Else
         v17 = True
       End If
-      If (drpHighestEducation.SelectedIndex = 0) Then
+      If txtMasjidName.Text = "" Then
         v18 = False
       Else
         v18 = True
       End If
-      If (txtSchoolName.Text = "") Then
+      If txtMasjidPhone.Text = "" Then
         v19 = False
       Else
         v19 = True
       End If
-      If (txtSchoolStreet.Text = "") Then
+      If (drpHighestEducation.SelectedIndex = 0) Then
         v20 = False
       Else
         v20 = True
       End If
-      If (txtSchoolCity.Text = "") Then
+      If (txtSchoolName.Text = "") Then
         v21 = False
       Else
         v21 = True
       End If
-      If (drpSchoolState.SelectedIndex = 0) Then
+      If (txtSchoolCity.Text = "") Then
         v22 = False
       Else
         v22 = True
       End If
-      If (txtSchoolZip.Text = "") Then
+      If (txtSchoolStreet.Text = "") Then
         v23 = False
       Else
         v23 = True
       End If
-      If (txtHusbandFirstName.Text = "") Then
+      If (drpSchoolState.SelectedIndex = 0) Then
         v24 = False
       Else
         v24 = True
       End If
-      If (txtHusbandLastName.Text = "") Then
+      If (txtSchoolZip.Text = "") Then
         v25 = False
       Else
         v25 = True
       End If
-      If (txtHusbandPhone.Text = "") Then
+      If (drpSchoolCountry.SelectedIndex = 0) Then
         v26 = False
       Else
         v26 = True
       End If
-      If (txtHusbandEmail.Text = "") Then
+      If (txtHusbandFirstName.Text = "") Then
         v27 = False
       Else
         v27 = True
       End If
-      If (chkHusbandApplied.SelectedIndex = -1) Then
+      If (txtHusbandLastName.Text = "") Then
         v28 = False
       Else
         v28 = True
       End If
-      If (txtHusbandExplanation.Text = "") Then
+      If (txtHusbandPhone.Text = "") Then
         v29 = False
       Else
         v29 = True
       End If
-      If (drpSchoolCountry.SelectedIndex = 0) Then
+
+      If (txtHusbandEmail.Text = "") Then
         v30 = False
       Else
         v30 = True
       End If
+      If (chkHusbandApplied.SelectedIndex = -1) Then
+        v31 = False
+      Else
+        v31 = True
+      End If
+      If (txtHusbandExplanation.Text = "") Then
+        v32 = False
+      Else
+        v32 = True
+      End If
 
       Dim vProgress As Decimal = 0
-      Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), 28, 22)
+      Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), 30, 24)
       vPossible = IIf(drpHomeType.SelectedValue = "Other", vPossible + 1, vPossible)
       vPossible = IIf(chkIsInternational.Checked, vPossible - 2, vPossible)
       If (v1 = True) Then
@@ -475,32 +486,28 @@ Public Class ZakatForm
       If (v21 = True) Then
         vProgress += 1
       End If
+      If (v22 = True) Then
+        vProgress += 1
+      End If
       If chkIsInternational.Checked Then
         'tally country
-        If (v30 = True) Then
+        If (v26 = True) Then
           vProgress += 1
         End If
       Else
         'don't tally country
-        If (v22 = True) Then
-          vProgress += 1
-        End If
         If (v23 = True) Then
           vProgress += 1
         End If
-      End If
-
-      'add the following if husband section is visible
-      If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
         If (v24 = True) Then
           vProgress += 1
         End If
         If (v25 = True) Then
           vProgress += 1
         End If
-        If (v26 = True) Then
-          vProgress += 1
-        End If
+      End If
+      'add the following if husband section is visible
+      If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
         If (v27 = True) Then
           vProgress += 1
         End If
@@ -508,6 +515,15 @@ Public Class ZakatForm
           vProgress += 1
         End If
         If (v29 = True) Then
+          vProgress += 1
+        End If
+        If (v30 = True) Then
+          vProgress += 1
+        End If
+        If (v31 = True) Then
+          vProgress += 1
+        End If
+        If (v32 = True) Then
           vProgress += 1
         End If
       End If
@@ -2341,10 +2357,9 @@ Public Class ZakatForm
   End Sub
 
   Sub EnableSubmitButton()
-    'verify all required fields are completed before enabling the submit button
     Try
-      'was the person ever employed
-      If ltlPercentApplicant.Text = "100% Complete" And ltlPercentArtifact.Text = "100% Complete" And ltlPercentAssetsAndSupport.Text = "100% Complete" And ltlPercentDependent.Text = "100% Complete" And ltlPercentEmployment.Text = "100% Complete" And ltlPercentReference.Text = "100% Complete" And ltlPercentStatement.Text = "100% Complete" Then
+      'verify all required fields are completed and the acknowledgement has been checked and the organization has been choosen before enabling the submit button
+      If drpOrganization.SelectedValue <> "(Select One)" AndAlso chkAcknowledgement.Checked = True AndAlso ltlPercentApplicant.Text = "100% Complete" AndAlso ltlPercentArtifact.Text = "100% Complete" AndAlso ltlPercentAssetsAndSupport.Text = "100% Complete" AndAlso ltlPercentDependent.Text = "100% Complete" AndAlso ltlPercentEmployment.Text = "100% Complete" AndAlso ltlPercentReference.Text = "100% Complete" AndAlso ltlPercentStatement.Text = "100% Complete" Then
         btnSubmit.Enabled = True
       Else
         btnSubmit.Enabled = False
