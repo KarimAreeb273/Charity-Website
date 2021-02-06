@@ -125,7 +125,7 @@ Public Class Base
   End Function
 
   Public Shared Function getPassword() As String
-    Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-:;/.,<>[]\|{}"
+    Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-:;/.,[]\|{}"
     Dim r As New Random
     Dim sb As New StringBuilder
     For i As Integer = 1 To 8
