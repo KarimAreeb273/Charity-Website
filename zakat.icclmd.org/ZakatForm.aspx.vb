@@ -995,12 +995,97 @@ Public Class ZakatForm
     End Try
   End Sub
 
+  Private Sub btnUploadArtifact_Click(sender As Object, e As EventArgs) Handles btnUploadArtifact.Click
+    Try
+      'reset validator
+      valUserRequiredArtifact.IsValid = True
+
+      'if no user determine if one can be created or give validation
+      Dim vUserId As Int32 = Session("sUserId")
+      If vUserId = 0 Then
+        'is the email, first and last name populated?
+        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+          'create the user and then add the reference
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+        Else
+          'show validation and exit sub
+          valUserRequiredArtifact.IsValid = False
+          Exit Sub
+        End If
+      End If
+
+      'set session userId
+      Session("sUserId") = vUserId
+
+      'save the application
+      SaveZakatForm(vUserId, False)
+
+      'verify that we have an applciation id to associate to it otherwise redirect home
+      Dim vApplicationId As Int32 = Session("sApplicationId")
+      If vApplicationId = 0 Then Response.Redirect("/")
+      'obtain file information if one exists
+      If fileUploadArtifact.HasFile Then
+        Dim vFilename As String = Path.GetFileName(fileUploadArtifact.PostedFile.FileName)
+        Dim vFileExtension As String = Path.GetExtension(fileUploadArtifact.PostedFile.FileName)
+        Dim vContentType As String = fileUploadArtifact.PostedFile.ContentType
+        'Using fs As Stream = fileUploadArtifact.PostedFile.InputStream
+        'Using br As New BinaryReader(fs)
+        'Dim bytes As Byte() = br.ReadBytes(DirectCast(fs.Length, Long))
+        Using oDB As New zakatEntities
+          'create new ARTIFACT
+          Dim oArtifact As New ARTIFACT
+          With oArtifact
+            .artifactTypeId = drpArtifactType.SelectedValue
+            .applicationId = vApplicationId
+            .filename = vFilename
+            .contentType = vContentType
+            '.data = bytes
+          End With
+          'add to db
+          oDB.ARTIFACT.Add(oArtifact)
+          oDB.SaveChanges()
+
+          'get the server artifact path
+          Dim aArtifactPath As String = System.Configuration.ConfigurationManager.AppSettings("ArtifactPath")
+          'rename the file using the primary key
+          Dim vUniqueFilename As String = CStr(oArtifact.artifactId) + vFileExtension
+          'upload the file to the server folder
+          fileUploadArtifact.PostedFile.SaveAs((Server.MapPath(aArtifactPath) + vUniqueFilename))
+
+          'update record in the data base
+          Dim oUpdatedArtifact As ARTIFACT = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = oArtifact.artifactId).First
+          With oArtifact
+            .filename = vUniqueFilename
+          End With
+          'update in db
+          oDB.SaveChanges()
+
+          'reset the artifact type dropdown
+          Dim oArtifactType As ARTIFACT_TYPE = (From ARTIFACT_TYPE In oDB.ARTIFACT_TYPE Where ARTIFACT_TYPE.name = "(Select One)").First
+          drpArtifactType.SelectedValue = oArtifactType.artifactTypeId
+        End Using
+        'End Using
+        'End Using
+        Response.Redirect("zakatform")
+      End If
+    Catch ex As Exception
+      Response.Write(ex)
+    End Try
+  End Sub
+
   Protected Sub btnDeleteArtifact_Click(sender As Object, e As System.EventArgs) Handles btnDeleteArtifact.Click
     Try
       Dim vArtifactId As Int32 = sender.CommandArgument
       Using oDB As New zakatEntities
         If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).Any Then
           Dim oArtifact As ARTIFACT = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
+          'get the server artifact path
+          Dim aArtifactPath As String = System.Configuration.ConfigurationManager.AppSettings("ArtifactPath")
+          'get the filename with extension
+          Dim vFilename As String = oArtifact.filename
+          'delete the file from the server
+          File.Delete(Server.MapPath(aArtifactPath) + vFilename)
+          'delete the record from the table
           oDB.ARTIFACT.Remove(oArtifact)
           oDB.SaveChanges()
         End If
@@ -1018,15 +1103,14 @@ Public Class ZakatForm
       Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
       If vArtifactId = 0 Then Response.Redirect("/")
 
-      Dim vBytes As Byte()
-      Dim vFileName As String, vContentType As String
+      'Dim vBytes As Byte()
+      Dim vFileName, vContentType As String
 
       Using oDB As New zakatEntities
         Dim oArtifact As ARTIFACT
         oArtifact = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
         With oArtifact
-          'ApplicationId = sdr("applicationId")
-          vBytes = DirectCast(.data, Byte())
+          'vBytes = DirectCast(.data, Byte())
           vContentType = .contentType
           vFileName = .filename
         End With
@@ -1036,8 +1120,13 @@ Public Class ZakatForm
         Response.Charset = ""
         Response.Cache.SetCacheability(HttpCacheability.NoCache)
         Response.ContentType = vContentType
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
-        Response.BinaryWrite(vBytes)
+        'get the server artifact path
+        Dim aArtifactPath As String = System.Configuration.ConfigurationManager.AppSettings("ArtifactPath")
+        Dim vFilePath As String = Server.MapPath(aArtifactPath) + vFileName
+        Response.AppendHeader("Content-Disposition", ("attachment; filename=" + Path.GetFileName(vFilePath)))
+        Response.WriteFile(vFilePath)
+        'Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
+        'Response.BinaryWrite(vBytes)
         Response.Flush()
         Response.End()
       End Using
@@ -2260,68 +2349,6 @@ Public Class ZakatForm
     getFormattedNumber = Base.getFormattedNumber(pNumber)
   End Function
 
-  Private Sub btnUploadArtifact_Click(sender As Object, e As EventArgs) Handles btnUploadArtifact.Click
-    Try
-      'reset validator
-      valUserRequiredArtifact.IsValid = True
-
-      'if no user determine if one can be created or give validation
-      Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then
-        'is the email, first and last name populated?
-        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
-        Else
-          'show validation and exit sub
-          valUserRequiredArtifact.IsValid = False
-          Exit Sub
-        End If
-      End If
-
-      'set session userId
-      Session("sUserId") = vUserId
-
-      'save the application
-      SaveZakatForm(vUserId, False)
-
-      'verify that we have an applciation id to associate to it otherwise redirect home
-      Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vApplicationId = 0 Then Response.Redirect("/")
-      'obtain file information if one exists
-      If fileUploadArtifact.HasFile Then
-        Dim vFilename As String = Path.GetFileName(fileUploadArtifact.PostedFile.FileName)
-        Dim vContentType As String = fileUploadArtifact.PostedFile.ContentType
-        Using fs As Stream = fileUploadArtifact.PostedFile.InputStream
-          Using br As New BinaryReader(fs)
-            Dim bytes As Byte() = br.ReadBytes(DirectCast(fs.Length, Long))
-            Using oDB As New zakatEntities
-              'create new ARTIFACT
-              Dim oArtifact As New ARTIFACT
-              With oArtifact
-                .artifactTypeId = drpArtifactType.SelectedValue
-                .applicationId = vApplicationId
-                .filename = vFilename
-                .contentType = vContentType
-                .data = bytes
-              End With
-              'add to db
-              oDB.ARTIFACT.Add(oArtifact)
-              oDB.SaveChanges()
-
-              'reset the artifact type dropdown
-              Dim oArtifactType As ARTIFACT_TYPE = (From ARTIFACT_TYPE In oDB.ARTIFACT_TYPE Where ARTIFACT_TYPE.name = "(Select One)").First
-              drpArtifactType.SelectedValue = oArtifactType.artifactTypeId
-            End Using
-          End Using
-        End Using
-        Response.Redirect("zakatform")
-      End If
-    Catch ex As Exception
-      Response.Write(ex)
-    End Try
-  End Sub
-
   Private Sub chkNotEmployed_CheckedChanged(sender As Object, e As EventArgs) Handles chkNotEmployed.CheckedChanged
     Try
       'was the person ever employed
@@ -2367,5 +2394,13 @@ Public Class ZakatForm
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
+  End Sub
+
+  Private Sub drpArtifactType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpArtifactType.SelectedIndexChanged
+    If drpArtifactType.SelectedItem.Value = "(Select One)" Then
+      fileUploadArtifact.Enabled = False
+    Else
+      fileUploadArtifact.Enabled = True
+    End If
   End Sub
 End Class

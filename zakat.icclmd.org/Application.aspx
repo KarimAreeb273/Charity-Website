@@ -700,10 +700,10 @@
           <asp:Repeater ID="rptArtifacts" runat="server">
             <HeaderTemplate>
               <tr style="height: 30px; border: solid solid solid solid">
-                <th style="text-align: left; width: 10%">Artifact #</th>
-                <th style="text-align: left; width: 25%">Artifact Type</th>
-                <th style="text-align: left; width: 30%;">Filename</th>
-                <th style="text-align: left; width: 45%">Content Type</th>
+                <th style="text-align: left; width: 20%">Artifact #</th>
+                <th style="text-align: left; width: 50%">Artifact Type</th>
+                <%--<th style="text-align: left; width: 30%;">Filename</th>--%>
+                <th style="text-align: left; width: 30%">Content Type</th>
               </tr>
             </HeaderTemplate>
             <ItemTemplate>
@@ -712,11 +712,12 @@
                   <%# getFormattedNumber(DataBinder.Eval(Container.DataItem, "artifactId"))%>
                 </td>
                 <td style="text-align: left; vertical-align: middle">
-                  <%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>
+                  <%--<%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>--%>
+                  <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;Download)</asp:LinkButton>
                 </td>
-                <td style="text-align: left; vertical-align: middle">
+                <%--<td style="text-align: left; vertical-align: middle">
                   <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;Download)</asp:LinkButton>
-                </td>
+                </td>--%>
                 <td style="text-align: left; vertical-align: middle">
                   <%# DataBinder.Eval(Container.DataItem, "contentType")%>
                 </td>

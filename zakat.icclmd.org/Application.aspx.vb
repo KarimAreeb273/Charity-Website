@@ -1,4 +1,6 @@
-﻿Public Class Application1
+﻿Imports System.IO
+
+Public Class Application1
   Inherits System.Web.UI.Page
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -282,7 +284,7 @@
             .isInvestigated = False
             .isQualified1 = False
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
             .isRejected = False
             .applicationStatus = "Validated"
             .validatedBy = vUserId
@@ -385,7 +387,7 @@
             .isInvestigated = True
             .isQualified1 = False
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
             .isRejected = False
             .applicationStatus = "Investigated"
             .investigatedBy = vUserId
@@ -488,7 +490,7 @@
             .isInvestigated = True
             .isQualified1 = True
             .isQualified2 = False
-            .IsDispersed = False
+            .isDispersed = False
             .isRejected = False
             .applicationStatus = "Qualified (Initial)"
             .qualified1By = vUserId
@@ -584,7 +586,7 @@
             .isInvestigated = True
             .isQualified1 = True
             .isQualified2 = True
-            .IsDispersed = False
+            .isDispersed = False
             .isRejected = False
             .applicationStatus = "Qualified (Final)"
             .qualified2By = vUserId
@@ -833,15 +835,14 @@
       Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
       If vArtifactId = 0 Then Response.Redirect("/")
 
-      Dim vBytes As Byte()
+      'Dim vBytes As Byte()
       Dim vFileName As String, vContentType As String
 
       Using oDB As New zakatEntities
         Dim oArtifact As ARTIFACT
         oArtifact = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.artifactId = vArtifactId).First
         With oArtifact
-          'ApplicationId = sdr("applicationId")
-          vBytes = DirectCast(.data, Byte())
+          'vBytes = DirectCast(.data, Byte())
           vContentType = .contentType
           vFileName = .filename
         End With
@@ -851,8 +852,13 @@
         Response.Charset = ""
         Response.Cache.SetCacheability(HttpCacheability.NoCache)
         Response.ContentType = vContentType
-        Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
-        Response.BinaryWrite(vBytes)
+        'get the server artifact path
+        Dim aArtifactPath As String = System.Configuration.ConfigurationManager.AppSettings("ArtifactPath")
+        Dim vFilePath As String = Server.MapPath(aArtifactPath) + vFileName
+        Response.AppendHeader("Content-Disposition", ("attachment; filename=" + Path.GetFileName(vFilePath)))
+        Response.WriteFile(vFilePath)
+        'Response.AppendHeader("Content-Disposition", "attachment; filename=" + vFileName)
+        'Response.BinaryWrite(vBytes)
         Response.Flush()
         Response.End()
       End Using

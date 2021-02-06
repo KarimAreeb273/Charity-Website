@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Zakat Form" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ZakatForm.aspx.vb" Inherits="zakat.icclmd.org.ZakatForm" MaintainScrollPositionOnPostback="true" %>
+﻿ <%@ Page Title="Zakat Form" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="ZakatForm.aspx.vb" Inherits="zakat.icclmd.org.ZakatForm" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -1508,7 +1508,7 @@
                             <div class="form-group">
                               <asp:Label runat="server" AssociatedControlID="drpArtifactType" CssClass="col-lg-2 control-label" ToolTip="Artifact Type" Style="white-space: nowrap; position: relative; top: 0px;">Artifact Type:</asp:Label>
                               <div class="col-lg-10">
-                                <asp:DropDownList ID="drpArtifactType" runat="server" ToolTip="Relation" CssClass="form-control" TabIndex="501" AutoPostBack="false" ValidationGroup="Artifact">
+                                <asp:DropDownList ID="drpArtifactType" runat="server" ToolTip="Relation" CssClass="form-control" TabIndex="501" AutoPostBack="True" ValidationGroup="Artifact">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator runat="server" ControlToValidate="drpArtifactType" CssClass="text-danger" ErrorMessage="The artifact type is required." InitialValue="(Select One)" ValidationGroup="Artifact" />
                               </div>
@@ -1528,7 +1528,7 @@
                               <table style="width: 100%" border="0">
                                 <tr>
                                   <td style="width: 60%; vertical-align:top">
-                                    <asp:FileUpload ID="fileUploadArtifact" runat="server" CssClass="col-lg-2 form-control" style="max-width:100%" Width="100%" TabIndex="502" /><br />
+                                    <asp:FileUpload ID="fileUploadArtifact" runat="server" CssClass="col-lg-2 form-control" style="max-width:100%" Width="100%" TabIndex="502" Enabled="False" /><br />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="fileUploadArtifact" CssClass="text-danger" ErrorMessage="Select a file before uploading." ValidationGroup="Artifact" Display="Dynamic" />
                                     <asp:CustomValidator ID="valUserRequiredArtifact" runat="server" CssClass="text-danger"  ErrorMessage="You must enter your email and name before uploading." Display="Static" ValidationGroup="Reference" Enabled="True" />
                                   </td>
@@ -1550,10 +1550,10 @@
                     <asp:Repeater ID="rptArtifacts" runat="server">
                       <HeaderTemplate>
                         <tr style="height: 30px; border: solid solid solid solid">
-                          <th style="text-align: left; width: 10%">Artifact #</th>
-                          <th style="text-align: left; width: 20%">Artifact Type</th>
-                          <th style="text-align: left; width: 20%;">Filename</th>
-                          <th style="text-align: left; width: 40%">Content Type</th>
+                          <th style="text-align: left; width: 20%">Artifact #</th>
+                          <th style="text-align: left; width: 40%">Artifact Type</th>
+                          <%--<th style="text-align: left; width: 20%;">Filename</th>--%>
+                          <th style="text-align: left; width: 30%">Content Type</th>
                           <th style="text-align: center; width: 10%;">Remove</th>
                         </tr>
                       </HeaderTemplate>
@@ -1563,11 +1563,12 @@
                             <%# getFormattedNumber(DataBinder.Eval(Container.DataItem, "artifactId"))%>
                           </td>
                           <td style="text-align: left; vertical-align: middle">
-                            <%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>
+                            <%--<%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>--%>
+                            <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;Download)</asp:LinkButton>
                           </td>
-                          <td style="text-align: left; vertical-align: middle">
+                          <%--<td style="text-align: left; vertical-align: middle">
                             <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%></asp:LinkButton>
-                          </td>
+                          </td>--%>
                           <td style="text-align: left; vertical-align: middle">
                             <%# DataBinder.Eval(Container.DataItem, "contentType")%>
                           </td>
