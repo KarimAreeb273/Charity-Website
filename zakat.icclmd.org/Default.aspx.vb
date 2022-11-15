@@ -37,10 +37,37 @@
           pnlAnonymous.Visible = True
         End If
       End If
+      lblAverageDuration.Text = getAverageDuration()
+
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  Private Function getAverageDuration() As String
+    Try
+      Using oDB As New zakatEntities()
+        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing And APPLICATION.qualified2On IsNot Nothing).Any Then
+          'Dim i As Int16 = 0
+          Dim vTotalDuration As Decimal
+          Dim vTotalAverageDuration As Decimal
+          Dim oApplication As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing And APPLICATION.qualified2On IsNot Nothing).ToList()
+          For Each item In oApplication
+            vTotalDuration = vTotalDuration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          If oApplication.Count = 0 Then
+            Return "N/A"
+          Else
+            vTotalAverageDuration = vTotalDuration / oApplication.Count
+            Return FormatNumber(vTotalAverageDuration, 1).ToString + " Day(s)"
+          End If
+        End If
+        Return "N/A"
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Function
 
   Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
     Try
