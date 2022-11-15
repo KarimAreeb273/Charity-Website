@@ -9,7 +9,8 @@
             <td style="width:100%; text-align: center">
               <h3>Online Zakat</h3>
               <br />
-              <i class="fas fa-dollar-sign" style='font-size:200px; color: darkgreen'></i>
+              <%--<i class="fas fa-dollar-sign" style='font-size:200px; color: darkgreen'></i>--%>
+              <img src="Images/zakatlogo.png" style='width:150px; height:300px'  />
             </td> 
           </tr>
         </table>
@@ -97,6 +98,18 @@
                   <i class='fas fa-cogs' style='color:darkgreen; font-size:100px'></i>
                   <br />
                   <h3 style='color:black; line-height: 1.5'>Administer Zakat<br />System</h3>
+                </td>
+              </tr>
+            </table>
+          </asp:Panel>
+          <asp:Panel ID="pnlMetrics" runat="server" Visible="true">
+            <table style="width: 100%" border="0">
+              <tr>
+                <td style="width: 100%; text-align: center">
+                  <br />
+                  Current Average Duration To Process A Zakat Application: <b><asp:Label ID="lblAverageDuration" runat="server" Text="0 Days"></asp:Label></b>
+                  <br />
+                    (Average Duration Is From Application Submission to 2nd Qualification)
                 </td>
               </tr>
             </table>
