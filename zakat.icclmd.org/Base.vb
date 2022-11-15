@@ -144,7 +144,7 @@ Public Class Base
     Using oDB As New zakatEntities
       'insert information about new user and save to db
       With oUser
-        .email = LCase(pEmail)
+        .email = Trim(LCase(pEmail))
         .firstName = pFirst
         .middleName = pMiddle
         .lastName = pLast
