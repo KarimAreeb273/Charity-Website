@@ -61,6 +61,23 @@
     End Try
   End Sub
 
+  Public Sub btnViewRequests_Click(sender As Object, e As System.EventArgs)
+    Try
+      Session("sViewRequestsUserId") = sender.CommandArgument
+      Dim vUserId As Int32 = sender.CommandArgument
+      'load the inbox with an applicant filter
+      Using oDB As New zakatEntities
+        Dim oApplications As List(Of APPLICATION)
+
+        oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId).ToList
+        rptInbox.DataSource = oApplications
+        rptInbox.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
   Public Function GetFormattedNumber(ByVal pMemberId As Int32) As String
     Try
       GetFormattedNumber = Base.GetFormattedNumber(pMemberId)

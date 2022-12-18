@@ -61,10 +61,11 @@
             <th style="text-align: left; width: 15%">Name</th>
             <th style="text-align: left; width: 10%">Submitted</th>
             <th style="text-align: left; width: 10%">Status</th>
-            <th style="text-align: left; width: 25%">Organization Submitted To</th>          
-            <th style="text-align: left; width: 25%">Progress</th>
-            <th style="text-align: center; width: 5%;">Timeline</th>
-            <th style="text-align: center; width: 5%;">Review</th>
+            <th style="text-align: left; width: 20%">Organization Submitted To</th>          
+            <th style="text-align: left; width: 20%">Progress</th>
+            <th style="text-align: center; width: 7%;">Timeline</th>
+              <th style="text-align: center; width: 7%;">Requests</th>
+            <th style="text-align: center; width: 7%;">Review</th>
           </tr>
         </HeaderTemplate>
         <ItemTemplate>
@@ -99,6 +100,8 @@
             </td>
             <td style="text-align: center; vertical-align: middle">
               <asp:LinkButton ID="btnViewTimeline_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "applicationId")%>' runat="server" CausesValidation="false" OnClick="btnViewTimeline_Click" ToolTip="View Timeline"><span class="far fa-clock" style="font-size:20px; color:darkgreen"></span></asp:LinkButton>
+            <td style="text-align: center; vertical-align: middle">
+              <asp:LinkButton ID="btnViewRequests" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnViewRequests_Click" ToolTip="View all zakat requests from this user"><span class="fas fa-filter" style="font-size:20px; color:darkgreen"></span></asp:LinkButton>
             <td style="text-align: center; vertical-align: middle">
               <asp:LinkButton ID="btnViewApplicationBot" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "applicationId")%>' runat="server" CausesValidation="false" OnClick="btnViewApplication_Click" ToolTip="View Application"><span class="fas fa-glasses" style="font-size:20px; color:darkgreen"></span></asp:LinkButton>
             </td>
