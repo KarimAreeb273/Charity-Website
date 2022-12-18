@@ -72,55 +72,71 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSubmitted]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSaved]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[USER_ROLE]') AND type in (N'U'))
 DROP TABLE [dbo].[USER_ROLE]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[USER_LANGUAGE]') AND type in (N'U'))
 DROP TABLE [dbo].[USER_LANGUAGE]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[USER]') AND type in (N'U'))
 DROP TABLE [dbo].[USER]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[STATE]') AND type in (N'U'))
 DROP TABLE [dbo].[STATE]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ROLE]') AND type in (N'U'))
 DROP TABLE [dbo].[ROLE]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[REVIEW]') AND type in (N'U'))
 DROP TABLE [dbo].[REVIEW]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[REFERENCE]') AND type in (N'U'))
 DROP TABLE [dbo].[REFERENCE]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ORGANIZATION]') AND type in (N'U'))
 DROP TABLE [dbo].[ORGANIZATION]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[NATIONALITY]') AND type in (N'U'))
 DROP TABLE [dbo].[NATIONALITY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[LANGUAGE]') AND type in (N'U'))
 DROP TABLE [dbo].[LANGUAGE]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DEPENDENT]') AND type in (N'U'))
 DROP TABLE [dbo].[DEPENDENT]
 GO
-/****** Object:  Table [dbo].[COUNTRY]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[COUNTRY]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[COUNTRY]') AND type in (N'U'))
 DROP TABLE [dbo].[COUNTRY]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[CERTIFICATION_SKILL]') AND type in (N'U'))
 DROP TABLE [dbo].[CERTIFICATION_SKILL]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ARTIFACT_TYPE]') AND type in (N'U'))
 DROP TABLE [dbo].[ARTIFACT_TYPE]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ARTIFACT]') AND type in (N'U'))
 DROP TABLE [dbo].[ARTIFACT]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[APPLICATION]') AND type in (N'U'))
 DROP TABLE [dbo].[APPLICATION]
 GO
-/****** Object:  Table [dbo].[APPLICATION]    Script Date: 5/10/2020 9:48:07 AM ******/
+/****** Object:  Table [dbo].[APPLICATION]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -198,10 +214,10 @@ CREATE TABLE [dbo].[APPLICATION](
  CONSTRAINT [PK_APPLICATION] PRIMARY KEY CLUSTERED 
 (
 	[applicationId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 5/10/2020 9:48:11 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -216,10 +232,10 @@ CREATE TABLE [dbo].[ARTIFACT](
  CONSTRAINT [PK_ARTIFACT] PRIMARY KEY CLUSTERED 
 (
 	[artifactId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 5/10/2020 9:48:12 AM ******/
+/****** Object:  Table [dbo].[ARTIFACT_TYPE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,10 +246,10 @@ CREATE TABLE [dbo].[ARTIFACT_TYPE](
  CONSTRAINT [PK_ARTIFACT_TYPE] PRIMARY KEY CLUSTERED 
 (
 	[artifactTypeId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 5/10/2020 9:48:12 AM ******/
+/****** Object:  Table [dbo].[CERTIFICATION_SKILL]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -245,10 +261,10 @@ CREATE TABLE [dbo].[CERTIFICATION_SKILL](
  CONSTRAINT [PK_CERTIFICATION_SKILL] PRIMARY KEY CLUSTERED 
 (
 	[certificationSkillId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[COUNTRY]    Script Date: 5/10/2020 9:48:13 AM ******/
+/****** Object:  Table [dbo].[COUNTRY]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,10 +275,10 @@ CREATE TABLE [dbo].[COUNTRY](
  CONSTRAINT [PK_COUNTRY] PRIMARY KEY CLUSTERED 
 (
 	[countryId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 5/10/2020 9:48:15 AM ******/
+/****** Object:  Table [dbo].[DEPENDENT]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -279,10 +295,10 @@ CREATE TABLE [dbo].[DEPENDENT](
  CONSTRAINT [PK_DEPDENDENTS] PRIMARY KEY CLUSTERED 
 (
 	[dependentId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 5/10/2020 9:48:17 AM ******/
+/****** Object:  Table [dbo].[LANGUAGE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -293,10 +309,10 @@ CREATE TABLE [dbo].[LANGUAGE](
  CONSTRAINT [PK_LANGUAGE] PRIMARY KEY CLUSTERED 
 (
 	[languageId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 5/10/2020 9:48:17 AM ******/
+/****** Object:  Table [dbo].[NATIONALITY]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -307,10 +323,10 @@ CREATE TABLE [dbo].[NATIONALITY](
  CONSTRAINT [PK_NATIONALITY] PRIMARY KEY CLUSTERED 
 (
 	[nationalityId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 5/10/2020 9:48:17 AM ******/
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -328,10 +344,10 @@ CREATE TABLE [dbo].[ORGANIZATION](
  CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED 
 (
 	[organizationId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REFERENCE]    Script Date: 5/10/2020 9:48:18 AM ******/
+/****** Object:  Table [dbo].[REFERENCE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -352,10 +368,10 @@ CREATE TABLE [dbo].[REFERENCE](
  CONSTRAINT [PK_REFERENCE] PRIMARY KEY CLUSTERED 
 (
 	[referenceId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[REVIEW]    Script Date: 5/10/2020 9:48:19 AM ******/
+/****** Object:  Table [dbo].[REVIEW]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -370,10 +386,10 @@ CREATE TABLE [dbo].[REVIEW](
  CONSTRAINT [PK_COMMENT] PRIMARY KEY CLUSTERED 
 (
 	[reviewId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[ROLE]    Script Date: 5/10/2020 9:48:20 AM ******/
+/****** Object:  Table [dbo].[ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -385,10 +401,10 @@ CREATE TABLE [dbo].[ROLE](
  CONSTRAINT [PK_ROLE] PRIMARY KEY CLUSTERED 
 (
 	[roleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[STATE]    Script Date: 5/10/2020 9:48:21 AM ******/
+/****** Object:  Table [dbo].[STATE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -399,10 +415,10 @@ CREATE TABLE [dbo].[STATE](
  CONSTRAINT [PK_STATE] PRIMARY KEY CLUSTERED 
 (
 	[stateAbbr] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER]    Script Date: 5/10/2020 9:48:23 AM ******/
+/****** Object:  Table [dbo].[USER]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -450,10 +466,10 @@ CREATE TABLE [dbo].[USER](
  CONSTRAINT [PK_MEMBER] PRIMARY KEY CLUSTERED 
 (
 	[userId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 5/10/2020 9:48:24 AM ******/
+/****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -465,10 +481,10 @@ CREATE TABLE [dbo].[USER_LANGUAGE](
  CONSTRAINT [PK_USER_LANGUAGE] PRIMARY KEY CLUSTERED 
 (
 	[userLanguageId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 5/10/2020 9:48:24 AM ******/
+/****** Object:  Table [dbo].[USER_ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -481,7 +497,7 @@ CREATE TABLE [dbo].[USER_ROLE](
  CONSTRAINT [PK_USER_ROLE] PRIMARY KEY CLUSTERED 
 (
 	[userRoleId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[APPLICATION] ADD  CONSTRAINT [DF_APPLICATION_isSaved]  DEFAULT ((1)) FOR [isDrafted]
@@ -619,7 +635,6 @@ REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[USER_ROLE] CHECK CONSTRAINT [FK_USER_ROLE_USER]
 GO
-
 
 USE [zakat]
 GO
@@ -1322,21 +1337,12 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Re
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('admin@icclmd.org'	,	'12121212'	,	'Administrator', 'Administrator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('applicant@icclmd.org'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('validator@icclmd.org'	,	'12121212'	,	'Validator', 'Validator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('investigator@icclmd.org'	,	'12121212'	,	'Investigator', 'Investigator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('qualifier@icclmd.org'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('financier@icclmd.org'	,	'12121212'	,	'Financier', 'Financier', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('eiad.sayyad@gmail.com'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
+INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
 
 INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
 INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
-
-
-INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (17, 2, 1);
-INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (18, 2, 1);
-INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (19, 2, 1);
-INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (20, 2, 1);
-INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (21, 2, 1);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (2, 1, 5);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (3, 1, 5);
