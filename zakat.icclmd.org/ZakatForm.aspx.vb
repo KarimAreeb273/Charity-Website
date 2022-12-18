@@ -899,15 +899,9 @@ Public Class ZakatForm
         Using oDB As New zakatEntities
           If (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso (ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification" OrElse ARTIFACT.ARTIFACT_TYPE.name = "Local Masjid Reference Letter")).Any Then
             Dim vGovId As Boolean
-            Dim vLetter As Boolean
             Dim oArtifactsGovId As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Government Photo Identification").ToList
             If oArtifactsGovId.Count > 0 Then vGovId = True Else vGovId = False
-            Dim oArtifactsLetter As List(Of ARTIFACT) = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId AndAlso ARTIFACT.ARTIFACT_TYPE.name = "Local Masjid Reference Letter").ToList
-            If oArtifactsLetter.Count > 0 Then vLetter = True Else vLetter = False
             If vGovId Then
-              vCount += 1
-            End If
-            If vLetter Then
               vCount += 1
             End If
             lblArtifacts.Text = vCount
@@ -916,7 +910,7 @@ Public Class ZakatForm
       End If
       'update the progress
       Dim vProgress As Decimal = CInt(lblArtifacts.Text)
-      Dim vPossible As Int32 = 2
+      Dim vPossible As Int32 = 1
       If vProgress > 0 Then
         vProgress = vCount
       Else
