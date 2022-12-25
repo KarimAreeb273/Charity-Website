@@ -18,7 +18,7 @@ Partial Public Class ARTIFACT
     Public Property contentType As String
     Public Property data As Byte()
 
-    Public Overridable Property ARTIFACT_TYPE As ARTIFACT_TYPE
     Public Overridable Property APPLICATION As APPLICATION
+    Public Overridable Property ARTIFACT_TYPE As ARTIFACT_TYPE
 
 End Class

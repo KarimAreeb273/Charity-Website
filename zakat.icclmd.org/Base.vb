@@ -1,4 +1,6 @@
-﻿Imports System.Net.Mail
+﻿Imports System.IO
+Imports System.Net.Mail
+Imports System.Security.Cryptography
 
 Public Class Base
 
@@ -138,7 +140,8 @@ Public Class Base
   Public Shared Function createUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "", Optional pPhone As String = "") As Int32
     'create the user
     Dim oUser As New USER
-    Dim vPassword As String
+    Dim vPassword As String = Base.getPassword() 'randomly generate a password
+    Dim vPasswordEncrypted As String = Base.encryptString(vPassword) 'encrypts the randomly generated password
     Dim vUserId As Int32
 
     Using oDB As New zakatEntities
@@ -149,7 +152,8 @@ Public Class Base
         .middleName = pMiddle
         .lastName = pLast
         .phone = getFormattedPhone(pPhone, enumFormatPhone.Strip)
-        .password = Base.getPassword()  'randomly generate a password
+        '.password = vPassword
+        .passwordEncrypted = vPasswordEncrypted
         .createdOn = Date.Now
         .updatedOn = Date.Now
       End With
@@ -160,7 +164,6 @@ Public Class Base
 
       'set the userId after adding to db
       vUserId = oUser.userId
-      vPassword = oUser.password
 
       'save audit information
       Dim oUserUpdate As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
@@ -209,6 +212,44 @@ Public Class Base
     createUser = vUserId
   End Function
 
+  Public Shared Function encryptString(ByVal encryptText As String) As String
+    Dim bytesBuff As Byte() = Encoding.Unicode.GetBytes(encryptText)
+    Dim aAppEnDecryptKey As String = System.Configuration.ConfigurationManager.AppSettings("AppEnDecryptKey")
+    Dim key As String = aAppEnDecryptKey
+    Using aes__1 As Aes = Aes.Create()
+      Dim crypto As New Rfc2898DeriveBytes(key, New Byte() {&H49, &H76, &H61, &H6E, &H20, &H4D, &H65, &H64, &H76, &H65, &H64, &H65, &H76})
+      aes__1.Key = crypto.GetBytes(32)
+      aes__1.IV = crypto.GetBytes(16)
+      Using mStream As New MemoryStream()
+        Using cStream As New CryptoStream(mStream, aes__1.CreateEncryptor(), CryptoStreamMode.Write)
+          cStream.Write(bytesBuff, 0, bytesBuff.Length)
+          cStream.Close()
+        End Using
+        encryptText = Convert.ToBase64String(mStream.ToArray())
+      End Using
+    End Using
+    Return encryptText
+  End Function
+
+  Public Shared Function decryptString(ByVal decryptText As String) As String
+    Dim aAppEnDecryptKey As String = System.Configuration.ConfigurationManager.AppSettings("AppEnDecryptKey")
+    Dim key As String = aAppEnDecryptKey
+    decryptText = decryptText.Replace(" ", "+")
+    Dim bytesBuff As Byte() = Convert.FromBase64String(decryptText)
+    Using aes__1 As Aes = Aes.Create()
+      Dim crypto As New Rfc2898DeriveBytes(key, New Byte() {&H49, &H76, &H61, &H6E, &H20, &H4D, &H65, &H64, &H76, &H65, &H64, &H65, &H76})
+      aes__1.Key = crypto.GetBytes(32)
+      aes__1.IV = crypto.GetBytes(16)
+      Using mStream As New MemoryStream()
+        Using cStream As New CryptoStream(mStream, aes__1.CreateDecryptor(), CryptoStreamMode.Write)
+          cStream.Write(bytesBuff, 0, bytesBuff.Length)
+          cStream.Close()
+        End Using
+        decryptText = Encoding.Unicode.GetString(mStream.ToArray())
+      End Using
+    End Using
+    Return decryptText
+  End Function
 #End Region
 
 End Class

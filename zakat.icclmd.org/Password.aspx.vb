@@ -42,17 +42,20 @@
         valMinChars.IsValid = False
         Exit Sub
       End If
+      Dim vCurrentPassword As String = txtCurrentPassword.Text
+      Dim vCurrentPasswordEncrypted As String = Base.encryptString(txtCurrentPassword.Text)
+      Dim vNewPassword As String = txtNewPassword.Text
+      Dim vNewPasswordEncrypted As String = Base.encryptString(txtNewPassword.Text)
       Dim oUser As USER
       pnlSuccess.Visible = False
       pnlFailed.Visible = False
       If vUserId <> 0 Then
-        'change paassword using user id
         Using oDB As New zakatEntities
-          If (From USER In oDB.USER Where USER.userId = vUserId And USER.password = txtCurrentPassword.Text).Any Then
-            'userid/password combination exists
+          'If (From USER In oDB.USER Where USER.userId = vUserId And USER.password = txtCurrentPassword.Text).Any Then
+          If (From USER In oDB.USER Where USER.userId = vUserId And USER.passwordEncrypted = vCurrentPasswordEncrypted).Any Then
             oUser = (From USER In oDB.USER Where USER.userId = vUserId).First
-            oUser.password = txtNewPassword.Text
-            ''oUser.isAuthenticated = True
+            'oUser.password = txtNewPassword.Text
+            oUser.passwordEncrypted = vNewPasswordEncrypted
             oDB.SaveChanges()
             showSuccess()
           Else
@@ -63,11 +66,11 @@
       ElseIf vEmail <> "" Then
         'change password using email
         Using oDB As New zakatEntities
-          If (From USER In oDB.USER Where LCase(USER.email) = vEmail And USER.password = txtCurrentPassword.Text).Any Then
-            'userid/password combination exists
+          'If (From USER In oDB.USER Where LCase(USER.email) = vEmail And USER.password = txtCurrentPassword.Text).Any Then
+          If (From USER In oDB.USER Where LCase(USER.email) = vEmail And USER.passwordEncrypted = vCurrentPasswordEncrypted).Any Then
             oUser = (From USER In oDB.USER Where LCase(USER.email) = vEmail).First
-            oUser.password = txtNewPassword.Text
-            ''oUser.isAuthenticated = True
+            'oUser.password = txtNewPassword.Text
+            oUser.passwordEncrypted = vNewPasswordEncrypted
             oDB.SaveChanges()
             showSuccess()
           Else

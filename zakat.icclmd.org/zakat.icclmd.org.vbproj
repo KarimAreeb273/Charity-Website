@@ -141,6 +141,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminFunctions.aspx" />
     <Content Include="Applicants.aspx" />
     <Content Include="Application.aspx" />
     <Content Include="Activity.aspx" />
@@ -256,6 +257,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminFunctions.aspx.designer.vb">
+      <DependentUpon>AdminFunctions.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminFunctions.aspx.vb">
+      <DependentUpon>AdminFunctions.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Applicants.aspx.designer.vb">
       <DependentUpon>Applicants.aspx</DependentUpon>
     </Compile>

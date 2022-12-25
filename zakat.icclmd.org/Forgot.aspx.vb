@@ -13,7 +13,9 @@
         If (From USER In oDB.USER Where USER.email = txtEmail.Text).Any Then
           Dim oUser As USER = (From USER In oDB.USER Where USER.email = txtEmail.Text).First
           Dim vPassword As String = Base.getPassword()
-          oUser.password = vPassword
+          Dim vPasswordEncrypted As String = Base.encryptString(vPassword)
+          'oUser.password = vPassword
+          oUser.passwordEncrypted = vPasswordEncrypted
           oDB.SaveChanges()
 
           'create email to member that forgot password

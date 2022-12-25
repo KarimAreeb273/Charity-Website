@@ -47,12 +47,16 @@
             With oUser
               txtEmail.Text = .email
               txtEmail.Enabled = False
-              txtSocialSecurity.Text = Base.getFormattedSSN(.socialSecurityNumber, Base.enumFormatSSN.Format)
+              txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
+              txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
+              txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
               txtLastName.Text = .lastName
               txtDOB.Text = IIf(IsDate(.dob), .dob, "")
-              txtPhone.Text = Base.getFormattedPhone(.phone, Base.enumFormatPhone.Format)
+              txtPhone1.Text = Left(.phone, 3)
+              txtPhone2.Text = Mid(.phone, 4, 3)
+              txtPhone3.Text = Right(.phone, 4)
               chkGender.SelectedValue = .gender
               drpMaritalStatus.SelectedValue = .maritalStatus
               txtStreet.Text = .street
@@ -61,7 +65,13 @@
               txtZip.Text = .zip
               txtBeganLiving.Text = IIf(IsDate(.beganLivingDate), .beganLivingDate, "")
               drpHomeType.SelectedValue = .homeType
-              txtHomeType.Enabled = IIf(drpHomeType.SelectedValue = "Other", True, False)
+              If (drpHomeType.SelectedValue = "Other") Then
+                txtHomeType.Enabled = True
+                litHomeType.Visible = True
+              Else
+                txtHomeType.Enabled = False
+                litHomeType.Visible = False
+              End If
               txtHomeType.Text = .homeTypeOther
               drpNationality.SelectedValue = .nationalityId
               drpCitizenship.SelectedValue = .citizenshipStatus
@@ -80,19 +90,15 @@
               drpSchoolCountry.SelectedValue = .schoolCountryId
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
-              'show husband pane based on rules
-              'If (.gender = "Female" And (.maritalStatus = "Married" Or .maritalStatus = "Divorced")) Then
-              '  pnlHusbandInformation.Visible = True
-              'Else
-              '  pnlHusbandInformation.Visible = False
-              'End If
               txtHusbandFirstName.Text = .husbandFirstName
               txtHusbandMiddleName.Text = .husbandMiddleName
               txtHusbandLastName.Text = .husbandLastName
               txtHusbandEmail.Text = .husbandEmail
               txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
               txtMasjidName.Text = .primaryMasjidName
-              txtMasjidPhone.Text = Base.getFormattedPhone(.primaryMasjidPhone, Base.enumFormatPhone.Format)
+              txtMasjidPhone1.Text = Left(.primaryMasjidPhone, 3)
+              txtMasjidPhone2.Text = Mid(.primaryMasjidPhone, 4, 3)
+              txtMasjidPhone3.Text = Right(.primaryMasjidPhone, 4)
             End With
 
             Session("sUserFirstName") = oUser.firstName
@@ -132,6 +138,15 @@
 
   Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
     Try
+      If (txtSocialSecurity1.Text = "" Or txtSocialSecurity2.Text = "" Or txtSocialSecurity3.Text = "") Then
+        valSocialSecurity.IsValid = False
+      End If
+      If (txtPhone1.Text = "" Or txtPhone2.Text = "" Or txtPhone3.Text = "") Then
+        valPhone.IsValid = False
+      End If
+      If (txtMasjidPhone1.Text = "" Or txtMasjidPhone2.Text = "" Or txtMasjidPhone3.Text = "") Then
+        valMasjidPhone.IsValid = False
+      End If
       Dim vUserId As Int32 = Session("sUserId")
 
       Using oDB As New zakatEntities
@@ -144,14 +159,17 @@
         'save user data
         Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
         With oUser
-          .socialSecurityNumber = Base.getFormattedSSN(txtSocialSecurity.Text, Base.enumFormatSSN.Strip)
+          Dim vSocialSecurityNumber As String = txtSocialSecurity1.Text + txtSocialSecurity2.Text + txtSocialSecurity3.Text
+          '.socialSecurityNumber = vSocialSecurityNumber
+          .socialSecurityNumberEncrypted = Base.encryptString(vSocialSecurityNumber)
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
           If txtDOB.Text <> "" Then
             .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
           End If
-          .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
+          .phone = Base.getFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
           .street = txtStreet.Text
@@ -179,7 +197,8 @@
           .husbandEmail = txtHusbandEmail.Text
           .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
           .primaryMasjidName = txtMasjidName.Text
-          .primaryMasjidPhone = Base.getFormattedPhone(txtMasjidPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vMasjidPhone As String = txtMasjidPhone1.Text + txtMasjidPhone2.Text + txtMasjidPhone3.Text
+          .primaryMasjidPhone = Base.getFormattedPhone(vMasjidPhone, Base.enumFormatPhone.Strip)
           .updatedBy = vUserId
           .updatedOn = Date.Now
         End With
@@ -236,45 +255,24 @@
       End Using
 
       'refresh page
-      Response.Redirect("profile")
+      lblSaved.Visible = True
 
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
   End Sub
 
-  'Private Sub chkGender_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkGender.SelectedIndexChanged
-  '  Try
-  '    If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
-  '      pnlHusbandInformation.Visible = True
-  '    Else
-  '      pnlHusbandInformation.Visible = False
-  '    End If
-  '  Catch ex As Exception
-  '    Response.Write(ex.Message)
-  '  End Try
-  'End Sub
-
-  'Private Sub drpMaritalStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpMaritalStatus.SelectedIndexChanged
-  '  Try
-  '    If chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") Then
-  '      pnlHusbandInformation.Visible = True
-  '    Else
-  '      pnlHusbandInformation.Visible = False
-  '    End If
-  '  Catch ex As Exception
-  '    Response.Write(ex.Message)
-  '  End Try
-  'End Sub
-
   Private Sub drpHomeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpHomeType.SelectedIndexChanged
     Try
       If (drpHomeType.SelectedItem.Text = "Other") Then
+        litHomeType.Visible = True
         txtHomeType.Enabled = True
         valHomeType.Enabled = True
       Else
+        litHomeType.Visible = False
         txtHomeType.Enabled = False
         valHomeType.Enabled = False
+        txtHomeType.Text = ""
       End If
     Catch ex As Exception
       Response.Write(ex.Message)

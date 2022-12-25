@@ -13,14 +13,12 @@ Imports System.Collections.Generic
 Partial Public Class USER
     Public Property userId As Integer
     Public Property email As String
-    Public Property password As String
     Public Property firstName As String
     Public Property middleName As String
     Public Property lastName As String
     Public Property gender As String
     Public Property maritalStatus As String
     Public Property dob As Nullable(Of Date)
-    Public Property socialSecurityNumber As String
     Public Property nationalityId As Nullable(Of Integer)
     Public Property citizenshipStatus As String
     Public Property phone As String
@@ -50,6 +48,8 @@ Partial Public Class USER
     Public Property createdBy As Nullable(Of Integer)
     Public Property updatedOn As Nullable(Of Date)
     Public Property updatedBy As Nullable(Of Integer)
+    Public Property passwordEncrypted As String
+    Public Property socialSecurityNumberEncrypted As String
 
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property CERTIFICATION_SKILL As ICollection(Of CERTIFICATION_SKILL) = New HashSet(Of CERTIFICATION_SKILL)

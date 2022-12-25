@@ -202,14 +202,12 @@
           </Key>
           <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="password" Type="varchar" MaxLength="20" />
           <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="middleName" Type="varchar" MaxLength="30" />
           <Property Name="lastName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="gender" Type="varchar" MaxLength="10" />
           <Property Name="maritalStatus" Type="varchar" MaxLength="15" />
           <Property Name="dob" Type="datetime" />
-          <Property Name="socialSecurityNumber" Type="varchar" MaxLength="9" />
           <Property Name="nationalityId" Type="int" />
           <Property Name="citizenshipStatus" Type="varchar" MaxLength="20" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
@@ -239,6 +237,8 @@
           <Property Name="createdBy" Type="int" />
           <Property Name="updatedOn" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
+          <Property Name="passwordEncrypted" Type="varchar(max)" />
+          <Property Name="socialSecurityNumberEncrypted" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -648,11 +648,6 @@
           </AssociationSet>
           <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
           <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
-          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
-          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
-            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
           <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
           <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
@@ -671,6 +666,11 @@
             <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
           <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
+          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
+            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
           <EntitySet Name="USER" EntityType="zakatModel.USER" />
           <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
             <End Role="USER" EntitySet="USER" />
@@ -918,29 +918,9 @@
           <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
         </EntityType>
-        <EntityType Name="ARTIFACT_TYPE">
-          <Key>
-            <PropertyRef Name="artifactTypeId" />
-          </Key>
-          <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
-        </EntityType>
-        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
-          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARTIFACT_TYPE">
-              <PropertyRef Name="artifactTypeId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="artifactTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="APPLICATION">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -1076,20 +1056,38 @@
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
         </EntityType>
+        <EntityType Name="ARTIFACT_TYPE">
+          <Key>
+            <PropertyRef Name="artifactTypeId" />
+          </Key>
+          <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
+        </EntityType>
+        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
+          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIFACT_TYPE">
+              <PropertyRef Name="artifactTypeId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="artifactTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="maritalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="dob" Type="DateTime" Precision="3" />
-          <Property Name="socialSecurityNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <Property Name="nationalityId" Type="Int32" />
           <Property Name="citizenshipStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1119,6 +1117,8 @@
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
+          <Property Name="passwordEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="socialSecurityNumberEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
           <NavigationProperty Name="COUNTRY" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
@@ -1401,14 +1401,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ARTIFACT_TYPE">
-            <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
-              <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="APPLICATION">
             <EntityTypeMapping TypeName="zakatModel.APPLICATION">
               <MappingFragment StoreEntitySet="APPLICATION">
@@ -1492,9 +1484,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ARTIFACT_TYPE">
+            <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
+              <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="USER">
             <EntityTypeMapping TypeName="zakatModel.USER">
               <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="socialSecurityNumberEncrypted" ColumnName="socialSecurityNumberEncrypted" />
+                <ScalarProperty Name="passwordEncrypted" ColumnName="passwordEncrypted" />
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
                 <ScalarProperty Name="createdBy" ColumnName="createdBy" />
@@ -1524,14 +1526,12 @@
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="citizenshipStatus" ColumnName="citizenshipStatus" />
                 <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
-                <ScalarProperty Name="socialSecurityNumber" ColumnName="socialSecurityNumber" />
                 <ScalarProperty Name="dob" ColumnName="dob" />
                 <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
                 <ScalarProperty Name="gender" ColumnName="gender" />
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="middleName" ColumnName="middleName" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>

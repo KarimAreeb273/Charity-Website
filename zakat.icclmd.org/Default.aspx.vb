@@ -73,10 +73,15 @@
     Try
       Using oDB As New zakatEntities()
         valBadLogin.IsValid = True
+        Dim vUsername As String = txtEmail.Text
+        Dim vPassword As String = txtPassword.Text
+        Dim vPasswordEncrypted As String = Base.encryptString(txtPassword.Text)
         'validate that its a valid username/password combination
-        If (From USER In oDB.USER Where USER.email = txtEmail.Text And USER.password = txtPassword.Text).Any Then
+        'If (From USER In oDB.USER Where USER.email = vUsername And USER.password = vPassword).Any Then
+        If (From USER In oDB.USER Where USER.email = vUsername AndAlso USER.passwordEncrypted = vPasswordEncrypted).Any Then
+          'Dim oUser As USER = (From USER In oDB.USER Where USER.email = vUsername And USER.password = vPassword).First
+          Dim oUser As USER = (From USER In oDB.USER Where USER.email = vUsername AndAlso USER.passwordEncrypted = vPasswordEncrypted).First
           Dim vSessionID As Int32 = Session("sUserID")
-          Dim oUser As USER = (From USER In oDB.USER Where USER.email = txtEmail.Text And USER.password = txtPassword.Text).First
 
           'successful login so set user information
           Session("sUserId") = oUser.userId

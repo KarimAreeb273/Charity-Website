@@ -9,7 +9,6 @@
             <td style="width:100%; text-align: center">
               <h3>Online Zakat</h3>
               <br />
-              <%--<i class="fas fa-dollar-sign" style='font-size:200px; color: darkgreen'></i>--%>
               <img src="Images/zakatlogo.png" style='width:150px; height:300px'  />
             </td> 
           </tr>

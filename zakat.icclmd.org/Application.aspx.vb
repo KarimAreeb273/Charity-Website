@@ -63,7 +63,7 @@ Public Class Application1
             txtFirstName.Text = .USER.firstName
             txtMiddleName.Text = .USER.middleName
             txtLastName.Text = .USER.lastName
-            txtSocialSecurity.Text = Left(.USER.socialSecurityNumber, 3) & "-" & Mid(.USER.socialSecurityNumber, 5, 2) & "-" & Right(.USER.socialSecurityNumber, 4)
+            txtSocialSecurity.Text = Base.getFormattedSSN(Base.decryptString(.USER.socialSecurityNumberEncrypted), Base.enumFormatSSN.Format)
             txtDOB.Text = .USER.dob
             txtPhone.Text = Base.getFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
             txtGender.Text = .USER.gender
