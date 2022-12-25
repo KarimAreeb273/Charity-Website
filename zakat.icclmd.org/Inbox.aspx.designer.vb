@@ -12,40 +12,31 @@ Option Explicit On
 
 
 Partial Public Class Inbox
-    
-    '''<summary>
-    '''txtNumber control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtNumber As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''ftbe1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ftbe1 As Global.AjaxControlToolkit.FilteredTextBoxExtender
-    
-    '''<summary>
-    '''drpWorkflow control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpWorkflow As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''rptInbox control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptInbox As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
+  '''drpSubmissionYear control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpSubmissionYear As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''drpWorkflow control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpWorkflow As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''rptInbox control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptInbox As Global.System.Web.UI.WebControls.Repeater
 End Class

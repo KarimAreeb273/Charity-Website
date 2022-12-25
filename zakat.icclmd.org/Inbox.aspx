@@ -11,15 +11,21 @@
             <tr>
               <td style="width: 20%; text-align: right">
                 <h5>
-                  Filter By Application #:
+                  Filter By Submission Year:
                 </h5>
               </td>
               <td style="width: 5%; text-align: right">
                 &nbsp;
               </td>
               <td style="width: 20%; text-align: left">
-                <asp:TextBox runat="server" ID="txtNumber" CssClass="form-control" ToolTip="Filter on Application #" MaxLength="10" TabIndex="1" placeholder="99999" AutoPostBack="True" />
-                <ajaxToolkit:FilteredTextBoxExtender ID="ftbe1" runat="server" TargetControlID="txtNumber" FilterType="Numbers" />
+                <%--<asp:TextBox runat="server" ID="txtNumber" CssClass="form-control" ToolTip="Filter on Application #" MaxLength="10" TabIndex="1" AutoPostBack="True" />
+                <ajaxToolkit:FilteredTextBoxExtender ID="ftbe1" runat="server" TargetControlID="txtNumber" FilterType="Numbers" />--%>
+                <asp:DropDownList ID="drpSubmissionYear" runat="server" ToolTip="Filter By Submission Year" CssClass="form-control" TabIndex="1" Width="350px" AutoPostBack="True">
+                  <asp:ListItem Text="2022" Value="All" Selected="True"></asp:ListItem>
+                  <asp:ListItem Text="2000" Value="Drafted"></asp:ListItem>
+                  <asp:ListItem Text="2021" Value="2021"></asp:ListItem>
+                  <asp:ListItem Text="2023" Value="Validated"></asp:ListItem>
+                </asp:DropDownList>
               </td>
               <td style="width: 5%; text-align: right">
                 &nbsp;
@@ -59,7 +65,7 @@
           <tr style="height: 30px; border: solid solid solid solid">
             <th style="text-align: left; width: 5%">App #</th>
             <th style="text-align: left; width: 15%">Name</th>
-            <th style="text-align: left; width: 10%">Submitted</th>
+            <th style="text-align: left; width: 10%" title="Created or Submitted Date">Submitted</th>
             <th style="text-align: left; width: 10%">Status</th>
             <th style="text-align: left; width: 20%">Organization Submitted To</th>          
             <th style="text-align: left; width: 20%">Progress</th>
@@ -79,7 +85,7 @@
               <%# DataBinder.Eval(Container.DataItem, "USER.firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.lastName")%>
             </td>
             <td style="text-align: left; vertical-align: middle">
-              <%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), FormatDateTime(DataBinder.Eval(Container.DataItem, "submittedOn"), DateFormat.ShortDate), "")%>
+              <%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), FormatDateTime(DataBinder.Eval(Container.DataItem, "submittedOn"), DateFormat.ShortDate), FormatDateTime(DataBinder.Eval(Container.DataItem, "createdOn"), DateFormat.ShortDate))%>
             </td>
             <td style="text-align: left; vertical-align: middle; white-space:nowrap">
               <%# DataBinder.Eval(Container.DataItem, "applicationStatus")%>

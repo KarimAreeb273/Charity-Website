@@ -8,12 +8,32 @@
       If vUserId = 0 Then Response.Redirect("/")
 
       If Not IsPostBack Then
-        txtNumber.Text = ""
         Using oDB As New zakatEntities
+
           'verify if the user is a reviewer or administrator otherwise redirect home
           If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier" OrElse USER_ROLE.ROLE.name = "Administrator")).Any Then
             Response.Redirect("/")
           End If
+
+          'populate the submission years dropdown filter with all the distinct years 
+          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing).Any Then
+            Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing Order By APPLICATION.submittedOn).ToList
+            Dim submissionYearList As New ArrayList
+            For Each item In oApplications
+              Dim vDate As Date = item.submittedOn
+              Dim vYear As Integer = vDate.Year
+              Dim vIndex As Integer = submissionYearList.IndexOf(vYear)
+              If vIndex = -1 Then
+                submissionYearList.Add(item.submittedOn.Value.Year)
+              End If
+            Next
+            drpSubmissionYear.Items.Clear()
+            drpSubmissionYear.DataSource = submissionYearList
+            drpSubmissionYear.DataBind()
+          End If
+
+          drpSubmissionYear.SelectedValue = Now.Date.Year
+
           'set the dropdown based on the reviewer's roles in order of workflow (validate, investigate, qualify, finance)
           Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier") Order By USER_ROLE.roleId).ToList
           For Each item In oUserRoles
@@ -87,23 +107,23 @@
     End Try
   End Function
 
-  Private Sub txtNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNumber.TextChanged
-    Try
-      Dim vAppId As Int32 = IIf(IsNumeric(txtNumber.Text), CInt(txtNumber.Text), 0)
-      If vAppId <> 0 Then
-        drpWorkflow.SelectedValue = "All"
-        Using oDB As New zakatEntities
-          If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).Any Then
-            Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).ToList
-            rptInbox.DataSource = oApplications
-            rptInbox.DataBind()
-          End If
-        End Using
-      End If
-    Catch ex As Exception
-      Response.Write(ex.Message)
-    End Try
-  End Sub
+  'Private Sub txtNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNumber.TextChanged
+  '  Try
+  '    Dim vAppId As Int32 = IIf(IsNumeric(txtNumber.Text), CInt(txtNumber.Text), 0)
+  '    If vAppId <> 0 Then
+  '      drpWorkflow.SelectedValue = "All"
+  '      Using oDB As New zakatEntities
+  '        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).Any Then
+  '          Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).ToList
+  '          rptInbox.DataSource = oApplications
+  '          rptInbox.DataBind()
+  '        End If
+  '      End Using
+  '    End If
+  '  Catch ex As Exception
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub drpWorkflow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpWorkflow.SelectedIndexChanged
     filterWorkflow()
@@ -111,30 +131,29 @@
 
   Sub filterWorkflow()
     Try
-      txtNumber.Text = ""
       'load the inbox
       Using oDB As New zakatEntities
         Dim oApplications As List(Of APPLICATION)
+        Dim vBeginDate As Date = CDate("01/01/" + drpSubmissionYear.SelectedItem.Text)
+        Dim vEndDate As Date = CDate("12/31/" + drpSubmissionYear.SelectedItem.Text)
         If drpWorkflow.SelectedValue = "All" Then
-          oApplications = (From APPLICATION In oDB.APPLICATION).ToList
+          oApplications = (From APPLICATION In oDB.APPLICATION Where (APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate) OrElse (APPLICATION.createdOn >= vBeginDate And APPLICATION.createdOn <= vEndDate)).ToList
+        ElseIf drpWorkflow.SelectedValue = "Drafted" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.createdOn >= vBeginDate And APPLICATION.createdOn <= vEndDate And APPLICATION.applicationStatus = "Drafted").ToList
+        ElseIf drpWorkflow.SelectedValue = "Rejected" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And APPLICATION.applicationStatus = "Rejected").ToList
+        ElseIf drpWorkflow.SelectedValue = "Submitted" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And APPLICATION.applicationStatus = "Submitted").ToList
+        ElseIf drpWorkflow.SelectedValue = "Validated" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And APPLICATION.applicationStatus = "Validated").ToList
+        ElseIf drpWorkflow.SelectedValue = "Investigated" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And (APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)")).ToList
+        ElseIf drpWorkflow.SelectedValue = "Qualified" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And APPLICATION.applicationStatus = "Qualified (Final)").ToList
+        ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
+          oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate And APPLICATION.applicationStatus = "Dispersed").ToList
         Else
-          If drpWorkflow.SelectedValue = "Rejected" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Rejected").ToList
-          ElseIf drpWorkflow.SelectedValue = "Drafted" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Drafted").ToList
-          ElseIf drpWorkflow.SelectedValue = "Submitted" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Submitted").ToList
-          ElseIf drpWorkflow.SelectedValue = "Validated" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Validated").ToList
-          ElseIf drpWorkflow.SelectedValue = "Investigated" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)").ToList
-          ElseIf drpWorkflow.SelectedValue = "Qualified" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Qualified (Final)").ToList
-          ElseIf drpWorkflow.SelectedValue = "Dispersed" Then
-            oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationStatus = "Dispersed").ToList
-          Else
-            oApplications = (From APPLICATION In oDB.APPLICATION).ToList
-          End If
+          oApplications = (From APPLICATION In oDB.APPLICATION Where (APPLICATION.submittedOn >= vBeginDate And APPLICATION.submittedOn <= vEndDate) OrElse (APPLICATION.createdOn >= vBeginDate And APPLICATION.createdOn <= vEndDate)).ToList
         End If
         rptInbox.DataSource = oApplications
         rptInbox.DataBind()
