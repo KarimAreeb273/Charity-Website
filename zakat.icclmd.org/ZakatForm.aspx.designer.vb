@@ -12,1597 +12,1885 @@ Option Explicit On
 
 
 Partial Public Class ZakatForm
-    
-    '''<summary>
-    '''chkAcknowledgement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkAcknowledgement As Global.System.Web.UI.WebControls.CheckBox
-    
-    '''<summary>
-    '''drpOrganization control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''accZakat control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents accZakat As Global.AjaxControlToolkit.Accordion
-    
-    '''<summary>
-    '''paneApplicant control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneApplicant As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''prgApplicant control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgApplicant As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentApplicant control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentApplicant As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''FormOrder control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents FormOrder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''txtEmail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''valDuplicateEmail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valDuplicateEmail As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtFirstName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMiddleName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMiddleName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''CustomValidator5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator5 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtLastName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtSocialSecurity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSocialSecurity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''valSSNFormat control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valSSNFormat As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDOB As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkCalendarDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''calDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''txtPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''chkGender control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkGender As Global.System.Web.UI.WebControls.RadioButtonList
-    
-    '''<summary>
-    '''drpMaritalStatus control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpMaritalStatus As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtCity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpState control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpState As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtZip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtZip As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtBeganLiving control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtBeganLiving As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkCalendarBeganLiving control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkCalendarBeganLiving As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''calBeganLiving control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents calBeganLiving As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''drpHomeType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpHomeType As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtHomeType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHomeType As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''valHomeType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valHomeType As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''drpNationality control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpNationality As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''drpCitizenship control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpCitizenship As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtMasjidName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMasjidPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMasjidPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lstLanguages control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lstLanguages As Global.System.Web.UI.WebControls.ListBox
-    
-    '''<summary>
-    '''btnAddLanguage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddLanguage As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnDeleteLanguage control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDeleteLanguage As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lstSpoken control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lstSpoken As Global.System.Web.UI.WebControls.ListBox
-    
-    '''<summary>
-    '''txtSkillCertification control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSkillCertification As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btnAddCertification control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddCertification As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''lstSkillCertification control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lstSkillCertification As Global.System.Web.UI.WebControls.ListBox
-    
-    '''<summary>
-    '''btnRemoveCertification control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnRemoveCertification As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''drpHighestEducation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpHighestEducation As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''chkIsInternational control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkIsInternational As Global.System.Web.UI.WebControls.CheckBox
-    
-    '''<summary>
-    '''CustomValidator3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator3 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtSchoolName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtSchoolCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolCity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''pnlDomestic control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlDomestic As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtSchoolStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpSchoolState control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpSchoolState As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtSchoolZip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtSchoolZip As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''pnlInternational control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlInternational As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''drpSchoolCountry control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpSchoolCountry As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''pnlHusbandInformation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlHusbandInformation As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtHusbandFirstName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandFirstName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtHusbandMiddleName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandMiddleName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''CustomValidator6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator6 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtHusbandLastName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtHusbandPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtHusbandEmail control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandEmail As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator13 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''chkHusbandApplied control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkHusbandApplied As Global.System.Web.UI.WebControls.RadioButtonList
-    
-    '''<summary>
-    '''txtHusbandExplanation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtHusbandExplanation As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''paneAssetsAndSupport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneAssetsAndSupport As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''prgAssetsAndSupport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgAssetsAndSupport As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentAssetsAndSupport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentAssetsAndSupport As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''txtValueCash control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueCash As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueGold control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueGold As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator3 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueSilver control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueSilver As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator4 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueInvestment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueInvestment As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator5 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator5 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueRetirement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueRetirement As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator7 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueAssistance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueAssistance As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator6 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator6 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''chkInsurance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkInsurance As Global.System.Web.UI.WebControls.RadioButtonList
-    
-    '''<summary>
-    '''txtValueLifeInsurance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueLifeInsurance As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator8 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator8 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueDebt control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueDebt As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator9 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator9 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtValueChildSupport control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueChildSupport As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator10 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator10 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''drpChildSupportFrequency control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpChildSupportFrequency As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''valChildSupportFrequency control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valChildSupportFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''txtValueFoodStamps control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtValueFoodStamps As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator11 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator11 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''drpFoodStampFrequency control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpFoodStampFrequency As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''valFoodStampFrequency control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valFoodStampFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''txtWhoAssisted control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtWhoAssisted As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''valWhoAssisted control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valWhoAssisted As Global.System.Web.UI.WebControls.RequiredFieldValidator
-    
-    '''<summary>
-    '''pnlInsurance control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlInsurance As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtInsuranceProvider control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtInsuranceProvider As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMedicare control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMedicare As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtPolicyNumber control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPolicyNumber As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMedicaid control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMedicaid As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''paneEmployment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneEmployment As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''prgEmployment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgEmployment As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentEmployment control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentEmployment As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''chkNotEmployed control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkNotEmployed As Global.System.Web.UI.WebControls.CheckBox
-    
-    '''<summary>
-    '''CustomValidator2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator2 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''pnlEmployed control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents pnlEmployed As Global.System.Web.UI.WebControls.Panel
-    
-    '''<summary>
-    '''txtEmployerName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployerName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtEmploymentStart control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmploymentStart As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkEmploymentStartDate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkEmploymentStartDate As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''CalendarExtender1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CalendarExtender1 As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''txtEmploymentEnd control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmploymentEnd As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkEmploymentEndDate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkEmploymentEndDate As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''CalendarExtender2 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CalendarExtender2 As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''txtPosition control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPosition As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtEmployerPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployerPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtMonthlySalary control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtMonthlySalary As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''RegularExpressionValidator12 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents RegularExpressionValidator12 As Global.System.Web.UI.WebControls.RegularExpressionValidator
-    
-    '''<summary>
-    '''txtEmployerStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployerStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtEmployerCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployerCity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpEmployerState control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpEmployerState As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtEmployerZip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtEmployerZip As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''paneDependent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneDependent As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''Div3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents Div3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentDependent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentDependent As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''txtDepFirstName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDepFirstName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtDepMiddleName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDepMiddleName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''CustomValidator7 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator7 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtDepLastName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDepLastName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtDepDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDepDOB As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkDepCalendarDOB control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkDepCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''CalendarExtender3 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CalendarExtender3 As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''chkDepGender control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents chkDepGender As Global.System.Web.UI.WebControls.RadioButtonList
-    
-    '''<summary>
-    '''drpDepRelation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpDepRelation As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''btnAddDependent control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddDependent As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''valUserRequiredDep control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valUserRequiredDep As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''rptDependents control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptDependents As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''paneReference control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneReference As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''lblReferences control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblReferences As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''prgReference control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgReference As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentReference control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentReference As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''txtRefFirstName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefFirstName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtRefMiddleName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefMiddleName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''CustomValidator1 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CustomValidator1 As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''txtRefLastName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefLastName As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpRefRelation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpRefRelation As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtRefPhone control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefPhone As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtKnownSince control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtKnownSince As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''lnkCalendarKnownSince control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lnkCalendarKnownSince As Global.System.Web.UI.HtmlControls.HtmlAnchor
-    
-    '''<summary>
-    '''CalendarExtender4 control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents CalendarExtender4 As Global.AjaxControlToolkit.CalendarExtender
-    
-    '''<summary>
-    '''txtRefStreet control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefStreet As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''txtRefCity control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefCity As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''drpRefState control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpRefState As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''txtRefZip control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtRefZip As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''btnAddReference control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnAddReference As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''valUserRequiredRef control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valUserRequiredRef As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''rptReferences control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''paneArtifacts control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneArtifacts As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''lblArtifacts control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblArtifacts As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''prgArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgArtifact As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentArtifact As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''drpArtifactType control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpArtifactType As Global.System.Web.UI.WebControls.DropDownList
-    
-    '''<summary>
-    '''fileUploadArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents fileUploadArtifact As Global.System.Web.UI.WebControls.FileUpload
-    
-    '''<summary>
-    '''valUserRequiredArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valUserRequiredArtifact As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''btnUploadArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnUploadArtifact As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''rptArtifacts control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rptArtifacts As Global.System.Web.UI.WebControls.Repeater
-    
-    '''<summary>
-    '''btnDownloadArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDownloadArtifact As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''btnDeleteArtifact control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDeleteArtifact As Global.System.Web.UI.WebControls.LinkButton
-    
-    '''<summary>
-    '''paneStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents paneStatement As Global.AjaxControlToolkit.AccordionPane
-    
-    '''<summary>
-    '''prgStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents prgStatement As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-    
-    '''<summary>
-    '''ltlPercentStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ltlPercentStatement As Global.System.Web.UI.WebControls.Literal
-    
-    '''<summary>
-    '''txtPersonalStatement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtPersonalStatement As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
-    '''valUserRequiredSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valUserRequiredSave As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''valAcknowledgement control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valAcknowledgement As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''valRequiredFields control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valRequiredFields As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''valPhotoID control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents valPhotoID As Global.System.Web.UI.WebControls.CustomValidator
-    
-    '''<summary>
-    '''btnSave control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
-    
-    '''<summary>
-    '''btnSubmit control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''chkAcknowledgement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkAcknowledgement As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''drpOrganization control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''accZakat control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents accZakat As Global.AjaxControlToolkit.Accordion
+
+  '''<summary>
+  '''paneApplicant control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneApplicant As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''prgApplicant control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgApplicant As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentApplicant control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentApplicant As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''FormOrder control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FormOrder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''txtEmail control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''valDuplicateEmail control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valDuplicateEmail As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''txtSocialSecurity1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSocialSecurity1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtSocialSecurity2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSocialSecurity2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtSocialSecurity3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSocialSecurity3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender13 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender13 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender14 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender14 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender15 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender15 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''CustomValidator4 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CustomValidator4 As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''txtFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMiddleName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMiddleName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDOB As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkCalendarDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''calDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents calDOB As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''txtPhone1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPhone1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtPhone2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPhone2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtPhone3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPhone3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender1 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender2 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender3 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''valPhone control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valPhone As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''chkGender control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkGender As Global.System.Web.UI.WebControls.RadioButtonList
+
+  '''<summary>
+  '''drpMaritalStatus control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpMaritalStatus As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtStreet As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''drpState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpState As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtBeganLiving control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtBeganLiving As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkCalendarBeganLiving control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkCalendarBeganLiving As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''calBeganLiving control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents calBeganLiving As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''drpHomeType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpHomeType As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''litHomeType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents litHomeType As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtHomeType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHomeType As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valHomeType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHomeType As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''drpNationality control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpNationality As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''drpCitizenship control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpCitizenship As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtMasjidName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMasjidPhone1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMasjidPhone1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMasjidPhone2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMasjidPhone2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMasjidPhone3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMasjidPhone3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender4 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender4 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender5 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender5 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender6 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender6 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''valMasjidPhone control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valMasjidPhone As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''lstLanguages control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lstLanguages As Global.System.Web.UI.WebControls.ListBox
+
+  '''<summary>
+  '''btnAddLanguage control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnAddLanguage As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''btnDeleteLanguage control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnDeleteLanguage As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''lstSpoken control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lstSpoken As Global.System.Web.UI.WebControls.ListBox
+
+  '''<summary>
+  '''txtSkillCertification control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSkillCertification As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''btnAddCertification control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnAddCertification As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''lstSkillCertification control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lstSkillCertification As Global.System.Web.UI.WebControls.ListBox
+
+  '''<summary>
+  '''btnRemoveCertification control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnRemoveCertification As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''drpHighestEducation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpHighestEducation As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''chkIsInternational control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkIsInternational As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''CustomValidator3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CustomValidator3 As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''txtSchoolName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSchoolName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtSchoolCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSchoolCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''pnlDomestic control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlDomestic As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''txtSchoolStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''drpSchoolState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpSchoolState As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtSchoolZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSchoolZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''pnlInternational control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlInternational As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''drpSchoolCountry control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpSchoolCountry As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''pnlHusbandInformation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlHusbandInformation As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''txtHusbandFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandFirstName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtHusbandMiddleName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandMiddleName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtHusbandLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtHusbandPhone1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandPhone1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtHusbandPhone2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandPhone2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtHusbandPhone3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandPhone3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender10 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender10 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender11 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender11 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender12 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender12 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''txtHusbandEmail control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandEmail As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator13 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''chkHusbandApplied control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkHusbandApplied As Global.System.Web.UI.WebControls.RadioButtonList
+
+  '''<summary>
+  '''litHusbandExplanation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents litHusbandExplanation As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtHusbandExplanation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtHusbandExplanation As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valHusbandExplanation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandExplanation As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''paneAssetsAndSupport control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneAssetsAndSupport As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''prgAssetsAndSupport control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgAssetsAndSupport As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentAssetsAndSupport control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentAssetsAndSupport As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtValueCash control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueCash As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator2 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueGold control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueGold As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator3 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueSilver control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueSilver As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator4 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator4 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueInvestment control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueInvestment As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator5 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator5 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueRetirement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueRetirement As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator7 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator7 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueAssistance control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueAssistance As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator6 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator6 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''chkInsurance control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkInsurance As Global.System.Web.UI.WebControls.RadioButtonList
+
+  '''<summary>
+  '''txtValueLifeInsurance control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueLifeInsurance As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator8 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator8 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueDebt control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueDebt As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator9 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator9 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtValueChildSupport control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueChildSupport As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator10 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator10 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''drpChildSupportFrequency control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpChildSupportFrequency As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valChildSupportFrequency control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valChildSupportFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''txtValueFoodStamps control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtValueFoodStamps As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator11 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator11 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''drpFoodStampFrequency control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpFoodStampFrequency As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valFoodStampFrequency control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valFoodStampFrequency As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''txtWhoAssisted control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtWhoAssisted As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valWhoAssisted control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valWhoAssisted As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''pnlInsurance control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlInsurance As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''txtInsuranceProvider control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtInsuranceProvider As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMedicare control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMedicare As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtPolicyNumber control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPolicyNumber As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtMedicaid control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMedicaid As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''paneEmployment control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneEmployment As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''prgEmployment control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgEmployment As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentEmployment control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentEmployment As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''chkNotEmployed control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkNotEmployed As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''CustomValidator2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CustomValidator2 As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''pnlEmployed control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlEmployed As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''txtEmployerName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmploymentStart control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmploymentStart As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkEmploymentStartDate control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkEmploymentStartDate As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''CalendarExtender1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CalendarExtender1 As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''txtEmploymentEnd control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmploymentEnd As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkEmploymentEndDate control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkEmploymentEndDate As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''CalendarExtender2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CalendarExtender2 As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''txtPosition control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPosition As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmployerPhone1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerPhone1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmployerPhone2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerPhone2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmployerPhone3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerPhone3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender7 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender7 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender8 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender8 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender9 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender9 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''txtMonthlySalary control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtMonthlySalary As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator12 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator12 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtEmployerStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerStreet As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmployerCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''drpEmployerState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpEmployerState As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtEmployerZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmployerZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''paneDependent control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneDependent As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''Div3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents Div3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentDependent control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentDependent As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtDepFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDepFirstName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtDepMiddleName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDepMiddleName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtDepLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDepLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtDepDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDepDOB As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkDepCalendarDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkDepCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''CalendarExtender3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CalendarExtender3 As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''chkDepGender control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkDepGender As Global.System.Web.UI.WebControls.RadioButtonList
+
+  '''<summary>
+  '''drpDepRelation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpDepRelation As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''btnAddDependent control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnAddDependent As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''valUserRequiredDep control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valUserRequiredDep As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''rptDependents control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptDependents As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
+  '''paneReference control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneReference As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''lblReferences control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblReferences As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''prgReference control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgReference As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentReference control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentReference As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtRefFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefFirstName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtRefMiddleName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefMiddleName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtRefLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''drpRefRelation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpRefRelation As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtRefPhone1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefPhone1 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtRefPhone2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefPhone2 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtRefPhone3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefPhone3 As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''FilteredTextBoxExtender16 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender16 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender17 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender17 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''FilteredTextBoxExtender18 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents FilteredTextBoxExtender18 As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+  '''<summary>
+  '''txtKnownSince control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtKnownSince As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lnkCalendarKnownSince control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lnkCalendarKnownSince As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''CalendarExtender4 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CalendarExtender4 As Global.AjaxControlToolkit.CalendarExtender
+
+  '''<summary>
+  '''txtRefStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefStreet As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtRefCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''drpRefState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpRefState As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''txtRefZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtRefZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''btnAddReference control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnAddReference As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''valUserRequiredRef control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valUserRequiredRef As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''rptReferences control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
+  '''paneArtifacts control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneArtifacts As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''lblArtifacts control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblArtifacts As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''prgArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgArtifact As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentArtifact As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''drpArtifactType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpArtifactType As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''fileUploadArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents fileUploadArtifact As Global.System.Web.UI.WebControls.FileUpload
+
+  '''<summary>
+  '''valUserRequiredArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valUserRequiredArtifact As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''btnUploadArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnUploadArtifact As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''rptArtifacts control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptArtifacts As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
+  '''btnDownloadArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnDownloadArtifact As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''btnDeleteArtifact control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnDeleteArtifact As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''paneStatement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents paneStatement As Global.AjaxControlToolkit.AccordionPane
+
+  '''<summary>
+  '''prgStatement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents prgStatement As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''ltlPercentStatement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ltlPercentStatement As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''txtPersonalStatement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPersonalStatement As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valUserRequiredSave control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valUserRequiredSave As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''valAcknowledgement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valAcknowledgement As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''valRequiredFields control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valRequiredFields As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''valPhotoID control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valPhotoID As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''btnSave control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnSave As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''btnSubmit control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''valSummary control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSummary As Global.System.Web.UI.WebControls.ValidationSummary
 End Class

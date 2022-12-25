@@ -5,7 +5,6 @@ Imports System.Configuration
 
 Public Class ZakatForm
   Inherits System.Web.UI.Page
-
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       Response.Write("")
@@ -78,12 +77,16 @@ Public Class ZakatForm
             With oUser
               txtEmail.Text = .email
               txtEmail.Enabled = False
-              txtSocialSecurity.Text = Base.getFormattedSSN(.socialSecurityNumber, Base.enumFormatSSN.Format)
+              txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
+              txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
+              txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
               txtLastName.Text = .lastName
               txtDOB.Text = IIf(IsDate(.dob), .dob, "")
-              txtPhone.Text = Base.getFormattedPhone(.phone, Base.enumFormatPhone.Format)
+              txtPhone1.Text = Left(.phone, 3)
+              txtPhone2.Text = Mid(.phone, 4, 3)
+              txtPhone3.Text = Right(.phone, 4)
               chkGender.SelectedValue = .gender
               drpMaritalStatus.SelectedValue = .maritalStatus
               txtStreet.Text = .street
@@ -92,7 +95,13 @@ Public Class ZakatForm
               txtZip.Text = .zip
               txtBeganLiving.Text = IIf(IsDate(.beganLivingDate), .beganLivingDate, "")
               drpHomeType.SelectedValue = .homeType
-              txtHomeType.Enabled = IIf(drpHomeType.SelectedValue = "Other", True, False)
+              If (drpHomeType.SelectedValue = "Other") Then
+                txtHomeType.Enabled = True
+                litHomeType.Visible = True
+              Else
+                txtHomeType.Enabled = False
+                litHomeType.Visible = False
+              End If
               txtHomeType.Text = .homeTypeOther
               drpNationality.SelectedValue = .nationalityId
               drpCitizenship.SelectedValue = .citizenshipStatus
@@ -121,9 +130,13 @@ Public Class ZakatForm
               txtHusbandMiddleName.Text = .husbandMiddleName
               txtHusbandLastName.Text = .husbandLastName
               txtHusbandEmail.Text = .husbandEmail
-              txtHusbandPhone.Text = Base.getFormattedPhone(.husbandPhone, Base.enumFormatPhone.Format)
+              txtHusbandPhone1.Text = Left(.husbandPhone, 3)
+              txtHusbandPhone2.Text = Mid(.husbandPhone, 4, 3)
+              txtHusbandPhone3.Text = Right(.husbandPhone, 4)
               txtMasjidName.Text = .primaryMasjidName
-              txtMasjidPhone.Text = Base.getFormattedPhone(.primaryMasjidPhone, Base.enumFormatPhone.Format)
+              txtMasjidPhone1.Text = Left(.primaryMasjidPhone, 3)
+              txtMasjidPhone2.Text = Mid(.primaryMasjidPhone, 4, 3)
+              txtMasjidPhone3.Text = Right(.primaryMasjidPhone, 4)
             End With
 
             'add saved languages to the spoken listbox
@@ -159,6 +172,7 @@ Public Class ZakatForm
                 drpOrganization.SelectedValue = .organizationId
                 chkHusbandApplied.SelectedValue = .husbandHasAppliedForZakat
                 txtHusbandExplanation.Text = .husbandZakatExplanation
+                txtHusbandExplanation.Enabled = IIf(.husbandHasAppliedForZakat = "No", True, False)
                 txtValueCash.Text = FormatCurrency(.totalValueCash)
                 txtValueGold.Text = FormatCurrency(.totalValueGold)
                 txtValueSilver.Text = FormatCurrency(.totalValueSilver)
@@ -195,7 +209,9 @@ Public Class ZakatForm
                   txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
                   txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
                   txtPosition.Text = .positionTitle
-                  txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+                  txtEmployerPhone1.Text = Left(.employerPhone, 3)
+                  txtEmployerPhone2.Text = Left(.employerPhone, 3)
+                  txtEmployerPhone3.Text = Left(.employerPhone, 4)
                   txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
                   txtEmployerStreet.Text = .employerStreet
                   txtEmployerCity.Text = .employerCity
@@ -250,177 +266,199 @@ Public Class ZakatForm
 
   Sub RefreshApplicantProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32 As Boolean
+      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36 As Boolean
       If (txtEmail.Text = "") Then
         v1 = False
       Else
         v1 = True
       End If
-      If (txtFirstName.Text = "") Then
+      If (txtSocialSecurity1.Text.ToString.Length <> 3 Or txtSocialSecurity2.Text.ToString.Length <> 2 Or txtSocialSecurity3.Text.ToString.Length <> 4) Then
         v2 = False
       Else
         v2 = True
       End If
-      If (txtLastName.Text = "") Then
+      If (txtFirstName.Text = "") Then
         v3 = False
       Else
         v3 = True
       End If
-      If (txtSocialSecurity.Text = "") Then
+      If (txtMiddleName.Text = "") Then
         v4 = False
       Else
-        If (Regex.IsMatch(txtSocialSecurity.Text, "^\d{3}-\d{2}-\d{4}$")) Then
-          v4 = True
-        Else
-          v4 = False
-        End If
+        v4 = True
       End If
-      If (txtDOB.Text = "") Then
+      If (txtLastName.Text = "") Then
         v5 = False
       Else
         v5 = True
       End If
-      If (txtPhone.Text = "") Then
+      If (txtDOB.Text = "") Then
         v6 = False
       Else
         v6 = True
       End If
-      If (chkGender.SelectedIndex = -1) Then
+      If (txtPhone1.Text.ToString.Length <> 3 And txtPhone2.Text.ToString.Length <> 3 And txtPhone3.Text.ToString.Length <> 4) Then
         v7 = False
       Else
         v7 = True
       End If
-      If (drpMaritalStatus.SelectedIndex = 0) Then
+      If (chkGender.SelectedIndex = -1) Then
         v8 = False
       Else
         v8 = True
       End If
-      If (txtStreet.Text = "") Then
+      If (drpMaritalStatus.SelectedIndex = 0) Then
         v9 = False
       Else
         v9 = True
       End If
-      If (txtCity.Text = "") Then
+      If (txtStreet.Text = "") Then
         v10 = False
       Else
         v10 = True
       End If
-      If (drpState.SelectedIndex = 0) Then
+      If (txtCity.Text = "") Then
         v11 = False
       Else
         v11 = True
       End If
-      If (txtZip.Text = "") Then
+      If (drpState.SelectedIndex = 0) Then
         v12 = False
       Else
         v12 = True
       End If
-      If (txtBeganLiving.Text = "") Then
+      If (txtZip.Text = "") Then
         v13 = False
       Else
         v13 = True
       End If
-      If (drpHomeType.SelectedIndex = 0) Then
+      If (txtBeganLiving.Text = "") Then
         v14 = False
       Else
         v14 = True
       End If
-      If (txtHomeType.Text = "") Then
+      If (drpHomeType.SelectedIndex = 0) Then
         v15 = False
       Else
         v15 = True
       End If
-      If (drpNationality.SelectedIndex = 0) Then
+      If (txtHomeType.Text = "") Then
         v16 = False
       Else
         v16 = True
       End If
-      If (drpCitizenship.SelectedIndex = 0) Then
+      If (drpNationality.SelectedIndex = 0) Then
         v17 = False
       Else
         v17 = True
       End If
-      If txtMasjidName.Text = "" Then
+      If (drpCitizenship.SelectedIndex = 0) Then
         v18 = False
       Else
         v18 = True
       End If
-      If txtMasjidPhone.Text = "" Then
+      If txtMasjidName.Text = "" Then
         v19 = False
       Else
         v19 = True
       End If
-      If (drpHighestEducation.SelectedIndex = 0) Then
+      If (txtMasjidPhone1.Text.ToString.Length <> 3 And txtMasjidPhone2.Text.ToString.Length <> 3 And txtMasjidPhone3.Text.ToString.Length <> 4) Then
         v20 = False
       Else
         v20 = True
       End If
-      If (txtSchoolName.Text = "") Then
+      If (drpHighestEducation.SelectedIndex = 0) Then
         v21 = False
       Else
         v21 = True
       End If
-      If (txtSchoolCity.Text = "") Then
+      If (lstSpoken.Items.Count = 0) Then
         v22 = False
       Else
         v22 = True
       End If
-      If (txtSchoolStreet.Text = "") Then
-        v23 = False
-      Else
-        v23 = True
-      End If
-      If (drpSchoolState.SelectedIndex = 0) Then
+      'v23 = chkIsInternational Checked or Unchecked
+      v23 = True
+      If (txtSchoolName.Text = "") Then
         v24 = False
       Else
         v24 = True
       End If
-      If (txtSchoolZip.Text = "") Then
+      If (txtSchoolCity.Text = "") Then
         v25 = False
       Else
         v25 = True
       End If
-      If (drpSchoolCountry.SelectedIndex = 0) Then
+      If (txtSchoolStreet.Text = "") Then
         v26 = False
       Else
         v26 = True
       End If
-      If (txtHusbandFirstName.Text = "") Then
+      If (drpSchoolState.SelectedIndex = 0) Then
         v27 = False
       Else
         v27 = True
       End If
-      If (txtHusbandLastName.Text = "") Then
+      If (txtSchoolZip.Text = "") Then
         v28 = False
       Else
         v28 = True
       End If
-      If (txtHusbandPhone.Text = "") Then
+      If (drpSchoolCountry.SelectedIndex = 0) Then
         v29 = False
       Else
         v29 = True
       End If
-
-      If (txtHusbandEmail.Text = "") Then
+      If (txtHusbandFirstName.Text = "") Then
         v30 = False
       Else
         v30 = True
       End If
-      If (chkHusbandApplied.SelectedIndex = -1) Then
+      If (txtHusbandMiddleName.Text = "") Then
         v31 = False
       Else
         v31 = True
       End If
-      If (txtHusbandExplanation.Text = "") Then
+      If (txtHusbandLastName.Text = "") Then
         v32 = False
       Else
         v32 = True
       End If
+      If (txtHusbandEmail.Text = "") Then
+        v33 = False
+      Else
+        v33 = True
+      End If
+      If (txtHusbandPhone1.Text.ToString.Length <> 3 And txtHusbandPhone2.Text.ToString.Length <> 3 And txtHusbandPhone3.Text.ToString.Length <> 4) Then
+        v34 = False
+      Else
+        v34 = True
+      End If
+      If (chkHusbandApplied.SelectedIndex = -1) Then
+        v35 = False
+      Else
+        v35 = True
+      End If
+      If (txtHusbandExplanation.Text = "") Then
+        v36 = False
+      Else
+        v36 = True
+      End If
 
       Dim vProgress As Decimal = 0
-      Dim vPossible As Int16 = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), 30, 24)
+      Dim vPossible As Int16
+      'set vPossible to all applicant fields except home type specification, school info, and husband info
+      vPossible = 21
+      'update vPossible by adding home type specification if home type equals other
       vPossible = IIf(drpHomeType.SelectedValue = "Other", vPossible + 1, vPossible)
-      vPossible = IIf(chkIsInternational.Checked, vPossible - 2, vPossible)
+      'update vPossible by adding school information including international indicator
+      vPossible = IIf(chkIsInternational.Checked, vPossible + 4, vPossible + 6)
+      'update vPossible by adding husband information excluding zakat application explanation
+      vPossible = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), vPossible + 6, vPossible)
+      'update vPossible by adding zakat application explanation if zakat application equals "No"
+      vPossible = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") AndAlso chkHusbandApplied.SelectedValue = "No", vPossible + 1, vPossible)
+
+
       If (v1 = True) Then
         vProgress += 1
       End If
@@ -463,18 +501,18 @@ Public Class ZakatForm
       If (v14 = True) Then
         vProgress += 1
       End If
-      If (drpHomeType.SelectedValue = "Other" And txtHomeType.Text <> "") Then
-        If (v15 = True) Then
+      If (v15 = True) Then
+        vProgress += 1
+      End If
+      If (drpHomeType.SelectedValue = "Other") Then
+        If (v16 = True) Then
           vProgress += 1
         End If
       End If
-      If (v16 = True) Then
-        vProgress += 1
-      End If
       If (v17 = True) Then
-        vProgress += 1
-      End If
-      If (v18 = True) Then
+          vProgress += 1
+        End If
+        If (v18 = True) Then
         vProgress += 1
       End If
       If (v19 = True) Then
@@ -489,34 +527,31 @@ Public Class ZakatForm
       If (v22 = True) Then
         vProgress += 1
       End If
-      If chkIsInternational.Checked Then
-        'tally country
+      If (v23 = True) Then
+        vProgress += 1
+      End If
+      If (v24 = True) Then
+        vProgress += 1
+      End If
+      If (v25 = True) Then
+        vProgress += 1
+      End If
+      If (Not chkIsInternational.Checked) Then
         If (v26 = True) Then
           vProgress += 1
         End If
-      Else
-        'don't tally country
-        If (v23 = True) Then
-          vProgress += 1
-        End If
-        If (v24 = True) Then
-          vProgress += 1
-        End If
-        If (v25 = True) Then
-          vProgress += 1
-        End If
-      End If
-      'add the following if husband section is visible
-      If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
         If (v27 = True) Then
           vProgress += 1
         End If
         If (v28 = True) Then
           vProgress += 1
         End If
+      Else
         If (v29 = True) Then
           vProgress += 1
         End If
+      End If
+      If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
         If (v30 = True) Then
           vProgress += 1
         End If
@@ -525,6 +560,20 @@ Public Class ZakatForm
         End If
         If (v32 = True) Then
           vProgress += 1
+        End If
+        If (v33 = True) Then
+          vProgress += 1
+        End If
+        If (v34 = True) Then
+          vProgress += 1
+        End If
+        If (v35 = True) Then
+          vProgress += 1
+        End If
+        If chkHusbandApplied.SelectedValue = "No" Then
+          If (v36 = True) Then
+            vProgress += 1
+          End If
         End If
       End If
 
@@ -790,7 +839,7 @@ Public Class ZakatForm
         Else
           v3 = True
         End If
-        If (txtEmployerPhone.Text = "") Then
+        If (txtEmployerPhone1.Text.ToString.Length <> 3 And txtEmployerPhone2.Text.ToString.Length <> 3 And txtEmployerPhone3.Text.ToString.Length <> 4) Then
           v4 = False
         Else
           v4 = True
@@ -1000,7 +1049,8 @@ Public Class ZakatForm
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredArtifact.IsValid = False
@@ -1209,6 +1259,7 @@ Public Class ZakatForm
       If Not lstSpoken.Items.Contains(New ListItem(vSpokenLanguageText, vSpokenLanguageValue)) Then
         lstSpoken.Items.Add(New ListItem(vSpokenLanguageText, vSpokenLanguageValue))
       End If
+      RefreshApplicantProgress()
 
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -1225,6 +1276,7 @@ Public Class ZakatForm
       Dim vSpokenLanguageText As String = lstSpoken.SelectedItem.Text
 
       lstSpoken.Items.Remove(New ListItem(vSpokenLanguageText, vSpokenLanguageValue))
+      RefreshApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -1273,8 +1325,9 @@ Public Class ZakatForm
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
           'create the user
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredDep.IsValid = False
@@ -1344,6 +1397,14 @@ Public Class ZakatForm
     End Try
   End Sub
 
+  Private Sub txtMiddleName_TextChanged(sender As Object, e As EventArgs) Handles txtMiddleName.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
   Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs) Handles txtLastName.TextChanged
     Try
       RefreshApplicantProgress()
@@ -1352,7 +1413,7 @@ Public Class ZakatForm
     End Try
   End Sub
 
-  Private Sub txtSocialSecurity_TextChanged(sender As Object, e As EventArgs) Handles txtSocialSecurity.TextChanged
+  Private Sub txtSocialSecurity_TextChanged(sender As Object, e As EventArgs) Handles txtSocialSecurity1.TextChanged, txtSocialSecurity2.TextChanged, txtSocialSecurity3.TextChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1368,7 +1429,7 @@ Public Class ZakatForm
     End Try
   End Sub
 
-  Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone.TextChanged
+  Private Sub txtPhone_TextChanged(sender As Object, e As EventArgs) Handles txtPhone1.TextChanged, txtPhone2.TextChanged, txtPhone3.TextChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1445,11 +1506,14 @@ Public Class ZakatForm
   Private Sub drpHomeType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpHomeType.SelectedIndexChanged
     Try
       If (drpHomeType.SelectedItem.Text = "Other") Then
+        litHomeType.Visible = True
         txtHomeType.Enabled = True
         valHomeType.Enabled = True
       Else
+        litHomeType.Visible = False
         txtHomeType.Enabled = False
         valHomeType.Enabled = False
+        txtHomeType.Text = ""
       End If
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1545,6 +1609,14 @@ Public Class ZakatForm
     End Try
   End Sub
 
+  Private Sub txtHusbandMiddleName_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandMiddleName.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
   Private Sub txtHusbandLastName_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandLastName.TextChanged
     Try
       RefreshApplicantProgress()
@@ -1553,7 +1625,7 @@ Public Class ZakatForm
     End Try
   End Sub
 
-  Private Sub txtHusbandPhone_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandPhone.TextChanged
+  Private Sub txtHusbandPhone_TextChanged(sender As Object, e As EventArgs) Handles txtHusbandPhone1.TextChanged, txtHusbandPhone2.TextChanged, txtHusbandPhone3.TextChanged
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
@@ -1571,6 +1643,16 @@ Public Class ZakatForm
 
   Private Sub chkHusbandApplied_SelectedIndexChanged(sender As Object, e As EventArgs) Handles chkHusbandApplied.SelectedIndexChanged
     Try
+      If (chkHusbandApplied.SelectedValue = "Yes") Then
+        litHusbandExplanation.Visible = False
+        txtHusbandExplanation.Enabled = False
+        valHusbandExplanation.Enabled = False
+        txtHusbandExplanation.Text = ""
+      Else
+        litHusbandExplanation.Visible = True
+        txtHusbandExplanation.Enabled = True
+        valHusbandExplanation.Enabled = True
+      End If
       RefreshApplicantProgress()
     Catch ex As Exception
       Response.Write(ex.Message)
@@ -1796,7 +1878,7 @@ Public Class ZakatForm
     End Try
   End Sub
 
-  Private Sub txtEmployerPhone_TextChanged(sender As Object, e As EventArgs) Handles txtEmployerPhone.TextChanged
+  Private Sub txtEmployerPhone_TextChanged(sender As Object, e As EventArgs) Handles txtEmployerPhone1.TextChanged, txtEmployerPhone2.TextChanged, txtEmployerPhone3.TextChanged
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
@@ -1862,8 +1944,9 @@ Public Class ZakatForm
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
           'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredRef.IsValid = False
@@ -1885,7 +1968,8 @@ Public Class ZakatForm
           .middleName = txtRefMiddleName.Text
           .lastName = txtRefLastName.Text
           .relationship = drpRefRelation.SelectedValue
-          .phone = Base.getFormattedPhone(txtRefPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vPhone As String = txtRefPhone1.Text + txtRefPhone2.Text + txtRefPhone3.Text
+          .phone = Base.getFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
           .knownSince = CDate(txtKnownSince.Text)
           .street = txtRefStreet.Text
           .city = txtRefCity.Text
@@ -1903,7 +1987,9 @@ Public Class ZakatForm
       txtRefMiddleName.Text = ""
       txtRefLastName.Text = ""
       drpRefRelation.SelectedValue = "(Select One)"
-      txtRefPhone.Text = ""
+      txtRefPhone1.Text = ""
+      txtRefPhone2.Text = ""
+      txtRefPhone3.Text = ""
       txtKnownSince.Text = ""
       txtRefStreet.Text = ""
       txtRefCity.Text = ""
@@ -1925,9 +2011,10 @@ Public Class ZakatForm
       'if no user, determine if one can be created or give validation
       Dim vUserId As Int32 = Session("sUserId")
       If vUserId = 0 Then
+        Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
         'is the email, first and last name populated?
-        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" And txtPhone.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+        If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" And vPhone <> "" Then
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -1965,7 +2052,8 @@ Public Class ZakatForm
       If vUserId = 0 Then
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, txtPhone.Text)
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
+          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -2088,14 +2176,17 @@ Public Class ZakatForm
         'save user data
         Dim oUser As USER = (From USER In oDB.USER Where USER.userId = pUserId).First
         With oUser
-          .socialSecurityNumber = Base.getFormattedSSN(txtSocialSecurity.Text, Base.enumFormatSSN.Strip)
+          Dim vSocialSecurityNumber As String = txtSocialSecurity1.Text + txtSocialSecurity2.Text + txtSocialSecurity3.Text
+          '.socialSecurityNumber = vSocialSecurityNumber
+          .socialSecurityNumberEncrypted = Base.encryptString(vSocialSecurityNumber)
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
           If txtDOB.Text <> "" Then
             .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
           End If
-          .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
+          .phone = Base.getFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
           .street = txtStreet.Text
@@ -2121,9 +2212,11 @@ Public Class ZakatForm
           .husbandMiddleName = txtHusbandMiddleName.Text
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
-          .husbandPhone = Base.getFormattedPhone(txtHusbandPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vHusbandPhone As String = txtHusbandPhone1.Text + txtHusbandPhone2.Text + txtHusbandPhone3.Text
+          .husbandPhone = Base.getFormattedPhone(vHusbandPhone, Base.enumFormatPhone.Strip)
           .primaryMasjidName = txtMasjidName.Text
-          .primaryMasjidPhone = Base.getFormattedPhone(txtMasjidPhone.Text, Base.enumFormatPhone.Strip)
+          Dim vMasjidPhone As String = txtMasjidPhone1.Text + txtMasjidPhone2.Text + txtMasjidPhone3.Text
+          .primaryMasjidPhone = Base.getFormattedPhone(vMasjidPhone, Base.enumFormatPhone.Strip)
           .updatedBy = pUserId
           .updatedOn = Date.Now
         End With
@@ -2131,13 +2224,10 @@ Public Class ZakatForm
         ' Add to Memory
         oDB.SaveChanges()
 
-        'Using oDB As New zakatEntities
-        'Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
         'set session variables:
         Session("sUserId") = pUserId
         Session("sIsApplicant") = True
         Session("sUserFirstName") = oUser.firstName
-        'End Using
 
         'delete all saved languages
         If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = pUserId).Any) Then
@@ -2243,7 +2333,8 @@ Public Class ZakatForm
                 .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
               End If
               .positionTitle = txtPosition.Text
-              .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
+              Dim vEmployerPhone As String = txtEmployerPhone1.Text + txtEmployerPhone2.Text + txtEmployerPhone3.Text
+              .employerPhone = Base.getFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
               .totalMonthlyGrossSalary = txtMonthlySalary.Text
               .employerStreet = txtEmployerStreet.Text
               .employerCity = txtEmployerCity.Text
@@ -2308,7 +2399,8 @@ Public Class ZakatForm
               .employmentEndtDate = IIf(IsDate(txtEmploymentEnd.Text), CDate(txtEmploymentEnd.Text), Nothing)
             End If
             .positionTitle = txtPosition.Text
-            .employerPhone = Base.getFormattedPhone(txtEmployerPhone.Text, Base.enumFormatPhone.Strip)
+            Dim vEmployerPhone As String = txtEmployerPhone1.Text + txtEmployerPhone2.Text + txtEmployerPhone3.Text
+            .employerPhone = Base.getFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
             .totalMonthlyGrossSalary = txtMonthlySalary.Text
             .employerStreet = txtEmployerStreet.Text
             .employerCity = txtEmployerCity.Text
@@ -2396,5 +2488,21 @@ Public Class ZakatForm
     Else
       fileUploadArtifact.Enabled = True
     End If
+  End Sub
+
+  Private Sub txtMasjidPhone1_TextChanged(sender As Object, e As EventArgs) Handles txtMasjidPhone1.TextChanged, txtMasjidPhone2.TextChanged, txtMasjidPhone3.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub txtMasjidName_TextChanged(sender As Object, e As EventArgs) Handles txtMasjidName.TextChanged
+    Try
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
   End Sub
 End Class
