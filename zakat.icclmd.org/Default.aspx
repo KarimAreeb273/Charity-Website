@@ -20,7 +20,7 @@
             <h3>Login</h3>
             <br />
             <div class="form-group">
-              <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">User name:</asp:Label>
+              <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Username:</asp:Label>
               <div class="col-md-10">
                 <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The email/username is required." Display="Dynamic" />
