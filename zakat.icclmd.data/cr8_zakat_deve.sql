@@ -426,14 +426,12 @@ GO
 CREATE TABLE [dbo].[USER](
 	[userId] [int] IDENTITY(1,1) NOT NULL,
 	[email] [varchar](60) NOT NULL,
-	[password] [varchar](20) NULL,
 	[firstName] [varchar](30) NOT NULL,
 	[middleName] [varchar](30) NULL,
 	[lastName] [varchar](30) NOT NULL,
 	[gender] [varchar](10) NULL,
 	[maritalStatus] [varchar](15) NULL,
 	[dob] [datetime] NULL,
-	[socialSecurityNumber] [varchar](9) NULL,
 	[nationalityId] [int] NULL,
 	[citizenshipStatus] [varchar](20) NULL,
 	[phone] [varchar](10) NULL,
@@ -463,11 +461,13 @@ CREATE TABLE [dbo].[USER](
 	[createdBy] [int] NULL,
 	[updatedOn] [datetime] NULL,
 	[updatedBy] [int] NULL,
- CONSTRAINT [PK_MEMBER] PRIMARY KEY CLUSTERED 
+	[passwordEncrypted] [varchar](max) NULL,
+	[socialSecurityNumberEncrypted] [varchar](max) NULL,
+	CONSTRAINT [PK_MEMBER] PRIMARY KEY CLUSTERED 
 (
 	[userId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[USER_LANGUAGE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
@@ -1336,9 +1336,10 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Reference Letter');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('eiad.sayyad@gmail.com'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
-INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@gmail.com'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('mohammed.sayyad@gmail.com'	,	'12121212'	,	'Mohammed', 'Sayyad', '3013174584');
 
 INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
 INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
@@ -1346,3 +1347,8 @@ INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[emai
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (2, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (3, 1, 5);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (4, 1, 2);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (4, 1, 3);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (4, 1, 4);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (4, 1, 5);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (4, 1, 6);
