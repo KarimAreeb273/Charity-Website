@@ -77,7 +77,7 @@
               <div class="form-group">
                 <asp:Label runat="server" AssociatedControlID="txtOrganizationName" CssClass="col-lg-2 control-label" ToolTip="Organization Name" Style="white-space: nowrap">Name:</asp:Label>
                 <div class="col-lg-10">
-                  <asp:TextBox runat="server" ID="txtOrganizationName" CssClass="form-control" ToolTip="Organization Name" MaxLength="30" TabIndex="1" />
+                  <asp:TextBox runat="server" ID="txtOrganizationName" CssClass="form-control" ToolTip="Organization Name" MaxLength="100" TabIndex="1" />
                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtOrganizationName" CssClass="text-danger" ErrorMessage="The organization name is required." Display="Static" ValidationGroup="Head" />
                 </div>
               </div>
