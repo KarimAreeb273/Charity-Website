@@ -426,6 +426,8 @@ GO
 CREATE TABLE [dbo].[USER](
 	[userId] [int] IDENTITY(1,1) NOT NULL,
 	[email] [varchar](60) NOT NULL,
+	[passwordEncrypted] [varchar](max) NULL,
+	[socialSecurityNumberEncrypted] [varchar](max) NULL,
 	[firstName] [varchar](30) NOT NULL,
 	[middleName] [varchar](30) NULL,
 	[lastName] [varchar](30) NOT NULL,
@@ -461,8 +463,6 @@ CREATE TABLE [dbo].[USER](
 	[createdBy] [int] NULL,
 	[updatedOn] [datetime] NULL,
 	[updatedBy] [int] NULL,
-	[passwordEncrypted] [varchar](max) NULL,
-	[socialSecurityNumberEncrypted] [varchar](max) NULL,
 	CONSTRAINT [PK_MEMBER] PRIMARY KEY CLUSTERED 
 (
 	[userId] ASC
