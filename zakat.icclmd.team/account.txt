@@ -7,10 +7,16 @@ DB Server:	198.71.227.2
 Username: 	iccl_zakat
 Password: 	wrkn4ICCL!
 
-FTP Access:
+FTP Access (zakat.icclmd.org):
 ===========
 Host Name: 	zakat.icclmd.org
 Username: 	eiad_zakat
+Password: 	Eiad12!@
+
+FTP Access (zakatnetwork.org):
+===========
+Host Name: 	zakatnetwork.org
+Username: 	eiad_zakat_network
 Password: 	Eiad12!@
 
 Email:
