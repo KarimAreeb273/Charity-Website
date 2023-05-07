@@ -334,6 +334,7 @@ GO
 CREATE TABLE [dbo].[ORGANIZATION](
 	[organizationId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](100) NULL,
+	[abbreviation] [varchar](10) NULL,
 	[street] [varchar](100) NULL,
 	[city] [varchar](50) NULL,
 	[stateAbbr] [varchar](15) NULL,
@@ -1341,8 +1342,7 @@ INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone
 INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
 INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('mohammed.sayyad@gmail.com'	,	'12121212'	,	'Mohammed', 'Sayyad', '3013174584');
 
-INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
-INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
+INSERT INTO [dbo].[ORGANIZATION] ([name],[abbreviation],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','ICCL','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (2, 1, 5);
