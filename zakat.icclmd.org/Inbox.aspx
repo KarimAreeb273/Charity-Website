@@ -67,7 +67,7 @@
             <th style="text-align: left; width: 15%">Name</th>
             <th style="text-align: left; width: 10%" title="Created or Submitted Date">Submitted</th>
             <th style="text-align: left; width: 10%">Status</th>
-            <th style="text-align: left; width: 20%">Organization Submitted To</th>          
+            <th style="text-align: left; width: 20%">Submitted To</th>          
             <th style="text-align: left; width: 20%">Progress</th>
             <th style="text-align: center; width: 7%;">Timeline</th>
               <th style="text-align: center; width: 7%;">Requests</th>
@@ -82,7 +82,9 @@
               </asp:LinkButton>
             </td>
             <td style="text-align: left; vertical-align: middle">
-              <%# DataBinder.Eval(Container.DataItem, "USER.firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.lastName")%>
+              <asp:LinkButton ID="btnViewProfile" runat="server" OnClick="btnViewProfile_Click" ToolTip="View Profile" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>'>
+                <%# DataBinder.Eval(Container.DataItem, "USER.firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "USER.lastName")%>
+              </asp:LinkButton>              
             </td>
             <td style="text-align: left; vertical-align: middle">
               <%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), FormatDateTime(DataBinder.Eval(Container.DataItem, "submittedOn"), DateFormat.ShortDate), FormatDateTime(DataBinder.Eval(Container.DataItem, "createdOn"), DateFormat.ShortDate))%>
@@ -91,8 +93,7 @@
               <%# DataBinder.Eval(Container.DataItem, "applicationStatus")%>
             </td>
             <td style="text-align: left; vertical-align: middle">
-              <%--<asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "USER.email")%>'><%# DataBinder.Eval(Container.DataItem, "USER.email")%></asp:HyperLink>--%>
-              <%# DataBinder.Eval(Container.DataItem, "ORGANIZATION.name")%>
+              <%# DataBinder.Eval(Container.DataItem, "ORGANIZATION.abbreviation")%>
             </td>            
             <td style="text-align: left; vertical-align: middle">
               <span title="Rejected" style="font-size:20px; color:red" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isRejected"), "glyphicon glyphicon-remove", "")%>'></span>

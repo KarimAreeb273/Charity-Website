@@ -25,7 +25,6 @@ Partial Public Class zakatEntities
     Public Overridable Property CERTIFICATION_SKILL() As DbSet(Of CERTIFICATION_SKILL)
     Public Overridable Property LANGUAGE() As DbSet(Of LANGUAGE)
     Public Overridable Property NATIONALITY() As DbSet(Of NATIONALITY)
-    Public Overridable Property ORGANIZATION() As DbSet(Of ORGANIZATION)
     Public Overridable Property REFERENCE() As DbSet(Of REFERENCE)
     Public Overridable Property ROLE() As DbSet(Of ROLE)
     Public Overridable Property STATE() As DbSet(Of STATE)
@@ -38,5 +37,6 @@ Partial Public Class zakatEntities
     Public Overridable Property COUNTRY() As DbSet(Of COUNTRY)
     Public Overridable Property ARTIFACT_TYPE() As DbSet(Of ARTIFACT_TYPE)
     Public Overridable Property USER() As DbSet(Of USER)
+    Public Overridable Property ORGANIZATION() As DbSet(Of ORGANIZATION)
 
 End Class

@@ -16,9 +16,9 @@
           End If
 
           'populate the submission years dropdown filter with all the distinct years 
+          Dim submissionYearList As New ArrayList
           If (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing).Any Then
             Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing Order By APPLICATION.submittedOn).ToList
-            Dim submissionYearList As New ArrayList
             For Each item In oApplications
               Dim vDate As Date = item.submittedOn
               Dim vYear As Integer = vDate.Year
@@ -30,9 +30,14 @@
             drpSubmissionYear.Items.Clear()
             drpSubmissionYear.DataSource = submissionYearList
             drpSubmissionYear.DataBind()
+          Else
+            drpSubmissionYear.Items.Clear()
+            submissionYearList.Add(CStr(Now.Date.Year))
+            drpSubmissionYear.DataSource = submissionYearList
+            drpSubmissionYear.DataBind()
           End If
 
-          drpSubmissionYear.SelectedValue = Now.Date.Year
+          drpSubmissionYear.SelectedIndex = drpSubmissionYear.Items.IndexOf(drpSubmissionYear.Items.FindByValue(CStr(Now.Date.Year)))
 
           'set the dropdown based on the reviewer's roles in order of workflow (validate, investigate, qualify, finance)
           Dim oUserRoles As List(Of USER_ROLE) = (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier") Order By USER_ROLE.roleId).ToList
@@ -67,6 +72,16 @@
     Try
       Session("sApplicationId") = sender.CommandArgument
       Response.Redirect("application")
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Sub btnViewProfile_Click(sender As Object, e As System.EventArgs)
+    Try
+      Session("sUserId") = Session("sUserId")
+      Session("sApplicantId") = sender.CommandArgument
+      Response.Redirect("profile")
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try

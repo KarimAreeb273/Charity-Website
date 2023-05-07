@@ -4,26 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="69">
+      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="135">
         <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="2.5" PointY="14" />
         <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="6" PointY="12.125" />
         <EntityTypeShape EntityType="zakatModel.NATIONALITY" Width="1.5" PointX="2.375" PointY="12.125" />
-        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="9.125" PointY="17.875" />
         <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="4.875" PointY="17.25" />
         <EntityTypeShape EntityType="zakatModel.ROLE" Width="1.5" PointX="8.875" PointY="12" />
         <EntityTypeShape EntityType="zakatModel.STATE" Width="1.5" PointX="6.75" PointY="16.375" />
         <EntityTypeShape EntityType="zakatModel.USER_LANGUAGE" Width="1.5" PointX="6" PointY="14" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
-        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" />
         <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="14.125" PointY="10.375" />
         <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="8.875" PointY="14.5" />
-        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_ROLE" />
         <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="14" PointY="15.625" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="18.625" PointY="17.5" />
         <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="16.625" PointY="10.375" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_APPLICATION" />
@@ -42,6 +38,10 @@
         <AssociationConnector Association="zakatModel.FK_USER_STATE1" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
+        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="9" PointY="17.75" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
+        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
+        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
