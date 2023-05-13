@@ -1337,10 +1337,11 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Reference Letter');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
-INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
-INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@gmail.com'	,	'12121212'	,	'Applicant', 'Applicant', '3013174584');
-INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'12121212'	,	'Qualifier', 'Qualifier', '3013174584');
-INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('mohammed.sayyad@gmail.com'	,	'12121212'	,	'Mohammed', 'Sayyad', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'ICCL Zakat', 'Administrator', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Applicant', 'Applicant', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Qualifier', 'Qualifier', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('mohammed.sayyad@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Mohammed', 'Sayyad', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('masbhaiyat@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Masihullah', 'Bhaiyat', '3013174584');
 
 INSERT INTO [dbo].[ORGANIZATION] ([name],[abbreviation],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','ICCL','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
