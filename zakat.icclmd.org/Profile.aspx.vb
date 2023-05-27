@@ -6,9 +6,17 @@
       Response.Write("")
       If Not IsPostBack Then
         calDOB.EndDate = Date.Now
-        Dim vUserId As Int32 = Session("sUserId")
+        Dim vApplicantId As Int32 = Session("sApplicantId")
+        Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
+        If vIsAdministrator Then
+          pnlPassword.Visible = True
+          ManageValidations(False)
+        Else
+          pnlPassword.Visible = False
+          ManageValidations(True)
+        End If
 
-        If vUserId = 0 Then Response.Redirect("/")
+        If vApplicantId = 0 Then Response.Redirect("/")
 
         Using oDB As New zakatEntities
           'load the state dropdown
@@ -41,15 +49,18 @@
           drpSchoolCountry.DataValueField = "countryId"
           drpSchoolCountry.DataBind()
 
-          If vUserId <> 0 Then
+          If vApplicantId <> 0 Then
             'load user data into the form
-            Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
+            Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vApplicantId).First
             With oUser
               txtEmail.Text = .email
               txtEmail.Enabled = False
-              txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
-              txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
-              txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
+              If .socialSecurityNumberEncrypted IsNot Nothing Then
+                txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
+                txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
+                txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
+              End If
+              lblPageHeaderUserFullName.Text = .firstName + " " + .middleName + " " + .lastName
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
               txtLastName.Text = .lastName
@@ -73,7 +84,9 @@
                 litHomeType.Visible = False
               End If
               txtHomeType.Text = .homeTypeOther
-              drpNationality.SelectedValue = .nationalityId
+              If .nationalityId IsNot Nothing Then
+                drpNationality.SelectedValue = .nationalityId
+              End If
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
               chkIsInternational.Checked = .isInternationalSchool
@@ -87,7 +100,9 @@
                 pnlInternational.Visible = False
               End If
               txtSchoolStreet.Text = .schoolStreet
-              drpSchoolCountry.SelectedValue = .schoolCountryId
+              If .schoolCountryId IsNot Nothing Then
+                drpSchoolCountry.SelectedValue = .schoolCountryId
+              End If
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
               txtHusbandFirstName.Text = .husbandFirstName
@@ -99,14 +114,18 @@
               txtMasjidPhone1.Text = Left(.primaryMasjidPhone, 3)
               txtMasjidPhone2.Text = Mid(.primaryMasjidPhone, 4, 3)
               txtMasjidPhone3.Text = Right(.primaryMasjidPhone, 4)
+              If .passwordEncrypted IsNot Nothing Then
+                txtPassword.Text = Base.decryptString(.passwordEncrypted)
+              End If
             End With
 
-            Session("sUserFirstName") = oUser.firstName
-
+            If Session("sUserId") = oUser.userId Then
+              Session("sUserFirstName") = oUser.firstName
+            End If
             'add saved languages to the spoken listbox
-            If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).Any) Then
+            If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vApplicantId).Any) Then
               'there are languages so add in the form
-              Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).ToList
+              Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vApplicantId).ToList
               For Each item In oUserLanguages
                 'obtain the language id from the list and add from the db
                 lstSpoken.Items.Add(New ListItem(item.LANGUAGE.name, item.LANGUAGE.languageId))
@@ -114,9 +133,9 @@
             End If
 
             'add saved certifications to the skills/certs listbox
-            If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).Any) Then
+            If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vApplicantId).Any) Then
               'there are skills/certs so add in the form
-              Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).ToList
+              Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vApplicantId).ToList
               For Each item In oCertSkills
                 'obtain the skills/certs from the list and add from the db
                 lstSkillCertification.Items.Add(New ListItem(item.certificationSkill, item.certificationSkillId))
@@ -148,6 +167,7 @@
         valMasjidPhone.IsValid = False
       End If
       Dim vUserId As Int32 = Session("sUserId")
+      Dim vApplicantId As Int32 = Session("sApplicantId")
 
       Using oDB As New zakatEntities
         'check if the user exists or not, if not, exit sub
@@ -157,11 +177,13 @@
         End If
 
         'save user data
-        Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First
+        Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vApplicantId).First
         With oUser
           Dim vSocialSecurityNumber As String = txtSocialSecurity1.Text + txtSocialSecurity2.Text + txtSocialSecurity3.Text
-          '.socialSecurityNumber = vSocialSecurityNumber
           .socialSecurityNumberEncrypted = Base.encryptString(vSocialSecurityNumber)
+          If txtPassword.Text <> "" Then
+            .passwordEncrypted = Base.encryptString(LTrim(RTrim(txtPassword.Text)))
+          End If
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
@@ -199,7 +221,7 @@
           .primaryMasjidName = txtMasjidName.Text
           Dim vMasjidPhone As String = txtMasjidPhone1.Text + txtMasjidPhone2.Text + txtMasjidPhone3.Text
           .primaryMasjidPhone = Base.getFormattedPhone(vMasjidPhone, Base.enumFormatPhone.Strip)
-          .updatedBy = vUserId
+          .updatedBy = vApplicantId
           .updatedOn = Date.Now
         End With
 
@@ -207,9 +229,9 @@
         oDB.SaveChanges()
 
         'delete all saved languages
-        If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).Any) Then
+        If ((From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vApplicantId).Any) Then
           'there are languages so delete them and read just add those in the form
-          Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vUserId).ToList
+          Dim oUserLanguages As List(Of USER_LANGUAGE) = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userId = vApplicantId).ToList
           For Each item In oUserLanguages
             'obtain the language id from the list and delete from the db
             Dim oUserLanguage As USER_LANGUAGE = (From USER_LANGUAGE In oDB.USER_LANGUAGE Where USER_LANGUAGE.userLanguageId = item.userLanguageId).First
@@ -223,7 +245,7 @@
 
           Dim oUserLanguage As New USER_LANGUAGE
           With oUserLanguage
-            .userId = vUserId
+            .userId = vApplicantId
             .languageId = CInt(item.Value)
           End With
           oDB.USER_LANGUAGE.Add(oUserLanguage)
@@ -231,9 +253,9 @@
         Next
 
         'delete all certs/skills
-        If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).Any) Then
+        If ((From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vApplicantId).Any) Then
           'there are languages so delete them and read just add those in the form
-          Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vUserId).ToList
+          Dim oCertSkills As List(Of CERTIFICATION_SKILL) = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.userId = vApplicantId).ToList
           For Each item In oCertSkills
             'obtain the language id from the list and delete from the db
             Dim oCertSkill As CERTIFICATION_SKILL = (From CERTIFICATION_SKILL In oDB.CERTIFICATION_SKILL Where CERTIFICATION_SKILL.certificationSkillId = item.certificationSkillId).First
@@ -246,7 +268,7 @@
         For Each item In lstSkillCertification.Items
           Dim oCertSkill As New CERTIFICATION_SKILL
           With oCertSkill
-            .userId = vUserId
+            .userId = vApplicantId
             .certificationSkill = item.Text
           End With
           oDB.CERTIFICATION_SKILL.Add(oCertSkill)
@@ -267,11 +289,11 @@
       If (drpHomeType.SelectedItem.Text = "Other") Then
         litHomeType.Visible = True
         txtHomeType.Enabled = True
-        valHomeType.Enabled = True
+        valTxtHomeType.Enabled = True
       Else
         litHomeType.Visible = False
         txtHomeType.Enabled = False
-        valHomeType.Enabled = False
+        valTxtHomeType.Enabled = False
         txtHomeType.Text = ""
       End If
     Catch ex As Exception
@@ -295,4 +317,64 @@
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  Private Sub ManageValidations(IsValidating As Boolean)
+    Try
+      'Username
+      valUsernameIsValidEmail.Enabled = IsValidating
+      valDuplicateEmail.Enabled = IsValidating
+      valUsername.Enabled = IsValidating
+      'SSN
+      valSocialSecurity.Enabled = IsValidating
+      'Names
+      valFirstName.Enabled = IsValidating
+      valMiddleName.Enabled = IsValidating
+      valLastName.Enabled = IsValidating
+      'DOB
+      valDOB.Enabled = IsValidating
+      'Phone
+      valPhone.Enabled = IsValidating
+      'Gender
+      valGender.Enabled = IsValidating
+      'Address
+      valStreet.Enabled = IsValidating
+      valCity.Enabled = IsValidating
+      valState.Enabled = IsValidating
+      valZip.Enabled = IsValidating
+      'Began Living
+      valBeganLiving.Enabled = IsValidating
+      'Home Type
+      valDrpHomeType.Enabled = IsValidating
+      valTxtHomeType.Enabled = IsValidating
+      'Nationality
+      valNationality.Enabled = IsValidating
+      'Citizenship
+      valCitizenship.Enabled = IsValidating
+      'Masjid Info
+      valMasjidName.Enabled = IsValidating
+      valMasjidPhone.Enabled = IsValidating
+      'Education
+      valHighestEducation.Enabled = IsValidating
+      valSchoolName.Enabled = IsValidating
+      valSchoolStreet.Enabled = IsValidating
+      valSchoolCity.Enabled = IsValidating
+      valSchoolState.Enabled = IsValidating
+      valSchoolZip.Enabled = IsValidating
+      valSchoolCountry.Enabled = IsValidating
+      'Husband Info
+      valMaritalStatus.Enabled = IsValidating
+      valHusbandApplied.Enabled = IsValidating
+      valHusbandFirstName.Enabled = IsValidating
+      valHusbandMiddleName.Enabled = IsValidating
+      valHusbandLastName.Enabled = IsValidating
+      valHusbandEmail.Enabled = IsValidating
+      valHusbandPhone.Enabled = IsValidating
+      valHusbandExplanation.Enabled = IsValidating
+      'password
+      valPassword.Enabled = IsValidating
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
 End Class

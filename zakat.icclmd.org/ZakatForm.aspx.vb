@@ -77,9 +77,11 @@ Public Class ZakatForm
             With oUser
               txtEmail.Text = .email
               txtEmail.Enabled = False
-              txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
-              txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
-              txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
+              If .socialSecurityNumberEncrypted IsNot Nothing Then
+                txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
+                txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
+                txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
+              End If
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
               txtLastName.Text = .lastName
@@ -103,7 +105,9 @@ Public Class ZakatForm
                 litHomeType.Visible = False
               End If
               txtHomeType.Text = .homeTypeOther
-              drpNationality.SelectedValue = .nationalityId
+              If .nationalityId IsNot Nothing Then
+                drpNationality.SelectedValue = .nationalityId
+              End If
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
               chkIsInternational.Checked = .isInternationalSchool
@@ -117,7 +121,9 @@ Public Class ZakatForm
                 pnlInternational.Visible = False
               End If
               txtSchoolStreet.Text = .schoolStreet
-              drpSchoolCountry.SelectedValue = .schoolCountryId
+              If .schoolCountryId IsNot Nothing Then
+                drpSchoolCountry.SelectedValue = .schoolCountryId
+              End If
               drpSchoolState.SelectedValue = .schoolStateAbbr
               txtSchoolZip.Text = .schoolZip
               'show husband pane based on rules

@@ -320,6 +320,9 @@
       <DependentUpon>Inbox.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ORGANIZATION.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
     </Compile>
@@ -369,9 +372,6 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="NATIONALITY.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ORGANIZATION.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="REFERENCE.vb">

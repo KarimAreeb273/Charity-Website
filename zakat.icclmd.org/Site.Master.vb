@@ -53,4 +53,8 @@
     End If
   End Sub
 
+  Private Sub lnkProfileFooter_Click(sender As Object, e As EventArgs) Handles lnkProfileFooter.Click
+    Session("sApplicantId") = Session("sUserId")
+    Response.Redirect("profile")
+  End Sub
 End Class

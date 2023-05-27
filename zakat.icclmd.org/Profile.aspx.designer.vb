@@ -14,13 +14,22 @@ Option Explicit On
 Partial Public Class Profile
 
   '''<summary>
-  '''FormOrder control.
+  '''lblPageHeaderUserFullName control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents FormOrder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+  Protected WithEvents lblPageHeaderUserFullName As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''Form control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents Form As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
   '''<summary>
   '''txtEmail control.
@@ -32,13 +41,13 @@ Partial Public Class Profile
   Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''RegularExpressionValidator1 control.
+  '''valUsernameIsValidEmail control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+  Protected WithEvents valUsernameIsValidEmail As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
   '''<summary>
   '''valDuplicateEmail control.
@@ -48,6 +57,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents valDuplicateEmail As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''valUsername control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valUsername As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtSocialSecurity1 control.
@@ -122,6 +140,15 @@ Partial Public Class Profile
   Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valFirstName As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtMiddleName control.
   '''</summary>
   '''<remarks>
@@ -131,6 +158,15 @@ Partial Public Class Profile
   Protected WithEvents txtMiddleName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valMiddleName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valMiddleName As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtLastName control.
   '''</summary>
   '''<remarks>
@@ -138,6 +174,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valLastName As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtDOB control.
@@ -156,6 +201,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents lnkCalendarDOB As Global.System.Web.UI.HtmlControls.HtmlAnchor
+
+  '''<summary>
+  '''valDOB control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valDOB As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''calDOB control.
@@ -239,6 +293,15 @@ Partial Public Class Profile
   Protected WithEvents chkGender As Global.System.Web.UI.WebControls.RadioButtonList
 
   '''<summary>
+  '''valGender control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valGender As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''drpMaritalStatus control.
   '''</summary>
   '''<remarks>
@@ -246,6 +309,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents drpMaritalStatus As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valMaritalStatus control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valMaritalStatus As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtStreet control.
@@ -257,6 +329,15 @@ Partial Public Class Profile
   Protected WithEvents txtStreet As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valStreet As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtCity control.
   '''</summary>
   '''<remarks>
@@ -264,6 +345,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valCity As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''drpState control.
@@ -275,6 +365,15 @@ Partial Public Class Profile
   Protected WithEvents drpState As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valState As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtZip control.
   '''</summary>
   '''<remarks>
@@ -282,6 +381,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valZip As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtBeganLiving control.
@@ -302,6 +410,15 @@ Partial Public Class Profile
   Protected WithEvents lnkCalendarBeganLiving As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
   '''<summary>
+  '''valBeganLiving control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valBeganLiving As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''calBeganLiving control.
   '''</summary>
   '''<remarks>
@@ -318,6 +435,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents drpHomeType As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valDrpHomeType control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valDrpHomeType As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''litHomeType control.
@@ -338,13 +464,13 @@ Partial Public Class Profile
   Protected WithEvents txtHomeType As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''valHomeType control.
+  '''valTxtHomeType control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents valHomeType As Global.System.Web.UI.WebControls.RequiredFieldValidator
+  Protected WithEvents valTxtHomeType As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''drpNationality control.
@@ -356,6 +482,15 @@ Partial Public Class Profile
   Protected WithEvents drpNationality As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valNationality control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valNationality As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''drpCitizenship control.
   '''</summary>
   '''<remarks>
@@ -365,6 +500,15 @@ Partial Public Class Profile
   Protected WithEvents drpCitizenship As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valCitizenship control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valCitizenship As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtMasjidName control.
   '''</summary>
   '''<remarks>
@@ -372,6 +516,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtMasjidName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valMasjidName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valMasjidName As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtMasjidPhone1 control.
@@ -518,6 +671,15 @@ Partial Public Class Profile
   Protected WithEvents drpHighestEducation As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valHighestEducation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHighestEducation As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''chkIsInternational control.
   '''</summary>
   '''<remarks>
@@ -545,6 +707,15 @@ Partial Public Class Profile
   Protected WithEvents txtSchoolName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valSchoolName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolName As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtSchoolCity control.
   '''</summary>
   '''<remarks>
@@ -552,6 +723,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtSchoolCity As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valSchoolCity control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolCity As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''pnlDomestic control.
@@ -572,6 +752,15 @@ Partial Public Class Profile
   Protected WithEvents txtSchoolStreet As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valSchoolStreet control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolStreet As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''drpSchoolState control.
   '''</summary>
   '''<remarks>
@@ -581,6 +770,15 @@ Partial Public Class Profile
   Protected WithEvents drpSchoolState As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valSchoolState control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolState As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtSchoolZip control.
   '''</summary>
   '''<remarks>
@@ -588,6 +786,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtSchoolZip As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valSchoolZip control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolZip As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''pnlInternational control.
@@ -608,6 +815,15 @@ Partial Public Class Profile
   Protected WithEvents drpSchoolCountry As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
+  '''valSchoolCountry control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valSchoolCountry As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''pnlHusbandInformation control.
   '''</summary>
   '''<remarks>
@@ -626,6 +842,15 @@ Partial Public Class Profile
   Protected WithEvents txtHusbandFirstName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valHusbandFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandFirstName As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtHusbandMiddleName control.
   '''</summary>
   '''<remarks>
@@ -635,13 +860,13 @@ Partial Public Class Profile
   Protected WithEvents txtHusbandMiddleName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''CustomValidator6 control.
+  '''valHusbandMiddleName control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents CustomValidator6 As Global.System.Web.UI.WebControls.CustomValidator
+  Protected WithEvents valHusbandMiddleName As Global.System.Web.UI.WebControls.CustomValidator
 
   '''<summary>
   '''txtHusbandLastName control.
@@ -653,6 +878,15 @@ Partial Public Class Profile
   Protected WithEvents txtHusbandLastName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valHusbandLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandLastName As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtHusbandPhone control.
   '''</summary>
   '''<remarks>
@@ -660,6 +894,15 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtHusbandPhone As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valHusbandPhone control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandPhone As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''txtHusbandEmail control.
@@ -680,6 +923,15 @@ Partial Public Class Profile
   Protected WithEvents RegularExpressionValidator13 As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
   '''<summary>
+  '''valHusbandEmail control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandEmail As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''chkHusbandApplied control.
   '''</summary>
   '''<remarks>
@@ -689,6 +941,15 @@ Partial Public Class Profile
   Protected WithEvents chkHusbandApplied As Global.System.Web.UI.WebControls.RadioButtonList
 
   '''<summary>
+  '''valHusbandApplied control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandApplied As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
   '''txtHusbandExplanation control.
   '''</summary>
   '''<remarks>
@@ -696,6 +957,42 @@ Partial Public Class Profile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtHusbandExplanation As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valHusbandExplanation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valHusbandExplanation As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+  '''<summary>
+  '''pnlPassword control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlPassword As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''txtPassword control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''valPassword control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valPassword As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''valUserRequiredSave control.
