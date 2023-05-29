@@ -10,14 +10,10 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class USER_ROLE
-    Public Property userRoleId As Integer
-    Public Property userId As Nullable(Of Integer)
-    Public Property roleId As Nullable(Of Integer)
-    Public Property organizationId As Nullable(Of Integer)
-
-    Public Overridable Property ORGANIZATION As ORGANIZATION
-    Public Overridable Property ROLE As ROLE
-    Public Overridable Property USER As USER
+Partial Public Class TOPIC
+    Public Property topicId As Integer
+    Public Property topicName As String
+    Public Property topicContent As String
+    Public Property topicLink As String
 
 End Class

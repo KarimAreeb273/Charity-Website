@@ -23,3 +23,7 @@ Email:
 ===========
 Username: 	zakat@icclmd.org
 Password: 	Zakat4567
+
+Google Maps API Key:
+===========
+AIzaSyACQMFMwLaPkCTzRvMbH_J3Pi7ijNB382k

@@ -23,6 +23,51 @@ Partial Public Class Site_Mobile
   Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
+  '''UpdatePanel1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+  '''<summary>
+  '''txtSearch control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''ajaxTxtSearch control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ajaxTxtSearch As Global.AjaxControlToolkit.PopupControlExtender
+
+  '''<summary>
+  '''pnlSearchResults control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlSearchResults As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''rptSearchResults control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptSearchResults As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
   '''pnlApplicant control.
   '''</summary>
   '''<remarks>

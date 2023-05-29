@@ -1,5 +1,6 @@
 ﻿<!-- بسم الله الرحمن الرحيم -->
 <%@ Master Language="VB" AutoEventWireup="true" CodeBehind="Site.master.vb" Inherits="zakat.icclmd.org.SiteMaster" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head runat="server">
@@ -24,6 +25,19 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+    .has-search .form-control-feedback {
+      right: initial;
+      left: 0;
+      color: #ccc;
+    }
+
+    .has-search .form-control {
+      padding-right: 12px;
+      padding-left: 34px;
+    }
+  </style>
 
 </head>
 <body>
@@ -83,6 +97,34 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="zakatform">Apply</a></li>
                     <li><a href="default">Login</a></li>
+                    <li>
+                      <%--start search section--%>
+                      <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                          <div class="form-group has-feedback has-search" style="position: relative; top:9px">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter to search" AutoPostBack="True" AutoCompleteType="Disabled"></asp:TextBox>
+                          </div>
+                          <ajaxToolkit:PopupControlExtender ID="ajaxTxtSearch" runat="server" TargetControlID="txtSearch" Position="Bottom" PopupControlID="pnlSearchResults" Enabled="true"></ajaxToolkit:PopupControlExtender>
+                          <asp:Panel ID="pnlSearchResults" runat="server" BackColor="#F8F8F8">
+                            <table class="table table-hover">
+                              <asp:Repeater ID="rptSearchResults" runat="server">
+                                <ItemTemplate>
+                                  <tr>
+                                    <td style="font-size: 10pt">
+                                      <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btnViewContent_Click" ToolTip="View Content" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "topicLink")%>'>
+                                        <%# GetHighlightedContent(DataBinder.Eval(Container.DataItem, "topicContent"))%>
+                                      </asp:LinkButton>
+                                    </td>
+                                  </tr>
+                                </ItemTemplate>
+                              </asp:Repeater>
+                            </table>
+                          </asp:Panel>
+                        </ContentTemplate>
+                      </asp:UpdatePanel>
+                      <%--end search section--%>
+                    </li>
                   </ul>
                 </asp:Panel>
                 <asp:Panel ID="pnlApplicant" runat="server" Visible="false">
@@ -105,7 +147,7 @@
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="users">Manage Users</a></li>
-                          <li role="presentation"><a role="menuitem" tabindex="-1" href="organizations">Manage Organizations</a></li>
+                          <li role="presentation"><a role="menuitem" tabindex="-1" href="manageorganizations">Manage Organizations</a></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="userroles">Manage Roles</a></li>
                           <li role="presentation" class="divider"></li>
                           <li role="presentation"><a role="menuitem" tabindex="-1" href="applicants">Manage Applicants</a></li>
@@ -163,6 +205,7 @@
                       <span style="white-space: nowrap;"><a href="/">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="language">Language</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;">
                         <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
@@ -183,7 +226,6 @@
             </div>
           </div>
         </footer>
-
     </form>
 </body>
 </html>

@@ -149,12 +149,14 @@
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
     <Content Include="Language.aspx" />
+    <Content Include="OrganizationProfile.aspx" />
+    <Content Include="Organizations.aspx" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
     <Content Include="UserRoles.aspx" />
     <Content Include="OrganizationEdit.aspx" />
-    <Content Include="Organizations.aspx" />
+    <Content Include="ManageOrganizations.aspx" />
     <Content Include="Users.aspx" />
     <Content Include="ZakatForm.aspx" />
     <Content Include="Contact.aspx" />
@@ -193,6 +195,33 @@
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include=".env\deve\Web.config.Debug.mohammad">
+      <DependentUpon>Web.config.mohammad</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.mohammad">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include=".env\deve\Web.config.Release.mohammad">
+      <DependentUpon>Web.config.mohammad</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.Debug.masihullah">
+      <DependentUpon>Web.config.masihullah</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.masihullah">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include=".env\deve\Web.config.Release.masihullah">
+      <DependentUpon>Web.config.masihullah</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.eiad">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include=".env\deve\Web.config.Debug.eiad">
+      <DependentUpon>Web.config.eiad</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.Release.eiad">
+      <DependentUpon>Web.config.eiad</DependentUpon>
+    </None>
     <None Include=".env\deve\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -278,6 +307,13 @@
       <DependentUpon>Application.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Activity.aspx.designer.vb">
+      <DependentUpon>Activity.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Activity.aspx.vb">
+      <DependentUpon>Activity.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="APPLICATION.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -296,22 +332,12 @@
     <Compile Include="DEPENDENT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Activity.aspx.designer.vb">
-      <DependentUpon>Activity.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Activity.aspx.vb">
-      <DependentUpon>Activity.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="Language.aspx.designer.vb">
       <DependentUpon>Language.aspx</DependentUpon>
     </Compile>
     <Compile Include="Language.aspx.vb">
       <DependentUpon>Language.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="LANGUAGE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">
       <DependentUpon>Inbox.aspx</DependentUpon>
@@ -320,7 +346,39 @@
       <DependentUpon>Inbox.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="LANGUAGE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NATIONALITY.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationProfile.aspx.designer.vb">
+      <DependentUpon>OrganizationProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationProfile.aspx.vb">
+      <DependentUpon>OrganizationProfile.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="ORGANIZATION.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organizations.aspx.designer.vb">
+      <DependentUpon>Organizations.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Organizations.aspx.vb">
+      <DependentUpon>Organizations.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="REFERENCE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="REVIEW.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ROLE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="STATE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
@@ -329,6 +387,9 @@
     <Compile Include="Timeline.aspx.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="TOPIC.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="USER.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
@@ -347,9 +408,6 @@
       <DependentUpon>Profile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="REVIEW.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="UserRoles.aspx.designer.vb">
       <DependentUpon>UserRoles.aspx</DependentUpon>
     </Compile>
@@ -364,24 +422,12 @@
       <DependentUpon>OrganizationEdit.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Organizations.aspx.designer.vb">
-      <DependentUpon>Organizations.aspx</DependentUpon>
+    <Compile Include="ManageOrganizations.aspx.designer.vb">
+      <DependentUpon>ManageOrganizations.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Organizations.aspx.vb">
-      <DependentUpon>Organizations.aspx</DependentUpon>
+    <Compile Include="ManageOrganizations.aspx.vb">
+      <DependentUpon>ManageOrganizations.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="NATIONALITY.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="REFERENCE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ROLE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="STATE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Users.aspx.designer.vb">
       <DependentUpon>Users.aspx</DependentUpon>

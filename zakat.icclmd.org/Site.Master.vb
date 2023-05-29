@@ -8,6 +8,7 @@
       Dim vIsApplicant As Boolean = Session("sIsApplicant")
       Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
       Dim vIsApprover As Boolean = Session("sIsApprover")
+      Dim vSearched As Boolean = Session("hasSearched")
 
       'show panel Anonymous vs. User vs. Admin vs. Approver
       If vUserID Then
@@ -50,6 +51,10 @@
         pnlFinancier.Visible = False
         pnlAnonymous.Visible = True
       End If
+
+      If vSearched = True Then
+        txtSearch.Focus()
+      End If
     End If
   End Sub
 
@@ -57,4 +62,55 @@
     Session("sApplicantId") = Session("sUserId")
     Response.Redirect("profile")
   End Sub
+
+  Public Sub btnViewContent_Click(sender As Object, e As System.EventArgs)
+    Try
+      Response.Redirect(sender.CommandArgument)
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Public Function GetHighlightedContent(ByVal pContent As String) As String
+    Try
+      Dim vSearch As String
+      vSearch = txtSearch.Text
+      'find the search string in the content
+      Dim vSearchResult As Int16 = InStr(1, pContent, vSearch, 1)
+      If vSearchResult >= 0 Then
+        'find the first instance of the serach within the content & store a snippet using 10 characters before and 10 characters after
+        Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
+        Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch) + 10) <= Len(pContent), (Len(vSearch) + 30), Len(pContent))
+        Dim vSnippet = "..." + pContent.Substring(vSnippetStart, vSnippetLength) + "..."
+        'highlight the search within the snippet and remove any extra spaces
+        vSnippet = Replace(LCase(vSnippet), LCase(vSearch), Replace("<mark>" + vSearch + "</mark>", " ", ""))
+        vSnippet = Replace(vSnippet, "</mark> ", "</mark>")
+        GetHighlightedContent = vSnippet
+      Else
+        GetHighlightedContent = ""
+      End If
+    Catch ex As Exception
+      GetHighlightedContent = ""
+      Response.Write(ex.Message)
+    End Try
+  End Function
+  Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+    Try
+      Dim vSearch As String
+      Dim vCount As Int16
+      vCount = 10
+      vSearch = txtSearch.Text
+      Using oDB As New zakatEntities()
+        Dim oTopics As List(Of TOPIC) = oDB.TOPIC.Where(Function(n) n.topicContent.Contains(vSearch)).OrderBy(Function(n) n.topicName).Take(vCount).ToList()
+        'lblResultsCount.Text = oTopics.Count
+        rptSearchResults.DataSource = oTopics
+        rptSearchResults.DataBind()
+      End Using
+      Session("hasSearched") = True
+      txtSearch.Focus()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
 End Class

@@ -29,7 +29,6 @@ Public Class Base
 #End Region
 
 #Region "Functions"
-
   Public Shared Function sendEmail(ByVal pTo As String, ByVal pSubject As String, ByVal pBody As String, Optional ByVal pFrom As String = "zakat@icclmd.org", Optional ByVal pIsBodyHtml As Boolean = True) As Boolean
     Try
       Dim vMsgText As New StringBuilder
@@ -57,7 +56,6 @@ Public Class Base
       sendEmail = False
     End Try
   End Function
-
   Public Shared Function getFormattedPhone(pPhone As String, pMode As enumFormatPhone) As String
     Try
       If pPhone = "" Then
@@ -211,7 +209,6 @@ Public Class Base
 
     createUser = vUserId
   End Function
-
   Public Shared Function encryptString(ByVal encryptText As String) As String
     Dim bytesBuff As Byte() = Encoding.Unicode.GetBytes(encryptText)
     Dim aAppEnDecryptKey As String = System.Configuration.ConfigurationManager.AppSettings("AppEnDecryptKey")

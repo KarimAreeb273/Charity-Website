@@ -197,6 +197,15 @@
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="stateName" Type="varchar" MaxLength="30" />
         </EntityType>
+        <EntityType Name="TOPIC">
+          <Key>
+            <PropertyRef Name="topicId" />
+          </Key>
+          <Property Name="topicId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="topicName" Type="varchar" MaxLength="100" />
+          <Property Name="topicContent" Type="varchar(max)" />
+          <Property Name="topicLink" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="userId" />
@@ -524,6 +533,7 @@
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOPIC" EntityType="Self.TOPIC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
@@ -617,32 +627,33 @@
     <edmx:ConceptualModels>
       <Schema Namespace="zakatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="zakatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
+          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="zakatModel.CERTIFICATION_SKILL" />
+          <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
+          <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
           <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
           <EntitySet Name="NATIONALITY" EntityType="zakatModel.NATIONALITY" />
+          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
           <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
+          <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
           <EntitySet Name="ROLE" EntityType="zakatModel.ROLE" />
           <EntitySet Name="STATE" EntityType="zakatModel.STATE" />
+          <EntitySet Name="TOPIC" EntityType="zakatModel.TOPIC" />
+          <EntitySet Name="USER" EntityType="zakatModel.USER" />
           <EntitySet Name="USER_LANGUAGE" EntityType="zakatModel.USER_LANGUAGE" />
-          <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE">
-            <End Role="LANGUAGE" EntitySet="LANGUAGE" />
-            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="REFERENCE" EntitySet="REFERENCE" />
-          </AssociationSet>
-          <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
           <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
-          <AssociationSet Name="FK_USER_ROLE_ROLE" Association="zakatModel.FK_USER_ROLE_ROLE">
-            <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
-          <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
-          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
-          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
           <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
             <End Role="STATE" EntitySet="STATE" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
+            <End Role="USER" EntitySet="USER" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
           <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
@@ -653,16 +664,9 @@
             <End Role="APPLICATION" EntitySet="APPLICATION" />
             <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
-          <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
-          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
           <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
             <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
             <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
-          <EntitySet Name="USER" EntityType="zakatModel.USER" />
-          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
           </AssociationSet>
           <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="zakatModel.FK_CERTIFICATION_SKILL_USER">
             <End Role="USER" EntitySet="USER" />
@@ -676,9 +680,25 @@
             <End Role="USER" EntitySet="USER" />
             <End Role="DEPENDENT" EntitySet="DEPENDENT" />
           </AssociationSet>
+          <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE">
+            <End Role="LANGUAGE" EntitySet="LANGUAGE" />
+            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
+          </AssociationSet>
           <AssociationSet Name="FK_USER_NATIONALITY1" Association="zakatModel.FK_USER_NATIONALITY1">
             <End Role="NATIONALITY" EntitySet="NATIONALITY" />
             <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
           </AssociationSet>
           <AssociationSet Name="FK_REFERENCE_USER1" Association="zakatModel.FK_REFERENCE_USER1">
             <End Role="USER" EntitySet="USER" />
@@ -687,6 +707,10 @@
           <AssociationSet Name="FK_COMMENT_USER" Association="zakatModel.FK_COMMENT_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="REVIEW" EntitySet="REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ROLE" Association="zakatModel.FK_USER_ROLE_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_STATE" Association="zakatModel.FK_USER_STATE">
             <End Role="STATE" EntitySet="STATE" />
@@ -704,183 +728,7 @@
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
-          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="CERTIFICATION_SKILL">
-          <Key>
-            <PropertyRef Name="certificationSkillId" />
-          </Key>
-          <Property Name="certificationSkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="certificationSkill" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="CERTIFICATION_SKILL" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="LANGUAGE">
-          <Key>
-            <PropertyRef Name="languageId" />
-          </Key>
-          <Property Name="languageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="LANGUAGE" ToRole="USER_LANGUAGE" />
-        </EntityType>
-        <EntityType Name="NATIONALITY">
-          <Key>
-            <PropertyRef Name="nationalityId" />
-          </Key>
-          <Property Name="nationalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="REFERENCE">
-          <Key>
-            <PropertyRef Name="referenceId" />
-          </Key>
-          <Property Name="referenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="knownSince" Type="DateTime" Precision="3" />
-          <Property Name="relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="REFERENCE" ToRole="STATE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="REFERENCE" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="ROLE">
-          <Key>
-            <PropertyRef Name="roleId" />
-          </Key>
-          <Property Name="roleId" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
-        </EntityType>
-        <EntityType Name="STATE">
-          <Key>
-            <PropertyRef Name="stateAbbr" />
-          </Key>
-          <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
-          <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
-          </EntityType>
-        <EntityType Name="USER_LANGUAGE">
-          <Key>
-            <PropertyRef Name="userLanguageId" />
-          </Key>
-          <Property Name="userLanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="languageId" Type="Int32" />
-          <NavigationProperty Name="LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
-        </EntityType>
-        <Association Name="FK_USER_LANGUAGE_LANGUAGE">
-          <End Type="zakatModel.LANGUAGE" Role="LANGUAGE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_LANGUAGE" Role="USER_LANGUAGE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LANGUAGE">
-              <PropertyRef Name="languageId" />
-            </Principal>
-            <Dependent Role="USER_LANGUAGE">
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_REFERENCE_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="REFERENCE">
-              <PropertyRef Name="stateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="DEPENDENT">
-          <Key>
-            <PropertyRef Name="dependentId" />
-          </Key>
-          <Property Name="dependentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="dob" Type="DateTime" Precision="3" />
-          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="USER_ROLE">
-          <Key>
-            <PropertyRef Name="userRoleId" />
-          </Key>
-          <Property Name="userRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="roleId" Type="Int32" />
-          <Property Name="organizationId" Type="Int32" />
-          <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
-        </EntityType>
-        <Association Name="FK_USER_ROLE_ROLE">
-          <End Type="zakatModel.ROLE" Role="ROLE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ROLE">
-              <PropertyRef Name="roleId" />
-            </Principal>
-            <Dependent Role="USER_ROLE">
-              <PropertyRef Name="roleId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="REVIEW">
-          <Key>
-            <PropertyRef Name="reviewId" />
-          </Key>
-          <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="applicationId" Type="Int32" />
-          <Property Name="reviewAction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="reviewDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="ARTIFACT">
-          <Key>
-            <PropertyRef Name="artifactId" />
-          </Key>
-          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="artifactTypeId" Type="Int32" />
-          <Property Name="applicationId" Type="Int32" />
-          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
-          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
-          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
-        </EntityType>
+        </EntityContainer>
         <EntityType Name="APPLICATION">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -954,55 +802,24 @@
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
           <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
           <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
         </EntityType>
-        <Association Name="FK_APPLICATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="employerStateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ARTIFACT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_COMMENT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="REVIEW">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="COUNTRY">
+        <EntityType Name="ARTIFACT">
           <Key>
-            <PropertyRef Name="countryId" />
+            <PropertyRef Name="artifactId" />
           </Key>
-          <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
+          <Property Name="artifactId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="artifactTypeId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" />
+          <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
         </EntityType>
         <EntityType Name="ARTIFACT_TYPE">
           <Key>
@@ -1012,24 +829,141 @@
           <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
         </EntityType>
-        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
-          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ARTIFACT_TYPE">
-              <PropertyRef Name="artifactTypeId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="artifactTypeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="CERTIFICATION_SKILL">
+          <Key>
+            <PropertyRef Name="certificationSkillId" />
+          </Key>
+          <Property Name="certificationSkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="certificationSkill" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="CERTIFICATION_SKILL" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="COUNTRY">
+          <Key>
+            <PropertyRef Name="countryId" />
+          </Key>
+          <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="DEPENDENT">
+          <Key>
+            <PropertyRef Name="dependentId" />
+          </Key>
+          <Property Name="dependentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="dob" Type="DateTime" Precision="3" />
+          <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="LANGUAGE">
+          <Key>
+            <PropertyRef Name="languageId" />
+          </Key>
+          <Property Name="languageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="LANGUAGE" ToRole="USER_LANGUAGE" />
+        </EntityType>
+        <EntityType Name="NATIONALITY">
+          <Key>
+            <PropertyRef Name="nationalityId" />
+          </Key>
+          <Property Name="nationalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ORGANIZATION">
+          <Key>
+            <PropertyRef Name="organizationId" />
+          </Key>
+          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
+        </EntityType>
+        <EntityType Name="REFERENCE">
+          <Key>
+            <PropertyRef Name="referenceId" />
+          </Key>
+          <Property Name="referenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="knownSince" Type="DateTime" Precision="3" />
+          <Property Name="relationship" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="REFERENCE" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="REFERENCE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="REVIEW">
+          <Key>
+            <PropertyRef Name="reviewId" />
+          </Key>
+          <Property Name="reviewId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="applicationId" Type="Int32" />
+          <Property Name="reviewAction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="reviewDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
+        </EntityType>
+        <EntityType Name="STATE">
+          <Key>
+            <PropertyRef Name="stateAbbr" />
+          </Key>
+          <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="TOPIC">
+          <Key>
+            <PropertyRef Name="topicId" />
+          </Key>
+          <Property Name="topicId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="topicName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="topicContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="topicLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="passwordEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="socialSecurityNumberEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
@@ -1065,8 +999,6 @@
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
-          <Property Name="passwordEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="socialSecurityNumberEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
           <NavigationProperty Name="COUNTRY" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
@@ -1079,6 +1011,52 @@
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
         </EntityType>
+        <EntityType Name="USER_LANGUAGE">
+          <Key>
+            <PropertyRef Name="userLanguageId" />
+          </Key>
+          <Property Name="userLanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="languageId" Type="Int32" />
+          <NavigationProperty Name="LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="USER_ROLE">
+          <Key>
+            <PropertyRef Name="userRoleId" />
+          </Key>
+          <Property Name="userRoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="roleId" Type="Int32" />
+          <Property Name="organizationId" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_APPLICATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="employerStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_APPLICATION_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
           <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
@@ -1088,6 +1066,42 @@
             </Principal>
             <Dependent Role="APPLICATION">
               <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARTIFACT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMMENT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="REVIEW">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
+          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ARTIFACT_TYPE">
+              <PropertyRef Name="artifactTypeId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="artifactTypeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1127,6 +1141,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_USER_LANGUAGE_LANGUAGE">
+          <End Type="zakatModel.LANGUAGE" Role="LANGUAGE" Multiplicity="0..1" />
+          <End Type="zakatModel.USER_LANGUAGE" Role="USER_LANGUAGE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LANGUAGE">
+              <PropertyRef Name="languageId" />
+            </Principal>
+            <Dependent Role="USER_LANGUAGE">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USER_NATIONALITY1">
           <End Type="zakatModel.NATIONALITY" Role="NATIONALITY" Multiplicity="0..1" />
           <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
@@ -1136,6 +1162,42 @@
             </Principal>
             <Dependent Role="USER">
               <PropertyRef Name="nationalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORGANIZATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="ORGANIZATION">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ROLE_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="USER_ROLE">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REFERENCE_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="REFERENCE">
+              <PropertyRef Name="stateAbbr" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1160,6 +1222,18 @@
             </Principal>
             <Dependent Role="REVIEW">
               <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ROLE_ROLE">
+          <End Type="zakatModel.ROLE" Role="ROLE" Multiplicity="0..1" />
+          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="USER_ROLE">
+              <PropertyRef Name="roleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1211,183 +1285,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ORGANIZATION">
-          <Key>
-            <PropertyRef Name="organizationId" />
-          </Key>
-          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
-        </EntityType>
-        <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORGANIZATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="ORGANIZATION">
-              <PropertyRef Name="stateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USER_ROLE_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="USER_ROLE">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="zakatModelStoreContainer" CdmEntityContainer="zakatEntities">
-          <EntitySetMapping Name="CERTIFICATION_SKILL">
-            <EntityTypeMapping TypeName="zakatModel.CERTIFICATION_SKILL">
-              <MappingFragment StoreEntitySet="CERTIFICATION_SKILL">
-                <ScalarProperty Name="certificationSkill" ColumnName="certificationSkill" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="certificationSkillId" ColumnName="certificationSkillId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="LANGUAGE">
-            <EntityTypeMapping TypeName="zakatModel.LANGUAGE">
-              <MappingFragment StoreEntitySet="LANGUAGE">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="NATIONALITY">
-            <EntityTypeMapping TypeName="zakatModel.NATIONALITY">
-              <MappingFragment StoreEntitySet="NATIONALITY">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="REFERENCE">
-            <EntityTypeMapping TypeName="zakatModel.REFERENCE">
-              <MappingFragment StoreEntitySet="REFERENCE">
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="referenceId" ColumnName="referenceId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ROLE">
-            <EntityTypeMapping TypeName="zakatModel.ROLE">
-              <MappingFragment StoreEntitySet="ROLE">
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="STATE">
-            <EntityTypeMapping TypeName="zakatModel.STATE">
-              <MappingFragment StoreEntitySet="STATE">
-                <ScalarProperty Name="stateName" ColumnName="stateName" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="USER_LANGUAGE">
-            <EntityTypeMapping TypeName="zakatModel.USER_LANGUAGE">
-              <MappingFragment StoreEntitySet="USER_LANGUAGE">
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="userLanguageId" ColumnName="userLanguageId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="DEPENDENT">
-            <EntityTypeMapping TypeName="zakatModel.DEPENDENT">
-              <MappingFragment StoreEntitySet="DEPENDENT">
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="dob" ColumnName="dob" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="dependentId" ColumnName="dependentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="USER_ROLE">
-            <EntityTypeMapping TypeName="zakatModel.USER_ROLE">
-              <MappingFragment StoreEntitySet="USER_ROLE">
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="userRoleId" ColumnName="userRoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="REVIEW">
-            <EntityTypeMapping TypeName="zakatModel.REVIEW">
-              <MappingFragment StoreEntitySet="REVIEW">
-                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
-                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
-                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ARTIFACT">
-            <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
-              <MappingFragment StoreEntitySet="ARTIFACT">
-                <ScalarProperty Name="data" ColumnName="data" />
-                <ScalarProperty Name="contentType" ColumnName="contentType" />
-                <ScalarProperty Name="filename" ColumnName="filename" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
-                <ScalarProperty Name="artifactId" ColumnName="artifactId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="APPLICATION">
             <EntityTypeMapping TypeName="zakatModel.APPLICATION">
               <MappingFragment StoreEntitySet="APPLICATION">
@@ -1463,11 +1366,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="COUNTRY">
-            <EntityTypeMapping TypeName="zakatModel.COUNTRY">
-              <MappingFragment StoreEntitySet="COUNTRY">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <EntitySetMapping Name="ARTIFACT">
+            <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
+              <MappingFragment StoreEntitySet="ARTIFACT">
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="contentType" ColumnName="contentType" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+                <ScalarProperty Name="artifactId" ColumnName="artifactId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1479,11 +1386,129 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CERTIFICATION_SKILL">
+            <EntityTypeMapping TypeName="zakatModel.CERTIFICATION_SKILL">
+              <MappingFragment StoreEntitySet="CERTIFICATION_SKILL">
+                <ScalarProperty Name="certificationSkill" ColumnName="certificationSkill" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="certificationSkillId" ColumnName="certificationSkillId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COUNTRY">
+            <EntityTypeMapping TypeName="zakatModel.COUNTRY">
+              <MappingFragment StoreEntitySet="COUNTRY">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPENDENT">
+            <EntityTypeMapping TypeName="zakatModel.DEPENDENT">
+              <MappingFragment StoreEntitySet="DEPENDENT">
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="dependentId" ColumnName="dependentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LANGUAGE">
+            <EntityTypeMapping TypeName="zakatModel.LANGUAGE">
+              <MappingFragment StoreEntitySet="LANGUAGE">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NATIONALITY">
+            <EntityTypeMapping TypeName="zakatModel.NATIONALITY">
+              <MappingFragment StoreEntitySet="NATIONALITY">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORGANIZATION">
+            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
+              <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REFERENCE">
+            <EntityTypeMapping TypeName="zakatModel.REFERENCE">
+              <MappingFragment StoreEntitySet="REFERENCE">
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REVIEW">
+            <EntityTypeMapping TypeName="zakatModel.REVIEW">
+              <MappingFragment StoreEntitySet="REVIEW">
+                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
+                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
+                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLE">
+            <EntityTypeMapping TypeName="zakatModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLE">
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATE">
+            <EntityTypeMapping TypeName="zakatModel.STATE">
+              <MappingFragment StoreEntitySet="STATE">
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOPIC">
+            <EntityTypeMapping TypeName="zakatModel.TOPIC">
+              <MappingFragment StoreEntitySet="TOPIC">
+                <ScalarProperty Name="topicLink" ColumnName="topicLink" />
+                <ScalarProperty Name="topicContent" ColumnName="topicContent" />
+                <ScalarProperty Name="topicName" ColumnName="topicName" />
+                <ScalarProperty Name="topicId" ColumnName="topicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="USER">
             <EntityTypeMapping TypeName="zakatModel.USER">
               <MappingFragment StoreEntitySet="USER">
-                <ScalarProperty Name="socialSecurityNumberEncrypted" ColumnName="socialSecurityNumberEncrypted" />
-                <ScalarProperty Name="passwordEncrypted" ColumnName="passwordEncrypted" />
                 <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
                 <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
                 <ScalarProperty Name="createdBy" ColumnName="createdBy" />
@@ -1519,24 +1544,29 @@
                 <ScalarProperty Name="lastName" ColumnName="lastName" />
                 <ScalarProperty Name="middleName" ColumnName="middleName" />
                 <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="socialSecurityNumberEncrypted" ColumnName="socialSecurityNumberEncrypted" />
+                <ScalarProperty Name="passwordEncrypted" ColumnName="passwordEncrypted" />
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ORGANIZATION">
-            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
-              <MappingFragment StoreEntitySet="ORGANIZATION">
-                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="name" ColumnName="name" />
+          <EntitySetMapping Name="USER_LANGUAGE">
+            <EntityTypeMapping TypeName="zakatModel.USER_LANGUAGE">
+              <MappingFragment StoreEntitySet="USER_LANGUAGE">
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userLanguageId" ColumnName="userLanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ROLE">
+            <EntityTypeMapping TypeName="zakatModel.USER_ROLE">
+              <MappingFragment StoreEntitySet="USER_ROLE">
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="userRoleId" ColumnName="userRoleId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

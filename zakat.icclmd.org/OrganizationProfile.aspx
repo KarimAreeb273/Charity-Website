@@ -1,0 +1,28 @@
+﻿<%@ Page Title="Organization" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="OrganizationProfile.aspx.vb" Inherits="zakat.icclmd.org.OrganizationProfile" %>
+
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h4><b>Organization Profile Page</b></h4>
+        <br />
+        <div class="well well-sm">
+          <h5><b><asp:Label ID="lblOrganizationName" runat="server"></asp:Label>:</b></h5>
+        </div>
+
+        <strong>Email:&nbsp;&nbsp;</strong><asp:HyperLink ID="hypEmail" runat="server" Target="_blank"></asp:HyperLink><br />
+        <strong>Phone:&nbsp;&nbsp;</strong><asp:Label ID="lblPhone" runat="server"></asp:Label><br />
+        <strong>Website:&nbsp;&nbsp;</strong><asp:HyperLink ID="hypWebsite" runat="server" Target="_blank"></asp:HyperLink><br />
+        <address>
+          <strong>Address:&nbsp;&nbsp;</strong><asp:Label ID="lblAddress" runat="server"></asp:Label><br />
+        </address>
+        <div>
+          <iframe id="ifrMap" runat="server" title="Map Location" src="" style="width: 100%; height: 500px; border: none"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <br />
+
+</asp:Content>

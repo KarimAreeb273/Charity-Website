@@ -4,45 +4,46 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="135">
-        <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="2.5" PointY="14" />
-        <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="6" PointY="12.125" />
-        <EntityTypeShape EntityType="zakatModel.NATIONALITY" Width="1.5" PointX="2.375" PointY="12.125" />
-        <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="4.875" PointY="17.25" />
-        <EntityTypeShape EntityType="zakatModel.ROLE" Width="1.5" PointX="8.875" PointY="12" />
-        <EntityTypeShape EntityType="zakatModel.STATE" Width="1.5" PointX="6.75" PointY="16.375" />
-        <EntityTypeShape EntityType="zakatModel.USER_LANGUAGE" Width="1.5" PointX="6" PointY="14" />
-        <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
-        <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" />
-        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="14.125" PointY="10.375" />
-        <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="8.875" PointY="14.5" />
-        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ROLE" />
-        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="14" PointY="15.625" />
-        <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="18.625" PointY="17.5" />
-        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="16.625" PointY="10.375" />
+      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="12">
+        <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="20.75" PointY="43.25" />
+        <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="26" PointY="49.625" />
+        <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="23.75" PointY="48.125" />
+        <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="20.75" PointY="34.125" />
+        <EntityTypeShape EntityType="zakatModel.COUNTRY" Width="1.5" PointX="16.25" PointY="40.125" />
+        <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="20.75" PointY="39.375" />
+        <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="21.5" PointY="37" />
+        <EntityTypeShape EntityType="zakatModel.NATIONALITY" Width="1.5" PointX="16.25" PointY="31.75" />
+        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="15.5" PointY="66.875" />
+        <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="15.5" PointY="34.875" />
+        <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="23" PointY="43.75" />
+        <EntityTypeShape EntityType="zakatModel.ROLE" Width="1.5" PointX="21.5" PointY="60" />
+        <EntityTypeShape EntityType="zakatModel.STATE" Width="1.5" PointX="13.25" PointY="35.625" />
+        <EntityTypeShape EntityType="zakatModel.TOPIC" Width="1.5" PointX="13.25" PointY="17.25" />
+        <EntityTypeShape EntityType="zakatModel.USER" Width="1.5" PointX="18.5" PointY="31.5" />
+        <EntityTypeShape EntityType="zakatModel.USER_LANGUAGE" Width="1.5" PointX="23.75" PointY="35.75" />
+        <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="23.75" PointY="50.75" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_STATE" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_APPLICATION" />
-        <EntityTypeShape EntityType="zakatModel.COUNTRY" Width="1.5" PointX="14.125" PointY="13.625" />
-        <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="18.625" PointY="11.25" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" />
-        <EntityTypeShape EntityType="zakatModel.USER" Width="1.5" PointX="11.625" PointY="11" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_CERTIFICATION_SKILL_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_COUNTRY" />
         <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
+        <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
         <AssociationConnector Association="zakatModel.FK_USER_NATIONALITY1" />
+        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
+        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
+        <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_USER1" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_USER" />
+        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ROLE" />
         <AssociationConnector Association="zakatModel.FK_USER_STATE" />
         <AssociationConnector Association="zakatModel.FK_USER_STATE1" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
-        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="9" PointY="17.75" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
-        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
-        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

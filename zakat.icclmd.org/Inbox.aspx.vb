@@ -1,6 +1,5 @@
 ﻿Public Class Inbox
   Inherits System.Web.UI.Page
-
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       'go home if no session/user
@@ -67,7 +66,6 @@
       Response.Write(ex.Message)
     End Try
   End Sub
-
   Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument
@@ -121,7 +119,6 @@
       Response.Write(ex.Message)
     End Try
   End Function
-
   'Private Sub txtNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNumber.TextChanged
   '  Try
   '    Dim vAppId As Int32 = IIf(IsNumeric(txtNumber.Text), CInt(txtNumber.Text), 0)
@@ -139,11 +136,9 @@
   '    Response.Write(ex.Message)
   '  End Try
   'End Sub
-
-  Private Sub drpWorkflow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpWorkflow.SelectedIndexChanged
-    filterWorkflow()
-  End Sub
-
+  'Private Sub drpWorkflow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpWorkflow.SelectedIndexChanged
+  '  filterWorkflow()
+  'End Sub
   Sub filterWorkflow()
     Try
       'load the inbox
@@ -177,4 +172,5 @@
       Response.Write(ex.Message)
     End Try
   End Sub
+
 End Class
