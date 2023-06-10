@@ -25,6 +25,7 @@
         setOrganizations()
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -75,35 +76,32 @@
         End If
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Public Function getDate(ByVal month As Short, ByVal day As Short) As Date
-    getDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
+    Try
+      getDate = CDate(month.ToString + day.ToString + Today.Year.ToString)
+    Catch ex As Exception
+      Return Nothing
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+
   End Function
 
   Public Function getAge(ByVal dob As Date) As Int16
-    getAge = Base.getAge(dob)
+    Try
+      getAge = Base.getAge(dob)
+    Catch ex As Exception
+      Return Nothing
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+
   End Function
-
-  'Protected Sub btnDelete_Click(sender As Object, e As System.EventArgs) Handles btnDelete.Click
-  '  Try
-  '    'go home if no session/user
-  '    Dim vOrganizationId As Int32 = sender.CommandArgument
-  '    If vOrganizationId = 0 Then Response.Redirect("/")
-
-  '    Using oDB As New zakatEntities
-  '      Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
-  '      oDB.ORGANIZATION.Remove(oOrganization)
-  '      oDB.SaveChanges()
-  '    End Using
-  '    'refresh the org list
-  '    setOrganizations()
-  '  Catch ex As Exception
-  '    Response.Write(ex.Message)
-  '  End Try
-  'End Sub
 
   Protected Sub btnEdit_Click(sender As Object, e As System.EventArgs) Handles btnEdit.Click
     Try
@@ -115,12 +113,18 @@
       'redirect to org edit
       Response.Redirect("organizationedit")
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Public Function getFormattedPhone(ByVal pPhone As String) As String
-    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+    Try
+      getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Function
 
   Sub setOrganizations()
@@ -131,6 +135,7 @@
         rptOrganizations.DataBind()
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub

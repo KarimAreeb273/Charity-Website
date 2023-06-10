@@ -2,38 +2,48 @@
   Inherits MasterPage
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-    If Not IsPostBack Then
-      Dim vUserID As Int32 = Session("sUserId")
-      Dim vIsAnonymous As Boolean = Session("sIsAnonymous")
-      Dim vIsApplicant As Boolean = Session("sIsApplicant")
-      Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
-      Dim vIsApprover As Boolean = Session("sIsApprover")
-      Dim vSearched As Boolean = Session("hasSearched")
+    Try
+      If Not IsPostBack Then
+        Dim vUserID As Int32 = Session("sUserId")
+        Dim vIsAnonymous As Boolean = Session("sIsAnonymous")
+        Dim vIsApplicant As Boolean = Session("sIsApplicant")
+        Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
+        Dim vIsApprover As Boolean = Session("sIsApprover")
+        Dim vSearched As Boolean = Session("hasSearched")
 
-      'show panel Anonymous vs. User vs. Admin vs. Approver
-      If vUserID Then
-        'LoggedIn
-        If vIsApplicant Then
-          pnlApplicant.Visible = True
-          pnlAdministrator.Visible = False
-          pnlApprover.Visible = False
-          pnlAnonymous.Visible = False
-          pnlFinancier.Visible = False
-          lblNameApplicant.Text = Session("sUserFirstName")
-        ElseIf vIsAdministrator Then
-          pnlApplicant.Visible = False
-          pnlAdministrator.Visible = True
-          pnlApprover.Visible = False
-          pnlAnonymous.Visible = False
-          pnlFinancier.Visible = False
-          lblNameAdministrator.Text = Session("sUserFirstName")
-        ElseIf vIsApprover Then
-          pnlApplicant.Visible = False
-          pnlAdministrator.Visible = False
-          pnlApprover.Visible = True
-          pnlAnonymous.Visible = False
-          pnlFinancier.Visible = False
-          lblNameApprover.Text = Session("sUserFirstName")
+        'show panel Anonymous vs. User vs. Admin vs. Approver
+        If vUserID Then
+          'LoggedIn
+          If vIsApplicant Then
+            pnlApplicant.Visible = True
+            pnlAdministrator.Visible = False
+            pnlApprover.Visible = False
+            pnlAnonymous.Visible = False
+            pnlFinancier.Visible = False
+            lblNameApplicant.Text = Session("sUserFirstName")
+          ElseIf vIsAdministrator Then
+            pnlApplicant.Visible = False
+            pnlAdministrator.Visible = True
+            pnlApprover.Visible = False
+            pnlAnonymous.Visible = False
+            pnlFinancier.Visible = False
+            lblNameAdministrator.Text = Session("sUserFirstName")
+          ElseIf vIsApprover Then
+            pnlApplicant.Visible = False
+            pnlAdministrator.Visible = False
+            pnlApprover.Visible = True
+            pnlAnonymous.Visible = False
+            pnlFinancier.Visible = False
+            lblNameApprover.Text = Session("sUserFirstName")
+          Else
+            'Anonymous
+            pnlApplicant.Visible = False
+            pnlAdministrator.Visible = False
+            pnlApprover.Visible = False
+            pnlFinancier.Visible = False
+            pnlAnonymous.Visible = True
+
+          End If
         Else
           'Anonymous
           pnlApplicant.Visible = False
@@ -41,32 +51,33 @@
           pnlApprover.Visible = False
           pnlFinancier.Visible = False
           pnlAnonymous.Visible = True
-
         End If
-      Else
-        'Anonymous
-        pnlApplicant.Visible = False
-        pnlAdministrator.Visible = False
-        pnlApprover.Visible = False
-        pnlFinancier.Visible = False
-        pnlAnonymous.Visible = True
-      End If
 
-      If vSearched = True Then
-        txtSearch.Focus()
+        If vSearched = True Then
+          txtSearch.Focus()
+        End If
       End If
-    End If
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub lnkProfileFooter_Click(sender As Object, e As EventArgs) Handles lnkProfileFooter.Click
-    Session("sApplicantId") = Session("sUserId")
-    Response.Redirect("profile")
+    Try
+      Session("sApplicantId") = Session("sUserId")
+      Response.Redirect("profile")
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Public Sub btnViewContent_Click(sender As Object, e As System.EventArgs)
     Try
       Response.Redirect(sender.CommandArgument)
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -91,6 +102,7 @@
       End If
     Catch ex As Exception
       GetHighlightedContent = ""
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Function
@@ -109,6 +121,7 @@
       Session("hasSearched") = True
       txtSearch.Focus()
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub

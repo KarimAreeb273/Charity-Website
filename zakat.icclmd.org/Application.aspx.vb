@@ -260,6 +260,7 @@ Public Class Application1
         setReport2(vApplicationId)
       End If
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -363,6 +364,7 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -466,6 +468,7 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -555,6 +558,7 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -666,6 +670,7 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -744,6 +749,7 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -817,16 +823,27 @@ Public Class Application1
       Response.Redirect("inbox")
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Public Function getFormattedPhone(ByVal pPhone As String) As String
-    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+    Try
+      getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Function
 
   Public Function getFormattedNumber(ByVal pNumber As Int32) As String
-    getFormattedNumber = Base.getFormattedNumber(pNumber)
+    Try
+      getFormattedNumber = Base.getFormattedNumber(pNumber)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Function
 
   Protected Sub btnDownloadArtifact_Click(sender As Object, e As System.EventArgs) Handles btnDownloadArtifact.Click
@@ -863,20 +880,36 @@ Public Class Application1
         Response.End()
       End Using
     Catch ex As Exception
-      Response.Write(ex)
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
     End Try
   End Sub
 
   Private Sub txtReviewComments_TextChanged(sender As Object, e As EventArgs) Handles txtReviewComments.TextChanged
-    updateForm()
+    Try
+      updateForm()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub txtDispersedAmount1_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount1.TextChanged
-    updateForm()
+    Try
+      updateForm()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub txtDispersedAmount2_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount2.TextChanged
-    updateForm()
+    Try
+      updateForm()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Sub updateForm()
@@ -926,16 +959,27 @@ Public Class Application1
         btnRejected5.Disabled = True
       End If
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Private Sub txtDispersedAmount_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedAmount.TextChanged
-    updateForm()
+    Try
+      updateForm()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub txtDispersedDate_TextChanged(sender As Object, e As EventArgs) Handles txtDispersedDate.TextChanged
-    updateForm()
+    Try
+      updateForm()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Sub setReport1(vApplicationId As Int32)
@@ -974,6 +1018,7 @@ Public Class Application1
       End Using
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -1231,6 +1276,7 @@ Public Class Application1
       End Using
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub

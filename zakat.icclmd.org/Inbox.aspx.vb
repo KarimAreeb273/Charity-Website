@@ -63,14 +63,17 @@
       End If
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
+
   Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument
       Response.Redirect("application")
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -81,6 +84,7 @@
       Session("sApplicantId") = sender.CommandArgument
       Response.Redirect("profile")
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -90,6 +94,7 @@
       Session("sApplicationId") = sender.CommandArgument
       Response.Redirect("timeline")
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -107,6 +112,7 @@
         rptInbox.DataBind()
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -116,29 +122,11 @@
       GetFormattedNumber = Base.GetFormattedNumber(pMemberId)
     Catch ex As Exception
       Return Nothing
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Function
-  'Private Sub txtNumber_TextChanged(sender As Object, e As EventArgs) Handles txtNumber.TextChanged
-  '  Try
-  '    Dim vAppId As Int32 = IIf(IsNumeric(txtNumber.Text), CInt(txtNumber.Text), 0)
-  '    If vAppId <> 0 Then
-  '      drpWorkflow.SelectedValue = "All"
-  '      Using oDB As New zakatEntities
-  '        If (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).Any Then
-  '          Dim oApplications As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vAppId).ToList
-  '          rptInbox.DataSource = oApplications
-  '          rptInbox.DataBind()
-  '        End If
-  '      End Using
-  '    End If
-  '  Catch ex As Exception
-  '    Response.Write(ex.Message)
-  '  End Try
-  'End Sub
-  'Private Sub drpWorkflow_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpWorkflow.SelectedIndexChanged
-  '  filterWorkflow()
-  'End Sub
+
   Sub filterWorkflow()
     Try
       'load the inbox
@@ -169,6 +157,7 @@
         rptInbox.DataBind()
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub

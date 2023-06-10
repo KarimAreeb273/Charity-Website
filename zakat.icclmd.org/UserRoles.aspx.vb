@@ -38,22 +38,38 @@
 
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Private Sub lstUsers_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstUsers.SelectedIndexChanged
-    refreshLstAssigned()
+    Try
+      refreshLstAssigned()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub txtSearchUser_TextChanged(sender As Object, e As EventArgs) Handles txtSearchUser.TextChanged
-    clearSearchUser()
+    Try
+      clearSearchUser()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-    txtSearchUser.Text = ""
-    lblUser.Text = "Select a User"
-    clearSearchUser()
+    Try
+      txtSearchUser.Text = ""
+      lblUser.Text = "Select a User"
+      clearSearchUser()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
   Private Sub btnAddRole_Click(sender As Object, e As EventArgs) Handles btnAddRole.Click
@@ -91,6 +107,7 @@
         End If
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -126,6 +143,7 @@
         End If
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -161,6 +179,7 @@
       End Using
 
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
@@ -175,29 +194,35 @@
         lstUsers.DataBind()
       End Using
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
   Private Sub drpOrganization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpOrganization.SelectedIndexChanged
-    If drpOrganization.SelectedValue = "(Select One)" Then
-      lstUsers.Enabled = False
-      lstAvailable.Enabled = False
-      lstAssigned.Enabled = False
-      btnAddRole.Enabled = False
-      btnDeleteRole.Enabled = False
-      btnClear.Enabled = False
-      btnSearch.Enabled = False
-      txtSearchUser.Enabled = False
-    Else
-      lstUsers.Enabled = True
-      lstAvailable.Enabled = True
-      lstAssigned.Enabled = True
-      btnAddRole.Enabled = True
-      btnDeleteRole.Enabled = True
-      btnClear.Enabled = True
-      btnSearch.Enabled = True
-      txtSearchUser.Enabled = True
-    End If
+    Try
+      If drpOrganization.SelectedValue = "(Select One)" Then
+        lstUsers.Enabled = False
+        lstAvailable.Enabled = False
+        lstAssigned.Enabled = False
+        btnAddRole.Enabled = False
+        btnDeleteRole.Enabled = False
+        btnClear.Enabled = False
+        btnSearch.Enabled = False
+        txtSearchUser.Enabled = False
+      Else
+        lstUsers.Enabled = True
+        lstAvailable.Enabled = True
+        lstAssigned.Enabled = True
+        btnAddRole.Enabled = True
+        btnDeleteRole.Enabled = True
+        btnClear.Enabled = True
+        btnSearch.Enabled = True
+        txtSearchUser.Enabled = True
+      End If
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 End Class
