@@ -151,7 +151,6 @@
     <Content Include="Language.aspx" />
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
-    <Content Include="Temp.aspx" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
@@ -381,13 +380,6 @@
     </Compile>
     <Compile Include="STATE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Temp.aspx.designer.vb">
-      <DependentUpon>Temp.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Temp.aspx.vb">
-      <DependentUpon>Temp.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
