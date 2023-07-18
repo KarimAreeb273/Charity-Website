@@ -9,7 +9,7 @@
 
       Using oDB As New zakatEntities
         Dim oApplications As List(Of APPLICATION)
-        oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isSubmitted = True).ToList
+        oApplications = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId).ToList
         rptInbox.DataSource = oApplications
         rptInbox.DataBind()
       End Using
