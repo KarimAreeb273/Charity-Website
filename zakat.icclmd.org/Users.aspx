@@ -99,7 +99,9 @@
                         <%#GetFormattedNumber(DataBinder.Eval(Container.DataItem, "userId"))%>
                       </td>
                       <td style="text-align: left; vertical-align: middle">
-                        <%# DataBinder.Eval(Container.DataItem, "fullName")%>
+                        <asp:HyperLink ID="HyperLink3" runat="server" Target="_self" NavigateUrl='<%# "profile?a=" & DataBinder.Eval(Container.DataItem, "userId")%>'>
+                          <%# DataBinder.Eval(Container.DataItem, "fullName")%>
+                        </asp:HyperLink>
                       </td>
                       <td style="vertical-align: middle">
                         <%# getFormattedPhone(DataBinder.Eval(Container.DataItem, "phone"))%>
