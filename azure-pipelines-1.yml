@@ -25,4 +25,4 @@ stages:
       jobs:
       -  deployment: DeployWebsite
          displayName: 'Deploy Website'
-         environment: 'Windows 11 Test Server'
+         environment: 'Windows 11 Test Server.DESKTOP-CLFU8GS'
