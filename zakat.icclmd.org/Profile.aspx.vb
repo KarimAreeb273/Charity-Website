@@ -6,7 +6,10 @@
       Response.Write("")
       If Not IsPostBack Then
         calDOB.EndDate = Date.Now
-        Dim vApplicantId As Int32 = Session("sApplicantId")
+        Dim vApplicantId As Integer = Session("sApplicantId")
+        If vApplicantId = 0 Then
+          vApplicantId = Request.QueryString("a")
+        End If
         Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
         If vIsAdministrator Then
           pnlPassword.Visible = True
