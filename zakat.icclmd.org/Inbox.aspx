@@ -18,8 +18,6 @@
                 &nbsp;
               </td>
               <td style="width: 20%; text-align: left">
-                <%--<asp:TextBox runat="server" ID="txtNumber" CssClass="form-control" ToolTip="Filter on Application #" MaxLength="10" TabIndex="1" AutoPostBack="True" />
-                <ajaxToolkit:FilteredTextBoxExtender ID="ftbe1" runat="server" TargetControlID="txtNumber" FilterType="Numbers" />--%>
                 <asp:DropDownList ID="drpSubmissionYear" runat="server" ToolTip="Filter By Submission Year" CssClass="form-control" TabIndex="1" Width="350px" AutoPostBack="True">
                   <asp:ListItem Text="2022" Value="All" Selected="True"></asp:ListItem>
                   <asp:ListItem Text="2000" Value="Drafted"></asp:ListItem>
