@@ -26,3 +26,8 @@ stages:
       -  deployment: DeployWebsite
          displayName: 'Deploy Website'
          environment: 'Windows 11 Test Server.DESKTOP-CLFU8GS'
+         strategy:
+           runOnce:
+             deploy:
+               steps:
+                 - checkout: none
