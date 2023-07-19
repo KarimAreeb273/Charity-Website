@@ -3,4 +3,26 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+trigger:
+- none
 
+variables:
+  IISWebsiteName: 'test.zakat.icclmd.org'
+
+resources:
+ pipelines:
+     - pipeline: 'buildPipeline'
+       project: zakat.icclmd.org
+       source: 'Build Pipeline'
+       branch: 'master'
+
+stages:
+    - stage: DeployWebsite
+      displayName: 'Deploy Website'
+      pool:
+        vmImage: windows-latest
+
+      jobs:
+      -  deployment: DeployWebsite
+         displayName: 'Deploy Website'
+         environment: 'Windows 11 Test Server'
