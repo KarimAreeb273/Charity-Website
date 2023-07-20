@@ -3,12 +3,22 @@
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
-      Response.Write("")
       If Not IsPostBack Then
         calDOB.EndDate = Date.Now
-        Dim vApplicantId As Integer = Session("sApplicantId")
+        Dim vApplicantId As Integer
         If vApplicantId = 0 Then
-          vApplicantId = Request.QueryString("a")
+          If Request.QueryString("a") <> Nothing Then
+            vApplicantId = Request.QueryString("a")
+            If vApplicantId <> 0 Then
+              'since the applicant id is set, we need to also set the corresponding session variable
+              Session("sApplicantId") = vApplicantId
+            End If
+          End If
+        End If
+        If vApplicantId = 0 Then
+          If Session("sApplicantId") <> Nothing Then
+            vApplicantId = Session("sApplicantId")
+          End If
         End If
         Dim vIsAdministrator As Boolean = Session("sIsAdministrator")
         If vIsAdministrator Then
@@ -92,7 +102,9 @@
               End If
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
-              chkIsInternational.Checked = .isInternationalSchool
+              If .isInternationalSchool IsNot Nothing Then
+                chkIsInternational.Checked = .isInternationalSchool
+              End If
               txtSchoolName.Text = .schoolName
               txtSchoolCity.Text = .schoolCity
               If .isInternationalSchool Then
