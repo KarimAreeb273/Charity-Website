@@ -151,6 +151,7 @@
     <Content Include="Language.aspx" />
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
+    <Content Include="sitemap.xml" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
