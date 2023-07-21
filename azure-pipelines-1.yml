@@ -10,24 +10,29 @@ variables:
   IISWebsiteName: 'test.zakat.icclmd.org'
 
 resources:
- pipelines:
+  pipelines:
      - pipeline: 'buildPipeline'
-       project: zakat.icclmd.org
+       project: 'zakat.icclmd.org'
        source: 'Build Pipeline'
        branch: 'master'
 
 stages:
-    - stage: DeployWebsite
-      displayName: 'Deploy Website'
-      pool:
-        vmImage: windows-latest
+  - stage: DeployWebsite
+    displayName: 'Deploy Website'
+    pool:
+      vmImage: windows-latest
 
-      jobs:
-      -  deployment: DeployWebsite
-         displayName: 'Deploy Website'
-         environment: 'Windows 11 Test Server.DESKTOP-CLFU8GS'
-         strategy:
-           runOnce:
-             deploy:
-               steps:
-                 - checkout: none
+    jobs:
+    - deployment: DeployWebsite
+      displayName: 'Deploy Website'
+      environment: 'Windows 11 Test Server.DESKTOP-CLFU8GS'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: none
+
+              - download: 'buildPipeline'
+                name: 'DownloadBuildArtifacts'
+                displayName: 'Download Build Artifacts'
+                artifact: 'zakat.icclmd.org'
