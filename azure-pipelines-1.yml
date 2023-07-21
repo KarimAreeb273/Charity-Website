@@ -45,6 +45,8 @@ stages:
                   ActionIISWebsite: 'StopWebsite'
                   StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
               
+              - script: echo $(Pipeline.Workspace)\buildPipeline\test.zakat.icclmd.org
+
               - task: IISWebAppDeploymentOnMachineGroup@0
                 name: 'DeployIIS'
                 displayName: 'Deploy IIS Website'
