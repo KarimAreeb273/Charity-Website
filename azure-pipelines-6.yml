@@ -55,12 +55,20 @@ stages:
                   TakeAppOfflineFlag: true
 
               - task: ExtractFiles@1
+                name: 'Extract'
+                displayName: 'Extract Archived Files'
                 inputs:
-                  # archiveFilePatterns: '**/zakat.icclmd.org.zip'
                   archiveFilePatterns: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\zakat.icclmd.org.zip'
                   destinationFolder: '${{ variables.IISWebsiteName }}'
                   cleanDestinationFolder: false
                   overwriteExistingFiles: true
+
+              - task: CopyFiles@2
+                name: 'Copy'
+                displayName: 'Copy Extracted Files'
+                inputs:
+                  contents: '${{ variables.IISWebsiteName }}\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
+                  targetFolder: '${{ variables.IISWebsiteName }}'
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
