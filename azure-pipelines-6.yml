@@ -6,29 +6,55 @@
 trigger:
 - none
 
-pool:
-  vmImage: 'windows-latest'
-
 variables:
-  solution: '**/*.sln'
-  buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
+  IISWebsiteName: 'zakat.icclmd.org'  
+  solution: '**/zakat.icclmd.org.sln'  
 
-steps:
-- task: NuGetToolInstaller@1
+resources:
+  pipelines:
+    - pipeline: 'buildPipeline'
+      project: 'zakat.icclmd.org'
+      source: 'Build Pipeline'
+      branch: 'master'
 
-- task: NuGetCommand@2
-  inputs:
-    restoreSolution: '$(solution)'
+stages:
+  - stage: DeployWebsite
+    displayName: 'Deploy Website'
+    pool:
+      vmImage: windows-latest
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    jobs:
+    - deployment: DeployWebsite
+      displayName: 'Deploy Website'
+      environment: 'Windows 11 Server.SURFACEPRO'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: none
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+              - download: 'buildPipeline'
+                name: 'DownloadBuildArtifacts'
+                displayName: 'Download Build Artifacts'
+                artifact: 'zakat.icclmd.org'
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StopIISWebsite'
+                displayName: 'Stop IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StopWebsite'
+                  StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
+              - task: IISWebAppDeploymentOnMachineGroup@0
+                name: 'DeployIISWebsite'
+                displayName: 'Deploy IIS Website'
+                inputs:
+                  WebSiteName: '${{ variables.IISWebsiteName }}'
+                  Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  TakeAppOfflineFlag: true
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StartIISWebsite'
+                displayName: 'Start IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StartWebsite'
+                  StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
