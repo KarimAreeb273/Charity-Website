@@ -60,7 +60,7 @@ stages:
                 name: 'Copy'
                 displayName: 'Copy Extracted Files'
                 inputs:
-                  contents: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\Content\**\PackageTmp\**'
+                  contents: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\**\PackageTmp\**'
                   targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   OverWrite: true
 
