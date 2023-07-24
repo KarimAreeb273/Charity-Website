@@ -4,17 +4,33 @@
 # https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
 
 trigger:
-- master
-
-pool:
-  vmImage: 'windows-latest'
+# - master
+  - none
 
 variables:
+  IISWebsiteName: 'zakat.icclmd.org'
   solution: '**/*.sln'
   project: '**/*.vbproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+resources:
+  pipelines:
+     - pipeline: 'buildPipeline'
+       project: 'zakat.icclmd.org'
+       source: 'Build Pipeline'
+       branch: 'master'
+
+stages:
+  - stage: DeployWebsite
+    displayName: 'Deploy Website'
+    pool:
+      vmImage: 'windows-latest'
+
+    jobs:
+    - deployment: DeployWebsite
+      displayName: 'Deploy Website'
+      
 steps:
 - task: NuGetToolInstaller@1
   name: 'NuGetToolInstaller'
