@@ -67,7 +67,7 @@ stages:
                 name: 'Copy'
                 displayName: 'Copy Extracted Files'
                 inputs:
-                  contents: '${{ variables.IISWebsiteName }}\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
+                  contents: '${{ variables.IISWebsiteName\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp }}'
                   targetFolder: '${{ variables.IISWebsiteName }}'
                   OverWrite: true
 
