@@ -14,43 +14,51 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*.sln'
-  project: '**/*.vbproj'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  solution: '**/zakat.icclmd.org.sln'
+  project: '**/zakat.icclmd.org.vbproj'
 
 steps:
   - task: NuGetToolInstaller@1
     name: 'NuGetToolInstaller'
     displayName: 'NuGet Tool Installer'
 
-stages:
-  - stage: DeployWebsite
-    displayName: 'Deploy Website'
+  - task: NuGetCommand@2
+    name: 'NuGetRestore'
+    displayName: 'NuGet Restore Packages'
+    inputs:
+        command: 'restore'
+        restoreSolution: '$(solution)'
+        feedsToUse: 'select'
 
-    jobs:
-    - deployment: DeployWebsite
-      displayName: 'Deploy Website'
-      
-steps:
-- task: NuGetToolInstaller@1
-  name: 'NuGetToolInstaller'
-  displayName: 'NuGet tool installer'
+  - task: VSBuild@1
+    name: 'Build'
+    displayName: 'Build Website'
+    inputs:
+      solution: '$(solution)'
+      msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
 
-- task: NuGetCommand@2
-  inputs:
-    command: 'restore' 
-    restoreSolution: '$(solution)'
-    feedsToUse: 'select'
+  - task: VSTest@2
+    name: 'Test'
+    displayName: 'Test Website'
+    inputs:
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:PackageLocation="$(build.artifactStagingDirectory)"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  - task: CopyFiles@2
+    name: 'Copy'
+    displayName: 'Copy Files'
+    inputs:
+      contents: '_buildOutput/**'
+      targetFolder: $(Build.ArtifactStagingDirectory)
 
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+  - task: PublishBuildArtifacts@1
+    name: 'PublishBuildArtifacts'
+    displayName: 'Publish Build Artifacts'
+    inputs:
+      pathToPublish: $(Build.ArtifactStagingDirectory)
+      artifactName: 'zakat.icclmd.org'
+      publishLocation: Container
