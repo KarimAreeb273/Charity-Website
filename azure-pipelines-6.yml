@@ -60,7 +60,7 @@ stages:
                 displayName: 'Extract Archived Files'
                 inputs:
                   archiveFilePatterns: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\zakat.icclmd.org.zip'
-                  destinationFolder: '${{ variables.IISWebsiteName }}'
+                  destinationFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   cleanDestinationFolder: false
                   overwriteExistingFiles: true
 
@@ -68,7 +68,7 @@ stages:
                 name: 'Copy'
                 displayName: 'Copy Extracted Files'
                 inputs:
-                  contents: '${{ variables.contents }}'
+                  contents: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
                   targetFolder: '${{ variables.IISWebsiteName }}'
                   OverWrite: true
 
