@@ -7,8 +7,9 @@ trigger:
 - none
 
 variables:
-  IISWebsiteName: 'zakat.icclmd.org'  
-  solution: '**/zakat.icclmd.org.sln'  
+  IISWebsiteName: 'zakat.icclmd.org'
+  solution: '**/zakat.icclmd.org.sln'
+  contents:  'zakat.icclmd.org\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
 
 resources:
   pipelines:
@@ -67,7 +68,7 @@ stages:
                 name: 'Copy'
                 displayName: 'Copy Extracted Files'
                 inputs:
-                  contents: '${{ variables.IISWebsiteName\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp }}'
+                  contents: '${{ variables.contents }}'
                   targetFolder: '${{ variables.IISWebsiteName }}'
                   OverWrite: true
 
