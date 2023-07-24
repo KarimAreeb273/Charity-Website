@@ -69,6 +69,7 @@ stages:
                 inputs:
                   contents: '${{ variables.IISWebsiteName }}\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
                   targetFolder: '${{ variables.IISWebsiteName }}'
+                  OverWrite: true
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
