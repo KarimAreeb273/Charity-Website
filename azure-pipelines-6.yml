@@ -47,14 +47,6 @@ stages:
                   ActionIISWebsite: 'StopWebsite'
                   StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
 
-              - task: IISWebAppDeploymentOnMachineGroup@0
-                name: 'DeployIISWebsite'
-                displayName: 'Deploy IIS Website'
-                inputs:
-                  WebSiteName: '${{ variables.IISWebsiteName }}'
-                  Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
-                  TakeAppOfflineFlag: true
-
               - task: ExtractFiles@1
                 name: 'Extract'
                 displayName: 'Extract Archived Files'
@@ -69,8 +61,16 @@ stages:
                 displayName: 'Copy Extracted Files'
                 inputs:
                   contents: '$(Pipeline.Workspace)\**\PackageTmp\**'
-                  targetFolder: '${{ variables.IISWebsiteName }}'
+                  targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   OverWrite: true
+
+              - task: IISWebAppDeploymentOnMachineGroup@0
+                name: 'DeployIISWebsite'
+                displayName: 'Deploy IIS Website'
+                inputs:
+                  WebSiteName: '${{ variables.IISWebsiteName }}'
+                  Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  TakeAppOfflineFlag: true
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
