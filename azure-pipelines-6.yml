@@ -58,9 +58,9 @@ stages:
                 inputs:
                   # archiveFilePatterns: '**/zakat.icclmd.org.zip'
                   archiveFilePatterns: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\zakat.icclmd.org.zip'
-                  destinationFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  destinationFolder: '${{ variables.IISWebsiteName }}'
                   cleanDestinationFolder: false
-                  overwriteExistingFiles: false
+                  overwriteExistingFiles: true
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
