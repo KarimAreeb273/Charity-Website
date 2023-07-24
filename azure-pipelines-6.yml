@@ -37,6 +37,7 @@ stages:
                 name: 'DownloadBuildArtifacts'
                 displayName: 'Download Build Artifacts'
                 artifact: 'zakat.icclmd.org'
+
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StopIISWebsite'
                 displayName: 'Stop IIS Website'
@@ -44,6 +45,7 @@ stages:
                   IISDeploymentType: 'IISWebsite'
                   ActionIISWebsite: 'StopWebsite'
                   StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
+
               - task: IISWebAppDeploymentOnMachineGroup@0
                 name: 'DeployIISWebsite'
                 displayName: 'Deploy IIS Website'
@@ -51,6 +53,15 @@ stages:
                   WebSiteName: '${{ variables.IISWebsiteName }}'
                   Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   TakeAppOfflineFlag: true
+
+              - task: ExtractFiles@1
+                inputs:
+                  # archiveFilePatterns: '**/zakat.icclmd.org.zip'
+                  archiveFilePatterns: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\zakat.icclmd.org.zip'
+                  destinationFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  cleanDestinationFolder: false
+                  overwriteExistingFiles: false
+
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
                 displayName: 'Start IIS Website'
