@@ -72,10 +72,16 @@ stages:
                   Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   TakeAppOfflineFlag: true
 
-              - task: CmdLine@2
+              # - task: CmdLine@2
+              #   inputs:
+              #     script: 'ManageRelease.bat > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+              #     workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+
+              - task: BatchScript@1
                 inputs:
-                  script: 'ManageRelease.bat > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
-                  workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  filename: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\ManageRelease.bat'
+                  arguments: '> ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+                  workingFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
