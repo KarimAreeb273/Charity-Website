@@ -64,11 +64,6 @@ stages:
               #     targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
               #     OverWrite: true
 
-              - task: CmdLine@2
-                inputs:
-                  script: 'ManageRelease.cmd > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
-                  workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
-
               - task: IISWebAppDeploymentOnMachineGroup@0
                 name: 'DeployIISWebsite'
                 displayName: 'Deploy IIS Website'
@@ -76,6 +71,11 @@ stages:
                   WebSiteName: '${{ variables.IISWebsiteName }}'
                   Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
                   TakeAppOfflineFlag: true
+
+              - task: CmdLine@2
+                inputs:
+                  script: 'ManageRelease.cmd > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+                  workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
 
               - task: IISWebAppManagementOnMachineGroup@0
                 name: 'StartIISWebsite'
