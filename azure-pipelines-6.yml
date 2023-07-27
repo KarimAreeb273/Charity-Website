@@ -56,13 +56,13 @@ stages:
                   cleanDestinationFolder: false
                   overwriteExistingFiles: true
 
-              - task: CopyFiles@2
-                name: 'Copy'
-                displayName: 'Copy Extracted Files'
-                inputs:
-                  contents: '$(Pipeline.Workspace)\**\PackageTmp\*'
-                  targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
-                  OverWrite: true
+              # - task: CopyFiles@2
+              #   name: 'Copy'
+              #   displayName: 'Copy Extracted Files'
+              #   inputs:
+              #     contents: '$(Pipeline.Workspace)\**\PackageTmp\*'
+              #     targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+              #     OverWrite: true
 
               - task: IISWebAppDeploymentOnMachineGroup@0
                 name: 'DeployIISWebsite'
