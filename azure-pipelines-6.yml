@@ -74,7 +74,7 @@ stages:
 
               - task: CmdLine@2
                 inputs:
-                  script: 'ManageRelease.cmd > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+                  script: 'ManageRelease.bat > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
                   workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
 
               - task: IISWebAppManagementOnMachineGroup@0
