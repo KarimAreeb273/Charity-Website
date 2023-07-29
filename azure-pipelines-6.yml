@@ -1,0 +1,92 @@
+# ASP.NET
+# Build and test ASP.NET projects.
+# Add steps that publish symbols, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/apps/aspnet/build-aspnet-4
+
+trigger:
+- none
+
+variables:
+  IISWebsiteName: 'zakat.icclmd.org'
+  solution: '**/zakat.icclmd.org.sln'
+  contents:  'zakat.icclmd.org\Content\D_C\a\1\s\zakat.icclmd.org\obj\Release\Package\PackageTmp'
+
+resources:
+  pipelines:
+    - pipeline: 'buildPipeline'
+      project: 'zakat.icclmd.org'
+      source: 'Build Pipeline'
+      branch: 'master'
+
+stages:
+  - stage: DeployWebsite
+    displayName: 'Deploy Website'
+    pool:
+      vmImage: windows-latest
+
+    jobs:
+    - deployment: DeployWebsite
+      displayName: 'Deploy Website'
+      environment: 'Windows 11 Zakat Server.SURFACEPRO'
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - checkout: none
+
+              - download: 'buildPipeline'
+                name: 'DownloadBuildArtifacts'
+                displayName: 'Download Build Artifacts'
+                artifact: 'zakat.icclmd.org'
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StopIISWebsite'
+                displayName: 'Stop IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StopWebsite'
+                  StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
+
+              - task: ExtractFiles@1
+                name: 'Extract'
+                displayName: 'Extract Archived Files'
+                inputs:
+                  archiveFilePatterns: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\zakat.icclmd.org.zip'
+                  destinationFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  cleanDestinationFolder: false
+                  overwriteExistingFiles: true
+
+              # - task: CopyFiles@2
+              #   name: 'Copy'
+              #   displayName: 'Copy Extracted Files'
+              #   inputs:
+              #     contents: '$(Pipeline.Workspace)\**\PackageTmp\*'
+              #     targetFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+              #     OverWrite: true
+
+              - task: IISWebAppDeploymentOnMachineGroup@0
+                name: 'DeployIISWebsite'
+                displayName: 'Deploy IIS Website'
+                inputs:
+                  WebSiteName: '${{ variables.IISWebsiteName }}'
+                  Package: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+                  TakeAppOfflineFlag: true
+
+              # - task: CmdLine@2
+              #   inputs:
+              #     script: 'ManageRelease.bat > ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+              #     workingDirectory: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+
+              - task: BatchScript@1
+                inputs:
+                  filename: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org\ManageRelease.bat'
+                  arguments: '> ManageReleaseLog.txt 2> ManageReleaseErrors.txt'
+                  workingFolder: '$(Pipeline.Workspace)\buildPipeline\zakat.icclmd.org'
+
+              - task: IISWebAppManagementOnMachineGroup@0
+                name: 'StartIISWebsite'
+                displayName: 'Start IIS Website'
+                inputs:
+                  IISDeploymentType: 'IISWebsite'
+                  ActionIISWebsite: 'StartWebsite'
+                  StartStopWebsiteName: '${{ variables.IISWebsiteName }}'
