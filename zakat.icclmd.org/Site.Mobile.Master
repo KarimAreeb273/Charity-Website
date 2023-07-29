@@ -207,6 +207,7 @@
                       <span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      <span style="white-space: nowrap;"><a href="protocols">Protocols</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
                       <span style="white-space: nowrap;">
                         <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
                       </span>&nbsp;&nbsp;|&nbsp;&nbsp;

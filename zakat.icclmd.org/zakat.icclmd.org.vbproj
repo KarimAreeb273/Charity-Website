@@ -151,6 +151,7 @@
     <Content Include="Language.aspx" />
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
+    <Content Include="Protocols.aspx" />
     <Content Include="sitemap.xml" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
@@ -238,7 +239,6 @@
     <None Include=".env\prod\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="documents\required_zakat_protocols_and_documents.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -368,6 +368,13 @@
     </Compile>
     <Compile Include="Organizations.aspx.vb">
       <DependentUpon>Organizations.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Protocols.aspx.designer.vb">
+      <DependentUpon>Protocols.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Protocols.aspx.vb">
+      <DependentUpon>Protocols.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="REFERENCE.vb">
