@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Protocols.aspx.vb" Inherits="zakat.icclmd.org.Protocols" %>
+﻿<%@ Page Title="Protocols" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Protocols.aspx.vb" Inherits="zakat.icclmd.org.Protocols" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <br />
   <h4><b>ZAKAT APPLICATION PROTOCOLS & REQUIRED (SUPPORTING) DOCUMENTS</b></h4>
