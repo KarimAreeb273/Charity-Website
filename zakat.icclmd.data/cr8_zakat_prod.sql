@@ -192,6 +192,8 @@ CREATE TABLE [dbo].[APPLICATION](
 	[employerZip] [varchar](5) NULL,
 	[employerPhone] [varchar](10) NULL,
 	[personalNeedStatement] [varchar](1000) NULL,
+	[draftedOn] [datetime] NULL,
+	[draftedBy] [int] NULL,
 	[submittedOn] [datetime] NULL,
 	[submittedBy] [int] NULL,
 	[validatedOn] [datetime] NULL,

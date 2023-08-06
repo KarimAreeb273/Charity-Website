@@ -22,8 +22,8 @@ Partial Public Class ORGANIZATION
     Public Property website As String
     Public Property abbreviation As String
 
-    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property STATE As STATE
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
+    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
 
 End Class

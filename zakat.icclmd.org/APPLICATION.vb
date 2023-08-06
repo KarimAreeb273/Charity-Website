@@ -80,6 +80,8 @@ Partial Public Class APPLICATION
     Public Property createdBy As Nullable(Of Integer)
     Public Property updatedOn As Nullable(Of Date)
     Public Property updatedBy As Nullable(Of Integer)
+    Public Property draftedOn As Nullable(Of Date)
+    Public Property draftedBy As Nullable(Of Integer)
 
     Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
