@@ -18,6 +18,8 @@
         Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.applicationId = vApplicationId).First
 
         'obtain aggregates
+        Dim vDraftedStartDate As DateTime
+        Dim vDraftedEndDate As DateTime
         Dim vSubmittedStartDate As DateTime
         Dim vSubmittedEndDate As DateTime
         Dim vValidatedStartDate As DateTime
@@ -55,8 +57,12 @@
             vValidatedEndDate = oApplication.validatedOn
           End If
           If .isSubmitted = True Then
-            vSubmittedStartDate = oApplication.createdOn
+            vSubmittedStartDate = oApplication.draftedOn
             vSubmittedEndDate = oApplication.submittedOn
+          End If
+          If .isDrafted = True Then
+            vDraftedStartDate = oApplication.createdOn
+            vDraftedEndDate = oApplication.draftedOn
           End If
           If .isRejected = True Then
             If .isQualified2 Then
@@ -85,8 +91,11 @@
           vJscript.Append("dataTable.addColumn({ type: 'date', id: 'End' });")
           vJscript.Append("dataTable.addRows([")
           'add data rows
+          If .isDrafted Then
+            vJscript.Append("['Drafted', new Date(" & vDraftedStartDate.Year.ToString & ", " & (vDraftedStartDate.Month - 1).ToString & ", " & vDraftedStartDate.Day.ToString & "), new Date(" & vDraftedEndDate.Year.ToString & ", " & (vDraftedEndDate.Month - 1).ToString & ", " & vDraftedEndDate.Day.ToString & ") ]")
+          End If
           If .isSubmitted Then
-            vJscript.Append("['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ") ]")
+            vJscript.Append(",['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ") ]")
           End If
           If .isValidated Then
             vJscript.Append(",['Validated', new Date(" & vValidatedStartDate.Year.ToString & ", " & (vValidatedStartDate.Month - 1).ToString & ", " & vValidatedStartDate.Day.ToString & "), new Date(" & vValidatedEndDate.Year.ToString & ", " & (vValidatedEndDate.Month - 1).ToString & ", " & vValidatedEndDate.Day.ToString & ") ]")

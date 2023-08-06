@@ -2158,11 +2158,15 @@ Public Class ZakatForm
       'update all the values stored in the form by calling a common sub routine
       SaveZakatForm(vUserId, False)
 
+      Dim vDraftedOn As Date
+
       'set the appropriate status for submission: isDrafted=True, isSubmitted=True, approvalStatus=Submitted
       Using oDB As New zakatEntities
         If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True AndAlso APPLICATION.isSubmitted = False).Any Then
           Dim oApplication As APPLICATION = (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId And APPLICATION.isDrafted = True AndAlso APPLICATION.isSubmitted = False).First
           With oApplication
+            'set the draftedOn date for insertion into the review table
+            vDraftedOn = .draftedOn
             .userId = vUserId
             .organizationId = drpOrganization.SelectedValue
             .isDrafted = True
@@ -2189,7 +2193,6 @@ Public Class ZakatForm
       'email the user about application submission
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
       Dim vTo As String = txtEmail.Text
-      'Dim vSubject As String = "Online Zakat - Application Submitted"
       Dim vSubject As String = "Online Zakat - Application #: " & vApplicationIdFormatted & " Submitted"
       Dim vMsgText As New StringBuilder
       Dim vSend As Boolean
@@ -2235,8 +2238,21 @@ Public Class ZakatForm
           vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
         End If
 
-        'add a generic review action on behalf of the user
+        'add a generic review action on behalf of the user for the submission
         Dim oReview As New REVIEW
+        With oReview
+          .userId = vUserId
+          .applicationId = vApplicationId
+          .reviewAction = "Drafted"
+          .reviewDate = vDraftedOn
+          .reviewComment = "I have drafted this zakat application for submission and review."
+        End With
+
+        ' Add to Memory
+        oDB.REVIEW.Add(oReview)
+        oDB.SaveChanges()
+
+        'add a generic review action on behalf of the user for the submission
         With oReview
           .userId = vUserId
           .applicationId = vApplicationId
@@ -2437,6 +2453,8 @@ Public Class ZakatForm
               .employerZip = txtEmployerZip.Text
             End If
             .personalNeedStatement = txtPersonalStatement.Text
+            .draftedOn = .updatedOn
+            .draftedBy = pUserId
             .updatedOn = Date.Now
             .updatedBy = pUserId
           End With
