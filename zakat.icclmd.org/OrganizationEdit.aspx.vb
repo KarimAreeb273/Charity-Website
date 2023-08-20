@@ -28,6 +28,7 @@
           Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
           With oOrganization
             txtOrganizationName.Text = oOrganization.name
+            txtOrganizationAbbreviation.Text = oOrganization.abbreviation
             txtEmail.Text = oOrganization.email
             txtPhone.Text = Base.getFormattedPhone(oOrganization.phone, Base.enumFormatPhone.Format)
             txtWebsite.Text = oOrganization.website
@@ -61,6 +62,7 @@
           Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
           With oOrganization
             .name = txtOrganizationName.Text
+            .abbreviation = txtOrganizationAbbreviation.Text
             .email = txtEmail.Text
             .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
             .website = txtWebsite.Text
@@ -74,7 +76,7 @@
           oDB.SaveChanges()
 
           'redirect to orgs
-          Response.Redirect("organizations")
+          Response.Redirect("manageorganizations")
         Else
           'redirect home
           Response.Redirect("/")

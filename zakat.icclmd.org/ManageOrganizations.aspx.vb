@@ -45,6 +45,7 @@
           'insert information about new org and save to db
           With oOrganization
             .name = txtOrganizationName.Text
+            .abbreviation = txtOrganizationAbbreviation.Text
             .email = txtEmail.Text
             .phone = Base.getFormattedPhone(txtPhone.Text, Base.enumFormatPhone.Strip)
             .website = txtWebsite.Text
@@ -63,6 +64,7 @@
 
           'clear fields
           txtOrganizationName.Text = ""
+          txtOrganizationAbbreviation.Text = ""
           txtEmail.Text = ""
           txtPhone.Text = ""
           txtWebsite.Text = ""

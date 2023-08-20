@@ -59,6 +59,15 @@ Partial Public Class ManageOrganizations
   Protected WithEvents txtOrganizationName As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''txtOrganizationAbbreviation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtOrganizationAbbreviation As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
   '''txtEmail control.
   '''</summary>
   '''<remarks>
