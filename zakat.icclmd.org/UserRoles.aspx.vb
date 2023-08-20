@@ -14,7 +14,7 @@
         End If
 
         If Not IsPostBack Then
-          'load the state dropdown
+          'load the users listbox
           lstUsers.DataSource = (From USER_ROLE In oDB.USER_ROLE
                                  Where USER_ROLE.roleId <> Base.enumRole.Appliciant
                                  Select New With {Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName & " - " & USER_ROLE.USER.email,
@@ -52,14 +52,14 @@
     End Try
   End Sub
 
-  Private Sub txtSearchUser_TextChanged(sender As Object, e As EventArgs) Handles txtSearchUser.TextChanged
-    Try
-      clearSearchUser()
-    Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
-    End Try
-  End Sub
+  'Private Sub txtSearchUser_TextChanged(sender As Object, e As EventArgs) Handles txtSearchUser.TextChanged
+  '  Try
+  '    clearSearchUser()
+  '  Catch ex As Exception
+  '    Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+  '    Response.Write(ex.Message)
+  '  End Try
+  'End Sub
 
   Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
     Try
@@ -90,7 +90,7 @@
         'get the selected role:
         Dim vNeededRole As Int32 = lstAvailable.SelectedValue
         If vNeededRole = 0 Then Exit Sub
-        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = CInt(lstUsers.SelectedValue) And USER_ROLE.ROLE.roleId = CInt(lstAvailable.SelectedValue) And USER_ROLE.organizationId = drpOrganization.SelectedValue).Any Then
+        If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = CInt(lstUsers.SelectedValue) And USER_ROLE.roleId = CInt(lstAvailable.SelectedValue) And USER_ROLE.organizationId = drpOrganization.SelectedValue).Any Then
           'add role to the user
           Dim oUserRole As New USER_ROLE
           With oUserRole
@@ -188,7 +188,11 @@
     Try
       lblUser.Text = "Select a User"
       Using oDB As New zakatEntities
-        lstUsers.DataSource = (From USER In oDB.USER Where USER.firstName.Contains(txtSearchUser.Text) Or USER.lastName.Contains(txtSearchUser.Text) Or USER.email.Contains(txtSearchUser.Text) Select New With {Key .fullName = USER.firstName & " " & USER.lastName & " - " & USER.email, Key .userId = USER.userId}).ToList
+        'load the users listbox
+        lstUsers.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                               Where USER_ROLE.roleId <> Base.enumRole.Appliciant
+                               Select New With {Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName & " - " & USER_ROLE.USER.email,
+                                                  Key .userId = USER_ROLE.USER.userId}).Distinct.ToList
         lstUsers.DataTextField = "fullname"
         lstUsers.DataValueField = "userId"
         lstUsers.DataBind()
@@ -201,25 +205,73 @@
 
   Private Sub drpOrganization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpOrganization.SelectedIndexChanged
     Try
-      If drpOrganization.SelectedValue = "(Select One)" Then
-        lstUsers.Enabled = False
-        lstAvailable.Enabled = False
-        lstAssigned.Enabled = False
-        btnAddRole.Enabled = False
-        btnDeleteRole.Enabled = False
-        btnClear.Enabled = False
-        btnSearch.Enabled = False
-        txtSearchUser.Enabled = False
-      Else
+      lstUsers.Enabled = False
+      lstAvailable.Enabled = False
+      lstAssigned.Enabled = False
+      btnAddRole.Enabled = False
+      btnDeleteRole.Enabled = False
+      btnClear.Enabled = False
+      btnSearch.Enabled = False
+      txtSearchUser.Enabled = False
+      lstAssigned.Items.Clear()
+      lstUsers.SelectedIndex = -1
+
+      If drpOrganization.SelectedValue <> "(Select One)" Then
         lstUsers.Enabled = True
-        lstAvailable.Enabled = True
-        lstAssigned.Enabled = True
         btnAddRole.Enabled = True
         btnDeleteRole.Enabled = True
         btnClear.Enabled = True
         btnSearch.Enabled = True
         txtSearchUser.Enabled = True
+        lstAvailable.Enabled = True
+        lstAssigned.Enabled = True
       End If
+
+      'If drpOrganization.SelectedValue = "(Select One)" Then
+      '  lstUsers.Enabled = False
+      '  lstAvailable.Enabled = False
+      '  lstAssigned.Enabled = False
+      '  btnAddRole.Enabled = False
+      '  btnDeleteRole.Enabled = False
+      '  btnClear.Enabled = False
+      '  btnSearch.Enabled = False
+      '  txtSearchUser.Enabled = False
+      'Else
+      '  lstUsers.Enabled = True
+      '  lstAvailable.Enabled = True
+      '  lstAssigned.Enabled = True
+      '  btnAddRole.Enabled = True
+      '  btnDeleteRole.Enabled = True
+      '  btnClear.Enabled = True
+      '  btnSearch.Enabled = True
+      '  txtSearchUser.Enabled = True
+      'End If
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Try
+      Using oDB As New zakatEntities
+        If Not IsPostBack Then
+          'load the users listbox
+          lstUsers.DataSource = (From USER_ROLE In oDB.USER_ROLE
+                                 Where (USER_ROLE.roleId <> Base.enumRole.Appliciant) AndAlso
+                                   (USER_ROLE.USER.firstName.Contains(txtSearchUser.Text) Or
+                                    USER_ROLE.USER.middleName.Contains(txtSearchUser.Text) Or
+                                    USER_ROLE.USER.lastName.Contains(txtSearchUser.Text) Or
+                                    USER_ROLE.USER.email.Contains(txtSearchUser.Text))
+                                 Select New With {
+                                  Key .fullName = USER_ROLE.USER.firstName & " " & USER_ROLE.USER.middleName & " " & USER_ROLE.USER.lastName & " - " & USER_ROLE.USER.email,
+                                  Key .userId = USER_ROLE.USER.userId}).Distinct.ToList
+          lstUsers.DataTextField = "fullname"
+          lstUsers.DataValueField = "userId"
+          lstUsers.DataBind()
+        End If
+
+      End Using
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)

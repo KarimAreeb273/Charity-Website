@@ -30,7 +30,7 @@
           <table style="width: 100%">
             <tr>
               <td style="width: 100%">
-                <asp:TextBox ID="txtSearchUser" runat="server" class="form-control" style="max-width: 100%" Width="400px" placeholder="Filter/Search Users" AutoPostBack="True" TabIndex="2" Enabled="False"></asp:TextBox>&nbsp;<asp:LinkButton ID="btnSearch" runat="server" ToolTip="Search" style="text-decoration:none" TabIndex="3" Enabled="False">
+                <asp:TextBox ID="txtSearchUser" runat="server" class="form-control" style="max-width: 100%" Width="400px" placeholder="Filter/Search Users" AutoPostBack="True" TabIndex="2" Enabled="False" AutoCompleteType="Disabled"></asp:TextBox>&nbsp;<asp:LinkButton ID="btnSearch" runat="server" ToolTip="Search" style="text-decoration:none" TabIndex="3" Enabled="False">
                   <i class="glyphicon glyphicon-search" style="color: darkgreen; font-size:20px;"></i>
                 </asp:LinkButton>&nbsp;<asp:LinkButton ID="btnClear" runat="server" ToolTip="Clear" style="text-decoration:none" TabIndex="4" Enabled="False">
                   <i class="glyphicon glyphicon-remove" style="color: darkgreen; font-size:20px"></i>
@@ -63,7 +63,7 @@
           <tr>
             <td style="width: 100%" colspan="2">
               <b>Available Roles:</b><br />
-              <asp:ListBox ID="lstAvailable"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="6" Width="210px" TabIndex="6" Enabled="False"></asp:ListBox>
+              <asp:ListBox ID="lstAvailable"  runat="server" CssClass="form-control" AutoPostBack="False" Rows="6" Width="210px" TabIndex="6" Enabled="true"></asp:ListBox>
             </td>
           </tr>
           <tr>
