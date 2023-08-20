@@ -22,7 +22,6 @@ Partial Public Class zakatEntities
         Throw New UnintentionalCodeFirstException()
     End Sub
 
-    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
     Public Overridable Property ARTIFACT() As DbSet(Of ARTIFACT)
     Public Overridable Property ARTIFACT_TYPE() As DbSet(Of ARTIFACT_TYPE)
     Public Overridable Property CERTIFICATION_SKILL() As DbSet(Of CERTIFICATION_SKILL)
@@ -39,5 +38,12 @@ Partial Public Class zakatEntities
     Public Overridable Property USER() As DbSet(Of USER)
     Public Overridable Property USER_LANGUAGE() As DbSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE() As DbSet(Of USER_ROLE)
+    Public Overridable Property APPLICATION() As DbSet(Of APPLICATION)
+    Public Overridable Property VW_APPLICATIONS_DISPERSED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_DISPERSED_BY_YEAR)
+    Public Overridable Property VW_APPLICATIONS_DRAFTED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_DRAFTED_BY_YEAR)
+    Public Overridable Property VW_APPLICATIONS_INVESTIGATED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_INVESTIGATED_BY_YEAR)
+    Public Overridable Property VW_APPLICATIONS_QUALIFIED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_QUALIFIED_BY_YEAR)
+    Public Overridable Property VW_APPLICATIONS_REJECTED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_REJECTED_BY_YEAR)
+    Public Overridable Property VW_APPLICATIONS_SUBMITTED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_SUBMITTED_BY_YEAR)
 
 End Class

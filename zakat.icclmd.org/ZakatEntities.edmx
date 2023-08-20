@@ -269,6 +269,60 @@
           <Property Name="roleId" Type="int" />
           <Property Name="organizationId" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DISPERSED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DRAFTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_INVESTIGATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_QUALIFIED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_REJECTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
           <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="1" />
           <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
@@ -539,6 +593,42 @@
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DISPERSED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_DISPERSED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_DISPERSED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_DISPERSED_BY_YEAR] AS [VW_APPLICATIONS_DISPERSED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DRAFTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_DRAFTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_DRAFTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_DRAFTED_BY_YEAR] AS [VW_APPLICATIONS_DRAFTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_INVESTIGATED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_INVESTIGATED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_INVESTIGATED_BY_YEAR] AS [VW_APPLICATIONS_INVESTIGATED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_QUALIFIED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_QUALIFIED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_QUALIFIED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_QUALIFIED_BY_YEAR] AS [VW_APPLICATIONS_QUALIFIED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_REJECTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_REJECTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_REJECTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_REJECTED_BY_YEAR] AS [VW_APPLICATIONS_REJECTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_SUBMITTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_SUBMITTED_BY_YEAR] AS [VW_APPLICATIONS_SUBMITTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="Self.FK_APPLICATION_ORGANIZATION">
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
@@ -730,6 +820,12 @@
             <End Role="APPLICATION" EntitySet="APPLICATION" />
             <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
+          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
         </EntityContainer>
         <EntityType Name="ARTIFACT">
           <Key>
@@ -1289,6 +1385,48 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1573,6 +1711,54 @@
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_REJECTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

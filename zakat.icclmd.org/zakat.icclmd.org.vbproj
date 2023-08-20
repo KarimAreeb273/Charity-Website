@@ -145,6 +145,7 @@
     <Content Include="Applicants.aspx" />
     <Content Include="Application.aspx" />
     <Content Include="Activity.aspx" />
+    <Content Include="Dashboard.aspx" />
     <Content Include="Images\png-transparent.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
@@ -152,6 +153,7 @@
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
     <Content Include="Protocols.aspx" />
+    <Content Include="Report.ascx" />
     <Content Include="sitemap.xml" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
@@ -313,7 +315,7 @@
     </Compile>
     <Compile Include="Activity.aspx.vb">
       <DependentUpon>Activity.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="APPLICATION.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
@@ -329,6 +331,13 @@
     </Compile>
     <Compile Include="COUNTRY.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.designer.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.aspx.vb">
+      <DependentUpon>Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DEPENDENT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
@@ -380,6 +389,13 @@
     <Compile Include="REFERENCE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Report.ascx.designer.vb">
+      <DependentUpon>Report.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Report.ascx.vb">
+      <DependentUpon>Report.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="REVIEW.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -394,7 +410,7 @@
     </Compile>
     <Compile Include="Timeline.aspx.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TOPIC.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
@@ -450,6 +466,24 @@
     <Compile Include="USER_ROLE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="VW_APPLICATIONS_DISPERSED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_DRAFTED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_INVESTIGATED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_QUALIFIED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_REJECTED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_SUBMITTED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ZakatForm.aspx.designer.vb">
       <DependentUpon>ZakatForm.aspx</DependentUpon>
     </Compile>
@@ -468,8 +502,8 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.vb">
-      <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Default.aspx.designer.vb">
       <DependentUpon>Default.aspx</DependentUpon>

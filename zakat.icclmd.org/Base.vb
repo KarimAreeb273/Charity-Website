@@ -29,7 +29,7 @@ Public Class Base
 #End Region
 
 #Region "Functions"
-  Public Shared Function sendEmail(ByVal pTo As String, ByVal pSubject As String, ByVal pBody As String, Optional ByVal pFrom As String = "zakat@icclmd.org", Optional ByVal pIsBodyHtml As Boolean = True) As Boolean
+  Public Shared Function SendEmail(ByVal pTo As String, ByVal pSubject As String, ByVal pBody As String, Optional ByVal pFrom As String = "zakat@icclmd.org", Optional ByVal pIsBodyHtml As Boolean = True) As Boolean
     Try
       Dim vMsgText As New StringBuilder
 
@@ -51,15 +51,16 @@ Public Class Base
 
       'send the message
       oSMTP.Send(oEmailMessage)
-      sendEmail = True
+      SendEmail = True
     Catch ex As Exception
-      sendEmail = False
+      SendEmail = False
     End Try
   End Function
-  Public Shared Function getFormattedPhone(pPhone As String, pMode As enumFormatPhone) As String
+
+  Public Shared Function GetFormattedPhone(pPhone As String, pMode As enumFormatPhone) As String
     Try
       If pPhone = "" Then
-        getFormattedPhone = ""
+        GetFormattedPhone = ""
       Else
         Select Case pMode
           Case enumFormatPhone.Strip
@@ -69,17 +70,17 @@ Public Class Base
             pPhone = pPhone.Insert(3, "-")
             pPhone = pPhone.Insert(7, "-")
         End Select
-        getFormattedPhone = pPhone
+        GetFormattedPhone = pPhone
       End If
     Catch ex As Exception
       Return ""
     End Try
   End Function
 
-  Public Shared Function getFormattedSSN(pSSN As String, pMode As enumFormatSSN) As String
+  Public Shared Function GetFormattedSSN(pSSN As String, pMode As enumFormatSSN) As String
     Try
       If pSSN = "" Then
-        getFormattedSSN = ""
+        GetFormattedSSN = ""
       Else
         Select Case pMode
           Case enumFormatPhone.Strip
@@ -89,42 +90,42 @@ Public Class Base
             pSSN = pSSN.Insert(3, "-")
             pSSN = pSSN.Insert(6, "-")
         End Select
-        getFormattedSSN = pSSN
+        GetFormattedSSN = pSSN
       End If
     Catch ex As Exception
       Return ""
     End Try
   End Function
 
-  Public Shared Function getFormattedNumber(pId As Int32) As String
+  Public Shared Function GetFormattedNumber(pId As Int32) As String
     Try
       Dim vId As String = pId.ToString
       Select Case vId.Length
         Case 1
-          getFormattedNumber = "0000" & vId
+          GetFormattedNumber = "0000" & vId
         Case 2
-          getFormattedNumber = "000" & vId
+          GetFormattedNumber = "000" & vId
         Case 3
-          getFormattedNumber = "00" & vId
+          GetFormattedNumber = "00" & vId
         Case 4
-          getFormattedNumber = "0" & vId
+          GetFormattedNumber = "0" & vId
         Case 5
-          getFormattedNumber = vId
+          GetFormattedNumber = vId
         Case Else
-          getFormattedNumber = vId
+          GetFormattedNumber = vId
       End Select
     Catch ex As Exception
       Return Nothing
     End Try
   End Function
 
-  Public Shared Function getAge(ByVal dob As Date) As Int16
+  Public Shared Function GetAge(ByVal dob As Date) As Int16
     Dim age As Int16 = Today.Year - dob.Year
     If (dob > Today.AddYears(-age)) Then age -= 1
     Return age
   End Function
 
-  Public Shared Function getPassword() As String
+  Public Shared Function GetPassword() As String
     Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-:;/.,[]\|{}"
     Dim r As New Random
     Dim sb As New StringBuilder
@@ -132,14 +133,14 @@ Public Class Base
       Dim idx As Integer = r.Next(0, 87)
       sb.Append(s.Substring(idx, 1))
     Next
-    getPassword = sb.ToString
+    GetPassword = sb.ToString
   End Function
 
-  Public Shared Function createUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "", Optional pPhone As String = "") As Int32
+  Public Shared Function CreateUser(pRole As enumRole, pOrganizationId As Int32, pEmail As String, pFirst As String, pLast As String, Optional pMiddle As String = "", Optional pPhone As String = "") As Int32
     'create the user
     Dim oUser As New USER
     Dim vPassword As String = Base.getPassword() 'randomly generate a password
-    Dim vPasswordEncrypted As String = Base.encryptString(vPassword) 'encrypts the randomly generated password
+    Dim vPasswordEncrypted As String = Base.EncryptString(vPassword) 'encrypts the randomly generated password
     Dim vUserId As Int32
 
     Using oDB As New zakatEntities
@@ -207,9 +208,10 @@ Public Class Base
     vMsgText.Append("</span>")
     Dim vSend As Boolean = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
 
-    createUser = vUserId
+    CreateUser = vUserId
   End Function
-  Public Shared Function encryptString(ByVal encryptText As String) As String
+
+  Public Shared Function EncryptString(ByVal encryptText As String) As String
     Dim bytesBuff As Byte() = Encoding.Unicode.GetBytes(encryptText)
     Dim aAppEnDecryptKey As String = System.Configuration.ConfigurationManager.AppSettings("AppEnDecryptKey")
     Dim key As String = aAppEnDecryptKey
@@ -228,7 +230,7 @@ Public Class Base
     Return encryptText
   End Function
 
-  Public Shared Function decryptString(ByVal decryptText As String) As String
+  Public Shared Function DecryptString(ByVal decryptText As String) As String
     Dim aAppEnDecryptKey As String = System.Configuration.ConfigurationManager.AppSettings("AppEnDecryptKey")
     Dim key As String = aAppEnDecryptKey
     decryptText = decryptText.Replace(" ", "+")
@@ -247,6 +249,21 @@ Public Class Base
     End Using
     Return decryptText
   End Function
+
+  Public Shared Function CheckPermission(pUserID As Integer, pRoleId As Integer) As Boolean
+    Try
+      Using oDB As New zakatEntities()
+        If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = pUserID AndAlso USER_ROLE.roleId = pRoleId).Any Then
+          Return True
+        Else
+          Return False
+        End If
+      End Using
+    Catch ex As Exception
+      Return False
+    End Try
+  End Function
+
 #End Region
 
 End Class

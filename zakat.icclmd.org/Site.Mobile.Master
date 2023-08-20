@@ -26,6 +26,9 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+  <%--Dashboard CDN using Google Charts--%>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
   <style>
     .has-search .form-control-feedback {
       right: initial;
@@ -127,6 +130,7 @@
                     </li>
                   </ul>
                 </asp:Panel>
+                <%--Applicant Panel--%>
                 <asp:Panel ID="pnlApplicant" runat="server" Visible="false">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a id="A11" runat="server" visible="true" href="~/activity">Activity</a><li>
@@ -138,6 +142,7 @@
                     <li><a href="logout">Logout</a></li>
                   </ul>
                 </asp:Panel>
+                <%--Administrator Panel--%>
                 <asp:Panel ID="pnlAdministrator" runat="server" Visible="false">
                   <ul class="nav navbar-nav navbar-right">
                     <li>
@@ -154,6 +159,7 @@
                         </ul>
                       </div>
                     </li>
+                    <li><a id="A13" runat="server" visible="true" href="dashboard">Dashboard</a><li>
                     <li><a id="A12" runat="server" visible="true" href="inbox">Inbox</a><li>
                     <li><a id="A3" runat="server" visible="true" href="~/password">Password</a></li>
                     <li>
@@ -162,6 +168,7 @@
                     <li><a href="logout">Logout</a></li>
                   </ul>
                 </asp:Panel>
+                <%--Approver Panel--%>
                 <asp:Panel ID="pnlApprover" runat="server" Visible="false">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a id="A4" runat="server" visible="true" href="inbox">Inbox</a><li>
@@ -172,6 +179,7 @@
                     <li><a href="logout">Logout</a></li>
                   </ul>
                 </asp:Panel>
+                <%--Financier Panel--%>
                 <asp:Panel ID="pnlFinancier" runat="server" Visible="false">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a id="A8" runat="server" visible="true" href="inbox">Inbox</a><li>
