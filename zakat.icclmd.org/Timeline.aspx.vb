@@ -86,19 +86,19 @@
           vJscript.Append("var container = document.getElementById('timeline');")
           vJscript.Append("var chart = new google.visualization.Timeline(container);")
           vJscript.Append("var dataTable = new google.visualization.DataTable();")
-          vJscript.Append("dataTable.addColumn({ type: 'string', id: 'Review Action' });")
+          vJscript.Append("dataTable.addColumn({ type: 'string', id: 'Action' });")
           vJscript.Append("dataTable.addColumn({ type: 'date', id: 'Start' });")
           vJscript.Append("dataTable.addColumn({ type: 'date', id: 'End' });")
           vJscript.Append("dataTable.addRows([")
           'add data rows
           If .isDrafted Then
-            vJscript.Append("['Drafted', new Date(" & vDraftedStartDate.Year.ToString & ", " & (vDraftedStartDate.Month - 1).ToString & ", " & vDraftedStartDate.Day.ToString & "), new Date(" & vDraftedEndDate.Year.ToString & ", " & (vDraftedEndDate.Month - 1).ToString & ", " & vDraftedEndDate.Day.ToString & ") ]")
+            vJscript.Append("['Drafted', new Date(" & vDraftedStartDate.Year.ToString & ", " & (vDraftedStartDate.Month - 1).ToString & ", " & vDraftedStartDate.Day.ToString & "), new Date(" & vDraftedEndDate.Year.ToString & ", " & (vDraftedEndDate.Month - 1).ToString & ", " & vDraftedEndDate.Day.ToString & ")]")
           End If
           If .isSubmitted Then
-            vJscript.Append(",['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ") ]")
+            vJscript.Append(",['Submitted', new Date(" & vSubmittedStartDate.Year.ToString & ", " & (vSubmittedStartDate.Month - 1).ToString & ", " & vSubmittedStartDate.Day.ToString & "), new Date(" & vSubmittedEndDate.Year.ToString & ", " & (vSubmittedEndDate.Month - 1).ToString & ", " & vSubmittedEndDate.Day.ToString & ")]")
           End If
           If .isValidated Then
-            vJscript.Append(",['Validated', new Date(" & vValidatedStartDate.Year.ToString & ", " & (vValidatedStartDate.Month - 1).ToString & ", " & vValidatedStartDate.Day.ToString & "), new Date(" & vValidatedEndDate.Year.ToString & ", " & (vValidatedEndDate.Month - 1).ToString & ", " & vValidatedEndDate.Day.ToString & ") ]")
+            vJscript.Append(",['Validated', new Date(" & vValidatedStartDate.Year.ToString & ", " & (vValidatedStartDate.Month - 1).ToString & ", " & vValidatedStartDate.Day.ToString & "), new Date(" & vValidatedEndDate.Year.ToString & ", " & (vValidatedEndDate.Month - 1).ToString & ", " & vValidatedEndDate.Day.ToString & ")]")
           End If
           If .isInvestigated Then
             vJscript.Append(",['Investigated', new Date(" & vInvestigatedStartDate.Year.ToString & ", " & (vInvestigatedStartDate.Month - 1).ToString & ", " & vInvestigatedStartDate.Day.ToString & "), new Date(" & vInvestigatedEndDate.Year.ToString & ", " & (vInvestigatedEndDate.Month - 1).ToString & ", " & vInvestigatedEndDate.Day.ToString & ")]")
@@ -116,9 +116,12 @@
             vJscript.Append(",['Rejected', new Date(" & vRejectedStartDate.Year.ToString & ", " & (vRejectedStartDate.Month - 1).ToString & ", " & vRejectedStartDate.Day.ToString & "), new Date(" & vRejectedEndDate.Year.ToString & ", " & (vRejectedEndDate.Month - 1).ToString & ", " & vRejectedEndDate.Day.ToString & ")]")
           End If
           vJscript.Append("]);")
-          vJscript.Append("chart.draw(dataTable);")
+          vJscript.Append("var options = {")
+          vJscript.Append("colors:  ['#C0C0C0', '#FFA500', '#FFFF00', '#800080', '#0000FF' ,'#00008B', '#008000', '#FF0000']")
+          vJscript.Append("};")
+          vJscript.Append("chart.draw(dataTable, options);")
           vJscript.Append("}")
-          lblReportName.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " (Application #: " & Base.getFormattedNumber(oApplication.applicationId) & ") - Review Action Interval Timeline"
+          lblReportName.Text = oApplication.USER.firstName & " " & oApplication.USER.middleName & " " & oApplication.USER.lastName & " (Application #: " & Base.GetFormattedNumber(oApplication.applicationId) & ") - Interval Timeline Between Actions"
           'begin load values from the list
           Dim cScript As New HtmlGenericControl
           cScript.TagName = "script"

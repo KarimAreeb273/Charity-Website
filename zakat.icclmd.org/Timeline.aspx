@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Timeline" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Timeline.aspx.vb" Inherits="zakat.icclmd.org.Timeline" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <br />
   <div class="row">
     <div class="col-lg-12">
@@ -13,7 +12,7 @@
         </table>
       </div>
       <asp:PlaceHolder ID="phReport" runat="server"></asp:PlaceHolder>
-      <div id="timeline" style="width: 100%; height: 300px;"></div>
+      <div id="timeline" style="width: 100%; height: 380px;"></div>
       <table class="table table-hover" border="0">
         <asp:Repeater ID="rptReviewHistory" runat="server">
           <HeaderTemplate>
