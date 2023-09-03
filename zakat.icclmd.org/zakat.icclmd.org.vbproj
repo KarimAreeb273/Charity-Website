@@ -466,6 +466,9 @@
     <Compile Include="USER_ROLE.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="VW_APPLICATIONS_BY_USER_AGE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="VW_APPLICATIONS_DISPERSED_BY_YEAR.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -482,6 +485,9 @@
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_SUBMITTED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_VALIDATED_BY_YEAR.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ZakatForm.aspx.designer.vb">

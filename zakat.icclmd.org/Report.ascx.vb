@@ -20,7 +20,9 @@ Public Class Report
 #Region "Control Members"
   Private _ucMode As eMode
   Private _ucTitle As String
+  Private _ucTitleVisible As Boolean
   Private _ucJscript As String
+
 #End Region
 
 #Region "Control Properties"
@@ -42,6 +44,15 @@ Public Class Report
     End Set
   End Property
 
+  Public Property ucTitleVisible() As Boolean
+    Get
+      Return _ucTitleVisible
+    End Get
+    Set(ByVal value As Boolean)
+      _ucTitleVisible = value
+    End Set
+  End Property
+
   Public Property ucJscript() As String
     Get
       Return _ucJscript
@@ -55,6 +66,7 @@ Public Class Report
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       lblTitle.Text = ucTitle
+      divTitle.Visible = ucTitleVisible
       Dim x As String = ucJscript
       Dim vDivID As String = "div" & Me.ID
       If ucMode <> eMode.Table Then
@@ -71,13 +83,13 @@ Public Class Report
         Case eMode.Bar
           setBarChart(vDivID)
         Case eMode.Column
-          'setColumnChart(vDivID)
+          setColumnChart(vDivID)
         Case eMode.Line
           'setLineChart(vDivID)
         Case eMode.Map
           'setMapChart(vDivID)
         Case eMode.Pie
-          'setPieChart(vDivID)
+          setPieChart(vDivID)
         Case eMode.Table
           'setTableChart()
         Case eMode.Grid
@@ -98,7 +110,30 @@ Public Class Report
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
+  End Sub
 
+  Sub setColumnChart(pDiv As String)
+    Try
+      Dim cScript As New HtmlGenericControl
+      cScript.TagName = "script"
+      cScript.Attributes.Add("type", "text/javascript")
+      cScript.InnerHtml = ucJscript.ToString
+      phScript.Controls.Add(cScript)
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setPieChart(pDiv As String)
+    Try
+      Dim cScript As New HtmlGenericControl
+      cScript.TagName = "script"
+      cScript.Attributes.Add("type", "text/javascript")
+      cScript.InnerHtml = ucJscript.ToString
+      phScript.Controls.Add(cScript)
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
 End Class

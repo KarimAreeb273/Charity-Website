@@ -21,4 +21,67 @@ Partial Public Class Dashboard
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents phChartTopLeft As Global.System.Web.UI.WebControls.PlaceHolder
+
+  '''<summary>
+  '''divTitle control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents divTitle As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''drpApplicationsByGenderByYear control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpApplicationsByGenderByYear As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''phChartTopRight control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents phChartTopRight As Global.System.Web.UI.WebControls.PlaceHolder
+
+  '''<summary>
+  '''div1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''drpApplicationsByGenderByNationalityByYear control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpApplicationsByGenderByNationalityByYear As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''phChartBottomLeft control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents phChartBottomLeft As Global.System.Web.UI.WebControls.PlaceHolder
+
+  '''<summary>
+  '''phChartBottomRight control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents phChartBottomRight As Global.System.Web.UI.WebControls.PlaceHolder
 End Class
