@@ -3,7 +3,7 @@
   <br />
   <h4><b>ZAKAT APPLICATION PROTOCOLS & REQUIRED (SUPPORTING) DOCUMENTS</b></h4>
   <hr />
-  <h5><b>Complete the ICCL Zakat application form FULLY (by answering all questions). Together with your application, submit and observe/abide by the following requirements:</b></h5>
+  <h5><b>Complete the Online Zakat application form FULLY (by answering all questions). Together with your application, submit and observe/abide by the following requirements:</b></h5>
   <br />
 
   <strong>

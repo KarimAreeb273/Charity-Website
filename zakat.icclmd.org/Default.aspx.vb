@@ -49,7 +49,6 @@
     Try
       Using oDB As New zakatEntities()
         If (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing And APPLICATION.qualified2On IsNot Nothing).Any Then
-          'Dim i As Int16 = 0
           Dim vTotalDuration As Decimal
           Dim vTotalAverageDuration As Decimal
           Dim oApplication As List(Of APPLICATION) = (From APPLICATION In oDB.APPLICATION Where APPLICATION.submittedOn IsNot Nothing And APPLICATION.qualified2On IsNot Nothing).ToList()
@@ -59,6 +58,7 @@
           If oApplication.Count = 0 Then
             Return "N/A"
           Else
+            'calculate total average duration as the all applications time between when submitted and the second qualified divided by the count of total applications
             vTotalAverageDuration = vTotalDuration / oApplication.Count
             Return FormatNumber(vTotalAverageDuration, 1).ToString + " Day(s)"
           End If
