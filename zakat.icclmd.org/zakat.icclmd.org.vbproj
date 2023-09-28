@@ -141,6 +141,7 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="About.aspx" />
     <Content Include="AdminFunctions.aspx" />
     <Content Include="Applicants.aspx" />
     <Content Include="Application.aspx" />
@@ -289,6 +290,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About.aspx.designer.vb">
+      <DependentUpon>About.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="About.aspx.vb">
+      <DependentUpon>About.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="AdminFunctions.aspx.designer.vb">
       <DependentUpon>AdminFunctions.aspx</DependentUpon>
     </Compile>
@@ -415,6 +423,9 @@
     <Compile Include="TOPIC.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="TRANSLATION.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="USER.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
@@ -437,21 +448,21 @@
     </Compile>
     <Compile Include="UserRoles.aspx.vb">
       <DependentUpon>UserRoles.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="OrganizationEdit.aspx.designer.vb">
       <DependentUpon>OrganizationEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrganizationEdit.aspx.vb">
       <DependentUpon>OrganizationEdit.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ManageOrganizations.aspx.designer.vb">
       <DependentUpon>ManageOrganizations.aspx</DependentUpon>
     </Compile>
     <Compile Include="ManageOrganizations.aspx.vb">
       <DependentUpon>ManageOrganizations.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Users.aspx.designer.vb">
       <DependentUpon>Users.aspx</DependentUpon>
@@ -464,6 +475,9 @@
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="USER_ROLE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_AVG_PROCESSING_DAYS.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_BY_USER_AGE.vb">
@@ -485,6 +499,9 @@
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_SUBMITTED_BY_YEAR.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_APPLICATIONS_TOTAL_DISPERSED.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_VALIDATED_BY_YEAR.vb">
