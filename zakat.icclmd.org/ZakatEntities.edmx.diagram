@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="74">
+      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="88">
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="26" PointY="49.625" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="23.75" PointY="48.125" />
         <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="9.875" PointY="47.375" />
@@ -43,14 +43,17 @@
         <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_APPLICATION" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" Width="1.5" PointX="4.75" PointY="3.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" Width="1.5" PointX="0.75" PointY="6.75" />
-        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" Width="1.5" PointX="6.75" PointY="0.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" Width="1.5" PointX="3.375" PointY="6.75" />
+        <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" Width="1.5" PointX="5.375" PointY="6.75" />
+        <EntityTypeShape EntityType="zakatModel.TRANSLATION" Width="1.5" PointX="7.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

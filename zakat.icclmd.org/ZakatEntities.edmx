@@ -208,6 +208,15 @@
           <Property Name="topicContent" Type="varchar(max)" />
           <Property Name="topicLink" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="TRANSLATION">
+          <Key>
+            <PropertyRef Name="translationId" />
+          </Key>
+          <Property Name="translationId" Type="int" Nullable="false" />
+          <Property Name="translationNameEnglish" Type="varchar" MaxLength="250" />
+          <Property Name="translationNameNative" Type="varchar" MaxLength="250" />
+          <Property Name="translationURL" Type="varchar" MaxLength="250" />
+        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="userId" />
@@ -268,6 +277,18 @@
           <Property Name="userId" Type="int" />
           <Property Name="roleId" Type="int" />
           <Property Name="organizationId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_AVG_PROCESSING_DAYS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="submittedOn" Type="datetime" />
+          <Property Name="qualified2On" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_BY_USER_AGE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -336,6 +357,17 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does 
           </Key>
           <Property Name="applicationYear" Type="int" />
           <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_TOTAL_DISPERSED' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="dispersedAmount" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -613,9 +645,19 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TOPIC" EntityType="Self.TOPIC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="Self.VW_APPLICATIONS_AVG_PROCESSING_DAYS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[applicationId] AS [applicationId], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[year] AS [year], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[month] AS [month], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[submittedOn] AS [submittedOn], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[qualified2On] AS [qualified2On]
+    FROM [dbo].[VW_APPLICATIONS_AVG_PROCESSING_DAYS] AS [VW_APPLICATIONS_AVG_PROCESSING_DAYS]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="Self.VW_APPLICATIONS_BY_USER_AGE" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_APPLICATIONS_BY_USER_AGE].[applicationId] AS [applicationId], 
@@ -661,6 +703,14 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
     [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationYear] AS [applicationYear], 
     [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationCount] AS [applicationCount]
     FROM [dbo].[VW_APPLICATIONS_SUBMITTED_BY_YEAR] AS [VW_APPLICATIONS_SUBMITTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="Self.VW_APPLICATIONS_TOTAL_DISPERSED" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[applicationId] AS [applicationId], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[year] AS [year], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[month] AS [month], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[dispersedAmount] AS [dispersedAmount]
+    FROM [dbo].[VW_APPLICATIONS_TOTAL_DISPERSED] AS [VW_APPLICATIONS_TOTAL_DISPERSED]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_VALIDATED_BY_YEAR" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -859,15 +909,18 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="APPLICATION" EntitySet="APPLICATION" />
             <End Role="REVIEW" EntitySet="REVIEW" />
           </AssociationSet>
+          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" />
           <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" />
           <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
-        </EntityContainer>
+          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
+          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
+          <EntitySet Name="TRANSLATION" EntityType="zakatModel.TRANSLATION" />
+          </EntityContainer>
         <EntityType Name="ARTIFACT">
           <Key>
             <PropertyRef Name="artifactId" />
@@ -1426,6 +1479,18 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
+          <Key>
+            <PropertyRef Name="applicationId" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="isSubmitted" Type="Boolean" />
+          <Property Name="isDispersed" Type="Boolean" />
+          <Property Name="isRejected" Type="Boolean" />
+          <Property Name="Age" Type="Int32" />
+        </EntityType>
         <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -1468,24 +1533,40 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="applicationYear" Type="Int32" />
           <Property Name="applicationCount" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
-          <Key>
-            <PropertyRef Name="applicationId" />
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="isSubmitted" Type="Boolean" />
-          <Property Name="isDispersed" Type="Boolean" />
-          <Property Name="isRejected" Type="Boolean" />
-          <Property Name="Age" Type="Int32" />
-        </EntityType>
         <EntityType Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
           </Key>
           <Property Name="applicationYear" Type="Int32" />
           <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="submittedOn" Type="DateTime" Precision="3" />
+          <Property Name="qualified2On" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="TRANSLATION">
+          <Key>
+            <PropertyRef Name="translationId" />
+          </Key>
+          <Property Name="translationId" Type="Int32" Nullable="false" />
+          <Property Name="translationNameEnglish" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="translationNameNative" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="translationURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1774,6 +1855,18 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_BY_USER_AGE">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_BY_USER_AGE">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_BY_USER_AGE">
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
+                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_DISPERSED_BY_YEAR">
@@ -1822,18 +1915,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="VW_APPLICATIONS_BY_USER_AGE">
-            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_BY_USER_AGE">
-              <MappingFragment StoreEntitySet="VW_APPLICATIONS_BY_USER_AGE">
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
-                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
-                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_VALIDATED_BY_YEAR">
@@ -1842,7 +1923,38 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
+                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_TOTAL_DISPERSED">
+                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSLATION">
+            <EntityTypeMapping TypeName="zakatModel.TRANSLATION">
+              <MappingFragment StoreEntitySet="TRANSLATION">
+                <ScalarProperty Name="translationURL" ColumnName="translationURL" />
+                <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
+                <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
+                <ScalarProperty Name="translationId" ColumnName="translationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
