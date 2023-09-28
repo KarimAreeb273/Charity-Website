@@ -15,12 +15,16 @@
         For i = 2020 To Now.Year
           drpApplicationsByGenderByYear.Items.Add(New ListItem(i, i))
           drpApplicationsByGenderByNationalityByYear.Items.Add(New ListItem(i, i))
+          drpAverageProcessingDaysByMonth.Items.Add(New ListItem(i, i))
+          drpTotalDispersedByMonth.Items.Add(New ListItem(i, i))
         Next
       End If
       setApplicationsOverThreeYears()
       setApplicationsSubmittedByGender()
       setApplicationsSubmittedByNationality()
       setApplicationsSubmittedByAgeGroup()
+      setAverageProcessingDaysByMonth()
+      setTotalDispersedByMonth()
     Catch ex As Exception
       Response.Write(ex.Message)
     End Try
@@ -99,7 +103,7 @@
         .ucTitleVisible = True
         .ucJscript = vJscript.ToString
       End With
-      phChartTopLeft.Controls.Add(ucChartApplicationsOverThreeYears)
+      phChartRow1Left.Controls.Add(ucChartApplicationsOverThreeYears)
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
@@ -152,7 +156,7 @@
         .ucTitleVisible = False
         .ucJscript = vJscript.ToString
       End With
-      phChartTopRight.Controls.Add(ucChartApplicationsSubmittedByGender)
+      phChartRow1Right.Controls.Add(ucChartApplicationsSubmittedByGender)
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
@@ -224,7 +228,7 @@
           .ucTitleVisible = False
           .ucJscript = vJscript.ToString
         End With
-        phChartBottomLeft.Controls.Add(ucChartApplicationsSubmittedByNationality)
+        phChartRow2Left.Controls.Add(ucChartApplicationsSubmittedByNationality)
       End Using
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
@@ -304,7 +308,456 @@
         .ucTitleVisible = True
         .ucJscript = vJscript.ToString
       End With
-      phChartBottomRight.Controls.Add(ucChartApplicationsSubmittedByAgeGroup)
+      phChartRow2Right.Controls.Add(ucChartApplicationsSubmittedByAgeGroup)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setAverageProcessingDaysByMonth()
+    Try
+      Dim vSelectedYear As Integer = drpAverageProcessingDaysByMonth.SelectedValue
+      Dim Month01Duration As Decimal
+      Dim Month02Duration As Decimal
+      Dim Month03Duration As Decimal
+      Dim Month04Duration As Decimal
+      Dim Month05Duration As Decimal
+      Dim Month06Duration As Decimal
+      Dim Month07Duration As Decimal
+      Dim Month08Duration As Decimal
+      Dim Month09Duration As Decimal
+      Dim Month10Duration As Decimal
+      Dim Month11Duration As Decimal
+      Dim Month12Duration As Decimal
+      Dim Month01Average As Decimal
+      Dim Month02Average As Decimal
+      Dim Month03Average As Decimal
+      Dim Month04Average As Decimal
+      Dim Month05Average As Decimal
+      Dim Month06Average As Decimal
+      Dim Month07Average As Decimal
+      Dim Month08Average As Decimal
+      Dim Month09Average As Decimal
+      Dim Month10Average As Decimal
+      Dim Month11Average As Decimal
+      Dim Month12Average As Decimal
+      Dim Month01Submissions As Integer
+      Dim Month02Submissions As Integer
+      Dim Month03Submissions As Integer
+      Dim Month04Submissions As Integer
+      Dim Month05Submissions As Integer
+      Dim Month06Submissions As Integer
+      Dim Month07Submissions As Integer
+      Dim Month08Submissions As Integer
+      Dim Month09Submissions As Integer
+      Dim Month10Submissions As Integer
+      Dim Month11Submissions As Integer
+      Dim Month12Submissions As Integer
+
+      Using oDB As New zakatEntities
+        Dim oAverageProcessing As List(Of VW_APPLICATIONS_AVG_PROCESSING_DAYS)
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 1).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 1).ToList
+          For Each item In oAverageProcessing
+            Month01Duration = Month01Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month01Average = Month01Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month01Average = 0
+          Month01Duration = 0
+        End If
+        Month01Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 1).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 2).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 2).ToList
+          For Each item In oAverageProcessing
+            Month02Duration = Month02Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month02Average = Month02Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month02Average = 0
+          Month02Duration = 0
+        End If
+        Month02Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 2).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 3).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 3).ToList
+          For Each item In oAverageProcessing
+            Month03Duration = Month03Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month03Average = Month03Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month03Average = 0
+          Month03Duration = 0
+        End If
+        Month03Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 3).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 4).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 4).ToList
+          For Each item In oAverageProcessing
+            Month04Duration = Month04Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month04Average = Month04Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month04Average = 0
+          Month04Duration = 0
+        End If
+        Month04Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 4).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 5).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 5).ToList
+          For Each item In oAverageProcessing
+            Month05Duration = Month05Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month05Average = Month05Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month05Average = 0
+          Month05Duration = 0
+        End If
+        Month05Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 5).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 6).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 6).ToList
+          For Each item In oAverageProcessing
+            Month06Duration = Month06Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month06Average = Month06Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month06Average = 0
+          Month06Duration = 0
+        End If
+        Month06Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 6).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 7).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 7).ToList
+          For Each item In oAverageProcessing
+            Month07Duration = Month07Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month07Average = Month07Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month07Average = 0
+          Month07Duration = 0
+        End If
+        Month07Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 7).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 8).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 8).ToList
+          For Each item In oAverageProcessing
+            Month08Duration = Month08Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month08Average = Month08Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month08Average = 0
+          Month08Duration = 0
+        End If
+        Month08Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 8).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 9).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 9).ToList
+          For Each item In oAverageProcessing
+            Month09Duration = Month09Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month09Average = Month09Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month09Average = 0
+          Month09Duration = 0
+        End If
+        Month09Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 9).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 10).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 10).ToList
+          For Each item In oAverageProcessing
+            Month10Duration = Month10Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month10Average = Month10Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month10Average = 0
+          Month10Duration = 0
+        End If
+        Month10Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 10).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 11).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 11).ToList
+          For Each item In oAverageProcessing
+            Month11Duration = Month11Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month11Average = Month11Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month11Average = 0
+          Month11Duration = 0
+        End If
+        Month11Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 11).Count
+
+        If (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 12).Any Then
+          'given some records exist, populate report variables with actual values
+          oAverageProcessing = (From VW_APPLICATIONS_AVG_PROCESSING_DAYS In oDB.VW_APPLICATIONS_AVG_PROCESSING_DAYS Where VW_APPLICATIONS_AVG_PROCESSING_DAYS.year = vSelectedYear AndAlso VW_APPLICATIONS_AVG_PROCESSING_DAYS.month = 12).ToList
+          For Each item In oAverageProcessing
+            Month12Duration = Month12Duration + DateDiff(DateInterval.Day, CDate(item.submittedOn), CDate(item.qualified2On))
+          Next
+          Month12Average = Month12Duration / oAverageProcessing.Count
+        Else
+          'given no records exist, populate report variables with placeholder values
+          Month12Average = 0
+          Month12Duration = 0
+        End If
+        Month12Submissions = (From APPLICATION In oDB.APPLICATION Where Year(APPLICATION.submittedOn) = vSelectedYear AndAlso Month(APPLICATION.submittedOn) = 12).Count
+      End Using
+
+      Dim vJscript As New StringBuilder
+      vJscript.Append("google.charts.load('current', {'packages':['corechart']});")
+      vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
+      vJscript.Append("function drawChart() {")
+      vJscript.Append("var data = google.visualization.arrayToDataTable([")
+      vJscript.Append("['Month', 'Average Processing Days','Submitted Applications'],")
+      vJscript.Append("['Jan'," & FormatNumber(Month01Average, 1).ToString & "," & Month01Submissions.ToString & "],")
+      vJscript.Append("['Feb'," & FormatNumber(Month02Average, 1).ToString & "," & Month02Submissions.ToString & "],")
+      vJscript.Append("['Mar'," & FormatNumber(Month03Average, 1).ToString & "," & Month03Submissions.ToString & "],")
+      vJscript.Append("['Apr'," & FormatNumber(Month04Average, 1).ToString & "," & Month04Submissions.ToString & "],")
+      vJscript.Append("['May'," & FormatNumber(Month05Average, 1).ToString & "," & Month05Submissions.ToString & "],")
+      vJscript.Append("['Jun'," & FormatNumber(Month06Average, 1).ToString & "," & Month06Submissions.ToString & "],")
+      vJscript.Append("['Jul'," & FormatNumber(Month07Average, 1).ToString & "," & Month07Submissions.ToString & "],")
+      vJscript.Append("['Aug'," & FormatNumber(Month08Average, 1).ToString & "," & Month08Submissions.ToString & "],")
+      vJscript.Append("['Sep'," & FormatNumber(Month09Average, 1).ToString & "," & Month09Submissions.ToString & "],")
+      vJscript.Append("['Oct'," & FormatNumber(Month10Average, 1).ToString & "," & Month10Submissions.ToString & "],")
+      vJscript.Append("['Nov'," & FormatNumber(Month11Average, 1).ToString & "," & Month11Submissions.ToString & "],")
+      vJscript.Append("['Dec'," & FormatNumber(Month12Average, 1).ToString & "," & Month12Submissions.ToString & "]")
+      vJscript.Append("]);")
+      vJscript.Append("var options = {")
+      vJscript.Append("title: 'Submitted Applications / Average Processing Days By Year and Month',")
+      vJscript.Append("curveType: 'function',")
+      vJscript.Append("pointSize: 5,")
+      vJscript.Append("legend: { position: 'bottom' },")
+      'vJscript.Append("vAxis: {")
+      'vJscript.Append("title: 'Days'")
+      'vJscript.Append("},")
+      vJscript.Append("colors: ['blue', 'orange']")
+      vJscript.Append("};")
+      vJscript.Append("var chart = new google.visualization.LineChart(document.getElementById('divucChartApplicationsAverageProcessingDaysByMonth'));")
+      vJscript.Append("chart.draw(data, options);")
+      vJscript.Append("}")
+
+      Dim ucChartApplicationsAverageProcessingDaysByMonth As New Report
+      ucChartApplicationsAverageProcessingDaysByMonth = LoadControl("Report.ascx")
+      With ucChartApplicationsAverageProcessingDaysByMonth
+        .ID = "ucChartApplicationsAverageProcessingDaysByMonth"
+        .ucMode = Report.eMode.Line
+        .ucTitle = "Average Processing Days By Year and Month"
+        .ucTitleVisible = False
+        .ucJscript = vJscript.ToString
+      End With
+      phChartRow3Left.Controls.Add(ucChartApplicationsAverageProcessingDaysByMonth)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setTotalDispersedByMonth()
+    Try
+      Dim vSelectedYear As Integer = drpTotalDispersedByMonth.SelectedValue
+      Dim Month01Total As Decimal
+      Dim Month02Total As Decimal
+      Dim Month03Total As Decimal
+      Dim Month04Total As Decimal
+      Dim Month05Total As Decimal
+      Dim Month06Total As Decimal
+      Dim Month07Total As Decimal
+      Dim Month08Total As Decimal
+      Dim Month09Total As Decimal
+      Dim Month10Total As Decimal
+      Dim Month11Total As Decimal
+      Dim Month12Total As Decimal
+
+      Using oDB As New zakatEntities
+        Dim oApplication As List(Of VW_APPLICATIONS_TOTAL_DISPERSED)
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 1).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 1).ToList
+          For Each item In oApplication
+            Month01Total = Month01Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month01Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 2).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 2).ToList
+          For Each item In oApplication
+            Month02Total = Month02Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month02Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 3).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 3).ToList
+          For Each item In oApplication
+            Month03Total = Month03Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month03Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 4).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 4).ToList
+          For Each item In oApplication
+            Month04Total = Month04Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month04Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 5).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 5).ToList
+          For Each item In oApplication
+            Month05Total = Month05Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month05Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 6).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 6).ToList
+          For Each item In oApplication
+            Month06Total = Month06Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month06Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 7).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 7).ToList
+          For Each item In oApplication
+            Month07Total = Month07Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month07Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 8).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 8).ToList
+          For Each item In oApplication
+            Month08Total = Month08Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month08Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 9).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 9).ToList
+          For Each item In oApplication
+            Month09Total = Month09Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month09Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 10).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 10).ToList
+          For Each item In oApplication
+            Month10Total = Month10Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month10Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 11).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 11).ToList
+          For Each item In oApplication
+            Month11Total = Month11Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month11Total = 0
+        End If
+        If (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 12).Any Then
+          'given some records exist, populate report variables with actual values
+          oApplication = (From VW_APPLICATIONS_TOTAL_DISPERSED In oDB.VW_APPLICATIONS_TOTAL_DISPERSED Where VW_APPLICATIONS_TOTAL_DISPERSED.year = vSelectedYear AndAlso VW_APPLICATIONS_TOTAL_DISPERSED.month = 12).ToList
+          For Each item In oApplication
+            Month12Total = Month12Total + (item.dispersedAmount)
+          Next
+        Else
+          'given no records exist, populate report variables with placeholder value(s)
+          Month12Total = 0
+        End If
+      End Using
+
+      Dim vJscript As New StringBuilder
+      vJscript.Append("google.charts.load('current', {'packages':['corechart']});")
+      vJscript.Append("google.charts.setOnLoadCallback(drawChart);")
+      vJscript.Append("function drawChart() {")
+      vJscript.Append("var data = google.visualization.arrayToDataTable([")
+      vJscript.Append("['Month', 'Total Dollar Amount Dispersed'],")
+      vJscript.Append("['Jan'," & CStr(Month01Total) & "],")
+      vJscript.Append("['Feb'," & CStr(Month02Total) & "],")
+      vJscript.Append("['Mar'," & CStr(Month03Total) & "],")
+      vJscript.Append("['Apr'," & CStr(Month04Total) & "],")
+      vJscript.Append("['May'," & CStr(Month05Total) & "],")
+      vJscript.Append("['Jun'," & CStr(Month06Total) & "],")
+      vJscript.Append("['Jul'," & CStr(Month07Total) & "],")
+      vJscript.Append("['Aug'," & CStr(Month08Total) & "],")
+      vJscript.Append("['Sep'," & CStr(Month09Total) & "],")
+      vJscript.Append("['Oct'," & CStr(Month10Total) & "],")
+      vJscript.Append("['Nov'," & CStr(Month11Total) & "],")
+      vJscript.Append("['Dec'," & CStr(Month12Total) & "],")
+      vJscript.Append("]);")
+      vJscript.Append("var options = {")
+      vJscript.Append("title: 'Total Amount Dispersed By Year and Month',")
+      vJscript.Append("curveType: 'function',")
+      vJscript.Append("pointSize: 5,")
+      vJscript.Append("legend: { position: 'bottom' },")
+      vJscript.Append("vAxis: {")
+      vJscript.Append("title: 'Dollar Amount'")
+      vJscript.Append("},")
+      vJscript.Append("colors: ['#008000']")
+      vJscript.Append("};")
+      vJscript.Append("var chart = new google.visualization.LineChart(document.getElementById('divucChartApplicationsTotalDispersedByMonth'));")
+      vJscript.Append("chart.draw(data, options);")
+      vJscript.Append("}")
+
+      Dim ucChartApplicationsTotalDispersedByMonth As New Report
+      ucChartApplicationsTotalDispersedByMonth = LoadControl("Report.ascx")
+      With ucChartApplicationsTotalDispersedByMonth
+        .ID = "ucChartApplicationsTotalDispersedByMonth"
+        .ucMode = Report.eMode.Line
+        .ucTitle = "Average Processing Days By Year and Month"
+        .ucTitleVisible = False
+        .ucJscript = vJscript.ToString
+      End With
+      phChartRow4Left.Controls.Add(ucChartApplicationsTotalDispersedByMonth)
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)

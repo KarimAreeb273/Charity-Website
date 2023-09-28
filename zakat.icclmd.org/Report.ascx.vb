@@ -85,7 +85,7 @@ Public Class Report
         Case eMode.Column
           setColumnChart(vDivID)
         Case eMode.Line
-          'setLineChart(vDivID)
+          setLineChart(vDivID)
         Case eMode.Map
           'setMapChart(vDivID)
         Case eMode.Pie
@@ -125,6 +125,18 @@ Public Class Report
   End Sub
 
   Sub setPieChart(pDiv As String)
+    Try
+      Dim cScript As New HtmlGenericControl
+      cScript.TagName = "script"
+      cScript.Attributes.Add("type", "text/javascript")
+      cScript.InnerHtml = ucJscript.ToString
+      phScript.Controls.Add(cScript)
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Sub setLineChart(pDiv As String)
     Try
       Dim cScript As New HtmlGenericControl
       cScript.TagName = "script"

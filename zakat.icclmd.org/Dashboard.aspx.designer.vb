@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class Dashboard
 
   '''<summary>
-  '''phChartTopLeft control.
+  '''phChartRow1Left control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents phChartTopLeft As Global.System.Web.UI.WebControls.PlaceHolder
+  Protected WithEvents phChartRow1Left As Global.System.Web.UI.WebControls.PlaceHolder
 
   '''<summary>
   '''divTitle control.
@@ -41,13 +41,13 @@ Partial Public Class Dashboard
   Protected WithEvents drpApplicationsByGenderByYear As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
-  '''phChartTopRight control.
+  '''phChartRow1Right control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents phChartTopRight As Global.System.Web.UI.WebControls.PlaceHolder
+  Protected WithEvents phChartRow1Right As Global.System.Web.UI.WebControls.PlaceHolder
 
   '''<summary>
   '''div1 control.
@@ -68,20 +68,74 @@ Partial Public Class Dashboard
   Protected WithEvents drpApplicationsByGenderByNationalityByYear As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
-  '''phChartBottomLeft control.
+  '''phChartRow2Left control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents phChartBottomLeft As Global.System.Web.UI.WebControls.PlaceHolder
+  Protected WithEvents phChartRow2Left As Global.System.Web.UI.WebControls.PlaceHolder
 
   '''<summary>
-  '''phChartBottomRight control.
+  '''phChartRow2Right control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents phChartBottomRight As Global.System.Web.UI.WebControls.PlaceHolder
+  Protected WithEvents phChartRow2Right As Global.System.Web.UI.WebControls.PlaceHolder
+
+  '''<summary>
+  '''div2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents div2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''drpAverageProcessingDaysByMonth control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpAverageProcessingDaysByMonth As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''phChartRow3Left control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents phChartRow3Left As Global.System.Web.UI.WebControls.PlaceHolder
+
+  '''<summary>
+  '''div3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents div3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+  '''<summary>
+  '''drpTotalDispersedByMonth control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpTotalDispersedByMonth As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''phChartRow4Left control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents phChartRow4Left As Global.System.Web.UI.WebControls.PlaceHolder
 End Class
