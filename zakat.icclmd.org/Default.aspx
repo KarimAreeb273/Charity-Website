@@ -127,15 +127,16 @@
         <li>Correspondence is sent/received via email when decisions are made</li>
         <li>Edit your saved profile as often as necessary</li>
         <li>Track the progress of your submitted online zakat application</li>
-        <li>Complete the zakat form in a <a href="language">language</a> that you understand</li>
+        <li>Translate the Online Zakat system in a language you understand</li>
       </ul>
+
     </div>
     <div class="col-md-6">
-      <h4>Required Zakat Protocols</h4>
+      <h4>Required Online Zakat Protocols</h4>
       <ul style="list-style: none">
         <li><b>Applicants</b>, prior to your completing an Online</li>
         <li>Zakat Application, please review and adhere to the</li>
-        <li><a href="protocols">Required Zakat Protocols</a></li>
+        <li><a href="protocols">Required Online Zakat Protocols</a></li>
       </ul>
     </div>
   </div>
