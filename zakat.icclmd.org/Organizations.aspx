@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
-    <h4><b>Organizations Affiliated with Online Zakat</b></h4>
+    <h3>Organizations Affiliated with Online Zakat</h3>
     <br />
     <div class="well well-sm">
       <h5><b>View Affiliated Organizations:</b></h5>
@@ -36,8 +36,8 @@
               <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "website")%>'><%# DataBinder.Eval(Container.DataItem, "website")%></asp:HyperLink>
             </td>
             <td style="text-align: center; vertical-align: middle">
-              <asp:LinkButton ID="btnView2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnView_Click" ToolTip='<%# "View more details about " & DataBinder.Eval(Container.DataItem, "name")%>'>
-                <span class="fas fa-glasses" style="font-size:20px; color:darkgreen"></span>
+              <asp:LinkButton ID="btnView2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnView_Click" ToolTip='<%# "Click to view more details about " & DataBinder.Eval(Container.DataItem, "name")%>'>
+                <span class="fas fa-info-circle" style="font-size:20px; color:darkgreen"></span>
               </asp:LinkButton>
             </td>
           </tr>

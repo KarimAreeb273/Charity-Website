@@ -58,7 +58,7 @@
 </style>
 
   <div class="container">
-    <h4><b>New Zakat Application</b></h4>
+    <h3>New Online Zakat Application</h3>
     <div class="row">
       <div class="col-lg-12">
         <div class="well well-sm" style="text-align:justify">

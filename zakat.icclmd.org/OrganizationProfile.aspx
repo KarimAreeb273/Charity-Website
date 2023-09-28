@@ -4,10 +4,15 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h4><b>Organization Profile Page</b></h4>
+        <h3>Organization Profile Page</h3>
         <br />
         <div class="well well-sm">
-          <h5><b><asp:Label ID="lblOrganizationName" runat="server"></asp:Label>:</b></h5>
+          <table style="width:100%">
+            <tr>
+              <td><a href="organizations" target="_self"><span class="fas fa-arrow-alt-circle-left" style="font-size:20px; color:darkgreen"></span></a></td>
+              <td><h5><b><asp:Label ID="lblOrganizationName" runat="server"></asp:Label>:</b></h5></td>
+            </tr>
+          </table>
         </div>
 
         <strong>Email:&nbsp;&nbsp;</strong><asp:HyperLink ID="hypEmail" runat="server" Target="_blank"></asp:HyperLink><br />

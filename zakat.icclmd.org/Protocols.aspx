@@ -1,18 +1,20 @@
 ﻿<%@ Page Title="Protocols" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Protocols.aspx.vb" Inherits="zakat.icclmd.org.Protocols" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <br />
-  <h4><b>ZAKAT APPLICATION PROTOCOLS & REQUIRED (SUPPORTING) DOCUMENTS</b></h4>
+  <h3>
+    Online Zakat Application Protocols & Required (Supporting) Documents
+  </h3>
   <hr />
-  <h5><b>Complete the Online Zakat application form FULLY (by answering all questions). Together with your application, submit and observe/abide by the following requirements:</b></h5>
+  <h5><b>Complete the Online Zakat application form FULLY by answering all questions with the most accurate information available. Together with your application, submit and observe/abide by the following requirements:</b></h5>
   <br />
 
   <strong>
     <ol>
-      <li>Valid copy of Driver’s License or Government issued photo identification</li>
+      <li>Provide a valid copy of a Driver’s License or Government issued photo identification</li>
       <br />
-      <li>Copies of all documents related to and/or supporting financial hardship</li>
+      <li>Provide copies of all documents related to and/or supporting financial hardship</li>
       <br />
-      <li>Submitted Zakat form and the related documents once processed and approved, <u>CANNOT</u> be used for multiple zakat applications. New zakat application form and related supporting documents are required and <u>MUST</u> be submitted for each new application</li>
+      <li>Any submitted Online Zakat application and their related documents once processed and approved, <u>CANNOT</u> be used for other zakat applications. Online zakat application and related supporting documents are required and <u>MUST</u> be submitted for each new application</li>
       <br />
       <li>Applicants <u>shall NOT</u> apply/submit multiple zakat applications within same calendar month or within number of days less than one calendar month</li>
       <br />
