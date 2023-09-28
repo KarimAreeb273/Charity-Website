@@ -42,7 +42,14 @@
             pnlApprover.Visible = False
             pnlFinancier.Visible = False
             pnlAnonymous.Visible = True
-
+            Using oDB As New zakatEntities()
+              Dim oTranslation As TRANSLATION = (From TRANSLATION In oDB.TRANSLATION Where TRANSLATION.translationNameEnglish = "English").FirstOrDefault
+              drpTranslation.DataSource = (From TRANSLATION In oDB.TRANSLATION Order By TRANSLATION.translationNameEnglish).ToList()
+              drpTranslation.DataTextField = "translationNameEnglish"
+              drpTranslation.DataValueField = "translationId"
+              drpTranslation.DataBind()
+              drpTranslation.Items.Insert(0, New ListItem("(Translate Site)", 0))
+            End Using
           End If
         Else
           'Anonymous
@@ -51,22 +58,20 @@
           pnlApprover.Visible = False
           pnlFinancier.Visible = False
           pnlAnonymous.Visible = True
+          Using oDB As New zakatEntities()
+            Dim oTranslation As TRANSLATION = (From TRANSLATION In oDB.TRANSLATION Where TRANSLATION.translationNameEnglish = "English").FirstOrDefault
+            drpTranslation.DataSource = (From TRANSLATION In oDB.TRANSLATION Order By TRANSLATION.translationNameEnglish).ToList()
+            drpTranslation.DataTextField = "translationNameEnglish"
+            drpTranslation.DataValueField = "translationId"
+            drpTranslation.DataBind()
+            drpTranslation.Items.Insert(0, New ListItem("(Translate Site)", 0))
+          End Using
         End If
 
         If vSearched = True Then
           txtSearch.Focus()
         End If
       End If
-    Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
-    End Try
-  End Sub
-
-  Private Sub lnkProfileFooter_Click(sender As Object, e As EventArgs) Handles lnkProfileFooter.Click
-    Try
-      Session("sApplicantId") = Session("sUserId")
-      Response.Redirect("profile")
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
@@ -120,6 +125,20 @@
       End Using
       Session("hasSearched") = True
       txtSearch.Focus()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub drpTranslation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles drpTranslation.SelectedIndexChanged
+    Try
+      If Not (drpTranslation.SelectedValue = 0) Then
+        Using oDB As New zakatEntities()
+          Dim oTranslation As TRANSLATION = (From TRANSLATION In oDB.TRANSLATION Where TRANSLATION.translationId = drpTranslation.SelectedValue).FirstOrDefault
+          Response.Redirect(oTranslation.translationURL)
+        End Using
+      End If
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)

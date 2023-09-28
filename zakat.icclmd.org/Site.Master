@@ -96,10 +96,21 @@
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
                 <li><a href="contact">Contact Us</a></li>
+                <li><a href="about">About Us</a></li>                
+                <li><a href="organizations">Organizations</a></li>                
               </ul>
-              <div class="container" style="white-space:nowrap">                
+              <div class="container" style="white-space:nowrap">       
+                <%--Anonymous Panel--%>
                 <asp:Panel ID="pnlAnonymous" runat="server" Visible="true" style="background-color: darkgreen;">
                   <ul class="nav navbar-nav navbar-right">
+                    <%--Translate--%>
+                    <li>
+                      <div class="form-group" style="position: relative; top:9px">
+                        <asp:DropDownList ID="drpTranslation" runat="server" AutoPostBack="True" Width="150px" CssClass="form-control" ToolTip="Translate Online Zakat Into Your Selected Language">
+                        </asp:DropDownList>
+                      </div>
+                    </li>
+                    <li><a href="privacy">Privacy</a></li>
                     <li><a href="zakatform">Apply</a></li>
                     <li><a href="default">Login</a></li>
                     <li>
@@ -212,19 +223,19 @@
                 <table class="" style="width: 100%; font-family: Helvetica,Arial,sans-serif; font-size: 12px">
                   <tr>
                     <td style="width: 100%; text-align: center; vertical-align: middle;">
-                      <span style="white-space: nowrap;"><a href="/">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="language">Language</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="protocols">Protocols</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;">
+                      <%--<span style="white-space: nowrap;"><a href="/">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="language">Language</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="protocols">Protocols</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;">
                         <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
-                      </span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="zakatform">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
+                      </span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="zakatform">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+                      <%--<span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
                       <span style="white-space: nowrap;">&copy;&nbsp;<%: DateTime.Now.Year %> <a href="https://www.icclmd.org" target="_blank">ICCL</a>&nbsp;All Rights Reserved</span>
                     </td>
                   </tr>

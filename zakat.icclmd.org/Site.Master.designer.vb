@@ -23,6 +23,15 @@ Partial Public Class SiteMaster
   Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
+  '''drpTranslation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpTranslation As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
   '''UpdatePanel1 control.
   '''</summary>
   '''<remarks>
@@ -273,13 +282,4 @@ Partial Public Class SiteMaster
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
-
-  '''<summary>
-  '''lnkProfileFooter control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents lnkProfileFooter As Global.System.Web.UI.WebControls.LinkButton
 End Class
