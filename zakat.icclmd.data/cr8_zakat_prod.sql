@@ -438,6 +438,24 @@ CREATE TABLE [dbo].[TOPIC](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[TRANSLATION]    Script Date: 9/27/2023 6:13:20 PM ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[TRANSLATION](
+	[translationId] [int] NOT NULL,
+	[translationNameEnglish] [varchar](250) NULL,
+	[translationNameNative] [varchar](250) NULL,
+	[translationURL] [varchar](250) NULL,
+ CONSTRAINT [PK_TRANSLATION] PRIMARY KEY CLUSTERED 
+(
+	[translationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 /****** Object:  Table [dbo].[USER]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -1366,4 +1384,22 @@ INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
 
 INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ("Online Zakat Home Page","Online Zakat Login Username: Password: Or, Submit an Online Zakat Application! Current Average Duration To Process A Zakat Application: N/A (Average Duration Is From Application Submission to 2nd Qualification) Advantages of the Online Zakat System Save your online zakat application data electronically and securely Submit online zakat application(s) to one or more Islamic organizations Correspondence is sent/received via email when decisions are made Edit your saved profile as often as necessary Track the progress of your submitted online zakat application Complete the zakat form in a language that you understand Required Zakat Protocols and Documents Applicants, Prior to your completing an Online Zakat Application, please download, review and adhere to the following:","default")
 INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ("Online Zakat Contact Us Page","Online Zakat Contact Information 7306 Contee Road Laurel, MD 20707 Ph: 301.317.4584 ICCL Office Manager: office@icclmd.org Online Zakat Administrator: zakat@icclmd.org ICCL General Website: https://www.icclmd.org Online Zakat Website: https://zakat.icclmd.org","contact")
+
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (1,'Arabic','العربية','https://translate.google.com/translate?sl=en&tl=ar&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (2,'Chechen','Нохчийн мотт','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=ru&_x_tr_hl=en&_x_tr_pto=wapp');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (3,'English','English','https://zakat.icclmd.org/');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (4,'French','Français','https://translate.google.com/translate?hl=&sl=en&tl=fr&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (5,'German','Deutsch','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=de&_x_tr_hl=en&_x_tr_pto=wapp');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (6,'Indonesian','Bahasa Indonesia','https://translate.google.com/translate?hl=&sl=en&tl=id&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (7,'Italian','italiano','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=it&_x_tr_hl=en&_x_tr_pto=wapp');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (8,'Hindi','हिन्दी','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=hi&_x_tr_hl=en&_x_tr_pto=wapp');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (9,'Kurdish','کوردی','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=ckb&_x_tr_hl=en&_x_tr_pto=wapp');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (10,'Malay','Bahasa Melayu','https://translate.google.com/translate?hl=&sl=en&tl=ms&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (11,'Pashto','پښتو','https://translate.google.com/translate?hl=&sl=en&tl=ps&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (12,'Persian','فارسى','https://translate.google.com/translate?hl=&sl=en&tl=fa&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (13,'Somali','اَف سٝومالِ','https://translate.google.com/translate?hl=&sl=en&tl=so&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (14,'Spanish','español','https://translate.google.com/translate?hl=&sl=en&tl=es&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (15,'Thai','ภาษาไทย','https://translate.google.com/translate?hl=&sl=en&tl=th&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (16,'Turkish','Türkçe','https://translate.google.com/translate?hl=&sl=en&tl=tr&u=https%3A%2F%2Fzakat.icclmd.org%2F');
+INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (17,'Urdu','اردو','https://translate.google.com/translate?hl=&sl=en&tl=ur&u=https%3A%2F%2Fzakat.icclmd.org%2F');
 GO
