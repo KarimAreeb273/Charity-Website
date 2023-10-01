@@ -150,7 +150,6 @@
     <Content Include="Images\png-transparent.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
-    <Content Include="Language.aspx" />
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
     <Content Include="Protocols.aspx" />
@@ -349,13 +348,6 @@
     </Compile>
     <Compile Include="DEPENDENT.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Language.aspx.designer.vb">
-      <DependentUpon>Language.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Language.aspx.vb">
-      <DependentUpon>Language.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">
       <DependentUpon>Inbox.aspx</DependentUpon>
