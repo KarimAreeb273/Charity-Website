@@ -1085,7 +1085,7 @@ Public Class ZakatForm
       'save the application
       SaveZakatForm(vUserId, False)
 
-      'verify that we have an applciation id to associate to it otherwise redirect home
+      'verify that we have an application id to associate to it otherwise redirect home
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vApplicationId = 0 Then Response.Redirect("/")
       'obtain file information if one exists
