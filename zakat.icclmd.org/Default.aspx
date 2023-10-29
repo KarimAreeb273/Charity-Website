@@ -22,7 +22,7 @@
             <div class="form-group">
               <asp:Label runat="server" AssociatedControlID="txtEmail" CssClass="col-md-2 control-label">Username:</asp:Label>
               <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" />
+                <asp:TextBox runat="server" ID="txtEmail" CssClass="form-control" placeholder="email@domain.com" ToolTip="Email/Username" MaxLength="60" TabIndex="1" autocomplete="off" ValidationGroup="Login" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" CssClass="text-danger" ErrorMessage="The email/username is required." Display="Dynamic" />
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="A valid email/username is required." ControlToValidate="txtEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic"></asp:RegularExpressionValidator>                
               </div>
@@ -30,7 +30,7 @@
             <div class="form-group">
               <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-md-2 control-label">Password:</asp:Label>
               <div class="col-md-10">
-                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" Text="12121212" />
+                <asp:TextBox runat="server" ID="txtPassword" TextMode="Password" CssClass="form-control" TabIndex="2" Text="12121212" ValidationGroup="Login" />
                 <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password is required." />
               </div>
             </div>
@@ -40,7 +40,7 @@
                 <table style="width: 100%" border="0">
                   <tr>
                     <td style="text-align: left">
-                      <asp:Button runat="server" ID="btnLogin" Text="Login" Width="133px" CssClass="btn btn-success" TabIndex="3" />&nbsp;
+                      <asp:Button runat="server" ID="btnLogin" Text="Login" Width="133px" CssClass="btn btn-success" TabIndex="3" ValidationGroup="Login" />&nbsp;
                       <a href="forgot" class="btn btn-default" style="width: 133px;"  TabIndex="4">Forgot Password</a>
                     </td>
                   </tr>
@@ -54,7 +54,9 @@
                 <br />
                 <table style="width: 100%">
                   <tr>
-                    <td style="width: 100%; text-align: left">Or, <a href="zakatform">Submit an Online Zakat Application!</a>
+                    <td style="width: 100%; text-align: left">                
+                       <%-- Or, <a href="zakatform">Submit an Online Zakat Application!</a>--%>
+                        <asp:LinkButton ID="btnGoToApplication" runat="server" Text="Submit an Online Zakat Application!" Width="275px" CssClass="btn btn-success" TabIndex="5" PostBackUrl="zakatform" CausesValidation="False"></asp:LinkButton>
                     </td>
                   </tr>
                 </table>

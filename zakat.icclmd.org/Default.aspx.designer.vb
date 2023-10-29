@@ -13,102 +13,111 @@ Option Explicit On
 
 Partial Public Class _Default
 
-  '''<summary>
-  '''pnlAnonymous control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
+    '''<summary>
+    '''pnlAnonymous control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlAnonymous As Global.System.Web.UI.WebControls.Panel
 
-  '''<summary>
-  '''txtEmail control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+    '''<summary>
+    '''txtEmail control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
 
-  '''<summary>
-  '''RegularExpressionValidator1 control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+    '''<summary>
+    '''RegularExpressionValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
 
-  '''<summary>
-  '''txtPassword control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
+    '''<summary>
+    '''txtPassword control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
 
-  '''<summary>
-  '''btnLogin control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
+    '''<summary>
+    '''btnLogin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnLogin As Global.System.Web.UI.WebControls.Button
 
-  '''<summary>
-  '''valBadLogin control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents valBadLogin As Global.System.Web.UI.WebControls.CustomValidator
+    '''<summary>
+    '''valBadLogin control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valBadLogin As Global.System.Web.UI.WebControls.CustomValidator
 
-  '''<summary>
-  '''pnlApplicant control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlApplicant As Global.System.Web.UI.WebControls.Panel
+    '''<summary>
+    '''btnGoToApplication control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnGoToApplication As Global.System.Web.UI.WebControls.LinkButton
 
-  '''<summary>
-  '''pnlApprover control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlApprover As Global.System.Web.UI.WebControls.Panel
+    '''<summary>
+    '''pnlApplicant control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlApplicant As Global.System.Web.UI.WebControls.Panel
 
-  '''<summary>
-  '''pnlAdministrator control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlAdministrator As Global.System.Web.UI.WebControls.Panel
+    '''<summary>
+    '''pnlApprover control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlApprover As Global.System.Web.UI.WebControls.Panel
 
-  '''<summary>
-  '''pnlMetrics control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlMetrics As Global.System.Web.UI.WebControls.Panel
+    '''<summary>
+    '''pnlAdministrator control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlAdministrator As Global.System.Web.UI.WebControls.Panel
 
-  '''<summary>
-  '''lblAverageDuration control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents lblAverageDuration As Global.System.Web.UI.WebControls.Label
+    '''<summary>
+    '''pnlMetrics control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlMetrics As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''lblAverageDuration control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents lblAverageDuration As Global.System.Web.UI.WebControls.Label
 End Class
