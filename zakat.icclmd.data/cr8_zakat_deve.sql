@@ -72,6 +72,14 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSubmitted]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSaved]
 GO
+/****** Object:  Table [dbo].[TOPIC]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TOPIC]') AND type in (N'U'))
+DROP TABLE [dbo].[TOPIC]
+GO
+/****** Object:  Table [dbo].[TRANSLATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TRANSLATION]') AND type in (N'U'))
+DROP TABLE [dbo].[TRANSLATION]
+GO
 /****** Object:  Table [dbo].[USER_ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[USER_ROLE]') AND type in (N'U'))
 DROP TABLE [dbo].[USER_ROLE]
