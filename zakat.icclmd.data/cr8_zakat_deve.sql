@@ -1388,6 +1388,8 @@ INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone
 INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('eiad.sayyad@outlook.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Qualifier', 'Qualifier', '3013174584');
 INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('mohammed.sayyad@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Mohammed', 'Sayyad', '3013174584');
 INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('masbhaiyat@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Masihullah', 'Bhaiyat', '3013174584');
+INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone) VALUES ('areebakarim99@gmail.com'	,	'gTEsGnri3KlAMeqLLgPaPLLcG+W41gS48eTNnAXCEcc='	,	'Areeb', 'Karim', '3013174584');
+
 
 INSERT INTO [dbo].[ORGANIZATION] ([name],[abbreviation],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','ICCL','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
 
@@ -1404,6 +1406,13 @@ INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 3);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 4);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 6);
+
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 2);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 3);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 4);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 5);
+INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 6);
+
 
 INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Home Page','Online Zakat Login Username: Password: Or, Submit an Online Zakat Application! Current Average Duration To Process A Zakat Application: N/A (Average Duration Is From Application Submission to 2nd Qualification) Advantages of the Online Zakat System Save your online zakat application data electronically and securely Submit online zakat application(s) to one or more Islamic organizations Correspondence is sent/received via email when decisions are made Edit your saved profile as often as necessary Track the progress of your submitted online zakat application Complete the zakat form in a language that you understand Required Zakat Protocols and Documents Applicants, Prior to your completing an Online Zakat Application, please download, review and adhere to the following:','default')
 INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Contact Us Page','Online Zakat Contact Information 7306 Contee Road Laurel, MD 20707 Ph: 301.317.4584 ICCL Office Manager: office@icclmd.org Online Zakat Administrator: zakat@icclmd.org ICCL General Website: https://www.icclmd.org Online Zakat Website: https://zakat.icclmd.org','contact')
