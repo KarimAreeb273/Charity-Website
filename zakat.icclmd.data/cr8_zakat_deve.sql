@@ -1406,7 +1406,6 @@ INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 3);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 4);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (5, 1, 6);
-
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 2);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 3);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (6, 1, 4);
