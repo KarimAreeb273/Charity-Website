@@ -1,4 +1,4 @@
-﻿<%@ Page Title="User Roles" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="UserRoles.aspx.vb" Inherits="zakat.icclmd.org.UserRoles" %>
+﻿<%@ Page Title="User Roles" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="UserRoles.aspx.vb" Inherits="zakat.icclmd.org.UserRoles" MaintainScrollPositionOnPostback="true" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
