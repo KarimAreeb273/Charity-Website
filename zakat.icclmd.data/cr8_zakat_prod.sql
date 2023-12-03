@@ -30,6 +30,10 @@ ALTER TABLE [dbo].[ORGANIZATION] DROP CONSTRAINT [FK_ORGANIZATION_STATE]
 GO
 ALTER TABLE [dbo].[DEPENDENT] DROP CONSTRAINT [FK_DEPDENDENTS_USER]
 GO
+ALTER TABLE [dbo].[DONATION] DROP CONSTRAINT [FK_DONATION_ORGANIZATION]
+GO
+ALTER TABLE [dbo].[DONATION] DROP CONSTRAINT [FK_DONATION_USER]
+GO
 ALTER TABLE [dbo].[CERTIFICATION_SKILL] DROP CONSTRAINT [FK_CERTIFICATION_SKILL_USER]
 GO
 ALTER TABLE [dbo].[ARTIFACT] DROP CONSTRAINT [FK_ARTIFACT_ARTIFACT_TYPE]
@@ -72,6 +76,14 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSubmitted]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [DF_APPLICATION_isSaved]
 GO
+/****** Object:  Table [dbo].[TOPIC]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TOPIC]') AND type in (N'U'))
+DROP TABLE [dbo].[TOPIC]
+GO
+/****** Object:  Table [dbo].[TRANSLATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[TRANSLATION]') AND type in (N'U'))
+DROP TABLE [dbo].[TRANSLATION]
+GO
 /****** Object:  Table [dbo].[USER_ROLE]    Script Date: 12/18/2022 10:46:03 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[USER_ROLE]') AND type in (N'U'))
 DROP TABLE [dbo].[USER_ROLE]
@@ -103,6 +115,10 @@ GO
 /****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 12/18/2022 10:46:03 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[ORGANIZATION]') AND type in (N'U'))
 DROP TABLE [dbo].[ORGANIZATION]
+GO
+/****** Object:  Table [dbo].[ORGANIZATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DONATION]') AND type in (N'U'))
+DROP TABLE [dbo].[DONATION]
 GO
 /****** Object:  Table [dbo].[NATIONALITY]    Script Date: 12/18/2022 10:46:03 AM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[NATIONALITY]') AND type in (N'U'))
@@ -336,6 +352,7 @@ GO
 CREATE TABLE [dbo].[ORGANIZATION](
 	[organizationId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](100) NULL,
+	[abbreviation] [varchar](10) NULL,
 	[street] [varchar](100) NULL,
 	[city] [varchar](50) NULL,
 	[stateAbbr] [varchar](15) NULL,
@@ -346,6 +363,23 @@ CREATE TABLE [dbo].[ORGANIZATION](
  CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED 
 (
 	[organizationId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DONATION]    Script Date: 12/18/2022 10:46:03 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DONATION](
+	[donationId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
+	[organizationId] [int] NULL,
+	[amount] [money] NULL,
+	[donationDate] [datetime] NULL
+ CONSTRAINT [PK_DONATION] PRIMARY KEY CLUSTERED 
+(
+	[donationId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -464,14 +498,14 @@ GO
 CREATE TABLE [dbo].[USER](
 	[userId] [int] IDENTITY(1,1) NOT NULL,
 	[email] [varchar](60) NOT NULL,
-	[password] [varchar](20) NULL,
+	[passwordEncrypted] [varchar](max) NULL,
+	[socialSecurityNumberEncrypted] [varchar](max) NULL,
 	[firstName] [varchar](30) NOT NULL,
 	[middleName] [varchar](30) NULL,
 	[lastName] [varchar](30) NOT NULL,
 	[gender] [varchar](10) NULL,
 	[maritalStatus] [varchar](15) NULL,
 	[dob] [datetime] NULL,
-	[socialSecurityNumber] [varchar](9) NULL,
 	[nationalityId] [int] NULL,
 	[citizenshipStatus] [varchar](20) NULL,
 	[phone] [varchar](10) NULL,
@@ -602,6 +636,16 @@ ALTER TABLE [dbo].[DEPENDENT]  WITH CHECK ADD  CONSTRAINT [FK_DEPDENDENTS_USER] 
 REFERENCES [dbo].[USER] ([userId])
 GO
 ALTER TABLE [dbo].[DEPENDENT] CHECK CONSTRAINT [FK_DEPDENDENTS_USER]
+GO
+ALTER TABLE [dbo].[DONATION]  WITH CHECK ADD  CONSTRAINT [FK_DONATION_ORGANIZATION] FOREIGN KEY([organizationId])
+REFERENCES [dbo].[ORGANIZATION] ([organizationId])
+GO
+ALTER TABLE [dbo].[DONATION] CHECK CONSTRAINT [FK_DONATION_ORGANIZATION]
+GO
+ALTER TABLE [dbo].[DONATION]  WITH CHECK ADD  CONSTRAINT [FK_DONATION_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[DONATION] CHECK CONSTRAINT [FK_DONATION_USER]
 GO
 ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])
@@ -1304,6 +1348,14 @@ INSERT INTO country (name) VALUES ('Yemen');
 INSERT INTO country (name) VALUES ('Zambia');
 INSERT INTO country (name) VALUES ('Zimbabwe');
 
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	1	,	'Applicant'	,	'This role provides a user the ability to save profile data, submit zakat application(s), and monitor zakat application status'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	2	,	'Validator'	,	'This role provides a user the ability to review a zakat application for completeness'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'This role provides a user the ability to review the zakat case to determine that a need exists'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispersed'	);
+INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	7	,	'General'	,	'This role provides no privileges'	);
+
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'(Select One)'	,	'(Select One)'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AL'	,	'Alabama'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'AK'	,	'Alaska'	);
@@ -1367,14 +1419,6 @@ INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	7	,	'Eviction Notice
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	8	,	'Local Masjid Reference Letter');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	9	,	'Other');
 
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	1	,	'Applicant'	,	'This role provides a user the ability to save profile data, submit zakat application(s), and monitor zakat application status'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	2	,	'Validator'	,	'This role provides a user the ability to review a zakat application for completeness'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	3	,	'Investigator'	,	'This role provides a user the ability to review the zakat case to determine that a need exists'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	4	,	'Qualifier'	,	'This role provides a user the ability to determine zakat eligibility based on Islamic jurisprudence'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	5	,	'Administrator'	,	'This role provides a user the ability to administer various reference data related to the system'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	6	,	'Financier'	,	'This role provides a user the ability to be notified about an approved zakat application so that funds can be dispersed'	);
-INSERT INTO ROLE (	roleId	,	name	,	description	) VALUES (	7	,	'General'	,	'This role provides no privileges'	);
-
 INSERT INTO [dbo].[USER] (email,	password,	firstName,	lastName, phone) VALUES ('zakat@icclmd.org'	,	'12121212'	,	'ICCL Zakat', 'Administrator', '3013174584');
 
 INSERT INTO [dbo].[ORGANIZATION] ([name]) VALUES ('Placeholder')
@@ -1382,8 +1426,12 @@ INSERT INTO [dbo].[ORGANIZATION] ([name],[street],[city],[stateAbbr],[zip],[emai
 
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
 
-INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ("Online Zakat Home Page","Online Zakat Login Username: Password: Or, Submit an Online Zakat Application! Current Average Duration To Process A Zakat Application: N/A (Average Duration Is From Application Submission to 2nd Qualification) Advantages of the Online Zakat System Save your online zakat application data electronically and securely Submit online zakat application(s) to one or more Islamic organizations Correspondence is sent/received via email when decisions are made Edit your saved profile as often as necessary Track the progress of your submitted online zakat application Complete the zakat form in a language that you understand Required Zakat Protocols and Documents Applicants, Prior to your completing an Online Zakat Application, please download, review and adhere to the following:","default")
-INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ("Online Zakat Contact Us Page","Online Zakat Contact Information 7306 Contee Road Laurel, MD 20707 Ph: 301.317.4584 ICCL Office Manager: office@icclmd.org Online Zakat Administrator: zakat@icclmd.org ICCL General Website: https://www.icclmd.org Online Zakat Website: https://zakat.icclmd.org","contact")
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Home Page','Online Zakat Login Username: Password: Or, Submit an Online Zakat Application! Current Average Duration To Process A Zakat Application: N/A (Average Duration Is From Application Submission to 2nd Qualification) Advantages of the Online Zakat System Save your online zakat application data electronically and securely Submit online zakat application(s) to one or more Islamic organizations Correspondence is sent/received via email when decisions are made Edit your saved profile as often as necessary Track the progress of your submitted online zakat application Complete the zakat form in a language that you understand Required Zakat Protocols and Documents Applicants, Prior to your completing an Online Zakat Application, please download, review and adhere to the following:','default')
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Contact Us Page','Online Zakat Contact Information 7306 Contee Road Laurel, MD 20707 Ph: 301.317.4584 ICCL Office Manager: office@icclmd.org Online Zakat Administrator: zakat@icclmd.org ICCL General Website: https://www.icclmd.org Online Zakat Website: https://zakat.icclmd.org','contact')
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat About Us Page','About Online Zakat Welcome to Online Zakat, a groundbreaking platform dedicated to facilitating the distribution of zakat as well as empowering communities in need. At Online Zakat, we believe in the transformative power of Zakat, an essential pillar of Islamic faith, to bring positive change to the lives of individuals and society as a whole. Our platform serves as a unified hub for local Masajid (mosques) to upload their information, enabling us to effectively assess eligibility and allocate Zakat funds to deserving recipients. We have created a streamlined process that ensures transparency, efficiency, and impactful distribution of Zakat contributions. With a deep commitment to social welfare and upliftment, Online Zakat strives to make a meaningful difference by connecting those who have Zakat funds to share with those who require support. By leveraging technology and a user-friendly interface, we have simplified the process of Zakat distribution, making it accessible to Masajid and individuals alike. Our mission goes beyond mere financial assistance. We firmly believe in fostering empowerment and sustainable change within communities. By providing a platform for Masajid to upload their information, we strengthen the network of support and enable local institutions to play an active role in addressing the needs of their congregants. Online Zakat is built on the principles of accountability and trust. We ensure that every contribution is utilized judiciously and reaches the intended recipients. Our stringent verification process and rigorous eligibility criteria enable us to maintain the highest standards of fairness and equity. Join us on this journey of compassion and solidarity by becoming a vital part of our shared vision to create a society where the blessings of Zakat reach those who truly need it. Together, let us uplift lives, strengthen communities, and fulfill the divine mandate of Zakat. Thank you for being a part of Online Zakat, and for making a difference in the lives of those in need.','about')
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Organizations Affiliated with Online Zakat','Organizations Affiliated with Online Zakat View Affiliated Organizations: Name Phone Email Website View Islamic Community Center of Laurel (ICCL) 301-317-4584	office@icclmd.org https://www.icclmd.org Maryland Institute of Development (MID) 571-338-5053 admin@marylandinstitute.org https://www.marylandinstitute.org/','organizations')
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Privacy Notice','Privacy Notice This privacy notice discloses the privacy practices for https://zakat.icclmd.org. This privacy notice applies solely to information collected by this website. It will notify you of the following: What personally identifiable information is collected from you through the website, how it is used and with whom it may be shared. What choices are available to you regarding the use of your data. The security procedures in place to protect the misuse of your information. How you can correct any inaccuracies in the information. Information Collection, Use, and Sharing We are the sole owners of the information collected on this site. We only have access to/collect information that you voluntarily give us via email or other direct contact from you. We will not sell or rent this information to anyone. We will use your information to respond to you, regarding the reason you contacted us. We will not share your information with any third party outside of our organization, other than as necessary to fulfill your request (e.g., to record zakat profile information, dependent information, and zakat payments). Unless you ask us not to, we may contact you via email in the future to tell you about services and/or changes to this privacy policy. Your Access to and Control Over Information You may opt out of any future contacts from us at any time by contacting the association and informing us of your decision. You can do the following at any time by contacting us via the email address or phone number given on our website: See what data we have about you, if any. Change/correct any data we have about you. Have us delete any data we have about you. Express any concern you have about our use of your data. Security We take precautions to protect your information. When you submit sensitive information via the website, your information is protected both online and offline. Wherever we collect sensitive information and personally identifiable information (such as name and date of birth), that information is encrypted and transmitted to us in a secure way. You can verify this by looking for a lock icon in the address bar and looking for "https" at the beginning of the address of the Web page. While we use encryption to protect sensitive information transmitted online, we also protect your information offline. Only select members of the association who need the information to perform a specific job (for example, approving zakat applications or those performing maintenance and administration) are granted access to personally identifiable information. The computers/servers in which we store personally identifiable information are kept in a secure environment with a hosting provider. If you feel that we are not abiding by this privacy policy, you should contact us immediately via telephone at 301.317.4584 or via email at: zakat@icclmd.org.','privacy')
+INSERT INTO [dbo].[TOPIC] ([topicName],[topicContent],[topicLink]) VALUES ('Online Zakat Application Protocols & Required Documents','Online Zakat Application Protocols & Required (Supporting) Documents Complete the Online Zakat application form FULLY by answering all questions with the most accurate information available. Together with your application, submit and observe/abide by the following requirements: Provide a valid copy of a Driver''s License or Government issued photo identification Provide copies of all documents related to and/or supporting financial hardship Any submitted Online Zakat application and their related documents once processed and approved, CANNOT be used for other zakat applications. Online zakat application and related supporting documents are required and MUST be submitted for each new application Applicants shall NOT apply/submit multiple zakat applications within same calendar month or within number of days less than one calendar month Incomplete or partially completed applications will delay timely processing & may/could result into the application being denied An applicant who is claimed as a dependent shall NOT apply at the same time/period with the applicant who has claimed him/her Note: Applicant is responsible for making and providing copies of all required documents.','protocols')
 
 INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (1,'Arabic','العربية','https://translate.google.com/translate?sl=en&tl=ar&u=https%3A%2F%2Fzakat.icclmd.org%2F');
 INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (2,'Chechen','Нохчийн мотт','https://zakat-icclmd-org.translate.goog/?_x_tr_sl=en&_x_tr_tl=ru&_x_tr_hl=en&_x_tr_pto=wapp');
