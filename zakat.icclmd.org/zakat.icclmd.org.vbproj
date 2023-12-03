@@ -147,6 +147,7 @@
     <Content Include="Application.aspx" />
     <Content Include="Activity.aspx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="Donate.aspx" />
     <Content Include="Images\png-transparent.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
@@ -347,6 +348,16 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DEPENDENT.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Donate.aspx.designer.vb">
+      <DependentUpon>Donate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Donate.aspx.vb">
+      <DependentUpon>Donate.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="DONATION.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">

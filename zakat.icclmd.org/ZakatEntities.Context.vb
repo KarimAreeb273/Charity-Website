@@ -50,5 +50,6 @@ Partial Public Class zakatEntities
     Public Overridable Property VW_APPLICATIONS_AVG_PROCESSING_DAYS() As DbSet(Of VW_APPLICATIONS_AVG_PROCESSING_DAYS)
     Public Overridable Property VW_APPLICATIONS_TOTAL_DISPERSED() As DbSet(Of VW_APPLICATIONS_TOTAL_DISPERSED)
     Public Overridable Property TRANSLATION() As DbSet(Of TRANSLATION)
+    Public Overridable Property DONATION() As DbSet(Of DONATION)
 
 End Class
