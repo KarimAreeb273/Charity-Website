@@ -1392,6 +1392,7 @@ INSERT INTO [dbo].[USER] (email,	[passwordEncrypted],	firstName,	lastName, phone
 
 
 INSERT INTO [dbo].[ORGANIZATION] ([name],[abbreviation],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Islamic Community Center of Laurel','ICCL','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.icclmd.org')
+INSERT INTO [dbo].[ORGANIZATION] ([name],[abbreviation],[street],[city],[stateAbbr],[zip],[email],[phone],[website]) VALUES ('Maryland Institute of Development','MID','7306 Contee Road','Laurel','MD','20707','office@icclmd.org','3013174584', 'https://www.marylandinstitute.org/')
 
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (1, 1, 5);
 INSERT INTO [dbo].[USER_ROLE] (userId, organizationId, roleId) VALUES (2, 1, 5);
