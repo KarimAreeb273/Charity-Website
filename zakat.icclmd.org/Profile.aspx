@@ -572,7 +572,7 @@
                       <div class="form-group">
                         <asp:Label runat="server" AssociatedControlID="txtPassword" CssClass="col-lg-2 control-label" ToolTip="Password" Style="white-space: nowrap">Password:</asp:Label>
                         <div class="col-lg-10">
-                          <asp:TextBox Style="text-transform: capitalize;" runat="server" ID="txtPassword" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="35" AutoPostBack="True" ValidationGroup="Save" />
+                          <asp:TextBox Style="text-transform: capitalize;" runat="server" ID="txtPassword" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Password" MaxLength="30" TabIndex="35" AutoPostBack="True" ValidationGroup="Save" />
                           <asp:RequiredFieldValidator runat="server" ID="valPassword" ControlToValidate="txtPassword" CssClass="text-danger" ErrorMessage="The password is required." Display="Static" ValidationGroup="Save" />
                         </div>
                       </div>

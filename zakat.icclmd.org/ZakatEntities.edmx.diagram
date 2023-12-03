@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="88">
+      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="143">
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="26" PointY="49.625" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="23.75" PointY="48.125" />
         <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="9.875" PointY="47.375" />
@@ -54,6 +54,9 @@
         <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" Width="1.5" PointX="3.375" PointY="6.75" />
         <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="zakatModel.TRANSLATION" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="zakatModel.DONATION" Width="1.5" PointX="15.5" PointY="52.375" />
+        <AssociationConnector Association="zakatModel.FK_DONATION_ORGANIZATION" />
+        <AssociationConnector Association="zakatModel.FK_DONATION_USER" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

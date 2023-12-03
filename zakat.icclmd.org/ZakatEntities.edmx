@@ -59,6 +59,8 @@
           <Property Name="employerZip" Type="varchar" MaxLength="5" />
           <Property Name="employerPhone" Type="varchar" MaxLength="10" />
           <Property Name="personalNeedStatement" Type="varchar" MaxLength="1000" />
+          <Property Name="draftedOn" Type="datetime" />
+          <Property Name="draftedBy" Type="int" />
           <Property Name="submittedOn" Type="datetime" />
           <Property Name="submittedBy" Type="int" />
           <Property Name="validatedOn" Type="datetime" />
@@ -78,8 +80,6 @@
           <Property Name="createdBy" Type="int" />
           <Property Name="updatedOn" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
-          <Property Name="draftedOn" Type="datetime" />
-          <Property Name="draftedBy" Type="int" />
         </EntityType>
         <EntityType Name="ARTIFACT">
           <Key>
@@ -127,6 +127,16 @@
           <Property Name="gender" Type="varchar" MaxLength="10" />
           <Property Name="relationship" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="DONATION">
+          <Key>
+            <PropertyRef Name="donationId" />
+          </Key>
+          <Property Name="donationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" />
+          <Property Name="organizationId" Type="int" />
+          <Property Name="amount" Type="money" />
+          <Property Name="donationDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="LANGUAGE">
           <Key>
             <PropertyRef Name="languageId" />
@@ -147,6 +157,7 @@
           </Key>
           <Property Name="organizationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="100" />
+          <Property Name="abbreviation" Type="varchar" MaxLength="10" />
           <Property Name="street" Type="varchar" MaxLength="100" />
           <Property Name="city" Type="varchar" MaxLength="50" />
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" />
@@ -154,7 +165,6 @@
           <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="250" />
-          <Property Name="abbreviation" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -486,6 +496,30 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DONATION_ORGANIZATION">
+          <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="0..1" />
+          <End Role="DONATION" Type="Self.DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONATION_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="DONATION" Type="Self.DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ORGANIZATION_STATE">
           <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
           <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="*" />
@@ -637,6 +671,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="Self.CERTIFICATION_SKILL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPENDENT" EntityType="Self.DEPENDENT" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DONATION" EntityType="Self.DONATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ORGANIZATION" EntityType="Self.ORGANIZATION" Schema="dbo" store:Type="Tables" />
@@ -753,6 +788,14 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <AssociationSet Name="FK_DEPDENDENTS_USER" Association="Self.FK_DEPDENDENTS_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="DEPENDENT" EntitySet="DEPENDENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="Self.FK_DONATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_USER" Association="Self.FK_DONATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="DONATION" EntitySet="DONATION" />
           </AssociationSet>
           <AssociationSet Name="FK_ORGANIZATION_STATE" Association="Self.FK_ORGANIZATION_STATE">
             <End Role="STATE" EntitySet="STATE" />
@@ -920,6 +963,15 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
           <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
           <EntitySet Name="TRANSLATION" EntityType="zakatModel.TRANSLATION" />
+          <EntitySet Name="DONATION" EntityType="zakatModel.DONATION" />
+          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_USER" Association="zakatModel.FK_DONATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="ARTIFACT">
           <Key>
@@ -1006,6 +1058,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
+          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -1123,6 +1176,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
+          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_USER" FromRole="USER" ToRole="DONATION" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -1568,6 +1622,42 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="translationNameNative" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="translationURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="DONATION">
+          <Key>
+            <PropertyRef Name="donationId" />
+          </Key>
+          <Property Name="donationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="organizationId" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="donationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="DONATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DONATION_USER" FromRole="DONATION" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_DONATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONATION_USER">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1951,6 +2041,17 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
                 <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
                 <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
                 <ScalarProperty Name="translationId" ColumnName="translationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DONATION">
+            <EntityTypeMapping TypeName="zakatModel.DONATION">
+              <MappingFragment StoreEntitySet="DONATION">
+                <ScalarProperty Name="donationDate" ColumnName="donationDate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="donationId" ColumnName="donationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

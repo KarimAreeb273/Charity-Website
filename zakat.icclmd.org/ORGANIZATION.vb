@@ -25,5 +25,6 @@ Partial Public Class ORGANIZATION
     Public Overridable Property STATE As STATE
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
+    Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
 
 End Class

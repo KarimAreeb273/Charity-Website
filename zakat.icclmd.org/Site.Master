@@ -95,9 +95,10 @@
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
                 <li><a href="/">Home</a></li>
+                <li><a href="organizations">Organizations</a></li> 
+                <li><a href="donate">Donate</a></li> 
                 <li><a href="contact">Contact Us</a></li>
-                <li><a href="about">About Us</a></li>                
-                <li><a href="organizations">Organizations</a></li>                
+                <li><a href="about">About Us</a></li>                                           
               </ul>
               <div class="container" style="white-space:nowrap">       
                 <%--Anonymous Panel--%>
