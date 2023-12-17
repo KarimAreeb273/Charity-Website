@@ -141,9 +141,28 @@
                 </div>
               </div>
               <div class="form-group">
+                <div class="checkbox">
+                    <label><asp:CheckBox ID="chkAcknowledgement" runat="server" CssClass="checkbox" TabIndex="10" AutoPostBack="True" /><b>Accept Donations?</b></label>
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="chkAcknowledgement" CssClass="text-danger" ErrorMessage="The PayPal token is required" Display="Static" ValidationGroup="Head" />
+                </div>
+              </div>
+              <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="txtPayPalToken" CssClass="col-lg-2 control-label" ToolTip="Organization PayPal Token" Style="white-space: nowrap">PayPal Token:</asp:Label>
+                <div class="col-lg-10">
+                  <asp:TextBox runat="server" ID="txtPayPalToken" CssClass="form-control" ToolTip="PayPal Token" MaxLength="5" TabIndex="11" AutoCompleteType="Disabled" />
+                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPayPalToken" CssClass="text-danger" ErrorMessage="The PayPal token is required" Display="Static" ValidationGroup="Head" />
+                </div>
+              </div>
+             <%-- <div class="form-group">
+                <div id="hiddenForm" runat="server" style="display:none;">
+                    <asp:TextBox runat="server"  ID="imgName" placeholder="Enter your Image URL"></asp:TextBox>
+                    <asp:TextBox ID="tokenName" runat="server" placeholder="Enter your org PayPal Token"></asp:TextBox>
+                </div>
+              </div>--%>
+              <div class="form-group">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-10">
-                  <asp:Button ID="btnAddOrganization" runat="server" Text="Add Organization" CssClass="btn btn-success" TabIndex="10" Width="150" ValidationGroup="Head" />
+                    <asp:Button ID="btnAddOrganization" runat="server" Text="Add Organization" CssClass="btn btn-success" TabIndex="10" Width="150" ValidationGroup="Head" />
                 </div>
               </div>
             </div>
