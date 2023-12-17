@@ -360,6 +360,8 @@ CREATE TABLE [dbo].[ORGANIZATION](
 	[email] [varchar](60) NULL,
 	[phone] [varchar](10) NULL,
 	[website] [varchar](250) NULL,
+	[payPalImageURL] [varchar](250) NULL,
+	[payPalIdentityToken] [varchar](100) NULL
  CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED 
 (
 	[organizationId] ASC
@@ -376,7 +378,16 @@ CREATE TABLE [dbo].[DONATION](
 	[userId] [int] NULL,
 	[organizationId] [int] NULL,
 	[amount] [money] NULL,
-	[donationDate] [datetime] NULL
+	[donationDate] [datetime] NULL,
+	[isConfirmed] [bit] NOT NULL,
+	[paypalPdtIsSuccessful] [bit] NULL,
+	[paypalPdtConfirmDate] [datetime] NULL,
+	[paypalPdtTransactionId] [varchar](50) NULL,
+	[paypalPdtResponse] [varchar](4000) NULL,
+	[paypalIpnIsSuccessful] [bit] NULL,
+	[paypalIpnConfirmDate] [datetime] NULL,
+	[paypalIpnTransactionId] [varchar](50) NULL,
+	[paypalIpnResponse] [varchar](4000) NULL
  CONSTRAINT [PK_DONATION] PRIMARY KEY CLUSTERED 
 (
 	[donationId] ASC
