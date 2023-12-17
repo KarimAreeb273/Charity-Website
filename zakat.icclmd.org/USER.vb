@@ -51,9 +51,11 @@ Partial Public Class USER
     Public Property updatedOn As Nullable(Of Date)
     Public Property updatedBy As Nullable(Of Integer)
 
+    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property CERTIFICATION_SKILL As ICollection(Of CERTIFICATION_SKILL) = New HashSet(Of CERTIFICATION_SKILL)
     Public Overridable Property COUNTRY As COUNTRY
     Public Overridable Property DEPENDENT As ICollection(Of DEPENDENT) = New HashSet(Of DEPENDENT)
+    Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
     Public Overridable Property NATIONALITY As NATIONALITY
     Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
@@ -61,7 +63,5 @@ Partial Public Class USER
     Public Overridable Property STATE1 As STATE
     Public Overridable Property USER_LANGUAGE As ICollection(Of USER_LANGUAGE) = New HashSet(Of USER_LANGUAGE)
     Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
-    Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
-    Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
 
 End Class

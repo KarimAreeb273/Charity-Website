@@ -373,15 +373,15 @@
     <Compile Include="NATIONALITY.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ORGANIZATION.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrganizationProfile.aspx.designer.vb">
       <DependentUpon>OrganizationProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="OrganizationProfile.aspx.vb">
       <DependentUpon>OrganizationProfile.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="ORGANIZATION.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Organizations.aspx.designer.vb">
       <DependentUpon>Organizations.aspx</DependentUpon>
@@ -414,6 +414,9 @@
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="STATE.vb">
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Timeline.aspx.designer.vb">

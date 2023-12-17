@@ -10,14 +10,11 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class USER_ROLE
-    Public Property userRoleId As Integer
-    Public Property userId As Nullable(Of Integer)
-    Public Property roleId As Nullable(Of Integer)
-    Public Property organizationId As Nullable(Of Integer)
-
-    Public Overridable Property ORGANIZATION As ORGANIZATION
-    Public Overridable Property ROLE As ROLE
-    Public Overridable Property USER As USER
+Partial Public Class sysdiagrams
+    Public Property name As String
+    Public Property principal_id As Integer
+    Public Property diagram_id As Integer
+    Public Property version As Nullable(Of Integer)
+    Public Property definition As Byte()
 
 End Class

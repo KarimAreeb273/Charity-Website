@@ -136,15 +136,6 @@
           <Property Name="organizationId" Type="int" />
           <Property Name="amount" Type="money" />
           <Property Name="donationDate" Type="datetime" />
-          <Property Name="isConfirmed" Type="bit" Nullable="false" />
-          <Property Name="paypalPdtIsSuccessful" Type="bit" />
-          <Property Name="paypalPdtConfirmDate" Type="datetime" />
-          <Property Name="paypalPdtTransactionId" Type="varchar" MaxLength="50" />
-          <Property Name="paypalPdtResponse" Type="varchar" MaxLength="4000" />
-          <Property Name="paypalIpnIsSuccessful" Type="bit" />
-          <Property Name="paypalIpnConfirmDate" Type="datetime" />
-          <Property Name="paypalIpnTransactionId" Type="varchar" MaxLength="50" />
-          <Property Name="paypalIpnResponse" Type="varchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="LANGUAGE">
           <Key>
@@ -174,8 +165,6 @@
           <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="250" />
-          <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
-          <Property Name="payPalIdentityToken" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -219,6 +208,16 @@
           </Key>
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="stateName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TOPIC">
           <Key>
@@ -298,6 +297,106 @@
           <Property Name="userId" Type="int" />
           <Property Name="roleId" Type="int" />
           <Property Name="organizationId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_AVG_PROCESSING_DAYS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="submittedOn" Type="datetime" />
+          <Property Name="qualified2On" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_BY_USER_AGE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
+          <Key>
+            <PropertyRef Name="applicationId" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="applicationId" Type="int" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="isSubmitted" Type="bit" />
+          <Property Name="isDispersed" Type="bit" />
+          <Property Name="isRejected" Type="bit" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DISPERSED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DRAFTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_INVESTIGATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_QUALIFIED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_REJECTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_TOTAL_DISPERSED' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="year" Type="int" />
+          <Property Name="month" Type="int" />
+          <Property Name="dispersedAmount" Type="money" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="int" />
+          <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
           <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="1" />
@@ -590,11 +689,81 @@
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TOPIC" EntityType="Self.TOPIC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="Self.VW_APPLICATIONS_AVG_PROCESSING_DAYS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[applicationId] AS [applicationId], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[year] AS [year], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[month] AS [month], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[submittedOn] AS [submittedOn], 
+    [VW_APPLICATIONS_AVG_PROCESSING_DAYS].[qualified2On] AS [qualified2On]
+    FROM [dbo].[VW_APPLICATIONS_AVG_PROCESSING_DAYS] AS [VW_APPLICATIONS_AVG_PROCESSING_DAYS]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="Self.VW_APPLICATIONS_BY_USER_AGE" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_BY_USER_AGE].[applicationId] AS [applicationId], 
+    [VW_APPLICATIONS_BY_USER_AGE].[userId] AS [userId], 
+    [VW_APPLICATIONS_BY_USER_AGE].[isSubmitted] AS [isSubmitted], 
+    [VW_APPLICATIONS_BY_USER_AGE].[isDispersed] AS [isDispersed], 
+    [VW_APPLICATIONS_BY_USER_AGE].[isRejected] AS [isRejected], 
+    [VW_APPLICATIONS_BY_USER_AGE].[Age] AS [Age]
+    FROM [dbo].[VW_APPLICATIONS_BY_USER_AGE] AS [VW_APPLICATIONS_BY_USER_AGE]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DISPERSED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_DISPERSED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_DISPERSED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_DISPERSED_BY_YEAR] AS [VW_APPLICATIONS_DISPERSED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DRAFTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_DRAFTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_DRAFTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_DRAFTED_BY_YEAR] AS [VW_APPLICATIONS_DRAFTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_INVESTIGATED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_INVESTIGATED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_INVESTIGATED_BY_YEAR] AS [VW_APPLICATIONS_INVESTIGATED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_QUALIFIED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_QUALIFIED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_QUALIFIED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_QUALIFIED_BY_YEAR] AS [VW_APPLICATIONS_QUALIFIED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_REJECTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_REJECTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_REJECTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_REJECTED_BY_YEAR] AS [VW_APPLICATIONS_REJECTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_SUBMITTED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_SUBMITTED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_SUBMITTED_BY_YEAR] AS [VW_APPLICATIONS_SUBMITTED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="Self.VW_APPLICATIONS_TOTAL_DISPERSED" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[applicationId] AS [applicationId], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[year] AS [year], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[month] AS [month], 
+    [VW_APPLICATIONS_TOTAL_DISPERSED].[dispersedAmount] AS [dispersedAmount]
+    FROM [dbo].[VW_APPLICATIONS_TOTAL_DISPERSED] AS [VW_APPLICATIONS_TOTAL_DISPERSED]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_VALIDATED_BY_YEAR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_APPLICATIONS_VALIDATED_BY_YEAR].[applicationYear] AS [applicationYear], 
+    [VW_APPLICATIONS_VALIDATED_BY_YEAR].[applicationCount] AS [applicationCount]
+    FROM [dbo].[VW_APPLICATIONS_VALIDATED_BY_YEAR] AS [VW_APPLICATIONS_VALIDATED_BY_YEAR]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="Self.FK_APPLICATION_ORGANIZATION">
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
@@ -693,21 +862,56 @@
     <edmx:ConceptualModels>
       <Schema Namespace="zakatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="zakatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
           <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
           <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
           <EntitySet Name="CERTIFICATION_SKILL" EntityType="zakatModel.CERTIFICATION_SKILL" />
           <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
           <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
+          <EntitySet Name="DONATION" EntityType="zakatModel.DONATION" />
           <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
           <EntitySet Name="NATIONALITY" EntityType="zakatModel.NATIONALITY" />
+          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
           <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
           <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
           <EntitySet Name="ROLE" EntityType="zakatModel.ROLE" />
           <EntitySet Name="STATE" EntityType="zakatModel.STATE" />
+          <EntitySet Name="sysdiagrams" EntityType="zakatModel.sysdiagrams" />
           <EntitySet Name="TOPIC" EntityType="zakatModel.TOPIC" />
+          <EntitySet Name="TRANSLATION" EntityType="zakatModel.TRANSLATION" />
           <EntitySet Name="USER" EntityType="zakatModel.USER" />
           <EntitySet Name="USER_LANGUAGE" EntityType="zakatModel.USER_LANGUAGE" />
           <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
+          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
+          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" />
+          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
+          <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="REVIEW" EntitySet="REVIEW" />
+          </AssociationSet>
           <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
             <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
             <End Role="ARTIFACT" EntitySet="ARTIFACT" />
@@ -724,6 +928,14 @@
             <End Role="USER" EntitySet="USER" />
             <End Role="DEPENDENT" EntitySet="DEPENDENT" />
           </AssociationSet>
+          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_USER" Association="zakatModel.FK_DONATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
           <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE">
             <End Role="LANGUAGE" EntitySet="LANGUAGE" />
             <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
@@ -731,6 +943,14 @@
           <AssociationSet Name="FK_USER_NATIONALITY1" Association="zakatModel.FK_USER_NATIONALITY1">
             <End Role="NATIONALITY" EntitySet="NATIONALITY" />
             <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
             <End Role="STATE" EntitySet="STATE" />
@@ -764,57 +984,88 @@
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
-          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
-          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="REVIEW" EntitySet="REVIEW" />
-          </AssociationSet>
-          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" />
-          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
-          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
-          <EntitySet Name="TRANSLATION" EntityType="zakatModel.TRANSLATION" />
-          <EntitySet Name="DONATION" EntityType="zakatModel.DONATION" />
-          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DONATION_USER" Association="zakatModel.FK_DONATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
+        <EntityType Name="APPLICATION">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="organizationId" Type="Int32" Nullable="false" />
+          <Property Name="isDrafted" Type="Boolean" />
+          <Property Name="isSubmitted" Type="Boolean" />
+          <Property Name="isValidated" Type="Boolean" />
+          <Property Name="isInvestigated" Type="Boolean" />
+          <Property Name="isQualified1" Type="Boolean" />
+          <Property Name="isQualified2" Type="Boolean" />
+          <Property Name="isDispersed" Type="Boolean" />
+          <Property Name="isRejected" Type="Boolean" />
+          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="husbandHasAppliedForZakat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="husbandZakatExplanation" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="totalValueInvestment" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasRetirement" Type="Boolean" />
+          <Property Name="totalValueRetirement" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasOutstandingDebts" Type="Boolean" />
+          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasHealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="hasLifeInsurance" Type="Boolean" />
+          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="hasChildSupport" Type="Boolean" />
+          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyChildSupport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="hasFoodStamps" Type="Boolean" />
+          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="frequencyFoodStamps" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
+          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="isNotEmployed" Type="Boolean" />
+          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
+          <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
+          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="employerStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="draftedOn" Type="DateTime" Precision="3" />
+          <Property Name="draftedBy" Type="Int32" />
+          <Property Name="submittedOn" Type="DateTime" Precision="3" />
+          <Property Name="submittedBy" Type="Int32" />
+          <Property Name="validatedOn" Type="DateTime" Precision="3" />
+          <Property Name="validatedBy" Type="Int32" />
+          <Property Name="investigatedOn" Type="DateTime" Precision="3" />
+          <Property Name="investigatedBy" Type="Int32" />
+          <Property Name="qualified1On" Type="DateTime" Precision="3" />
+          <Property Name="qualified1By" Type="Int32" />
+          <Property Name="qualified2On" Type="DateTime" Precision="3" />
+          <Property Name="qualified2By" Type="Int32" />
+          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="dispersedOn" Type="DateTime" Precision="3" />
+          <Property Name="dispersedBy" Type="Int32" />
+          <Property Name="rejectedOn" Type="DateTime" Precision="3" />
+          <Property Name="rejectedBy" Type="Int32" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+          <Property Name="createdBy" Type="Int32" />
+          <Property Name="updatedOn" Type="DateTime" Precision="3" />
+          <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
+          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
+          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
+        </EntityType>
         <EntityType Name="ARTIFACT">
           <Key>
             <PropertyRef Name="artifactId" />
@@ -825,8 +1076,8 @@
           <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
         </EntityType>
         <EntityType Name="ARTIFACT_TYPE">
           <Key>
@@ -867,6 +1118,18 @@
           <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
         </EntityType>
+        <EntityType Name="DONATION">
+          <Key>
+            <PropertyRef Name="donationId" />
+          </Key>
+          <Property Name="donationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" />
+          <Property Name="organizationId" Type="Int32" />
+          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="donationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="DONATION" ToRole="ORGANIZATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DONATION_USER" FromRole="DONATION" ToRole="USER" />
+        </EntityType>
         <EntityType Name="LANGUAGE">
           <Key>
             <PropertyRef Name="languageId" />
@@ -882,6 +1145,25 @@
           <Property Name="nationalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="ORGANIZATION">
+          <Key>
+            <PropertyRef Name="organizationId" />
+          </Key>
+          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
+          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -912,8 +1194,8 @@
           <Property Name="reviewAction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="reviewDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -930,11 +1212,21 @@
           </Key>
           <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
           <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TOPIC">
           <Key>
@@ -944,6 +1236,15 @@
           <Property Name="topicName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="topicContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="topicLink" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TRANSLATION">
+          <Key>
+            <PropertyRef Name="translationId" />
+          </Key>
+          <Property Name="translationId" Type="Int32" Nullable="false" />
+          <Property Name="translationNameEnglish" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="translationNameNative" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="translationURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -988,9 +1289,11 @@
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
           <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
           <NavigationProperty Name="COUNTRY" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
           <NavigationProperty Name="DEPENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPENDENT" />
+          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_USER" FromRole="USER" ToRole="DONATION" />
           <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="USER" ToRole="REFERENCE" />
           <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_USER" FromRole="USER" ToRole="REVIEW" />
@@ -998,8 +1301,6 @@
           <NavigationProperty Name="STATE1" Relationship="zakatModel.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
           <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
-          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_USER" FromRole="USER" ToRole="DONATION" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -1019,10 +1320,150 @@
           <Property Name="userId" Type="Int32" />
           <Property Name="roleId" Type="Int32" />
           <Property Name="organizationId" Type="Int32" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
           <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
         </EntityType>
+        <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="submittedOn" Type="DateTime" Precision="3" />
+          <Property Name="qualified2On" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
+          <Key>
+            <PropertyRef Name="applicationId" />
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="isSubmitted" Type="Boolean" />
+          <Property Name="isDispersed" Type="Boolean" />
+          <Property Name="isRejected" Type="Boolean" />
+          <Property Name="Age" Type="Int32" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+          <Key>
+            <PropertyRef Name="applicationId" />
+          </Key>
+          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="month" Type="Int32" />
+          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
+        </EntityType>
+        <EntityType Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
+          <Key>
+            <PropertyRef Name="applicationCount" />
+          </Key>
+          <Property Name="applicationYear" Type="Int32" />
+          <Property Name="applicationCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_APPLICATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="employerStateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_APPLICATION_USER">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ARTIFACT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="ARTIFACT">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMMENT_APPLICATION">
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
+          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="APPLICATION">
+              <PropertyRef Name="applicationId" />
+            </Principal>
+            <Dependent Role="REVIEW">
+              <PropertyRef Name="applicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
           <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
           <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
@@ -1071,6 +1512,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_DONATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONATION_USER">
+          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
+          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="userId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_USER_LANGUAGE_LANGUAGE">
           <End Type="zakatModel.LANGUAGE" Role="LANGUAGE" Multiplicity="0..1" />
           <End Type="zakatModel.USER_LANGUAGE" Role="USER_LANGUAGE" Multiplicity="*" />
@@ -1092,6 +1557,30 @@
             </Principal>
             <Dependent Role="USER">
               <PropertyRef Name="nationalityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORGANIZATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="ORGANIZATION">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ROLE_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="USER_ROLE">
+              <PropertyRef Name="organizationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1191,332 +1680,89 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="APPLICATION">
-          <Key>
-            <PropertyRef Name="applicationId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="organizationId" Type="Int32" Nullable="false" />
-          <Property Name="isDrafted" Type="Boolean" />
-          <Property Name="isSubmitted" Type="Boolean" />
-          <Property Name="isValidated" Type="Boolean" />
-          <Property Name="isInvestigated" Type="Boolean" />
-          <Property Name="isQualified1" Type="Boolean" />
-          <Property Name="isQualified2" Type="Boolean" />
-          <Property Name="isDispersed" Type="Boolean" />
-          <Property Name="isRejected" Type="Boolean" />
-          <Property Name="applicationStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="husbandHasAppliedForZakat" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="husbandZakatExplanation" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="totalValueCash" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueGold" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueSilver" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="totalValueInvestment" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasRetirement" Type="Boolean" />
-          <Property Name="totalValueRetirement" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasOutstandingDebts" Type="Boolean" />
-          <Property Name="totalValueOutstandingDebts" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasHealthInsurance" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="medicaidNumber" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
-          <Property Name="medicareNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="healthInsuranceProviderPolicyNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="hasLifeInsurance" Type="Boolean" />
-          <Property Name="totalValueLifeInsurance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="hasChildSupport" Type="Boolean" />
-          <Property Name="totalChildSupport" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyChildSupport" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="hasFoodStamps" Type="Boolean" />
-          <Property Name="totalFoodStamps" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="frequencyFoodStamps" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="hasTemporaryCashAssistance" Type="Boolean" />
-          <Property Name="sourceTemporaryCashAssistance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalTemporaryCashAssistance" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="isNotEmployed" Type="Boolean" />
-          <Property Name="employerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="positionTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="totalMonthlyGrossSalary" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="employmentStartDate" Type="DateTime" Precision="3" />
-          <Property Name="employmentEndtDate" Type="DateTime" Precision="3" />
-          <Property Name="employerStreet" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="employerCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="employerStateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="employerZip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="employerPhone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="personalNeedStatement" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="submittedOn" Type="DateTime" Precision="3" />
-          <Property Name="submittedBy" Type="Int32" />
-          <Property Name="validatedOn" Type="DateTime" Precision="3" />
-          <Property Name="validatedBy" Type="Int32" />
-          <Property Name="investigatedOn" Type="DateTime" Precision="3" />
-          <Property Name="investigatedBy" Type="Int32" />
-          <Property Name="qualified1On" Type="DateTime" Precision="3" />
-          <Property Name="qualified1By" Type="Int32" />
-          <Property Name="qualified2On" Type="DateTime" Precision="3" />
-          <Property Name="qualified2By" Type="Int32" />
-          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="dispersedOn" Type="DateTime" Precision="3" />
-          <Property Name="dispersedBy" Type="Int32" />
-          <Property Name="rejectedOn" Type="DateTime" Precision="3" />
-          <Property Name="rejectedBy" Type="Int32" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-          <Property Name="createdBy" Type="Int32" />
-          <Property Name="updatedOn" Type="DateTime" Precision="3" />
-          <Property Name="updatedBy" Type="Int32" />
-          <Property Name="draftedOn" Type="DateTime" Precision="3" />
-          <Property Name="draftedBy" Type="Int32" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
-          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
-        </EntityType>
-        <Association Name="FK_APPLICATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="employerStateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_APPLICATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ARTIFACT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="ARTIFACT">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_COMMENT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="APPLICATION">
-              <PropertyRef Name="applicationId" />
-            </Principal>
-            <Dependent Role="REVIEW">
-              <PropertyRef Name="applicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
-          <Key>
-            <PropertyRef Name="applicationId" />
-            <PropertyRef Name="userId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" />
-          <Property Name="userId" Type="Int32" Nullable="false" />
-          <Property Name="isSubmitted" Type="Boolean" />
-          <Property Name="isDispersed" Type="Boolean" />
-          <Property Name="isRejected" Type="Boolean" />
-          <Property Name="Age" Type="Int32" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
-          <Key>
-            <PropertyRef Name="applicationCount" />
-          </Key>
-          <Property Name="applicationYear" Type="Int32" />
-          <Property Name="applicationCount" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
-          <Key>
-            <PropertyRef Name="applicationId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="submittedOn" Type="DateTime" Precision="3" />
-          <Property Name="qualified2On" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
-          <Key>
-            <PropertyRef Name="applicationId" />
-          </Key>
-          <Property Name="applicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="month" Type="Int32" />
-          <Property Name="dispersedAmount" Type="Decimal" Precision="19" Scale="4" />
-        </EntityType>
-        <EntityType Name="TRANSLATION">
-          <Key>
-            <PropertyRef Name="translationId" />
-          </Key>
-          <Property Name="translationId" Type="Int32" Nullable="false" />
-          <Property Name="translationNameEnglish" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="translationNameNative" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="translationURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="DONATION">
-          <Key>
-            <PropertyRef Name="donationId" />
-          </Key>
-          <Property Name="donationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
-          <Property Name="organizationId" Type="Int32" />
-          <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="donationDate" Type="DateTime" Precision="3" />
-          <Property Name="isConfirmed" Type="Boolean" Nullable="false" />
-          <Property Name="paypalPdtIsSuccessful" Type="Boolean" />
-          <Property Name="paypalPdtConfirmDate" Type="DateTime" Precision="3" />
-          <Property Name="paypalPdtTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="paypalPdtResponse" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <Property Name="paypalIpnIsSuccessful" Type="Boolean" />
-          <Property Name="paypalIpnConfirmDate" Type="DateTime" Precision="3" />
-          <Property Name="paypalIpnTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="paypalIpnResponse" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="DONATION" ToRole="ORGANIZATION" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DONATION_USER" FromRole="DONATION" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="ORGANIZATION">
-          <Key>
-            <PropertyRef Name="organizationId" />
-          </Key>
-          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="payPalImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="payPalIdentityToken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
-          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
-        </EntityType>
-        <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DONATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="DONATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DONATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="DONATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORGANIZATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="ORGANIZATION">
-              <PropertyRef Name="stateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USER_ROLE_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="USER_ROLE">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="zakatModelStoreContainer" CdmEntityContainer="zakatEntities">
+          <EntitySetMapping Name="APPLICATION">
+            <EntityTypeMapping TypeName="zakatModel.APPLICATION">
+              <MappingFragment StoreEntitySet="APPLICATION">
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="rejectedBy" ColumnName="rejectedBy" />
+                <ScalarProperty Name="rejectedOn" ColumnName="rejectedOn" />
+                <ScalarProperty Name="dispersedBy" ColumnName="dispersedBy" />
+                <ScalarProperty Name="dispersedOn" ColumnName="dispersedOn" />
+                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
+                <ScalarProperty Name="qualified2By" ColumnName="qualified2By" />
+                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
+                <ScalarProperty Name="qualified1By" ColumnName="qualified1By" />
+                <ScalarProperty Name="qualified1On" ColumnName="qualified1On" />
+                <ScalarProperty Name="investigatedBy" ColumnName="investigatedBy" />
+                <ScalarProperty Name="investigatedOn" ColumnName="investigatedOn" />
+                <ScalarProperty Name="validatedBy" ColumnName="validatedBy" />
+                <ScalarProperty Name="validatedOn" ColumnName="validatedOn" />
+                <ScalarProperty Name="submittedBy" ColumnName="submittedBy" />
+                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
+                <ScalarProperty Name="draftedBy" ColumnName="draftedBy" />
+                <ScalarProperty Name="draftedOn" ColumnName="draftedOn" />
+                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
+                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
+                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
+                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
+                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
+                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
+                <ScalarProperty Name="employmentEndtDate" ColumnName="employmentEndtDate" />
+                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
+                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
+                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
+                <ScalarProperty Name="employerName" ColumnName="employerName" />
+                <ScalarProperty Name="isNotEmployed" ColumnName="isNotEmployed" />
+                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
+                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
+                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
+                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
+                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
+                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
+                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
+                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
+                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
+                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
+                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
+                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
+                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
+                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
+                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
+                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
+                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
+                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
+                <ScalarProperty Name="totalValueRetirement" ColumnName="totalValueRetirement" />
+                <ScalarProperty Name="hasRetirement" ColumnName="hasRetirement" />
+                <ScalarProperty Name="totalValueInvestment" ColumnName="totalValueInvestment" />
+                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
+                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
+                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
+                <ScalarProperty Name="husbandZakatExplanation" ColumnName="husbandZakatExplanation" />
+                <ScalarProperty Name="husbandHasAppliedForZakat" ColumnName="husbandHasAppliedForZakat" />
+                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
+                <ScalarProperty Name="isQualified2" ColumnName="isQualified2" />
+                <ScalarProperty Name="isQualified1" ColumnName="isQualified1" />
+                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
+                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
+                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="isDrafted" ColumnName="isDrafted" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="ARTIFACT">
             <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
               <MappingFragment StoreEntitySet="ARTIFACT">
@@ -1568,6 +1814,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="DONATION">
+            <EntityTypeMapping TypeName="zakatModel.DONATION">
+              <MappingFragment StoreEntitySet="DONATION">
+                <ScalarProperty Name="donationDate" ColumnName="donationDate" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="donationId" ColumnName="donationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="LANGUAGE">
             <EntityTypeMapping TypeName="zakatModel.LANGUAGE">
               <MappingFragment StoreEntitySet="LANGUAGE">
@@ -1581,6 +1838,22 @@
               <MappingFragment StoreEntitySet="NATIONALITY">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORGANIZATION">
+            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
+              <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1631,6 +1904,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="zakatModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TOPIC">
             <EntityTypeMapping TypeName="zakatModel.TOPIC">
               <MappingFragment StoreEntitySet="TOPIC">
@@ -1638,6 +1922,16 @@
                 <ScalarProperty Name="topicContent" ColumnName="topicContent" />
                 <ScalarProperty Name="topicName" ColumnName="topicName" />
                 <ScalarProperty Name="topicId" ColumnName="topicId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TRANSLATION">
+            <EntityTypeMapping TypeName="zakatModel.TRANSLATION">
+              <MappingFragment StoreEntitySet="TRANSLATION">
+                <ScalarProperty Name="translationURL" ColumnName="translationURL" />
+                <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
+                <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
+                <ScalarProperty Name="translationId" ColumnName="translationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1705,132 +1999,96 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="APPLICATION">
-            <EntityTypeMapping TypeName="zakatModel.APPLICATION">
-              <MappingFragment StoreEntitySet="APPLICATION">
-                <ScalarProperty Name="draftedBy" ColumnName="draftedBy" />
-                <ScalarProperty Name="draftedOn" ColumnName="draftedOn" />
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-                <ScalarProperty Name="rejectedBy" ColumnName="rejectedBy" />
-                <ScalarProperty Name="rejectedOn" ColumnName="rejectedOn" />
-                <ScalarProperty Name="dispersedBy" ColumnName="dispersedBy" />
-                <ScalarProperty Name="dispersedOn" ColumnName="dispersedOn" />
-                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
-                <ScalarProperty Name="qualified2By" ColumnName="qualified2By" />
+          <EntitySetMapping Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
                 <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
-                <ScalarProperty Name="qualified1By" ColumnName="qualified1By" />
-                <ScalarProperty Name="qualified1On" ColumnName="qualified1On" />
-                <ScalarProperty Name="investigatedBy" ColumnName="investigatedBy" />
-                <ScalarProperty Name="investigatedOn" ColumnName="investigatedOn" />
-                <ScalarProperty Name="validatedBy" ColumnName="validatedBy" />
-                <ScalarProperty Name="validatedOn" ColumnName="validatedOn" />
-                <ScalarProperty Name="submittedBy" ColumnName="submittedBy" />
                 <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
-                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
-                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
-                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
-                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
-                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
-                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
-                <ScalarProperty Name="employmentEndtDate" ColumnName="employmentEndtDate" />
-                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
-                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
-                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
-                <ScalarProperty Name="employerName" ColumnName="employerName" />
-                <ScalarProperty Name="isNotEmployed" ColumnName="isNotEmployed" />
-                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
-                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
-                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
-                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
-                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
-                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
-                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
-                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
-                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
-                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
-                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
-                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
-                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
-                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
-                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
-                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
-                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
-                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
-                <ScalarProperty Name="totalValueRetirement" ColumnName="totalValueRetirement" />
-                <ScalarProperty Name="hasRetirement" ColumnName="hasRetirement" />
-                <ScalarProperty Name="totalValueInvestment" ColumnName="totalValueInvestment" />
-                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
-                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
-                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
-                <ScalarProperty Name="husbandZakatExplanation" ColumnName="husbandZakatExplanation" />
-                <ScalarProperty Name="husbandHasAppliedForZakat" ColumnName="husbandHasAppliedForZakat" />
-                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_BY_USER_AGE">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_BY_USER_AGE">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_BY_USER_AGE">
+                <ScalarProperty Name="Age" ColumnName="Age" />
                 <ScalarProperty Name="isRejected" ColumnName="isRejected" />
                 <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
-                <ScalarProperty Name="isQualified2" ColumnName="isQualified2" />
-                <ScalarProperty Name="isQualified1" ColumnName="isQualified1" />
-                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
-                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
                 <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
-                <ScalarProperty Name="isDrafted" ColumnName="isDrafted" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TRANSLATION">
-            <EntityTypeMapping TypeName="zakatModel.TRANSLATION">
-              <MappingFragment StoreEntitySet="TRANSLATION">
-                <ScalarProperty Name="translationURL" ColumnName="translationURL" />
-                <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
-                <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
-                <ScalarProperty Name="translationId" ColumnName="translationId" />
+          <EntitySetMapping Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_DISPERSED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DONATION">
-            <EntityTypeMapping TypeName="zakatModel.DONATION">
-              <MappingFragment StoreEntitySet="DONATION">
-                <ScalarProperty Name="paypalIpnResponse" ColumnName="paypalIpnResponse" />
-                <ScalarProperty Name="paypalIpnTransactionId" ColumnName="paypalIpnTransactionId" />
-                <ScalarProperty Name="paypalIpnConfirmDate" ColumnName="paypalIpnConfirmDate" />
-                <ScalarProperty Name="paypalIpnIsSuccessful" ColumnName="paypalIpnIsSuccessful" />
-                <ScalarProperty Name="paypalPdtResponse" ColumnName="paypalPdtResponse" />
-                <ScalarProperty Name="paypalPdtTransactionId" ColumnName="paypalPdtTransactionId" />
-                <ScalarProperty Name="paypalPdtConfirmDate" ColumnName="paypalPdtConfirmDate" />
-                <ScalarProperty Name="paypalPdtIsSuccessful" ColumnName="paypalPdtIsSuccessful" />
-                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
-                <ScalarProperty Name="donationDate" ColumnName="donationDate" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
-                <ScalarProperty Name="donationId" ColumnName="donationId" />
+          <EntitySetMapping Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_DRAFTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ORGANIZATION">
-            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
-              <MappingFragment StoreEntitySet="ORGANIZATION">
-                <ScalarProperty Name="payPalIdentityToken" ColumnName="payPalIdentityToken" />
-                <ScalarProperty Name="payPalImageURL" ColumnName="payPalImageURL" />
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+          <EntitySetMapping Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_REJECTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_TOTAL_DISPERSED">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_TOTAL_DISPERSED">
+                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
+            <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR">
+              <MappingFragment StoreEntitySet="VW_APPLICATIONS_VALIDATED_BY_YEAR">
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
+                <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

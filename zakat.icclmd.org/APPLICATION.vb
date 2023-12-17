@@ -61,6 +61,8 @@ Partial Public Class APPLICATION
     Public Property employerZip As String
     Public Property employerPhone As String
     Public Property personalNeedStatement As String
+    Public Property draftedOn As Nullable(Of Date)
+    Public Property draftedBy As Nullable(Of Integer)
     Public Property submittedOn As Nullable(Of Date)
     Public Property submittedBy As Nullable(Of Integer)
     Public Property validatedOn As Nullable(Of Date)
@@ -80,13 +82,11 @@ Partial Public Class APPLICATION
     Public Property createdBy As Nullable(Of Integer)
     Public Property updatedOn As Nullable(Of Date)
     Public Property updatedBy As Nullable(Of Integer)
-    Public Property draftedOn As Nullable(Of Date)
-    Public Property draftedBy As Nullable(Of Integer)
 
+    Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
     Public Overridable Property ARTIFACT As ICollection(Of ARTIFACT) = New HashSet(Of ARTIFACT)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
-    Public Overridable Property ORGANIZATION As ORGANIZATION
 
 End Class

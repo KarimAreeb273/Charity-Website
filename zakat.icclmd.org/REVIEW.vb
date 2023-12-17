@@ -18,7 +18,7 @@ Partial Public Class REVIEW
     Public Property reviewComment As String
     Public Property reviewDate As Nullable(Of Date)
 
-    Public Overridable Property USER As USER
     Public Overridable Property APPLICATION As APPLICATION
+    Public Overridable Property USER As USER
 
 End Class
