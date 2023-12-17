@@ -16,8 +16,8 @@ Partial Public Class USER_ROLE
     Public Property roleId As Nullable(Of Integer)
     Public Property organizationId As Nullable(Of Integer)
 
-    Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property ROLE As ROLE
     Public Overridable Property USER As USER
+    Public Overridable Property ORGANIZATION As ORGANIZATION
 
 End Class

@@ -189,8 +189,8 @@
     <Content Include="Privacy.aspx" />
     <Content Include="ZakatEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ZakatEntities.Context.vb</LastGenOutput>
       <DependentUpon>ZakatEntities.edmx</DependentUpon>
+      <LastGenOutput>ZakatEntities.Context.vb</LastGenOutput>
     </Content>
     <Content Include="ZakatEntities.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -510,6 +510,16 @@
     <Compile Include="VW_APPLICATIONS_VALIDATED_BY_YEAR.vb">
       <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="ZakatEntities.Context.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ZakatEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ZakatEntities.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ZakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ZakatForm.aspx.designer.vb">
       <DependentUpon>ZakatForm.aspx</DependentUpon>
     </Compile>
@@ -605,20 +615,10 @@
     <Compile Include="Site.Mobile.Master.designer.vb">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
     </Compile>
-    <Compile Include="ZakatEntities.Context.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZakatEntities.Context.tt</DependentUpon>
-    </Compile>
     <Compile Include="ZakatEntities.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ZakatEntities.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ZakatEntities.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

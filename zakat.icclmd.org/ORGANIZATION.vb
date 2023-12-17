@@ -13,6 +13,7 @@ Imports System.Collections.Generic
 Partial Public Class ORGANIZATION
     Public Property organizationId As Integer
     Public Property name As String
+    Public Property abbreviation As String
     Public Property street As String
     Public Property city As String
     Public Property stateAbbr As String
@@ -20,11 +21,12 @@ Partial Public Class ORGANIZATION
     Public Property email As String
     Public Property phone As String
     Public Property website As String
-    Public Property abbreviation As String
+    Public Property payPalImageURL As String
+    Public Property payPalIdentityToken As String
 
-    Public Overridable Property STATE As STATE
-    Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
+    Public Overridable Property STATE As STATE
+    Public Overridable Property USER_ROLE As ICollection(Of USER_ROLE) = New HashSet(Of USER_ROLE)
 
 End Class

@@ -4,21 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="143">
+      <Diagram DiagramId="d33b650bb6384d57afc874b4dcf58ec5" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="26" PointY="49.625" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="23.75" PointY="48.125" />
         <EntityTypeShape EntityType="zakatModel.CERTIFICATION_SKILL" Width="1.5" PointX="9.875" PointY="47.375" />
-        <EntityTypeShape EntityType="zakatModel.COUNTRY" Width="1.5" PointX="5.375" PointY="53.375" />
+        <EntityTypeShape EntityType="zakatModel.COUNTRY" Width="1.5" PointX="7.375" PointY="6.875" />
         <EntityTypeShape EntityType="zakatModel.DEPENDENT" Width="1.5" PointX="9.875" PointY="52.625" />
         <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="10.625" PointY="50.25" />
         <EntityTypeShape EntityType="zakatModel.NATIONALITY" Width="1.5" PointX="5.375" PointY="45" />
-        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="13.25" PointY="52.75" />
         <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="4.625" PointY="48.125" />
         <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="23" PointY="43.75" />
         <EntityTypeShape EntityType="zakatModel.ROLE" Width="1.5" PointX="14.625" PointY="44.125" />
         <EntityTypeShape EntityType="zakatModel.STATE" Width="1.5" PointX="2.375" PointY="48.875" />
         <EntityTypeShape EntityType="zakatModel.TOPIC" Width="1.5" PointX="16" PointY="49" />
-        <EntityTypeShape EntityType="zakatModel.USER" Width="1.5" PointX="7.625" PointY="44.75" />
+        <EntityTypeShape EntityType="zakatModel.USER" Width="1.5" PointX="7.625" PointY="44.625" />
         <EntityTypeShape EntityType="zakatModel.USER_LANGUAGE" Width="1.5" PointX="12.875" PointY="49" />
         <EntityTypeShape EntityType="zakatModel.USER_ROLE" Width="1.5" PointX="23.75" PointY="50.75" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" />
@@ -27,8 +26,6 @@
         <AssociationConnector Association="zakatModel.FK_DEPDENDENTS_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE" />
         <AssociationConnector Association="zakatModel.FK_USER_NATIONALITY1" />
-        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
-        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_USER1" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_USER" />
@@ -38,7 +35,6 @@
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" />
         <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="18.5" PointY="42.75" />
-        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_STATE" />
         <AssociationConnector Association="zakatModel.FK_APPLICATION_USER" />
         <AssociationConnector Association="zakatModel.FK_ARTIFACT_APPLICATION" />
@@ -54,9 +50,13 @@
         <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" Width="1.5" PointX="3.375" PointY="6.75" />
         <EntityTypeShape EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" Width="1.5" PointX="5.375" PointY="6.75" />
         <EntityTypeShape EntityType="zakatModel.TRANSLATION" Width="1.5" PointX="7.375" PointY="3.75" />
-        <EntityTypeShape EntityType="zakatModel.DONATION" Width="1.5" PointX="15.5" PointY="52.375" />
+        <EntityTypeShape EntityType="zakatModel.DONATION" Width="1.5" PointX="12.875" PointY="52.375" />
+        <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="4.625" PointY="56" />
+        <AssociationConnector Association="zakatModel.FK_APPLICATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_DONATION_ORGANIZATION" />
         <AssociationConnector Association="zakatModel.FK_DONATION_USER" />
+        <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" />
+        <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
