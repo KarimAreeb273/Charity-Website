@@ -14,47 +14,56 @@ Option Explicit On
 Partial Public Class Donate
 
     '''<summary>
-    '''txtPaymentMethod control.
+    '''txtDonationMethod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPaymentMethod As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDonationMethod As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''txtPaymentAmount control.
+    '''txtDonationAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPaymentAmount As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDonationAmount As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''txtPaymentDate control.
+    '''txtDonationDate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtPaymentDate As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtDonationDate As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''calPaymentDate control.
+    '''calDonationDate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents calPaymentDate As Global.AjaxControlToolkit.CalendarExtender
+    Protected WithEvents calDonationDate As Global.AjaxControlToolkit.CalendarExtender
 
     '''<summary>
-    '''Button1 control.
+    '''drpOrganization control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''btnDonation control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnDonation As Global.System.Web.UI.WebControls.Button
 End Class

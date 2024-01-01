@@ -83,10 +83,10 @@ Partial Public Class APPLICATION
     Public Property updatedOn As Nullable(Of Date)
     Public Property updatedBy As Nullable(Of Integer)
 
-    Public Overridable Property ORGANIZATION As ORGANIZATION
     Public Overridable Property STATE As STATE
     Public Overridable Property USER As USER
     Public Overridable Property ARTIFACT As ICollection(Of ARTIFACT) = New HashSet(Of ARTIFACT)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
+    Public Overridable Property ORGANIZATION As ORGANIZATION
 
 End Class

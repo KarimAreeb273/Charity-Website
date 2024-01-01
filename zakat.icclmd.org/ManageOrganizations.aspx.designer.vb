@@ -50,6 +50,15 @@ Partial Public Class ManageOrganizations
     Protected WithEvents btnEdit As Global.System.Web.UI.WebControls.LinkButton
 
     '''<summary>
+    '''UpdatePanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''txtOrganizationName control.
     '''</summary>
     '''<remarks>
@@ -131,6 +140,33 @@ Partial Public Class ManageOrganizations
     Protected WithEvents RequiredFieldValidator1 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
+    '''txtPayPalImg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPayPalImg As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''valPayPalImgUrl control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valPayPalImgUrl As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''valPayPalImg control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valPayPalImg As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''txtStreet control.
     '''</summary>
     '''<remarks>
@@ -176,6 +212,15 @@ Partial Public Class ManageOrganizations
     Protected WithEvents chkAcknowledgement As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
+    '''CustomValidator1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents CustomValidator1 As Global.System.Web.UI.WebControls.CustomValidator
+
+    '''<summary>
     '''txtPayPalToken control.
     '''</summary>
     '''<remarks>
@@ -183,6 +228,15 @@ Partial Public Class ManageOrganizations
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtPayPalToken As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''valPayPalToken control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents valPayPalToken As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''btnAddOrganization control.

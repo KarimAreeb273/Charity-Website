@@ -52,8 +52,11 @@
             .street = txtStreet.Text
             .city = txtCity.Text
             .stateAbbr = drpState.SelectedValue
-            .zip = txtZip.Text
-          End With
+                        .zip = txtZip.Text
+                        .isDonationAccepted = chkAcknowledgement.Checked
+                        .payPalImageURL = txtPayPalImg.Text
+                        .payPalIdentityToken = txtPayPalToken.Text
+                    End With
 
           ' Add to Memory
           oDB.ORGANIZATION.Add(oOrganization)
@@ -141,5 +144,29 @@
       Response.Write(ex.Message)
     End Try
   End Sub
+
+    Private Sub chkAcknowledgment_CheckedChanged(sender As Object, e As EventArgs) Handles chkAcknowledgement.CheckedChanged
+        Try
+            'enable PayPal fields if the check is true otherwise disable them
+            If chkAcknowledgement.Checked Then
+                txtPayPalImg.Enabled = True
+                txtPayPalToken.Enabled = True
+                valPayPalImg.Enabled = True
+                valPayPalToken.Enabled = True
+                valPayPalImgUrl.Enabled = True
+            Else
+                txtPayPalImg.Enabled = False
+                txtPayPalToken.Enabled = False
+                valPayPalImg.Enabled = False
+                valPayPalToken.Enabled = False
+                valPayPalImgUrl.Enabled = False
+                txtPayPalImg.Text = ""
+                txtPayPalToken.Text = ""
+            End If
+        Catch ex As Exception
+            Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+            Response.Write(ex.Message)
+        End Try
+    End Sub
 
 End Class

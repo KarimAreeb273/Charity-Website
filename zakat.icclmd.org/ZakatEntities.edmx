@@ -136,6 +136,15 @@
           <Property Name="organizationId" Type="int" />
           <Property Name="amount" Type="money" />
           <Property Name="donationDate" Type="datetime" />
+          <Property Name="isConfirmed" Type="bit" Nullable="false" />
+          <Property Name="paypalPdtIsSuccessful" Type="bit" />
+          <Property Name="paypalPdtConfirmDate" Type="datetime" />
+          <Property Name="paypalPdtTransactionId" Type="varchar" MaxLength="50" />
+          <Property Name="paypalPdtResponse" Type="varchar" MaxLength="4000" />
+          <Property Name="paypalIpnIsSuccessful" Type="bit" />
+          <Property Name="paypalIpnConfirmDate" Type="datetime" />
+          <Property Name="paypalIpnTransactionId" Type="varchar" MaxLength="50" />
+          <Property Name="paypalIpnResponse" Type="varchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="LANGUAGE">
           <Key>
@@ -165,6 +174,9 @@
           <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="250" />
+          <Property Name="isDonationAccepted" Type="bit" />
+          <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
+          <Property Name="payPalIdentityToken" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -871,7 +883,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="DONATION" EntityType="zakatModel.DONATION" />
           <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
           <EntitySet Name="NATIONALITY" EntityType="zakatModel.NATIONALITY" />
-          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
           <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
           <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
           <EntitySet Name="ROLE" EntityType="zakatModel.ROLE" />
@@ -892,10 +903,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
           <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
           <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
             <End Role="STATE" EntitySet="STATE" />
             <End Role="APPLICATION" EntitySet="APPLICATION" />
@@ -928,10 +935,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="USER" EntitySet="USER" />
             <End Role="DEPENDENT" EntitySet="DEPENDENT" />
           </AssociationSet>
-          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_DONATION_USER" Association="zakatModel.FK_DONATION_USER">
             <End Role="USER" EntitySet="USER" />
             <End Role="DONATION" EntitySet="DONATION" />
@@ -943,14 +946,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <AssociationSet Name="FK_USER_NATIONALITY1" Association="zakatModel.FK_USER_NATIONALITY1">
             <End Role="NATIONALITY" EntitySet="NATIONALITY" />
             <End Role="USER" EntitySet="USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
             <End Role="STATE" EntitySet="STATE" />
@@ -984,7 +979,24 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="USER" EntitySet="USER" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="APPLICATION">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -1060,11 +1072,11 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
           <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
           <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="ARTIFACT">
           <Key>
@@ -1127,8 +1139,17 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="organizationId" Type="Int32" />
           <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="donationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="DONATION" ToRole="ORGANIZATION" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_DONATION_USER" FromRole="DONATION" ToRole="USER" />
+          <Property Name="isConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="paypalPdtIsSuccessful" Type="Boolean" />
+          <Property Name="paypalPdtConfirmDate" Type="DateTime" Precision="3" />
+          <Property Name="paypalPdtTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="paypalPdtResponse" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <Property Name="paypalIpnIsSuccessful" Type="Boolean" />
+          <Property Name="paypalIpnConfirmDate" Type="DateTime" Precision="3" />
+          <Property Name="paypalIpnTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="paypalIpnResponse" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="DONATION" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="LANGUAGE">
           <Key>
@@ -1145,25 +1166,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="nationalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
-        </EntityType>
-        <EntityType Name="ORGANIZATION">
-          <Key>
-            <PropertyRef Name="organizationId" />
-          </Key>
-          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
-          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -1213,10 +1215,10 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
           <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
           <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1320,9 +1322,9 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="userId" Type="Int32" />
           <Property Name="roleId" Type="Int32" />
           <Property Name="organizationId" Type="Int32" />
-          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
           <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
           <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
+          <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
           <Key>
@@ -1404,18 +1406,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="applicationYear" Type="Int32" />
           <Property Name="applicationCount" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_APPLICATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="APPLICATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_APPLICATION_STATE">
           <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
           <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
@@ -1512,18 +1502,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DONATION_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="DONATION">
-              <PropertyRef Name="organizationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DONATION_USER">
           <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
           <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
@@ -1557,30 +1535,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Principal>
             <Dependent Role="USER">
               <PropertyRef Name="nationalityId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ORGANIZATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STATE">
-              <PropertyRef Name="stateAbbr" />
-            </Principal>
-            <Dependent Role="ORGANIZATION">
-              <PropertyRef Name="stateAbbr" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_USER_ROLE_ORGANIZATION">
-          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ORGANIZATION">
-              <PropertyRef Name="organizationId" />
-            </Principal>
-            <Dependent Role="USER_ROLE">
-              <PropertyRef Name="organizationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1677,6 +1631,76 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Principal>
             <Dependent Role="USER_ROLE">
               <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ORGANIZATION">
+          <Key>
+            <PropertyRef Name="organizationId" />
+          </Key>
+          <Property Name="organizationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="abbreviation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="street" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="isDonationAccepted" Type="Boolean" />
+          <Property Name="payPalImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="payPalIdentityToken" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
+          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
+          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
+        </EntityType>
+        <Association Name="FK_APPLICATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
+          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="APPLICATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DONATION_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="DONATION">
+              <PropertyRef Name="organizationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORGANIZATION_STATE">
+          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STATE">
+              <PropertyRef Name="stateAbbr" />
+            </Principal>
+            <Dependent Role="ORGANIZATION">
+              <PropertyRef Name="stateAbbr" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_ROLE_ORGANIZATION">
+          <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="0..1" />
+          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORGANIZATION">
+              <PropertyRef Name="organizationId" />
+            </Principal>
+            <Dependent Role="USER_ROLE">
+              <PropertyRef Name="organizationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1817,6 +1841,15 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySetMapping Name="DONATION">
             <EntityTypeMapping TypeName="zakatModel.DONATION">
               <MappingFragment StoreEntitySet="DONATION">
+                <ScalarProperty Name="paypalIpnResponse" ColumnName="paypalIpnResponse" />
+                <ScalarProperty Name="paypalIpnTransactionId" ColumnName="paypalIpnTransactionId" />
+                <ScalarProperty Name="paypalIpnConfirmDate" ColumnName="paypalIpnConfirmDate" />
+                <ScalarProperty Name="paypalIpnIsSuccessful" ColumnName="paypalIpnIsSuccessful" />
+                <ScalarProperty Name="paypalPdtResponse" ColumnName="paypalPdtResponse" />
+                <ScalarProperty Name="paypalPdtTransactionId" ColumnName="paypalPdtTransactionId" />
+                <ScalarProperty Name="paypalPdtConfirmDate" ColumnName="paypalPdtConfirmDate" />
+                <ScalarProperty Name="paypalPdtIsSuccessful" ColumnName="paypalPdtIsSuccessful" />
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
                 <ScalarProperty Name="donationDate" ColumnName="donationDate" />
                 <ScalarProperty Name="amount" ColumnName="amount" />
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
@@ -1838,22 +1871,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               <MappingFragment StoreEntitySet="NATIONALITY">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ORGANIZATION">
-            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
-              <MappingFragment StoreEntitySet="ORGANIZATION">
-                <ScalarProperty Name="website" ColumnName="website" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2085,6 +2102,25 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_VALIDATED_BY_YEAR">
                 <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORGANIZATION">
+            <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
+              <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="payPalIdentityToken" ColumnName="payPalIdentityToken" />
+                <ScalarProperty Name="payPalImageURL" ColumnName="payPalImageURL" />
+                <ScalarProperty Name="isDonationAccepted" ColumnName="isDonationAccepted" />
+                <ScalarProperty Name="website" ColumnName="website" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

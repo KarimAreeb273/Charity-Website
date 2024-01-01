@@ -21,6 +21,9 @@ Partial Public Class ORGANIZATION
     Public Property email As String
     Public Property phone As String
     Public Property website As String
+    Public Property isDonationAccepted As Nullable(Of Boolean)
+    Public Property payPalImageURL As String
+    Public Property payPalIdentityToken As String
 
     Public Overridable Property APPLICATION As ICollection(Of APPLICATION) = New HashSet(Of APPLICATION)
     Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
