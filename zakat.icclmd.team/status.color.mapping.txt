@@ -1,8 +1,0 @@
-Drafted 	= Silver	= 	#C0C0C0
-Submitted 	= Orange	=	#FFA500
-Validated	= Yellow	=	#FFFF00
-Investigated	= Purple	=	#800080
-Qualified1	= Blue		=	#0000FF
-Qualified2	= DarkBlue	=	#00008B
-Dispersed	= Green		=	#008000
-Rejected	= Red		=	#FF0000

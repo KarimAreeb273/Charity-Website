@@ -32,6 +32,8 @@ ALTER TABLE [dbo].[DEPENDENT] DROP CONSTRAINT [FK_DEPDENDENTS_USER]
 GO
 ALTER TABLE [dbo].[DONATION] DROP CONSTRAINT [FK_DONATION_ORGANIZATION]
 GO
+ALTER TABLE [dbo].[DONATION] DROP CONSTRAINT [FK_DONATION_USER]
+GO
 ALTER TABLE [dbo].[CERTIFICATION_SKILL] DROP CONSTRAINT [FK_CERTIFICATION_SKILL_USER]
 GO
 ALTER TABLE [dbo].[ARTIFACT] DROP CONSTRAINT [FK_ARTIFACT_ARTIFACT_TYPE]
@@ -373,12 +375,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[DONATION](
 	[donationId] [int] IDENTITY(1,1) NOT NULL,
+	[userId] [int] NULL,
 	[organizationId] [int] NULL,
-	[firstName] [varchar](30) NULL,
-	[lastName] [varchar](30) NULL,
 	[amount] [money] NULL,
 	[donationDate] [datetime] NULL,
-	[isConfirmed] [bit] NULL,
+	[isConfirmed] [bit] NOT NULL,
 	[paypalPdtIsSuccessful] [bit] NULL,
 	[paypalPdtConfirmDate] [datetime] NULL,
 	[paypalPdtTransactionId] [varchar](50) NULL,
@@ -386,7 +387,7 @@ CREATE TABLE [dbo].[DONATION](
 	[paypalIpnIsSuccessful] [bit] NULL,
 	[paypalIpnConfirmDate] [datetime] NULL,
 	[paypalIpnTransactionId] [varchar](50) NULL,
-	[paypalIpnResponse] [varchar](4000) NULL,
+	[paypalIpnResponse] [varchar](4000) NULL
  CONSTRAINT [PK_DONATION] PRIMARY KEY CLUSTERED 
 (
 	[donationId] ASC
@@ -770,6 +771,11 @@ ALTER TABLE [dbo].[DONATION]  WITH CHECK ADD  CONSTRAINT [FK_DONATION_ORGANIZATI
 REFERENCES [dbo].[ORGANIZATION] ([organizationId])
 GO
 ALTER TABLE [dbo].[DONATION] CHECK CONSTRAINT [FK_DONATION_ORGANIZATION]
+GO
+ALTER TABLE [dbo].[DONATION]  WITH CHECK ADD  CONSTRAINT [FK_DONATION_USER] FOREIGN KEY([userId])
+REFERENCES [dbo].[USER] ([userId])
+GO
+ALTER TABLE [dbo].[DONATION] CHECK CONSTRAINT [FK_DONATION_USER]
 GO
 ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])

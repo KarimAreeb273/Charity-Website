@@ -55,6 +55,7 @@ Partial Public Class USER
     Public Overridable Property CERTIFICATION_SKILL As ICollection(Of CERTIFICATION_SKILL) = New HashSet(Of CERTIFICATION_SKILL)
     Public Overridable Property COUNTRY As COUNTRY
     Public Overridable Property DEPENDENT As ICollection(Of DEPENDENT) = New HashSet(Of DEPENDENT)
+    Public Overridable Property DONATION As ICollection(Of DONATION) = New HashSet(Of DONATION)
     Public Overridable Property NATIONALITY As NATIONALITY
     Public Overridable Property REFERENCE As ICollection(Of REFERENCE) = New HashSet(Of REFERENCE)
     Public Overridable Property REVIEW As ICollection(Of REVIEW) = New HashSet(Of REVIEW)
