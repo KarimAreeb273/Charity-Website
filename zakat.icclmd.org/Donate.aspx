@@ -53,7 +53,7 @@
                         <asp:Label runat="server" AssociatedControlID="drpOrganization" CssClass="col-lg-3 control-label" ToolTip="Organization">Organization:</asp:Label>
                         <div class="col-lg-9">
                             <asp:DropDownList ID="drpOrganization" runat="server" ToolTip="Organization" CssClass="form-control" Style="max-width: 100%; padding-left: 0px; padding-right: 0px" TabIndex="5" Width="280px"></asp:DropDownList>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="drpOrganization" CssClass="text-danger" ErrorMessage="The Organization is required." Display="Static" InitialValue="0" ValidationGroup="donate" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="drpOrganization" CssClass="text-danger" ErrorMessage="The organization is required." Display="Static" InitialValue="0" ValidationGroup="donate" />
                         </div>
                     </div>
                     <div class="form-group">
@@ -68,7 +68,7 @@
                                 </tr>
                             </table>
                             <asp:RegularExpressionValidator runat="server" ControlToValidate="txtDonationAmount" CssClass="text-danger" ValidationExpression="^[0-9]*$" ErrorMessage="A valid Donation amount is required." Display="Dynamic"></asp:RegularExpressionValidator>
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDonationAmount" CssClass="text-danger" ErrorMessage="The Donation amount is required." Display="Static" ValidationGroup="donate" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDonationAmount" CssClass="text-danger" ErrorMessage="The donation amount is required." Display="Static" ValidationGroup="donate" />
                         </div>
                     </div>
                 </div>
