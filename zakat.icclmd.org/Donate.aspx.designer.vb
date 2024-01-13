@@ -23,13 +23,22 @@ Partial Public Class Donate
     Protected WithEvents txtDonationMethod As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''txtDonationAmount control.
+    '''txtFirstName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents txtDonationAmount As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtLastName control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''txtDonationDate control.
@@ -57,6 +66,15 @@ Partial Public Class Donate
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''txtDonationAmount control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtDonationAmount As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''btnDonation control.
