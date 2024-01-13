@@ -12,11 +12,12 @@ Imports System.Collections.Generic
 
 Partial Public Class DONATION
     Public Property donationId As Integer
-    Public Property userId As Nullable(Of Integer)
     Public Property organizationId As Nullable(Of Integer)
+    Public Property firstName As String
+    Public Property lastName As String
     Public Property amount As Nullable(Of Decimal)
     Public Property donationDate As Nullable(Of Date)
-    Public Property isConfirmed As Boolean
+    Public Property isConfirmed As Nullable(Of Boolean)
     Public Property paypalPdtIsSuccessful As Nullable(Of Boolean)
     Public Property paypalPdtConfirmDate As Nullable(Of Date)
     Public Property paypalPdtTransactionId As String
@@ -26,7 +27,6 @@ Partial Public Class DONATION
     Public Property paypalIpnTransactionId As String
     Public Property paypalIpnResponse As String
 
-    Public Overridable Property USER As USER
     Public Overridable Property ORGANIZATION As ORGANIZATION
 
 End Class

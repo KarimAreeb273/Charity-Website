@@ -378,7 +378,7 @@ CREATE TABLE [dbo].[DONATION](
 	[lastName] [varchar](30) NULL,
 	[amount] [money] NULL,
 	[donationDate] [datetime] NULL,
-	[isConfirmed] [bit] NULL,
+	[isConfirmed] [bit] NOT NULL,
 	[paypalPdtIsSuccessful] [bit] NULL,
 	[paypalPdtConfirmDate] [datetime] NULL,
 	[paypalPdtTransactionId] [varchar](50) NULL,
@@ -386,7 +386,7 @@ CREATE TABLE [dbo].[DONATION](
 	[paypalIpnIsSuccessful] [bit] NULL,
 	[paypalIpnConfirmDate] [datetime] NULL,
 	[paypalIpnTransactionId] [varchar](50) NULL,
-	[paypalIpnResponse] [varchar](4000) NULL,
+	[paypalIpnResponse] [varchar](4000) NULL
  CONSTRAINT [PK_DONATION] PRIMARY KEY CLUSTERED 
 (
 	[donationId] ASC
@@ -770,7 +770,7 @@ ALTER TABLE [dbo].[DONATION]  WITH CHECK ADD  CONSTRAINT [FK_DONATION_ORGANIZATI
 REFERENCES [dbo].[ORGANIZATION] ([organizationId])
 GO
 ALTER TABLE [dbo].[DONATION] CHECK CONSTRAINT [FK_DONATION_ORGANIZATION]
-GO
+
 ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])
 GO

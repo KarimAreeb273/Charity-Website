@@ -35,7 +35,6 @@ Partial Public Class zakatEntities
     Public Overridable Property REVIEW() As DbSet(Of REVIEW)
     Public Overridable Property ROLE() As DbSet(Of ROLE)
     Public Overridable Property STATE() As DbSet(Of STATE)
-    Public Overridable Property sysdiagrams() As DbSet(Of sysdiagrams)
     Public Overridable Property TOPIC() As DbSet(Of TOPIC)
     Public Overridable Property TRANSLATION() As DbSet(Of TRANSLATION)
     Public Overridable Property USER() As DbSet(Of USER)

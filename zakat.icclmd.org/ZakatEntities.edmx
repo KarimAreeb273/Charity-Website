@@ -132,11 +132,12 @@
             <PropertyRef Name="donationId" />
           </Key>
           <Property Name="donationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="userId" Type="int" />
           <Property Name="organizationId" Type="int" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" />
+          <Property Name="lastName" Type="varchar" MaxLength="30" />
           <Property Name="amount" Type="money" />
           <Property Name="donationDate" Type="datetime" />
-          <Property Name="isConfirmed" Type="bit" Nullable="false" />
+          <Property Name="isConfirmed" Type="bit" />
           <Property Name="paypalPdtIsSuccessful" Type="bit" />
           <Property Name="paypalPdtConfirmDate" Type="datetime" />
           <Property Name="paypalPdtTransactionId" Type="varchar" MaxLength="50" />
@@ -176,7 +177,7 @@
           <Property Name="website" Type="varchar" MaxLength="250" />
           <Property Name="isDonationAccepted" Type="bit" />
           <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
-          <Property Name="payPalIdentityToken" Type="varchar" MaxLength="250" />
+          <Property Name="payPalIdentityToken" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -220,16 +221,6 @@
           </Key>
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="stateName" Type="varchar" MaxLength="30" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TOPIC">
           <Key>
@@ -530,18 +521,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DONATION_USER">
-          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
-          <End Role="DONATION" Type="Self.DONATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="DONATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ORGANIZATION_STATE">
           <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
           <End Role="ORGANIZATION" Type="Self.ORGANIZATION" Multiplicity="*" />
@@ -701,7 +680,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TOPIC" EntityType="Self.TOPIC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
@@ -816,10 +794,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
             <End Role="DONATION" EntitySet="DONATION" />
           </AssociationSet>
-          <AssociationSet Name="FK_DONATION_USER" Association="Self.FK_DONATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
           <AssociationSet Name="FK_ORGANIZATION_STATE" Association="Self.FK_ORGANIZATION_STATE">
             <End Role="STATE" EntitySet="STATE" />
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
@@ -873,130 +847,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="zakatModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="zakatEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="APPLICATION" EntityType="zakatModel.APPLICATION" />
-          <EntitySet Name="ARTIFACT" EntityType="zakatModel.ARTIFACT" />
-          <EntitySet Name="ARTIFACT_TYPE" EntityType="zakatModel.ARTIFACT_TYPE" />
-          <EntitySet Name="CERTIFICATION_SKILL" EntityType="zakatModel.CERTIFICATION_SKILL" />
-          <EntitySet Name="COUNTRY" EntityType="zakatModel.COUNTRY" />
-          <EntitySet Name="DEPENDENT" EntityType="zakatModel.DEPENDENT" />
-          <EntitySet Name="DONATION" EntityType="zakatModel.DONATION" />
-          <EntitySet Name="LANGUAGE" EntityType="zakatModel.LANGUAGE" />
-          <EntitySet Name="NATIONALITY" EntityType="zakatModel.NATIONALITY" />
-          <EntitySet Name="REFERENCE" EntityType="zakatModel.REFERENCE" />
-          <EntitySet Name="REVIEW" EntityType="zakatModel.REVIEW" />
-          <EntitySet Name="ROLE" EntityType="zakatModel.ROLE" />
-          <EntitySet Name="STATE" EntityType="zakatModel.STATE" />
-          <EntitySet Name="sysdiagrams" EntityType="zakatModel.sysdiagrams" />
-          <EntitySet Name="TOPIC" EntityType="zakatModel.TOPIC" />
-          <EntitySet Name="TRANSLATION" EntityType="zakatModel.TRANSLATION" />
-          <EntitySet Name="USER" EntityType="zakatModel.USER" />
-          <EntitySet Name="USER_LANGUAGE" EntityType="zakatModel.USER_LANGUAGE" />
-          <EntitySet Name="USER_ROLE" EntityType="zakatModel.USER_ROLE" />
-          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
-          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="zakatModel.VW_APPLICATIONS_BY_USER_AGE" />
-          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
-          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED" />
-          <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
-          <AssociationSet Name="FK_APPLICATION_STATE" Association="zakatModel.FK_APPLICATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_APPLICATION_USER" Association="zakatModel.FK_APPLICATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="zakatModel.FK_ARTIFACT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="zakatModel.FK_COMMENT_APPLICATION">
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-            <End Role="REVIEW" EntitySet="REVIEW" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE">
-            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
-            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="zakatModel.FK_CERTIFICATION_SKILL_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="CERTIFICATION_SKILL" EntitySet="CERTIFICATION_SKILL" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_COUNTRY" Association="zakatModel.FK_USER_COUNTRY">
-            <End Role="COUNTRY" EntitySet="COUNTRY" />
-            <End Role="USER" EntitySet="USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DEPDENDENTS_USER" Association="zakatModel.FK_DEPDENDENTS_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="DEPENDENT" EntitySet="DEPENDENT" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DONATION_USER" Association="zakatModel.FK_DONATION_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="zakatModel.FK_USER_LANGUAGE_LANGUAGE">
-            <End Role="LANGUAGE" EntitySet="LANGUAGE" />
-            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_NATIONALITY1" Association="zakatModel.FK_USER_NATIONALITY1">
-            <End Role="NATIONALITY" EntitySet="NATIONALITY" />
-            <End Role="USER" EntitySet="USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_REFERENCE_STATE" Association="zakatModel.FK_REFERENCE_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="REFERENCE" EntitySet="REFERENCE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_REFERENCE_USER1" Association="zakatModel.FK_REFERENCE_USER1">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="REFERENCE" EntitySet="REFERENCE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_COMMENT_USER" Association="zakatModel.FK_COMMENT_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="REVIEW" EntitySet="REVIEW" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_ROLE" Association="zakatModel.FK_USER_ROLE_ROLE">
-            <End Role="ROLE" EntitySet="ROLE" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_STATE" Association="zakatModel.FK_USER_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="USER" EntitySet="USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_STATE1" Association="zakatModel.FK_USER_STATE1">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="USER" EntitySet="USER" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_LANGUAGE_USER" Association="zakatModel.FK_USER_LANGUAGE_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_USER" Association="zakatModel.FK_USER_ROLE_USER">
-            <End Role="USER" EntitySet="USER" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
-          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="APPLICATION" EntitySet="APPLICATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="DONATION" EntitySet="DONATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
-            <End Role="STATE" EntitySet="STATE" />
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-          </AssociationSet>
-          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
-            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
-            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
-          </AssociationSet>
-          </EntityContainer>
         <EntityType Name="APPLICATION">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -1072,10 +922,10 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
-          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
+          <NavigationProperty Name="STATE" Relationship="Self.FK_APPLICATION_STATE" FromRole="APPLICATION" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_APPLICATION_USER" FromRole="APPLICATION" ToRole="USER" />
+          <NavigationProperty Name="ARTIFACT" Relationship="Self.FK_ARTIFACT_APPLICATION" FromRole="APPLICATION" ToRole="ARTIFACT" />
+          <NavigationProperty Name="REVIEW" Relationship="Self.FK_COMMENT_APPLICATION" FromRole="APPLICATION" ToRole="REVIEW" />
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="APPLICATION" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="ARTIFACT">
@@ -1088,8 +938,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="filename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="contentType" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
           <Property Name="data" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
-          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
+          <NavigationProperty Name="APPLICATION" Relationship="Self.FK_ARTIFACT_APPLICATION" FromRole="ARTIFACT" ToRole="APPLICATION" />
+          <NavigationProperty Name="ARTIFACT_TYPE" Relationship="Self.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT" ToRole="ARTIFACT_TYPE" />
         </EntityType>
         <EntityType Name="ARTIFACT_TYPE">
           <Key>
@@ -1097,7 +947,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </Key>
           <Property Name="artifactTypeId" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ARTIFACT" Relationship="zakatModel.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
+          <NavigationProperty Name="ARTIFACT" Relationship="Self.FK_ARTIFACT_ARTIFACT_TYPE" FromRole="ARTIFACT_TYPE" ToRole="ARTIFACT" />
         </EntityType>
         <EntityType Name="CERTIFICATION_SKILL">
           <Key>
@@ -1106,7 +956,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="certificationSkillId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
           <Property Name="certificationSkill" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="CERTIFICATION_SKILL" ToRole="USER" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_CERTIFICATION_SKILL_USER" FromRole="CERTIFICATION_SKILL" ToRole="USER" />
         </EntityType>
         <EntityType Name="COUNTRY">
           <Key>
@@ -1114,7 +964,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </Key>
           <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_COUNTRY" FromRole="COUNTRY" ToRole="USER" />
         </EntityType>
         <EntityType Name="DEPENDENT">
           <Key>
@@ -1128,19 +978,19 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="dob" Type="DateTime" Precision="3" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="relationship" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_DEPDENDENTS_USER" FromRole="DEPENDENT" ToRole="USER" />
         </EntityType>
         <EntityType Name="DONATION">
           <Key>
             <PropertyRef Name="donationId" />
           </Key>
           <Property Name="donationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="userId" Type="Int32" />
           <Property Name="organizationId" Type="Int32" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="amount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="donationDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_DONATION_USER" FromRole="DONATION" ToRole="USER" />
-          <Property Name="isConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="isConfirmed" Type="Boolean" />
           <Property Name="paypalPdtIsSuccessful" Type="Boolean" />
           <Property Name="paypalPdtConfirmDate" Type="DateTime" Precision="3" />
           <Property Name="paypalPdtTransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -1157,7 +1007,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </Key>
           <Property Name="languageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="LANGUAGE" ToRole="USER_LANGUAGE" />
+          <NavigationProperty Name="USER_LANGUAGE" Relationship="Self.FK_USER_LANGUAGE_LANGUAGE" FromRole="LANGUAGE" ToRole="USER_LANGUAGE" />
         </EntityType>
         <EntityType Name="NATIONALITY">
           <Key>
@@ -1165,7 +1015,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </Key>
           <Property Name="nationalityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_NATIONALITY1" FromRole="NATIONALITY" ToRole="USER" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -1183,8 +1033,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="zip" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="REFERENCE" ToRole="STATE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="REFERENCE" ToRole="USER" />
+          <NavigationProperty Name="STATE" Relationship="Self.FK_REFERENCE_STATE" FromRole="REFERENCE" ToRole="STATE" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_REFERENCE_USER1" FromRole="REFERENCE" ToRole="USER" />
         </EntityType>
         <EntityType Name="REVIEW">
           <Key>
@@ -1196,8 +1046,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="reviewAction" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="reviewComment" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="reviewDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
+          <NavigationProperty Name="APPLICATION" Relationship="Self.FK_COMMENT_APPLICATION" FromRole="REVIEW" ToRole="APPLICATION" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_COMMENT_USER" FromRole="REVIEW" ToRole="USER" />
         </EntityType>
         <EntityType Name="ROLE">
           <Key>
@@ -1206,29 +1056,19 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="roleId" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="Self.FK_USER_ROLE_ROLE" FromRole="ROLE" ToRole="USER_ROLE" />
         </EntityType>
         <EntityType Name="STATE">
           <Key>
             <PropertyRef Name="stateAbbr" />
           </Key>
-          <Property Name="stateAbbr" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="stateAbbr" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="stateName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
-          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
-          <NavigationProperty Name="USER1" Relationship="zakatModel.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="APPLICATION" Relationship="Self.FK_APPLICATION_STATE" FromRole="STATE" ToRole="APPLICATION" />
+          <NavigationProperty Name="REFERENCE" Relationship="Self.FK_REFERENCE_STATE" FromRole="STATE" ToRole="REFERENCE" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
+          <NavigationProperty Name="USER1" Relationship="Self.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="STATE" ToRole="ORGANIZATION" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TOPIC">
           <Key>
@@ -1253,12 +1093,12 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <PropertyRef Name="userId" />
           </Key>
           <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="passwordEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="socialSecurityNumberEncrypted" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="firstName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="middleName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="maritalStatus" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="dob" Type="DateTime" Precision="3" />
@@ -1291,18 +1131,17 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="createdBy" Type="Int32" />
           <Property Name="updatedOn" Type="DateTime" Precision="3" />
           <Property Name="updatedBy" Type="Int32" />
-          <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
-          <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="zakatModel.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
-          <NavigationProperty Name="COUNTRY" Relationship="zakatModel.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
-          <NavigationProperty Name="DEPENDENT" Relationship="zakatModel.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPENDENT" />
-          <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_USER" FromRole="USER" ToRole="DONATION" />
-          <NavigationProperty Name="NATIONALITY" Relationship="zakatModel.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
-          <NavigationProperty Name="REFERENCE" Relationship="zakatModel.FK_REFERENCE_USER1" FromRole="USER" ToRole="REFERENCE" />
-          <NavigationProperty Name="REVIEW" Relationship="zakatModel.FK_COMMENT_USER" FromRole="USER" ToRole="REVIEW" />
-          <NavigationProperty Name="STATE" Relationship="zakatModel.FK_USER_STATE" FromRole="USER" ToRole="STATE" />
-          <NavigationProperty Name="STATE1" Relationship="zakatModel.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
-          <NavigationProperty Name="USER_LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
-          <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
+          <NavigationProperty Name="APPLICATION" Relationship="Self.FK_APPLICATION_USER" FromRole="USER" ToRole="APPLICATION" />
+          <NavigationProperty Name="CERTIFICATION_SKILL" Relationship="Self.FK_CERTIFICATION_SKILL_USER" FromRole="USER" ToRole="CERTIFICATION_SKILL" />
+          <NavigationProperty Name="COUNTRY" Relationship="Self.FK_USER_COUNTRY" FromRole="USER" ToRole="COUNTRY" />
+          <NavigationProperty Name="DEPENDENT" Relationship="Self.FK_DEPDENDENTS_USER" FromRole="USER" ToRole="DEPENDENT" />
+          <NavigationProperty Name="NATIONALITY" Relationship="Self.FK_USER_NATIONALITY1" FromRole="USER" ToRole="NATIONALITY" />
+          <NavigationProperty Name="REFERENCE" Relationship="Self.FK_REFERENCE_USER1" FromRole="USER" ToRole="REFERENCE" />
+          <NavigationProperty Name="REVIEW" Relationship="Self.FK_COMMENT_USER" FromRole="USER" ToRole="REVIEW" />
+          <NavigationProperty Name="STATE" Relationship="Self.FK_USER_STATE" FromRole="USER" ToRole="STATE" />
+          <NavigationProperty Name="STATE1" Relationship="Self.FK_USER_STATE1" FromRole="USER" ToRole="STATE" />
+          <NavigationProperty Name="USER_LANGUAGE" Relationship="Self.FK_USER_LANGUAGE_USER" FromRole="USER" ToRole="USER_LANGUAGE" />
+          <NavigationProperty Name="USER_ROLE" Relationship="Self.FK_USER_ROLE_USER" FromRole="USER" ToRole="USER_ROLE" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -1311,8 +1150,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="userLanguageId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userId" Type="Int32" />
           <Property Name="languageId" Type="Int32" />
-          <NavigationProperty Name="LANGUAGE" Relationship="zakatModel.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
+          <NavigationProperty Name="LANGUAGE" Relationship="Self.FK_USER_LANGUAGE_LANGUAGE" FromRole="USER_LANGUAGE" ToRole="LANGUAGE" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_LANGUAGE_USER" FromRole="USER_LANGUAGE" ToRole="USER" />
         </EntityType>
         <EntityType Name="USER_ROLE">
           <Key>
@@ -1322,8 +1161,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="userId" Type="Int32" />
           <Property Name="roleId" Type="Int32" />
           <Property Name="organizationId" Type="Int32" />
-          <NavigationProperty Name="ROLE" Relationship="zakatModel.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
-          <NavigationProperty Name="USER" Relationship="zakatModel.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK_USER_ROLE_ROLE" FromRole="USER_ROLE" ToRole="ROLE" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_ROLE_USER" FromRole="USER_ROLE" ToRole="USER" />
           <NavigationProperty Name="ORGANIZATION" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="USER_ROLE" ToRole="ORGANIZATION" />
         </EntityType>
         <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
@@ -1407,8 +1246,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="applicationCount" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_APPLICATION_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATE">
               <PropertyRef Name="stateAbbr" />
@@ -1419,8 +1258,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_APPLICATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="1" />
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="1" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1431,8 +1270,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ARTIFACT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="0..1" />
+          <End Role="ARTIFACT" Type="Self.ARTIFACT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APPLICATION">
               <PropertyRef Name="applicationId" />
@@ -1443,8 +1282,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_COMMENT_APPLICATION">
-          <End Type="zakatModel.APPLICATION" Role="APPLICATION" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <End Role="APPLICATION" Type="Self.APPLICATION" Multiplicity="0..1" />
+          <End Role="REVIEW" Type="Self.REVIEW" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="APPLICATION">
               <PropertyRef Name="applicationId" />
@@ -1455,8 +1294,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ARTIFACT_ARTIFACT_TYPE">
-          <End Type="zakatModel.ARTIFACT_TYPE" Role="ARTIFACT_TYPE" Multiplicity="0..1" />
-          <End Type="zakatModel.ARTIFACT" Role="ARTIFACT" Multiplicity="*" />
+          <End Role="ARTIFACT_TYPE" Type="Self.ARTIFACT_TYPE" Multiplicity="0..1" />
+          <End Role="ARTIFACT" Type="Self.ARTIFACT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ARTIFACT_TYPE">
               <PropertyRef Name="artifactTypeId" />
@@ -1467,8 +1306,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CERTIFICATION_SKILL_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.CERTIFICATION_SKILL" Role="CERTIFICATION_SKILL" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="CERTIFICATION_SKILL" Type="Self.CERTIFICATION_SKILL" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1479,8 +1318,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_COUNTRY">
-          <End Type="zakatModel.COUNTRY" Role="COUNTRY" Multiplicity="0..1" />
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
+          <End Role="COUNTRY" Type="Self.COUNTRY" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="COUNTRY">
               <PropertyRef Name="countryId" />
@@ -1491,8 +1330,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DEPDENDENTS_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.DEPENDENT" Role="DEPENDENT" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="DEPENDENT" Type="Self.DEPENDENT" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1502,21 +1341,9 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DONATION_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.DONATION" Role="DONATION" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER">
-              <PropertyRef Name="userId" />
-            </Principal>
-            <Dependent Role="DONATION">
-              <PropertyRef Name="userId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_USER_LANGUAGE_LANGUAGE">
-          <End Type="zakatModel.LANGUAGE" Role="LANGUAGE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_LANGUAGE" Role="USER_LANGUAGE" Multiplicity="*" />
+          <End Role="LANGUAGE" Type="Self.LANGUAGE" Multiplicity="0..1" />
+          <End Role="USER_LANGUAGE" Type="Self.USER_LANGUAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="LANGUAGE">
               <PropertyRef Name="languageId" />
@@ -1527,8 +1354,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_NATIONALITY1">
-          <End Type="zakatModel.NATIONALITY" Role="NATIONALITY" Multiplicity="0..1" />
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
+          <End Role="NATIONALITY" Type="Self.NATIONALITY" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="NATIONALITY">
               <PropertyRef Name="nationalityId" />
@@ -1539,8 +1366,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REFERENCE_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="REFERENCE" Type="Self.REFERENCE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATE">
               <PropertyRef Name="stateAbbr" />
@@ -1551,8 +1378,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_REFERENCE_USER1">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.REFERENCE" Role="REFERENCE" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="REFERENCE" Type="Self.REFERENCE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1563,8 +1390,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_COMMENT_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.REVIEW" Role="REVIEW" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="REVIEW" Type="Self.REVIEW" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1575,8 +1402,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_ROLE_ROLE">
-          <End Type="zakatModel.ROLE" Role="ROLE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <End Role="ROLE" Type="Self.ROLE" Multiplicity="0..1" />
+          <End Role="USER_ROLE" Type="Self.USER_ROLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROLE">
               <PropertyRef Name="roleId" />
@@ -1587,8 +1414,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_STATE">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATE">
               <PropertyRef Name="stateAbbr" />
@@ -1599,8 +1426,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_STATE1">
-          <End Type="zakatModel.STATE" Role="STATE" Multiplicity="0..1" />
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="*" />
+          <End Role="STATE" Type="Self.STATE" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="STATE">
               <PropertyRef Name="stateAbbr" />
@@ -1611,8 +1438,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_LANGUAGE_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_LANGUAGE" Role="USER_LANGUAGE" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_LANGUAGE" Type="Self.USER_LANGUAGE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1623,8 +1450,8 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_USER_ROLE_USER">
-          <End Type="zakatModel.USER" Role="USER" Multiplicity="0..1" />
-          <End Type="zakatModel.USER_ROLE" Role="USER_ROLE" Multiplicity="*" />
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="USER_ROLE" Type="Self.USER_ROLE" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="USER">
               <PropertyRef Name="userId" />
@@ -1634,6 +1461,125 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="zakatEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPLICATION" EntityType="Self.APPLICATION" />
+          <EntitySet Name="ARTIFACT" EntityType="Self.ARTIFACT" />
+          <EntitySet Name="ARTIFACT_TYPE" EntityType="Self.ARTIFACT_TYPE" />
+          <EntitySet Name="CERTIFICATION_SKILL" EntityType="Self.CERTIFICATION_SKILL" />
+          <EntitySet Name="COUNTRY" EntityType="Self.COUNTRY" />
+          <EntitySet Name="DEPENDENT" EntityType="Self.DEPENDENT" />
+          <EntitySet Name="DONATION" EntityType="Self.DONATION" />
+          <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" />
+          <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" />
+          <EntitySet Name="REFERENCE" EntityType="Self.REFERENCE" />
+          <EntitySet Name="REVIEW" EntityType="Self.REVIEW" />
+          <EntitySet Name="ROLE" EntityType="Self.ROLE" />
+          <EntitySet Name="STATE" EntityType="Self.STATE" />
+          <EntitySet Name="TOPIC" EntityType="Self.TOPIC" />
+          <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <EntitySet Name="USER_LANGUAGE" EntityType="Self.USER_LANGUAGE" />
+          <EntitySet Name="USER_ROLE" EntityType="Self.USER_ROLE" />
+          <EntitySet Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS" EntityType="Self.VW_APPLICATIONS_AVG_PROCESSING_DAYS" />
+          <EntitySet Name="VW_APPLICATIONS_BY_USER_AGE" EntityType="Self.VW_APPLICATIONS_BY_USER_AGE" />
+          <EntitySet Name="VW_APPLICATIONS_DISPERSED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DISPERSED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_DRAFTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_DRAFTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_INVESTIGATED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_QUALIFIED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_REJECTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_REJECTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_SUBMITTED_BY_YEAR" />
+          <EntitySet Name="VW_APPLICATIONS_TOTAL_DISPERSED" EntityType="Self.VW_APPLICATIONS_TOTAL_DISPERSED" />
+          <EntitySet Name="VW_APPLICATIONS_VALIDATED_BY_YEAR" EntityType="Self.VW_APPLICATIONS_VALIDATED_BY_YEAR" />
+          <AssociationSet Name="FK_APPLICATION_STATE" Association="Self.FK_APPLICATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_APPLICATION_USER" Association="Self.FK_APPLICATION_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_APPLICATION" Association="Self.FK_ARTIFACT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMMENT_APPLICATION" Association="Self.FK_COMMENT_APPLICATION">
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+            <End Role="REVIEW" EntitySet="REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ARTIFACT_ARTIFACT_TYPE" Association="Self.FK_ARTIFACT_ARTIFACT_TYPE">
+            <End Role="ARTIFACT_TYPE" EntitySet="ARTIFACT_TYPE" />
+            <End Role="ARTIFACT" EntitySet="ARTIFACT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CERTIFICATION_SKILL_USER" Association="Self.FK_CERTIFICATION_SKILL_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="CERTIFICATION_SKILL" EntitySet="CERTIFICATION_SKILL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_COUNTRY" Association="Self.FK_USER_COUNTRY">
+            <End Role="COUNTRY" EntitySet="COUNTRY" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPDENDENTS_USER" Association="Self.FK_DEPDENDENTS_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="DEPENDENT" EntitySet="DEPENDENT" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_LANGUAGE_LANGUAGE" Association="Self.FK_USER_LANGUAGE_LANGUAGE">
+            <End Role="LANGUAGE" EntitySet="LANGUAGE" />
+            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_NATIONALITY1" Association="Self.FK_USER_NATIONALITY1">
+            <End Role="NATIONALITY" EntitySet="NATIONALITY" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_STATE" Association="Self.FK_REFERENCE_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REFERENCE_USER1" Association="Self.FK_REFERENCE_USER1">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="REFERENCE" EntitySet="REFERENCE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMMENT_USER" Association="Self.FK_COMMENT_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="REVIEW" EntitySet="REVIEW" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ROLE" Association="Self.FK_USER_ROLE_ROLE">
+            <End Role="ROLE" EntitySet="ROLE" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_STATE" Association="Self.FK_USER_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_STATE1" Association="Self.FK_USER_STATE1">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_LANGUAGE_USER" Association="Self.FK_USER_LANGUAGE_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_LANGUAGE" EntitySet="USER_LANGUAGE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_USER" Association="Self.FK_USER_ROLE_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          <EntitySet Name="ORGANIZATION" EntityType="zakatModel.ORGANIZATION" />
+          <AssociationSet Name="FK_APPLICATION_ORGANIZATION" Association="zakatModel.FK_APPLICATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="APPLICATION" EntitySet="APPLICATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DONATION_ORGANIZATION" Association="zakatModel.FK_DONATION_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="DONATION" EntitySet="DONATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORGANIZATION_STATE" Association="zakatModel.FK_ORGANIZATION_STATE">
+            <End Role="STATE" EntitySet="STATE" />
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_ROLE_ORGANIZATION" Association="zakatModel.FK_USER_ROLE_ORGANIZATION">
+            <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
+            <End Role="USER_ROLE" EntitySet="USER_ROLE" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="ORGANIZATION">
           <Key>
             <PropertyRef Name="organizationId" />
@@ -1650,7 +1596,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="website" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="isDonationAccepted" Type="Boolean" />
           <Property Name="payPalImageURL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="payPalIdentityToken" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="payPalIdentityToken" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="APPLICATION" Relationship="zakatModel.FK_APPLICATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="APPLICATION" />
           <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
@@ -1713,395 +1659,385 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySetMapping Name="APPLICATION">
             <EntityTypeMapping TypeName="zakatModel.APPLICATION">
               <MappingFragment StoreEntitySet="APPLICATION">
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-                <ScalarProperty Name="rejectedBy" ColumnName="rejectedBy" />
-                <ScalarProperty Name="rejectedOn" ColumnName="rejectedOn" />
-                <ScalarProperty Name="dispersedBy" ColumnName="dispersedBy" />
-                <ScalarProperty Name="dispersedOn" ColumnName="dispersedOn" />
-                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
-                <ScalarProperty Name="qualified2By" ColumnName="qualified2By" />
-                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
-                <ScalarProperty Name="qualified1By" ColumnName="qualified1By" />
-                <ScalarProperty Name="qualified1On" ColumnName="qualified1On" />
-                <ScalarProperty Name="investigatedBy" ColumnName="investigatedBy" />
-                <ScalarProperty Name="investigatedOn" ColumnName="investigatedOn" />
-                <ScalarProperty Name="validatedBy" ColumnName="validatedBy" />
-                <ScalarProperty Name="validatedOn" ColumnName="validatedOn" />
-                <ScalarProperty Name="submittedBy" ColumnName="submittedBy" />
-                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
-                <ScalarProperty Name="draftedBy" ColumnName="draftedBy" />
-                <ScalarProperty Name="draftedOn" ColumnName="draftedOn" />
-                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
-                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
-                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
-                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
-                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
-                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
-                <ScalarProperty Name="employmentEndtDate" ColumnName="employmentEndtDate" />
-                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
-                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
-                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
-                <ScalarProperty Name="employerName" ColumnName="employerName" />
-                <ScalarProperty Name="isNotEmployed" ColumnName="isNotEmployed" />
-                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
-                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
-                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
-                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
-                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
-                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
-                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
-                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
-                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
-                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
-                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
-                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
-                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
-                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
-                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
-                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
-                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
-                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
-                <ScalarProperty Name="totalValueRetirement" ColumnName="totalValueRetirement" />
-                <ScalarProperty Name="hasRetirement" ColumnName="hasRetirement" />
-                <ScalarProperty Name="totalValueInvestment" ColumnName="totalValueInvestment" />
-                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
-                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
-                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
-                <ScalarProperty Name="husbandZakatExplanation" ColumnName="husbandZakatExplanation" />
-                <ScalarProperty Name="husbandHasAppliedForZakat" ColumnName="husbandHasAppliedForZakat" />
-                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
-                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
-                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
-                <ScalarProperty Name="isQualified2" ColumnName="isQualified2" />
-                <ScalarProperty Name="isQualified1" ColumnName="isQualified1" />
-                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
-                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
-                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
-                <ScalarProperty Name="isDrafted" ColumnName="isDrafted" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="isDrafted" ColumnName="isDrafted" />
+                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="isValidated" ColumnName="isValidated" />
+                <ScalarProperty Name="isInvestigated" ColumnName="isInvestigated" />
+                <ScalarProperty Name="isQualified1" ColumnName="isQualified1" />
+                <ScalarProperty Name="isQualified2" ColumnName="isQualified2" />
+                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
+                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+                <ScalarProperty Name="applicationStatus" ColumnName="applicationStatus" />
+                <ScalarProperty Name="husbandHasAppliedForZakat" ColumnName="husbandHasAppliedForZakat" />
+                <ScalarProperty Name="husbandZakatExplanation" ColumnName="husbandZakatExplanation" />
+                <ScalarProperty Name="totalValueCash" ColumnName="totalValueCash" />
+                <ScalarProperty Name="totalValueGold" ColumnName="totalValueGold" />
+                <ScalarProperty Name="totalValueSilver" ColumnName="totalValueSilver" />
+                <ScalarProperty Name="totalValueInvestment" ColumnName="totalValueInvestment" />
+                <ScalarProperty Name="hasRetirement" ColumnName="hasRetirement" />
+                <ScalarProperty Name="totalValueRetirement" ColumnName="totalValueRetirement" />
+                <ScalarProperty Name="hasOutstandingDebts" ColumnName="hasOutstandingDebts" />
+                <ScalarProperty Name="totalValueOutstandingDebts" ColumnName="totalValueOutstandingDebts" />
+                <ScalarProperty Name="hasHealthInsurance" ColumnName="hasHealthInsurance" />
+                <ScalarProperty Name="medicaidNumber" ColumnName="medicaidNumber" />
+                <ScalarProperty Name="medicareNumber" ColumnName="medicareNumber" />
+                <ScalarProperty Name="healthInsuranceProviderName" ColumnName="healthInsuranceProviderName" />
+                <ScalarProperty Name="healthInsuranceProviderPolicyNumber" ColumnName="healthInsuranceProviderPolicyNumber" />
+                <ScalarProperty Name="hasLifeInsurance" ColumnName="hasLifeInsurance" />
+                <ScalarProperty Name="totalValueLifeInsurance" ColumnName="totalValueLifeInsurance" />
+                <ScalarProperty Name="hasChildSupport" ColumnName="hasChildSupport" />
+                <ScalarProperty Name="totalChildSupport" ColumnName="totalChildSupport" />
+                <ScalarProperty Name="frequencyChildSupport" ColumnName="frequencyChildSupport" />
+                <ScalarProperty Name="hasFoodStamps" ColumnName="hasFoodStamps" />
+                <ScalarProperty Name="totalFoodStamps" ColumnName="totalFoodStamps" />
+                <ScalarProperty Name="frequencyFoodStamps" ColumnName="frequencyFoodStamps" />
+                <ScalarProperty Name="hasTemporaryCashAssistance" ColumnName="hasTemporaryCashAssistance" />
+                <ScalarProperty Name="sourceTemporaryCashAssistance" ColumnName="sourceTemporaryCashAssistance" />
+                <ScalarProperty Name="totalTemporaryCashAssistance" ColumnName="totalTemporaryCashAssistance" />
+                <ScalarProperty Name="isNotEmployed" ColumnName="isNotEmployed" />
+                <ScalarProperty Name="employerName" ColumnName="employerName" />
+                <ScalarProperty Name="positionTitle" ColumnName="positionTitle" />
+                <ScalarProperty Name="totalMonthlyGrossSalary" ColumnName="totalMonthlyGrossSalary" />
+                <ScalarProperty Name="employmentStartDate" ColumnName="employmentStartDate" />
+                <ScalarProperty Name="employmentEndtDate" ColumnName="employmentEndtDate" />
+                <ScalarProperty Name="employerStreet" ColumnName="employerStreet" />
+                <ScalarProperty Name="employerCity" ColumnName="employerCity" />
+                <ScalarProperty Name="employerStateAbbr" ColumnName="employerStateAbbr" />
+                <ScalarProperty Name="employerZip" ColumnName="employerZip" />
+                <ScalarProperty Name="employerPhone" ColumnName="employerPhone" />
+                <ScalarProperty Name="personalNeedStatement" ColumnName="personalNeedStatement" />
+                <ScalarProperty Name="draftedOn" ColumnName="draftedOn" />
+                <ScalarProperty Name="draftedBy" ColumnName="draftedBy" />
+                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
+                <ScalarProperty Name="submittedBy" ColumnName="submittedBy" />
+                <ScalarProperty Name="validatedOn" ColumnName="validatedOn" />
+                <ScalarProperty Name="validatedBy" ColumnName="validatedBy" />
+                <ScalarProperty Name="investigatedOn" ColumnName="investigatedOn" />
+                <ScalarProperty Name="investigatedBy" ColumnName="investigatedBy" />
+                <ScalarProperty Name="qualified1On" ColumnName="qualified1On" />
+                <ScalarProperty Name="qualified1By" ColumnName="qualified1By" />
+                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
+                <ScalarProperty Name="qualified2By" ColumnName="qualified2By" />
+                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
+                <ScalarProperty Name="dispersedOn" ColumnName="dispersedOn" />
+                <ScalarProperty Name="dispersedBy" ColumnName="dispersedBy" />
+                <ScalarProperty Name="rejectedOn" ColumnName="rejectedOn" />
+                <ScalarProperty Name="rejectedBy" ColumnName="rejectedBy" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ARTIFACT">
             <EntityTypeMapping TypeName="zakatModel.ARTIFACT">
               <MappingFragment StoreEntitySet="ARTIFACT">
-                <ScalarProperty Name="data" ColumnName="data" />
-                <ScalarProperty Name="contentType" ColumnName="contentType" />
-                <ScalarProperty Name="filename" ColumnName="filename" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
                 <ScalarProperty Name="artifactId" ColumnName="artifactId" />
+                <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="filename" ColumnName="filename" />
+                <ScalarProperty Name="contentType" ColumnName="contentType" />
+                <ScalarProperty Name="data" ColumnName="data" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ARTIFACT_TYPE">
             <EntityTypeMapping TypeName="zakatModel.ARTIFACT_TYPE">
               <MappingFragment StoreEntitySet="ARTIFACT_TYPE">
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="artifactTypeId" ColumnName="artifactTypeId" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CERTIFICATION_SKILL">
             <EntityTypeMapping TypeName="zakatModel.CERTIFICATION_SKILL">
               <MappingFragment StoreEntitySet="CERTIFICATION_SKILL">
-                <ScalarProperty Name="certificationSkill" ColumnName="certificationSkill" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="certificationSkillId" ColumnName="certificationSkillId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="certificationSkill" ColumnName="certificationSkill" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="COUNTRY">
             <EntityTypeMapping TypeName="zakatModel.COUNTRY">
               <MappingFragment StoreEntitySet="COUNTRY">
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DEPENDENT">
             <EntityTypeMapping TypeName="zakatModel.DEPENDENT">
               <MappingFragment StoreEntitySet="DEPENDENT">
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="dob" ColumnName="dob" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="dependentId" ColumnName="dependentId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DONATION">
             <EntityTypeMapping TypeName="zakatModel.DONATION">
               <MappingFragment StoreEntitySet="DONATION">
-                <ScalarProperty Name="paypalIpnResponse" ColumnName="paypalIpnResponse" />
-                <ScalarProperty Name="paypalIpnTransactionId" ColumnName="paypalIpnTransactionId" />
-                <ScalarProperty Name="paypalIpnConfirmDate" ColumnName="paypalIpnConfirmDate" />
-                <ScalarProperty Name="paypalIpnIsSuccessful" ColumnName="paypalIpnIsSuccessful" />
-                <ScalarProperty Name="paypalPdtResponse" ColumnName="paypalPdtResponse" />
-                <ScalarProperty Name="paypalPdtTransactionId" ColumnName="paypalPdtTransactionId" />
-                <ScalarProperty Name="paypalPdtConfirmDate" ColumnName="paypalPdtConfirmDate" />
-                <ScalarProperty Name="paypalPdtIsSuccessful" ColumnName="paypalPdtIsSuccessful" />
-                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
-                <ScalarProperty Name="donationDate" ColumnName="donationDate" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="donationId" ColumnName="donationId" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="donationDate" ColumnName="donationDate" />
+                <ScalarProperty Name="isConfirmed" ColumnName="isConfirmed" />
+                <ScalarProperty Name="paypalPdtIsSuccessful" ColumnName="paypalPdtIsSuccessful" />
+                <ScalarProperty Name="paypalPdtConfirmDate" ColumnName="paypalPdtConfirmDate" />
+                <ScalarProperty Name="paypalPdtTransactionId" ColumnName="paypalPdtTransactionId" />
+                <ScalarProperty Name="paypalPdtResponse" ColumnName="paypalPdtResponse" />
+                <ScalarProperty Name="paypalIpnIsSuccessful" ColumnName="paypalIpnIsSuccessful" />
+                <ScalarProperty Name="paypalIpnConfirmDate" ColumnName="paypalIpnConfirmDate" />
+                <ScalarProperty Name="paypalIpnTransactionId" ColumnName="paypalIpnTransactionId" />
+                <ScalarProperty Name="paypalIpnResponse" ColumnName="paypalIpnResponse" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LANGUAGE">
             <EntityTypeMapping TypeName="zakatModel.LANGUAGE">
               <MappingFragment StoreEntitySet="LANGUAGE">
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NATIONALITY">
             <EntityTypeMapping TypeName="zakatModel.NATIONALITY">
               <MappingFragment StoreEntitySet="NATIONALITY">
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REFERENCE">
             <EntityTypeMapping TypeName="zakatModel.REFERENCE">
               <MappingFragment StoreEntitySet="REFERENCE">
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="relationship" ColumnName="relationship" />
-                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="referenceId" ColumnName="referenceId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="knownSince" ColumnName="knownSince" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="REVIEW">
             <EntityTypeMapping TypeName="zakatModel.REVIEW">
               <MappingFragment StoreEntitySet="REVIEW">
-                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
-                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
-                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
-                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="reviewId" ColumnName="reviewId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="reviewAction" ColumnName="reviewAction" />
+                <ScalarProperty Name="reviewComment" ColumnName="reviewComment" />
+                <ScalarProperty Name="reviewDate" ColumnName="reviewDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ROLE">
             <EntityTypeMapping TypeName="zakatModel.ROLE">
               <MappingFragment StoreEntitySet="ROLE">
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="description" ColumnName="description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="STATE">
             <EntityTypeMapping TypeName="zakatModel.STATE">
               <MappingFragment StoreEntitySet="STATE">
-                <ScalarProperty Name="stateName" ColumnName="stateName" />
                 <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="zakatModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="stateName" ColumnName="stateName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TOPIC">
             <EntityTypeMapping TypeName="zakatModel.TOPIC">
               <MappingFragment StoreEntitySet="TOPIC">
-                <ScalarProperty Name="topicLink" ColumnName="topicLink" />
-                <ScalarProperty Name="topicContent" ColumnName="topicContent" />
-                <ScalarProperty Name="topicName" ColumnName="topicName" />
                 <ScalarProperty Name="topicId" ColumnName="topicId" />
+                <ScalarProperty Name="topicName" ColumnName="topicName" />
+                <ScalarProperty Name="topicContent" ColumnName="topicContent" />
+                <ScalarProperty Name="topicLink" ColumnName="topicLink" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TRANSLATION">
             <EntityTypeMapping TypeName="zakatModel.TRANSLATION">
               <MappingFragment StoreEntitySet="TRANSLATION">
-                <ScalarProperty Name="translationURL" ColumnName="translationURL" />
-                <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
-                <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
                 <ScalarProperty Name="translationId" ColumnName="translationId" />
+                <ScalarProperty Name="translationNameEnglish" ColumnName="translationNameEnglish" />
+                <ScalarProperty Name="translationNameNative" ColumnName="translationNameNative" />
+                <ScalarProperty Name="translationURL" ColumnName="translationURL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USER">
             <EntityTypeMapping TypeName="zakatModel.USER">
               <MappingFragment StoreEntitySet="USER">
-                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
-                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
-                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-                <ScalarProperty Name="primaryMasjidPhone" ColumnName="primaryMasjidPhone" />
-                <ScalarProperty Name="primaryMasjidName" ColumnName="primaryMasjidName" />
-                <ScalarProperty Name="schoolZip" ColumnName="schoolZip" />
-                <ScalarProperty Name="schoolStateAbbr" ColumnName="schoolStateAbbr" />
-                <ScalarProperty Name="schoolCity" ColumnName="schoolCity" />
-                <ScalarProperty Name="schoolStreet" ColumnName="schoolStreet" />
-                <ScalarProperty Name="schoolCountryId" ColumnName="schoolCountryId" />
-                <ScalarProperty Name="schoolName" ColumnName="schoolName" />
-                <ScalarProperty Name="isInternationalSchool" ColumnName="isInternationalSchool" />
-                <ScalarProperty Name="highestEducationCompleted" ColumnName="highestEducationCompleted" />
-                <ScalarProperty Name="husbandEmail" ColumnName="husbandEmail" />
-                <ScalarProperty Name="husbandPhone" ColumnName="husbandPhone" />
-                <ScalarProperty Name="husbandLastName" ColumnName="husbandLastName" />
-                <ScalarProperty Name="husbandMiddleName" ColumnName="husbandMiddleName" />
-                <ScalarProperty Name="husbandFirstName" ColumnName="husbandFirstName" />
-                <ScalarProperty Name="homeTypeOther" ColumnName="homeTypeOther" />
-                <ScalarProperty Name="homeType" ColumnName="homeType" />
-                <ScalarProperty Name="beganLivingDate" ColumnName="beganLivingDate" />
-                <ScalarProperty Name="zip" ColumnName="zip" />
-                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
-                <ScalarProperty Name="city" ColumnName="city" />
-                <ScalarProperty Name="street" ColumnName="street" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="citizenshipStatus" ColumnName="citizenshipStatus" />
-                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
-                <ScalarProperty Name="dob" ColumnName="dob" />
-                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
-                <ScalarProperty Name="gender" ColumnName="gender" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="middleName" ColumnName="middleName" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="socialSecurityNumberEncrypted" ColumnName="socialSecurityNumberEncrypted" />
-                <ScalarProperty Name="passwordEncrypted" ColumnName="passwordEncrypted" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="passwordEncrypted" ColumnName="passwordEncrypted" />
+                <ScalarProperty Name="socialSecurityNumberEncrypted" ColumnName="socialSecurityNumberEncrypted" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="maritalStatus" ColumnName="maritalStatus" />
+                <ScalarProperty Name="dob" ColumnName="dob" />
+                <ScalarProperty Name="nationalityId" ColumnName="nationalityId" />
+                <ScalarProperty Name="citizenshipStatus" ColumnName="citizenshipStatus" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="street" ColumnName="street" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="stateAbbr" ColumnName="stateAbbr" />
+                <ScalarProperty Name="zip" ColumnName="zip" />
+                <ScalarProperty Name="beganLivingDate" ColumnName="beganLivingDate" />
+                <ScalarProperty Name="homeType" ColumnName="homeType" />
+                <ScalarProperty Name="homeTypeOther" ColumnName="homeTypeOther" />
+                <ScalarProperty Name="husbandFirstName" ColumnName="husbandFirstName" />
+                <ScalarProperty Name="husbandMiddleName" ColumnName="husbandMiddleName" />
+                <ScalarProperty Name="husbandLastName" ColumnName="husbandLastName" />
+                <ScalarProperty Name="husbandPhone" ColumnName="husbandPhone" />
+                <ScalarProperty Name="husbandEmail" ColumnName="husbandEmail" />
+                <ScalarProperty Name="highestEducationCompleted" ColumnName="highestEducationCompleted" />
+                <ScalarProperty Name="isInternationalSchool" ColumnName="isInternationalSchool" />
+                <ScalarProperty Name="schoolName" ColumnName="schoolName" />
+                <ScalarProperty Name="schoolCountryId" ColumnName="schoolCountryId" />
+                <ScalarProperty Name="schoolStreet" ColumnName="schoolStreet" />
+                <ScalarProperty Name="schoolCity" ColumnName="schoolCity" />
+                <ScalarProperty Name="schoolStateAbbr" ColumnName="schoolStateAbbr" />
+                <ScalarProperty Name="schoolZip" ColumnName="schoolZip" />
+                <ScalarProperty Name="primaryMasjidName" ColumnName="primaryMasjidName" />
+                <ScalarProperty Name="primaryMasjidPhone" ColumnName="primaryMasjidPhone" />
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="updatedOn" ColumnName="updatedOn" />
+                <ScalarProperty Name="updatedBy" ColumnName="updatedBy" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USER_LANGUAGE">
             <EntityTypeMapping TypeName="zakatModel.USER_LANGUAGE">
               <MappingFragment StoreEntitySet="USER_LANGUAGE">
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="userLanguageId" ColumnName="userLanguageId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="USER_ROLE">
             <EntityTypeMapping TypeName="zakatModel.USER_ROLE">
               <MappingFragment StoreEntitySet="USER_ROLE">
-                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
-                <ScalarProperty Name="roleId" ColumnName="roleId" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="userRoleId" ColumnName="userRoleId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="organizationId" ColumnName="organizationId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_AVG_PROCESSING_DAYS">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
-                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
-                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
-                <ScalarProperty Name="month" ColumnName="month" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="submittedOn" ColumnName="submittedOn" />
+                <ScalarProperty Name="qualified2On" ColumnName="qualified2On" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_BY_USER_AGE">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_BY_USER_AGE">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_BY_USER_AGE">
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
-                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
-                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
-                <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="isSubmitted" ColumnName="isSubmitted" />
+                <ScalarProperty Name="isDispersed" ColumnName="isDispersed" />
+                <ScalarProperty Name="isRejected" ColumnName="isRejected" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DISPERSED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_DISPERSED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_DRAFTED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_DRAFTED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_QUALIFIED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_REJECTED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_REJECTED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_SUBMITTED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_TOTAL_DISPERSED">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_TOTAL_DISPERSED">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_TOTAL_DISPERSED">
-                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
-                <ScalarProperty Name="month" ColumnName="month" />
-                <ScalarProperty Name="year" ColumnName="year" />
                 <ScalarProperty Name="applicationId" ColumnName="applicationId" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="month" ColumnName="month" />
+                <ScalarProperty Name="dispersedAmount" ColumnName="dispersedAmount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
             <EntityTypeMapping TypeName="zakatModel.VW_APPLICATIONS_VALIDATED_BY_YEAR">
               <MappingFragment StoreEntitySet="VW_APPLICATIONS_VALIDATED_BY_YEAR">
-                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
                 <ScalarProperty Name="applicationYear" ColumnName="applicationYear" />
+                <ScalarProperty Name="applicationCount" ColumnName="applicationCount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

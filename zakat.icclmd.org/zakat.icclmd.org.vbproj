@@ -163,6 +163,16 @@
     <Content Include="OrganizationEdit.aspx" />
     <Content Include="ManageOrganizations.aspx" />
     <Content Include="Users.aspx" />
+    <Content Include="zakatEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>zakatEntities.edmx</DependentUpon>
+      <LastGenOutput>zakatEntities.Context.vb</LastGenOutput>
+    </Content>
+    <Content Include="zakatEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>zakatEntities.edmx</DependentUpon>
+      <LastGenOutput>zakatEntities.vb</LastGenOutput>
+    </Content>
     <Content Include="ZakatForm.aspx" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -187,16 +197,6 @@
     <Content Include="Logout.aspx" />
     <Content Include="Password.aspx" />
     <Content Include="Privacy.aspx" />
-    <Content Include="ZakatEntities.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZakatEntities.edmx</DependentUpon>
-      <LastGenOutput>ZakatEntities.Context.vb</LastGenOutput>
-    </Content>
-    <Content Include="ZakatEntities.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ZakatEntities.edmx</DependentUpon>
-      <LastGenOutput>ZakatEntities.vb</LastGenOutput>
-    </Content>
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -272,13 +272,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Bundle.config" />
-    <EntityDeploy Include="ZakatEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ZakatEntities.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ZakatEntities.edmx.diagram">
-      <DependentUpon>ZakatEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -297,6 +290,13 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <EntityDeploy Include="zakatEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>zakatEntities.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="zakatEntities.edmx.diagram">
+      <DependentUpon>zakatEntities.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.designer.vb">
@@ -335,19 +335,19 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="APPLICATION.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ARTIFACT.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ARTIFACT_TYPE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="CERTIFICATION_SKILL.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="COUNTRY.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.aspx.designer.vb">
       <DependentUpon>Dashboard.aspx</DependentUpon>
@@ -357,7 +357,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DEPENDENT.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Donate.aspx.designer.vb">
       <DependentUpon>Donate.aspx</DependentUpon>
@@ -367,7 +367,7 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="DONATION.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">
       <DependentUpon>Inbox.aspx</DependentUpon>
@@ -377,13 +377,13 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="LANGUAGE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="NATIONALITY.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ORGANIZATION.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="OrganizationProfile.aspx.designer.vb">
       <DependentUpon>OrganizationProfile.aspx</DependentUpon>
@@ -407,7 +407,7 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="REFERENCE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Report.ascx.designer.vb">
       <DependentUpon>Report.ascx</DependentUpon>
@@ -417,16 +417,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="REVIEW.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ROLE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="STATE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagrams.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
@@ -436,13 +433,13 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="TOPIC.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="TRANSLATION.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="USER.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="UserEdit.aspx.designer.vb">
       <DependentUpon>UserEdit.aspx</DependentUpon>
@@ -487,50 +484,55 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="USER_LANGUAGE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="USER_ROLE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_AVG_PROCESSING_DAYS.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_BY_USER_AGE.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_DISPERSED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_DRAFTED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_INVESTIGATED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_QUALIFIED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_REJECTED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_SUBMITTED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_TOTAL_DISPERSED.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="VW_APPLICATIONS_VALIDATED_BY_YEAR.vb">
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="ZakatEntities.Context.vb">
-      <DesignTime>True</DesignTime>
+    <Compile Include="zakatEntities.Context.vb">
       <AutoGen>True</AutoGen>
-      <DependentUpon>ZakatEntities.Context.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>zakatEntities.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ZakatEntities.vb">
-      <DesignTime>True</DesignTime>
+    <Compile Include="zakatEntities.Designer.vb">
       <AutoGen>True</AutoGen>
-      <DependentUpon>ZakatEntities.tt</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>zakatEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="zakatEntities.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ZakatForm.aspx.designer.vb">
       <DependentUpon>ZakatForm.aspx</DependentUpon>
@@ -626,11 +628,6 @@
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.vb">
       <DependentUpon>Site.Mobile.Master</DependentUpon>
-    </Compile>
-    <Compile Include="ZakatEntities.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ZakatEntities.edmx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
