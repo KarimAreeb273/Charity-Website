@@ -282,6 +282,15 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <None Include=".env\deve\Web.config.areeb">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include=".env\deve\Web.config.Debug.areeb">
+      <DependentUpon>Web.config.areeb</DependentUpon>
+    </None>
+    <None Include=".env\deve\Web.config.Release.areeb">
+      <DependentUpon>Web.config.areeb</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
