@@ -146,6 +146,8 @@
     <Content Include="Applicants.aspx" />
     <Content Include="Application.aspx" />
     <Content Include="Activity.aspx" />
+    <Content Include="Confirm.aspx" />
+    <Content Include="ConfirmIPN.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Donate.aspx" />
     <Content Include="Images\png-transparent.png" />
@@ -345,6 +347,20 @@
     </Compile>
     <Compile Include="CERTIFICATION_SKILL.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Confirm.aspx.designer.vb">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Confirm.aspx.vb">
+      <DependentUpon>Confirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ConfirmIPN.aspx.designer.vb">
+      <DependentUpon>ConfirmIPN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConfirmIPN.aspx.vb">
+      <DependentUpon>ConfirmIPN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="COUNTRY.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>

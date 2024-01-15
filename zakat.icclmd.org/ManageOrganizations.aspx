@@ -162,7 +162,7 @@
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="txtPayPalToken" CssClass="col-lg-2 control-label" ToolTip="PayPal Token" Style="white-space: nowrap">PayPal Token:</asp:Label>
                                         <div class="col-lg-10">
-                                            <asp:TextBox runat="server" ID="txtPayPalToken" CssClass="form-control" ToolTip="PayPal Token" MaxLength="5" TabIndex="12" AutoCompleteType="Disabled" Enabled="False" />
+                                            <asp:TextBox runat="server" ID="txtPayPalToken" CssClass="form-control" ToolTip="PayPal Token" TabIndex="12" AutoCompleteType="Disabled" Enabled="False" />
                                             <asp:RequiredFieldValidator runat="server" ID="valPayPalToken" ControlToValidate="txtPayPalToken" CssClass="text-danger" ErrorMessage="The PayPal token is required." Display="Static" ValidationGroup="Head" Enabled="False" />
                                         </div>
                                     </div>

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="well well-sm">
-                    <h5><b>NOTE: All donations made on this site are done anonymously but you may have to provide personal information with PayPal. </b>
+                    <h5><b>NOTE: Not all organizations are accepting donations and may not appear in the organization list! </b>
                     </h5>
                 </div>
             </div>
@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="well well-sm">
-                        <h5><b>NOTE: This is a disclaimer that this site is not responsible for providing any end of year tax information. Please coordinate with the organization you are donating to in order to receive these documents.</b>
+                        <h5><b>DISCLAIMER: This site is not responsible for providing any end of year tax information. Please coordinate with the organization you are donating to in order to receive these documents.</b>
                         </h5>
                     </div>
                 </div>
