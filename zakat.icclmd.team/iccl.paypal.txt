@@ -1,0 +1,126 @@
+ICCL PayPal Email Account:
+URL:  https://gmail.com
+User: paypal@icclmd.org
+Pass: wrkn4iccl!@
+
+      =====================================================
+      New ICCL PayPal Live Account:
+      URL:  https://www.paypal.com/us/signin
+      User: paypal@icclmd.org
+      Pass: Wrkn4iccl#$
+
+      Live Application Display Name:
+      ICCL Membership
+
+      Live PayPal Account:
+      paypal@icclmd.org
+
+      Live Client ID:
+      AS6AVnzO9_WAsHZV_YFH6ZbfWuDMU2NSgeHSfUwiwayURm5gH-RCNkJMXB8aVsxhNmxDTiCOjBTRttd-
+
+      Live Secret for App "ICCL Membership":
+      None
+
+      Return URL:
+      https://membership.icclmd.org/confirm
+
+      =====================================================
+      New ICCL PayPal Sandbox Account:
+      URL:  https://www.sandbox.paypal.com/
+      User: paypal@icclmd.org
+      Pass: Wrkn4iccl#$
+      
+      Sandbox Application Display Name:
+      ICCL Membership Test
+
+      Sandbox Account:
+      sb-pxbqg2199645@business.example.com
+
+      Sandbox Client ID:
+      AcJ-kkYpgD2lfBud21YOT0ukLFFMZ6CBmVF0uf8KgNOEgYoKMZ6Ga_8XfId33PQqt4i6OXpL68o8K78D
+
+      Sandbox Secret for App "ICCL Membership Test":
+      EH4MFxBrvHVplifC6t52C3JTI2QE4x-dSP9kKHO889Hx3zZzC5kR8c1CHSvqY_fwvVilcaoMEfT9qMkI
+
+      Return URL:
+      
+
+      Sandbox URL for Test App:
+
+      URL:    https://www.sandbox.paypal.com/cgi-bin/webscr
+
+      Type:   Seller
+      User:   sb-pxbqg2199645@business.example.com
+      Pass:   12121212
+
+      Type:   Buyer
+      First:  John
+      Last:   Doe
+      User:   sb-m3ng42196286@personal.example.com
+      Pass:   12121212
+
+      Credit Card:
+      Number: 4032037513966099
+      Type:   VISA
+      Exp:    0625
+
+      Account Number:
+      24928391012
+
+      Routing Number:
+      325272063
+
+Old ICCL PayPal Account:
+URL:  https://www.paypal.com/us/signin
+User: finance@icclmd.org
+Pass: wrkn4iccl!
+
+      Sandbox account:
+      URL:  https://www.sandbox.paypal.com/cgi-bin/webscr
+      User: finance-facilitator@icclmd.org
+      Pass: 12121212
+
+      Bank Account
+      Account Number:
+      54038462431141
+
+      Routing Number:
+      325272063
+
+      Credit Card Number:
+      4032033609071100
+      Expiration Date:
+      01/2024
+
+
+Bank Account
+Account Number:
+15177394660443
+Routing Number:
+325272063
+
+Credit Card Number:
+4032031750707480
+
+Expiration Date:
+01/2024
+
+=======================================================================
+
+Create New REST API Credentials:
+
+1.Go to https://developer.paypal.com/
+2.Click Log into Dashboard.
+3.Log in using your PayPal Business account login credentials.
+4.Click My Apps & Credentials.
+5.Click Sandbox or Live. If you are creating a live app for live integration, choose "Live".
+6.Click Create App.
+7.Enter an App Name.
+8.Choose a Sandbox developer account (only if creating a sandbox app).
+9.Click Create App.
+
+Once the app is created, you will have access to your Sandbox and Live credentials.
+
+Feel free to reply whenever you're ready and we'll reply as soon as we can.
+
+
