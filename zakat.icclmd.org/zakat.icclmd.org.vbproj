@@ -150,6 +150,7 @@
     <Content Include="ConfirmIPN.aspx" />
     <Content Include="Dashboard.aspx" />
     <Content Include="Donate.aspx" />
+    <Content Include="Eligible.aspx" />
     <Content Include="Images\png-transparent.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
@@ -384,6 +385,13 @@
     </Compile>
     <Compile Include="DONATION.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Eligible.aspx.designer.vb">
+      <DependentUpon>Eligible.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Eligible.aspx.vb">
+      <DependentUpon>Eligible.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">
       <DependentUpon>Inbox.aspx</DependentUpon>
