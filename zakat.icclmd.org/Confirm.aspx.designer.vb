@@ -12,7 +12,7 @@ Option Explicit On
 
 
 Partial Public Class Confirm
-    
+
     '''<summary>
     '''lblFirstName control.
     '''</summary>
@@ -21,25 +21,25 @@ Partial Public Class Confirm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFirstName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
-    '''lblYear1 control.
+    '''lblOrgName control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblYear1 As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblOrgName As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''lblMemberId control.
+    '''lblDonationId control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMemberId As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblDonationId As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''lblFullName control.
     '''</summary>
@@ -48,70 +48,34 @@ Partial Public Class Confirm
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents lblFullName As Global.System.Web.UI.WebControls.Label
-    
+
     '''<summary>
-    '''lblMemberType control.
+    '''lblDonationAmount control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblMemberType As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblDonationAmount As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''lblYear2 control.
+    '''lblDonationDate control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblYear2 As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblDonationDate As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
-    '''lblPayAmount control.
+    '''lblDonationMethod control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents lblPayAmount As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblPayDate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblPayDate As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblPayMethod control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblPayMethod As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblReference control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblReference As Global.System.Web.UI.WebControls.Label
-    
-    '''<summary>
-    '''lblRecordedBy control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents lblRecordedBy As Global.System.Web.UI.WebControls.Label
-    
+    Protected WithEvents lblDonationMethod As Global.System.Web.UI.WebControls.Label
+
     '''<summary>
     '''btnProfile control.
     '''</summary>
