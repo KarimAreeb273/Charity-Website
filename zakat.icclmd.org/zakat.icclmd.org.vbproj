@@ -235,9 +235,7 @@
     <None Include=".env\deve\Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include=".env\prod\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include=".env\prod\Web.config" />
     <None Include=".env\prod\Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

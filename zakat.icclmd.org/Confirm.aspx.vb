@@ -27,6 +27,7 @@ Public Class Confirm
                 Dim vOrganizationId As Int32 = Session("sOrganizationId")
                 Dim vFirstName As String = ""
                 Dim vOrgPayPalIdentityTokenPDT As String = ""
+                Dim vOrgName As String = ""
 
                 'if either the donation Id or organization Id is not saved from the session, we will have it to get it from the cookie
                 If vDonationId = 0 Or vOrganizationId = 0 Then
@@ -50,6 +51,7 @@ Public Class Confirm
                         Dim oOrganization As ORGANIZATION = (From ORGANIZATION In oDB.ORGANIZATION Where ORGANIZATION.organizationId = vOrganizationId).First
                         With oOrganization
                             vOrgPayPalIdentityTokenPDT = .payPalIdentityToken
+                            vOrgName = .name
                         End With
                     End If
                 End Using
@@ -247,10 +249,13 @@ Public Class Confirm
                             End With
                             oDB.SaveChanges()
 
+                            lblFirstName.Text = oDonation.firstName
+                            lblDonationId.Text = oDonation.donationId.ToString("00000")
                             lblFullName.Text = oDonation.firstName + " " + oDonation.lastName
-                            lblPayAmount.Text = FormatCurrency(oDonation.amount)
-                            lblPayDate.Text = oDonation.donationDate
-                            lblPayMethod.Text = "PayPal"
+                            lblDonationAmount.Text = FormatCurrency(oDonation.amount)
+                            lblDonationDate.Text = oDonation.donationDate
+                            lblDonationMethod.Text = "PayPal"
+                            lblOrgName.Text = vOrgName
 
                             ''create email to member as a receipt
                             'Dim oMember As USER = (From USER In oDB.USER Where USER.userId = oDonation.userId).First
