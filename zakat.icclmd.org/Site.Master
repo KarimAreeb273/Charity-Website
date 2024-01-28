@@ -6,7 +6,7 @@
 <head runat="server">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%: Page.Title %> - Online Zakat</title>
+  <title><%: Page.Title %> - Zakat Network</title>
 
   <asp:PlaceHolder runat="server">
       <%: Scripts.Render("~/bundles/modernizr") %>
@@ -75,26 +75,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <%--<a class="navbar-brand" href="/">
-                <table>
-                  <tr>
-                    <td>
-                      <i class="fas fa-dollar-sign"></i>
-                    </td>
-                    <td>
-                      &nbsp;
-                    </td>
-                    <td>
-                      Online Zakat
-                    </td>
-                  </tr>
-                </table>
-              </a>--%>
-            </div>
-                
+            </div>                
             <div class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li><a href="/">Home</a></li>
+                <li>
+                  <a class="navbar-brand" href="/">
+                    <table>
+                      <tr>
+                        <td>
+                          <img src="Images/zakat.network.png" style="width: 40%; height:40%; position: relative; top: -15px; left: 0px" />
+                        </td>
+                      </tr>
+                    </table>
+                  </a>
+                </li>
                 <li><a href="organizations">Organizations</a></li> 
                 <li><a href="donate">Donate</a></li> 
                 <li><a href="contact">Contact Us</a></li>
