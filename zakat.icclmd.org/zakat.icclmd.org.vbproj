@@ -203,24 +203,6 @@
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include=".env\deve\Web.config.Debug.mohammad">
-      <DependentUpon>Web.config.mohammad</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.mohammad">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include=".env\deve\Web.config.Release.mohammad">
-      <DependentUpon>Web.config.mohammad</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.Debug.masihullah">
-      <DependentUpon>Web.config.masihullah</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.masihullah">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include=".env\deve\Web.config.Release.masihullah">
-      <DependentUpon>Web.config.masihullah</DependentUpon>
-    </None>
     <None Include=".env\deve\Web.config.eiad">
       <SubType>Designer</SubType>
     </None>
