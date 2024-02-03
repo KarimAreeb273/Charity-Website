@@ -5,4 +5,8 @@
 
   End Sub
 
+    Private Sub txtSavings_TextChanged(sender As Object, e As EventArgs) Handles txtSavings.TextChanged
+        txtNet.Text = CInt(txtSavings.Text) ' + CInt(txtJewelry.Text) + CInt(txtValue.Text) + CInt(txtLoans.Text) - CInt(txtDebt.Text)
+    End Sub
+
 End Class
