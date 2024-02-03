@@ -273,9 +273,6 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Bundle.config" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include=".env\deve\Web.config.areeb">
       <SubType>Designer</SubType>
     </None>
@@ -285,12 +282,6 @@
     <None Include=".env\deve\Web.config.Release.areeb">
       <DependentUpon>Web.config.areeb</DependentUpon>
     </None>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <EntityDeploy Include="zakatEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>zakatEntities.Designer.vb</LastGenOutput>
@@ -298,6 +289,15 @@
     <Content Include="zakatEntities.edmx.diagram">
       <DependentUpon>zakatEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.designer.vb">
