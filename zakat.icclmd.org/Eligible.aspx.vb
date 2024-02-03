@@ -5,8 +5,12 @@
 
   End Sub
 
-    Private Sub txtSavings_TextChanged(sender As Object, e As EventArgs) Handles txtSavings.TextChanged
-        txtNet.Text = CInt(txtSavings.Text) ' + CInt(txtJewelry.Text) + CInt(txtValue.Text) + CInt(txtLoans.Text) - CInt(txtDebt.Text)
-    End Sub
+  Private Sub txtSavings_TextChanged(sender As Object, e As EventArgs) Handles txtSavings.TextChanged
+    txtNet.Text = (CDec(txtSavings.Text) + CDec(txtJewelry.Text) + CDec(txtValue.Text) + CDec(txtLoans.Text)) - CDec(txtDebt.Text)
+  End Sub
+
+  Private Sub txtJewelry_TextChanged(sender As Object, e As EventArgs) Handles txtJewelry.TextChanged
+    txtNet.Text = (CDec(txtSavings.Text) + CDec(txtJewelry.Text) + CDec(txtValue.Text) + CDec(txtLoans.Text)) - CDec(txtDebt.Text)
+  End Sub
 
 End Class
