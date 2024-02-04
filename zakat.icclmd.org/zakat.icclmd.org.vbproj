@@ -46,8 +46,8 @@
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AjaxControlToolkit, Version=19.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
-      <HintPath>..\packages\AjaxControlToolkit.19.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
+    <Reference Include="AjaxControlToolkit, Version=20.1.0.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+      <HintPath>..\packages\AjaxControlToolkit.20.1.0\lib\net40\AjaxControlToolkit.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
@@ -151,7 +151,11 @@
     <Content Include="Dashboard.aspx" />
     <Content Include="Donate.aspx" />
     <Content Include="Eligible.aspx" />
+    <Content Include="Feedback.aspx" />
+    <Content Include="Images\EmptyStar.png" />
+    <Content Include="Images\FilledStar.png" />
     <Content Include="Images\png-transparent.png" />
+    <Content Include="Images\SavedStar.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
     <Content Include="OrganizationProfile.aspx" />
@@ -203,24 +207,6 @@
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <None Include=".env\deve\Web.config.Debug.mohammad">
-      <DependentUpon>Web.config.mohammad</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.mohammad">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include=".env\deve\Web.config.Release.mohammad">
-      <DependentUpon>Web.config.mohammad</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.Debug.masihullah">
-      <DependentUpon>Web.config.masihullah</DependentUpon>
-    </None>
-    <None Include=".env\deve\Web.config.masihullah">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include=".env\deve\Web.config.Release.masihullah">
-      <DependentUpon>Web.config.masihullah</DependentUpon>
-    </None>
     <None Include=".env\deve\Web.config.eiad">
       <SubType>Designer</SubType>
     </None>
@@ -289,11 +275,11 @@
     <Content Include="zakatEntities.edmx.diagram">
       <DependentUpon>zakatEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.config">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -389,6 +375,13 @@
     </Compile>
     <Compile Include="Eligible.aspx.vb">
       <DependentUpon>Eligible.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Feedback.aspx.designer.vb">
+      <DependentUpon>Feedback.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback.aspx.vb">
+      <DependentUpon>Feedback.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Inbox.aspx.designer.vb">

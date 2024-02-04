@@ -1,6 +1,9 @@
 ﻿<%@ Page Title="Home Page" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.vb" Inherits="zakat.icclmd.org._Default" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+  <br />
+  <br />
+  <br />
   <div class="jumbotron">
     <div class="row">
       <div class="col-md-6">

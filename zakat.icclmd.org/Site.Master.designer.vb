@@ -158,15 +158,6 @@ Partial Public Class SiteMaster
   Protected WithEvents A12 As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
   '''<summary>
-  '''A3 control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents A3 As Global.System.Web.UI.HtmlControls.HtmlAnchor
-
-  '''<summary>
   '''A6 control.
   '''</summary>
   '''<remarks>
