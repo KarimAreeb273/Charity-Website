@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Eligible
 
     '''<summary>
+    '''UpdatePanel1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
     '''txtSavings control.
     '''</summary>
     '''<remarks>
@@ -21,6 +30,15 @@ Partial Public Class Eligible
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtSavings As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Savings control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Savings As Global.AjaxControlToolkit.FilteredTextBoxExtender
 
     '''<summary>
     '''txtJewelry control.
@@ -32,6 +50,15 @@ Partial Public Class Eligible
     Protected WithEvents txtJewelry As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Jewelry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Jewelry As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+    '''<summary>
     '''txtValue control.
     '''</summary>
     '''<remarks>
@@ -39,6 +66,15 @@ Partial Public Class Eligible
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValue As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Value control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Value As Global.AjaxControlToolkit.FilteredTextBoxExtender
 
     '''<summary>
     '''txtLoans control.
@@ -50,6 +86,15 @@ Partial Public Class Eligible
     Protected WithEvents txtLoans As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Loans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Loans As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+    '''<summary>
     '''txtDebt control.
     '''</summary>
     '''<remarks>
@@ -57,6 +102,15 @@ Partial Public Class Eligible
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDebt As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Debt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Debt As Global.AjaxControlToolkit.FilteredTextBoxExtender
 
     '''<summary>
     '''txtNet control.
@@ -68,11 +122,38 @@ Partial Public Class Eligible
     Protected WithEvents txtNet As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''btnDonation control.
+    '''btnReset control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDonation As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnReset As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnEligible control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnEligible As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''iconEligible control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents iconEligible As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''iconNotEligible control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents iconNotEligible As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 End Class
