@@ -14,13 +14,76 @@ Option Explicit On
 Partial Public Class Feedback
 
   '''<summary>
-  '''LabelRatingSatisfaction control.
+  '''txtFirstName control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents LabelRatingSatisfaction As Global.System.Web.UI.WebControls.Label
+  Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''txtEmail control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''RegularExpressionValidator1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents RegularExpressionValidator1 As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+  '''<summary>
+  '''txtPhone control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtPhone As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''MaskedEditExtender1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents MaskedEditExtender1 As Global.AjaxControlToolkit.MaskedEditExtender
+
+  '''<summary>
+  '''chkFollowUp control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkFollowUp As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''lblRatingSatisfaction control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblRatingSatisfaction As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
   '''LabelRating1 control.
@@ -30,4 +93,157 @@ Partial Public Class Feedback
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents LabelRating1 As Global.AjaxControlToolkit.Rating
+
+  '''<summary>
+  '''lblRatingReceommendation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblRatingReceommendation As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''LabelRating2 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents LabelRating2 As Global.AjaxControlToolkit.Rating
+
+  '''<summary>
+  '''lblRatingExperience control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblRatingExperience As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''LabelRating3 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents LabelRating3 As Global.AjaxControlToolkit.Rating
+
+  '''<summary>
+  '''lblMostLiked control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblMostLiked As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''chkMostLiked control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkMostLiked As Global.System.Web.UI.WebControls.CheckBoxList
+
+  '''<summary>
+  '''chkOtherMostLiked control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkOtherMostLiked As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''txtOtherMostLiked control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtOtherMostLiked As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lblMostToImprove control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblMostToImprove As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''chkMostToImprove control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkMostToImprove As Global.System.Web.UI.WebControls.CheckBoxList
+
+  '''<summary>
+  '''chkOtherMostToImprove control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkOtherMostToImprove As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''txtOtherMostToImprove control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtOtherMostToImprove As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lblCommentsForImprovement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblCommentsForImprovement As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''txtCommentsForImprovement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtCommentsForImprovement As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''lbl control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lbl As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''txtAdditionalComments control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtAdditionalComments As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''btnSubmit control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
 End Class
