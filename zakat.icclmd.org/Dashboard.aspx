@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
-    <h4><span style="font-size:20px; color:darkgreen" class="fas fa-chart-area"></span>&nbsp;&nbsp;<b>Online Zakat Dashboard</b></h4>
+    <h4><span style="font-size:20px; color:black" class="fas fa-chart-area"></span>&nbsp;&nbsp;<b>Zakat Network Dashboard</b></h4>
     <br />
     <table style="width:100%" border="0" >
       <tr>

@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
-    <h4><span style="font-size:20px; color:darkgreen" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>My Activity</b></h4>
+    <h4><span style="font-size:20px; color:black" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>My Activity</b></h4>
     <br />
     
     <table class="table table-hover" border="0" style="font-size: 14px">
@@ -39,16 +39,16 @@
             </td>            
             <td style="text-align: left; vertical-align: middle">
               <span title='<%# IIf(DataBinder.Eval(Container.DataItem, "isRejected"), getRejectionComment(DataBinder.Eval(Container.DataItem, "applicationId")), "")%>' style="font-size:20px; color:red" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isRejected"), "glyphicon glyphicon-remove", "")%>'></span>            
-              &nbsp;<span title="Drafted" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDrafted"), "fas fa-save", "")%>'></span>
-              &nbsp;<span title="Submitted" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), "fas fa-clipboard-list", "")%>'></span>
-              &nbsp;<span title="Validated" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isValidated"), "fas fa-clipboard-check", "")%>'></span>
-              &nbsp;<span title="Investigated" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isInvestigated"), "fas fa-search", "")%>'></span>
-              &nbsp;<span title="Qualified (Initial)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified1"), "fas fa-check", "")%>'></span>
-              &nbsp;<span title="Qualified (Final)" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified2"), "fas fa-check-double", "")%>'></span>
-              &nbsp;<span title="Dispersed" style="font-size:20px; color:darkgreen" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDispersed"), "fas fa-money-bill-wave", "")%>'></span>
+              &nbsp;<span title="Drafted" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDrafted"), "fas fa-save", "")%>'></span>
+              &nbsp;<span title="Submitted" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isSubmitted"), "fas fa-clipboard-list", "")%>'></span>
+              &nbsp;<span title="Validated" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isValidated"), "fas fa-clipboard-check", "")%>'></span>
+              &nbsp;<span title="Investigated" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isInvestigated"), "fas fa-search", "")%>'></span>
+              &nbsp;<span title="Qualified (Initial)" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified1"), "fas fa-check", "")%>'></span>
+              &nbsp;<span title="Qualified (Final)" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isQualified2"), "fas fa-check-double", "")%>'></span>
+              &nbsp;<span title="Dispersed" style="font-size:20px; color:black" class='<%# IIf(DataBinder.Eval(Container.DataItem, "isDispersed"), "fas fa-money-bill-wave", "")%>'></span>
             </td>
             <td style="text-align: center; vertical-align: middle">
-              <asp:LinkButton ID="btnViewTimelineBot_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "applicationId")%>' runat="server" CausesValidation="false" OnClick="btnViewTimeline_Click" ToolTip="View Timeline"><span class="far fa-clock" style="font-size:20px; color:darkgreen"></span></asp:LinkButton>
+              <asp:LinkButton ID="btnViewTimelineBot_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "applicationId")%>' runat="server" CausesValidation="false" OnClick="btnViewTimeline_Click" ToolTip="View Timeline"><span class="far fa-clock" style="font-size:20px; color:black"></span></asp:LinkButton>
             </td>
           </tr>
         </ItemTemplate>

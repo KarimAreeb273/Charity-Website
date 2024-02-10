@@ -2,6 +2,10 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <br />
+    <br />
+    <br />
     <div class="container">
         <h4><b>Zakat Donations</b></h4>
         <div class="row">
@@ -81,7 +85,7 @@
                     <div class="form-group">
                         <div class="col-lg-3"></div>
                         <div class="col-lg-9">
-                            <asp:Button ID="btnDonation" runat="server" Text="Make Donation" CssClass="btn btn-success" TabIndex="7" Width="150" ValidationGroup="donate" />
+                            <asp:Button ID="btnDonation" runat="server" Text="Make Donation" CssClass="btn btn-primary" TabIndex="7" Width="150" ValidationGroup="donate" />
                         </div>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Application.aspx.vb" Inherits="zakat.icclmd.org.Application1" MaintainScrollPositionOnPostback="true" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
-    <h4><span style="font-size:20px; color:darkgreen" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>Online Zakat Application</b></h4>
+    <h4><span style="font-size:20px; color:black" class="fas fa-clipboard-list"></span>&nbsp;&nbsp;<b>Zakat Network Application</b></h4>
     <br />
     <div class="well well-sm">
-      <h5><b>Review the Online Zakat Application and Take Action:</b></h5>
+      <h5><b>Review the Zakat Network Application and Take Action:</b></h5>
     </div>
 
     <ul class="nav nav-tabs">
@@ -978,7 +978,7 @@
                 </td>
                 <td style="width: 1%; text-align: left;">
                   <a href="#" runat="server" id="lnkCalendarDOB">
-                    <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="4"></span>
+                    <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="4"></span>
                   </a>
                 </td>
                 <td style="width:1%;">

@@ -10,7 +10,7 @@
         <table style="width:100%" border="0">
           <tr>
             <td style="width:100%; text-align: center">
-              <h3>Online Zakat Network</h3>
+              <h3>Zakat Network Network</h3>
               <br />
               <img src="Images/zakatlogo.png" style='width:150px; height:300px'  />
             </td> 
@@ -43,7 +43,7 @@
                 <table style="width: 100%" border="0">
                   <tr>
                     <td style="text-align: left">
-                      <asp:Button runat="server" ID="btnLogin" Text="Login" Width="133px" CssClass="btn btn-success" TabIndex="3" ValidationGroup="Login" />&nbsp;
+                      <asp:Button runat="server" ID="btnLogin" Text="Login" Width="133px" CssClass="btn btn-primary" TabIndex="3" ValidationGroup="Login" />&nbsp;
                       <a href="forgot" class="btn btn-default" style="width: 133px;"  TabIndex="4">Forgot Password</a>
                     </td>
                   </tr>
@@ -58,8 +58,8 @@
                 <table style="width: 100%">
                   <tr>
                     <td style="width: 100%; text-align: left">                
-                       <%-- Or, <a href="zakatform">Submit an Online Zakat Application!</a>--%>
-                        <asp:LinkButton ID="btnGoToApplication" runat="server" Text="Submit an Online Zakat Application!" Width="275px" CssClass="btn btn-success" TabIndex="5" PostBackUrl="zakatform" CausesValidation="False"></asp:LinkButton>
+                       <%-- Or, <a href="zakatform">Submit an Zakat Network Application!</a>--%>
+                        <asp:LinkButton ID="btnGoToApplication" runat="server" Text="Submit an Zakat Network Application!" Width="275px" CssClass="btn btn-primary" TabIndex="5" PostBackUrl="zakatform" CausesValidation="False"></asp:LinkButton>
                     </td>
                   </tr>
                 </table>
@@ -72,7 +72,7 @@
                 <td style="width: 100%; text-align: center">
                   <br />
                   <a href="zakatform">
-                    <i class='fas fa-clipboard-list' style='color:darkgreen; font-size:100px'></i>
+                    <i class='fas fa-clipboard-list' style='color:black; font-size:100px'></i>
                     <br />
                     <h3 style='color:black; line-height: 1.5'>Complete Zakat<br />Application</h3>
                   </a>
@@ -86,7 +86,7 @@
                 <td style="width: 100%; text-align: center">
                   <br />
                   <a href="inbox">
-                    <i class='fas fas fa-inbox' style='color:darkgreen; font-size:100px'></i>
+                    <i class='fas fas fa-inbox' style='color:black; font-size:100px'></i>
                     <br />
                     <h3 style='color:black; line-height: 1.5'>Review Zakat<br />Applications</h3>
                   </a>
@@ -99,7 +99,7 @@
               <tr>
                 <td style="width: 100%; text-align: center">
                   <br />
-                  <i class='fas fa-cogs' style='color:darkgreen; font-size:100px'></i>
+                  <i class='fas fa-cogs' style='color:black; font-size:100px'></i>
                   <br />
                   <h3 style='color:black; line-height: 1.5'>Administer Zakat<br />System</h3>
                 </td>
@@ -125,23 +125,23 @@
 
   <div class="row">
     <div class="col-md-6">
-      <h4>Advantages of the Online Zakat System</h4>
+      <h4>Advantages of the Zakat Network System</h4>
       <ul>
-        <li>Save your online zakat application data electronically and securely</li>
-        <li>Submit online zakat application(s) to one or more Islamic organizations</li>
+        <li>Save your Zakat Network application data electronically and securely</li>
+        <li>Submit Zakat Network application(s) to one or more Islamic organizations</li>
         <li>Correspondence is sent/received via email when decisions are made</li>
         <li>Edit your saved profile as often as necessary</li>
-        <li>Track the progress of your submitted online zakat application</li>
-        <li>Translate the Online Zakat system in a language you understand</li>
+        <li>Track the progress of your submitted Zakat Network application</li>
+        <li>Translate the Zakat Network system in a language you understand</li>
       </ul>
 
     </div>
     <div class="col-md-6">
-      <h4>Required Online Zakat Protocols</h4>
+      <h4>Required Zakat Network Protocols</h4>
       <ul style="list-style: none">
         <li><b>Applicants</b>, prior to your completing an Online</li>
         <li>Zakat Application, please review and adhere to the</li>
-        <li><a href="protocols">Required Online Zakat Protocols</a></li>
+        <li><a href="protocols">Required Zakat Network Protocols</a></li>
       </ul>
     </div>
   </div>

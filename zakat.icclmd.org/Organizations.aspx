@@ -3,7 +3,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <div class="container">
-    <h3>Organizations Affiliated with Online Zakat</h3>
+    <h3>Organizations Affiliated with Zakat Network</h3>
     <br />
     <div class="well well-sm">
       <h5><b>View Affiliated Organizations:</b></h5>
@@ -37,7 +37,7 @@
             </td>
             <td style="text-align: center; vertical-align: middle">
               <asp:LinkButton ID="btnView2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnView_Click" ToolTip='<%# "Click to view more details about " & DataBinder.Eval(Container.DataItem, "name")%>'>
-                <span class="fas fa-info-circle" style="font-size:20px; color:darkgreen"></span>
+                <span class="fas fa-info-circle" style="font-size:20px; color:black"></span>
               </asp:LinkButton>
             </td>
           </tr>

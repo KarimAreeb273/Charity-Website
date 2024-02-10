@@ -9,7 +9,7 @@
         <div class="well well-sm">
           <table style="width:100%">
             <tr>
-              <td><a href="organizations" target="_self"><span class="fas fa-arrow-alt-circle-left" style="font-size:20px; color:darkgreen"></span></a></td>
+              <td><a href="organizations" target="_self"><span class="fas fa-arrow-alt-circle-left" style="font-size:20px; color:black"></span></a></td>
               <td><h5><b><asp:Label ID="lblOrganizationName" runat="server"></asp:Label>:</b></h5></td>
             </tr>
           </table>

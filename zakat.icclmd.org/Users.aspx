@@ -110,7 +110,7 @@
                         <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
                       </td>
                       <td style="text-align: center; vertical-align: middle">
-                        <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
+                        <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:black"></span></asp:LinkButton>
                       </td>
                     </tr>
                   </ItemTemplate>

@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="Privacy Policy" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Privacy.aspx.vb" Inherits="zakat.icclmd.org.Privacy" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <br />
+  <br />
+  <br />
   <div class="well">
     <table style="width: 100%;">
       <tr>

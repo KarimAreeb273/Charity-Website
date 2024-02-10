@@ -48,7 +48,7 @@
                                                 <asp:HyperLink ID="HyperLink2" runat="server" Target="_blank" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "website")%>'><%# DataBinder.Eval(Container.DataItem, "website")%></asp:HyperLink>
                                             </td>
                                             <td style="text-align: center; vertical-align: middle">
-                                                <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "name")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
+                                                <asp:LinkButton ID="btnEdit2" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "organizationId")%>' runat="server" CausesValidation="false" OnClick="btnEdit_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "name")%>'><span class="fas fa-edit" style="font-size:15px; color:black"></span></asp:LinkButton>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

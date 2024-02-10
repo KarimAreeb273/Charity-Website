@@ -31,9 +31,9 @@
             <tr>
               <td style="width: 100%">
                 <asp:TextBox ID="txtSearchUser" runat="server" class="form-control" style="max-width: 100%" Width="400px" placeholder="Filter/Search Users" AutoPostBack="True" TabIndex="2" Enabled="False" AutoCompleteType="Disabled"></asp:TextBox>&nbsp;<asp:LinkButton ID="btnSearch" runat="server" ToolTip="Search" style="text-decoration:none" TabIndex="3" Enabled="False">
-                  <i class="glyphicon glyphicon-search" style="color: darkgreen; font-size:20px;"></i>
+                  <i class="glyphicon glyphicon-search" style="color: black; font-size:20px;"></i>
                 </asp:LinkButton>&nbsp;<asp:LinkButton ID="btnClear" runat="server" ToolTip="Clear" style="text-decoration:none" TabIndex="4" Enabled="False">
-                  <i class="glyphicon glyphicon-remove" style="color: darkgreen; font-size:20px"></i>
+                  <i class="glyphicon glyphicon-remove" style="color: black; font-size:20px"></i>
                 </asp:LinkButton>
               </td>
             </tr>
@@ -73,12 +73,12 @@
                 <tr>
                   <td style="width: 50%; text-align: left">
                     <asp:LinkButton ID="btnAddRole" runat="server" ToolTip="Add the Role" TabIndex="7" Enabled="False">
-                      <span class="fas fa-arrow-alt-circle-down" style="color: darkgreen; font-size: 30px" ></span>
+                      <span class="fas fa-arrow-alt-circle-down" style="color: black; font-size: 30px" ></span>
                     </asp:LinkButton>
                   </td>
                   <td style="width: 50%; text-align: right">
                     <asp:LinkButton ID="btnDeleteRole" runat="server" ToolTip="Remove the Role" TabIndex="8" Enabled="False">
-                      <span class="fas fa-arrow-alt-circle-up" style="color: darkgreen; font-size: 30px" ></span>
+                      <span class="fas fa-arrow-alt-circle-up" style="color: black; font-size: 30px" ></span>
                     </asp:LinkButton>
                   </td>
                 </tr>

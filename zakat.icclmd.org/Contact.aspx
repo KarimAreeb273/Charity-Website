@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Contact Us" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.vb" Inherits="zakat.icclmd.org.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-  <h3>Online Zakat Contact Information</h3>
+  <h3>Zakat Network Contact Information</h3>
 
   <address>
     7306 Contee Road<br />
@@ -12,11 +12,11 @@
 
   <address>
     <strong>ICCL Office Manager:</strong><br /><a href="mailto:office@icclmd.org">office@icclmd.org</a><br /><br />
-    <strong>Online Zakat Administrator:</strong><br /><a href="mailto:zakat@icclmd.org">zakat@icclmd.org</a>
+    <strong>Zakat Network Administrator:</strong><br /><a href="mailto:zakat@icclmd.org">zakat@icclmd.org</a>
   </address>
 
   <address>
     <strong>ICCL General Website:</strong><br /><a target="_blank" href="https://www.icclmd.org">https://www.icclmd.org</a><br /><br />
-    <strong>Online Zakat Website:</strong><br /><a href="https://zakat.icclmd.org">https://zakat.icclmd.org</a>
+    <strong>Zakat Network Website:</strong><br /><a href="https://zakat.icclmd.org">https://zakat.icclmd.org</a>
   </address>
 </asp:Content>

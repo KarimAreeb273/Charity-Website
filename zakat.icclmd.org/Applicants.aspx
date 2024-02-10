@@ -17,7 +17,7 @@
           </td>
           <td style="text-align: center; width: 1%">
             <asp:LinkButton ID="btnClearFilter" runat="server">
-              <span title="clear filter/reset list" class="glyphicon glyphicon-refresh" style="font-size:20px; color:darkgreen"></span>
+              <span title="clear filter/reset list" class="glyphicon glyphicon-refresh" style="font-size:20px; color:black"></span>
             </asp:LinkButton>
           </td>
         </tr>
@@ -62,7 +62,7 @@
               <asp:HyperLink ID="HyperLink1" runat="server" Target="_blank" NavigateUrl='<%# "mailto:" & DataBinder.Eval(Container.DataItem, "email")%>'><%# DataBinder.Eval(Container.DataItem, "email")%></asp:HyperLink>
             </td>
             <td style="text-align: center; vertical-align: middle">
-              <asp:LinkButton ID="btnEdit3" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEditApplicant_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:darkgreen"></span></asp:LinkButton>
+              <asp:LinkButton ID="btnEdit3" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnEditApplicant_Click" ToolTip='<%# "Edit " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="fas fa-edit" style="font-size:15px; color:black"></span></asp:LinkButton>
             </td>
             <td style="text-align: center; vertical-align: middle">
               <asp:LinkButton ID="btnDelete3" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "userId")%>' runat="server" CausesValidation="false" OnClick="btnDeleteApplicant_Click" ToolTip='<%# "Delete " & DataBinder.Eval(Container.DataItem, "fullName")%>'><span class="glyphicon glyphicon-remove" style="font-size:15px; color:red"></span></asp:LinkButton>

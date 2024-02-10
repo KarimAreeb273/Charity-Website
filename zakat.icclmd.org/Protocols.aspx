@@ -2,10 +2,10 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
   <br />
   <h3>
-    Online Zakat Application Protocols & Required (Supporting) Documents
+    Zakat Network Application Protocols & Required (Supporting) Documents
   </h3>
   <hr />
-  <h5><b>Complete the Online Zakat application form FULLY by answering all questions with the most accurate information available. Together with your application, submit and observe/abide by the following requirements:</b></h5>
+  <h5><b>Complete the Zakat Network application form FULLY by answering all questions with the most accurate information available. Together with your application, submit and observe/abide by the following requirements:</b></h5>
   <br />
 
   <strong>
@@ -14,7 +14,7 @@
       <br />
       <li>Provide copies of all documents related to and/or supporting financial hardship</li>
       <br />
-      <li>Any submitted Online Zakat application and their related documents once processed and approved, <u>CANNOT</u> be used for other zakat applications. Online zakat application and related supporting documents are required and <u>MUST</u> be submitted for each new application</li>
+      <li>Any submitted Zakat Network application and their related documents once processed and approved, <u>CANNOT</u> be used for other zakat applications. Zakat Network application and related supporting documents are required and <u>MUST</u> be submitted for each new application</li>
       <br />
       <li>Applicants <u>shall NOT</u> apply/submit multiple zakat applications within same calendar month or within number of days less than one calendar month</li>
       <br />

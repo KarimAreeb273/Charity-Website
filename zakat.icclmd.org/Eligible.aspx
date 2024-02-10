@@ -89,7 +89,7 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                     <br />
                     <h3>
                         <asp:Button ID="btnDonation" runat="server" Text="Am I Eligible?" CssClass="btn btn-success" TabIndex="7" Width="150" />
-                        <i class='fas fa-check-circle' style='color:darkgreen'> Yes you are</i> <i class='glyphicon glyphicon-remove' style='color:red'> No you are not</i></h3>
+                        <i class='fas fa-check-circle' style='color:black'> Yes you are</i> <i class='glyphicon glyphicon-remove' style='color:red'> No you are not</i></h3>
                 </div>
             </div>
         </div>

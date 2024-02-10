@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="Profile" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Profile.aspx.vb" Inherits="zakat.icclmd.org.Profile" MaintainScrollPositionOnPostback="true"  %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-  <h4><b>Online Zakat Profile for <asp:Label ID="lblPageHeaderUserFullName" runat="server" Style="white-space: nowrap;">UserFullName</asp:Label></b></h4>
+  <h4><b>Zakat Network Profile for <asp:Label ID="lblPageHeaderUserFullName" runat="server" Style="white-space: nowrap;">UserFullName</asp:Label></b></h4>
   <hr />
   <div id="Form" runat="server">
     <table border="1" style="width:100%">
@@ -83,7 +83,7 @@
                             </td>
                             <td style="width: 10%; text-align: center;">
                               <a href="#" runat="server" id="lnkCalendarDOB">
-                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="9"></span>
+                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="9"></span>
                               </a>
                             </td>
                           </tr>
@@ -191,7 +191,7 @@
                             </td>
                             <td style="width: 10%; text-align: center;">
                               <a href="#" runat="server" id="lnkCalendarBeganLiving">
-                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="20"></span>
+                                <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="20"></span>
                               </a>
                             </td>
                           </tr>
@@ -312,11 +312,11 @@
                         <td style="text-align: center;width: 10%">
                           <br /><br />
                           <asp:LinkButton ID="btnAddLanguage" runat="server" ToolTip="Add the Language" TabIndex="30" CausesValidation="false" >
-                            <span class="fas fa-arrow-alt-circle-right" style="color: darkgreen; font-size: 25px" ></span>
+                            <span class="fas fa-arrow-alt-circle-right" style="color: black; font-size: 25px" ></span>
                           </asp:LinkButton>
                           <br /><br />
                           <asp:LinkButton ID="btnDeleteLanguage" runat="server" ToolTip="Remove the Language" TabIndex="31" CausesValidation="false" >
-                            <span class="fas fa-arrow-alt-circle-left" style="color: darkgreen; font-size: 25px" ></span>
+                            <span class="fas fa-arrow-alt-circle-left" style="color: black; font-size: 25px" ></span>
                           </asp:LinkButton>
                           <br /><br />
                         </td>
@@ -338,7 +338,7 @@
                               </td>
                               <td>&nbsp;</td>
                               <td style="width: 5%; vertical-align: middle">
-                                <asp:LinkButton ID="btnAddCertification" runat="server" style="width:100%;" TabIndex="34" CausesValidation="false" ToolTip="Add Certification to List"><i class="fas fa-plus-circle" style="font-size:20px;color:darkgreen"></i></asp:LinkButton>
+                                <asp:LinkButton ID="btnAddCertification" runat="server" style="width:100%;" TabIndex="34" CausesValidation="false" ToolTip="Add Certification to List"><i class="fas fa-plus-circle" style="font-size:20px;color:black"></i></asp:LinkButton>
                               </td>
                             </tr>
                           </table>

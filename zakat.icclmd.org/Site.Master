@@ -67,7 +67,7 @@
         </Scripts>
       </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: darkgreen">
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: black">
           <div class="container">
             <div class="navbar-header">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -94,7 +94,7 @@
 
               <div class="container" style="white-space:nowrap">       
                 <%--Anonymous Panel--%>
-                <asp:Panel ID="pnlAnonymous" runat="server" Visible="true" style="background-color: darkgreen;">
+                <asp:Panel ID="pnlAnonymous" runat="server" Visible="true" style="background-color: black;">
                   <ul class="nav navbar-nav navbar-right">
                     <li><a href="organizations">Organizations</a></li>
                     <li><a href="donate">Donate</a></li> 

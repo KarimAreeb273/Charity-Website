@@ -42,7 +42,7 @@
     {
         border: 1px solid #2F4F4F;
         color: white;
-        background-color: darkgreen;
+        background-color: black;
         font-family: inherit;
         font-size: 12px;
         font-weight: bold;
@@ -58,7 +58,7 @@
 </style>
 
   <div class="container">
-    <h3>New Online Zakat Application</h3>
+    <h3>New Zakat Network Application</h3>
     <div class="row">
       <div class="col-lg-12">
         <div class="well well-sm" style="text-align:justify">
@@ -71,12 +71,12 @@
 
     <div class="row">
       <div class="col-lg-12">
-        <div class="well well-sm" style="text-align:justify; background-color: darkgreen; color: white">
+        <div class="well well-sm" style="text-align:justify; background-color: black; color: white">
           <table style="width: 100%">
             <tr>
               <td style="width: 60%; text-align: right">
                 <h5>
-                  Please specifiy the organization that you would like to submit this online zakat application to (* required):
+                  Please specifiy the organization that you would like to submit this Zakat Network application to (* required):
                 </h5>
               </td>
               <td style="width: 5%; text-align: right">
@@ -102,7 +102,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgApplicant" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
+                    <div id="prgApplicant" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
                       <asp:Literal ID="ltlPercentApplicant" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -195,7 +195,7 @@
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkCalendarDOB">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="8"></span>
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="8"></span>
                                         </a>
                                       </td>
                                     </tr>
@@ -303,7 +303,7 @@
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkCalendarBeganLiving">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="18"></span>
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="18"></span>
                                         </a>
                                       </td>
                                     </tr>
@@ -424,11 +424,11 @@
                                   <td style="text-align: center;width: 10%">
                                     <br /><br />
                                     <asp:LinkButton ID="btnAddLanguage" runat="server" ToolTip="Add the Language" TabIndex="28" CausesValidation="false" >
-                                      <span class="fas fa-arrow-alt-circle-right" style="color: darkgreen; font-size: 25px" ></span>
+                                      <span class="fas fa-arrow-alt-circle-right" style="color: black; font-size: 25px" ></span>
                                     </asp:LinkButton>
                                     <br /><br />
                                     <asp:LinkButton ID="btnDeleteLanguage" runat="server" ToolTip="Remove the Language" TabIndex="29" CausesValidation="false" >
-                                      <span class="fas fa-arrow-alt-circle-left" style="color: darkgreen; font-size: 25px" ></span>
+                                      <span class="fas fa-arrow-alt-circle-left" style="color: black; font-size: 25px" ></span>
                                     </asp:LinkButton>
                                     <br /><br />
                                   </td>
@@ -450,7 +450,7 @@
                                         </td>
                                         <td>&nbsp;</td>
                                         <td style="width: 5%; vertical-align: middle">
-                                          <asp:LinkButton ID="btnAddCertification" runat="server" style="width:100%;" TabIndex="32" CausesValidation="false" ToolTip="Add Certification to List"><i class="fas fa-plus-circle" style="font-size:20px;color:darkgreen"></i></asp:LinkButton>
+                                          <asp:LinkButton ID="btnAddCertification" runat="server" style="width:100%;" TabIndex="32" CausesValidation="false" ToolTip="Add Certification to List"><i class="fas fa-plus-circle" style="font-size:20px;color:black"></i></asp:LinkButton>
                                         </td>
                                       </tr>
                                     </table>
@@ -700,7 +700,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgAssetsAndSupport" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="width:91%; color: black">
+                    <div id="prgAssetsAndSupport" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="width:91%; color: black">
                       <asp:Literal ID="ltlPercentAssetsAndSupport" runat="server" Text="91% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1037,7 +1037,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgEmployment" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width:11%; color: black">
+                    <div id="prgEmployment" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" style="width:11%; color: black">
                       <asp:Literal ID="ltlPercentEmployment" runat="server" Text="11% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1090,7 +1090,7 @@
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkEmploymentStartDate">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="202"></span>
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="202"></span>
                                         </a>
                                       </td>
                                     </tr>
@@ -1110,7 +1110,7 @@
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkEmploymentEndDate">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="203"></span>
+                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="203"></span>
                                         </a>
                                       </td>
                                     </tr>
@@ -1230,7 +1230,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="Div3" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; color: black">
+                    <div id="Div3" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; color: black">
                       <asp:Literal ID="ltlPercentDependent" runat="server" Text="100% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1293,7 +1293,7 @@
                                     </td>
                                     <td style="width: 10%; text-align: center;">
                                       <a href="#" runat="server" id="lnkDepCalendarDOB">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="6"></span>
+                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="6"></span>
                                       </a>
                                     </td>
                                   </tr>
@@ -1409,7 +1409,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgReference" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
+                    <div id="prgReference" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
                       <asp:Literal ID="ltlPercentReference" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1517,7 +1517,7 @@
                                     </td>
                                     <td style="width: 10%; text-align: center;">
                                       <a href="#" runat="server" id="lnkCalendarKnownSince">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: darkgreen" tabindex="409"></span>
+                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="409"></span>
                                       </a>
                                     </td>
                                   </tr>
@@ -1622,7 +1622,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgArtifact" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
+                    <div id="prgArtifact" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
                       <asp:Literal ID="ltlPercentArtifact" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1733,7 +1733,7 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgStatement" runat="server" class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
+                    <div id="prgStatement" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
                       <asp:Literal ID="ltlPercentStatement" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
@@ -1780,7 +1780,7 @@
                 &nbsp;
               </td>
               <td style="width:1%; text-align:right">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-success" TabIndex="701" Width="150"  ValidationGroup="Submit" Enabled="False" />
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-primary" TabIndex="701" Width="150"  ValidationGroup="Submit" Enabled="False" />
               </td>
             </tr>
             <tr>
