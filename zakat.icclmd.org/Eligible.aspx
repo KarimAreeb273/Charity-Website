@@ -29,8 +29,8 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                                         <asp:Label runat="server" AssociatedControlID="txtSavings" CssClass="col-lg-3 control-label" ToolTip="Savings" Style="white-space: nowrap">Amount of Cash and Savings at home or in the bank:</asp:Label>
                                         <br />
                                         <div class="col-lg-12">
-                                            <asp:TextBox runat="server" ID="txtSavings" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Savings" TabIndex="1" AutoPostBack="False" Placeholder="$" Text="$ 0.00" />
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSavings" CssClass="text-danger" ErrorMessage="Must be a number." Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <asp:TextBox runat="server" ID="txtSavings" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Savings" TabIndex="1" AutoPostBack="False" Placeholder="$"/>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSavings" CssClass="text-danger" ErrorMessage="" Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
                                             <ajaxToolkit:FilteredTextBoxExtender ID="Savings" runat="server" TargetControlID="txtSavings" FilterType="Custom, Numbers" ValidChars="0123456789.," />
 <%--                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="RegularExpressionValidator" ControlToValidate="txtSavings" ValidationExpression="^\$?(([1-9]\d{0,2}(,\d{3})*)|0)?\.\d{1,2}$"></asp:RegularExpressionValidator>--%>
                                         </div>
@@ -40,8 +40,9 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="txtJewelry" CssClass="col-lg-3 control-label" ToolTip="Jewelry" Style="white-space: nowrap">Current value of any gold and silver jewelry, coins, utensils etc:</asp:Label>
                                         <div class="col-lg-12">
-                                            <asp:TextBox runat="server" ID="txtJewelry" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Jewelry" TabIndex="2" AutoPostBack="False" Placeholder="$" Text="$ 0.00" />
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtJewelry" CssClass="text-danger" ErrorMessage="Must be a number." Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <asp:TextBox runat="server" ID="txtJewelry" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Jewelry" TabIndex="2" AutoPostBack="False" Placeholder="$"/>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtJewelry" CssClass="text-danger" ErrorMessage="" Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <ajaxToolkit:FilteredTextBoxExtender ID="Jewelry" runat="server" TargetControlID="txtJewelry" FilterType="Custom, Numbers" ValidChars="0123456789.," />
                                         </div>
                                     </div>
                                     <br />
@@ -49,8 +50,9 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="txtValue" CssClass="col-lg-3 control-label" ToolTip="Value" Style="white-space: nowrap">Value of  assets and merchandise for trade:</asp:Label>
                                         <div class="col-lg-12">
-                                            <asp:TextBox runat="server" ID="txtValue" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Value" TabIndex="3" AutoPostBack="False" Placeholder="$" Text="$ 0.00" />
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValue" CssClass="text-danger" ErrorMessage="Must be a number." Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <asp:TextBox runat="server" ID="txtValue" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Value" TabIndex="3" AutoPostBack="False" Placeholder="$"/>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValue" CssClass="text-danger" ErrorMessage="" Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <ajaxToolkit:FilteredTextBoxExtender ID="Value" runat="server" TargetControlID="txtValue" FilterType="Custom, Numbers" ValidChars="0123456789.," />
                                         </div>
                                     </div>
                                     <br />
@@ -58,8 +60,9 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                                     <div class="form-group">
                                         <asp:Label runat="server" AssociatedControlID="txtLoans" CssClass="col-lg-3 control-label" ToolTip="Loans" Style="white-space: nowrap">Receivables and loaned amounts to others:</asp:Label>
                                         <div class="col-lg-12">
-                                            <asp:TextBox runat="server" ID="txtLoans" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Loans" TabIndex="4" AutoPostBack="False" Placeholder="$" Text="$ 0.00" />
-                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLoans" CssClass="text-danger" ErrorMessage="Must be a number." Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <asp:TextBox runat="server" ID="txtLoans" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Loans" TabIndex="4" AutoPostBack="False" Placeholder="$"/>
+                                            <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLoans" CssClass="text-danger" ErrorMessage="" Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                            <ajaxToolkit:FilteredTextBoxExtender ID="Loans" runat="server" TargetControlID="txtLoans" FilterType="Custom, Numbers" ValidChars="0123456789.," />
                                         </div>
                                     </div>
                                 </div>
@@ -74,8 +77,9 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                             <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtDebt" CssClass="col-lg-3 control-label" ToolTip="Debt" Style="white-space: nowrap">Amount Debts to be paid:</asp:Label>
                                 <div class="col-lg-12">
-                                    <asp:TextBox runat="server" ID="txtDebt" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Debt" TabIndex="5" AutoPostBack="False" Placeholder="$" Text="$ 0.00" />
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDebt" CssClass="text-danger" ErrorMessage="Must be a number." Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                    <asp:TextBox runat="server" ID="txtDebt" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Debt" TabIndex="5" AutoPostBack="False" Placeholder="$" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDebt" CssClass="text-danger" ErrorMessage="" Display="Static" ValidationExpression='(^([0-9]*|\d*\d{1}?\d*)$)' ValidationGroup="eligibile" />
+                                    <ajaxToolkit:FilteredTextBoxExtender ID="Debt" runat="server" TargetControlID="txtDebt" FilterType="Custom, Numbers" ValidChars="0123456789.," />
                                 </div>
                             </div>
                             <br />
@@ -95,7 +99,7 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                             <br />
                             <h4>
                                 <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-default" TabIndex="8" Width="150" />
-                                <asp:Button ID="btnDonation" runat="server" Text="Am I Eligible?" CssClass="btn btn-success" TabIndex="7" Width="150" ValidationGroup="eligible" />
+                                <asp:Button ID="btnEligible" runat="server" Text="Am I Eligible?" CssClass="btn btn-success" TabIndex="7" Width="150" ValidationGroup="eligible" />
                                 <i runat="server" visible="false" id="iconEligible" class='fas fa-check-circle' style='color: darkgreen'>Yes you are</i> <i runat="server" visible="false" id="iconNotEligible" class='glyphicon glyphicon-remove' style='color: red'>No you are not</i></h4>
                             <br />
                         </div>

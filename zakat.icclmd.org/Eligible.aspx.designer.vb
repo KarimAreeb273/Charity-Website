@@ -50,6 +50,15 @@ Partial Public Class Eligible
     Protected WithEvents txtJewelry As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Jewelry control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Jewelry As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+    '''<summary>
     '''txtValue control.
     '''</summary>
     '''<remarks>
@@ -57,6 +66,15 @@ Partial Public Class Eligible
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValue As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Value control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Value As Global.AjaxControlToolkit.FilteredTextBoxExtender
 
     '''<summary>
     '''txtLoans control.
@@ -68,6 +86,15 @@ Partial Public Class Eligible
     Protected WithEvents txtLoans As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Loans control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Loans As Global.AjaxControlToolkit.FilteredTextBoxExtender
+
+    '''<summary>
     '''txtDebt control.
     '''</summary>
     '''<remarks>
@@ -75,6 +102,15 @@ Partial Public Class Eligible
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtDebt As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Debt control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents Debt As Global.AjaxControlToolkit.FilteredTextBoxExtender
 
     '''<summary>
     '''txtNet control.
@@ -95,13 +131,13 @@ Partial Public Class Eligible
     Protected WithEvents btnReset As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''btnDonation control.
+    '''btnEligible control.
     '''</summary>
     '''<remarks>
     '''Auto-generated field.
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
-    Protected WithEvents btnDonation As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnEligible As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''iconEligible control.
