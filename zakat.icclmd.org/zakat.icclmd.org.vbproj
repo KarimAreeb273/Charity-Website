@@ -440,6 +440,9 @@
     <Compile Include="STATE.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="SURVEY.vb">
+      <DependentUpon>zakatEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
     </Compile>
