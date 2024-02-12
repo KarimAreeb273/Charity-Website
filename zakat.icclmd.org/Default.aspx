@@ -10,7 +10,7 @@
         <table style="width:100%" border="0">
           <tr>
             <td style="width:100%; text-align: center">
-              <h3>Zakat Network Network</h3>
+              <h3>Zakat Network</h3>
               <br />
               <img src="Images/zakatlogo.png" style='width:150px; height:300px'  />
             </td> 
