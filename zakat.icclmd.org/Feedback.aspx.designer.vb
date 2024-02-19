@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Feedback
 
   '''<summary>
+  '''pnlSurvey control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlSurvey As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
   '''txtFirstName control.
   '''</summary>
   '''<remarks>
@@ -284,13 +293,13 @@ Partial Public Class Feedback
   Protected WithEvents txtAdditionalComments As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''btnSubmit control.
+  '''btnConfirm control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
+  Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
   '''LabelRating8 control.
@@ -300,4 +309,49 @@ Partial Public Class Feedback
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents LabelRating8 As Global.AjaxControlToolkit.Rating
+
+  '''<summary>
+  '''ModalPopupExtender1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
+
+  '''<summary>
+  '''pnlConfirmation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlConfirmation As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''btnX control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnX As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''btnCancel control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''btnSubmit control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
 End Class

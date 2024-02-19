@@ -18,6 +18,7 @@ Public Class Feedback
       End If
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex)
     End Try
   End Sub
 
@@ -33,6 +34,7 @@ Public Class Feedback
         txtOtherMostLiked.ReadOnly = True
       End If
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex)
     End Try
   End Sub
@@ -49,6 +51,7 @@ Public Class Feedback
         txtOtherMostToImprove.ReadOnly = True
       End If
     Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex)
     End Try
   End Sub
@@ -129,6 +132,7 @@ Public Class Feedback
       Response.Redirect("\")
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex)
     End Try
   End Sub
 
@@ -138,5 +142,25 @@ Public Class Feedback
 
   Private Sub txtOtherMostLiked_TextChanged(sender As Object, e As EventArgs) Handles txtOtherMostLiked.TextChanged
     If sender.Text <> "" Then valOtherMostLiked.IsValid = True
+  End Sub
+
+  Private Sub btnConfirm_Click(sender As Object, e As EventArgs) Handles btnConfirm.Click
+    Try
+      pnlSurvey.Visible = False
+      pnlConfirmation.Visible = True
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex)
+    End Try
+  End Sub
+
+  Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click, btnX.Click
+    Try
+      pnlSurvey.Visible = True
+      pnlConfirmation.Visible = False
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex)
+    End Try
   End Sub
 End Class
