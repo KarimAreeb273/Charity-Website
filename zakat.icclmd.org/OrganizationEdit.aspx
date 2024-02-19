@@ -112,7 +112,7 @@
         <asp:Label runat="server" AssociatedControlID="txtZip" CssClass="col-lg-1 control-label" ToolTip="Organization Mission Statement" Style="white-space: nowrap">Org Mission:</asp:Label>
         <div class="col-lg-11">
           <asp:TextBox runat="server" ID="txtMission" CssClass="form-control" ToolTip="Organization Mission Statement" MaxLength="4000" TabIndex="13" AutoCompleteType="Disabled" Width="1040" TextMode="MultiLine" Rows="5" ValidateRequestMode="Disabled" />
-          <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMission" CssClass="text-danger" ErrorMessage="The mission statement is required." Display="Static" ValidationGroup="Head" />
+          <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMission" CssClass="text-danger" ErrorMessage="The organization mission statement is required." Display="Static" ValidationGroup="Head" />
         </div>
       </div>
     </div>
