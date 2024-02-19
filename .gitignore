@@ -276,3 +276,5 @@ __pycache__/
 /zakat.icclmd.team/comments.docx
 /zakat.icclmd.data/general.queries.sql
 /zakat.icclmd.org/Web.config
+/zakat.icclmd.org/Web.Debug.config
+/zakat.icclmd.org/Web.Release.config
