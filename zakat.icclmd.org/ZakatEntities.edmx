@@ -178,6 +178,7 @@
           <Property Name="isDonationAccepted" Type="bit" />
           <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
           <Property Name="payPalIdentityToken" Type="varchar" MaxLength="100" />
+          <Property Name="missionStatement" Type="varchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -1634,6 +1635,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
+          <Property Name="missionStatement" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
           <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
@@ -2108,6 +2110,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySetMapping Name="ORGANIZATION">
             <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
               <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="missionStatement" ColumnName="missionStatement" />
                 <ScalarProperty Name="payPalIdentityToken" ColumnName="payPalIdentityToken" />
                 <ScalarProperty Name="payPalImageURL" ColumnName="payPalImageURL" />
                 <ScalarProperty Name="isDonationAccepted" ColumnName="isDonationAccepted" />
