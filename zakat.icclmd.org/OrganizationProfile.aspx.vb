@@ -19,6 +19,7 @@
           hypWebsite.Text = oOrganization.website
           lblPhone.Text = Base.getFormattedPhone(oOrganization.phone, Base.enumFormatPhone.Format)
           lblAddress.Text = oOrganization.street + " " + oOrganization.city + ", " + oOrganization.stateAbbr + " " + oOrganization.zip
+          lblMission.Text = oOrganization.missionStatement
           Dim vMapAddress As String = Replace(oOrganization.street, " ", "+") + ",+" + Replace(oOrganization.city, " ", "+") + ",+" + Replace(oOrganization.stateAbbr, " ", "+") + "+" + Replace(oOrganization.zip, " ", "+")
           ifrMap.Src = "https://www.google.com/maps/embed/v1/search?key=" + aGoogleMapsAPIKey + "&q=" + vMapAddress
         Else
