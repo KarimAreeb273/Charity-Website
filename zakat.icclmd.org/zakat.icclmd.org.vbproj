@@ -141,7 +141,6 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Forum.aspx" />
     <Content Include="About.aspx" />
     <Content Include="AdminFunctions.aspx" />
     <Content Include="Applicants.aspx" />
@@ -301,13 +300,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forum.aspx.designer.vb">
-      <DependentUpon>Forum.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Forum.aspx.vb">
-      <DependentUpon>Forum.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
     <Compile Include="About.aspx.designer.vb">
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
