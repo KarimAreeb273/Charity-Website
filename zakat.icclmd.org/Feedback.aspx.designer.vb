@@ -14,6 +14,15 @@ Option Explicit On
 Partial Public Class Feedback
 
   '''<summary>
+  '''pnlSurvey control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlSurvey As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
   '''txtFirstName control.
   '''</summary>
   '''<remarks>
@@ -86,31 +95,49 @@ Partial Public Class Feedback
   Protected WithEvents lblRatingSatisfaction As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
-  '''LabelRating1 control.
+  '''drpRatingSatisfaction control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents LabelRating1 As Global.AjaxControlToolkit.Rating
+  Protected WithEvents drpRatingSatisfaction As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
-  '''lblRatingReceommendation control.
+  '''valRatingSatisfaction control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents lblRatingReceommendation As Global.System.Web.UI.WebControls.Label
+  Protected WithEvents valRatingSatisfaction As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
-  '''LabelRating2 control.
+  '''lblRatingRecommendation control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents LabelRating2 As Global.AjaxControlToolkit.Rating
+  Protected WithEvents lblRatingRecommendation As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''drpRatingRecommendation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpRatingRecommendation As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valRatingRecommendation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valRatingRecommendation As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''lblRatingExperience control.
@@ -122,13 +149,22 @@ Partial Public Class Feedback
   Protected WithEvents lblRatingExperience As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
-  '''LabelRating3 control.
+  '''drpRatingExperience control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents LabelRating3 As Global.AjaxControlToolkit.Rating
+  Protected WithEvents drpRatingExperience As Global.System.Web.UI.WebControls.DropDownList
+
+  '''<summary>
+  '''valRatingExperience control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valRatingExperience As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
   '''lblMostLiked control.
@@ -167,6 +203,15 @@ Partial Public Class Feedback
   Protected WithEvents txtOtherMostLiked As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
+  '''valOtherMostLiked control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents valOtherMostLiked As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
   '''lblMostToImprove control.
   '''</summary>
   '''<remarks>
@@ -203,22 +248,31 @@ Partial Public Class Feedback
   Protected WithEvents txtOtherMostToImprove As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''lblCommentsForImprovement control.
+  '''valOtherMostLikeToImprove control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents lblCommentsForImprovement As Global.System.Web.UI.WebControls.Label
+  Protected WithEvents valOtherMostLikeToImprove As Global.System.Web.UI.WebControls.CustomValidator
 
   '''<summary>
-  '''txtCommentsForImprovement control.
+  '''lblSuggestionsForImprovement control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents txtCommentsForImprovement As Global.System.Web.UI.WebControls.TextBox
+  Protected WithEvents lblSuggestionsForImprovement As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''txtSuggestionsForImprovement control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSuggestionsForImprovement As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
   '''lbl control.
@@ -237,6 +291,60 @@ Partial Public Class Feedback
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents txtAdditionalComments As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''btnConfirm control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnConfirm As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''LabelRating8 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents LabelRating8 As Global.AjaxControlToolkit.Rating
+
+  '''<summary>
+  '''ModalPopupExtender1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents ModalPopupExtender1 As Global.AjaxControlToolkit.ModalPopupExtender
+
+  '''<summary>
+  '''pnlConfirmation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlConfirmation As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''btnX control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnX As Global.System.Web.UI.WebControls.Button
+
+  '''<summary>
+  '''btnCancel control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnCancel As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
   '''btnSubmit control.

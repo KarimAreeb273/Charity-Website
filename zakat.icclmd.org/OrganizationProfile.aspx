@@ -21,8 +21,9 @@
         <address>
           <strong>Address:&nbsp;&nbsp;</strong><asp:Label ID="lblAddress" runat="server"></asp:Label><br />
         </address>
+        <strong>Mission:&nbsp;&nbsp;</strong><asp:Label ID="lblMission" runat="server"></asp:Label><br />
         <div>
-          <iframe id="ifrMap" runat="server" title="Map Location" src="" style="width: 100%; height: 500px; border: none"></iframe>
+          <iframe id="ifrMap" runat="server" title="Map Location" src="" style="width: 100%; height: 400px; border: none"></iframe>
         </div>
       </div>
     </div>

@@ -178,6 +178,7 @@
           <Property Name="isDonationAccepted" Type="bit" />
           <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
           <Property Name="payPalIdentityToken" Type="varchar" MaxLength="100" />
+          <Property Name="missionStatement" Type="varchar" MaxLength="4000" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -221,6 +222,37 @@
           </Key>
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="stateName" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="SURVEY">
+          <Key>
+            <PropertyRef Name="surveyId" />
+          </Key>
+          <Property Name="surveyId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="30" />
+          <Property Name="lastName" Type="varchar" MaxLength="30" />
+          <Property Name="email" Type="varchar" MaxLength="60" />
+          <Property Name="phone" Type="varchar" MaxLength="10" />
+          <Property Name="isFollowUp" Type="bit" />
+          <Property Name="question1Stars" Type="int" />
+          <Property Name="question2Stars" Type="int" />
+          <Property Name="question3Stars" Type="int" />
+          <Property Name="question4Option1" Type="bit" />
+          <Property Name="question4Option2" Type="bit" />
+          <Property Name="question4Option3" Type="bit" />
+          <Property Name="question4Option4" Type="bit" />
+          <Property Name="question4Option5" Type="bit" />
+          <Property Name="question4Option6" Type="bit" />
+          <Property Name="question4Option6Value" Type="varchar" MaxLength="50" />
+          <Property Name="question5Option1" Type="bit" />
+          <Property Name="question5Option2" Type="bit" />
+          <Property Name="question5Option3" Type="bit" />
+          <Property Name="question5Option4" Type="bit" />
+          <Property Name="question5Option5" Type="bit" />
+          <Property Name="question5Option6" Type="bit" />
+          <Property Name="question5Option6Value" Type="varchar" MaxLength="50" />
+          <Property Name="question6" Type="varchar" MaxLength="1000" />
+          <Property Name="question7" Type="varchar" MaxLength="1000" />
+          <Property Name="createdOn" Type="datetime" />
         </EntityType>
         <EntityType Name="TOPIC">
           <Key>
@@ -680,6 +712,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATE" EntityType="Self.STATE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SURVEY" EntityType="Self.SURVEY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TOPIC" EntityType="Self.TOPIC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
@@ -1579,6 +1612,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="ORGANIZATION" EntitySet="ORGANIZATION" />
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
+          <EntitySet Name="SURVEY" EntityType="zakatModel.SURVEY" />
           </EntityContainer>
         <EntityType Name="ORGANIZATION">
           <Key>
@@ -1601,6 +1635,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="DONATION" Relationship="zakatModel.FK_DONATION_ORGANIZATION" FromRole="ORGANIZATION" ToRole="DONATION" />
           <NavigationProperty Name="STATE" Relationship="zakatModel.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
           <NavigationProperty Name="USER_ROLE" Relationship="zakatModel.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
+          <Property Name="missionStatement" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_APPLICATION_ORGANIZATION">
           <End Type="zakatModel.ORGANIZATION" Role="ORGANIZATION" Multiplicity="1" />
@@ -1650,6 +1685,37 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SURVEY">
+          <Key>
+            <PropertyRef Name="surveyId" />
+          </Key>
+          <Property Name="surveyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="isFollowUp" Type="Boolean" />
+          <Property Name="question1Stars" Type="Int32" />
+          <Property Name="question2Stars" Type="Int32" />
+          <Property Name="question3Stars" Type="Int32" />
+          <Property Name="question4Option1" Type="Boolean" />
+          <Property Name="question4Option2" Type="Boolean" />
+          <Property Name="question4Option3" Type="Boolean" />
+          <Property Name="question4Option4" Type="Boolean" />
+          <Property Name="question4Option5" Type="Boolean" />
+          <Property Name="question4Option6" Type="Boolean" />
+          <Property Name="question4Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="question5Option1" Type="Boolean" />
+          <Property Name="question5Option2" Type="Boolean" />
+          <Property Name="question5Option3" Type="Boolean" />
+          <Property Name="question5Option4" Type="Boolean" />
+          <Property Name="question5Option5" Type="Boolean" />
+          <Property Name="question5Option6" Type="Boolean" />
+          <Property Name="question5Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="question6" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="question7" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2044,6 +2110,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySetMapping Name="ORGANIZATION">
             <EntityTypeMapping TypeName="zakatModel.ORGANIZATION">
               <MappingFragment StoreEntitySet="ORGANIZATION">
+                <ScalarProperty Name="missionStatement" ColumnName="missionStatement" />
                 <ScalarProperty Name="payPalIdentityToken" ColumnName="payPalIdentityToken" />
                 <ScalarProperty Name="payPalImageURL" ColumnName="payPalImageURL" />
                 <ScalarProperty Name="isDonationAccepted" ColumnName="isDonationAccepted" />
@@ -2057,6 +2124,38 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
                 <ScalarProperty Name="abbreviation" ColumnName="abbreviation" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="organizationId" ColumnName="organizationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SURVEY">
+            <EntityTypeMapping TypeName="zakatModel.SURVEY">
+              <MappingFragment StoreEntitySet="SURVEY">
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="question7" ColumnName="question7" />
+                <ScalarProperty Name="question6" ColumnName="question6" />
+                <ScalarProperty Name="question5Option6Value" ColumnName="question5Option6Value" />
+                <ScalarProperty Name="question5Option6" ColumnName="question5Option6" />
+                <ScalarProperty Name="question5Option5" ColumnName="question5Option5" />
+                <ScalarProperty Name="question5Option4" ColumnName="question5Option4" />
+                <ScalarProperty Name="question5Option3" ColumnName="question5Option3" />
+                <ScalarProperty Name="question5Option2" ColumnName="question5Option2" />
+                <ScalarProperty Name="question5Option1" ColumnName="question5Option1" />
+                <ScalarProperty Name="question4Option6Value" ColumnName="question4Option6Value" />
+                <ScalarProperty Name="question4Option6" ColumnName="question4Option6" />
+                <ScalarProperty Name="question4Option5" ColumnName="question4Option5" />
+                <ScalarProperty Name="question4Option4" ColumnName="question4Option4" />
+                <ScalarProperty Name="question4Option3" ColumnName="question4Option3" />
+                <ScalarProperty Name="question4Option2" ColumnName="question4Option2" />
+                <ScalarProperty Name="question4Option1" ColumnName="question4Option1" />
+                <ScalarProperty Name="question3Stars" ColumnName="question3Stars" />
+                <ScalarProperty Name="question2Stars" ColumnName="question2Stars" />
+                <ScalarProperty Name="question1Stars" ColumnName="question1Stars" />
+                <ScalarProperty Name="isFollowUp" ColumnName="isFollowUp" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="surveyId" ColumnName="surveyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
