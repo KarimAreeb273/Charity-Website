@@ -149,9 +149,12 @@
     <Content Include="Confirm.aspx" />
     <Content Include="ConfirmIPN.aspx" />
     <Content Include="Dashboard.aspx" />
+    <Content Include="Discussion.aspx" />
     <Content Include="Donate.aspx" />
     <Content Include="Eligible.aspx" />
     <Content Include="Feedback.aspx" />
+    <Content Include="Images\double.left.png" />
+    <Content Include="Images\double.right.png" />
     <Content Include="Images\EmptyStar.png" />
     <Content Include="Images\FilledStar.png" />
     <Content Include="Images\png-transparent.png" />
@@ -359,6 +362,13 @@
     </Compile>
     <Compile Include="DEPENDENT.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Discussion.aspx.designer.vb">
+      <DependentUpon>Discussion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Discussion.aspx.vb">
+      <DependentUpon>Discussion.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Donate.aspx.designer.vb">
       <DependentUpon>Donate.aspx</DependentUpon>
