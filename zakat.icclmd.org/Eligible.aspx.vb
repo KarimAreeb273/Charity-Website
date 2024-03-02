@@ -175,6 +175,7 @@ Public Class Eligible
             iconEligible.Visible = True
         Else
             iconNotEligible.Visible = True
+            txtZakat.Text = ((CDec(txtNet.Text) - 442) * 0.025)
         End If
     End Sub
 
