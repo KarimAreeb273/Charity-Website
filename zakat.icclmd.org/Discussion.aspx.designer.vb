@@ -32,13 +32,13 @@ Partial Public Class Discussion
   Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''btnExpand control.
+  '''pnlBody control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnExpand As Global.System.Web.UI.WebControls.LinkButton
+  Protected WithEvents pnlBody As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
   '''btnCollapse control.
@@ -50,11 +50,11 @@ Partial Public Class Discussion
   Protected WithEvents btnCollapse As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
-  '''CollapsiblePanelExtender1 control.
+  '''btnExpand control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents CollapsiblePanelExtender1 As Global.AjaxControlToolkit.CollapsiblePanelExtender
+  Protected WithEvents btnExpand As Global.System.Web.UI.WebControls.LinkButton
 End Class

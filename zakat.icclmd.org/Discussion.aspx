@@ -3,21 +3,44 @@
   <br />
   <br />
   <br />
-  <table style="width:100%" border="1">
-    <tr>
-      <td id="colNavigate" style="width: 20%;">
-        &nbsp;
-        <asp:Panel ID="pnlNavigate" runat="server">
-          <asp:TextBox ID="txtSearch" runat="server"></asp:TextBox>
-          <asp:LinkButton ID="btnExpand" runat="server"><img src="Images/double.right.png" style="width:20px; height: 20px" /></asp:LinkButton>
-          <asp:LinkButton ID="btnCollapse" runat="server"><img src="Images/double.left.png" style="width:20px; height: 20px" /></asp:LinkButton>
+   <table style="width:100%" border="0">
+     <tr>
+      <td style="width: 20%;">
+        <asp:Panel ID="pnlNavigate" runat="server" Visible="true" Width="170px" Height="800px" BorderStyle="Solid">
+          <b>Search By Keywords</b><br />
+          <table>
+            <tr>
+              <td>&nbsp;</td>
+              <td style="text-align:center">
+                <div class="form-group has-feedback has-search">
+                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                  <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="" AutoPostBack="True" AutoCompleteType="Disabled" width="150px"></asp:TextBox>
+                </div>
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+          <br />
+          <b>Search By Category</b><br />
+
         </asp:Panel>
-        <ajaxToolkit:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" TargetControlID="pnlNavigate" CollapsedSize="0" ExpandedSize="300" CollapsedText="Show Details..." ExpandedText="Hide Details..." CollapsedImage="Images/double.right.png" ExpandedImage="Images/double.left.png" ExpandDirection="Horizontal"  ExpandControlID="btnExpand" CollapseControlID="btnCollapse" />
-        
-        <br />
-        
       </td>
-      <td id="colMain" style="width: 80%">&nbsp;</td>
+      <td style="width: 80%">
+        <asp:Panel ID="pnlBody" runat="server" Visible="true" Width="1000px" Height="800px" BorderStyle="Solid">
+          <table style="width:100%" border="0">
+            <tr>
+              <td style="width:1%">
+                &nbsp;
+              </td>
+              <td style="width:1%">
+                <asp:LinkButton ID="btnCollapse" runat="server" Visible="true"><img src="Images/double.left.png" style="width:15px; height: 15px" /></asp:LinkButton>
+                <asp:LinkButton ID="btnExpand" runat="server" Visible="false"><img src="Images/double.right.png" style="width:15px; height: 15px" /></asp:LinkButton>
+              </td>
+              <td style="width:100%">&nbsp</td>
+            </tr>
+          </table>
+        </asp:Panel> 
+      </td>
     </tr>
-  </table>
+   </table>
 </asp:Content>
