@@ -117,7 +117,7 @@
                     <ContentTemplate>
                       <div class="form-group has-feedback has-search" style="position: relative; top: 9px">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter to search" AutoPostBack="True" AutoCompleteType="Disabled"></asp:TextBox>
+                        <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter" AutoPostBack="True" AutoCompleteType="Disabled" width="175px"></asp:TextBox>
                       </div>
                       <ajaxToolkit:PopupControlExtender ID="ajaxTxtSearch" runat="server" TargetControlID="txtSearch" Position="Bottom" PopupControlID="pnlSearchResults" Enabled="true"></ajaxToolkit:PopupControlExtender>
                       <asp:Panel ID="pnlSearchResults" runat="server" BackColor="#F8F8F8">
