@@ -10,14 +10,12 @@
 Imports System
 Imports System.Collections.Generic
 
-Partial Public Class USER_ROLE
-    Public Property userRoleId As Integer
-    Public Property userId As Nullable(Of Integer)
-    Public Property roleId As Nullable(Of Integer)
-    Public Property organizationId As Nullable(Of Integer)
+Partial Public Class POST_CATEGORY
+    Public Property postCategoryId As Integer
+    Public Property name As String
+    Public Property description As String
+    Public Property countOfPosts As Nullable(Of Integer)
 
-    Public Overridable Property ORGANIZATION As ORGANIZATION
-    Public Overridable Property ROLE As ROLE
-    Public Overridable Property USER As USER
+    Public Overridable Property POST As ICollection(Of POST) = New HashSet(Of POST)
 
 End Class
