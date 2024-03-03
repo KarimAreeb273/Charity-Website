@@ -33,8 +33,8 @@
                 &nbsp;
               </td>
               <td style="width:1%">
-                <asp:LinkButton ID="btnCollapse" runat="server" Visible="true"><img src="Images/double.left.png" style="width:15px; height: 15px" /></asp:LinkButton>
-                <asp:LinkButton ID="btnExpand" runat="server" Visible="false"><img src="Images/double.right.png" style="width:15px; height: 15px" /></asp:LinkButton>
+                <asp:LinkButton ID="btnCollapse" runat="server" Visible="true" ToolTip="Collapse Navigation Bar"><img src="Images/double.left.png" style="width:15px; height: 15px" /></asp:LinkButton>
+                <asp:LinkButton ID="btnExpand" runat="server" Visible="false" ToolTip="Expand Navigation Bar"><img src="Images/double.right.png" style="width:15px; height: 15px" /></asp:LinkButton>
               </td>
               <td style="width:100%">&nbsp</td>
             </tr>
