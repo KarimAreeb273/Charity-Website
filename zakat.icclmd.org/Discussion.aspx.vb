@@ -1,64 +1,49 @@
-﻿Imports System.Net.NetworkInformation
+﻿Public Class Discussion
+  Inherits System.Web.UI.Page
 
-Public Class Discussion
-    Inherits System.Web.UI.Page
+  Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+    Try
+      'update org repeater
+      Using oDB As New zakatEntities
+        rptPostCategories.DataSource = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
+        rptPostCategories.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+  Private Sub btnCollapse_Click(sender As Object, e As EventArgs) Handles btnCollapse.Click
+    btnCollapse.Visible = False
+    btnExpand.Visible = True
 
-    End Sub
+    pnlNavigateShow.Visible = False
+    pnlNavigateHide.Visible = Visible
 
-    Private Sub btnCollapse_Click(sender As Object, e As EventArgs) Handles btnCollapse.Click
-        btnCollapse.Visible = False
-        btnExpand.Visible = True
+    pnlNavigateShow.Width = 170
+    pnlNavigateHide.Width = 40
+    pnlBody.Width = 1130
+  End Sub
 
-        pnlNavigate.Visible = False
-        pnlBody.Width = 1170
-    End Sub
+  Private Sub btnExpand_Click(sender As Object, e As EventArgs) Handles btnExpand.Click
+    btnCollapse.Visible = True
+    btnExpand.Visible = False
 
-    Private Sub btnExpand_Click(sender As Object, e As EventArgs) Handles btnExpand.Click
-        btnCollapse.Visible = True
-        btnExpand.Visible = False
+    pnlNavigateShow.Visible = True
+    pnlNavigateHide.Visible = False
 
-        pnlNavigate.Visible = True
-        pnlBody.Width = 1000
-    End Sub
-    Private Sub btnAddComment_Click(sender As Object, e As EventArgs) Handles btnAddComment.Click
-        txtAnswer.Visible = True
-        btnAddComment.Visible = False
-        btnNoComment.Visible = True
-        btnSubmit.Visible = True
-    End Sub
+    pnlNavigateShow.Width = 170
+    pnlNavigateHide.Width = 40
+    pnlBody.Width = 1000
+  End Sub
 
-    Private Sub btnNoComment_Click(sender As Object, e As EventArgs) Handles btnNoComment.Click
-        txtAnswer.Visible = False
-        btnAddComment.Visible = True
-        btnNoComment.Visible = False
-        btnSubmit.Visible = False
-    End Sub
+  Public Sub btnViewPostCategory_Click(sender As Object, e As System.EventArgs)
+    Try
 
-    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        Try
-
-            Using oDB As New zakatEntities
-                'add organization
-                Dim oPost As New POST
-
-                'insert information about new org and save to db
-                With oPost
-
-                End With
-
-                ' Add to Memory
-                oDB.POST.Add(oPost)
-                oDB.SaveChanges()
-
-                'clear fields
-
-
-            End Using
-        Catch ex As Exception
-            Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-            Response.Write(ex.Message)
-        End Try
-    End Sub
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 End Class
