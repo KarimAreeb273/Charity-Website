@@ -14,31 +14,13 @@ Option Explicit On
 Partial Public Class Discussion
 
   '''<summary>
-  '''pnlNavigate control.
+  '''pnlNavigateShow control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents pnlNavigate As Global.System.Web.UI.WebControls.Panel
-
-  '''<summary>
-  '''txtSearch control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
-
-  '''<summary>
-  '''pnlBody control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents pnlBody As Global.System.Web.UI.WebControls.Panel
+  Protected WithEvents pnlNavigateShow As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
   '''btnCollapse control.
@@ -50,6 +32,33 @@ Partial Public Class Discussion
   Protected WithEvents btnCollapse As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
+  '''txtSearch control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
+
+  '''<summary>
+  '''rptPostCategories control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptPostCategories As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
+  '''pnlNavigateHide control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlNavigateHide As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
   '''btnExpand control.
   '''</summary>
   '''<remarks>
@@ -57,4 +66,13 @@ Partial Public Class Discussion
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents btnExpand As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
+  '''pnlBody control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlBody As Global.System.Web.UI.WebControls.Panel
 End Class
