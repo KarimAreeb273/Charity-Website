@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="zakatModel.LANGUAGE" Width="1.5" PointX="11" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.NATIONALITY" Width="1.5" PointX="5.75" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.ORGANIZATION" Width="1.5" PointX="3" PointY="36.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="zakatModel.POST" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.POST_CATEGORY" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.REFERENCE" Width="1.5" PointX="3" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.REVIEW" Width="1.5" PointX="10.25" PointY="26.375" IsExpanded="true" />
@@ -51,7 +50,6 @@
         <AssociationConnector Association="zakatModel.FK_USER_NATIONALITY1" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_ORGANIZATION_STATE" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_ORGANIZATION" ManuallyRouted="false" />
-        <AssociationConnector Association="zakatModel.FK_POST_POST_CATEGORY" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_STATE" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_REFERENCE_USER1" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_COMMENT_USER" ManuallyRouted="false" />
@@ -60,6 +58,8 @@
         <AssociationConnector Association="zakatModel.FK_USER_STATE1" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_USER_LANGUAGE_USER" ManuallyRouted="false" />
         <AssociationConnector Association="zakatModel.FK_USER_ROLE_USER" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="zakatModel.POST" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="zakatModel.FK_POST_POST_CATEGORY" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
