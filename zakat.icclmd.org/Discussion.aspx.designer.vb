@@ -113,6 +113,15 @@ Partial Public Class Discussion
   Protected WithEvents btnCreatePost As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
+  '''lblModalHeader control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblModalHeader As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
   '''txtPostTitle control.
   '''</summary>
   '''<remarks>
