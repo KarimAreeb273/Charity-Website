@@ -32,7 +32,6 @@ Partial Public Class zakatEntities
     Public Overridable Property LANGUAGE() As DbSet(Of LANGUAGE)
     Public Overridable Property NATIONALITY() As DbSet(Of NATIONALITY)
     Public Overridable Property ORGANIZATION() As DbSet(Of ORGANIZATION)
-    Public Overridable Property POST() As DbSet(Of POST)
     Public Overridable Property POST_CATEGORY() As DbSet(Of POST_CATEGORY)
     Public Overridable Property REFERENCE() As DbSet(Of REFERENCE)
     Public Overridable Property REVIEW() As DbSet(Of REVIEW)
@@ -54,5 +53,6 @@ Partial Public Class zakatEntities
     Public Overridable Property VW_APPLICATIONS_SUBMITTED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_SUBMITTED_BY_YEAR)
     Public Overridable Property VW_APPLICATIONS_TOTAL_DISPERSED() As DbSet(Of VW_APPLICATIONS_TOTAL_DISPERSED)
     Public Overridable Property VW_APPLICATIONS_VALIDATED_BY_YEAR() As DbSet(Of VW_APPLICATIONS_VALIDATED_BY_YEAR)
+    Public Overridable Property POST() As DbSet(Of POST)
 
 End Class

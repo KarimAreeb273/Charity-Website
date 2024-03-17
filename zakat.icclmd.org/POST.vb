@@ -14,7 +14,7 @@ Partial Public Class POST
     Public Property postId As Integer
     Public Property postParentId As Nullable(Of Integer)
     Public Property postCategoryId As Integer
-    Public Property postHeader As String
+    Public Property postTitle As String
     Public Property postContent As String
     Public Property hasPosts As Boolean
     Public Property postCreatedOn As Date
