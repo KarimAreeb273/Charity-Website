@@ -90,7 +90,7 @@
                           <h1></h1>
                         </td>
                         <td style="width: 100%; text-align: left">
-                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModal" Style="white-space: nowrap">Create a Post &nbsp;</asp:LinkButton>
+                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModal" OnClick="btnReplyPost_Click" Style="white-space: nowrap">Create a Post &nbsp;</asp:LinkButton>
                           <%--<asp:Button ID="btnQuestion" runat="server" Text="Create a Post" CssClass="btn btn-primary" TabIndex="1" Width="150" data-toggle="modal" data-target="#myModal" />--%>
                           <%-- Modal start --%>
                           <div class="modal fade" id="myModal" role="dialog">
@@ -227,10 +227,24 @@
                 <ItemTemplate>
                   <tr>
                     <td style="text-align: left" colspan="1">
-                      <%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
+                      <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
                     </td>
                     <td style="text-align: left" colspan="2">
-                      <%# DataBinder.Eval(Container.DataItem, "postTitle")%>
+                      <b>Title:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postTitle")%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left" colspan="3">
+                      <hr />
+                      <%# DataBinder.Eval(Container.DataItem, "postContent")%>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: left; white-space: nowrap" colspan="2">
+                      <b>Created on &nbsp;</b><%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# DataBinder.Eval(Container.DataItem, "postCreatedBy")%> 
+                    </td>
+                    <td style="text-align: right" colspan="1">
+                      <asp:LinkButton ID="btnReplyPost" runat="server" data-toggle="modal" data-target="#myModalReply" Style="white-space: nowrap" OnClick="btnReplyPost_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>'>Reply to Post &nbsp;</asp:LinkButton>
                     </td>
                   </tr>
                 </ItemTemplate>

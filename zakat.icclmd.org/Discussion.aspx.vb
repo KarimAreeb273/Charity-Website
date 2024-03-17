@@ -133,7 +133,7 @@ Public Class Discussion
 
         'insert information about new post and save to db
         With oPost
-          .postTitle = txtPostTitle.Text
+          .postHeader = txtPostTitle.Text
           .postCategoryId = drpPostCategory.SelectedValue
           .postContent = txtPostContent.Text
           .hasPosts = 0
@@ -164,15 +164,19 @@ Public Class Discussion
     End Try
   End Sub
   Sub setPosts()
-        Try
-            'update org repeater
-            Using oDB As New zakatEntities
-                rptPosts.DataSource = (From POST In oDB.POST Where POST.postId <> "Placeholder").ToList
-                rptPosts.DataBind()
-            End Using
-        Catch ex As Exception
-            Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-            Response.Write(ex.Message)
-        End Try
-    End Sub
+    Try
+      'update org repeater
+      Using oDB As New zakatEntities
+        rptPosts.DataSource = (From POST In oDB.POST Where POST.postId <> "Placeholder").ToList
+        rptPosts.DataBind()
+      End Using
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+  Public Sub btnReplyPost_Click(sender As Object, e As System.EventArgs)
+
+  End Sub
+
 End Class
