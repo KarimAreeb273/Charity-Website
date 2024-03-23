@@ -175,8 +175,40 @@ Public Class Discussion
       Response.Write(ex.Message)
     End Try
   End Sub
-  Public Sub btnReplyPost_Click(sender As Object, e As System.EventArgs)
 
+  Public Sub btnReplyPost_Click(sender As Object, e As System.EventArgs) Handles btnCreatePost.Click
+    Try
+      'update modal based on which link is clicked
+      Dim vUserId As Integer = Session("sUserId")
+      Dim vPostId As Integer = sender.CommandArgument
+      'if vPostId = 0 means create else reply
+      If vPostId = 0 Then
+        'create
+        lblModalHeader.Text = "Create a Post"
+        If vUserId = 0 Then
+          'anonymous
+          btnCreatePost.Text = "Create a Post As Guest"
+          btnLogInPost.Text = "Login To Create As User"
+        Else
+          'logged in
+          btnCreatePost.Text = "Create a Post"
+        End If
+      Else
+        'reply
+        lblModalHeader.Text = "Reply To a Post"
+        If vUserId = 0 Then
+          'anonymous
+          btnCreatePost.Text = "Reply As a Guest"
+          btnLogInPost.Text = "Login To Reply As User"
+        Else
+          'logged in
+          btnCreatePost.Text = "Reply To Post"
+        End If
+      End If
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
   End Sub
 
 End Class

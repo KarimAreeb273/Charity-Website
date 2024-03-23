@@ -90,7 +90,7 @@
                           <h1></h1>
                         </td>
                         <td style="width: 100%; text-align: left">
-                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModal" OnClick="btnReplyPost_Click" Style="white-space: nowrap">Create a Post &nbsp;</asp:LinkButton>
+                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModal" Style="white-space: nowrap" Text=""></asp:LinkButton>
                           <%--<asp:Button ID="btnQuestion" runat="server" Text="Create a Post" CssClass="btn btn-primary" TabIndex="1" Width="150" data-toggle="modal" data-target="#myModal" />--%>
                           <%-- Modal start --%>
                           <div class="modal fade" id="myModal" role="dialog">
@@ -100,7 +100,7 @@
                                 <%-- Modal header --%>
                                 <div class="modal-header">
                                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  <h4 class="modal-title"><b>Create a Post</b></h4>
+                                  <h4 class="modal-title"><b><asp:Label ID="lblModalHeader" runat="server" Text="Create a Post"></asp:Label></b></h4>
                                 </div>
                                 <%-- Modal body --%>
                                 <div class="modal-body">
