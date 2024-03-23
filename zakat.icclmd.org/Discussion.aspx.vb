@@ -133,7 +133,7 @@ Public Class Discussion
 
         'insert information about new post and save to db
         With oPost
-          .postHeader = txtPostTitle.Text
+          .postTitle = txtPostTitle.Text
           .postCategoryId = drpPostCategory.SelectedValue
           .postContent = txtPostContent.Text
           .hasPosts = 0
