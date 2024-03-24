@@ -90,140 +90,18 @@
                           <h1></h1>
                         </td>
                         <td style="width: 100%; text-align: left">
-                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModal" Style="white-space: nowrap" Text=""></asp:LinkButton>
+                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModalCreate" Style="white-space: nowrap" Text="Create a Post"></asp:LinkButton>
                           <%--<asp:Button ID="btnQuestion" runat="server" Text="Create a Post" CssClass="btn btn-primary" TabIndex="1" Width="150" data-toggle="modal" data-target="#myModal" />--%>
-                          <%-- Modal start --%>
-                          <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog modal-md">
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <%-- Modal header --%>
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  <h4 class="modal-title"><b><asp:Label ID="lblModalHeader" runat="server" Text="Create a Post"></asp:Label></b></h4>
-                                </div>
-                                <%-- Modal body --%>
-                                <div class="modal-body">
-                                  <div class="form-group">
-                                    <asp:Label runat="server" AssociatedControlID="txtPostTitle" CssClass="col-lg-2 control-label" ToolTip="Post Title">Title:<span style="color: red">*</span></asp:Label>
-                                    <div class="col-lg-10">
-                                      <asp:TextBox ID="txtPostTitle" runat="server" CssClass="form-control" ValidationGroup="Save" AutoCompleteType="Disabled"></asp:TextBox>
-                                      <asp:RequiredFieldValidator runat="server" ID="valPostTitle" ControlToValidate="txtPostTitle" CssClass="text-danger" ErrorMessage="The Post Title is required." ValidationGroup="Save" />
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <asp:Label runat="server" AssociatedControlID="drpPostCategory" CssClass="col-lg-2 control-label" ToolTip="Post Category">Category:<span style="color: red">*</span></asp:Label>
-                                    <div class="col-lg-10">
-                                      <asp:DropDownList ID="drpPostCategory" runat="server" CssClass="form-control" ValidationGroup="Save"></asp:DropDownList>
-                                      <asp:RequiredFieldValidator runat="server" ID="valPostCategory" ControlToValidate="drpPostCategory" CssClass="text-danger" ErrorMessage="The Post Category is required." InitialValue="(Select One)" ValidationGroup="Save" />
-                                    </div>
-                                  </div>
-                                  <table class="table table-condensed table-striped" style="width: 100%;">
-                                    <tr>
-                                      <td>
-                                        <asp:TextBox ID="txtPostContent" runat="server" CssClass="form-control" Width="100%" Rows="10" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
-                                        <asp:RequiredFieldValidator runat="server" ID="valPostContent" ControlToValidate="txtPostContent" CssClass="text-danger" ErrorMessage="The Post Content is required." ValidationGroup="Save" />
-                                      </td>
-                                    </tr>
-                                  </table>
-                                </div>
-                                <%-- modal footer --%>
-                                <div class="modal-footer">
-                                  <div class="row" runat="server" id="divNotLoggedInPost" visible="false">
-                                    <div class="col-lg-6">
-                                      <div style="width: 100%; text-align: left">
-                                        <asp:Button ID="btnLogInPost" runat="server" Text="Log in to reply as User" CssClass="btn btn-link" TabIndex="2" Width="200" />
-                                      </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                      <div style="width: 100%; text-align: right">
-                                        <asp:Button ID="btnGuestSubmitPost" runat="server" Text="Reply as a Guest" CssClass="btn btn-primary" TabIndex="3" Width="200" ValidationGroup="Save" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="row" runat="server" id="divLoggedInPost" visible="false">
-                                    <div class="col-lg-12">
-                                      <div style="width: 100%; text-align: right">
-                                        <asp:Button ID="btnUserSubmitPost" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <%-- modal end --%>
                         </td>
                       </tr>
                     </table>
                     <h4></h4>
-                    <hr />
-
-                    <hr />
-                    <%--<asp:LinkButton ID="btnAddComment" runat="server">Reply to Post</asp:LinkButton>--%>
-                    <asp:LinkButton ID="btnReplyPost" runat="server" data-toggle="modal" data-target="#myModalReply">&nbsp; Reply to Post</asp:LinkButton>
-                    <!-- Start Modal -->
-                    <div class="modal fade" id="myModalReply" role="dialog">
-                      <div class="modal-dialog modal-md">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            <h4 class="modal-title"><b>Reply to Post</b></h4>
-                          </div>
-                          <div class="modal-body">
-                            <table class="table table-condensed table-striped" style="width: 100%;">
-                              <tr>
-                                <td>
-                                  <textarea id="txtAnswer" runat="server" style="width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;" rows="10" visible="true"></textarea>
-                                </td>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="modal-footer">
-                            <div class="row" runat="server" id="divNotLoggedIn" visible="false">
-                              <div class="col-lg-6">
-                                <div style="width: 100%; text-align: left">
-                                  <asp:Button ID="btnLogIn" runat="server" Text="Log in to reply as User" CssClass="btn btn-primary" TabIndex="2" Width="200" />
-                                </div>
-                              </div>
-                              <div class="col-lg-6">
-                                <div style="width: 100%; text-align: right">
-                                  <asp:Button ID="btnGuestSubmit" runat="server" Text="Reply as a Guest" CssClass="btn btn-primary" TabIndex="3" Width="200" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="row" runat="server" id="divLoggedIn" visible="false">
-                              <div class="col-lg-12">
-                                <div style="width: 100%; text-align: right">
-                                  <asp:Button ID="btnUserSubmit" runat="server" Text="Submit Comment" CssClass="btn btn-primary" TabIndex="4" Width="200" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!--  End  Modal -->
-                    <hr />
-                    <h2>Answers</h2>
-                    <br />
-                    <br />
                   </div>
                 </td>
               </tr>
             </table>
             <table class="table table-table" border="0" style="font-size: 14px">
               <asp:Repeater ID="rptPosts" runat="server">
-                <%--                <HeaderTemplate>
-                  <tr style="height: 30px; border: solid solid solid solid">
-                    <th style="text-align: left; width: 30%">Name</th>
-                    <th style="text-align: left; width: 10%">Phone</th>
-                    <th style="text-align: left; width: 20%">Email</th>
-                    <th style="text-align: left; width: 30%">Website</th>
-                    <th style="text-align: center; width: 5%;">Edit</th>
-                  </tr>
-                </HeaderTemplate>--%>
                 <ItemTemplate>
                   <tr>
                     <td style="text-align: left" colspan="1">
@@ -235,7 +113,6 @@
                   </tr>
                   <tr>
                     <td style="text-align: left" colspan="3">
-                      <hr />
                       <%# DataBinder.Eval(Container.DataItem, "postContent")%>
                     </td>
                   </tr>
@@ -257,5 +134,129 @@
   </table>
   <br />
   <br />
+  <%-- Start Post Modal --%>
+  <div class="modal fade" id="myModalCreate" role="dialog">
+    <div class="modal-dialog modal-md">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <%-- Modal header --%>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>
+            <asp:Label ID="lblModalHeader" runat="server" Text="Create a Post"></asp:Label></b></h4>
+        </div>
+        <%-- Modal body --%>
+        <div class="modal-body">
+          <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="txtPostTitle" CssClass="col-lg-2 control-label" ToolTip="Post Title">Title:<span style="color: red">*</span></asp:Label>
+            <div class="col-lg-10">
+              <asp:TextBox ID="txtPostTitle" runat="server" CssClass="form-control" ValidationGroup="Save" AutoCompleteType="Disabled"></asp:TextBox>
+              <asp:RequiredFieldValidator runat="server" ID="valPostTitle" ControlToValidate="txtPostTitle" CssClass="text-danger" ErrorMessage="The Post Title is required." ValidationGroup="Create" />
+            </div>
+          </div>
+          <div class="form-group">
+            <asp:Label runat="server" AssociatedControlID="drpPostCategory" CssClass="col-lg-2 control-label" ToolTip="Post Category">Category:<span style="color: red">*</span></asp:Label>
+            <div class="col-lg-10">
+              <asp:DropDownList ID="drpPostCategory" runat="server" CssClass="form-control" ValidationGroup="Save"></asp:DropDownList>
+              <asp:RequiredFieldValidator runat="server" ID="valPostCategory" ControlToValidate="drpPostCategory" CssClass="text-danger" ErrorMessage="The Post Category is required." InitialValue="(Select One)" ValidationGroup="Create" />
+            </div>
+          </div>
+          <table class="table table-condensed table-striped" style="width: 100%;">
+            <tr>
+              <td>
+                <asp:TextBox ID="txtPostContent" runat="server" CssClass="form-control" Width="100%" Rows="10" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
+                <asp:RequiredFieldValidator runat="server" ID="valPostContent" ControlToValidate="txtPostContent" CssClass="text-danger" ErrorMessage="The Post Content is required." ValidationGroup="Create" />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <%-- modal footer --%>
+        <div class="modal-footer">
+          <div class="row" runat="server" id="divNotLoggedInPost" visible="true">
+            <div class="col-lg-6">
+              <div style="width: 100%; text-align: left">
+                <asp:Button ID="btnLogInPost" runat="server" Text="Log in to post as User" CssClass="btn btn-link" TabIndex="2" Width="200" />
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div style="width: 100%; text-align: right">
+                <asp:Button ID="btnSubmitPost" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="3" Width="200" ValidationGroup="Create" />
+              </div>
+            </div>
+          </div>
+<%--          <div class="row" runat="server" id="divLoggedInPost" visible="false">
+            <div class="col-lg-12">
+              <div style="width: 100%; text-align: right">
+                <asp:Button ID="btnUserSubmitPost" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
+              </div>
+            </div>
+          </div>--%>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%-- End Post Modal --%>
+  <!-- Start Reply Modal -->
+  <div class="modal fade" id="myModalReply" role="dialog">
+  <div class="modal-dialog modal-md">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <%-- Modal header --%>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><b>
+          <asp:Label ID="lblReplyHeader" runat="server" Text="Reply to Post"></asp:Label></b></h4>
+      </div>
+      <%-- Modal body --%>
+      <div class="modal-body">
+        <div class="form-group">
+          <asp:Label runat="server" ID="lblReplyTitle" CssClass="col-lg-2 control-label" ToolTip="Post Title"><span style="color: red">*</span></asp:Label>
+          <div class="col-lg-10">
+<%--            <asp:TextBox ID="txtReplyTitle" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>--%>
+<%--            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtReplyTitle" CssClass="text-danger" ErrorMessage="The Post Title is required." ValidationGroup="Reply" />--%>
+          </div>
+        </div>
+        <div class="form-group">
+          <asp:Label runat="server" ID="lblReplyCategory" CssClass="col-lg-2 control-label" ToolTip="Post Category"><span style="color: red">*</span></asp:Label>
+          <div class="col-lg-10">
+<%--            <asp:DropDownList ID="drpReplyCategory" runat="server" CssClass="form-control" ></asp:DropDownList>--%>
+<%--            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="drpReplyCategory" CssClass="text-danger" ErrorMessage="The Post Category is required." InitialValue="(Select One)" ValidationGroup="Reply" />--%>
+          </div>
+        </div>
+        <table class="table table-condensed table-striped" style="width: 100%;">
+          <tr>
+            <td>
+              <asp:TextBox ID="txtReplyContent" runat="server" CssClass="form-control" Width="100%" Rows="10" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
+              <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtReplyContent" CssClass="text-danger" ErrorMessage="The Post Content is required." ValidationGroup="Reply" />
+            </td>
+          </tr>
+        </table>
+      </div>
+      <%-- modal footer --%>
+      <div class="modal-footer">
+        <div class="row" runat="server" id="div1" visible="true">
+          <div class="col-lg-6">
+            <div style="width: 100%; text-align: left">
+              <asp:Button ID="btnLogInReply" runat="server" Text="Log in to reply as User" CssClass="btn btn-link" TabIndex="2" Width="200" />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div style="width: 100%; text-align: right">
+              <asp:Button ID="btnSubmitReply" runat="server" Text="Reply to Post" CssClass="btn btn-primary" TabIndex="3" Width="200" ValidationGroup="Reply" />
+            </div>
+          </div>
+        </div>
+<%--        <div class="row" runat="server" id="div2" visible="false">
+          <div class="col-lg-12">
+            <div style="width: 100%; text-align: right">
+              <asp:Button ID="btnUserSubmitReply" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
+            </div>
+          </div>
+        </div>--%>
+      </div>
+    </div>
+  </div>
+</div>
+  <!--  End Reply Modal -->
 </asp:Content>
 

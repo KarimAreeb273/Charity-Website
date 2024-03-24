@@ -113,6 +113,15 @@ Partial Public Class Discussion
   Protected WithEvents btnCreatePost As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
+  '''rptPosts control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptPosts As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
   '''lblModalHeader control.
   '''</summary>
   '''<remarks>
@@ -194,101 +203,83 @@ Partial Public Class Discussion
   Protected WithEvents btnLogInPost As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
-  '''btnGuestSubmitPost control.
+  '''btnSubmitPost control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnGuestSubmitPost As Global.System.Web.UI.WebControls.Button
+  Protected WithEvents btnSubmitPost As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
-  '''divLoggedInPost control.
+  '''lblReplyHeader control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents divLoggedInPost As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+  Protected WithEvents lblReplyHeader As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
-  '''btnUserSubmitPost control.
+  '''lblReplyTitle control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnUserSubmitPost As Global.System.Web.UI.WebControls.Button
+  Protected WithEvents lblReplyTitle As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
-  '''btnReplyPost control.
+  '''lblReplyCategory control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnReplyPost As Global.System.Web.UI.WebControls.LinkButton
+  Protected WithEvents lblReplyCategory As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
-  '''txtAnswer control.
+  '''txtReplyContent control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents txtAnswer As Global.System.Web.UI.HtmlControls.HtmlTextArea
+  Protected WithEvents txtReplyContent As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''divNotLoggedIn control.
+  '''RequiredFieldValidator3 control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents divNotLoggedIn As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+  Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
-  '''btnLogIn control.
+  '''div1 control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnLogIn As Global.System.Web.UI.WebControls.Button
+  Protected WithEvents div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
   '''<summary>
-  '''btnGuestSubmit control.
+  '''btnLogInReply control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnGuestSubmit As Global.System.Web.UI.WebControls.Button
+  Protected WithEvents btnLogInReply As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
-  '''divLoggedIn control.
+  '''btnSubmitReply control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents divLoggedIn As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-  '''<summary>
-  '''btnUserSubmit control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents btnUserSubmit As Global.System.Web.UI.WebControls.Button
-
-  '''<summary>
-  '''rptPosts control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents rptPosts As Global.System.Web.UI.WebControls.Repeater
+  Protected WithEvents btnSubmitReply As Global.System.Web.UI.WebControls.Button
 End Class

@@ -17,7 +17,7 @@ CREATE TABLE [dbo].[POST_CATEGORY](
 	[postCategoryId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NULL,
 	[description] [varchar](500) NULL,
-	[countOfPosts] [int] NULL
+	[countOfPosts] [int] DEFAULT 0 NOT NULL
  CONSTRAINT [PK_POST_CATEGORY] PRIMARY KEY CLUSTERED 
 (
 	[postCategoryId] ASC
@@ -31,7 +31,7 @@ CREATE TABLE [dbo].[POST](
 	[postCategoryId] [int] NOT NULL,
 	[postTitle] [varchar](50) NOT NULL,
 	[postContent] [varchar](750) NOT NULL,
-	[hasPosts] [bit] DEFAULT 0 NOT NULL,
+	[countOfReplies] [int] DEFAULT 0 NOT NULL,
 	[postCreatedOn] [datetime] NOT NULL,
 	[postUpdatedOn] [datetime] NULL,
 	[postCreatedBy] [int] NULL,
@@ -66,7 +66,7 @@ CREATE TABLE [ph14095182591_iccl_zakat].[dbo].[POST_CATEGORY](
 	[postCategoryId] [int] IDENTITY(1,1) NOT NULL,
 	[name] [varchar](50) NULL,
 	[description] [varchar](500) NULL,
-	[countOfPosts] [int] NULL
+	[countOfPosts] [int] DEFAULT 0 NOT NULL
  CONSTRAINT [PK_POST_CATEGORY] PRIMARY KEY CLUSTERED 
 (
 	[postCategoryId] ASC
@@ -80,7 +80,7 @@ CREATE TABLE [ph14095182591_iccl_zakat].[dbo].[POST](
 	[postCategoryId] [int] NOT NULL,
 	[postHeader] [varchar](50) NOT NULL,
 	[postContent] [varchar](750) NOT NULL,
-	[hasPosts] [bit] DEFAULT 0 NOT NULL,
+	[countOfReplies] [int] DEFAULT 0 NOT NULL,
 	[postCreatedOn] [datetime] NOT NULL,
 	[postUpdatedOn] [datetime] NULL,
 	[postCreatedBy] [int] NOT NULL,
