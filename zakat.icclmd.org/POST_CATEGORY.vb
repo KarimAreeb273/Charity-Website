@@ -14,7 +14,7 @@ Partial Public Class POST_CATEGORY
     Public Property postCategoryId As Integer
     Public Property name As String
     Public Property description As String
-    Public Property countOfPosts As Nullable(Of Integer)
+    Public Property countOfPosts As Integer
 
     Public Overridable Property POST As ICollection(Of POST) = New HashSet(Of POST)
 

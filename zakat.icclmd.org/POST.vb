@@ -16,10 +16,10 @@ Partial Public Class POST
     Public Property postCategoryId As Integer
     Public Property postTitle As String
     Public Property postContent As String
-    Public Property hasPosts As Boolean
+    Public Property countOfReplies As Integer
     Public Property postCreatedOn As Date
     Public Property postUpdatedOn As Nullable(Of Date)
-    Public Property postCreatedBy As Integer
+    Public Property postCreatedBy As Nullable(Of Integer)
 
     Public Overridable Property POST_CATEGORY As POST_CATEGORY
 

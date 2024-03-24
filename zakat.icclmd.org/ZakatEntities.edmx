@@ -189,10 +189,10 @@
           <Property Name="postCategoryId" Type="int" Nullable="false" />
           <Property Name="postTitle" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="postContent" Type="varchar" MaxLength="750" Nullable="false" />
-          <Property Name="hasPosts" Type="bit" Nullable="false" />
+          <Property Name="countOfReplies" Type="int" Nullable="false" />
           <Property Name="postCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="postUpdatedOn" Type="datetime" />
-          <Property Name="postCreatedBy" Type="int" Nullable="false" />
+          <Property Name="postCreatedBy" Type="int" />
         </EntityType>
         <EntityType Name="POST_CATEGORY">
           <Key>
@@ -201,7 +201,7 @@
           <Property Name="postCategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="50" />
           <Property Name="description" Type="varchar" MaxLength="500" />
-          <Property Name="countOfPosts" Type="int" />
+          <Property Name="countOfPosts" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
@@ -1114,16 +1114,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="STATE" Relationship="Self.FK_ORGANIZATION_STATE" FromRole="ORGANIZATION" ToRole="STATE" />
           <NavigationProperty Name="USER_ROLE" Relationship="Self.FK_USER_ROLE_ORGANIZATION" FromRole="ORGANIZATION" ToRole="USER_ROLE" />
         </EntityType>
-        <EntityType Name="POST_CATEGORY">
-          <Key>
-            <PropertyRef Name="postCategoryId" />
-          </Key>
-          <Property Name="postCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="countOfPosts" Type="Int32" />
-          <NavigationProperty Name="POST" Relationship="zakatModel.FK_POST_POST_CATEGORY" FromRole="POST_CATEGORY" ToRole="POST" />
-        </EntityType>
         <EntityType Name="REFERENCE">
           <Key>
             <PropertyRef Name="referenceId" />
@@ -1658,7 +1648,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="LANGUAGE" EntityType="Self.LANGUAGE" />
           <EntitySet Name="NATIONALITY" EntityType="Self.NATIONALITY" />
           <EntitySet Name="ORGANIZATION" EntityType="Self.ORGANIZATION" />
-          <EntitySet Name="POST_CATEGORY" EntityType="Self.POST_CATEGORY" />
           <EntitySet Name="REFERENCE" EntityType="Self.REFERENCE" />
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" />
@@ -1768,6 +1757,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="USER_ROLE" EntitySet="USER_ROLE" />
           </AssociationSet>
           <EntitySet Name="POST" EntityType="zakatModel.POST" />
+          <EntitySet Name="POST_CATEGORY" EntityType="zakatModel.POST_CATEGORY" />
           <AssociationSet Name="FK_POST_POST_CATEGORY" Association="zakatModel.FK_POST_POST_CATEGORY">
             <End Role="POST_CATEGORY" EntitySet="POST_CATEGORY" />
             <End Role="POST" EntitySet="POST" />
@@ -1782,11 +1772,21 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="postCategoryId" Type="Int32" Nullable="false" />
           <Property Name="postTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="postContent" Type="String" Nullable="false" MaxLength="750" FixedLength="false" Unicode="false" />
-          <Property Name="hasPosts" Type="Boolean" Nullable="false" />
+          <Property Name="countOfReplies" Type="Int32" Nullable="false" />
           <Property Name="postCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="postUpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="postCreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="postCreatedBy" Type="Int32" />
           <NavigationProperty Name="POST_CATEGORY" Relationship="zakatModel.FK_POST_POST_CATEGORY" FromRole="POST" ToRole="POST_CATEGORY" />
+        </EntityType>
+        <EntityType Name="POST_CATEGORY">
+          <Key>
+            <PropertyRef Name="postCategoryId" />
+          </Key>
+          <Property Name="postCategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="countOfPosts" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="POST" Relationship="zakatModel.FK_POST_POST_CATEGORY" FromRole="POST_CATEGORY" ToRole="POST" />
         </EntityType>
         <Association Name="FK_POST_POST_CATEGORY">
           <End Type="zakatModel.POST_CATEGORY" Role="POST_CATEGORY" Multiplicity="1" />
@@ -1988,16 +1988,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
                 <ScalarProperty Name="payPalImageURL" ColumnName="payPalImageURL" />
                 <ScalarProperty Name="payPalIdentityToken" ColumnName="payPalIdentityToken" />
                 <ScalarProperty Name="missionStatement" ColumnName="missionStatement" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="POST_CATEGORY">
-            <EntityTypeMapping TypeName="zakatModel.POST_CATEGORY">
-              <MappingFragment StoreEntitySet="POST_CATEGORY">
-                <ScalarProperty Name="postCategoryId" ColumnName="postCategoryId" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="countOfPosts" ColumnName="countOfPosts" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2259,12 +2249,22 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
                 <ScalarProperty Name="postCreatedBy" ColumnName="postCreatedBy" />
                 <ScalarProperty Name="postUpdatedOn" ColumnName="postUpdatedOn" />
                 <ScalarProperty Name="postCreatedOn" ColumnName="postCreatedOn" />
-                <ScalarProperty Name="hasPosts" ColumnName="hasPosts" />
+                <ScalarProperty Name="countOfReplies" ColumnName="countOfReplies" />
                 <ScalarProperty Name="postContent" ColumnName="postContent" />
                 <ScalarProperty Name="postTitle" ColumnName="postTitle" />
                 <ScalarProperty Name="postCategoryId" ColumnName="postCategoryId" />
                 <ScalarProperty Name="postParentId" ColumnName="postParentId" />
                 <ScalarProperty Name="postId" ColumnName="postId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POST_CATEGORY">
+            <EntityTypeMapping TypeName="zakatModel.POST_CATEGORY">
+              <MappingFragment StoreEntitySet="POST_CATEGORY">
+                <ScalarProperty Name="countOfPosts" ColumnName="countOfPosts" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="postCategoryId" ColumnName="postCategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
