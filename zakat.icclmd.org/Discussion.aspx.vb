@@ -164,32 +164,38 @@ Public Class Discussion
         ' Add to Memory
         oDB.POST.Add(oPost)
         oDB.SaveChanges()
+        Dim vPostId As Int32 = oPost.postId
 
         'update post category with the total count of posts with the current selected category
         vPostCategoryCount = (From POST In oDB.POST Where POST.postCategoryId = drpPostCategory.SelectedValue).Count()
         oPostCategory.countOfPosts = vPostCategoryCount
         oDB.SaveChanges()
 
+
         'update the post repeater
-        setPosts()
+        'setPosts()
+        Response.Redirect("discussion?pid=" + vPostId)
 
         'clear fields
       End Using
-      'refresh page
-      Response.Redirect("Discussion")
+      ''refresh page
+      'Response.Redirect("Discussion")
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
-  Sub setPosts()
+  Sub setPosts(Optional pPostId As Int32 = 0)
     Try
-      'update org repeater
-      Using oDB As New zakatEntities
-        rptPosts.DataSource = (From POST In oDB.POST Where POST.postId <> "Placeholder").ToList
-        rptPosts.DataBind()
-      End Using
+      If pPostId <> 0 Then
+        'update post repeater
+        Using oDB As New zakatEntities
+          rptPosts.DataSource = (From POST In oDB.POST Where POST.postId = pPostId Or POST.postParentId = pPostId Order By POST.postCreatedOn).ToList
+          rptPosts.DataBind()
+        End Using
+      End If
+
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
@@ -243,7 +249,7 @@ Public Class Discussion
 
       'Determine if User is logged in or not
       Dim vUserId As Int32 = Session("sUserId")
-      Dim vPostId As Integer = sender.CommandArgument
+      Dim vPostId As Int32 = sender.CommandArgument
 
       Using oDB As New zakatEntities
         'add post
@@ -266,19 +272,17 @@ Public Class Discussion
         oDB.POST.Add(oPost)
         oDB.SaveChanges()
 
-        'update post category with the total count of posts with the current selected category
-        'vPostCategoryCount = (From POST In oDB.POST Where POST.postCategoryId = drpPostCategory.SelectedValue).Count()
-        'oPostCategory.countOfPosts = vPostCategoryCount
-
+        'update post with the total count of replies 
+        Dim vPostRepliesCount As Int32 = (From POST In oDB.POST Where POST.postParentId = vPostId).Count()
+        oParentPost.countOfReplies = vPostRepliesCount
         oDB.SaveChanges()
 
         'update the post repeater
-        setPosts()
+        'setPosts(vPostId)
+        Response.Redirect("discussion?pid=" + vPostId)
 
         'clear fields
       End Using
-      'refresh page
-      Response.Redirect("Discussion")
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
