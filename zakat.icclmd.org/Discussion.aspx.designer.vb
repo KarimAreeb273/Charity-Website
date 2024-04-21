@@ -113,6 +113,15 @@ Partial Public Class Discussion
   Protected WithEvents btnCreatePost As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
+  '''UpdatePanel1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+
+  '''<summary>
   '''rptPosts control.
   '''</summary>
   '''<remarks>
@@ -210,76 +219,4 @@ Partial Public Class Discussion
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents btnSubmitPost As Global.System.Web.UI.WebControls.Button
-
-  '''<summary>
-  '''lblReplyHeader control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents lblReplyHeader As Global.System.Web.UI.WebControls.Label
-
-  '''<summary>
-  '''lblReplyTitle control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents lblReplyTitle As Global.System.Web.UI.WebControls.Label
-
-  '''<summary>
-  '''lblReplyCategory control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents lblReplyCategory As Global.System.Web.UI.WebControls.Label
-
-  '''<summary>
-  '''txtReplyContent control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents txtReplyContent As Global.System.Web.UI.WebControls.TextBox
-
-  '''<summary>
-  '''RequiredFieldValidator3 control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents RequiredFieldValidator3 As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-  '''<summary>
-  '''div1 control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents div1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-  '''<summary>
-  '''btnLogInReply control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents btnLogInReply As Global.System.Web.UI.WebControls.Button
-
-  '''<summary>
-  '''btnSubmitReply control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents btnSubmitReply As Global.System.Web.UI.WebControls.Button
 End Class

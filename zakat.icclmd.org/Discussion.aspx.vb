@@ -1,9 +1,9 @@
 ﻿Imports System.Net.NetworkInformation
 
 Public Class Discussion
-    Inherits System.Web.UI.Page
+  Inherits System.Web.UI.Page
 
-    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+  Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       If Not IsPostBack Then
         Dim vUserId As Int32 = Session("sUserId")
@@ -25,66 +25,63 @@ Public Class Discussion
           If vUserId = 0 Then
             '  '"Not Logged In"
             btnLogInPost.Visible = True
-            btnLogInReply.Visible = True
+            'btnLogInReply.Visible = True
             btnSubmitPost.Text = "Post as a Guest"
-            btnSubmitReply.Text = "Reply as a Guest"
+            'btnSubmitReply.Text = "Reply as a Guest"
           Else
             '  '"Logged in"
             btnLogInPost.Visible = False
-            btnLogInReply.Visible = False
+            'btnLogInReply.Visible = False
             btnSubmitPost.Text = "Submit Post"
-            btnSubmitReply.Text = "Submit Reply"
+            'btnSubmitReply.Text = "Submit Reply"
           End If
         End If
 
         Using oDB As New zakatEntities
-            'update post category repeater
-            Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
-            rptPostCategories.DataSource = oPostCategories
-            rptPostCategories.DataBind()
-            drpPostCategory.DataSource = oPostCategories
-            drpPostCategory.DataTextField = "name"
-            drpPostCategory.DataValueField = "postCategoryId"
-            drpPostCategory.DataBind()
-            drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+          'update post category repeater
+          Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
+          rptPostCategories.DataSource = oPostCategories
+          rptPostCategories.DataBind()
+          drpPostCategory.DataSource = oPostCategories
+          drpPostCategory.DataTextField = "name"
+          drpPostCategory.DataValueField = "postCategoryId"
+          drpPostCategory.DataBind()
+          drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
-            'update post repeater
-            Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
-            rptPosts.DataSource = oPost
-            rptPosts.DataBind()
-          End Using
-        End If
+          'update post repeater
+          Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
+          rptPosts.DataSource = oPost
+          rptPosts.DataBind()
+        End Using
+      End If
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-            Response.Write(ex.Message)
-        End Try
-    End Sub
-    Private Sub btnCollapse_Click(sender As Object, e As EventArgs) Handles btnCollapse.Click
-        btnCollapse.Visible = False
-        btnExpand.Visible = True
-        pnlNavigateShow.Visible = False
-        pnlNavigateHide.Visible = Visible
-        pnlNavigateShow.Width = 170
-        pnlNavigateHide.Width = 40
-        pnlBody.Width = 1130
-    End Sub
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+  Private Sub btnCollapse_Click(sender As Object, e As EventArgs) Handles btnCollapse.Click
+    btnCollapse.Visible = False
+    btnExpand.Visible = True
+    pnlNavigateShow.Visible = False
+    pnlNavigateHide.Visible = Visible
+    pnlNavigateShow.Width = 170
+    pnlNavigateHide.Width = 40
+    pnlBody.Width = 1130
+  End Sub
 
-    Private Sub btnExpand_Click(sender As Object, e As EventArgs) Handles btnExpand.Click
-        btnCollapse.Visible = True
-        btnExpand.Visible = False
+  Private Sub btnExpand_Click(sender As Object, e As EventArgs) Handles btnExpand.Click
+    btnCollapse.Visible = True
+    btnExpand.Visible = False
 
-        pnlNavigateShow.Visible = True
-        pnlNavigateHide.Visible = False
+    pnlNavigateShow.Visible = True
+    pnlNavigateHide.Visible = False
 
-        pnlNavigateShow.Width = 170
-        pnlNavigateHide.Width = 40
-        pnlBody.Width = 1000
-    End Sub
-    Private Sub btnLogInPost_Click(sender As Object, e As EventArgs) Handles btnLogInPost.Click
-        Response.Redirect("/")
-    End Sub
-  Private Sub btnLogIn_Click(sender As Object, e As EventArgs) Handles btnLogInReply.Click
+    pnlNavigateShow.Width = 170
+    pnlNavigateHide.Width = 40
+    pnlBody.Width = 1000
+  End Sub
+  Private Sub btnLogInPost_Click(sender As Object, e As EventArgs) Handles btnLogInPost.Click
     Response.Redirect("/")
   End Sub
 
@@ -130,12 +127,12 @@ Public Class Discussion
   '    End Try
   'End Sub
   Public Sub btnViewPostCategory_Click(sender As Object, e As System.EventArgs)
-        Try
-        Catch ex As Exception
-            Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-            Response.Write(ex.Message)
-        End Try
-    End Sub
+    Try
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 
   Private Sub btnSubmitPost_Click(sender As Object, e As EventArgs) Handles btnSubmitPost.Click
     Try
@@ -201,50 +198,28 @@ Public Class Discussion
       Response.Write(ex.Message)
     End Try
   End Sub
-
-  Public Sub btnReplyPost_Click(sender As Object, e As System.EventArgs) Handles btnCreatePost.Click
+  Protected Sub btnReplyPost_Click(sender As Object, e As System.EventArgs)
     Try
       'update modal based on which link is clicked
       Dim vUserId As Integer = Session("sUserId")
       Dim vPostId As Integer = sender.CommandArgument
-      btnSubmitReply.CommandArgument = vPostId
+      'btnSubmitReply.CommandArgument = vPostId
+
+      'pnlReplyPostForm.visible = True
 
       Using oDB As New zakatEntities
-        Dim oPost As POST = (From POST In oDB.POST Where POST.postParentId = vPostId).First()
-        lblReplyTitle.Text = "Re: " + oPost.postTitle
-        lblReplyCategory.Text = oPost.POST_CATEGORY.name
+
+        Dim oPost As POST = (From POST In oDB.POST Where POST.postId = vPostId).First()
+        'lblReplyTitle.Text = "Re: " + oPost.postTitle
+        'lblReplyCategory.Text = oPost.POST_CATEGORY.name
       End Using
-      'if vPostId = 0 means create else reply
-      'If vPostId = 0 Then
-      '  'create
-      '  lblModalHeader.Text = "Create a Post"
-      '  If vUserId = 0 Then
-      '    'anonymous
-      '    btnCreatePost.Text = "Create a Post As Guest"
-      '    btnLogInPost.Text = "Login To Create As User"
-      '  Else
-      '    'logged in
-      '    btnCreatePost.Text = "Create a Post"
-      '  End If
-      'Else
-      '  'reply
-      '  lblModalHeader.Text = "Reply To a Post"
-      '  If vUserId = 0 Then
-      '    'anonymous
-      '    btnCreatePost.Text = "Reply As a Guest"
-      '    btnLogInPost.Text = "Login To Reply As User"
-      '  Else
-      '    'logged in
-      '    btnCreatePost.Text = "Reply To Post"
-      '  End If
-      'End If
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
     End Try
   End Sub
 
-  Private Sub btnSubmitReply_Click(sender As Object, e As EventArgs) Handles btnSubmitReply.Click
+  Public Sub btnSubmitReply_Click(sender As Object, e As EventArgs)
     Try
 
       'Determine if User is logged in or not
@@ -253,13 +228,18 @@ Public Class Discussion
 
       Using oDB As New zakatEntities
         'add post
-        Dim oParentPost As POST = (From POST In oDB.POST Where POST.postParentId = vPostId).First()
+        Dim oParentPost As POST = (From POST In oDB.POST Where POST.postId = vPostId).First()
         Dim oPost As New POST
+
+        'retrieving items within repeater
+        Dim item As RepeaterItem = CType((CType(sender, Button)).NamingContainer, RepeaterItem)
+        Dim txtReplyContent As TextBox = CType(item.FindControl("txtReplyContent"), TextBox)
+        'Dim replyContent As String = txtReplyContent.Text
 
         'insert information about new post and save to db
         With oPost
           .postParentId = vPostId
-          .postTitle = lblReplyTitle.Text
+          .postTitle = IIf(InStr(oParentPost.postTitle, "Re: ") = 0, "Re: " + oParentPost.postTitle, oParentPost.postTitle)
           .postCategoryId = oParentPost.postCategoryId
           .postContent = txtReplyContent.Text
           .countOfReplies = 0
@@ -289,4 +269,41 @@ Public Class Discussion
       Response.Write(ex.Message)
     End Try
   End Sub
+
+  Public Function getName(Optional pUserId As Integer = 0) As String
+    Try
+      If pUserId = 0 Then
+        getName = "Anonymous"
+      Else
+        ' Retrieve User First Name
+        Using oDB As New zakatEntities
+          Dim oUser As USER = (From USER In oDB.USER Where USER.userId = pUserId).First()
+          getName = oUser.firstName
+        End Using
+      End If
+    Catch ex As Exception
+      Return ""
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Function
+
+  Public Function getUser()
+    Try
+      Dim vUserId As Int32 = Session("sUserId")
+      If vUserId = 0 Then
+        getUser = "Anonymous"
+      Else
+        ' Retrieve User First Name
+        Using oDB As New zakatEntities
+          Dim oUser As USER = (From USER In oDB.USER Where USER.userId = vUserId).First()
+          getUser = oUser.firstName
+        End Using
+      End If
+    Catch ex As Exception
+      Return ""
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Function
 End Class

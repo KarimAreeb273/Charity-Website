@@ -93,6 +93,8 @@
                           <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModalCreate" Style="white-space: nowrap" Text="Create a Post"></asp:LinkButton>
                           <%--<asp:Button ID="btnQuestion" runat="server" Text="Create a Post" CssClass="btn btn-primary" TabIndex="1" Width="150" data-toggle="modal" data-target="#myModal" />--%>
                         </td>
+                        <td>&nbsp;
+                        </td>
                       </tr>
                     </table>
                     <h4></h4>
@@ -100,33 +102,124 @@
                 </td>
               </tr>
             </table>
-            <table class="table table-table" border="0" style="font-size: 14px">
-              <asp:Repeater ID="rptPosts" runat="server">
-                <ItemTemplate>
-                  <tr>
-                    <td style="text-align: left" colspan="1">
-                      <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
-                    </td>
-                    <td style="text-align: left" colspan="2">
-                      <b>Title:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postTitle")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left" colspan="3">
-                      <%# DataBinder.Eval(Container.DataItem, "postContent")%>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="text-align: left; white-space: nowrap" colspan="2">
-                      <b>Created on &nbsp;</b><%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# DataBinder.Eval(Container.DataItem, "postCreatedBy")%> 
-                    </td>
-                    <td style="text-align: right" colspan="1">
-                      <asp:LinkButton ID="btnReplyPost" runat="server" data-toggle="modal" data-target="#myModalReply" Style="white-space: nowrap" OnClick="btnReplyPost_Click" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>'>Reply to Post &nbsp;</asp:LinkButton>
-                    </td>
-                  </tr>
-                </ItemTemplate>
-              </asp:Repeater>
-            </table>
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+              <ContentTemplate>
+                <asp:Repeater ID="rptPosts" runat="server">
+                  <ItemTemplate>
+                    <table>
+                      <tr>
+                        <td width="1%">
+                          <img src='<%# IIf(DataBinder.Eval(Container.DataItem, "postParentId") > 0, "Images/Reply_Arrow.png", "")%>'/>
+                        </td>
+                        <td width="99%">
+                          <table class="table table-table" border="0" style="font-size: 14px">
+                            <tr>
+                              <td style="text-align: left" colspan="1">
+                                <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
+                              </td>
+                              <td style="text-align: left" colspan="2">
+                                <b>Title:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postTitle")%>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: left" colspan="3">
+                                <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postContent")%>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td style="text-align: left; white-space: nowrap" colspan="2">
+                                <b>Created on &nbsp;</b><%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# getName(DataBinder.Eval(Container.DataItem, "postCreatedBy"))%> 
+                              </td>
+
+                              <td style="text-align: right" colspan="1">
+                                <%--                          <asp:LinkButton ID="btnReplyPost" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>' runat="server" CausesValidation="false" OnClick="btnReplyPost_Click">Reply to Post</asp:LinkButton>--%>
+
+                              </td>
+
+                            </tr>
+                          </table>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <table width="100%">
+                      <tr>
+                        <td>&nbsp; &nbsp;
+                        </td>
+                        <td width="100%">
+                          <asp:Panel ID="pnlReplyPostForm" runat="server" Width="100%" BorderStyle="Solid" BorderColor="Black">
+                            <table border="0" width="100%">
+                              <tr>
+                                <td>&nbsp;
+                                </td>
+                                <th colspan="3" style="background-color: lightgray">Reply to Post
+                                </th>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;
+                                </td>
+                                <th style="text-align: right; width: 150px">Title: 
+                                </th>
+                                <td style="width: 1%">&nbsp;
+                                </td>
+                                <td style="width: 100%"> <%# IIf(InStr(DataBinder.Eval(Container.DataItem, "postTitle"), "Re: ") = 0, "Re: " + DataBinder.Eval(Container.DataItem, "postTitle"), DataBinder.Eval(Container.DataItem, "postTitle"))%>
+                                </td>
+                                <td>&nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;
+                                </td>
+                                <th style="text-align: right">Category: 
+                                </th>
+                                <td style="width: 1%">&nbsp;
+                                </td>
+                                <td>
+                                  <%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
+                                </td>
+                                <td>&nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;
+                                </td>
+                                <th style="text-align: right; vertical-align: top">Content:  
+                                </th>
+                                <td style="width: 1%">&nbsp;
+                                </td>
+                                <td>
+                                  <asp:TextBox ID="txtReplyContent" runat="server" CssClass="form-control" Width="100%" Rows="3" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
+                                  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtReplyContent" CssClass="text-danger" ErrorMessage="The Reply Content is required." ValidationGroup="Reply" />
+                                </td>
+                                <td>&nbsp;
+                                </td>
+                              </tr>
+                              <tr>
+                                <td>&nbsp;
+                                </td>
+                                <td style="white-space: nowrap">
+                                  <a runat="server" href="/" tabindex="2" visible='<%# IIf(getUser() = "Anonymous", True, False)%>'>Reply as User</a>
+                                </td>
+                                <td style="width: 1%">&nbsp;
+                                </td>
+                                <td style="text-align: right">
+                                  <asp:Button ID="btnSubmitReply" runat="server" Text='<%#"Reply as " + getUser()%>' CssClass="btn btn-primary" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>' TabIndex="3" ValidationGroup="Reply" OnClick="btnSubmitReply_Click" />
+                                </td>
+                                <td>&nbsp;
+                                </td>
+                              </tr>
+                            </table>
+                          </asp:Panel>
+                        </td>
+                        <td>&nbsp; &nbsp;
+                        </td>
+                      </tr>
+                    </table>
+
+                  </ItemTemplate>
+                </asp:Repeater>
+              </ContentTemplate>
+            </asp:UpdatePanel>
           </asp:Panel>
         </asp:Panel>
       </td>
@@ -184,7 +277,7 @@
               </div>
             </div>
           </div>
-<%--          <div class="row" runat="server" id="divLoggedInPost" visible="false">
+          <%--          <div class="row" runat="server" id="divLoggedInPost" visible="false">
             <div class="col-lg-12">
               <div style="width: 100%; text-align: right">
                 <asp:Button ID="btnUserSubmitPost" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
@@ -196,67 +289,5 @@
     </div>
   </div>
   <%-- End Post Modal --%>
-  <!-- Start Reply Modal -->
-  <div class="modal fade" id="myModalReply" role="dialog">
-  <div class="modal-dialog modal-md">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <%-- Modal header --%>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><b>
-          <asp:Label ID="lblReplyHeader" runat="server" Text="Reply to Post"></asp:Label></b></h4>
-      </div>
-      <%-- Modal body --%>
-      <div class="modal-body">
-        <div class="form-group">
-          <asp:Label runat="server" ID="lblReplyTitle" CssClass="col-lg-2 control-label" ToolTip="Post Title"><span style="color: red">*</span></asp:Label>
-          <div class="col-lg-10">
-<%--            <asp:TextBox ID="txtReplyTitle" runat="server" CssClass="form-control" AutoCompleteType="Disabled"></asp:TextBox>--%>
-<%--            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator1" ControlToValidate="txtReplyTitle" CssClass="text-danger" ErrorMessage="The Post Title is required." ValidationGroup="Reply" />--%>
-          </div>
-        </div>
-        <div class="form-group">
-          <asp:Label runat="server" ID="lblReplyCategory" CssClass="col-lg-2 control-label" ToolTip="Post Category"><span style="color: red">*</span></asp:Label>
-          <div class="col-lg-10">
-<%--            <asp:DropDownList ID="drpReplyCategory" runat="server" CssClass="form-control" ></asp:DropDownList>--%>
-<%--            <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="drpReplyCategory" CssClass="text-danger" ErrorMessage="The Post Category is required." InitialValue="(Select One)" ValidationGroup="Reply" />--%>
-          </div>
-        </div>
-        <table class="table table-condensed table-striped" style="width: 100%;">
-          <tr>
-            <td>
-              <asp:TextBox ID="txtReplyContent" runat="server" CssClass="form-control" Width="100%" Rows="10" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
-              <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtReplyContent" CssClass="text-danger" ErrorMessage="The Post Content is required." ValidationGroup="Reply" />
-            </td>
-          </tr>
-        </table>
-      </div>
-      <%-- modal footer --%>
-      <div class="modal-footer">
-        <div class="row" runat="server" id="div1" visible="true">
-          <div class="col-lg-6">
-            <div style="width: 100%; text-align: left">
-              <asp:Button ID="btnLogInReply" runat="server" Text="Log in to reply as User" CssClass="btn btn-link" TabIndex="2" Width="200" />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div style="width: 100%; text-align: right">
-              <asp:Button ID="btnSubmitReply" runat="server" Text="Reply to Post" CssClass="btn btn-primary" TabIndex="3" Width="200" ValidationGroup="Reply" />
-            </div>
-          </div>
-        </div>
-<%--        <div class="row" runat="server" id="div2" visible="false">
-          <div class="col-lg-12">
-            <div style="width: 100%; text-align: right">
-              <asp:Button ID="btnUserSubmitReply" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
-            </div>
-          </div>
-        </div>--%>
-      </div>
-    </div>
-  </div>
-</div>
-  <!--  End Reply Modal -->
 </asp:Content>
 

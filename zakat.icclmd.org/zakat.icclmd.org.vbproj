@@ -158,6 +158,7 @@
     <Content Include="Images\EmptyStar.png" />
     <Content Include="Images\FilledStar.png" />
     <Content Include="Images\png-transparent.png" />
+    <Content Include="Images\Reply_Arrow.png" />
     <Content Include="Images\SavedStar.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
