@@ -166,6 +166,7 @@
     <Content Include="Protocols.aspx" />
     <Content Include="Report.ascx" />
     <Content Include="sitemap.xml" />
+    <Content Include="Temp.aspx" />
     <Content Include="Timeline.aspx" />
     <Content Include="UserEdit.aspx" />
     <Content Include="Profile.aspx" />
@@ -458,6 +459,13 @@
     </Compile>
     <Compile Include="SURVEY.vb">
       <DependentUpon>zakatEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Temp.aspx.designer.vb">
+      <DependentUpon>Temp.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Temp.aspx.vb">
+      <DependentUpon>Temp.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Timeline.aspx.designer.vb">
       <DependentUpon>Timeline.aspx</DependentUpon>
