@@ -1,6 +1,53 @@
-﻿<%@ Page Title="User Forum" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Discussion.aspx.vb" Inherits="zakat.icclmd.org.Discussion" %>
+﻿<%@ Page Title="User Forum" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Discussion.aspx.vb" Inherits="zakat.icclmd.org.Discussion" MaintainScrollPositionOnPostback="true"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+  <style type="text/css">
+    body {
+      font-family: inherit;
+      font-size: 12px;
+    }
+    /* Accordion */
+    .accordionHeader {
+      border: 1px solid #2F4F4F;
+      color: black;
+      background-color: #f5f5f5;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px;
+      margin-top: 5px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    #master_content .accordionHeader a {
+      color: #FFFFFF;
+      background: none;
+      text-decoration: none;
+    }
+
+      #master_content .accordionHeader a:hover {
+        background: none;
+        text-decoration: underline;
+      }
+
+    .accordionHeaderSelected {
+      border: 1px solid #2F4F4F;
+      color: white;
+      background-color: black;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 5px;
+      margin-top: 5px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .accordionContent {
+      overflow: hidden;
+    }
+  </style>
   <br />
   <br />
   <br />
@@ -73,7 +120,7 @@
         </asp:Panel>
       </td>
       <td style="width: 80%">
-        <asp:Panel ID="pnlBody" runat="server" Visible="true" Width="1000px" Height="800px" BorderStyle="Solid" ScrollBars="None">
+        <asp:Panel ID="pnlBody" runat="server" Visible="true" Width="1000px" Height="800px" BorderStyle="Solid" ScrollBars="Vertical">
 
           <asp:Panel ID="pnlSearch" runat="server" Visible="false" Width="100%" Height="100%">
           </asp:Panel>
@@ -102,38 +149,33 @@
                 </td>
               </tr>
             </table>
-            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-              <ContentTemplate>
+<%--            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+              <ContentTemplate>--%>
                 <asp:Repeater ID="rptPosts" runat="server">
                   <ItemTemplate>
-                    <table>
+                    <table style="width: 100%">
                       <tr>
-                        <td width="1%">
-                          <img src='<%# IIf(DataBinder.Eval(Container.DataItem, "postParentId") > 0, "Images/Reply_Arrow.png", "")%>'/>
+                        <td style="width: 1%">
+                          <img src='<%# IIf(DataBinder.Eval(Container.DataItem, "postParentId") > 0, "Images/Reply_Arrow.png", "")%>' />
                         </td>
-                        <td width="99%">
+                        <td style="width: 99%">
                           <table class="table table-table" border="0" style="font-size: 14px">
                             <tr>
-                              <td style="text-align: left" colspan="1">
-                                <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
+                              <td style="text-align: left; width: 25%" colspan="1">
+                                <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>  
                               </td>
-                              <td style="text-align: left" colspan="2">
+                              <td style="text-align: left; width: 75%" colspan="1">
                                 <b>Title:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postTitle")%>
                               </td>
                             </tr>
                             <tr>
-                              <td style="text-align: left" colspan="3">
-                                <b>Category:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postContent")%>
+                              <td style="text-align: left" colspan="2">
+                                <b>Content:&nbsp;</b><%# DataBinder.Eval(Container.DataItem, "postContent")%>
                               </td>
                             </tr>
                             <tr>
-                              <td style="text-align: left; white-space: nowrap" colspan="2">
-                                <b>Created on &nbsp;</b><%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# getName(DataBinder.Eval(Container.DataItem, "postCreatedBy"))%> 
-                              </td>
-
-                              <td style="text-align: right" colspan="1">
-                                <%--                          <asp:LinkButton ID="btnReplyPost" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>' runat="server" CausesValidation="false" OnClick="btnReplyPost_Click">Reply to Post</asp:LinkButton>--%>
-
+                              <td style="text-align: left; white-space: nowrap; font-size:x-small" colspan="2">
+                                <a href='discussion?pid=<%# DataBinder.Eval(Container.DataItem, "postId")%>'>Post ID: <%# DataBinder.Eval(Container.DataItem, "postId")%> &nbsp; Created on &nbsp;<%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# getName(DataBinder.Eval(Container.DataItem, "postCreatedBy"))%> &nbsp; Total Replies: <%# DataBinder.Eval(Container.DataItem, "countOfReplies")%></a>
                               </td>
 
                             </tr>
@@ -147,66 +189,165 @@
                         <td>&nbsp; &nbsp;
                         </td>
                         <td width="100%">
-                          <asp:Panel ID="pnlReplyPostForm" runat="server" Width="100%" BorderStyle="Solid" BorderColor="Black">
+                          <asp:Panel ID="pnlReplyPostForm" runat="server" Width="100%" >
                             <table border="0" width="100%">
                               <tr>
                                 <td>&nbsp;
                                 </td>
-                                <th colspan="3" style="background-color: lightgray">Reply to Post
+                                <th colspan="3">
+                                  <%--<ajaxToolkit:Accordion ID="accZakat" runat="server" BorderWidth="0px" RequireOpenedPane="False" FadeTransitions="True" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" SelectedIndex="-1" BorderStyle="None" AutoSize="None" Height="625px">
+                                    <Panes>
+                                      <ajaxToolkit:AccordionPane runat="server" ID="paneReply" TabIndex="600">
+                                        <Header>
+                                          <table style="width: 100%">
+                                            <tr>
+                                              <th style="width: 25%; text-align: left; vertical-align: middle">Reply To The Post
+                                              </th>
+                                              <th style="width: 25%; text-align: right; vertical-align: middle">
+                                                <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                              </th>
+                                            </tr>
+                                          </table>
+                                        </Header>
+                                        <Content>
+                                          <br />
+                                          <table style="width: 100%">
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right; width: 150px">Title: 
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                          
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right">Category: 
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td>
+          \
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right; vertical-align: top">Content:  
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td>
+                                              
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <td style="white-space: nowrap">
+                                              </td>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td style="text-align: right">
+         
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </Content>
+                                      </ajaxToolkit:AccordionPane>
+                                    </Panes>
+                                  </ajaxToolkit:Accordion>--%>
+                                  <div class="panel-group" id="accordion">
+                                    <div >
+                                      <div class="panel-heading" style="background-color: #f5f5f5">
+                                        <h4 class="panel-title">
+                                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse<%# DataBinder.Eval(Container.DataItem, "postId")%>">
+                                            <table style="width: 100%">
+                                              <tr>
+                                                <th style="width: 25%; text-align: left; vertical-align: middle; font-size:small">Reply To The Post
+                                                </th>
+                                                <th style="width: 25%; text-align: right; vertical-align: middle">
+                                                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                                </th>
+                                              </tr>
+                                            </table>
+                                          </a>
+                                        </h4>
+                                      </div>
+                                      <div id="collapse<%# DataBinder.Eval(Container.DataItem, "postId")%>" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                          <table style="width: 100%">
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right; width: 150px">Title: 
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td style="width: 100%"><%# IIf(InStr(DataBinder.Eval(Container.DataItem, "postTitle"), "Re: ") = 0, "Re: " + DataBinder.Eval(Container.DataItem, "postTitle"), DataBinder.Eval(Container.DataItem, "postTitle"))%>
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right">Category: 
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td>
+                                                <%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <th style="text-align: right; vertical-align: top">Content:  
+                                              </th>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td>
+                                                <asp:TextBox ID="txtReplyContent" runat="server" CssClass="form-control" Width="100%" Rows="3" Visible="true" ValidationGroup='<%# DataBinder.Eval(Container.DataItem, "postId")%>' TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
+                                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtReplyContent" CssClass="text-danger" ErrorMessage="The Reply Content is required." ValidationGroup='<%# DataBinder.Eval(Container.DataItem, "postId")%>' />
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                            <tr>
+                                              <td>&nbsp;
+                                              </td>
+                                              <td style="white-space: nowrap">
+                                                <a runat="server" href="/" tabindex="2" visible='<%# IIf(getUser() = "Anonymous", True, False)%>'>Reply as User</a>
+                                              </td>
+                                              <td style="width: 1%">&nbsp;
+                                              </td>
+                                              <td style="text-align: right">
+                                                <asp:Button ID="btnSubmitReply" runat="server" Text='<%#"Reply as " + getUser()%>' CssClass="btn btn-primary" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>' TabIndex="3" ValidationGroup='<%# DataBinder.Eval(Container.DataItem, "postId")%>' OnClick="btnSubmitReply_Click" />
+                                              </td>
+                                              <td>&nbsp;
+                                              </td>
+                                            </tr>
+                                          </table>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                 </th>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;
-                                </td>
-                                <th style="text-align: right; width: 150px">Title: 
-                                </th>
-                                <td style="width: 1%">&nbsp;
-                                </td>
-                                <td style="width: 100%"> <%# IIf(InStr(DataBinder.Eval(Container.DataItem, "postTitle"), "Re: ") = 0, "Re: " + DataBinder.Eval(Container.DataItem, "postTitle"), DataBinder.Eval(Container.DataItem, "postTitle"))%>
-                                </td>
-                                <td>&nbsp;
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;
-                                </td>
-                                <th style="text-align: right">Category: 
-                                </th>
-                                <td style="width: 1%">&nbsp;
-                                </td>
-                                <td>
-                                  <%# DataBinder.Eval(Container.DataItem, "POST_CATEGORY.name")%>
-                                </td>
-                                <td>&nbsp;
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;
-                                </td>
-                                <th style="text-align: right; vertical-align: top">Content:  
-                                </th>
-                                <td style="width: 1%">&nbsp;
-                                </td>
-                                <td>
-                                  <asp:TextBox ID="txtReplyContent" runat="server" CssClass="form-control" Width="100%" Rows="3" Visible="true" ValidationGroup="Save" TextMode="MultiLine" AutoCompleteType="Disabled"></asp:TextBox>
-                                  <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="txtReplyContent" CssClass="text-danger" ErrorMessage="The Reply Content is required." ValidationGroup="Reply" />
-                                </td>
-                                <td>&nbsp;
-                                </td>
-                              </tr>
-                              <tr>
-                                <td>&nbsp;
-                                </td>
-                                <td style="white-space: nowrap">
-                                  <a runat="server" href="/" tabindex="2" visible='<%# IIf(getUser() = "Anonymous", True, False)%>'>Reply as User</a>
-                                </td>
-                                <td style="width: 1%">&nbsp;
-                                </td>
-                                <td style="text-align: right">
-                                  <asp:Button ID="btnSubmitReply" runat="server" Text='<%#"Reply as " + getUser()%>' CssClass="btn btn-primary" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>' TabIndex="3" ValidationGroup="Reply" OnClick="btnSubmitReply_Click" />
-                                </td>
-                                <td>&nbsp;
-                                </td>
+
                               </tr>
                             </table>
                           </asp:Panel>
@@ -218,13 +359,14 @@
 
                   </ItemTemplate>
                 </asp:Repeater>
-              </ContentTemplate>
-            </asp:UpdatePanel>
+<%--              </ContentTemplate>
+            </asp:UpdatePanel>--%>
           </asp:Panel>
         </asp:Panel>
       </td>
     </tr>
   </table>
+
   <br />
   <br />
   <%-- Start Post Modal --%>

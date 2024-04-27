@@ -234,7 +234,6 @@ Public Class Discussion
         'retrieving items within repeater
         Dim item As RepeaterItem = CType((CType(sender, Button)).NamingContainer, RepeaterItem)
         Dim txtReplyContent As TextBox = CType(item.FindControl("txtReplyContent"), TextBox)
-        'Dim replyContent As String = txtReplyContent.Text
 
         'insert information about new post and save to db
         With oPost
@@ -257,8 +256,8 @@ Public Class Discussion
         oParentPost.countOfReplies = vPostRepliesCount
         oDB.SaveChanges()
 
-        'update the post repeater
-        'setPosts(vPostId)
+        'update the reply repeater
+        txtReplyContent.Text = ""
         Response.Redirect("discussion?pid=" + vPostId)
 
         'clear fields
