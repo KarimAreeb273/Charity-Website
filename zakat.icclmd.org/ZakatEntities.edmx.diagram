@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5ae402e47a9246b1bd02dc92176752e7" Name="Diagram1">
+      <Diagram DiagramId="5ae402e47a9246b1bd02dc92176752e7" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="zakatModel.APPLICATION" Width="1.5" PointX="5.25" PointY="20.375" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT" Width="1.5" PointX="7.5" PointY="29" IsExpanded="true" />
         <EntityTypeShape EntityType="zakatModel.ARTIFACT_TYPE" Width="1.5" PointX="5.25" PointY="42.5" IsExpanded="true" />
