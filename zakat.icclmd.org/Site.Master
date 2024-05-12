@@ -119,7 +119,7 @@
                             <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter" AutoPostBack="True" AutoCompleteType="Disabled" width="175px"></asp:TextBox>
                           </div>
                           <ajaxToolkit:PopupControlExtender ID="ajaxTxtSearch" runat="server" TargetControlID="txtSearch" Position="Bottom" PopupControlID="pnlSearchResults" Enabled="true"></ajaxToolkit:PopupControlExtender>
-                          <asp:Panel ID="pnlSearchResults" runat="server" BackColor="#F8F8F8" BorderColor="Black" BorderWidth="1px">
+                          <asp:Panel ID="pnlSearchResults" runat="server" BackColor="#F8F8F8" BorderColor="Black" BorderWidth="1px" Visible="false">
                             <table class="table table-hover">
                               <asp:Repeater ID="rptSearchResults" runat="server">
                                 <ItemTemplate>

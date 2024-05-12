@@ -4,6 +4,11 @@ Public Class SiteMaster
 
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
     Try
+      If txtSearch.Text = "" Then
+        pnlSearchResults.Visible = False
+      Else
+        pnlSearchResults.Visible = True
+      End If
       If Not IsPostBack Then
         Dim vUserID As Int32 = Session("sUserId")
         Dim vIsAnonymous As Boolean = Session("sIsAnonymous")
@@ -123,6 +128,11 @@ Public Class SiteMaster
         'lblResultsCount.Text = oTopics.Count
         rptSearchResults.DataSource = oTopics
         rptSearchResults.DataBind()
+        If oTopics.Count Then
+          pnlSearchResults.Visible = True
+        Else
+          pnlSearchResults.Visible = False
+        End If
       End Using
       Session("hasSearched") = True
       txtSearch.Focus()
