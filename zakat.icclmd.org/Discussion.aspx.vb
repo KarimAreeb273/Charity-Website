@@ -1,4 +1,5 @@
 ﻿Imports System.Net.NetworkInformation
+Imports System.Web.UI.WebControls.Expressions
 
 Public Class Discussion
   Inherits System.Web.UI.Page
@@ -7,10 +8,44 @@ Public Class Discussion
     Try
       If Not IsPostBack Then
         Dim vUserId As Int32 = Session("sUserId")
-        Dim vPostId As Int32 = Request.QueryString("pid")
+        Dim vPostId As Int32 = CInt(Request.QueryString("pid"))
+        Dim vCategoryId As Int32 = CInt(Request.QueryString("cid"))
+        Dim vSearch As String = (Request.QueryString("s"))
         txtPostTitle.Text = ""
         drpPostCategory.SelectedIndex = -1
         txtPostContent.Text = ""
+        ' Show landing page if there no instructions
+        If vPostId = 0 And vCategoryId = 0 And vSearch = "" Then
+          pnlLanding.Visible = True
+          pnlPosts.Visible = False
+          pnlSearch.Visible = False
+          pnlCategories.Visible = False
+        End If
+        ' Since a category was clicked, go get all the posts for that category
+        If vCategoryId <> 0 Then
+          pnlCategories.Visible = True
+          pnlPosts.Visible = False
+          pnlSearch.Visible = False
+          pnlLanding.Visible = False
+          pnlBody.ScrollBars = ScrollBars.Vertical
+
+          Using oDB As New zakatEntities
+            'Dynamically changing the context header for categories
+            Dim oPostCategoryLabel As POST_CATEGORY = (From POST_CATEGORY In oDB.POST_CATEGORY Where POST_CATEGORY.postCategoryId = vCategoryId).First()
+            lblCategory.Text = oPostCategoryLabel.name
+
+            'update post for specific category repeater and dynamically change the No Post message visibility
+            Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postCategoryId = vCategoryId Order By POST.postCreatedOn).ToList
+            rptPostCategories.DataSource = oPost
+            rptPostCategories.DataBind()
+            lblCategoryResults.Text = oPost.Count
+            If oPost.Count = 0 Then
+              pnlNoPostCategoryMsg.Visible = True
+            Else
+              pnlNoPostCategoryMsg.Visible = False
+            End If
+          End Using
+        End If
         If vPostId = 0 Then
           If vUserId = 0 Then
             '  '"Not Logged In"
@@ -36,24 +71,59 @@ Public Class Discussion
             'btnSubmitReply.Text = "Submit Reply"
           End If
         End If
+        ' Showing the Parent Posts and replies
+        If vPostId <> 0 Then
+          pnlPosts.Visible = True
+          pnlCategories.Visible = False
+          pnlSearch.Visible = False
+          pnlLanding.Visible = False
+          pnlBody.ScrollBars = ScrollBars.Vertical
 
+          Using oDB As New zakatEntities
+            Dim oPostLabel As POST = (From POST In oDB.POST Where POST.postId = vPostId).First()
+            lblPosts.Text = oPostLabel.postTitle
+            lblPostResults.Text = oPostLabel.countOfReplies
+          End Using
+        End If
+        ' Show all posts for searched term
+        If vSearch <> "" Then
+          pnlPosts.Visible = False
+          pnlCategories.Visible = False
+          pnlSearch.Visible = True
+          pnlLanding.Visible = False
+          pnlBody.ScrollBars = ScrollBars.Vertical
+          lblKeywordSearch.Text = vSearch
+
+          Using oDB As New zakatEntities()
+            Dim oPosts As List(Of POST) = oDB.POST.Where(Function(n) (n.postContent.Contains(vSearch)) Or n.postTitle.Contains(vSearch)).OrderByDescending(Function(n) n.postCreatedOn).ToList()
+            rptSearchResultsDisplay.DataSource = oPosts
+            rptSearchResultsDisplay.DataBind()
+            lblSearchResults.Text = oPosts.Count
+            If oPosts.Count = 0 Then
+              pnlNoSearchMsg.Visible = True
+            Else
+              pnlNoSearchMsg.Visible = False
+            End If
+          End Using
+        End If
         Using oDB As New zakatEntities
-          'update post category repeater
-          Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
-          rptPostCategories.DataSource = oPostCategories
-          rptPostCategories.DataBind()
-          drpPostCategory.DataSource = oPostCategories
-          drpPostCategory.DataTextField = "name"
-          drpPostCategory.DataValueField = "postCategoryId"
-          drpPostCategory.DataBind()
-          drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+            'update category repeater
+            Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
+            rptCategories.DataSource = oPostCategories
+            rptCategories.DataBind()
+            drpPostCategory.DataSource = oPostCategories
+            drpPostCategory.DataTextField = "name"
+            drpPostCategory.DataValueField = "postCategoryId"
+            drpPostCategory.DataBind()
+            drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
-          'update post repeater
-          Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
-          rptPosts.DataSource = oPost
-          rptPosts.DataBind()
-        End Using
-      End If
+
+            'update post repeater
+            Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
+            rptPosts.DataSource = oPost
+            rptPosts.DataBind()
+          End Using
+        End If
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
@@ -128,6 +198,8 @@ Public Class Discussion
   'End Sub
   Public Sub btnViewPostCategory_Click(sender As Object, e As System.EventArgs)
     Try
+      Response.Redirect("discussion?cid=" & sender.CommandArgument)
+
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
@@ -170,8 +242,11 @@ Public Class Discussion
 
 
         'update the post repeater
-        'setPosts()
-        Response.Redirect("discussion?pid=" + vPostId)
+        'reset modal form
+        txtPostTitle.Text = ""
+        drpPostCategory.SelectedValue = "(Select One)"
+        txtPostContent.Text = ""
+        Response.Redirect("discussion?pid=" & vPostId)
 
         'clear fields
       End Using
@@ -258,7 +333,7 @@ Public Class Discussion
 
         'update the reply repeater
         txtReplyContent.Text = ""
-        Response.Redirect("discussion?pid=" + vPostId)
+        Response.Redirect("discussion?pid=" & vPostId)
 
         'clear fields
       End Using
@@ -305,4 +380,70 @@ Public Class Discussion
       Response.Write(ex.Message)
     End Try
   End Function
+
+  Public Function GetHighlightedContent(ByVal pContent As String) As String
+    Try
+      Dim vSearch As String
+      vSearch = (Request.QueryString("s"))
+      'find the search string in the content
+      Dim vSearchResult As Int16 = InStr(1, pContent, vSearch, 1)
+      If vSearchResult >= 0 Then
+        'find the first instance of the serach within the content & store a snippet using 10 characters before and 10 characters after
+        'Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
+        'Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch) + 10) <= Len(pContent), (Len(vSearch) + 30), Len(pContent))
+        'Dim vSnippet = "..." + pContent.Substring(vSnippetStart, vSnippetLength) + "..."
+        Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
+        Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch)) <= Len(pContent), (Len(vSearch)), Len(pContent))
+        'Dim vSnippet = pContent.Substring(vSnippetStart, vSnippetLength)
+        'highlight the search within the snippet and remove any extra spaces
+        Dim vSnippet As String = pContent
+        vSnippet = Replace((vSnippet), (vSearch), ("<mark>" + vSearch + "</mark>"))
+        vSnippet = Replace(vSnippet, "</mark> ", "</mark>")
+        GetHighlightedContent = vSnippet
+      Else
+        GetHighlightedContent = ""
+      End If
+    Catch ex As Exception
+      GetHighlightedContent = ""
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Function
+  Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+    Try
+      Dim vSearch As String
+      vSearch = txtSearch.Text
+      Response.Redirect("discussion?s=" & vSearch)
+      'vCount = 10
+      'pnlSearch.Visible = False
+      'pnlPosts.Visible = True
+      'pnlCategories.Visible = False
+      'pnlLanding.Visible = False
+      'Using oDB As New zakatEntities()
+      '  Dim oPosts As List(Of POST) = oDB.POST.Where(Function(n) (n.postContent.Contains(vSearch)) Or n.postTitle.Contains(vSearch)).OrderByDescending(Function(n) n.postCreatedOn).Take(vCount).ToList()
+      '  rptSearchResultsDropdown.DataSource = oPosts
+      '  rptSearchResultsDropdown.DataBind()
+      '  If oPosts.Count = 0 Then
+      '    pnlSearch.Visible = True
+      '    pnlPosts.Visible = False
+      '    pnlCategories.Visible = False
+      '    Exit Sub
+      'End If
+      '  End Using
+      '  Session("hasSearched") = True
+      '  txtSearch.Focus()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+  Public Sub btnViewContent_Click(sender As Object, e As System.EventArgs)
+    Try
+      Dim vPostId As Int32 = sender.CommandArgument
+      Response.Redirect("discussion?pid=" & vPostId)
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
 End Class

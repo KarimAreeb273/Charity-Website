@@ -32,6 +32,15 @@ Partial Public Class Discussion
   Protected WithEvents btnCollapse As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
+  '''btnCreatePost control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnCreatePost As Global.System.Web.UI.WebControls.LinkButton
+
+  '''<summary>
   '''txtSearch control.
   '''</summary>
   '''<remarks>
@@ -41,13 +50,13 @@ Partial Public Class Discussion
   Protected WithEvents txtSearch As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''rptPostCategories control.
+  '''rptCategories control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents rptPostCategories As Global.System.Web.UI.WebControls.Repeater
+  Protected WithEvents rptCategories As Global.System.Web.UI.WebControls.Repeater
 
   '''<summary>
   '''pnlNavigateHide control.
@@ -77,6 +86,15 @@ Partial Public Class Discussion
   Protected WithEvents pnlBody As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
+  '''pnlLanding control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlLanding As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
   '''pnlSearch control.
   '''</summary>
   '''<remarks>
@@ -84,6 +102,51 @@ Partial Public Class Discussion
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents pnlSearch As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''lblKeywordSearch control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblKeywordSearch As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''lblSearchResults control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblSearchResults As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''pnlNoSearchMsg control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlNoSearchMsg As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''lblNoSearchMsg control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblNoSearchMsg As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''rptSearchResultsDisplay control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptSearchResultsDisplay As Global.System.Web.UI.WebControls.Repeater
 
   '''<summary>
   '''pnlCategories control.
@@ -95,6 +158,51 @@ Partial Public Class Discussion
   Protected WithEvents pnlCategories As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
+  '''lblCategory control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblCategory As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''lblCategoryResults control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblCategoryResults As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''pnlNoPostCategoryMsg control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlNoPostCategoryMsg As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''lblNoPostCategoryMsg control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblNoPostCategoryMsg As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''rptPostCategories control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents rptPostCategories As Global.System.Web.UI.WebControls.Repeater
+
+  '''<summary>
   '''pnlPosts control.
   '''</summary>
   '''<remarks>
@@ -104,13 +212,22 @@ Partial Public Class Discussion
   Protected WithEvents pnlPosts As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
-  '''btnCreatePost control.
+  '''lblPosts control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents btnCreatePost As Global.System.Web.UI.WebControls.LinkButton
+  Protected WithEvents lblPosts As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
+  '''lblPostResults control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblPostResults As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
   '''rptPosts control.
