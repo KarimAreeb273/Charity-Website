@@ -294,7 +294,7 @@
                           <tr>
                             <td>&nbsp;
                             </td>
-                            <th colspan="3">
+                            <td colspan="3">
                               <div class="panel-group" id="accordion">
                                 <div>
                                   <div class="panel-heading" style="background-color: #f5f5f5">
@@ -373,7 +373,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </th>
+                            </td>
                           </tr>
                         </table>
                       </asp:Panel>
@@ -451,7 +451,7 @@
                           <tr>
                             <td>&nbsp;
                             </td>
-                            <th colspan="3">
+                            <td colspan="3">
                               <div class="panel-group" id="accordion">
                                 <div>
                                   <div class="panel-heading" style="background-color: #f5f5f5">
@@ -530,7 +530,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </th>
+                            </td>
                           </tr>
                         </table>
                       </asp:Panel>
@@ -622,7 +622,7 @@
                           <tr>
                             <td>&nbsp;
                             </td>
-                            <th colspan="3">
+                            <td colspan="3">
                               <%--<ajaxToolkit:Accordion ID="accZakat" runat="server" BorderWidth="0px" RequireOpenedPane="False" FadeTransitions="True" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" SelectedIndex="-1" BorderStyle="None" AutoSize="None" Height="625px">
                                     <Panes>
                                       <ajaxToolkit:AccordionPane runat="server" ID="paneReply" TabIndex="600">
@@ -774,7 +774,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </th>
+                            </td>
 
                           </tr>
                         </table>
