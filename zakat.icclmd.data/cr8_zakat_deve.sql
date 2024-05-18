@@ -370,9 +370,11 @@ CREATE TABLE [dbo].[ORGANIZATION](
 	[email] [varchar](60) NULL,
 	[phone] [varchar](10) NULL,
 	[website] [varchar](250) NULL,
+	[missionStatement] varchar(4000) NULL,
 	[isDonationAccepted] [bit] NULL,
 	[payPalImageURL] [varchar](250) NULL,
 	[payPalIdentityToken] [varchar](100) NULL
+	
  CONSTRAINT [PK_ORGANIZATION] PRIMARY KEY CLUSTERED 
 (
 	[organizationId] ASC
