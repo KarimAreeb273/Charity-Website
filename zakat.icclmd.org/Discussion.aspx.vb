@@ -107,23 +107,23 @@ Public Class Discussion
           End Using
         End If
         Using oDB As New zakatEntities
-            'update category repeater
-            Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
-            rptCategories.DataSource = oPostCategories
-            rptCategories.DataBind()
-            drpPostCategory.DataSource = oPostCategories
-            drpPostCategory.DataTextField = "name"
-            drpPostCategory.DataValueField = "postCategoryId"
-            drpPostCategory.DataBind()
-            drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
+          'update category repeater
+          Dim oPostCategories As List(Of POST_CATEGORY) = (From POST_CATEGORY In oDB.POST_CATEGORY Order By POST_CATEGORY.name).ToList
+          rptCategories.DataSource = oPostCategories
+          rptCategories.DataBind()
+          drpPostCategory.DataSource = oPostCategories
+          drpPostCategory.DataTextField = "name"
+          drpPostCategory.DataValueField = "postCategoryId"
+          drpPostCategory.DataBind()
+          drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
 
 
-            'update post repeater
-            Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
-            rptPosts.DataSource = oPost
-            rptPosts.DataBind()
-          End Using
-        End If
+          'update post repeater
+          Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
+          rptPosts.DataSource = oPost
+          rptPosts.DataBind()
+        End Using
+      End If
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")

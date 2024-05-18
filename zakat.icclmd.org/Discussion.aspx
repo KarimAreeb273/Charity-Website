@@ -8,7 +8,7 @@
   <table style="width: 100%" border="0">
     <tr>
       <td style="width: 20%;">
-        <asp:Panel ID="pnlNavigateShow" runat="server" Visible="true" Width="170px" Height="540px" BorderStyle="Solid">
+        <asp:Panel ID="pnlNavigateShow" runat="server" Visible="true" Width="170px" Height="750px" BorderStyle="Solid">
           <table style="width: 100%" border="0">
             <tr>
               <td style="width: 100%">&nbsp;&nbsp;
@@ -104,7 +104,7 @@
         </asp:Panel>
       </td>
       <td style="width: 20%;">
-        <asp:Panel ID="pnlNavigateHide" runat="server" Visible="false" Width="40px" Height="540px" BorderStyle="Solid">
+        <asp:Panel ID="pnlNavigateHide" runat="server" Visible="false" Width="40px" Height="750px" BorderStyle="Solid">
           <table style="width: 100%" border="0">
             <tr>
               <td style="width: 100%">&nbsp;&nbsp;</td>
@@ -117,7 +117,7 @@
         </asp:Panel>
       </td>
       <td style="width: 80%">
-        <asp:Panel ID="pnlBody" runat="server" Visible="true" Width="1000px" Height="540px" BorderStyle="Solid" ScrollBars="None">
+        <asp:Panel ID="pnlBody" runat="server" Visible="true" Width="1000px" Height="750px" BorderStyle="Solid" ScrollBars="None">
           <asp:Panel ID="pnlLanding" runat="server" Visible="true" Width="100%" Height="100%">
             <br />
             <table style="width: 100%">
@@ -126,8 +126,10 @@
                 </td>
                 <td style="width: 100%" colspan="3">
                   <p style="text-align: justify; font-size: 16pt">
-                    Welcome to the Zakat Network User Form, a place where our zakat applicants can share ideas amongst one another and gain advice prior to submitting zakat applications.  We ask that all content created by existing users to remain civil and please note we reserve the right to remove content which is not suitable for the Zakat Network User Form.
+                    Welcome to the Zakat Network User Forum, a place where our zakat applicants can share ideas amongst one another and gain advice prior to submitting zakat applications.  We ask that all content created by existing users to remain civil and please note we reserve the right to remove content which is not suitable for the Zakat Network User Forum.
                   </p>
+                  <br />
+                  <br />
                   <br />
                 </td>
                 <td style="width: 1%">&nbsp;
@@ -168,13 +170,16 @@
                 </td>
                 <td style="width: 33%; text-align: center; vertical-align: top">
                   <br />
+                  <br />
                   <p>See a list of posts based on category by click on the category in our navigation pane.</p>
                 </td>
                 <td style="width: 33%; text-align: center; vertical-align: top">
                   <br />
+                  <br />
                   <p>Search for a post across all categories by entering keywords in the search textbox.</p>
                 </td>
                 <td style="width: 33%; text-align: center; vertical-align: top">
+                  <br />
                   <br />
                   <p>If you can find an existing post based on those from other users, create your own.</p>
                 </td>

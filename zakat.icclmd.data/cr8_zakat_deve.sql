@@ -44,6 +44,8 @@ ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [FK_APPLICATION_STATE]
 GO
 ALTER TABLE [dbo].[APPLICATION] DROP CONSTRAINT [FK_APPLICATION_ORGANIZATION]
 GO
+ALTER TABLE [dbo].[POST] DROP CONSTRAINT [FK_POST_POST_CATEGORY]
+GO
 ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_updatedOn]
 GO
 ALTER TABLE [dbo].[USER] DROP CONSTRAINT [DF_USER_createdOn]
@@ -404,6 +406,38 @@ CREATE TABLE [dbo].[DONATION](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+
+/****** Object:  Table [dbo].[POST_CATEGORY]    Script Date: 12/18/2022 10:46:03 AM ******/
+CREATE TABLE [dbo].[POST_CATEGORY](
+	[postCategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[name] [varchar](50) NULL,
+	[description] [varchar](500) NULL,
+	[countOfPosts] [int] DEFAULT 0 NOT NULL
+ CONSTRAINT [PK_POST_CATEGORY] PRIMARY KEY CLUSTERED 
+(
+	[postCategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+/****** Object:  Table [dbo].[POST]    Script Date: 12/18/2022 10:46:03 AM ******/
+CREATE TABLE [dbo].[POST](
+	[postId] [int] IDENTITY(1,1) NOT NULL,
+	[postParentId] [int] NULL,
+	[postCategoryId] [int] NOT NULL,
+	[postTitle] [varchar](50) NOT NULL,
+	[postContent] [varchar](750) NOT NULL,
+	[countOfReplies] [int] DEFAULT 0 NOT NULL,
+	[postCreatedOn] [datetime] NOT NULL,
+	[postUpdatedOn] [datetime] NULL,
+	[postCreatedBy] [int] NULL,
+ CONSTRAINT [PK_POST] PRIMARY KEY CLUSTERED 
+(
+	[postId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 /****** Object:  Table [dbo].[REFERENCE]    Script Date: 12/18/2022 10:46:03 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -788,6 +822,11 @@ ALTER TABLE [dbo].[ORGANIZATION]  WITH CHECK ADD  CONSTRAINT [FK_ORGANIZATION_ST
 REFERENCES [dbo].[STATE] ([stateAbbr])
 GO
 ALTER TABLE [dbo].[ORGANIZATION] CHECK CONSTRAINT [FK_ORGANIZATION_STATE]
+GO
+ALTER TABLE [dbo].[POST]  WITH CHECK ADD  CONSTRAINT [FK_POST_POST_CATEGORY] FOREIGN KEY([postCategoryId])
+REFERENCES [dbo].[POST_CATEGORY] ([postCategoryId])
+GO
+ALTER TABLE [dbo].[POST] CHECK CONSTRAINT [FK_POST_POST_CATEGORY]
 GO
 ALTER TABLE [dbo].[REFERENCE]  WITH CHECK ADD  CONSTRAINT [FK_REFERENCE_STATE] FOREIGN KEY([stateAbbr])
 REFERENCES [dbo].[STATE] ([stateAbbr])
@@ -1612,3 +1651,11 @@ INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translatio
 INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (16,'Turkish','Türkçe','https://translate.google.com/translate?hl=&sl=en&tl=tr&u=https%3A%2F%2Fzakat.icclmd.org%2F');
 INSERT INTO [dbo].[TRANSLATION] (translationId,translationNameEnglish,translationNameNative,translationURL) VALUES (17,'Urdu','اردو','https://translate.google.com/translate?hl=&sl=en&tl=ur&u=https%3A%2F%2Fzakat.icclmd.org%2F');
 GO
+
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Process', 'Process', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Dispersal', 'Dispersal', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Communication', 'Communication', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Timeliness', 'Timeliness', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Application', 'Application', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Translation', 'Translation', 0)
+INSERT INTO [zakat].[dbo].[POST_CATEGORY] ([name], [description], [countOfPosts]) VALUES ('Other', 'Other', 0)
