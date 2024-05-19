@@ -386,22 +386,27 @@ Public Class Discussion
       Dim vSearch As String
       vSearch = (Request.QueryString("s"))
       'find the search string in the content
-      Dim vSearchResult As Int16 = InStr(1, pContent, vSearch, 1)
-      If vSearchResult >= 0 Then
+      Dim vSearchResult As Int16 = InStr(1, LCase(pContent), LCase(vSearch), 1)
+      If vSearchResult > 0 Then
+        Dim vOriginalSearchValue As String = pContent.Substring(vSearchResult - 1, Len(vSearch))
         'find the first instance of the serach within the content & store a snippet using 10 characters before and 10 characters after
         'Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
         'Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch) + 10) <= Len(pContent), (Len(vSearch) + 30), Len(pContent))
         'Dim vSnippet = "..." + pContent.Substring(vSnippetStart, vSnippetLength) + "..."
-        Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
-        Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch)) <= Len(pContent), (Len(vSearch)), Len(pContent))
+        'Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
+        'Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch)) <= Len(pContent), (Len(vSearch)), Len(pContent))
         'Dim vSnippet = pContent.Substring(vSnippetStart, vSnippetLength)
         'highlight the search within the snippet and remove any extra spaces
-        Dim vSnippet As String = pContent
-        vSnippet = Replace((vSnippet), (vSearch), ("<mark>" + vSearch + "</mark>"))
-        vSnippet = Replace(vSnippet, "</mark> ", "</mark>")
-        GetHighlightedContent = vSnippet
+        'Dim vSnippet As String = pContent
+        pContent = Replace(pContent, vOriginalSearchValue, ("<mark>" + vOriginalSearchValue + "</mark>"))
+        pContent = Replace(pContent, "</mark> ", "</mark>")
+        pContent = Replace(pContent, " </mark>", "</mark>")
+        pContent = Replace(pContent, "<mark> ", "<mark>")
+        pContent = Replace(pContent, " <mark>", "<mark>")
+        Dim vSpacePosition As Int32 = InStrRev(pContent, " ")
+        Return pContent
       Else
-        GetHighlightedContent = ""
+        Return pContent
       End If
     Catch ex As Exception
       GetHighlightedContent = ""
