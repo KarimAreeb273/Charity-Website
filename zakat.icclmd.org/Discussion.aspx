@@ -45,38 +45,12 @@
               <td>&nbsp;</td>
               <td style="text-align: center">
                 <div class="form-group has-feedback has-search">
-                  <%--<span class="glyphicon glyphicon-search form-control-feedback"></span>--%>
-                  <%--<asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter" AutoPostBack="True" AutoCompleteType="Disabled" Width="155px"></asp:TextBox>--%>
                   <%--start search section--%>
                   <table style="width: 100%">
                     <tr>
                       <td>
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                         <asp:TextBox ID="txtSearch" runat="server" CssClass="form-control" placeholder="type & click enter" AutoPostBack="True" AutoCompleteType="Disabled" Width="155px"></asp:TextBox>
-                        <%--<asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                          <ContentTemplate>--%>
-                            <%--<div class="form-group has-feedback has-search" style="position: relative; top: 9px">
-                              <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                              
-                            </div>
-                            <ajaxToolkit:PopupControlExtender ID="ajaxTxtSearch" runat="server" TargetControlID="txtSearch" Position="Bottom" PopupControlID="pnlSearchResults" Enabled="true"></ajaxToolkit:PopupControlExtender>
-                            <asp:Panel ID="pnlSearchResults" runat="server" BackColor="#F8F8F8">
-                              <table class="table table-hover">
-                                <asp:Repeater ID="rptSearchResultsDropdown" runat="server">
-                                  <ItemTemplate>
-                                    <tr>
-                                      <td style="font-size: 10pt">
-                                        <asp:LinkButton ID="btnViewContent" runat="server" OnClick="btnViewContent_Click" ToolTip="View Content" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "postId")%>'>
-< GetHighlightedContent(DataBinder.Eval(Container.DataItem, "postContent"))%>
-                                        </asp:LinkButton>
-                                      </td>
-                                    </tr>
-                                  </ItemTemplate>
-                                </asp:Repeater>
-                              </table>
-                            </asp:Panel>--%>
-                         <%-- </ContentTemplate>
-                        </asp:UpdatePanel>--%>
                       </td>
                     </tr>
                   </table>
@@ -187,45 +161,6 @@
                 </td>
               </tr>
             </table>
-            <%--<div class="container">
-              <div class="row">
-                <div class="col-lg-3">
-                  <table style="width: 100%">
-                    <tr>
-                      <td style="width: 100%; text-align: center; color: black">
-                        <i style="font-size: 60px" class="fas fa-list"></i>
-                        <h2>Categories</h2>
-                        <p style="font-size: 14pt">Our products prevent the capture of clear photos using all mobile phone cameras ensuring the privacy of guests.</p>
-                      </td>
-                    </tr>
-                  </table>
-                </div>
-                <div class="col-lg-3">
-                  <table style="width: 100%">
-                    <tbody>
-                      <tr>
-                        <td style="width: 100%; text-align: center; color: black">
-                          <i style="font-size: 60px" class="fas fa-search"></i>
-                          <h2>Search</h2>
-                          <p style="font-size: 14pt">Although photo taking will be disabled, guests will be able to retain and use their mobile phones for calls, texts and apps.</p>
-                        </td>
-                      </tr>
-                  </table>
-                </div>
-                <div class="col-lg-3">
-                  <table style="width: 100%">
-                    <tbody>
-                      <tr>
-                        <td style="width: 100%; text-align: center; color: black">
-                          <i style="font-size: 60px" class="far fa-plus-square"></i>
-                          <h2>Posts</h2>
-                          <p style="font-size: 14pt">In a few short steps, our scheduling system will give you peace of mind to know we will make your special event our focus.</p>
-                        </td>
-                      </tr>
-                  </table>
-                </div>
-              </div>
-            </div>--%>
           </asp:Panel>
           <asp:Panel ID="pnlSearch" runat="server" Visible="false" Width="100%" Height="100%">
             <div class="well well-sm">
@@ -543,27 +478,6 @@
             </asp:Repeater>
           </asp:Panel>
           <asp:Panel ID="pnlPosts" runat="server" Visible="false" Width="100%" Height="100%">
-            <%--<table style="width: 100%" border="0">
-              <tr>
-                <td colspan="3">
-                  <div>
-                    <table style="width: 100%;">
-                      <tr>
-                        <td style="width: 100%; text-align: left">
-                          <h1></h1>
-                        </td>
-                        <td style="width: 100%; text-align: left">
-                          <asp:LinkButton ID="btnCreatePost" runat="server" data-toggle="modal" data-target="#myModalCreate" Style="white-space: nowrap" Text="Create a Post"></asp:LinkButton>
-                        </td>
-                        <td>&nbsp;
-                        </td>
-                      </tr>
-                    </table>
-                    <h4></h4>
-                  </div>
-                </td>
-              </tr>
-            </table>--%>
             <div class="well well-sm">
               <table style="width: 100%">
                 <tr>
@@ -606,7 +520,6 @@
                           <td style="text-align: left; white-space: nowrap; font-size: x-small" colspan="2">
                             <a href='discussion?pid=<%# DataBinder.Eval(Container.DataItem, "postId")%>'>Post ID: <%# DataBinder.Eval(Container.DataItem, "postId")%> &nbsp; Created on &nbsp;<%# FormatDateTime(DataBinder.Eval(Container.DataItem, "postCreatedOn"), DateFormat.GeneralDate)%> by <%# getName(DataBinder.Eval(Container.DataItem, "postCreatedBy"))%> &nbsp; Total Replies: <%# DataBinder.Eval(Container.DataItem, "countOfReplies")%></a>
                           </td>
-
                         </tr>
                       </table>
                     </td>
@@ -623,79 +536,6 @@
                             <td>&nbsp;
                             </td>
                             <td colspan="3">
-                              <%--<ajaxToolkit:Accordion ID="accZakat" runat="server" BorderWidth="0px" RequireOpenedPane="False" FadeTransitions="True" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" SelectedIndex="-1" BorderStyle="None" AutoSize="None" Height="625px">
-                                    <Panes>
-                                      <ajaxToolkit:AccordionPane runat="server" ID="paneReply" TabIndex="600">
-                                        <Header>
-                                          <table style="width: 100%">
-                                            <tr>
-                                              <th style="width: 25%; text-align: left; vertical-align: middle">Reply To The Post
-                                              </th>
-                                              <th style="width: 25%; text-align: right; vertical-align: middle">
-                                                <span class="glyphicon glyphicon-triangle-bottom"></span>
-                                              </th>
-                                            </tr>
-                                          </table>
-                                        </Header>
-                                        <Content>
-                                          <br />
-                                          <table style="width: 100%">
-                                            <tr>
-                                              <td>&nbsp;
-                                              </td>
-                                              <th style="text-align: right; width: 150px">Title: 
-                                              </th>
-                                              <td style="width: 1%">&nbsp;
-                                              </td>
-                                          
-                                              </td>
-                                              <td>&nbsp;
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td>&nbsp;
-                                              </td>
-                                              <th style="text-align: right">Category: 
-                                              </th>
-                                              <td style="width: 1%">&nbsp;
-                                              </td>
-                                              <td>
-          \
-                                              </td>
-                                              <td>&nbsp;
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td>&nbsp;
-                                              </td>
-                                              <th style="text-align: right; vertical-align: top">Content:  
-                                              </th>
-                                              <td style="width: 1%">&nbsp;
-                                              </td>
-                                              <td>
-                                              
-                                              </td>
-                                              <td>&nbsp;
-                                              </td>
-                                            </tr>
-                                            <tr>
-                                              <td>&nbsp;
-                                              </td>
-                                              <td style="white-space: nowrap">
-                                              </td>
-                                              <td style="width: 1%">&nbsp;
-                                              </td>
-                                              <td style="text-align: right">
-         
-                                              </td>
-                                              <td>&nbsp;
-                                              </td>
-                                            </tr>
-                                          </table>
-                                        </Content>
-                                      </ajaxToolkit:AccordionPane>
-                                    </Panes>
-                                  </ajaxToolkit:Accordion>--%>
                               <div class="panel-group" id="accordion">
                                 <div>
                                   <div class="panel-heading" style="background-color: #f5f5f5">
@@ -775,7 +615,6 @@
                                 </div>
                               </div>
                             </td>
-
                           </tr>
                         </table>
                       </asp:Panel>
@@ -842,13 +681,6 @@
               </div>
             </div>
           </div>
-          <%--          <div class="row" runat="server" id="divLoggedInPost" visible="false">
-            <div class="col-lg-12">
-              <div style="width: 100%; text-align: right">
-                <asp:Button ID="btnUserSubmitPost" runat="server" Text="Submit Post" CssClass="btn btn-primary" TabIndex="4" Width="200" ValidationGroup="Save" />
-              </div>
-            </div>
-          </div>--%>
         </div>
       </div>
     </div>

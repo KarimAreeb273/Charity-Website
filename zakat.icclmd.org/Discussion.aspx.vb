@@ -60,15 +60,11 @@ Public Class Discussion
           If vUserId = 0 Then
             '  '"Not Logged In"
             btnLogInPost.Visible = True
-            'btnLogInReply.Visible = True
             btnSubmitPost.Text = "Post as a Guest"
-            'btnSubmitReply.Text = "Reply as a Guest"
           Else
             '  '"Logged in"
             btnLogInPost.Visible = False
-            'btnLogInReply.Visible = False
             btnSubmitPost.Text = "Submit Post"
-            'btnSubmitReply.Text = "Submit Reply"
           End If
         End If
         ' Showing the Parent Posts and replies
@@ -154,48 +150,6 @@ Public Class Discussion
   Private Sub btnLogInPost_Click(sender As Object, e As EventArgs) Handles btnLogInPost.Click
     Response.Redirect("/")
   End Sub
-
-  'Private Sub btnAddComment_Click(sender As Object, e As EventArgs) Handles btnAddComment.Click
-  '    txtAnswer.Visible = True
-  '    btnAddComment.Visible = False
-  '    btnNoComment.Visible = True
-  '    btnSubmit.Visible = True
-  'End Sub
-
-  'Private Sub btnNoComment_Click(sender As Object, e As EventArgs) Handles btnNoComment.Click
-  '    txtAnswer.Visible = False
-  '    btnAddComment.Visible = True
-  '    btnNoComment.Visible = False
-  '    btnSubmit.Visible = False
-  'End Sub
-
-  'Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-  '    Try
-
-  '        Using oDB As New zakatEntities
-  '            'add organization
-  '            Dim oPost As New POST
-
-  '            'insert information about new org and save to db
-  '            With oPost
-  '                .postContent = txtAnswer.InnerText
-  '                '.postParentId = 
-  '            End With
-
-  '            ' Add to Memory
-  '            oDB.POST.Add(oPost)
-  '            oDB.SaveChanges()
-
-  '            'update the org repeater
-  '            setPosts()
-
-
-  '        End Using
-  '    Catch ex As Exception
-  '        Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-  '        Response.Write(ex.Message)
-  '    End Try
-  'End Sub
   Public Sub btnViewPostCategory_Click(sender As Object, e As System.EventArgs)
     Try
       Response.Redirect("discussion?cid=" & sender.CommandArgument)
@@ -250,8 +204,6 @@ Public Class Discussion
 
         'clear fields
       End Using
-      ''refresh page
-      'Response.Redirect("Discussion")
 
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
@@ -278,15 +230,9 @@ Public Class Discussion
       'update modal based on which link is clicked
       Dim vUserId As Integer = Session("sUserId")
       Dim vPostId As Integer = sender.CommandArgument
-      'btnSubmitReply.CommandArgument = vPostId
-
-      'pnlReplyPostForm.visible = True
 
       Using oDB As New zakatEntities
-
         Dim oPost As POST = (From POST In oDB.POST Where POST.postId = vPostId).First()
-        'lblReplyTitle.Text = "Re: " + oPost.postTitle
-        'lblReplyCategory.Text = oPost.POST_CATEGORY.name
       End Using
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
@@ -390,14 +336,6 @@ Public Class Discussion
       If vSearchResult > 0 Then
         Dim vOriginalSearchValue As String = pContent.Substring(vSearchResult - 1, Len(vSearch))
         'find the first instance of the serach within the content & store a snippet using 10 characters before and 10 characters after
-        'Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
-        'Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch) + 10) <= Len(pContent), (Len(vSearch) + 30), Len(pContent))
-        'Dim vSnippet = "..." + pContent.Substring(vSnippetStart, vSnippetLength) + "..."
-        'Dim vSnippetStart As Int16 = IIf(vSearchResult - 15 >= 0, vSearchResult - 15, 0)
-        'Dim vSnippetLength As Int16 = IIf((vSearchResult + Len(vSearch)) <= Len(pContent), (Len(vSearch)), Len(pContent))
-        'Dim vSnippet = pContent.Substring(vSnippetStart, vSnippetLength)
-        'highlight the search within the snippet and remove any extra spaces
-        'Dim vSnippet As String = pContent
         pContent = Replace(pContent, vOriginalSearchValue, ("<mark>" + vOriginalSearchValue + "</mark>"))
         pContent = Replace(pContent, "</mark> ", "</mark>")
         pContent = Replace(pContent, " </mark>", "</mark>")
@@ -419,24 +357,6 @@ Public Class Discussion
       Dim vSearch As String
       vSearch = txtSearch.Text
       Response.Redirect("discussion?s=" & vSearch)
-      'vCount = 10
-      'pnlSearch.Visible = False
-      'pnlPosts.Visible = True
-      'pnlCategories.Visible = False
-      'pnlLanding.Visible = False
-      'Using oDB As New zakatEntities()
-      '  Dim oPosts As List(Of POST) = oDB.POST.Where(Function(n) (n.postContent.Contains(vSearch)) Or n.postTitle.Contains(vSearch)).OrderByDescending(Function(n) n.postCreatedOn).Take(vCount).ToList()
-      '  rptSearchResultsDropdown.DataSource = oPosts
-      '  rptSearchResultsDropdown.DataBind()
-      '  If oPosts.Count = 0 Then
-      '    pnlSearch.Visible = True
-      '    pnlPosts.Visible = False
-      '    pnlCategories.Visible = False
-      '    Exit Sub
-      'End If
-      '  End Using
-      '  Session("hasSearched") = True
-      '  txtSearch.Focus()
     Catch ex As Exception
       Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
       Response.Write(ex.Message)
