@@ -79,6 +79,11 @@ Public Class Discussion
             Dim oPostLabel As POST = (From POST In oDB.POST Where POST.postId = vPostId).First()
             lblPosts.Text = oPostLabel.postTitle
             lblPostResults.Text = oPostLabel.countOfReplies
+
+            'update post repeater
+            Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
+            rptPosts.DataSource = oPost
+            rptPosts.DataBind()
           End Using
         End If
         ' Show all posts for searched term
@@ -112,12 +117,6 @@ Public Class Discussion
           drpPostCategory.DataValueField = "postCategoryId"
           drpPostCategory.DataBind()
           drpPostCategory.Items.Insert(0, New ListItem("(Select One)", "(Select One)"))
-
-
-          'update post repeater
-          Dim oPost As List(Of POST) = (From POST In oDB.POST Where POST.postId = vPostId Or POST.postParentId = vPostId Order By POST.postCreatedOn).ToList
-          rptPosts.DataSource = oPost
-          rptPosts.DataBind()
         End Using
       End If
 

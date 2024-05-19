@@ -160,6 +160,7 @@
     <Content Include="Images\png-transparent.png" />
     <Content Include="Images\Reply_Arrow.png" />
     <Content Include="Images\SavedStar.png" />
+    <Content Include="Images\zakat.network.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
     <Content Include="OrganizationProfile.aspx" />
@@ -211,6 +212,15 @@
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include=".env\deve\temp\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include=".env\deve\temp\Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include=".env\deve\temp\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include=".env\deve\Web.config.eiad">
       <SubType>Designer</SubType>
     </None>
@@ -272,15 +282,6 @@
     <None Include=".env\deve\Web.config.Release.areeb">
       <DependentUpon>Web.config.areeb</DependentUpon>
     </None>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <EntityDeploy Include="zakatEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>zakatEntities.Designer.vb</LastGenOutput>
@@ -288,6 +289,13 @@
     <Content Include="zakatEntities.edmx.diagram">
       <DependentUpon>zakatEntities.edmx</DependentUpon>
     </Content>
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.designer.vb">
