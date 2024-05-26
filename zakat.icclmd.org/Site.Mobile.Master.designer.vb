@@ -273,4 +273,13 @@ Partial Public Class Site_Mobile
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
+
+  '''<summary>
+  '''DropDownList1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
 End Class

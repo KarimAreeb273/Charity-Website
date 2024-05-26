@@ -163,6 +163,7 @@
     <Content Include="Images\zakat.network.png" />
     <Content Include="Images\zakatlogo.png" />
     <Content Include="Inbox.aspx" />
+    <Content Include="ModalPopup.html" />
     <Content Include="OrganizationProfile.aspx" />
     <Content Include="Organizations.aspx" />
     <Content Include="Protocols.aspx" />
@@ -212,15 +213,6 @@
     <Content Include=".env\deve\Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include=".env\deve\temp\Web.config">
-      <SubType>Designer</SubType>
-    </Content>
-    <None Include=".env\deve\temp\Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include=".env\deve\temp\Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include=".env\deve\Web.config.eiad">
       <SubType>Designer</SubType>
     </None>
@@ -289,7 +281,9 @@
     <Content Include="zakatEntities.edmx.diagram">
       <DependentUpon>zakatEntities.edmx</DependentUpon>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -59,8 +59,6 @@
           <Property Name="employerZip" Type="varchar" MaxLength="5" />
           <Property Name="employerPhone" Type="varchar" MaxLength="10" />
           <Property Name="personalNeedStatement" Type="varchar" MaxLength="1000" />
-          <Property Name="draftedOn" Type="datetime" />
-          <Property Name="draftedBy" Type="int" />
           <Property Name="submittedOn" Type="datetime" />
           <Property Name="submittedBy" Type="int" />
           <Property Name="validatedOn" Type="datetime" />
@@ -80,6 +78,8 @@
           <Property Name="createdBy" Type="int" />
           <Property Name="updatedOn" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
+          <Property Name="draftedOn" Type="datetime" />
+          <Property Name="draftedBy" Type="int" />
         </EntityType>
         <EntityType Name="ARTIFACT">
           <Key>
@@ -167,7 +167,6 @@
           </Key>
           <Property Name="organizationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="100" />
-          <Property Name="abbreviation" Type="varchar" MaxLength="10" />
           <Property Name="street" Type="varchar" MaxLength="100" />
           <Property Name="city" Type="varchar" MaxLength="50" />
           <Property Name="stateAbbr" Type="varchar" MaxLength="15" />
@@ -175,6 +174,7 @@
           <Property Name="email" Type="varchar" MaxLength="60" />
           <Property Name="phone" Type="varchar" MaxLength="10" />
           <Property Name="website" Type="varchar" MaxLength="250" />
+          <Property Name="abbreviation" Type="varchar" MaxLength="10" />
           <Property Name="isDonationAccepted" Type="bit" />
           <Property Name="payPalImageURL" Type="varchar" MaxLength="250" />
           <Property Name="payPalIdentityToken" Type="varchar" MaxLength="100" />
@@ -192,7 +192,7 @@
           <Property Name="countOfReplies" Type="int" Nullable="false" />
           <Property Name="postCreatedOn" Type="datetime" Nullable="false" />
           <Property Name="postUpdatedOn" Type="datetime" />
-          <Property Name="postCreatedBy" Type="int" />
+          <Property Name="postCreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="POST_CATEGORY">
           <Key>
@@ -301,8 +301,6 @@
           </Key>
           <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="passwordEncrypted" Type="varchar(max)" />
-          <Property Name="socialSecurityNumberEncrypted" Type="varchar(max)" />
           <Property Name="firstName" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="middleName" Type="varchar" MaxLength="30" />
           <Property Name="lastName" Type="varchar" MaxLength="30" Nullable="false" />
@@ -338,6 +336,8 @@
           <Property Name="createdBy" Type="int" />
           <Property Name="updatedOn" Type="datetime" />
           <Property Name="updatedBy" Type="int" />
+          <Property Name="passwordEncrypted" Type="varchar(max)" />
+          <Property Name="socialSecurityNumberEncrypted" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="USER_LANGUAGE">
           <Key>
@@ -357,7 +357,7 @@
           <Property Name="organizationId" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_AVG_PROCESSING_DAYS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_AVG_PROCESSING_DAYS' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_AVG_PROCESSING_DAYS">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -369,7 +369,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_AVG_PROCESSING_DAYS' doe
           <Property Name="qualified2On" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_BY_USER_AGE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_BY_USER_AGE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_BY_USER_AGE">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -383,7 +383,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_BY_USER_AGE' does not ha
           <Property Name="Age" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DISPERSED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_DISPERSED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_DISPERSED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -392,7 +392,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DISPERSED_BY_YEAR' does 
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DRAFTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_DRAFTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_DRAFTED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -401,7 +401,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_DRAFTED_BY_YEAR' does no
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_INVESTIGATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_INVESTIGATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_INVESTIGATED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -410,7 +410,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_INVESTIGATED_BY_YEAR' do
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_QUALIFIED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_QUALIFIED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_QUALIFIED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -419,7 +419,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_QUALIFIED_BY_YEAR' does 
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_REJECTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_REJECTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_REJECTED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -428,7 +428,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_REJECTED_BY_YEAR' does n
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_SUBMITTED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -437,7 +437,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_SUBMITTED_BY_YEAR' does 
           <Property Name="applicationCount" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_TOTAL_DISPERSED' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_TOTAL_DISPERSED' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_TOTAL_DISPERSED">
           <Key>
             <PropertyRef Name="applicationId" />
@@ -448,7 +448,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_TOTAL_DISPERSED' does no
           <Property Name="dispersedAmount" Type="money" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'ph14095182591_iccl_zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_APPLICATIONS_VALIDATED_BY_YEAR">
           <Key>
             <PropertyRef Name="applicationCount" />
@@ -1167,37 +1167,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <NavigationProperty Name="USER" Relationship="Self.FK_USER_STATE" FromRole="STATE" ToRole="USER" />
           <NavigationProperty Name="USER1" Relationship="Self.FK_USER_STATE1" FromRole="STATE" ToRole="USER" />
         </EntityType>
-        <EntityType Name="SURVEY">
-          <Key>
-            <PropertyRef Name="surveyId" />
-          </Key>
-          <Property Name="surveyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="isFollowUp" Type="Boolean" />
-          <Property Name="question1Stars" Type="Int32" />
-          <Property Name="question2Stars" Type="Int32" />
-          <Property Name="question3Stars" Type="Int32" />
-          <Property Name="question4Option1" Type="Boolean" />
-          <Property Name="question4Option2" Type="Boolean" />
-          <Property Name="question4Option3" Type="Boolean" />
-          <Property Name="question4Option4" Type="Boolean" />
-          <Property Name="question4Option5" Type="Boolean" />
-          <Property Name="question4Option6" Type="Boolean" />
-          <Property Name="question4Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="question5Option1" Type="Boolean" />
-          <Property Name="question5Option2" Type="Boolean" />
-          <Property Name="question5Option3" Type="Boolean" />
-          <Property Name="question5Option4" Type="Boolean" />
-          <Property Name="question5Option5" Type="Boolean" />
-          <Property Name="question5Option6" Type="Boolean" />
-          <Property Name="question5Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="question6" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="question7" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <Property Name="createdOn" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="TOPIC">
           <Key>
             <PropertyRef Name="topicId" />
@@ -1652,7 +1621,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <EntitySet Name="REVIEW" EntityType="Self.REVIEW" />
           <EntitySet Name="ROLE" EntityType="Self.ROLE" />
           <EntitySet Name="STATE" EntityType="Self.STATE" />
-          <EntitySet Name="SURVEY" EntityType="Self.SURVEY" />
           <EntitySet Name="TOPIC" EntityType="Self.TOPIC" />
           <EntitySet Name="TRANSLATION" EntityType="Self.TRANSLATION" />
           <EntitySet Name="USER" EntityType="Self.USER" />
@@ -1762,6 +1730,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             <End Role="POST_CATEGORY" EntitySet="POST_CATEGORY" />
             <End Role="POST" EntitySet="POST" />
           </AssociationSet>
+          <EntitySet Name="SURVEY" EntityType="zakatModel.SURVEY" />
         </EntityContainer>
         <EntityType Name="POST">
           <Key>
@@ -1775,7 +1744,7 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
           <Property Name="countOfReplies" Type="Int32" Nullable="false" />
           <Property Name="postCreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="postUpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="postCreatedBy" Type="Int32" />
+          <Property Name="postCreatedBy" Type="Int32" Nullable="false" />
           <NavigationProperty Name="POST_CATEGORY" Relationship="zakatModel.FK_POST_POST_CATEGORY" FromRole="POST" ToRole="POST_CATEGORY" />
         </EntityType>
         <EntityType Name="POST_CATEGORY">
@@ -1800,6 +1769,37 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SURVEY">
+          <Key>
+            <PropertyRef Name="surveyId" />
+          </Key>
+          <Property Name="surveyId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="lastName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="isFollowUp" Type="Boolean" />
+          <Property Name="question1Stars" Type="Int32" />
+          <Property Name="question2Stars" Type="Int32" />
+          <Property Name="question3Stars" Type="Int32" />
+          <Property Name="question4Option1" Type="Boolean" />
+          <Property Name="question4Option2" Type="Boolean" />
+          <Property Name="question4Option3" Type="Boolean" />
+          <Property Name="question4Option4" Type="Boolean" />
+          <Property Name="question4Option5" Type="Boolean" />
+          <Property Name="question4Option6" Type="Boolean" />
+          <Property Name="question4Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="question5Option1" Type="Boolean" />
+          <Property Name="question5Option2" Type="Boolean" />
+          <Property Name="question5Option3" Type="Boolean" />
+          <Property Name="question5Option4" Type="Boolean" />
+          <Property Name="question5Option5" Type="Boolean" />
+          <Property Name="question5Option6" Type="Boolean" />
+          <Property Name="question5Option6Value" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="question6" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="question7" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="createdOn" Type="DateTime" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2038,38 +2038,6 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="SURVEY">
-            <EntityTypeMapping TypeName="zakatModel.SURVEY">
-              <MappingFragment StoreEntitySet="SURVEY">
-                <ScalarProperty Name="surveyId" ColumnName="surveyId" />
-                <ScalarProperty Name="firstName" ColumnName="firstName" />
-                <ScalarProperty Name="lastName" ColumnName="lastName" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="isFollowUp" ColumnName="isFollowUp" />
-                <ScalarProperty Name="question1Stars" ColumnName="question1Stars" />
-                <ScalarProperty Name="question2Stars" ColumnName="question2Stars" />
-                <ScalarProperty Name="question3Stars" ColumnName="question3Stars" />
-                <ScalarProperty Name="question4Option1" ColumnName="question4Option1" />
-                <ScalarProperty Name="question4Option2" ColumnName="question4Option2" />
-                <ScalarProperty Name="question4Option3" ColumnName="question4Option3" />
-                <ScalarProperty Name="question4Option4" ColumnName="question4Option4" />
-                <ScalarProperty Name="question4Option5" ColumnName="question4Option5" />
-                <ScalarProperty Name="question4Option6" ColumnName="question4Option6" />
-                <ScalarProperty Name="question4Option6Value" ColumnName="question4Option6Value" />
-                <ScalarProperty Name="question5Option1" ColumnName="question5Option1" />
-                <ScalarProperty Name="question5Option2" ColumnName="question5Option2" />
-                <ScalarProperty Name="question5Option3" ColumnName="question5Option3" />
-                <ScalarProperty Name="question5Option4" ColumnName="question5Option4" />
-                <ScalarProperty Name="question5Option5" ColumnName="question5Option5" />
-                <ScalarProperty Name="question5Option6" ColumnName="question5Option6" />
-                <ScalarProperty Name="question5Option6Value" ColumnName="question5Option6Value" />
-                <ScalarProperty Name="question6" ColumnName="question6" />
-                <ScalarProperty Name="question7" ColumnName="question7" />
-                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TOPIC">
             <EntityTypeMapping TypeName="zakatModel.TOPIC">
               <MappingFragment StoreEntitySet="TOPIC">
@@ -2265,6 +2233,38 @@ warning 6002: The table/view 'zakat.dbo.VW_APPLICATIONS_VALIDATED_BY_YEAR' does 
                 <ScalarProperty Name="description" ColumnName="description" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="postCategoryId" ColumnName="postCategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SURVEY">
+            <EntityTypeMapping TypeName="zakatModel.SURVEY">
+              <MappingFragment StoreEntitySet="SURVEY">
+                <ScalarProperty Name="createdOn" ColumnName="createdOn" />
+                <ScalarProperty Name="question7" ColumnName="question7" />
+                <ScalarProperty Name="question6" ColumnName="question6" />
+                <ScalarProperty Name="question5Option6Value" ColumnName="question5Option6Value" />
+                <ScalarProperty Name="question5Option6" ColumnName="question5Option6" />
+                <ScalarProperty Name="question5Option5" ColumnName="question5Option5" />
+                <ScalarProperty Name="question5Option4" ColumnName="question5Option4" />
+                <ScalarProperty Name="question5Option3" ColumnName="question5Option3" />
+                <ScalarProperty Name="question5Option2" ColumnName="question5Option2" />
+                <ScalarProperty Name="question5Option1" ColumnName="question5Option1" />
+                <ScalarProperty Name="question4Option6Value" ColumnName="question4Option6Value" />
+                <ScalarProperty Name="question4Option6" ColumnName="question4Option6" />
+                <ScalarProperty Name="question4Option5" ColumnName="question4Option5" />
+                <ScalarProperty Name="question4Option4" ColumnName="question4Option4" />
+                <ScalarProperty Name="question4Option3" ColumnName="question4Option3" />
+                <ScalarProperty Name="question4Option2" ColumnName="question4Option2" />
+                <ScalarProperty Name="question4Option1" ColumnName="question4Option1" />
+                <ScalarProperty Name="question3Stars" ColumnName="question3Stars" />
+                <ScalarProperty Name="question2Stars" ColumnName="question2Stars" />
+                <ScalarProperty Name="question1Stars" ColumnName="question1Stars" />
+                <ScalarProperty Name="isFollowUp" ColumnName="isFollowUp" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="surveyId" ColumnName="surveyId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
