@@ -96,7 +96,8 @@ Public Class Report
           'setGridChart(vDivID)
       End Select
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -108,7 +109,8 @@ Public Class Report
       cScript.InnerHtml = ucJscript.ToString
       phScript.Controls.Add(cScript)
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -120,7 +122,8 @@ Public Class Report
       cScript.InnerHtml = ucJscript.ToString
       phScript.Controls.Add(cScript)
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -132,7 +135,8 @@ Public Class Report
       cScript.InnerHtml = ucJscript.ToString
       phScript.Controls.Add(cScript)
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -144,7 +148,8 @@ Public Class Report
       cScript.InnerHtml = ucJscript.ToString
       phScript.Controls.Add(cScript)
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 

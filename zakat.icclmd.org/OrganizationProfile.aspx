@@ -18,9 +18,8 @@
         <strong>Email:&nbsp;&nbsp;</strong><asp:HyperLink ID="hypEmail" runat="server" Target="_blank"></asp:HyperLink><br />
         <strong>Phone:&nbsp;&nbsp;</strong><asp:Label ID="lblPhone" runat="server"></asp:Label><br />
         <strong>Website:&nbsp;&nbsp;</strong><asp:HyperLink ID="hypWebsite" runat="server" Target="_blank"></asp:HyperLink><br />
-        <address>
-          <strong>Address:&nbsp;&nbsp;</strong><asp:Label ID="lblAddress" runat="server"></asp:Label><br />
-        </address>
+        <strong>Address:&nbsp;&nbsp;</strong><asp:Label ID="lblAddress" runat="server"></asp:Label><br />
+        <strong>Accepts Donation:&nbsp;&nbsp;</strong><asp:Label ID="lblAcceptsDonation" runat="server"></asp:Label><br /><br />
         <strong>Mission:&nbsp;&nbsp;</strong><asp:Label ID="lblMission" runat="server"></asp:Label><br />
         <div>
           <iframe id="ifrMap" runat="server" title="Map Location" src="" style="width: 100%; height: 400px; border: none"></iframe>

@@ -78,9 +78,9 @@ Public Class ZakatForm
               txtEmail.Text = .email
               txtEmail.Enabled = False
               If .socialSecurityNumberEncrypted IsNot Nothing Then
-                txtSocialSecurity1.Text = Left(Base.decryptString(.socialSecurityNumberEncrypted), 3)
-                txtSocialSecurity2.Text = Mid(Base.decryptString(.socialSecurityNumberEncrypted), 4, 2)
-                txtSocialSecurity3.Text = Right(Base.decryptString(.socialSecurityNumberEncrypted), 4)
+                txtSocialSecurity1.Text = Left(Base.DecryptString(.socialSecurityNumberEncrypted), 3)
+                txtSocialSecurity2.Text = Mid(Base.DecryptString(.socialSecurityNumberEncrypted), 4, 2)
+                txtSocialSecurity3.Text = Right(Base.DecryptString(.socialSecurityNumberEncrypted), 4)
               End If
               txtFirstName.Text = .firstName
               txtMiddleName.Text = .middleName
@@ -262,8 +262,8 @@ Public Class ZakatForm
       End If
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -517,9 +517,9 @@ Public Class ZakatForm
         End If
       End If
       If (v17 = True) Then
-          vProgress += 1
-        End If
-        If (v18 = True) Then
+        vProgress += 1
+      End If
+      If (v18 = True) Then
         vProgress += 1
       End If
       If (v19 = True) Then
@@ -595,8 +595,8 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -816,8 +816,8 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -921,8 +921,8 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -944,8 +944,8 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -986,8 +986,8 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1008,23 +1008,23 @@ Public Class ZakatForm
       'enable the submit button if all fields are complete
       EnableSubmitButton()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
   Public Function getAge(ByVal dob As Date) As Int16
     Try
-      getAge = Base.getAge(dob)
+      getAge = Base.GetAge(dob)
     Catch ex As Exception
       Return Nothing
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Function
 
   Public Function getFormattedPhone(ByVal pPhone As String) As String
-    getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+    getFormattedPhone = Base.GetFormattedPhone(pPhone, Base.enumFormatPhone.Format)
   End Function
 
   Public Sub btnDeleteDependent_Click(sender As Object, e As System.EventArgs)
@@ -1038,8 +1038,8 @@ Public Class ZakatForm
       'refresh the dependents list
       setDependents()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1054,8 +1054,8 @@ Public Class ZakatForm
       'refresh the references list
       setReferences()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1071,7 +1071,7 @@ Public Class ZakatForm
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           'create the user and then add the reference
           Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
+          vUserId = Base.CreateUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredArtifact.IsValid = False
@@ -1134,7 +1134,8 @@ Public Class ZakatForm
         Response.Redirect("zakatform")
       End If
     Catch ex As Exception
-      Response.Write(ex)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1158,8 +1159,8 @@ Public Class ZakatForm
       'refresh the artifact list
       setArtifacts()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1197,8 +1198,8 @@ Public Class ZakatForm
         Response.End()
       End Using
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1212,8 +1213,8 @@ Public Class ZakatForm
         rptDependents.DataBind()
       End Using
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1231,8 +1232,8 @@ Public Class ZakatForm
       ' refresh the progress bar
       RefreshReferenceProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1250,7 +1251,8 @@ Public Class ZakatForm
       'update progress bar
       RefreshArtifactProgress()
     Catch ex As Exception
-      Response.Write(ex)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1268,8 +1270,8 @@ Public Class ZakatForm
         End If
       End Using
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1288,8 +1290,8 @@ Public Class ZakatForm
       RefreshApplicantProgress()
 
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1305,8 +1307,8 @@ Public Class ZakatForm
       lstSpoken.Items.Remove(New ListItem(vSpokenLanguageText, vSpokenLanguageValue))
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1323,8 +1325,8 @@ Public Class ZakatForm
       End If
 
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1340,8 +1342,8 @@ Public Class ZakatForm
       lstSkillCertification.Items.Remove(New ListItem(vSkillCertificationText, vSkillCertificationValue))
       txtSkillCertification.Text = ""
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1357,7 +1359,7 @@ Public Class ZakatForm
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
           'create the user
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
+          vUserId = Base.CreateUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredDep.IsValid = False
@@ -1398,8 +1400,8 @@ Public Class ZakatForm
       'refresh the dependent repeater
       setDependents()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1416,8 +1418,8 @@ Public Class ZakatForm
       End Using
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1425,8 +1427,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1434,8 +1436,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1443,8 +1445,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1452,8 +1454,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1461,8 +1463,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1470,8 +1472,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1484,8 +1486,8 @@ Public Class ZakatForm
       End If
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1498,8 +1500,8 @@ Public Class ZakatForm
       End If
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1507,8 +1509,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1516,8 +1518,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1525,8 +1527,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1534,8 +1536,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1543,8 +1545,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1562,8 +1564,8 @@ Public Class ZakatForm
       End If
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1571,8 +1573,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1580,8 +1582,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1589,8 +1591,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1598,8 +1600,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1607,8 +1609,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1616,8 +1618,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1625,8 +1627,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1634,8 +1636,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1643,8 +1645,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1652,8 +1654,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1661,8 +1663,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1670,8 +1672,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1679,8 +1681,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1688,8 +1690,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1697,8 +1699,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1716,8 +1718,8 @@ Public Class ZakatForm
       End If
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1725,8 +1727,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1734,8 +1736,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1743,8 +1745,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1752,8 +1754,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1761,8 +1763,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1770,8 +1772,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1779,8 +1781,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1788,8 +1790,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1805,8 +1807,8 @@ Public Class ZakatForm
       End If
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1814,8 +1816,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1831,8 +1833,8 @@ Public Class ZakatForm
       End If
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1840,8 +1842,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1862,8 +1864,8 @@ Public Class ZakatForm
       'refresh the progress bar
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1871,8 +1873,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1886,8 +1888,8 @@ Public Class ZakatForm
       'refresh the progress bar
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1895,8 +1897,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1904,8 +1906,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1913,8 +1915,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1922,8 +1924,8 @@ Public Class ZakatForm
     Try
       RefreshAssetsSupportProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1931,8 +1933,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1940,8 +1942,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1949,8 +1951,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1958,8 +1960,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1967,8 +1969,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1976,8 +1978,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1985,8 +1987,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -1994,8 +1996,8 @@ Public Class ZakatForm
     Try
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2038,7 +2040,7 @@ Public Class ZakatForm
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
           'create the user and then add the reference
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
+          vUserId = Base.CreateUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredRef.IsValid = False
@@ -2061,7 +2063,7 @@ Public Class ZakatForm
           .lastName = txtRefLastName.Text
           .relationship = drpRefRelation.SelectedValue
           Dim vPhone As String = txtRefPhone1.Text + txtRefPhone2.Text + txtRefPhone3.Text
-          .phone = Base.getFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
+          .phone = Base.GetFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
           .knownSince = CDate(txtKnownSince.Text)
           .street = txtRefStreet.Text
           .city = txtRefCity.Text
@@ -2091,8 +2093,8 @@ Public Class ZakatForm
       'refresh the reference repeater
       setReferences()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2107,7 +2109,7 @@ Public Class ZakatForm
         Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" And vPhone <> "" Then
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
+          vUserId = Base.CreateUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -2119,8 +2121,8 @@ Public Class ZakatForm
       SaveZakatForm(vUserId, True)
 
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2147,7 +2149,7 @@ Public Class ZakatForm
         'is the email, first and last name populated?
         If txtEmail.Text <> "" And txtFirstName.Text <> "" And txtLastName.Text <> "" Then
           Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
-          vUserId = Base.createUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
+          vUserId = Base.CreateUser(Base.enumRole.Appliciant, drpOrganization.SelectedValue, txtEmail.Text, txtFirstName.Text, txtLastName.Text, txtMiddleName.Text, vPhone)
         Else
           'show validation and exit sub
           valUserRequiredSave.IsValid = False
@@ -2191,7 +2193,7 @@ Public Class ZakatForm
       End Using
 
       'email the user about application submission
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
       Dim vTo As String = txtEmail.Text
       Dim vSubject As String = "Online Zakat - Application #: " & vApplicationIdFormatted & " Submitted"
       Dim vMsgText As New StringBuilder
@@ -2210,7 +2212,7 @@ Public Class ZakatForm
       vMsgText.Append("Laurel, MD 20707<br />")
       vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
       vMsgText.Append("</span>")
-      vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+      vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
 
       'email the validators that an application requires reviewing
       Using oDB As New zakatEntities
@@ -2235,7 +2237,7 @@ Public Class ZakatForm
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
         End If
 
         'add a generic review action on behalf of the user for the submission
@@ -2270,8 +2272,8 @@ Public Class ZakatForm
       Response.Redirect("activity")
 
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2289,7 +2291,7 @@ Public Class ZakatForm
         With oUser
           Dim vSocialSecurityNumber As String = txtSocialSecurity1.Text + txtSocialSecurity2.Text + txtSocialSecurity3.Text
           '.socialSecurityNumber = vSocialSecurityNumber
-          .socialSecurityNumberEncrypted = Base.encryptString(vSocialSecurityNumber)
+          .socialSecurityNumberEncrypted = Base.EncryptString(vSocialSecurityNumber)
           .firstName = txtFirstName.Text
           .middleName = txtMiddleName.Text
           .lastName = txtLastName.Text
@@ -2297,7 +2299,7 @@ Public Class ZakatForm
             .dob = IIf(IsDate(txtDOB.Text), CDate(txtDOB.Text), Nothing)
           End If
           Dim vPhone As String = txtPhone1.Text + txtPhone2.Text + txtPhone3.Text
-          .phone = Base.getFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
+          .phone = Base.GetFormattedPhone(vPhone, Base.enumFormatPhone.Strip)
           .gender = chkGender.SelectedValue
           .maritalStatus = drpMaritalStatus.SelectedValue
           .street = txtStreet.Text
@@ -2324,10 +2326,10 @@ Public Class ZakatForm
           .husbandLastName = txtHusbandLastName.Text
           .husbandEmail = txtHusbandEmail.Text
           Dim vHusbandPhone As String = txtHusbandPhone1.Text + txtHusbandPhone2.Text + txtHusbandPhone3.Text
-          .husbandPhone = Base.getFormattedPhone(vHusbandPhone, Base.enumFormatPhone.Strip)
+          .husbandPhone = Base.GetFormattedPhone(vHusbandPhone, Base.enumFormatPhone.Strip)
           .primaryMasjidName = txtMasjidName.Text
           Dim vMasjidPhone As String = txtMasjidPhone1.Text + txtMasjidPhone2.Text + txtMasjidPhone3.Text
-          .primaryMasjidPhone = Base.getFormattedPhone(vMasjidPhone, Base.enumFormatPhone.Strip)
+          .primaryMasjidPhone = Base.GetFormattedPhone(vMasjidPhone, Base.enumFormatPhone.Strip)
           .updatedBy = pUserId
           .updatedOn = Date.Now
         End With
@@ -2445,7 +2447,7 @@ Public Class ZakatForm
               End If
               .positionTitle = txtPosition.Text
               Dim vEmployerPhone As String = txtEmployerPhone1.Text + txtEmployerPhone2.Text + txtEmployerPhone3.Text
-              .employerPhone = Base.getFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
+              .employerPhone = Base.GetFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
               .totalMonthlyGrossSalary = txtMonthlySalary.Text
               .employerStreet = txtEmployerStreet.Text
               .employerCity = txtEmployerCity.Text
@@ -2513,7 +2515,7 @@ Public Class ZakatForm
             End If
             .positionTitle = txtPosition.Text
             Dim vEmployerPhone As String = txtEmployerPhone1.Text + txtEmployerPhone2.Text + txtEmployerPhone3.Text
-            .employerPhone = Base.getFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
+            .employerPhone = Base.GetFormattedPhone(vEmployerPhone, Base.enumFormatPhone.Strip)
             .totalMonthlyGrossSalary = txtMonthlySalary.Text
             .employerStreet = txtEmployerStreet.Text
             .employerCity = txtEmployerCity.Text
@@ -2540,18 +2542,18 @@ Public Class ZakatForm
       End If
 
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
   Public Function getFormattedNumber(ByVal pNumber As Int32) As String
     Try
-      getFormattedNumber = Base.getFormattedNumber(pNumber)
+      getFormattedNumber = Base.GetFormattedNumber(pNumber)
     Catch ex As Exception
       Return Nothing
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Function
 
@@ -2566,7 +2568,8 @@ Public Class ZakatForm
       'refresh employment progress
       RefreshEmploymentProgress()
     Catch ex As Exception
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2585,8 +2588,8 @@ Public Class ZakatForm
       'refresh employment progress
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2599,8 +2602,8 @@ Public Class ZakatForm
         btnSubmit.Enabled = False
       End If
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2612,8 +2615,8 @@ Public Class ZakatForm
         fileUploadArtifact.Enabled = True
       End If
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2621,8 +2624,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 
@@ -2630,8 +2633,8 @@ Public Class ZakatForm
     Try
       RefreshApplicantProgress()
     Catch ex As Exception
-      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
-      Response.Write(ex.Message)
+      Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
+      Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
   End Sub
 End Class

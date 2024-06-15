@@ -59,6 +59,15 @@ Partial Public Class OrganizationProfile
   Protected WithEvents lblAddress As Global.System.Web.UI.WebControls.Label
 
   '''<summary>
+  '''lblAcceptsDonation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents lblAcceptsDonation As Global.System.Web.UI.WebControls.Label
+
+  '''<summary>
   '''lblMission control.
   '''</summary>
   '''<remarks>

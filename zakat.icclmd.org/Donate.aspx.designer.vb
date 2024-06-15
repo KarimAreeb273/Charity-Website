@@ -13,75 +13,75 @@ Option Explicit On
 
 Partial Public Class Donate
 
-    '''<summary>
-    '''txtDonationMethod control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDonationMethod As Global.System.Web.UI.WebControls.TextBox
+  '''<summary>
+  '''txtDonationMethod control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDonationMethod As Global.System.Web.UI.WebControls.TextBox
 
-    '''<summary>
-    '''txtFirstName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
+  '''<summary>
+  '''txtFirstName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
 
-    '''<summary>
-    '''txtLastName control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
+  '''<summary>
+  '''txtLastName control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtLastName As Global.System.Web.UI.WebControls.TextBox
 
-    '''<summary>
-    '''txtDonationDate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDonationDate As Global.System.Web.UI.WebControls.TextBox
+  '''<summary>
+  '''txtDonationDate control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDonationDate As Global.System.Web.UI.WebControls.TextBox
 
-    '''<summary>
-    '''calDonationDate control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents calDonationDate As Global.AjaxControlToolkit.CalendarExtender
+  '''<summary>
+  '''calDonationDate control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents calDonationDate As Global.AjaxControlToolkit.CalendarExtender
 
-    '''<summary>
-    '''drpOrganization control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
+  '''<summary>
+  '''drpOrganization control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
 
-    '''<summary>
-    '''txtDonationAmount control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtDonationAmount As Global.System.Web.UI.WebControls.TextBox
+  '''<summary>
+  '''txtDonationAmount control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents txtDonationAmount As Global.System.Web.UI.WebControls.TextBox
 
-    '''<summary>
-    '''btnDonation control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents btnDonation As Global.System.Web.UI.WebControls.Button
+  '''<summary>
+  '''btnDonation control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnDonation As Global.System.Web.UI.WebControls.Button
 End Class
