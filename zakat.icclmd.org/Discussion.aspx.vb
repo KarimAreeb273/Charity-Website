@@ -147,11 +147,11 @@ Public Class Discussion
     pnlBody.Width = 1000
   End Sub
   Private Sub btnLogInPost_Click(sender As Object, e As EventArgs) Handles btnLogInPost.Click
-    Response.Redirect("/")
+    Response.Redirect("/", False)
   End Sub
   Public Sub btnViewPostCategory_Click(sender As Object, e As System.EventArgs)
     Try
-      Response.Redirect("discussion?cid=" & sender.CommandArgument)
+      Response.Redirect("discussion?cid=" & sender.CommandArgument, False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -199,7 +199,7 @@ Public Class Discussion
         txtPostTitle.Text = ""
         drpPostCategory.SelectedValue = "(Select One)"
         txtPostContent.Text = ""
-        Response.Redirect("discussion?pid=" & vPostId)
+        Response.Redirect("discussion?pid=" & vPostId, False)
 
         'clear fields
       End Using
@@ -278,7 +278,7 @@ Public Class Discussion
 
         'update the reply repeater
         txtReplyContent.Text = ""
-        Response.Redirect("discussion?pid=" & vPostId)
+        Response.Redirect("discussion?pid=" & vPostId, False)
 
         'clear fields
       End Using
@@ -355,7 +355,7 @@ Public Class Discussion
     Try
       Dim vSearch As String
       vSearch = txtSearch.Text
-      Response.Redirect("discussion?s=" & vSearch)
+      Response.Redirect("discussion?s=" & vSearch, False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -364,7 +364,7 @@ Public Class Discussion
   Public Sub btnViewContent_Click(sender As Object, e As System.EventArgs)
     Try
       Dim vPostId As Int32 = sender.CommandArgument
-      Response.Redirect("discussion?pid=" & vPostId)
+      Response.Redirect("discussion?pid=" & vPostId, False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
