@@ -3,49 +3,48 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head runat="server">
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title><%: Page.Title %> - Zakat Network</title>
+  <head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - Zakat Network</title>
 
-  <%--<asp:PlaceHolder runat="server">
-      <%: Scripts.Render("~/bundles/modernizr") %>
-  </asp:PlaceHolder>--%>
+    <%--<asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>--%>
 
-  <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
-  <link href="Images/zakat.ico" rel="shortcut icon" type="image/x-icon" />
-  <%--font-awesome 5 icons CDN--%>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-  <%--bootstrap 3 CDN references--%>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <%--<webopt:bundlereference runat="server" path="~/Content/css" />--%>
+    <link href="Images/zakat.ico" rel="shortcut icon" type="image/x-icon" />
+    <%--font-awesome 5 icons CDN--%>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <%--bootstrap 3 CDN references--%>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
-  <!-- jQuery library -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-  <!-- Latest compiled JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-  <%--Dashboard CDN using Google Charts--%>
-  <%--<script type="text/javascript" src="https://www.google.com/jsapi"></script>--%>
-  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript"></script>
+    <%--Dashboard CDN using Google Charts--%>
+    <%--<script type="text/javascript" src="https://www.google.com/jsapi"></script>--%>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript"></script>
 
-  <style>
-    .has-search .form-control-feedback {
-      right: initial;
-      left: 0;
-      color: #ccc;
-    }
+    <style>
+      .has-search .form-control-feedback {
+        right: initial;
+        left: 0;
+        color: #ccc;
+      }
 
-    .has-search .form-control {
-      padding-right: 12px;
-      padding-left: 34px;
-    }
-  </style>
-
-</head>
-<body>
+      .has-search .form-control {
+        padding-right: 12px;
+        padding-left: 34px;
+      }
+    </style>
+  </head>
+  <body>
     <form runat="server">
       <asp:ScriptManager runat="server">
         <Scripts>
@@ -66,7 +65,7 @@
             <%--Site Scripts--%>
         </Scripts>
       </asp:ScriptManager>
-
+      <div>
         <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: black">
           <div class="container">
             <div class="navbar-header">
@@ -100,13 +99,6 @@
                     <li><a href="donate">Donate</a></li> 
                     <li><a href="contact">Contact Us</a></li>
                     <li><a href="about">About Us</a></li>  
-                    <%--Translate--%>
-                    <li>
-                      <div class="form-group" style="position: relative; top:9px">
-                        <asp:DropDownList ID="drpTranslation" runat="server" AutoPostBack="True" Width="150px" CssClass="form-control" ToolTip="Translate Online Zakat Into Your Selected Language">
-                        </asp:DropDownList>
-                      </div>
-                    </li>
                     <li><a href="privacy">Privacy</a></li>
                     <li><a href="zakatform">Apply</a></li>
                     <li><a href="default">Login</a></li>
@@ -208,44 +200,72 @@
           </asp:ContentPlaceHolder>
         </div>
 
+        <%--Footer--%>
         <footer class="navbar-default navbar-fixed-bottom">
           <div class="container-fluid" style="height: 50px">
             <div class="row">
-              <div class="col-md-1">
+              <div class="col-lg-2">
                 &nbsp;
               </div>
-              <div class="col-md-10">
+              <div class="col-lg-8">
                 <br />
-                <table class="" style="width: 100%; font-family: Helvetica,Arial,sans-serif; font-size: 12px">
+                <table border="0" class="" style="width: 100%; font-family: Helvetica,Arial,sans-serif; font-size: 12px">
                   <tr>
-                    <td style="width: 100%; text-align: center; vertical-align: middle;">
-                      <%--<span style="white-space: nowrap;"><a href="discussion">User Forum</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <span style="white-space: nowrap;"><a href="feedback">Take a Survey</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;
-                      <%--<span style="white-space: nowrap;"><a href="/">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="language">Language</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="protocols">Protocols</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;">
-                        <asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
-                      </span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="zakatform">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <%--<span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
-                      <span style="white-space: nowrap;">&copy;&nbsp;<%: DateTime.Now.Year %> <a href="https://www.icclmd.org" target="_blank">ICCL</a>&nbsp;All Rights Reserved</span>
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                      &nbsp;
                     </td>
+                    <td style="width: 13%; text-align: center; vertical-align: middle;">
+                      <%--Translate--%>
+                      <div class="form-group" style="position: relative; top:9px">
+                        <asp:DropDownList ID="drpTranslation" runat="server" AutoPostBack="True" Width="150px" CssClass="form-control" ToolTip="Translate Online Zakat Into Your Selected Language">
+                        </asp:DropDownList>
+                      </div>
+                    </td>
+                    <td style="width: 5%; text-align: center; vertical-align: middle;">
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </td>
+                    <td style="width: 10%; text-align: center; vertical-align: middle;">
+                      <span style="white-space: nowrap;"><a href="discussion">User Forum</a></span>
+                    </td>
+                    <td style="width: 5%; text-align: center; vertical-align: middle;">
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </td>
+                    <td style="width: 10%; text-align: center; vertical-align: middle;">
+                      <span style="white-space: nowrap;"><a href="feedback">Take a Survey</a></span>
+                    </td>
+                    <td style="width: 5%; text-align: center; vertical-align: middle;">
+                      &nbsp;&nbsp;|&nbsp;&nbsp;
+                    </td>
+                    <td style="width: 13%; text-align: center; vertical-align: middle;">
+                      <span style="white-space: nowrap;">&copy;&nbsp;<%: DateTime.Now.Year %> <a href="https://www.icclmd.org" target="_blank">ICCL</a>&nbsp;All Rights Reserved</span> 
+                    </td>
+                    <td style="width: 20%; text-align: center; vertical-align: middle;">
+                      &nbsp;
+                    </td>                                           
                   </tr>
                 </table>
               </div>
-              <div class="col-md-1">
+              <div class="col-lg-2">
                 &nbsp;
               </div>
-              <br />
             </div>
           </div>
-        </footer>
+        </footer>          
+      </div>        
     </form>
-</body>
+  </body>
 </html>
+
+<%--<span style="white-space: nowrap;"><a href="/">Home</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="language">Language</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="contact">Contact Us</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="organizations">Organizations</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="privacy">Privacy</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="protocols">Protocols</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;">
+<asp:LinkButton ID="lnkProfileFooter" runat="server" CausesValidation="false">Profile</asp:LinkButton>
+</span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="zakatform">Apply</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="default">Login</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="password">Password</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>
+<%--<span style="white-space: nowrap;"><a href="forgot">Forgot</a></span>&nbsp;&nbsp;|&nbsp;&nbsp;--%>

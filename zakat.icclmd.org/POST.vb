@@ -19,7 +19,7 @@ Partial Public Class POST
     Public Property countOfReplies As Integer
     Public Property postCreatedOn As Date
     Public Property postUpdatedOn As Nullable(Of Date)
-    Public Property postCreatedBy As Nullable(Of Integer)
+    Public Property postCreatedBy As Integer
 
     Public Overridable Property POST_CATEGORY As POST_CATEGORY
 
