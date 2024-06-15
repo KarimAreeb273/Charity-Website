@@ -15,9 +15,9 @@
     Try
       'go home if no session/user
       Dim vOrganizationId As Int32 = sender.CommandArgument
-      If vOrganizationId = 0 Then Response.Redirect("/")
+      If vOrganizationId = 0 Then Response.Redirect("/", False)
       'redirect to org edit
-      Response.Redirect("organizationprofile?o=" + vOrganizationId.ToString)
+      Response.Redirect("organizationprofile?o=" + vOrganizationId.ToString, False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)

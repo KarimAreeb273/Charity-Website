@@ -29,7 +29,7 @@
           ManageValidations(True)
         End If
 
-        If vApplicantId = 0 Then Response.Redirect("/")
+        If vApplicantId = 0 Then Response.Redirect("/", False)
 
         Using oDB As New zakatEntities
           'load the state dropdown

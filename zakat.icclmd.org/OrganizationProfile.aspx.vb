@@ -6,7 +6,7 @@
       Dim vOrganizationId As Int32 = CInt(Request.QueryString("o"))
       Dim aGoogleMapsAPIKey As String = System.Configuration.ConfigurationManager.AppSettings("GoogleMapsAPIKey")
       'go to organizations page if a url parameter for org is not passed
-      If vOrganizationId = 0 Then Response.Redirect("organizations")
+      If vOrganizationId = 0 Then Response.Redirect("organizations", False)
 
       'get org and populated fields
       Using oDB As New zakatEntities
@@ -24,7 +24,7 @@
           Dim vMapAddress As String = Replace(oOrganization.street, " ", "+") + ",+" + Replace(oOrganization.city, " ", "+") + ",+" + Replace(oOrganization.stateAbbr, " ", "+") + "+" + Replace(oOrganization.zip, " ", "+")
           ifrMap.Src = "https://www.google.com/maps/embed/v1/search?key=" + aGoogleMapsAPIKey + "&q=" + vMapAddress
         Else
-          Response.Redirect("organizations")
+          Response.Redirect("organizations", False)
         End If
       End Using
     Catch ex As Exception
