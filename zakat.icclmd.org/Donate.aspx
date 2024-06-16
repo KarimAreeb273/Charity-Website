@@ -5,7 +5,6 @@
     <br />
     <br />
     <br />
-    <br />
     <div class="container">
         <h4><b>Zakat Donations</b></h4>
         <div class="row">
@@ -94,7 +93,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="well well-sm">
-                        <h5><b>DISCLAIMER: This site is not responsible for providing any end of year tax information. Please coordinate with the organization you are donating to in order to receive these documents.</b>
+                        <h5><b>DISCLAIMER:<br /><br />This site is not responsible for providing any end of year tax information. Please coordinate with the organization you are donating to in order to receive these documents.</b>
                         </h5>
                     </div>
                 </div>
