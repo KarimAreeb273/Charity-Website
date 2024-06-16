@@ -11,7 +11,7 @@
         font-size: 12px;
     }
     /* Accordion */
-    .accordionHeader
+    /*.accordionHeader
     {
         border: 1px solid #2F4F4F;
         color: black;
@@ -54,11 +54,14 @@
     .accordionContent
     {
       overflow:hidden;
-    }
+    }*/
 </style>
 
   <div class="container">
-    <h3>New Zakat Network Application</h3>
+    <br /><br /><br />
+    <h4>
+      <b>New Zakat Network Application</b>
+    </h4>
     <div class="row">
       <div class="col-lg-12">
         <div class="well well-sm" style="text-align:justify">
@@ -91,9 +94,9 @@
       </div>
     </div>
     <span style="color: red">* indicates a required field and must be entered to submit the application</span>
-    <ajaxToolkit:Accordion ID="accZakat" runat="server" BorderWidth="0px" RequireOpenedPane="False" FadeTransitions="True" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" SelectedIndex="-1" BorderStyle="None" AutoSize="None" Height="625px" Enabled="false">
+<%--    <ajaxToolkit:Accordion ID="accZakat" runat="server" BorderWidth="0px" RequireOpenedPane="False" FadeTransitions="True" HeaderCssClass="accordionHeader" HeaderSelectedCssClass="accordionHeaderSelected" ContentCssClass="accordionContent" SelectedIndex="-1" BorderStyle="None" AutoSize="None" Height="625px" Enabled="false">
       <Panes>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneApplicant" Visible="True" BorderStyle="None" TabIndex="1">
+        <ajaxToolkit:AccordionPane runat="server" ID="pneApplicant" Visible="True" BorderStyle="None" TabIndex="1">
           <Header>
             <table style="width:100%">
               <tr>
@@ -102,8 +105,6 @@
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="prgApplicant" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%; color: black">
-                      <asp:Literal ID="ltlPercentApplicant" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
                 </th>
@@ -114,7 +115,86 @@
             </table>
           </Header>
           <Content>
-            <div id="FormOrder" runat="server">
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneAssetsAndSupport" TabIndex="100">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneEmployment" TabIndex="200">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneDependent" TabIndex="300">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneReference" TabIndex="400">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneArtifacts" TabIndex="500">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+        <ajaxToolkit:AccordionPane runat="server" ID="pneStatement" TabIndex="600">
+          <Header>
+            Moved
+          </Header>
+          <Content>
+            Moved
+          </Content>
+        </ajaxToolkit:AccordionPane>
+      </Panes>      
+    </ajaxToolkit:Accordion>--%>
+    <%--Start Accordion For Zakat Form--%>
+    <div class="panel-group" id="accZakat">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneApplicant">
+            <table style="width:100%">
+              <tr>
+                <th style="width:25%; text-align:left; vertical-align: middle">                  
+                  <h4>Applicant Information</h4>
+                </th>
+                <th style="width:50%; text-align:center; vertical-align: middle">
+                  <div class="progress" style="position: relative; top: 10px;">
+                    <div id="prgApplicant" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100" style="width:4%; color: black">
+                      <asp:Literal ID="ltlPercentApplicant" runat="server" Text="4% Complete"></asp:Literal>
+                    </div>
+                  </div>
+                </th>
+                <th style="width:25%; text-align:right; vertical-align: middle">
+                  <span class="glyphicon glyphicon-triangle-bottom"></span>
+                </th>
+              </tr>
+            </table>
+          </a>
+        </div>
+        <div id="paneApplicant" class="panel-collapse collapse">
+          <div class="panel-body">
+            <div id="divApplicatant" runat="server">
               <table border="1" style="width:100%">
                 <tr>
                   <td style="width:100%">
@@ -151,7 +231,7 @@
                                         <b>-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       </td>
                                       <td style="width: 20%">
-                                        <asp:TextBox runat="server" ID="txtSocialSecurity3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Social Secuirity Number - Serial Number (Third Set of Four Digits)" MaxLength="4" placeholder="6789" TabIndex="4" AutoPostBack="true" ValidationGroup="Submit" style="width: 60px" />
+                                        <asp:TextBox runat="server" ID="txtSocialSecurity3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Social Secuirity Number - Serial Number (Third Set of Four Digits)" MaxLength="4" placeholder="6789" TabIndex="4" AutoPostBack="False" ValidationGroup="Submit" style="width: 60px" />
                                       </td>
                                       <td style="width: 40%">
                                         &nbsp;
@@ -167,21 +247,21 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="5" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="5" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="6" AutoPostBack="True" ValidationGroup="Submit" placeholder="if no middle name, enter 'N/A'" />
+                                  <asp:TextBox runat="server" ID="txtMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="6" AutoPostBack="False" ValidationGroup="Submit" placeholder="if no middle name, enter 'N/A'" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMiddleName" CssClass="text-danger" ErrorMessage="The middle name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="7" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="7" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -191,18 +271,18 @@
                                   <table border="0" style="width: 280px">
                                     <tr>
                                       <td style="width: 90%">
-                                        <asp:TextBox runat="server" ID="txtDOB" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Date of Birth" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="8" AutoPostBack="True" ValidationGroup="Submit" />
+                                        <asp:TextBox runat="server" ID="txtDOB" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Date of Birth" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="8" AutoPostBack="False" ValidationGroup="Submit" />
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkCalendarDOB">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="8"></span>
+                                          <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="8"></span>--%>
                                         </a>
                                       </td>
                                     </tr>
                                   </table>
                                   <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtDOB" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDOB" CssClass="text-danger" ErrorMessage="The date of birth is required." Display="Static" ValidationGroup="Submit" />
-                                  <ajaxToolkit:CalendarExtender ID="calDOB" runat="server" TargetControlID="txtDOB" PopupButtonID="lnkCalendarDOB" />
+                                  <ajaxToolkit:CalendarExtender ID="calDOB" runat="server" TargetControlID="txtDOB" PopupButtonID="lnkCalendarDOB" />                                  
                                 </div>
                               </div>
                               <div class="form-group">
@@ -223,7 +303,7 @@
                                         <b>-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       </td>
                                       <td style="width: 20%">
-                                        <asp:TextBox runat="server" ID="txtPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="11" AutoPostBack="true" ValidationGroup="Submit" style="width: 60px" />
+                                        <asp:TextBox runat="server" ID="txtPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="11" AutoPostBack="False" ValidationGroup="Submit" style="width: 60px" />
                                       </td>
                                       <td style="width: 40%">
                                         &nbsp;
@@ -261,7 +341,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="14" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="14" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -274,21 +354,21 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="15" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="15" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">State:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:DropDownList ID="drpState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="16" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
+                                  <asp:DropDownList ID="drpState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="16" AutoPostBack="False" ValidationGroup="Submit"></asp:DropDownList>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="drpState" CssClass="text-danger" ErrorMessage="The address state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">Zip Code:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="17" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="17" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RegularExpressionValidator runat="server" ControlToValidate="txtZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtZip" CssClass="text-danger" ErrorMessage="The address zip code is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
@@ -299,11 +379,11 @@
                                   <table border="0" style="width: 280px">
                                     <tr>
                                       <td style="width: 90%">
-                                        <asp:TextBox runat="server" ID="txtBeganLiving" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Began Living Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="18" AutoPostBack="True" ValidationGroup="Submit" />
+                                        <asp:TextBox runat="server" ID="txtBeganLiving" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Began Living Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="18" AutoPostBack="False" ValidationGroup="Submit" />
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkCalendarBeganLiving">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="18"></span>
+                                          <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="18"></span>--%>
                                         </a>
                                       </td>
                                     </tr>
@@ -328,14 +408,14 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtHomeType" CssClass="col-lg-2 control-label" ToolTip="Home Type" Style="white-space: nowrap">Specify:<asp:Literal ID="litHomeType" runat="server" Visible="false"><span style="color: red">*</span></asp:Literal></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHomeType" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Specify Home Type" MaxLength="50" TabIndex="20" AutoPostBack="True" Enabled="False" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHomeType" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Specify Home Type" MaxLength="50" TabIndex="20" AutoPostBack="False" Enabled="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ID="valHomeType" Enabled="false" ControlToValidate="txtHomeType" CssClass="text-danger" ErrorMessage="Please specify the other home type." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpNationality" CssClass="col-lg-2 control-label" ToolTip="Nationality" Style="white-space: nowrap; position: relative; top: 0px;">Nationality:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:DropDownList ID="drpNationality" runat="server" ToolTip="Nationality" CssClass="form-control" TabIndex="21" AutoPostBack="True" ValidationGroup="Submit">
+                                  <asp:DropDownList ID="drpNationality" runat="server" ToolTip="Nationality" CssClass="form-control" TabIndex="21" AutoPostBack="False" ValidationGroup="Submit">
                                     <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                   </asp:DropDownList>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="drpCitizenship" CssClass="text-danger" ErrorMessage="The nationality is required." InitialValue="(Select One)" ValidationGroup="Submit" />
@@ -344,7 +424,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpCitizenship" CssClass="col-lg-2 control-label" ToolTip="Citizenship Status" Style="white-space: nowrap; position: relative; top: 0px;">Citizenship:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:DropDownList ID="drpCitizenship" runat="server" ToolTip="Citizenship Status" CssClass="form-control" TabIndex="22" AutoPostBack="True" ValidationGroup="Submit">
+                                  <asp:DropDownList ID="drpCitizenship" runat="server" ToolTip="Citizenship Status" CssClass="form-control" TabIndex="22" AutoPostBack="False" ValidationGroup="Submit">
                                     <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                     <asp:ListItem Text="Permanent Resident" Value="Permanent Resident"></asp:ListItem>
                                     <asp:ListItem Text="Non-Citizen" Value="Non-Citizen"></asp:ListItem>
@@ -357,7 +437,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMasjidName" CssClass="col-lg-2 control-label" ToolTip="Primary Masjid Name" Style="white-space: nowrap">Masjid Name:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="23" AutoPostBack="true" validationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;"  runat="server" ID="txtMasjidName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Primary Masjid Name" MaxLength="30" TabIndex="23" AutoPostBack="False" validationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMasjidName" CssClass="text-danger" ErrorMessage="Your primary masjid name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -379,7 +459,7 @@
                                         <b>-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       </td>
                                       <td style="width: 20%">
-                                        <asp:TextBox runat="server" ID="txtMasjidPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Masjid Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="26" AutoPostBack="True" ValidationGroup="Submit" style="width: 60px" />
+                                        <asp:TextBox runat="server" ID="txtMasjidPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Masjid Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="26" AutoPostBack="False" ValidationGroup="Submit" style="width: 60px" />
                                       </td>
                                       <td style="width: 40%">
                                         &nbsp;
@@ -477,8 +557,9 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpHighestEducation" CssClass="col-lg-4 control-label" ToolTip="Highest Education Completed" style="white-space: nowrap; position: relative; top: 0px;">Highest Education Completed:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-8">
-                                  <asp:DropDownList ID="drpHighestEducation" style="max-width: 100%;" runat="server" ToolTip="Highest Education Completed" CssClass="form-control" TabIndex="35" AutoPostBack="True" ValidationGroup="Submit">
+                                  <asp:DropDownList ID="drpHighestEducation" style="max-width: 100%;" runat="server" ToolTip="Highest Education Completed" CssClass="form-control" TabIndex="35" AutoPostBack="False" ValidationGroup="Submit">
                                     <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="Lower Than High School Diploma" Value="Lower Than High School Diploma"></asp:ListItem>
                                     <asp:ListItem Text="High School Diploma/GED" Value="High School Diploma/GED"></asp:ListItem>
                                     <asp:ListItem Text="Associate Degree or Certificate" Value="Associate Degree or Certificate"></asp:ListItem>
                                     <asp:ListItem Text="Bachelors Degree" Value="Bachelors Degree"></asp:ListItem>
@@ -492,7 +573,7 @@
                             </div>
                           </div>
                         </td>
-                        <td style="width:50%">
+                        <td style="width:50%; vertical-align:top">
                           <div class="col-lg-12">
                             <br />
                             <div class="form-horizontal">
@@ -500,65 +581,67 @@
                                 <asp:Label runat="server" CssClass="col-lg-2 control-label">&nbsp;</asp:Label>
                                 <div class="col-lg-10">
                                   <label>
-                                    <asp:CheckBox ID="chkIsInternational" TabIndex="36" runat="server" AutoPostBack="True" /><b>&nbsp;International School</b>
+                                    <asp:CheckBox ID="chkIsInternational" TabIndex="36" runat="server" AutoPostBack="True" />&nbsp;International School&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;<asp:RadioButton ID="chkIsNotSchooled" TabIndex="36" runat="server" AutoPostBack="True"></asp:RadioButton>&nbsp;No School
                                   </label>
                                   <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="CustomValidator" Text="temp"></asp:CustomValidator>
                                 </div>
                               </div>
-                              <div class="form-group">
-                                <asp:Label runat="server" AssociatedControlID="txtSchoolName" CssClass="col-lg-2 control-label" ToolTip="School Name" Style="white-space: nowrap">School Name:<span style="color: red">*</span></asp:Label>
-                                <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="37" AutoPostBack="True" ValidationGroup="Submit" />
-                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolName" CssClass="text-danger" ErrorMessage="The school name is required." Display="Static" ValidationGroup="Submit" />
-                                </div>
-                              </div>
-                              <div class="form-group">
-                                  <asp:Label runat="server" AssociatedControlID="txtSchoolCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">School City:<span style="color: red">*</span></asp:Label>
-                                  <div class="col-lg-10">
-                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="38" AutoPostBack="True" ValidationGroup="Submit" />
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolCity" CssClass="text-danger" ErrorMessage="The school city is required." Display="Static" ValidationGroup="Submit" />
-                                  </div>
-                                </div>
-                              <asp:Panel ID="pnlDomestic" runat="server">
+                              <asp:Panel ID="pnlNoSchool" runat="server" Visible="true">
                                 <div class="form-group">
-                                  <asp:Label runat="server" AssociatedControlID="txtSchoolStreet" CssClass="col-lg-2 control-label" ToolTip="School Street" Style="white-space: nowrap">School Street:<span style="color: red">*</span></asp:Label>
+                                  <asp:Label runat="server" AssociatedControlID="txtSchoolName" CssClass="col-lg-2 control-label" ToolTip="School Name" Style="white-space: nowrap">School Name:<span style="color: red">*</span></asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Street" MaxLength="100" TabIndex="39" AutoPostBack="True" ValidationGroup="Submit" />
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolStreet" CssClass="text-danger" ErrorMessage="The school street is required." Display="Static" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Name" MaxLength="100" TabIndex="37" AutoPostBack="False" ValidationGroup="Submit" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolName" CssClass="text-danger" ErrorMessage="The school name is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
                                 <div class="form-group">
-                                  <asp:Label runat="server" AssociatedControlID="drpSchoolState" CssClass="col-lg-2 control-label" ToolTip="School State" Style="white-space: nowrap; position: relative; top: 0px;">School State:<span style="color: red">*</span></asp:Label>
-                                  <div class="col-lg-10">
-                                    <asp:DropDownList ID="drpSchoolState" runat="server" ToolTip="School State" CssClass="form-control" TabIndex="40" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolState" CssClass="text-danger" ErrorMessage="The school state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                    <asp:Label runat="server" AssociatedControlID="txtSchoolCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">School City:<span style="color: red">*</span></asp:Label>
+                                    <div class="col-lg-10">
+                                      <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="38" AutoPostBack="False" ValidationGroup="Submit" />
+                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolCity" CssClass="text-danger" ErrorMessage="The school city is required." Display="Static" ValidationGroup="Submit" />
+                                    </div>
                                   </div>
-                                </div>
-                                <div class="form-group">
-                                  <asp:Label runat="server" AssociatedControlID="txtSchoolZip" CssClass="col-lg-2 control-label" ToolTip="School Zip" Style="white-space: nowrap">School Zip:<span style="color: red">*</span></asp:Label>
-                                  <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtSchoolZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Zip" MaxLength="5" TabIndex="41" AutoPostBack="True" ValidationGroup="Submit" />
-                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ErrorMessage="The school zip code is required." Display="Static" ValidationGroup="Submit" />
+                                <asp:Panel ID="pnlDomestic" runat="server">
+                                  <div class="form-group">
+                                    <asp:Label runat="server" AssociatedControlID="txtSchoolStreet" CssClass="col-lg-2 control-label" ToolTip="School Street" Style="white-space: nowrap">School Street:<span style="color: red">*</span></asp:Label>
+                                    <div class="col-lg-10">
+                                      <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtSchoolStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Street" MaxLength="100" TabIndex="39" AutoPostBack="False" ValidationGroup="Submit" />
+                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolStreet" CssClass="text-danger" ErrorMessage="The school street is required." Display="Static" ValidationGroup="Submit" />
+                                    </div>
                                   </div>
-                                </div>
-                              </asp:Panel>
-                              <asp:Panel ID="pnlInternational" runat="server" Visible="false">
-                                <div class="form-group">
-                                  <asp:Label runat="server" AssociatedControlID="drpSchoolCountry" CssClass="col-lg-2 control-label" ToolTip="School Country" Style="white-space: nowrap; position: relative; top: 0px;">Sch. Country:<span style="color: red">*</span></asp:Label>
-                                  <div class="col-lg-10">
-                                    <asp:DropDownList ID="drpSchoolCountry" runat="server" ToolTip="School Country" CssClass="form-control" TabIndex="42" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolCountry" CssClass="text-danger" ErrorMessage="The school country is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                  <div class="form-group">
+                                    <asp:Label runat="server" AssociatedControlID="drpSchoolState" CssClass="col-lg-2 control-label" ToolTip="School State" Style="white-space: nowrap; position: relative; top: 0px;">School State:<span style="color: red">*</span></asp:Label>
+                                    <div class="col-lg-10">
+                                      <asp:DropDownList ID="drpSchoolState" runat="server" ToolTip="School State" CssClass="form-control" TabIndex="40" AutoPostBack="False" ValidationGroup="Submit"></asp:DropDownList>
+                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolState" CssClass="text-danger" ErrorMessage="The school state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                    </div>
                                   </div>
-                                </div>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <br />
+                                  <div class="form-group">
+                                    <asp:Label runat="server" AssociatedControlID="txtSchoolZip" CssClass="col-lg-2 control-label" ToolTip="School Zip" Style="white-space: nowrap">School Zip:<span style="color: red">*</span></asp:Label>
+                                    <div class="col-lg-10">
+                                      <asp:TextBox runat="server" ID="txtSchoolZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="School Zip" MaxLength="5" TabIndex="41" AutoPostBack="False" ValidationGroup="Submit" />
+                                      <asp:RegularExpressionValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
+                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="txtSchoolZip" CssClass="text-danger" ErrorMessage="The school zip code is required." Display="Static" ValidationGroup="Submit" />
+                                    </div>
+                                  </div>
+                                </asp:Panel>
+                                <asp:Panel ID="pnlInternational" runat="server" Visible="false">
+                                  <div class="form-group">
+                                    <asp:Label runat="server" AssociatedControlID="drpSchoolCountry" CssClass="col-lg-2 control-label" ToolTip="School Country" Style="white-space: nowrap; position: relative; top: 0px;">Sch. Country:<span style="color: red">*</span></asp:Label>
+                                    <div class="col-lg-10">
+                                      <asp:DropDownList ID="drpSchoolCountry" runat="server" ToolTip="School Country" CssClass="form-control" TabIndex="42" AutoPostBack="False" ValidationGroup="Submit"></asp:DropDownList>
+                                      <asp:RequiredFieldValidator runat="server" ControlToValidate="drpSchoolCountry" CssClass="text-danger" ErrorMessage="The school country is required." InitialValue="(Select One)" ValidationGroup="Submit" />
+                                    </div>
+                                  </div>
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <br />
+                                  <br />
+                                </asp:Panel>
                               </asp:Panel>
                             </div>
                           </div>
@@ -587,21 +670,21 @@
                                 <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtHusbandFirstName" CssClass="col-lg-2 control-label" ToolTip="Husband First Name" Style="white-space: nowrap">First Name:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband First Name" MaxLength="30" TabIndex="43" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband First Name" MaxLength="30" TabIndex="43" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandFirstName" CssClass="text-danger" ErrorMessage="The husband first name is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandMiddleName" CssClass="col-lg-2 control-label" ToolTip="Husband Middle Name" Style="white-space: nowrap">Middle Name:<span style="color: red">*</span></asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Middle Name" MaxLength="30" TabIndex="44" AutoPostBack="True" ValidationGroup="Submit"  placeholder="if no middle name, enter 'N/A'" />
+                                    <asp:TextBox runat="server" ID="txtHusbandMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Middle Name" MaxLength="30" TabIndex="44" AutoPostBack="False" ValidationGroup="Submit"  placeholder="if no middle name, enter 'N/A'" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandMiddleName" CssClass="text-danger" ErrorMessage="The hudband middle name is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandLastName" CssClass="col-lg-2 control-label" ToolTip="Husband Last Name" Style="white-space: nowrap">Last Name:<span style="color: red">*</span></asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Last Name" MaxLength="30" TabIndex="45" AutoPostBack="True" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtHusbandLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Last Name" MaxLength="30" TabIndex="45" AutoPostBack="False" ValidationGroup="Submit" />
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandLastName" CssClass="text-danger" Display="Static" ErrorMessage="The husband last name is required." ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -623,7 +706,7 @@
                                           <b>-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         </td>
                                         <td style="width: 20%">
-                                        <asp:TextBox runat="server" ID="txtHusbandPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="48" AutoPostBack="True" ValidationGroup="Submit" style="width: 60px" />
+                                        <asp:TextBox runat="server" ID="txtHusbandPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Husband Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="48" AutoPostBack="False" ValidationGroup="Submit" style="width: 60px" />
                                         </td>
                                         <td style="width: 40%">
                                         &nbsp;
@@ -645,7 +728,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" AssociatedControlID="txtHusbandEmail" CssClass="col-lg-2 control-label" ToolTip="Husband Email" Style="white-space: nowrap">Email:<span style="color: red">*</span></asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox style="text-transform: lowercase;" runat="server" ID="txtHusbandEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Husband Email" MaxLength="60" AutoPostBack="True" TabIndex="49" ValidationGroup="Submit" />
+                                    <asp:TextBox style="text-transform: lowercase;" runat="server" ID="txtHusbandEmail" AutoCompleteType="Disabled" CssClass="form-control" placeholder="email@domain.com" ToolTip="Husband Email" MaxLength="60" AutoPostBack="False" TabIndex="49" ValidationGroup="Submit" />
                                     <asp:RegularExpressionValidator ID="RegularExpressionValidator13" runat="server" ErrorMessage="A valid husband email is required." ControlToValidate="txtHusbandEmail" ValidationExpression="^([0-9a-zA-Z]([-\.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$" CssClass="text-danger" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtHusbandEmail" CssClass="text-danger" ErrorMessage="The husband email is required." Display="Static" ValidationGroup="Submit" />
                                   </div>
@@ -653,7 +736,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" CssClass="col-lg-2 control-label" ToolTip="" Style="white-space: nowrap; position: relative; top: 0px;">&nbsp;</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:Label runat="server" AssociatedControlID="chkHusbandApplied" CssClass="control-label" ToolTip="Has the Husband Applied" Style="white-space: nowrap; position: relative; top: 0px;">Has your husband applied for zakat?<span style="color: red">*</span></asp:Label><br />
+                                    <asp:Label runat="server" AssociatedControlID="chkHusbandApplied" CssClass="control-label" ToolTip="Has the Husband Applied For Zakat" Style="white-space: nowrap; position: relative; top: 0px;">Has your husband applied for zakat?<span style="color: red">*</span></asp:Label><br />
                                   </div>
                                 </div>
                                 <div class="form-group">
@@ -675,7 +758,7 @@
                                 <div class="form-group">
                                   <asp:Label runat="server" CssClass="col-lg-2 control-label" ToolTip="" Style="white-space: nowrap; position: relative; top: 0px;">&nbsp;</asp:Label>
                                   <div class="col-lg-10">
-                                    <asp:TextBox runat="server" ID="txtHusbandExplanation" CssClass="form-control" Enabled="false" AutoCompleteType="Disabled" ToolTip="Explanation for husband not applying" MaxLength="1000" TabIndex="51" TextMode="MultiLine" Rows="2" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
+                                    <asp:TextBox runat="server" ID="txtHusbandExplanation" CssClass="form-control" Enabled="false" AutoCompleteType="Disabled" ToolTip="Explanation for husband not applying" MaxLength="1000" TabIndex="51" TextMode="MultiLine" Rows="2" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="False" />
                                     <asp:RequiredFieldValidator id="valHusbandExplanation" runat="server" ControlToValidate="txtHusbandExplanation" CssClass="text-danger" ErrorMessage="The explanation for husband not applying is required." Enabled="false" Display="Static" ValidationGroup="Submit" />
                                   </div>
                                 </div>
@@ -687,16 +770,25 @@
                     </asp:Panel>
                   </td>
                 </tr>
+                <tr>
+                  <td style="width:100%; text-align:right; vertical-align:middle">
+                    <br />
+                    <asp:Button ID="btnUpdateProgressApplicant" runat="server" Text="Update Applicant Information Progress" CssClass="btn btn-default" Width="300px" />&nbsp;
+                    <br /><br />
+                  </td>
+                </tr>
               </table>
             </div>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneAssetsAndSupport" TabIndex="100">
-          <Header>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneAssetsAndSupport">
             <table style="width:100%">
               <tr>
                 <th style="width:25%; text-align:left; vertical-align: middle">
-                  Assets and Support
+                  <h4>Assets and Support</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -710,8 +802,10 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
+          </a>
+        </div>
+        <div id="paneAssetsAndSupport" class="panel-collapse collapse">
+          <div class="panel-body">
             <table border="1" style="width:100%">
               <tr>
                 <td style="width:100%; padding: 5px">
@@ -730,7 +824,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueCash" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueCash" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Cash Value Possessed" MaxLength="5" TabIndex="101" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueCash" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Cash Value Possessed" MaxLength="5" TabIndex="101" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueCash" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueCash" CssClass="text-danger" ErrorMessage="The cash value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -747,7 +841,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueGold" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueGold" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Gold Value Possessed" MaxLength="5" TabIndex="102" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueGold" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Gold Value Possessed" MaxLength="5" TabIndex="102" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueGold" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueGold" CssClass="text-danger" ErrorMessage="The gold value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -764,7 +858,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueSilver" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueSilver" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Silver Value Possessed" MaxLength="5" TabIndex="103" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueSilver" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Silver Value Possessed" MaxLength="5" TabIndex="103" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueSilver" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueSilver" CssClass="text-danger" ErrorMessage="The silver value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -781,7 +875,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueInvestment" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueInvestment" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Investments Value Possessed" MaxLength="5" TabIndex="104" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueInvestment" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Investments Value Possessed" MaxLength="5" TabIndex="104" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator5" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueInvestment" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueInvestment" CssClass="text-danger" ErrorMessage="The investments value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -798,7 +892,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueRetirement" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueRetirement" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Retirement Value Possessed" MaxLength="5" TabIndex="105" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueRetirement" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Retirement Value Possessed" MaxLength="5" TabIndex="105" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator7" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueRetirement" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueRetirement" CssClass="text-danger" ErrorMessage="The retirement value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -817,7 +911,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueAssistance" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueAssistance" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" MaxLength="5" TabIndex="112" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueAssistance" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" MaxLength="5" TabIndex="112" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueAssistance" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueAssistance" CssClass="text-danger" ErrorMessage="The assistance value received is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -850,7 +944,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueLifeInsurance" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueLifeInsurance" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Life Insurance Value Possessed" MaxLength="5" TabIndex="106" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueLifeInsurance" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Life Insurance Value Possessed" MaxLength="5" TabIndex="106" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueLifeInsurance" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueLifeInsurance" CssClass="text-danger" ErrorMessage="The life insurance value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -867,7 +961,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueDebt" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueDebt" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Outstanding Debts" MaxLength="5" TabIndex="107" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueDebt" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Outstanding Debts" MaxLength="5" TabIndex="107" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueDebt" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueDebt" CssClass="text-danger" ErrorMessage="The debt value possessed is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -884,7 +978,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueChildSupport" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueChildSupport" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Child Support Value Received" MaxLength="5" TabIndex="108" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueChildSupport" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Child Support Value Received" MaxLength="5" TabIndex="108" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueChildSupport" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueChildSupport" CssClass="text-danger" ErrorMessage="The child support value received is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -901,7 +995,7 @@
                                       <asp:Label runat="server" AssociatedControlID="drpChildSupportFrequency" style="white-space: nowrap; position:relative; top:-5px">&nbsp;</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:DropDownList ID="drpChildSupportFrequency" runat="server" ToolTip="Child Support Frequency" CssClass="form-control" TabIndex="109" AutoPostBack="True" ValidationGroup="Submit" Enabled="False">
+                                      <asp:DropDownList ID="drpChildSupportFrequency" runat="server" ToolTip="Child Support Frequency" CssClass="form-control" TabIndex="109" AutoPostBack="False" ValidationGroup="Submit" Enabled="False">
                                         <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                         <asp:ListItem Text="Daily" Value="Daily"></asp:ListItem>
                                         <asp:ListItem Text="Weekly" Value="Weekly"></asp:ListItem>
@@ -924,7 +1018,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtValueChildSupport" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox runat="server" ID="txtValueFoodStamps" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Food Stamps Value Received" MaxLength="5" TabIndex="110" AutoPostBack="True" Text="0" ValidationGroup="Submit" />
+                                      <asp:TextBox runat="server" ID="txtValueFoodStamps" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Food Stamps Value Received" MaxLength="5" TabIndex="110" AutoPostBack="False" Text="0" ValidationGroup="Submit" />
                                       <asp:RegularExpressionValidator ID="RegularExpressionValidator11" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtValueFoodStamps" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                       <asp:RequiredFieldValidator runat="server" ControlToValidate="txtValueFoodStamps" CssClass="text-danger" ErrorMessage="The food stamps value received is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
@@ -941,7 +1035,7 @@
                                       <asp:Label runat="server" AssociatedControlID="drpFoodStampFrequency" style="white-space: nowrap; position:relative; top:-5px">&nbsp;</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:DropDownList ID="drpFoodStampFrequency" runat="server" ToolTip="Food Stamp Frequency" CssClass="form-control" TabIndex="111" AutoPostBack="True" ValidationGroup="Submit" Enabled="False">
+                                      <asp:DropDownList ID="drpFoodStampFrequency" runat="server" ToolTip="Food Stamp Frequency" CssClass="form-control" TabIndex="111" AutoPostBack="False" ValidationGroup="Submit" Enabled="False">
                                         <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
                                         <asp:ListItem Text="Daily" Value="Daily"></asp:ListItem>
                                         <asp:ListItem Text="Weekly" Value="Weekly"></asp:ListItem>
@@ -965,7 +1059,7 @@
                                       <asp:Label runat="server" AssociatedControlID="txtWhoAssisted" style="white-space: nowrap; position:relative; top:-5px">&nbsp;&nbsp;</asp:Label>
                                     </td>
                                     <td>
-                                      <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtWhoAssisted" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" TabIndex="113" AutoPostBack="True" Enabled="false" ValidationGroup="Submit" />
+                                      <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtWhoAssisted" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Assistance Value Received" TabIndex="113" AutoPostBack="False" Enabled="false" ValidationGroup="Submit" />
                                       <asp:RequiredFieldValidator ID="valWhoAssisted" runat="server" ControlToValidate="txtWhoAssisted" CssClass="text-danger" Enabled="false" ErrorMessage="The person who assisted is required." Display="Static" ValidationGroup="Submit" />
                                     </td>
                                   </tr>
@@ -986,14 +1080,14 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtInsuranceProvider" CssClass="col-lg-2 control-label" ToolTip="Insurance Provider" Style="white-space: nowrap; position: relative; top: 5px">Provider:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" ID="txtInsuranceProvider" AutoCompleteType="Disabled" runat="server"  CssClass="form-control" ToolTip="Insurance Provider" AutoPostBack="True" TabIndex="115" ValidationGroup="Submit"></asp:TextBox>
+                                  <asp:TextBox style="text-transform: capitalize;" ID="txtInsuranceProvider" AutoCompleteType="Disabled" runat="server"  CssClass="form-control" ToolTip="Insurance Provider" AutoPostBack="False" TabIndex="115" ValidationGroup="Submit"></asp:TextBox>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtInsuranceProvider" CssClass="text-danger" ErrorMessage="The insurance provider is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMedicare" CssClass="col-lg-2 control-label" ToolTip="Medicare #" Style="white-space: nowrap; position: relative; top: 5px">Medicare #:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMedicare" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicare #" TabIndex="116" AutoPostBack="True" ValidationGroup="Submit" MaxLength="11" />
+                                  <asp:TextBox runat="server" ID="txtMedicare" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicare #" TabIndex="116" AutoPostBack="False" ValidationGroup="Submit" MaxLength="11" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMedicare" CssClass="text-danger" ErrorMessage="The Medicare # is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1006,14 +1100,14 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtPolicyNumber" CssClass="col-lg-2 control-label" style="white-space: nowrap; position: relative; top: 5px">Policy #:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtPolicyNumber" AutoCompleteType="Disabled" MaxLength="25" CssClass="form-control" ToolTip="Polciy Number" TabIndex="117" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtPolicyNumber" AutoCompleteType="Disabled" MaxLength="25" CssClass="form-control" ToolTip="Polciy Number" TabIndex="117" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPolicyNumber" CssClass="text-danger" ErrorMessage="The policy number is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtMedicaid" CssClass="col-lg-2 control-label" ToolTip="Medicaid #" Style="white-space: nowrap; position: relative; top: 5px">Medicaid #:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtMedicaid" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicaid #" TabIndex="118" AutoPostBack="True" ValidationGroup="Submit" MaxLength="9" />
+                                  <asp:TextBox runat="server" ID="txtMedicaid" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Medicaid #" TabIndex="118" AutoPostBack="False" ValidationGroup="Submit" MaxLength="9" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMedicaid" CssClass="text-danger" ErrorMessage="The Medicaid # is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1025,15 +1119,24 @@
                   </asp:Panel>
                 </td>
               </tr>
+              <tr>
+                <td style="width:100%; text-align:right; vertical-align:middle">
+                  <br />
+                  <asp:Button ID="btnUpdateProgressAssetsAndSupport" runat="server" Text="Update Assests And Support Progress" CssClass="btn btn-default" Width="300px" />&nbsp;
+                  <br /><br />
+                </td>
+              </tr>
             </table>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneEmployment" TabIndex="200">
-          <Header>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneEmployment">
             <table style="width:100%">
               <tr>
-                <th style="width:25%; text-align:left; vertical-align: middle">
-                  Employment (or Previous Employment)
+                <th style="width:25%; text-align:left; vertical-align: middle">                    
+                  <h4>Employment (or Previous)</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1047,8 +1150,10 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
+          </a>
+        </div>
+        <div id="paneEmployment" class="panel-collapse collapse">
+          <div class="panel-body">
             <table border="1" style="width:100%">
               <tr>
                 <td style="width:100%; padding: 5px">
@@ -1059,7 +1164,7 @@
                         <asp:Label runat="server" CssClass="col-lg-1 control-label">&nbsp;</asp:Label>
                         <div class="col-lg-10">
                           <label>
-                            <asp:CheckBox ID="chkNotEmployed" TabIndex="30" runat="server" AutoPostBack="True" /><b>&nbsp;I am not nor have been previously employed</b>
+                            <asp:CheckBox ID="chkNotEmployed" TabIndex="30" runat="server" AutoPostBack="True" Checked="false" /><b>&nbsp;I am not nor have been previously employed</b>
                           </label>
                           <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="CustomValidator" Text="temp"></asp:CustomValidator>
                         </div>
@@ -1076,7 +1181,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerName" CssClass="col-lg-2 control-label" ToolTip="Employer Name" Style="white-space: nowrap">Employer:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="True" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Name" MaxLength="100" TabIndex="201" ValidationGroup="Submit" AutoPostBack="False" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerName" CssClass="text-danger" Display="Static" ErrorMessage="The employer name is required." ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1086,11 +1191,11 @@
                                   <table border="0" style="width: 280px">
                                     <tr>
                                       <td style="width: 90%">
-                                        <asp:TextBox runat="server" ID="txtEmploymentStart" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment Start Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="202" AutoPostBack="True" ValidationGroup="Submit" />
+                                        <asp:TextBox runat="server" ID="txtEmploymentStart" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment Start Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="202" AutoPostBack="False" ValidationGroup="Submit" />
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkEmploymentStartDate">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="202"></span>
+                                          <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="202"></span>--%>
                                         </a>
                                       </td>
                                     </tr>
@@ -1106,11 +1211,11 @@
                                   <table border="0" style="width: 280px">
                                     <tr>
                                       <td style="width: 90%">
-                                        <asp:TextBox runat="server" ID="txtEmploymentEnd" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment End Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="203" AutoPostBack="True" ValidationGroup="Submit" />
+                                        <asp:TextBox runat="server" ID="txtEmploymentEnd" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employment End Date" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="203" AutoPostBack="False" ValidationGroup="Submit" />
                                       </td>
                                       <td style="width: 10%; text-align: center;">
                                         <a href="#" runat="server" id="lnkEmploymentEndDate">
-                                          <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="203"></span>
+                                          <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="203"></span>--%>
                                         </a>
                                       </td>
                                     </tr>
@@ -1123,7 +1228,7 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtPosition" CssClass="col-lg-2 control-label" ToolTip="Position" Style="white-space: nowrap">Position:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtPosition" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Position" MaxLength="100" TabIndex="204" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPosition" CssClass="text-danger" ErrorMessage="The position title is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
@@ -1145,7 +1250,7 @@
                                        <b>-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                       </td>
                                       <td style="width: 20%">
-                                        <asp:TextBox runat="server" ID="txtEmployerPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="207" AutoPostBack="True" ValidationGroup="Submit" Width="50"  style="width: 60px" />
+                                        <asp:TextBox runat="server" ID="txtEmployerPhone3" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Employer Phone Number - Subscriber Number" MaxLength="4" placeholder="1234" TabIndex="207" AutoPostBack="False" ValidationGroup="Submit" Width="50"  style="width: 60px" />
                                       </td>
                                       <td style="width: 40%">
                                         &nbsp;
@@ -1173,7 +1278,7 @@
                                         &nbsp;<asp:Label runat="server" AssociatedControlID="txtMonthlySalary" style="white-space: nowrap; position:relative; top:-5px">$</asp:Label>&nbsp;
                                       </td>
                                       <td>
-                                        <asp:TextBox runat="server" MaxLength="7" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="208" ValidationGroup="Submit" Text="0" AutoPostBack="True" style="width: 270px" />
+                                        <asp:TextBox runat="server" MaxLength="7" ID="txtMonthlySalary" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Monthly Salary" TabIndex="208" ValidationGroup="Submit" Text="0" AutoPostBack="False" style="width: 270px" />
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator12" runat="server" ErrorMessage="Enter a valid currency amount." ControlToValidate="txtMonthlySalary" ValidationExpression="^\$?(\d{1,3}(\,\d{3})*|(\d+))(\.\d{2})?$" ValidationGroup="Submit" Display="Dynamic" CssClass="text-danger"></asp:RegularExpressionValidator>
                                         <asp:RequiredFieldValidator runat="server" ControlToValidate="txtMonthlySalary" CssClass="text-danger" Display="Static" ErrorMessage="The monthly salary is required." ValidationGroup="Submit" />
                                       </td>
@@ -1184,28 +1289,28 @@
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerStreet" CssClass="col-lg-2 control-label" ToolTip="Address Street" Style="white-space: nowrap">Street:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="209" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerStreet" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Street" MaxLength="100" TabIndex="209" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerStreet" CssClass="text-danger" ErrorMessage="The address street is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerCity" CssClass="col-lg-2 control-label" ToolTip="Address City" Style="white-space: nowrap">City:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="210" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtEmployerCity" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address City" MaxLength="50" TabIndex="210" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerCity" CssClass="text-danger" ErrorMessage="The address city is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="drpEmployerState" CssClass="col-lg-2 control-label" ToolTip="Address State" Style="white-space: nowrap; position: relative; top: 0px;">State:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:DropDownList ID="drpEmployerState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="211" AutoPostBack="True" ValidationGroup="Submit"></asp:DropDownList>
+                                  <asp:DropDownList ID="drpEmployerState" runat="server" ToolTip="Address State" CssClass="form-control" TabIndex="211" AutoPostBack="False" ValidationGroup="Submit"></asp:DropDownList>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="drpEmployerState" CssClass="text-danger" ErrorMessage="The address state is required." InitialValue="(Select One)" ValidationGroup="Submit" />
                                 </div>
                               </div>
                               <div class="form-group">
                                 <asp:Label runat="server" AssociatedControlID="txtEmployerZip" CssClass="col-lg-2 control-label" ToolTip="Address Zip" Style="white-space: nowrap">Zip Code:<span style="color: red">*</span></asp:Label>
                                 <div class="col-lg-10">
-                                  <asp:TextBox runat="server" ID="txtEmployerZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="212" AutoPostBack="True" ValidationGroup="Submit" />
+                                  <asp:TextBox runat="server" ID="txtEmployerZip" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Address Zip" MaxLength="5" TabIndex="212" AutoPostBack="False" ValidationGroup="Submit" />
                                   <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ValidationExpression="^\d{5}$" ErrorMessage="Please enter a valid zip code" Display="Dynamic" ValidationGroup="Submit"></asp:RegularExpressionValidator>
                                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmployerZip" CssClass="text-danger" ErrorMessage="The address zip code is required." Display="Static" ValidationGroup="Submit" />
                                 </div>
@@ -1218,20 +1323,29 @@
                   </asp:Panel>
                 </td>
               </tr>
-            </table>            
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneDependent" TabIndex="300">
-          <Header>
+              <tr>
+                <td style="width:100%; text-align:right; vertical-align:middle">
+                  <br />
+                  <asp:Button ID="btnUpdateProgressEmployment" runat="server" Text="Update Employment (or Previous) Progress" CssClass="btn btn-default" Width="300px" />&nbsp;
+                  <br /><br />
+                </td>
+              </tr>
+            </table>   
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneDependents">
             <table style="width:100%">
               <tr>
                 <th style="width:25%; text-align:left; vertical-align: middle">
-                  Dependent Information (Assistance Needed)
+                  <h4>Dependent Information</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
-                    <div id="Div3" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%; color: black">
-                      <asp:Literal ID="ltlPercentDependent" runat="server" Text="100% Complete"></asp:Literal>
+                    <div id="prgDependent" runat="server" class="progress-bar progress-bar-progress progress-bar-striped" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0; color: black">
+                      <asp:Literal ID="ltlPercentDependent" runat="server" Text="0% Complete"></asp:Literal>
                     </div>
                   </div>
                 </th>
@@ -1240,172 +1354,190 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
+          </a>
+        </div>
+        <div id="paneDependents" class="panel-collapse collapse">
+          <div class="panel-body">
             <table border="1" style="width:100%">
               <tr>
                 <td style="width:100%; padding: 5px">
                   <br />
-                  <table border="0" style="width:100%">
-                    <tr>
-                      <td style="width:50%; vertical-align:top">
-                        <div class="col-lg-12">
-                          <div class="form-horizontal">
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtDepFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="false" ValidationGroup="Dependent" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Dependent" Enabled="True" />
+                  <div class="col-lg-12">
+                    <div class="form-horizontal">
+                      <div class="form-group">
+                        <asp:Label runat="server" CssClass="col-lg-1 control-label">&nbsp;</asp:Label>
+                        <div class="col-lg-10">
+                          <label>
+                            <asp:CheckBox ID="chkNoDependents" TabIndex="30" runat="server" AutoPostBack="True" Checked="false" /><b>&nbsp;I do not have any dependents</b>
+                          </label>
+                          <asp:CustomValidator ID="CustomValidator1" runat="server" ErrorMessage="CustomValidator" Text="temp"></asp:CustomValidator>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <asp:Panel ID="pnlDependents" runat="server" Visible="true">
+                    <table border="0" style="width:100%">
+                      <tr>
+                        <td style="width:50%; vertical-align:top">
+                          <div class="col-lg-12">
+                            <div class="form-horizontal">
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtDepFirstName" CssClass="col-lg-2 control-label" ToolTip="First Name" Style="white-space: nowrap">First Name:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepFirstName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="First Name" MaxLength="30" TabIndex="2" AutoPostBack="false" ValidationGroup="Dependent" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepFirstName" CssClass="text-danger" ErrorMessage="The first name is required." Display="Static" ValidationGroup="Dependent" Enabled="True" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtDepMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox runat="server" ID="txtDepMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="true" ValidationGroup="Dependent" placeholder="if no middle name, enter 'N/A'" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepMiddleName" CssClass="text-danger" ErrorMessage="The middle name is required." Display="Static" ValidationGroup="Dependent" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtDepMiddleName" CssClass="col-lg-2 control-label" ToolTip="Middle Name" Style="white-space: nowrap">Middle Name:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox runat="server" ID="txtDepMiddleName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Middle Name" MaxLength="30" TabIndex="3" AutoPostBack="False" ValidationGroup="Dependent" placeholder="if no middle name, enter 'N/A'" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepMiddleName" CssClass="text-danger" ErrorMessage="The middle name is required." Display="Static" ValidationGroup="Dependent" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtDepLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="false" ValidationGroup="Dependent" />
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Dependent" Enabled="True" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtDepLastName" CssClass="col-lg-2 control-label" ToolTip="Last Name" Style="white-space: nowrap">Last Name:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:TextBox style="text-transform: capitalize;" runat="server" ID="txtDepLastName" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Last Name" MaxLength="30" TabIndex="4" AutoPostBack="false" ValidationGroup="Dependent" />
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepLastName" CssClass="text-danger" Display="Static" ErrorMessage="The last name is required." ValidationGroup="Dependent" Enabled="True" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="col-lg-12">
-                                <b>Your Current List of Dependents Are Shown Below:</b>
+                              <div class="form-group">
+                                <div class="col-lg-12">
+                                  <b>Your Current List of Dependents Are Shown Below:</b>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                      <td style="width:50%; vertical-align:top">
-                        <div class="col-lg-12">
-                          <div class="form-horizontal">
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="txtDepDOB" CssClass="col-lg-2 control-label" ToolTip="Date of Birth" Style="white-space: nowrap">Date of Birth:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <table border="0" style="width: 280px">
-                                  <tr>
-                                    <td style="width: 90%">
-                                      <asp:TextBox runat="server" ID="txtDepDOB" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Date of Birth" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="5" AutoPostBack="false" ValidationGroup="Dependent" />
-                                    </td>
-                                    <td style="width: 10%; text-align: center;">
-                                      <a href="#" runat="server" id="lnkDepCalendarDOB">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="6"></span>
-                                      </a>
-                                    </td>
-                                  </tr>
-                                </table>
-                                <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtDepDOB" ValidationGroup="Dependent" Enabled="True"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepDOB" CssClass="text-danger" ErrorMessage="The date of birth is required." Display="Static" ValidationGroup="Dependent" Enabled="True" />
-                                <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="txtDepDOB" PopupButtonID="lnkDepCalendarDOB" />
+                        </td>
+                        <td style="width:50%; vertical-align:top">
+                          <div class="col-lg-12">
+                            <div class="form-horizontal">
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="txtDepDOB" CssClass="col-lg-2 control-label" ToolTip="Date of Birth" Style="white-space: nowrap">Date of Birth:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <table border="0" style="width: 280px">
+                                    <tr>
+                                      <td style="width: 90%">
+                                        <asp:TextBox runat="server" ID="txtDepDOB" AutoCompleteType="Disabled" CssClass="form-control" ToolTip="Date of Birth" BackColor="White" placeholder="mm/dd/yyyy" TabIndex="5" AutoPostBack="false" ValidationGroup="Dependent" />
+                                      </td>
+                                      <td style="width: 10%; text-align: center;">
+                                        <a href="#" runat="server" id="lnkDepCalendarDOB">
+                                          <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="6"></span>--%>
+                                        </a>
+                                      </td>
+                                    </tr>
+                                  </table>
+                                  <asp:RegularExpressionValidator runat="server" ErrorMessage="Enter a valid date." CssClass="text-danger" Display="Dynamic" ValidationExpression="^(0?[1-9]|1[0-2])/(0?[1-9]|1[0-9]|2[0-9]|3[01])/\d{4}$" ControlToValidate="txtDepDOB" ValidationGroup="Dependent" Enabled="True"></asp:RegularExpressionValidator>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDepDOB" CssClass="text-danger" ErrorMessage="The date of birth is required." Display="Static" ValidationGroup="Dependent" Enabled="True" />
+                                  <ajaxToolkit:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="txtDepDOB" PopupButtonID="lnkDepCalendarDOB" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="chkDepGender" CssClass="col-lg-2 control-label" ToolTip="Gender" Style="white-space: nowrap; position: relative; top: 0px;">Gender:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <asp:RadioButtonList ID="chkDepGender" runat="server" RepeatDirection="Horizontal" Style="position: relative; top: 6px;" ToolTip="Gender" TabIndex="7" AutoPostBack="false" ValidationGroup="Dependent">
-                                  <asp:ListItem Text="Male" Value="Male">&nbsp;&nbsp;Male&nbsp;&nbsp;</asp:ListItem>
-                                  <asp:ListItem Text="Female" Value="Female">&nbsp;&nbsp;Female</asp:ListItem>
-                                </asp:RadioButtonList>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="chkDepGender" CssClass="text-danger" Display="Static" ErrorMessage="The gender is required." ValidationGroup="Dependent" Enabled="True" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="chkDepGender" CssClass="col-lg-2 control-label" ToolTip="Gender" Style="white-space: nowrap; position: relative; top: 0px;">Gender:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:RadioButtonList ID="chkDepGender" runat="server" RepeatDirection="Horizontal" Style="position: relative; top: 6px;" ToolTip="Gender" TabIndex="7" AutoPostBack="false" ValidationGroup="Dependent">
+                                    <asp:ListItem Text="Male" Value="Male">&nbsp;&nbsp;Male&nbsp;&nbsp;</asp:ListItem>
+                                    <asp:ListItem Text="Female" Value="Female">&nbsp;&nbsp;Female</asp:ListItem>
+                                  </asp:RadioButtonList>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="chkDepGender" CssClass="text-danger" Display="Static" ErrorMessage="The gender is required." ValidationGroup="Dependent" Enabled="True" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" AssociatedControlID="drpDepRelation" CssClass="col-lg-2 control-label" ToolTip="Relation" Style="white-space: nowrap; position: relative; top: 0px;">Relation:<span style="color: red">*</span></asp:Label>
-                              <div class="col-lg-10">
-                                <asp:DropDownList ID="drpDepRelation" runat="server" ToolTip="Relation" CssClass="form-control" TabIndex="8" AutoPostBack="false" ValidationGroup="Dependent">
-                                  <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
-                                  <asp:ListItem Text="Father" Value="Father"></asp:ListItem>
-                                  <asp:ListItem Text="Mother" Value="Mother"></asp:ListItem>
-                                  <asp:ListItem Text="Son" Value="Son"></asp:ListItem>
-                                  <asp:ListItem Text="Daughter" Value="Daughter"></asp:ListItem>
-                                  <asp:ListItem Text="Husband" Value="Husband"></asp:ListItem>
-                                  <asp:ListItem Text="Wife" Value="Wife"></asp:ListItem>
-                                  <asp:ListItem Text="Brother" Value="Brother"></asp:ListItem>
-                                  <asp:ListItem Text="Sister" Value="Sister"></asp:ListItem>
-                                  <asp:ListItem Text="Grandfather" Value="Grandfather"></asp:ListItem>
-                                  <asp:ListItem Text="Grandmother" Value="Grandmother"></asp:ListItem>
-                                  <asp:ListItem Text="Great Grandfather" Value="Great Grandfather"></asp:ListItem>
-                                  <asp:ListItem Text="Great Grandmother" Value="Great Grandmother"></asp:ListItem>
-                                  <asp:ListItem Text="Grandson" Value="Grandson"></asp:ListItem>
-                                  <asp:ListItem Text="Granddaughter" Value="Granddaughter"></asp:ListItem>
-                                  <asp:ListItem Text="Grandson" Value="Grandson"></asp:ListItem>
-                                  <asp:ListItem Text="Uncle" Value="Uncle"></asp:ListItem>
-                                  <asp:ListItem Text="Aunt" Value="Aunt"></asp:ListItem>
-                                  <asp:ListItem Text="Nephew" Value="Nephew"></asp:ListItem>
-                                  <asp:ListItem Text="Niece" Value="Niece"></asp:ListItem>
-                                  <asp:ListItem Text="Cousin" Value="Cousin"></asp:ListItem>
-                                  <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
-                                </asp:DropDownList>
-                                <asp:RequiredFieldValidator runat="server" ControlToValidate="drpDepRelation" CssClass="text-danger" ErrorMessage="The relatoinship is required." InitialValue="(Select One)" ValidationGroup="Dependent" Enabled="True" />
+                              <div class="form-group">
+                                <asp:Label runat="server" AssociatedControlID="drpDepRelation" CssClass="col-lg-2 control-label" ToolTip="Relation" Style="white-space: nowrap; position: relative; top: 0px;">Relation:<span style="color: red">*</span></asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:DropDownList ID="drpDepRelation" runat="server" ToolTip="Relation" CssClass="form-control" TabIndex="8" AutoPostBack="false" ValidationGroup="Dependent">
+                                    <asp:ListItem Text="(Select One)" Value="(Select One)" Selected="True"></asp:ListItem>
+                                    <asp:ListItem Text="Father" Value="Father"></asp:ListItem>
+                                    <asp:ListItem Text="Mother" Value="Mother"></asp:ListItem>
+                                    <asp:ListItem Text="Son" Value="Son"></asp:ListItem>
+                                    <asp:ListItem Text="Daughter" Value="Daughter"></asp:ListItem>
+                                    <asp:ListItem Text="Husband" Value="Husband"></asp:ListItem>
+                                    <asp:ListItem Text="Wife" Value="Wife"></asp:ListItem>
+                                    <asp:ListItem Text="Brother" Value="Brother"></asp:ListItem>
+                                    <asp:ListItem Text="Sister" Value="Sister"></asp:ListItem>
+                                    <asp:ListItem Text="Grandfather" Value="Grandfather"></asp:ListItem>
+                                    <asp:ListItem Text="Grandmother" Value="Grandmother"></asp:ListItem>
+                                    <asp:ListItem Text="Great Grandfather" Value="Great Grandfather"></asp:ListItem>
+                                    <asp:ListItem Text="Great Grandmother" Value="Great Grandmother"></asp:ListItem>
+                                    <asp:ListItem Text="Grandson" Value="Grandson"></asp:ListItem>
+                                    <asp:ListItem Text="Granddaughter" Value="Granddaughter"></asp:ListItem>
+                                    <asp:ListItem Text="Grandson" Value="Grandson"></asp:ListItem>
+                                    <asp:ListItem Text="Uncle" Value="Uncle"></asp:ListItem>
+                                    <asp:ListItem Text="Aunt" Value="Aunt"></asp:ListItem>
+                                    <asp:ListItem Text="Nephew" Value="Nephew"></asp:ListItem>
+                                    <asp:ListItem Text="Niece" Value="Niece"></asp:ListItem>
+                                    <asp:ListItem Text="Cousin" Value="Cousin"></asp:ListItem>
+                                    <asp:ListItem Text="Other" Value="Other"></asp:ListItem>
+                                  </asp:DropDownList>
+                                  <asp:RequiredFieldValidator runat="server" ControlToValidate="drpDepRelation" CssClass="text-danger" ErrorMessage="The relatoinship is required." InitialValue="(Select One)" ValidationGroup="Dependent" Enabled="True" />
+                                </div>
                               </div>
-                            </div>
-                            <div class="form-group">
-                              <asp:Label runat="server" CssClass="col-lg-2 control-label">&nbsp;</asp:Label>
-                              <div class="col-lg-10">
-                                <asp:Button ID="btnAddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" TabIndex="600" Width="150" ValidationGroup="Dependent" /><br />
-                                <asp:CustomValidator ID="valUserRequiredDep" runat="server" CssClass="text-danger" ControlToValidate="txtDepMiddleName" ErrorMessage="You must enter your email and name before adding dependents" Display="Static" ValidationGroup="Dependent" Enabled="True" />
+                              <div class="form-group">
+                                <asp:Label runat="server" CssClass="col-lg-2 control-label">&nbsp;</asp:Label>
+                                <div class="col-lg-10">
+                                  <asp:Button ID="btnAddDependent" runat="server" Text="Add Dependent" CssClass="btn btn-default" TabIndex="600" Width="150" ValidationGroup="Dependent" /><br />
+                                  <asp:CustomValidator ID="valUserRequiredDep" runat="server" CssClass="text-danger" ControlToValidate="txtDepMiddleName" ErrorMessage="You must enter your email and name before adding dependents" Display="Static" ValidationGroup="Dependent" Enabled="True" />
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </table>
-                  <br />
-                  <table class="table table-hover" border="0" style="font-size:12px">
-                    <asp:Repeater ID="rptDependents" runat="server">
-                      <HeaderTemplate>
-                        <tr style="height: 30px; border: solid solid solid solid">
-                          <th style="text-align: left; width: 25%">Name</th>
-                          <th style="text-align: left; width: 20%">Date of Birth</th>
-                          <th style="text-align: center; width: 15%;">Age</th>
-                          <th style="text-align: center; width: 15%;">Gender</th>
-                          <th style="text-align: left; width: 15%">Relationship</th>
-                          <th style="text-align: center; width: 10%;">Remove</th>
-                        </tr>
-                      </HeaderTemplate>
-                      <ItemTemplate>
-                        <tr>
-                          <td style="text-align: left; vertical-align: middle">
-                            <%# DataBinder.Eval(Container.DataItem, "firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "lastName")%>
-                          </td>
-                          <td style="text-align: left; vertical-align: middle">
-                            <%# FormatDateTime(DataBinder.Eval(Container.DataItem, "dob"), DateFormat.LongDate)%>
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                            <%# GetAge(DataBinder.Eval(Container.DataItem, "dob"))%>
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                            <%# IIf(DataBinder.Eval(Container.DataItem, "gender") = "Male", "Male", "Female")%>
-                          </td>
-                          <td style="text-align: left; vertical-align: middle">
-                            <%# DataBinder.Eval(Container.DataItem, "relationship")%>
-                          </td>
-                          <td style="text-align: center; vertical-align: middle">
-                            <asp:LinkButton ID="btnDeleteDependent" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "dependentId")%>' runat="server" CausesValidation="false" OnClick="btnDeleteDependent_Click" ToolTip="Remove Dependent"><span class="glyphicon glyphicon-remove" style="font-size:20px; color:red"></span></asp:LinkButton>
-                          </td>
-                        </tr>
-                      </ItemTemplate>
-                    </asp:Repeater>
-                  </table>
-                  <br />
+                        </td>
+                      </tr>
+                    </table>
+                    <br />
+                    <table class="table table-hover" border="0" style="font-size:12px">
+                      <asp:Repeater ID="rptDependents" runat="server">
+                        <HeaderTemplate>
+                          <tr style="height: 30px; border: solid solid solid solid">
+                            <th style="text-align: left; width: 25%">Name</th>
+                            <th style="text-align: left; width: 20%">Date of Birth</th>
+                            <th style="text-align: center; width: 15%;">Age</th>
+                            <th style="text-align: center; width: 15%;">Gender</th>
+                            <th style="text-align: left; width: 15%">Relationship</th>
+                            <th style="text-align: center; width: 10%;">Remove</th>
+                          </tr>
+                        </HeaderTemplate>
+                        <ItemTemplate>
+                          <tr>
+                            <td style="text-align: left; vertical-align: middle">
+                              <%# DataBinder.Eval(Container.DataItem, "firstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "middleName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "lastName")%>
+                            </td>
+                            <td style="text-align: left; vertical-align: middle">
+                              <%# FormatDateTime(DataBinder.Eval(Container.DataItem, "dob"), DateFormat.LongDate)%>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                              <%# GetAge(DataBinder.Eval(Container.DataItem, "dob"))%>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                              <%# IIf(DataBinder.Eval(Container.DataItem, "gender") = "Male", "Male", "Female")%>
+                            </td>
+                            <td style="text-align: left; vertical-align: middle">
+                              <%# DataBinder.Eval(Container.DataItem, "relationship")%>
+                            </td>
+                            <td style="text-align: center; vertical-align: middle">
+                              <asp:LinkButton ID="btnDeleteDependent" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "dependentId")%>' runat="server" CausesValidation="false" OnClick="btnDeleteDependent_Click" ToolTip="Remove Dependent"><span class="glyphicon glyphicon-remove" style="font-size:20px; color:red"></span></asp:LinkButton>
+                            </td>
+                          </tr>
+                        </ItemTemplate>
+                      </asp:Repeater>
+                    </table>
+                    <br />
+                  </asp:Panel>
                 </td>
               </tr>
             </table>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneReference" TabIndex="400">
-          <Header>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneReference">
             <table style="width:100%">
               <tr>
                 <th style="width:25%; text-align:left; vertical-align: middle">
-                  Reference Information
-                  <span class="label label-default"><asp:Label ID="lblReferences" runat="server" Text="0"></asp:Label></span>
-                  &nbsp;(2 Required)
+                  <h4>References&nbsp;<span class="label label-default"><asp:Label ID="lblReferences" runat="server" Text="0"></asp:Label></span>&nbsp;(2 Required)</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1419,8 +1551,10 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
+          </a>
+        </div>
+        <div id="paneReference" class="panel-collapse collapse">
+          <div class="panel-body">
             <table border="1" style="width:100%">
               <tr>
                 <td style="width:100%">
@@ -1517,7 +1651,7 @@
                                     </td>
                                     <td style="width: 10%; text-align: center;">
                                       <a href="#" runat="server" id="lnkCalendarKnownSince">
-                                        <span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="409"></span>
+                                        <%--<span class="glyphicon glyphicon-calendar" style="font-size: 20px; color: black" tabindex="409"></span>--%>
                                       </a>
                                     </td>
                                   </tr>
@@ -1609,16 +1743,16 @@
                 </td>
               </tr>
             </table>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneArtifacts" TabIndex="500">
-          <Header>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneArtifacts">
             <table style="width:100%">
               <tr>
                 <th style="width:25%; text-align:left; vertical-align: middle">
-                  Artifacts
-                  <span class="label label-default"><asp:Label ID="lblArtifacts" runat="server" Text="0"></asp:Label></span>
-                  &nbsp;(Government ID Req'd)
+                  <h4>Artifacts&nbsp;<span class="label label-default"><asp:Label ID="lblArtifacts" runat="server" Text="0"></asp:Label></span>&nbsp;(Gov't ID Req'd)</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1632,8 +1766,10 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
+          </a>
+        </div>
+        <div id="paneArtifacts" class="panel-collapse collapse">
+          <div class="panel-body">
             <table border="1" style="width:100%">
               <tr>
                 <td style="width:100%">
@@ -1690,7 +1826,6 @@
                         <tr style="height: 30px; border: solid solid solid solid">
                           <th style="text-align: left; width: 20%">Artifact #</th>
                           <th style="text-align: left; width: 40%">Artifact Type</th>
-                          <%--<th style="text-align: left; width: 20%;">Filename</th>--%>
                           <th style="text-align: left; width: 30%">Content Type</th>
                           <th style="text-align: center; width: 10%;">Remove</th>
                         </tr>
@@ -1701,12 +1836,8 @@
                             <%# getFormattedNumber(DataBinder.Eval(Container.DataItem, "artifactId"))%>
                           </td>
                           <td style="text-align: left; vertical-align: middle">
-                            <%--<%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>--%>
                             <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "ARTIFACT_TYPE.name")%>&nbsp;&nbsp;(<span class="glyphicon glyphicon-download-alt" style="font-size:15px;"></span>&nbsp;Download)</asp:LinkButton>
                           </td>
-                          <%--<td style="text-align: left; vertical-align: middle">
-                            <asp:LinkButton ID="btnDownloadArtifact2" OnClick="btnDownloadArtifact_Click" runat="server" ToolTip="Download Artifact" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "artifactId")%>'><%# DataBinder.Eval(Container.DataItem, "filename")%></asp:LinkButton>
-                          </td>--%>
                           <td style="text-align: left; vertical-align: middle">
                             <%# DataBinder.Eval(Container.DataItem, "contentType")%>
                           </td>
@@ -1721,15 +1852,24 @@
                   <asp:LinkButton ID="btnDeleteArtifact" runat="server" Visible="false" Text="temp"></asp:LinkButton>
                 </td>
               </tr>
+              <%--<tr>
+                <td style="width:100%; text-align:right; vertical-align:middle">
+                  <br />
+                  <asp:Button ID="btnUpdateProgressArtifact" runat="server" Text="Update Applicant Information Progress" CssClass="btn btn-default" Width="300px" />&nbsp;
+                  <br /><br />
+                </td>
+              </tr>--%>
             </table>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-        <ajaxToolkit:AccordionPane runat="server" ID="paneStatement" TabIndex="600">
-          <Header>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <a data-toggle="collapse" data-parent="#accordion" href="#paneStatement">
             <table style="width:100%">
               <tr>
                 <th style="width:25%; text-align:left; vertical-align: middle">
-                  Personal Statement
+                  <h4>Personal Statement</h4>
                 </th>
                 <th style="width:50%; text-align:center; vertical-align: middle">
                   <div class="progress" style="position: relative; top: 10px;">
@@ -1743,50 +1883,63 @@
                 </th>
               </tr>
             </table>
-          </Header>
-          <Content>
-            <table border="1" style="width:100%">
+          </a>
+        </div>
+        <div id="paneStatement" class="panel-collapse collapse">
+          <div class="panel-body">
+            <table border="0" style="width:100%">
               <tr>
                 <td style="width:100%; padding: 5px">
                   <asp:Label runat="server" AssociatedControlID="txtPersonalStatement" CssClass="control-label" ToolTip="Personal Statement" style="white-space: nowrap">Briefly describe your personal and/or family needs (1000 characters max):<span style="color: red">*</span></asp:Label>
-                  <asp:TextBox runat="server" ID="txtPersonalStatement" AutoCompleteType="Disabled" MaxLength="1000" TabIndex="601" TextMode="MultiLine" Rows="5" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="True" />
+                  <asp:TextBox runat="server" ID="txtPersonalStatement" AutoCompleteType="Disabled" MaxLength="1000" TabIndex="601" TextMode="MultiLine" Rows="5" Width="100%" style="max-width:100%" ValidationGroup="Submit" AutoPostBack="False" />
                   <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPersonalStatement" CssClass="text-danger" ErrorMessage="The personal statement is required." Display="Static" ValidationGroup="Submit" />
                 </td>
               </tr>
+              <%--<tr>
+                <td style="width:100%; text-align:right; vertical-align:middle">
+                  <br />
+                  <asp:Button ID="btnUpdateProgressStatement" runat="server" Text="Update Personal Statement Progress" CssClass="btn btn-default" Width="300px" />&nbsp;
+                  <br /><br />
+                </td>
+              </tr>--%>
             </table>
-          </Content>
-        </ajaxToolkit:AccordionPane>
-      </Panes>      
-    </ajaxToolkit:Accordion>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <%--End Accordion For Zakat Form--%>
     <br />
     <div class="row">
       <div class="form-group">
         <div class="col-lg-12">
           <table style="width:100%">
             <tr>
-              <td style="width:96%; text-align:right">
+              <td style="width:95%; text-align:right">
                 <asp:CustomValidator ID="valUserRequiredSave" runat="server" CssClass="text-danger" ErrorMessage="You must enter your email, name and phone before saving the form." Display="Dynamic" ValidationGroup="Save" Enabled="True" />
                 <asp:CustomValidator ID="valAcknowledgement" runat="server" CssClass="text-danger" ErrorMessage="You must acknowledge the submission statement by checking the box at the top of this form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
                 <asp:CustomValidator ID="valRequiredFields" runat="server" CssClass="text-danger" ErrorMessage="You must fill in all required fields on the form." Display="Dynamic" ValidationGroup="Submit" Enabled="True" />
                 <asp:CustomValidator ID="valPhotoID" runat="server" CssClass="text-danger" ErrorMessage="You must have a photo identification before submitting" Display="Dynamic" ValidationGroup="Submit" />
               </td>
               <td style="width:1%; text-align:right">
-                &nbsp;
-              </td>
-              <td style="width:1%; text-align:right">
-                <asp:Button ID="btnSave" runat="server" Text="Save Application" CssClass="btn btn-default" ValidationGroup="Save" TabIndex="700" Width="150" Enabled="False" />
+                <asp:Button ID="btnUpdateProgressAll" runat="server" Text="Update All Progress" CssClass="btn btn-default" ValidationGroup="Update Progress" TabIndex="700" Width="150" Enabled="False" />
               </td>
               <td style="width:1%; text-align:right">
                 &nbsp;
               </td>
               <td style="width:1%; text-align:right">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-primary" TabIndex="701" Width="150"  ValidationGroup="Submit" Enabled="False" />
+                <asp:Button ID="btnSave" runat="server" Text="Save Application" CssClass="btn btn-default" ValidationGroup="Save" TabIndex="701" Width="150" Enabled="False" />
+              </td>
+              <td style="width:1%; text-align:right">
+                &nbsp;
+              </td>
+              <td style="width:1%; text-align:right">
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit Application" CssClass="btn btn-primary" TabIndex="702" Width="150"  ValidationGroup="Submit" Enabled="False" />
               </td>
             </tr>
             <tr>
-                <td colspan="5" style="width:100%; text-align:left">
-                    <asp:ValidationSummary ID="valSummary" runat="server" ValidationGroup="Submit" />
-                </td>
+              <td colspan="5" style="width:100%; text-align:left">
+                  <asp:ValidationSummary ID="valSummary" runat="server" ValidationGroup="Submit" />
+              </td>
             </tr>
           </table>
         </div>
@@ -1794,5 +1947,5 @@
     </div>    
   </div>
   <br />
-  <br /><br />
+  <br /><br /><br /><br />
 </asp:Content>
