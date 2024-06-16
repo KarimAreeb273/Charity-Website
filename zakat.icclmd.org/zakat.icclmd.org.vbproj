@@ -274,13 +274,6 @@
     <None Include=".env\deve\Web.config.Release.areeb">
       <DependentUpon>Web.config.areeb</DependentUpon>
     </None>
-    <EntityDeploy Include="zakatEntities.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>zakatEntities.Designer.vb</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="zakatEntities.edmx.diagram">
-      <DependentUpon>zakatEntities.edmx</DependentUpon>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -290,6 +283,13 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <EntityDeploy Include="zakatEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>zakatEntities.Designer.vb</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="zakatEntities.edmx.diagram">
+      <DependentUpon>zakatEntities.edmx</DependentUpon>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="About.aspx.designer.vb">

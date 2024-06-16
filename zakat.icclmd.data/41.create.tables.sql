@@ -78,7 +78,7 @@ CREATE TABLE [ph14095182591_iccl_zakat].[dbo].[POST](
 	[postId] [int] IDENTITY(1,1) NOT NULL,
 	[postParentId] [int] NULL,
 	[postCategoryId] [int] NOT NULL,
-	[postHeader] [varchar](50) NOT NULL,
+	[postTitle] [varchar](50) NOT NULL,
 	[postContent] [varchar](750) NOT NULL,
 	[countOfReplies] [int] DEFAULT 0 NOT NULL,
 	[postCreatedOn] [datetime] NOT NULL,

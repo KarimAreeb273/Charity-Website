@@ -4,7 +4,9 @@
   <br />
   <br />
 
-  <h3>Zakat Network Survey</h3>
+  <h4>
+    <b>Zakat Network Survey</b>
+  </h4>
 
   <div class="row">
     <div class="col-lg-12">

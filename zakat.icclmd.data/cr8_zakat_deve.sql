@@ -1625,6 +1625,7 @@ INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WV'	,	'West Virginia'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WI'	,	'Wisconsin'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'WY'	,	'Wyoming'	);
 INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'DC'	,	'District of Columbia'	);
+INSERT INTO STATE (	stateAbbr	,	stateName	) VALUES (	'OT'	,	'Other'	);
 
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	1	,	'(Select One)');
 INSERT INTO ARTIFACT_TYPE (	artifactTypeId	,	name) VALUES (	2	,	'Government Photo Identification');
