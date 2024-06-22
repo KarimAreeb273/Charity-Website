@@ -43,7 +43,7 @@ Public Class Confirm
         End If
 
         'if vDonation is still 0, re route to home
-        If vDonationId = 0 Then Response.Redirect("/")
+        If vDonationId = 0 Then Response.Redirect("/", False)
 
         Using oDB As New zakatEntities
           'set member variables
@@ -73,14 +73,14 @@ Public Class Confirm
           Session("sUserFirstName") = vFirstName
         Else
           Session.Clear()
-          Response.Redirect("~/")
+          Response.Redirect("~/", False)
         End If
 
         ''START PAYPAL PROCESSING
         ''=======================
         'set tx to value of tx passed in via Querystring from PayPal
         Dim tx As String = Request.QueryString("tx")
-        If tx = Nothing Then Response.Redirect("dues")
+        If tx = Nothing Then Response.Redirect("dues", False)
 
         Dim PDTvalidateQuery As String
         Dim strResponse As HttpWebResponse
@@ -281,7 +281,7 @@ Public Class Confirm
     Try
       Dim vMemberId As Int32 = Session("sMemberId")
       Session("sMemberId") = vMemberId
-      Response.Redirect("profile")
+      Response.Redirect("profile", False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)

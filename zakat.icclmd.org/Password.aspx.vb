@@ -7,7 +7,7 @@
       Dim vEmail As String = LCase(Request.QueryString("e"))
       If vUserId = 0 And vEmail = "" Then
         'redirect to home
-        Response.Redirect("/")
+        Response.Redirect("/", False)
       End If
 
       If vUserId <> 0 Then
@@ -25,7 +25,7 @@
             txtEmail.Text = oUser.email
           Else
             'redirect to home
-            Response.Redirect("/")
+            Response.Redirect("/", False)
           End If
         End Using
       End If
@@ -81,7 +81,7 @@
         End Using
       Else
         'redirect to home
-        Response.Redirect("/")
+        Response.Redirect("/", False)
       End If
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message

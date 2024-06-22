@@ -5,12 +5,12 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         If Not IsPostBack Then
@@ -79,12 +79,12 @@
 
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'get the selected role:
@@ -119,14 +119,14 @@
 
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
       'if the logged in user tries to remove a permission, exit sub
       If vUserId = lstUsers.SelectedValue Then Exit Sub
 
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'get the selected role:
@@ -152,12 +152,12 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And USER_ROLE.ROLE.name = "Administrator").Any Then
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         Else
           'get the selected user in the listbox and display their current roles for the currently selected organization
           Dim oUser As USER = (From USER In oDB.USER Where USER.userId = lstUsers.SelectedValue).First

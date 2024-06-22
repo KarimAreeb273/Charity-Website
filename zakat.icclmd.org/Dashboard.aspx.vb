@@ -5,7 +5,7 @@
     Try
       'check permissions for this page
       If Not (Base.CheckPermission(Session("sUserID"), Base.enumRole.Administrator)) Then
-        Response.Redirect("/")
+        Response.Redirect("/", False)
       End If
 
       If Not IsPostBack Then

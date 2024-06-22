@@ -103,7 +103,7 @@
 
   Public Sub btnViewContent_Click(sender As Object, e As System.EventArgs)
     Try
-      Response.Redirect(sender.CommandArgument)
+      Response.Redirect(sender.CommandArgument, False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -164,7 +164,7 @@
       If Not (drpTranslation.SelectedValue = 0) Then
         Using oDB As New zakatEntities()
           Dim oTranslation As TRANSLATION = (From TRANSLATION In oDB.TRANSLATION Where TRANSLATION.translationId = drpTranslation.SelectedValue).FirstOrDefault
-          Response.Redirect(oTranslation.translationURL)
+          Response.Redirect(oTranslation.translationURL, False)
         End Using
       End If
     Catch ex As Exception

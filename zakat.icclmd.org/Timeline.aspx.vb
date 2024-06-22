@@ -4,10 +4,10 @@
   Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
     Try
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vApplicationId = 0 Then Response.Redirect("/")
+      If vApplicationId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         'add review history to the page

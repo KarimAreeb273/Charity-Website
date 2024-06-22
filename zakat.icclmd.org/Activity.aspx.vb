@@ -5,7 +5,7 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         Dim oApplications As List(Of APPLICATION)
@@ -23,7 +23,7 @@
   Public Sub btnViewTimeline_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument
-      Response.Redirect("timeline")
+      Response.Redirect("timeline", False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)

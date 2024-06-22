@@ -16,7 +16,7 @@ Public Class ZakatForm
           'only allow the create a new application if user has one in a status of drafted, rejected, or dispersed otherwise redirect to activity page
           If (From APPLICATION In oDB.APPLICATION Where APPLICATION.userId = vUserId AndAlso (APPLICATION.applicationStatus = "Submitted" OrElse APPLICATION.applicationStatus = "Validated" OrElse APPLICATION.applicationStatus = "Investigated" OrElse APPLICATION.applicationStatus = "Qualified (Initial)" OrElse APPLICATION.applicationStatus = "Qualified (Final)") Order By APPLICATION.createdOn Descending).Any Then
             'nothing in drafted status so redirect to activity page
-            Response.Redirect("activity")
+            Response.Redirect("activity", False)
           End If
 
           'load the state dropdown
@@ -1138,7 +1138,7 @@ Public Class ZakatForm
 
       'verify that we have an application id to associate to it otherwise redirect home
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vApplicationId = 0 Then Response.Redirect("/")
+      If vApplicationId = 0 Then Response.Redirect("/", False)
       'obtain file information if one exists
       If fileUploadArtifact.HasFile Then
         Dim vFilename As String = Path.GetFileName(fileUploadArtifact.PostedFile.FileName)
@@ -1182,7 +1182,7 @@ Public Class ZakatForm
         End Using
         'End Using
         'End Using
-        Response.Redirect("zakatform")
+        Response.Redirect("zakatform", False)
       End If
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -1219,7 +1219,7 @@ Public Class ZakatForm
     Try
       'if artifact id = 0, redirect home
       Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
-      If vArtifactId = 0 Then Response.Redirect("/")
+      If vArtifactId = 0 Then Response.Redirect("/", False)
 
       'Dim vBytes As Byte()
       Dim vFileName, vContentType As String
@@ -1292,7 +1292,7 @@ Public Class ZakatForm
     Try
       'verify that we have an applciation id to associate to it otherwise redirect home
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vApplicationId = 0 Then Response.Redirect("/")
+      If vApplicationId = 0 Then Response.Redirect("/", False)
       Using oDB As New zakatEntities
         Dim oArtifacts As List(Of ARTIFACT)
         oArtifacts = (From ARTIFACT In oDB.ARTIFACT Where ARTIFACT.applicationId = vApplicationId).ToList
@@ -2322,7 +2322,7 @@ Public Class ZakatForm
       End Using
 
       'redirect to the activity page
-      Response.Redirect("activity")
+      Response.Redirect("activity", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -2597,7 +2597,7 @@ Public Class ZakatForm
 
       'if this is a save and not submit, refresh the form page
       If isSave Then
-        Response.Redirect("zakatform")
+        Response.Redirect("zakatform", False)
       End If
 
     Catch ex As Exception
