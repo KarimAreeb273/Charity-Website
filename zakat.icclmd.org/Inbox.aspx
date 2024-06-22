@@ -18,7 +18,7 @@
                 &nbsp;
               </td>
               <td style="width: 20%; text-align: left">
-                <asp:DropDownList ID="drpSubmissionYear" runat="server" ToolTip="Filter By Submission Year" CssClass="form-control" TabIndex="1" Width="350px" AutoPostBack="True">
+                <asp:DropDownList ID="drpSubmissionYear" runat="server" ToolTip="Filter By Submission Year" CssClass="form-control" TabIndex="1" Width="300px" AutoPostBack="True">
                   <asp:ListItem Text="2022" Value="All" Selected="True"></asp:ListItem>
                   <asp:ListItem Text="2000" Value="Drafted"></asp:ListItem>
                   <asp:ListItem Text="2021" Value="2021"></asp:ListItem>
@@ -37,7 +37,7 @@
                 &nbsp;
               </td>
               <td style="width: 20%; text-align: left; white-space: nowrap;">
-                <asp:DropDownList ID="drpWorkflow" runat="server" ToolTip="Select one to Filter" CssClass="form-control" TabIndex="2" Width="350px" AutoPostBack="True">
+                <asp:DropDownList ID="drpWorkflow" runat="server" ToolTip="Select one to Filter" CssClass="form-control" TabIndex="2" Width="300px" AutoPostBack="True">
                   <asp:ListItem Text="All" Value="All" Selected="True"></asp:ListItem>
                   <asp:ListItem Text="Drafted" Value="Drafted"></asp:ListItem>
                   <asp:ListItem Text="Submitted" Value="Submitted"></asp:ListItem>

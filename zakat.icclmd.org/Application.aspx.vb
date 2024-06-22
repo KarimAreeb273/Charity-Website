@@ -57,15 +57,15 @@ Public Class Application1
           'load form with application data
           With oApplication
             btnEmail.NavigateUrl = "mailto:" & .USER.email
-            txtUserId.Text = Base.getFormattedNumber(.userId)
+            txtUserId.Text = Base.GetFormattedNumber(.userId)
             btnEmail.Text = .USER.email
             txtEmail.Text = .USER.email
             txtFirstName.Text = .USER.firstName
             txtMiddleName.Text = .USER.middleName
             txtLastName.Text = .USER.lastName
-            txtSocialSecurity.Text = Base.getFormattedSSN(Base.decryptString(.USER.socialSecurityNumberEncrypted), Base.enumFormatSSN.Format)
+            txtSocialSecurity.Text = Base.GetFormattedSSN(Base.DecryptString(.USER.socialSecurityNumberEncrypted), Base.enumFormatSSN.Format)
             txtDOB.Text = .USER.dob
-            txtPhone.Text = Base.getFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
+            txtPhone.Text = Base.GetFormattedPhone(.USER.phone, Base.enumFormatPhone.Format)
             txtGender.Text = .USER.gender
             txtMaritalStatus.Text = .USER.maritalStatus
             txtStreet.Text = .USER.street
@@ -89,7 +89,7 @@ Public Class Application1
             txtHusbandMiddleName.Text = .USER.husbandMiddleName
             txtHusbandLastName.Text = .USER.husbandLastName
             txtMasjidName.Text = .USER.primaryMasjidName
-            txtMasjidPhone.Text = Base.getFormattedPhone(.USER.primaryMasjidPhone, Base.enumFormatPhone.Format)
+            txtMasjidPhone.Text = Base.GetFormattedPhone(.USER.primaryMasjidPhone, Base.enumFormatPhone.Format)
 
             'add saved languages to the list
             Dim vLanguages As String = ""
@@ -139,7 +139,7 @@ Public Class Application1
               txtLastDateAssisted.Text = "N/A"
             End If
 
-            txtApplicationId.Text = Base.getFormattedNumber(.applicationId)
+            txtApplicationId.Text = Base.GetFormattedNumber(.applicationId)
             txtOrganizationId.Value = .organizationId
             txtApplicationStatus.Text = .applicationStatus
             txtOrganization.Text = .ORGANIZATION.name
@@ -169,7 +169,7 @@ Public Class Application1
             txtEmploymentStart.Text = IIf(IsDate(.employmentStartDate), .employmentStartDate, "")
             txtEmploymentEnd.Text = IIf(IsDate(.employmentEndtDate), .employmentEndtDate, "")
             txtPosition.Text = .positionTitle
-            txtEmployerPhone.Text = Base.getFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
+            txtEmployerPhone.Text = Base.GetFormattedPhone(.employerPhone, Base.enumFormatPhone.Format)
             txtMonthlySalary.Text = FormatCurrency(.totalMonthlyGrossSalary)
             txtEmployerStreet.Text = .employerStreet
             txtEmployerCity.Text = .employerCity
@@ -271,7 +271,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -332,7 +332,7 @@ Public Class Application1
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the investigators that an application requires reviewing
         If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Investigator And USER_ROLE.organizationId = CInt(txtOrganizationId.Value)).Any Then
@@ -356,7 +356,7 @@ Public Class Application1
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
 
@@ -375,7 +375,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -436,7 +436,7 @@ Public Class Application1
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the qualifiers that an application requires reviewing
         If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Qualifier And USER_ROLE.organizationId = CInt(txtOrganizationId.Value)).Any Then
@@ -460,7 +460,7 @@ Public Class Application1
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
 
@@ -479,7 +479,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -550,7 +550,7 @@ Public Class Application1
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
 
@@ -569,7 +569,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -638,7 +638,7 @@ Public Class Application1
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
 
         'email the validators that an application requires reviewing
         If (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.roleId = Base.enumRole.Financier And USER_ROLE.organizationId = CInt(txtOrganizationId.Value)).Any Then
@@ -662,7 +662,7 @@ Public Class Application1
           vMsgText.Append("Laurel, MD 20707<br />")
           vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
           vMsgText.Append("</span>")
-          vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+          vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
         End If
       End Using
 
@@ -681,7 +681,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -742,7 +742,7 @@ Public Class Application1
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
       End Using
 
       'redirect back to the inbox
@@ -760,7 +760,7 @@ Public Class Application1
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
       If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
-      Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
+      Dim vApplicationIdFormatted As String = Base.GetFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
         'check if an application exists.  If so, update data, if not redirect home
@@ -816,7 +816,7 @@ Public Class Application1
         vMsgText.Append("Laurel, MD 20707<br />")
         vMsgText.Append("<a href='https://zakat.icclmd.org'>https://zakat.icclmd.org</a>")
         vMsgText.Append("</span>")
-        vSend = Base.sendEmail(vTo, vSubject, vMsgText.ToString)
+        vSend = Base.SendEmail(vTo, vSubject, vMsgText.ToString)
       End Using
 
       'redirect back to the inbox
@@ -830,7 +830,7 @@ Public Class Application1
 
   Public Function getFormattedPhone(ByVal pPhone As String) As String
     Try
-      getFormattedPhone = Base.getFormattedPhone(pPhone, Base.enumFormatPhone.Format)
+      getFormattedPhone = Base.GetFormattedPhone(pPhone, Base.enumFormatPhone.Format)
     Catch ex As Exception
       Return Nothing
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -840,7 +840,7 @@ Public Class Application1
 
   Public Function getFormattedNumber(ByVal pNumber As Int32) As String
     Try
-      getFormattedNumber = Base.getFormattedNumber(pNumber)
+      getFormattedNumber = Base.GetFormattedNumber(pNumber)
     Catch ex As Exception
       Return Nothing
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message

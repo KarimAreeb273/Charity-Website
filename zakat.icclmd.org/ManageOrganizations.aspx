@@ -180,7 +180,7 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="form-group">
-                           <asp:Button ID="btnAddOrganization" runat="server" Text="Add Organization" CssClass="btn btn-success" TabIndex="13" Width="150" ValidationGroup="Head" />
+                           <asp:Button ID="btnAddOrganization" runat="server" Text="Add Organization" CssClass="btn btn-primary" TabIndex="13" Width="150" ValidationGroup="Head" />
                         </div>
                     </div>
                 </div>

@@ -5,7 +5,7 @@
     <br />
     <div class="row">
       <div class="col-lg-12">
-        <%--<div class="alert alert-success">--%>
+        <%--<div class="alert alert-primary">--%>
         <div class="well well-sm">
           <h5>
             Assalaamu Alaikum <asp:Label ID="lblFirstName" runat="server" Text="First"></asp:Label>,<br /><br />

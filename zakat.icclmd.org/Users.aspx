@@ -67,7 +67,7 @@
               <div class="form-group">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-10">
-                  <asp:Button ID="btnAddUser" runat="server" Text="Add User" CssClass="btn btn-success" TabIndex="6" Width="150" ValidationGroup="Submit" />
+                  <asp:Button ID="btnAddUser" runat="server" Text="Add User" CssClass="btn btn-primary" TabIndex="6" Width="150" ValidationGroup="Submit" />
                 </div>
               </div>
             </div>

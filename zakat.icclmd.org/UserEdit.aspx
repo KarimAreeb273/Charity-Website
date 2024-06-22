@@ -71,7 +71,7 @@
             <div class="col-lg-2"></div>
             <div class="col-lg-10">
               <asp:HyperLink ID="btnCancel" runat="server" NavigateUrl="users" CssClass="btn btn-default" TabIndex="8" Width="140">Cancel</asp:HyperLink>
-              <asp:Button ID="btnSaveUser" runat="server" Text="Save User" CssClass="btn btn-success" TabIndex="9" Width="140" ValidationGroup="Save" />
+              <asp:Button ID="btnSaveUser" runat="server" Text="Save User" CssClass="btn btn-primary" TabIndex="9" Width="140" ValidationGroup="Save" />
             </div>
           </div>
         </div>
