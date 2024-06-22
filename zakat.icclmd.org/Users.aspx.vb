@@ -7,11 +7,11 @@
 
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
       Using oDB As New zakatEntities
         'verify if the user is an administrator otherwise redirect home
         If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId AndAlso USER_ROLE.ROLE.name = "Administrator").Any Then
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
       End Using
 
@@ -65,7 +65,7 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = sender.CommandArgument
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
       'set org session id and redirect
       Session("sOtherUserId") = vUserId
       'redirect to users edit
@@ -80,7 +80,7 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       Using oDB As New zakatEntities
         'check if the user has admin role
@@ -112,7 +112,7 @@
           txtPhone.Text = ""
         Else
           'redirect home
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
       End Using
 
