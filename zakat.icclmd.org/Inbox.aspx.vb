@@ -4,14 +4,14 @@
     Try
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
-      If vUserId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Then Response.Redirect("/", False)
 
       If Not IsPostBack Then
         Using oDB As New zakatEntities
 
           'verify if the user is a reviewer or administrator otherwise redirect home
           If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId And (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier" OrElse USER_ROLE.ROLE.name = "Administrator")).Any Then
-            Response.Redirect("/")
+            Response.Redirect("/", False)
           End If
 
           'populate the submission years dropdown filter with all the distinct years 
@@ -71,7 +71,7 @@
   Public Sub btnViewApplication_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument
-      Response.Redirect("application")
+      Response.Redirect("application", False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -82,7 +82,7 @@
     Try
       Session("sUserId") = Session("sUserId")
       Session("sApplicantId") = sender.CommandArgument
-      Response.Redirect("profile")
+      Response.Redirect("profile", False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -92,7 +92,7 @@
   Public Sub btnViewTimeline_Click(sender As Object, e As System.EventArgs)
     Try
       Session("sApplicationId") = sender.CommandArgument
-      Response.Redirect("timeline")
+      Response.Redirect("timeline", False)
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)

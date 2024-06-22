@@ -8,7 +8,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
 
       If Not IsPostBack Then
         Using oDB As New zakatEntities
@@ -31,7 +31,7 @@ Public Class Application1
 
           'verify if the user is a reviewer otherwise redirect home
           If Not (From USER_ROLE In oDB.USER_ROLE Where USER_ROLE.userId = vUserId AndAlso (USER_ROLE.ROLE.name = "Administrator" OrElse (USER_ROLE.organizationId = oApplication.organizationId AndAlso (USER_ROLE.ROLE.name = "Validator" OrElse USER_ROLE.ROLE.name = "Investigator" OrElse USER_ROLE.ROLE.name = "Qualifier" OrElse USER_ROLE.ROLE.name = "Financier")))).Any Then
-            Response.Redirect("/")
+            Response.Redirect("/", False)
           End If
 
           'get the reviewer roles for displaying the correct review panel or none if a role has not been granted
@@ -270,7 +270,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -296,7 +296,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -361,7 +361,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -374,7 +374,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -400,7 +400,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -465,7 +465,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -478,7 +478,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -505,7 +505,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -555,7 +555,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -568,7 +568,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -602,7 +602,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -667,7 +667,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -680,7 +680,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -707,7 +707,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -746,7 +746,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -759,7 +759,7 @@ Public Class Application1
       'go home if no session/user
       Dim vUserId As Int32 = Session("sUserId")
       Dim vApplicationId As Int32 = Session("sApplicationId")
-      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/")
+      If vUserId = 0 Or vApplicationId = 0 Then Response.Redirect("/", False)
       Dim vApplicationIdFormatted As String = Base.getFormattedNumber(vApplicationId)
 
       Using oDB As New zakatEntities
@@ -778,7 +778,7 @@ Public Class Application1
           ' Save in DB
           oDB.SaveChanges()
         Else
-          Response.Redirect("/")
+          Response.Redirect("/", False)
         End If
 
         'add a review action
@@ -820,7 +820,7 @@ Public Class Application1
       End Using
 
       'redirect back to the inbox
-      Response.Redirect("inbox")
+      Response.Redirect("inbox", False)
 
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
@@ -852,7 +852,7 @@ Public Class Application1
     Try
       'if artifact id = 0, redirect home
       Dim vArtifactId As Int32 = Integer.Parse(TryCast(sender, LinkButton).CommandArgument)
-      If vArtifactId = 0 Then Response.Redirect("/")
+      If vArtifactId = 0 Then Response.Redirect("/", False)
 
       'Dim vBytes As Byte()
       Dim vFileName As String, vContentType As String
