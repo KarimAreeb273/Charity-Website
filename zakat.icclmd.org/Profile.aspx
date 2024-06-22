@@ -602,7 +602,7 @@
                 <asp:Label ID="lblSaved" runat="server" Text="Saved" Visible="false" style="color: green; font-weight:bold"></asp:Label>&nbsp;
             </td>
             <td style="width:1%; text-align:right">
-              <asp:Button ID="btnSave" runat="server" Text="Save Profile" CssClass="btn btn-success" ValidationGroup="Save" TabIndex="600" Width="150" />
+              <asp:Button ID="btnSave" runat="server" Text="Save Profile" CssClass="btn btn-primary" ValidationGroup="Save" TabIndex="600" Width="150" />
             </td>
           </tr>
         </table>

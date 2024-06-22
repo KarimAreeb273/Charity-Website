@@ -4,10 +4,10 @@
     <table style="width:100%">
       <tr>
         <td style="width:100%; text-align: center">
-          <asp:Button ID="btnEncryptUserSSNs" runat="server" Text="Encrypt User SSNs" CssClass="btn btn-success" />
+          <asp:Button ID="btnEncryptUserSSNs" runat="server" Text="Encrypt User SSNs" CssClass="btn btn-primary" />
           <br />
           <br />
-          <asp:Button ID="btnEncryptUserPasswords" runat="server" Text="Encrypt User Passwords" CssClass="btn btn-success" />
+          <asp:Button ID="btnEncryptUserPasswords" runat="server" Text="Encrypt User Passwords" CssClass="btn btn-primary" />
           <br />
           <br />
           <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label>

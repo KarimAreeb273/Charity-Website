@@ -94,7 +94,7 @@ silver, which is equal to 7.5 tola and 52.5 tola, respectively. </b>
                         <asp:Button ID="btnReset" runat="server" Text="Reset" CssClass="btn btn-default" TabIndex="8" Width="150" />
                         <asp:Button ID="btnEligible" runat="server" Text="Am I Eligible?" CssClass="btn btn-primary" TabIndex="7" Width="150" ValidationGroup="eligible" />
                     </h4>
-                    <div class="alert alert-success alert-dismissable" runat="server" ID="iconEligible" visible="false" >
+                    <div class="alert alert-primary alert-dismissable" runat="server" ID="iconEligible" visible="false" >
                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                         <strong>You are Eligible!</strong>
                     </div>

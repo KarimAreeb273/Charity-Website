@@ -17,7 +17,7 @@
           <div class="form-group">
             <asp:Label runat="server" CssClass="col-lg-3 control-label" Style="white-space: nowrap">&nbsp;</asp:Label>
             <div class="col-lg-9">
-              <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" CssClass="btn btn-success" TabIndex="5" Width="150" />
+              <asp:Button ID="btnResetPassword" runat="server" Text="Reset Password" CssClass="btn btn-primary" TabIndex="5" Width="150" />
             </div>
           </div>
           <br />
@@ -25,7 +25,7 @@
             <asp:Label runat="server" CssClass="col-lg-3 control-label" Style="white-space: nowrap">&nbsp;</asp:Label>
             <div class="col-lg-9">
               <asp:Panel ID="pnlSuccess" runat="server" Visible="false">
-                <div class="alert alert-success">
+                <div class="alert alert-primary">
                   <span class="glyphicon glyphicon-ok" style="font-size:15px;">&nbsp;</span><strong>Your password reset was successfully performed.  Please check your email.</strong>
                 </div>
               </asp:Panel>
