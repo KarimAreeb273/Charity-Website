@@ -266,6 +266,24 @@ Partial Public Class SiteMaster
   Protected WithEvents MainContent As Global.System.Web.UI.WebControls.ContentPlaceHolder
 
   '''<summary>
+  '''pnlAdministratratorOrApprover control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlAdministratratorOrApprover As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
+  '''pnlAnonymousOrApplicant control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlAnonymousOrApplicant As Global.System.Web.UI.WebControls.Panel
+
+  '''<summary>
   '''drpTranslation control.
   '''</summary>
   '''<remarks>

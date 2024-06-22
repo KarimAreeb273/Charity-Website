@@ -110,22 +110,30 @@ Public Class ZakatForm
               End If
               drpCitizenship.SelectedValue = .citizenshipStatus
               drpHighestEducation.SelectedValue = .highestEducationCompleted
-              chkIsInternational.Checked = .isInternationalSchool
-              txtSchoolName.Text = .schoolName
-              txtSchoolCity.Text = .schoolCity
-              If .isInternationalSchool Then
-                pnlDomestic.Visible = False
-                pnlInternational.Visible = True
+              chkIsNotSchooled.Checked = .isNotSchooled
+              If (chkIsNotSchooled.Checked = True) Then
+                pnlNoSchool.Visible = False
               Else
-                pnlDomestic.Visible = True
-                pnlInternational.Visible = False
+                pnlNoSchool.Visible = True
               End If
-              txtSchoolStreet.Text = .schoolStreet
-              If .schoolCountryId IsNot Nothing Then
-                drpSchoolCountry.SelectedValue = .schoolCountryId
+              If Not .isNotSchooled Then
+                chkIsInternational.Checked = .isInternationalSchool
+                txtSchoolName.Text = .schoolName
+                txtSchoolCity.Text = .schoolCity
+                If .isInternationalSchool Then
+                  pnlDomestic.Visible = False
+                  pnlInternational.Visible = True
+                  If .schoolCountryId IsNot Nothing Then
+                    drpSchoolCountry.SelectedValue = .schoolCountryId
+                  End If
+                Else
+                  pnlDomestic.Visible = True
+                  pnlInternational.Visible = False
+                  txtSchoolStreet.Text = .schoolStreet
+                  drpSchoolState.SelectedValue = .schoolStateAbbr
+                  txtSchoolZip.Text = .schoolZip
+                End If
               End If
-              drpSchoolState.SelectedValue = .schoolStateAbbr
-              txtSchoolZip.Text = .schoolZip
               'show husband pane based on rules
               If (.gender = "Female" And (.maritalStatus = "Married" Or .maritalStatus = "Divorced")) Then
                 pnlHusbandInformation.Visible = True
@@ -238,25 +246,28 @@ Public Class ZakatForm
 
             'refresh applicant progress
             RefreshApplicantProgress()
-            'refresh reference progress
-            RefreshReferenceProgress()
-            'refresh reference progress
-            RefreshArtifactProgress()
             'refresh assets and support progress
             RefreshAssetsSupportProgress()
             'refresh employment progress
             RefreshEmploymentProgress()
+            'refresh employment progress
+            RefreshDependentProgress()
+            'refresh reference progress
+            RefreshReferenceProgress()
+            'refresh reference progress
+            RefreshArtifactProgress()
+
             'refresh personal statement progress
             RefreshStatementProgress()
           End If
         End Using
 
         If drpOrganization.SelectedValue = "(Select One)" Then
-          accZakat.Enabled = False
+          btnUpdateProgressAll.Enabled = False
           btnSave.Enabled = False
           btnSubmit.Enabled = False
         Else
-          accZakat.Enabled = True
+          btnUpdateProgressAll.Enabled = True
           btnSave.Enabled = True
         End If
       End If
@@ -273,7 +284,7 @@ Public Class ZakatForm
 
   Sub RefreshApplicantProgress()
     Try
-      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36 As Boolean
+      Dim v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16, v17, v18, v19, v20, v21, v22, v23, v24, v25, v26, v27, v28, v29, v30, v31, v32, v33, v34, v35, v36, v37 As Boolean
       If (txtEmail.Text = "") Then
         v1 = False
       Else
@@ -384,8 +395,8 @@ Public Class ZakatForm
       Else
         v22 = True
       End If
-      'v23 = chkIsInternational Checked or Unchecked
-      v23 = True
+      v23 = True 'v23 = chkIsInternational Checked or Unchecked
+      v37 = True 'v37 = chkIsNotSchooled Checked or Unchecked
       If (txtSchoolName.Text = "") Then
         v24 = False
       Else
@@ -455,16 +466,21 @@ Public Class ZakatForm
       Dim vProgress As Decimal = 0
       Dim vPossible As Int16
       'set vPossible to all applicant fields except home type specification, school info, and husband info
-      vPossible = 21
+      vPossible = 22
       'update vPossible by adding home type specification if home type equals other
       vPossible = IIf(drpHomeType.SelectedValue = "Other", vPossible + 1, vPossible)
-      'update vPossible by adding school information including international indicator
-      vPossible = IIf(chkIsInternational.Checked, vPossible + 4, vPossible + 6)
-      'update vPossible by adding husband information excluding zakat application explanation
-      vPossible = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), vPossible + 6, vPossible)
+      If Not chkIsNotSchooled.Checked Then
+        'update vPossible by adding international school info plu international indicator = 4; otherwise make it the domestic school info plus the indicator = 6
+        If (chkIsInternational.Checked = True) Then
+          vPossible += 4
+        Else
+          vPossible += 6
+        End If
+      End If
+        'update vPossible by adding husband information excluding zakat application explanation
+        vPossible = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced"), vPossible + 6, vPossible)
       'update vPossible by adding zakat application explanation if zakat application equals "No"
       vPossible = IIf(chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced") AndAlso chkHusbandApplied.SelectedValue = "No", vPossible + 1, vPossible)
-
 
       If (v1 = True) Then
         vProgress += 1
@@ -543,19 +559,21 @@ Public Class ZakatForm
       If (v25 = True) Then
         vProgress += 1
       End If
-      If (Not chkIsInternational.Checked) Then
-        If (v26 = True) Then
-          vProgress += 1
-        End If
-        If (v27 = True) Then
-          vProgress += 1
-        End If
-        If (v28 = True) Then
-          vProgress += 1
-        End If
-      Else
-        If (v29 = True) Then
-          vProgress += 1
+      If (Not chkIsNotSchooled.Checked) Then
+        If (Not chkIsInternational.Checked) Then
+          If (v26 = True) Then
+            vProgress += 1
+          End If
+          If (v27 = True) Then
+            vProgress += 1
+          End If
+          If (v28 = True) Then
+            vProgress += 1
+          End If
+        Else
+          If (v29 = True) Then
+            vProgress += 1
+          End If
         End If
       End If
       If (chkGender.SelectedValue = "Female" And (drpMaritalStatus.SelectedValue = "Married" Or drpMaritalStatus.SelectedValue = "Divorced")) Then
@@ -582,9 +600,15 @@ Public Class ZakatForm
             vProgress += 1
           End If
         End If
+        If (v37 = True) Then
+          vProgress += 1
+        End If
       End If
 
       'calculate progress
+      If vProgress > vPossible Then
+        vProgress = vPossible
+      End If
       vProgress = ((vProgress / vPossible) * 100)
 
       'set progress bar attributes
@@ -838,11 +862,6 @@ Public Class ZakatForm
         Else
           v2 = True
         End If
-        ''If (txtEmploymentEnd.Text = "") Then
-        ''  v3 = False
-        ''Else
-        ''  v3 = True
-        ''End If
         If (txtPosition.Text = "") Then
           v3 = False
         Else
@@ -924,6 +943,36 @@ Public Class ZakatForm
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
     End Try
+  End Sub
+
+  Sub RefreshDependentProgress()
+    Try
+      Dim vProgress As Decimal = 0
+      If chkNoDependents.Checked Then
+        vProgress = 100
+      Else
+        Dim vCount As Int32 = 0
+        Dim vUserId As Integer = Session("sUserId")
+        If vUserId <> 0 Then
+          Using oDB As New zakatEntities
+            vCount = (From DEPENDENT In oDB.DEPENDENT Where DEPENDENT.userId = vUserId).Count
+          End Using
+          If vCount > 0 Then
+            vProgress = 100
+          End If
+        End If
+      End If
+      'set progress bar attributes
+      prgDependent.Attributes.Add("aria-valuenow", CStr(CInt(vProgress)))
+      prgDependent.Style("width") = CStr(CInt(vProgress)) + "%"
+      ltlPercentDependent.Text = CStr(CInt(vProgress)) + "% Complete"
+
+      'enable the submit button if all fields are complete
+      EnableSubmitButton()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+        Response.Write(ex.Message)
+      End Try
   End Sub
 
   Sub RefreshReferenceProgress()
@@ -1037,6 +1086,7 @@ Public Class ZakatForm
       End Using
       'refresh the dependents list
       setDependents()
+      RefreshDependentProgress()
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -1053,6 +1103,7 @@ Public Class ZakatForm
       End Using
       'refresh the references list
       setReferences()
+      RefreshReferenceProgress()
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -1260,11 +1311,11 @@ Public Class ZakatForm
     Try
       Using oDB As New zakatEntities
         If drpOrganization.SelectedValue = "(Select One)" Then
-          accZakat.Enabled = False
+          btnUpdateProgressAll.Enabled = False
           btnSave.Enabled = False
           btnSubmit.Enabled = False
         Else
-          accZakat.Enabled = True
+          btnUpdateProgressAll.Enabled = True
           btnSave.Enabled = True
           EnableSubmitButton()
         End If
@@ -1399,6 +1450,7 @@ Public Class ZakatForm
       drpDepRelation.SelectedValue = "(Select One)"
       'refresh the dependent repeater
       setDependents()
+      RefreshDependentProgress()
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -2092,6 +2144,7 @@ Public Class ZakatForm
 
       'refresh the reference repeater
       setReferences()
+      RefreshReferenceProgress()
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
@@ -2315,12 +2368,18 @@ Public Class ZakatForm
           .citizenshipStatus = drpCitizenship.SelectedValue
           .highestEducationCompleted = drpHighestEducation.SelectedValue
           .isInternationalSchool = chkIsInternational.Checked
-          .schoolName = txtSchoolName.Text
-          .schoolStreet = txtSchoolStreet.Text
-          .schoolCity = txtSchoolCity.Text
-          .schoolStateAbbr = drpSchoolState.SelectedValue
-          .schoolCountryId = drpSchoolCountry.SelectedValue
-          .schoolZip = txtSchoolZip.Text
+          .isNotSchooled = chkIsNotSchooled.Checked
+          If (Not chkIsNotSchooled.Checked) Then
+            .schoolName = txtSchoolName.Text
+            .schoolCity = txtSchoolCity.Text
+            If (chkIsInternational.Checked) Then
+              .schoolCountryId = drpSchoolCountry.SelectedValue
+            Else
+              .schoolStreet = txtSchoolStreet.Text
+              .schoolStateAbbr = drpSchoolState.SelectedValue
+              .schoolZip = txtSchoolZip.Text
+            End If
+          End If
           .husbandFirstName = txtHusbandFirstName.Text
           .husbandMiddleName = txtHusbandMiddleName.Text
           .husbandLastName = txtHusbandLastName.Text
@@ -2573,6 +2632,21 @@ Public Class ZakatForm
     End Try
   End Sub
 
+  Private Sub chkNoDependents_CheckedChanged(sender As Object, e As EventArgs) Handles chkNoDependents.CheckedChanged
+    Try
+      'was the person ever employed
+      If chkNoDependents.Checked Then
+        pnlDependents.Visible = False
+      Else
+        pnlDependents.Visible = True
+      End If
+      'refresh dependents progress
+      RefreshDependentProgress()
+    Catch ex As Exception
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
   Private Sub chkIsInternational_CheckedChanged(sender As Object, e As EventArgs) Handles chkIsInternational.CheckedChanged
     Try
       'was the person ever employed
@@ -2580,6 +2654,8 @@ Public Class ZakatForm
         'is international
         pnlInternational.Visible = True
         pnlDomestic.Visible = False
+        pnlNoSchool.Visible = True
+        chkIsNotSchooled.Checked = False
       Else
         'is not international
         pnlInternational.Visible = False
@@ -2590,6 +2666,27 @@ Public Class ZakatForm
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
+    End Try
+  End Sub
+
+  Private Sub chkIsNotSchooled_CheckedChanged(sender As Object, e As EventArgs) Handles chkIsNotSchooled.CheckedChanged
+    Try
+      'was the person ever employed
+      If chkIsNotSchooled.Checked Then
+        'is not schooled
+        pnlNoSchool.Visible = False
+        chkIsInternational.Checked = False
+        txtSchoolName.Text = ""
+        txtSchoolCity.Text = ""
+        txtSchoolStreet.Text = ""
+        drpSchoolState.SelectedValue = "(Select One)"
+        txtSchoolZip.Text = ""
+        drpSchoolCountry.SelectedValue = "1"
+      End If
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
     End Try
   End Sub
 
@@ -2635,6 +2732,54 @@ Public Class ZakatForm
     Catch ex As Exception
       Dim eURL As String = "You have just encountered an error. Please contact <font color=blue> <u>zakat@icclmd.org</u> </font> regarding the error you just received. The error you just received is shown below: <br /><br />" + ex.Message
       Response.Redirect("ModalPopup.html?returnURL=" + Replace(Request.FilePath, "/", "") + "&eURL=" + eURL)
+    End Try
+  End Sub
+
+  Private Sub btnUpdateProgressAll_Click(sender As Object, e As EventArgs) Handles btnUpdateProgressAll.Click
+    Try
+      RefreshApplicantProgress()
+      RefreshAssetsSupportProgress()
+      RefreshEmploymentProgress()
+      RefreshDependentProgress()
+      RefreshReferenceProgress()
+      RefreshArtifactProgress()
+      RefreshStatementProgress()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnUpdateProgressApplicant_Click(sender As Object, e As EventArgs) Handles btnUpdateProgressApplicant.Click
+    Try
+      Dim vUserId As Int32 = Session("sUserId")
+      SaveZakatForm(vUserId, True)
+      RefreshApplicantProgress()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnUpdateProgressAssetsAndSupport_Click(sender As Object, e As EventArgs) Handles btnUpdateProgressAssetsAndSupport.Click
+    Try
+      Dim vUserId As Int32 = Session("sUserId")
+      SaveZakatForm(vUserId, True)
+      RefreshAssetsSupportProgress()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
+    End Try
+  End Sub
+
+  Private Sub btnUpdateProgressEmployment_Click(sender As Object, e As EventArgs) Handles btnUpdateProgressEmployment.Click
+    Try
+      Dim vUserId As Int32 = Session("sUserId")
+      SaveZakatForm(vUserId, True)
+      RefreshEmploymentProgress()
+    Catch ex As Exception
+      Response.Write("You have just encountered an error.  Please contact <a href='mailto:zakat@icclmd.org?subject=Error Encountered on http://zakat.icclmd.org&body=The following error was encountered on http://zakat.icclmd.org: <replace with entire error content>'>zakat@icclmd.org</a> and copy/paste the entire error content shown below in the email.<br /><br />")
+      Response.Write(ex.Message)
     End Try
   End Sub
 End Class

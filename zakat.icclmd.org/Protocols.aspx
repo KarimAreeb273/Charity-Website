@@ -1,10 +1,8 @@
 ﻿<%@ Page Title="Protocols" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="Protocols.aspx.vb" Inherits="zakat.icclmd.org.Protocols" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-  <br />
-  <br />
-  <br />
-  <h3>
-    Zakat Network Application Protocols & Required (Supporting) Documents
+  <br /><br /><br />
+  <h4>
+    <b>Zakat Network Application Protocols & Required (Supporting) Documents</b>
   </h3>
   <hr />
   <h5><b>Complete the Zakat Network application form FULLY by answering all questions with the most accurate information available. Together with your application, submit and observe/abide by the following requirements:</b></h5>

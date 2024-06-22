@@ -32,24 +32,6 @@ Partial Public Class ZakatForm
   Protected WithEvents drpOrganization As Global.System.Web.UI.WebControls.DropDownList
 
   '''<summary>
-  '''accZakat control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents accZakat As Global.AjaxControlToolkit.Accordion
-
-  '''<summary>
-  '''paneApplicant control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents paneApplicant As Global.AjaxControlToolkit.AccordionPane
-
-  '''<summary>
   '''prgApplicant control.
   '''</summary>
   '''<remarks>
@@ -68,13 +50,13 @@ Partial Public Class ZakatForm
   Protected WithEvents ltlPercentApplicant As Global.System.Web.UI.WebControls.Literal
 
   '''<summary>
-  '''FormOrder control.
+  '''divApplicatant control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents FormOrder As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+  Protected WithEvents divApplicatant As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
   '''<summary>
   '''txtEmail control.
@@ -581,6 +563,15 @@ Partial Public Class ZakatForm
   Protected WithEvents chkIsInternational As Global.System.Web.UI.WebControls.CheckBox
 
   '''<summary>
+  '''chkIsNotSchooled control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkIsNotSchooled As Global.System.Web.UI.WebControls.RadioButton
+
+  '''<summary>
   '''CustomValidator3 control.
   '''</summary>
   '''<remarks>
@@ -588,6 +579,15 @@ Partial Public Class ZakatForm
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents CustomValidator3 As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''pnlNoSchool control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlNoSchool As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
   '''txtSchoolName control.
@@ -806,13 +806,13 @@ Partial Public Class ZakatForm
   Protected WithEvents valHusbandExplanation As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
   '''<summary>
-  '''paneAssetsAndSupport control.
+  '''btnUpdateProgressApplicant control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents paneAssetsAndSupport As Global.AjaxControlToolkit.AccordionPane
+  Protected WithEvents btnUpdateProgressApplicant As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
   '''prgAssetsAndSupport control.
@@ -1121,13 +1121,13 @@ Partial Public Class ZakatForm
   Protected WithEvents txtMedicaid As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''paneEmployment control.
+  '''btnUpdateProgressAssetsAndSupport control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents paneEmployment As Global.AjaxControlToolkit.AccordionPane
+  Protected WithEvents btnUpdateProgressAssetsAndSupport As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
   '''prgEmployment control.
@@ -1355,22 +1355,22 @@ Partial Public Class ZakatForm
   Protected WithEvents txtEmployerZip As Global.System.Web.UI.WebControls.TextBox
 
   '''<summary>
-  '''paneDependent control.
+  '''btnUpdateProgressEmployment control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents paneDependent As Global.AjaxControlToolkit.AccordionPane
+  Protected WithEvents btnUpdateProgressEmployment As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
-  '''Div3 control.
+  '''prgDependent control.
   '''</summary>
   '''<remarks>
   '''Auto-generated field.
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
-  Protected WithEvents Div3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+  Protected WithEvents prgDependent As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
   '''<summary>
   '''ltlPercentDependent control.
@@ -1380,6 +1380,33 @@ Partial Public Class ZakatForm
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents ltlPercentDependent As Global.System.Web.UI.WebControls.Literal
+
+  '''<summary>
+  '''chkNoDependents control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents chkNoDependents As Global.System.Web.UI.WebControls.CheckBox
+
+  '''<summary>
+  '''CustomValidator1 control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents CustomValidator1 As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''pnlDependents control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents pnlDependents As Global.System.Web.UI.WebControls.Panel
 
   '''<summary>
   '''txtDepFirstName control.
@@ -1479,15 +1506,6 @@ Partial Public Class ZakatForm
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents rptDependents As Global.System.Web.UI.WebControls.Repeater
-
-  '''<summary>
-  '''paneReference control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents paneReference As Global.AjaxControlToolkit.AccordionPane
 
   '''<summary>
   '''lblReferences control.
@@ -1697,15 +1715,6 @@ Partial Public Class ZakatForm
   Protected WithEvents rptReferences As Global.System.Web.UI.WebControls.Repeater
 
   '''<summary>
-  '''paneArtifacts control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents paneArtifacts As Global.AjaxControlToolkit.AccordionPane
-
-  '''<summary>
   '''lblArtifacts control.
   '''</summary>
   '''<remarks>
@@ -1796,15 +1805,6 @@ Partial Public Class ZakatForm
   Protected WithEvents btnDeleteArtifact As Global.System.Web.UI.WebControls.LinkButton
 
   '''<summary>
-  '''paneStatement control.
-  '''</summary>
-  '''<remarks>
-  '''Auto-generated field.
-  '''To modify move field declaration from designer file to code-behind file.
-  '''</remarks>
-  Protected WithEvents paneStatement As Global.AjaxControlToolkit.AccordionPane
-
-  '''<summary>
   '''prgStatement control.
   '''</summary>
   '''<remarks>
@@ -1866,6 +1866,15 @@ Partial Public Class ZakatForm
   '''To modify move field declaration from designer file to code-behind file.
   '''</remarks>
   Protected WithEvents valPhotoID As Global.System.Web.UI.WebControls.CustomValidator
+
+  '''<summary>
+  '''btnUpdateProgressAll control.
+  '''</summary>
+  '''<remarks>
+  '''Auto-generated field.
+  '''To modify move field declaration from designer file to code-behind file.
+  '''</remarks>
+  Protected WithEvents btnUpdateProgressAll As Global.System.Web.UI.WebControls.Button
 
   '''<summary>
   '''btnSave control.

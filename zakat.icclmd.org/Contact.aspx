@@ -1,7 +1,8 @@
 ﻿<%@ Page Title="Contact Us" Language="VB" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Contact.aspx.vb" Inherits="zakat.icclmd.org.Contact" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-  <h3>Zakat Network Contact Information</h3>
+  <br /><br /><br />
+  <h4><b>Zakat Network Contact Information</b></h4>
 
   <address>
     7306 Contee Road<br />

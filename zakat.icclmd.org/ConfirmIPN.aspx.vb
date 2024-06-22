@@ -177,9 +177,6 @@ Public Class ConfirmIPN
 
         'Determine if Instant Payment Notification (IPN) is successful or not:  IPNResponse="VERIFIED"=success ; IPNResponse="INVALID"=failed
         If IPNResponse = "VERIFIED" Then
-          ' if IPN response was VERIFIED, perform VERIFIED handling
-          Dim vMemberId As Integer
-
           'record Paypal Instant Processing Notification(IPN) Information and store in DB
           Using oDB As New zakatEntities()
             If (From DONATION In oDB.DONATION Where DONATION.donationId = vDonationId).Any Then

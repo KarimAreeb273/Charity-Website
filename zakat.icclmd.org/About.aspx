@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="About Us" Language="vb" AutoEventWireup="false" MasterPageFile="~/Site.Master" CodeBehind="About.aspx.vb" Inherits="zakat.icclmd.org.About" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-  <h3>
-    About Zakat Network
-  </h3>
+  <br /><br /><br />
+  <h4>
+    <b>About Zakat Network</b>
+  </h4>
   <br />
   <p>
     Welcome to Zakat Network, a groundbreaking platform dedicated to facilitating the distribution of zakat as well as empowering communities in need. At Zakat Network, we believe in the transformative power of Zakat, an essential pillar of Islamic faith, to bring positive change to the lives of individuals and society as a whole.

@@ -26,6 +26,16 @@
             pnlAnonymous.Visible = False
             pnlFinancier.Visible = False
             lblNameApplicant.Text = Session("sUserFirstName")
+            Using oDB As New zakatEntities()
+              Dim oTranslation As TRANSLATION = (From TRANSLATION In oDB.TRANSLATION Where TRANSLATION.translationNameEnglish = "English").FirstOrDefault
+              drpTranslation.DataSource = (From TRANSLATION In oDB.TRANSLATION Order By TRANSLATION.translationNameEnglish).ToList()
+              drpTranslation.DataTextField = "translationNameEnglish"
+              drpTranslation.DataValueField = "translationId"
+              drpTranslation.DataBind()
+              drpTranslation.Items.Insert(0, New ListItem("(Translate Site)", 0))
+            End Using
+            pnlAnonymousOrApplicant.Visible = True
+            pnlAdministratratorOrApprover.Visible = False
           ElseIf vIsAdministrator Then
             pnlApplicant.Visible = False
             pnlAdministrator.Visible = True
@@ -33,6 +43,8 @@
             pnlAnonymous.Visible = False
             pnlFinancier.Visible = False
             lblNameAdministrator.Text = Session("sUserFirstName")
+            pnlAnonymousOrApplicant.Visible = False
+            pnlAdministratratorOrApprover.Visible = True
           ElseIf vIsApprover Then
             pnlApplicant.Visible = False
             pnlAdministrator.Visible = False
@@ -40,6 +52,8 @@
             pnlAnonymous.Visible = False
             pnlFinancier.Visible = False
             lblNameApprover.Text = Session("sUserFirstName")
+            pnlAnonymousOrApplicant.Visible = False
+            pnlAdministratratorOrApprover.Visible = True
           Else
             'Anonymous
             pnlApplicant.Visible = False
@@ -55,6 +69,8 @@
               drpTranslation.DataBind()
               drpTranslation.Items.Insert(0, New ListItem("(Translate Site)", 0))
             End Using
+            pnlAnonymousOrApplicant.Visible = True
+            pnlAdministratratorOrApprover.Visible = False
           End If
         Else
           'Anonymous
@@ -71,6 +87,8 @@
             drpTranslation.DataBind()
             drpTranslation.Items.Insert(0, New ListItem("(Translate Site)", 0))
           End Using
+          pnlAnonymousOrApplicant.Visible = True
+          pnlAdministratratorOrApprover.Visible = False
         End If
 
         If vSearched = True Then
