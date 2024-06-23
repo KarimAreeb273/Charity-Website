@@ -79,7 +79,9 @@ Public Class Application1
             txtCitizenship.Text = .USER.citizenshipStatus
             txtHighestEducation.Text = .USER.highestEducationCompleted
             txtSchoolIsInternational.Text = IIf(.USER.isInternationalSchool, "Yes", "No")
-            txtSchoolCountry.Text = IIf(.USER.isInternationalSchool, .USER.COUNTRY.name, "United States")
+            If .USER.isInternationalSchool <> 0 Then
+              txtSchoolCountry.Text = IIf(.USER.isInternationalSchool, .USER.COUNTRY.name, "United States")
+            End If
             txtSchoolName.Text = .USER.schoolName
             txtSchoolStreet.Text = .USER.schoolStreet
             txtSchoolCity.Text = .USER.schoolCity
