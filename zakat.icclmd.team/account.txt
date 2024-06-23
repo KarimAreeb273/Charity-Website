@@ -5,6 +5,9 @@ Website:
 Username: 	zakat@icclmd.org
 Password: 	IccL@dm1n
 
+Username: 	office@icclmd.org
+Password: 	IccL@dm1n
+
 Database:
 ===========
 DB Name: 	ph14095182591_iccl_zakat
