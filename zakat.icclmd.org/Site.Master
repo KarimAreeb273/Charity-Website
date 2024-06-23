@@ -101,7 +101,7 @@
                     <li><a href="about">About Us</a></li>  
                     <li><a href="privacy">Privacy</a></li>
                     <li><a href="zakatform">Apply</a></li>
-                    <li><a href="default">Login</a></li>
+                    <li><a href="/">Login</a></li>
                     <li>
                       <%--start search section--%>
                       <asp:UpdatePanel ID="UpdatePanel1" runat="server">
